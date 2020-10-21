@@ -33,7 +33,7 @@ toc: false
 Github 을 이용한 Github Page Blog 는 아래의 링크에서 정보를 얻었다.  고맙게도 친절하게 글을 남겨주셨다. (따라하기만 하면 되니 큰 어려움은 없다.)  
 
 
-[GitHub 블로그 시작하기](https://honbabzone.com/jekyll/start-gitHubBlog/)
+[GitHub 블로그 시작하기](https://honbabzone.com/jekyll/start-gitHubBlog/){: target="_blank"}
 
 
 나는 개발자 (엄밀히 말하면 운영자일까?) 이지만 Node.js 나 Ruby, Github 에 대해서는 잘 모른다. 하지만 Github Page 를 이용한 블로그를 운영하기 위해서는 약간의 프로그래밍과 Github 과 Markdown 에 대한 기초 지식은 필요한 것 같다.
@@ -45,7 +45,7 @@ Github 을 이용한 Github Page Blog 는 아래의 링크에서 정보를 얻�
 설치가 끝난 뒤 자세한 세팅, 사용법은 아래 링크를 찾아보면 될 것 같다. 역시 공식 사이트(영어...) 의 가이드가  가장 볼만한 듯 하다.
 
 
-[minimal-mistakes 퀵 스타트 가이드](https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/)
+[minimal-mistakes 퀵 스타트 가이드](https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/){: target="_blank"}
 
 
 
