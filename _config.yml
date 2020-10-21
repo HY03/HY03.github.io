@@ -18,7 +18,7 @@ minimal_mistakes_skin    : "dark" # "default", "air", "aqua", "contrast", "dark"
 locale                   : "ko-KR"
 title                    : "Bluesplatter" # Meta 태그에 들어가는 영역 , masthead_title등이 없으면 기본값으로 나온다.
 title_separator          : "&#124;" # 타이틀 사이 구분자 <title>Welcome to Jekyll | Minimal Mistakes</title> 해당 형식으로 들어갑니다.
-subtitle                 : "세상에 남기는 작은 흔적" # 타이틀 아래에 나올 작은 글씨 
+subtitle                 : "Bluesplatter" # 타이틀 아래에 나올 작은 글씨 
 name                     : "HY03" # 맨 하단 이름 찍히는 영역
 description              : "전문적이지 않은 정보들, 감상, 즉흥적인 내용들" # Meta 태그에 들어가는 영역 
 url                      : "https://bluesplatter.com" # GitBlog 호스트 주소
@@ -26,7 +26,7 @@ baseurl                  : # subPath https://7271kim.github.io/blog라고 하고
 repository               : "HY03/hy03.github.com" # GitHub username/repo-name  
 teaser                   : # "/assets/images/senior-couple-4723737_640.jpg" # 홈페이지 기본 티져 이미지
 logo                     : # 타이틀 옆에 작게 들어갈 이미지.
-masthead_title           : "단편적인 개인 일상의 기록들" # 홈페이지 최 상탄에 들어갈 타이틀
+masthead_title           : "세상에 남기는 작은 흔적" # 홈페이지 최 상탄에 들어갈 타이틀
 breadcrumbs              : true # 브래드크럼 사용 여부 true, false (default) , _data/ui-text.yml에 다국어 지원 가능합니다.
 words_per_minute         : 200 # 해당 포스트 읽는데 걸리는 시간을 계산하기 위해 대락 분당 읽는 수가 몇글자가 될지 적는 공간.
 comments:
@@ -96,7 +96,7 @@ analytics:
 # Site Author
 author:
   name             : "HY03"
-  avatar           : "/assets/images/profile/poto.jpg" # 프로필 이미지
+  avatar           : "/assets/images/profile/photo.jpg" # 프로필 이미지
   bio              : "저는 전문가가 아니고 이것 저것 알아보는 비전문가 입니다. <br> 틀린 내용이 기술되어도 너그러이 봐주시고 댓글을 남겨주셨으면 좋겠습니다."
   location         : "Republic of Korea"
   email            : "hyunik03@gmail.com"
@@ -280,10 +280,12 @@ defaults:
     values:
       layout: single
       author_profile: true
-      read_time: true
+      show_date: true
+      read_time: false
       comments: true
       share: true
       related: true
+      toc: true
 
   # _pages
   - scope:
