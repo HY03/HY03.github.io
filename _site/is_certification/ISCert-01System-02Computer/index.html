@@ -1,0 +1,1082 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.20.2 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>01.시스템보안 - 02.컴퓨터 구조 | Bluesplatter</title>
+<meta name="description" content="CPU (속도 빠름, 고가) - 연산처리 1. CPU 구조 CPU 구조 그림 삽입">
+
+
+  <meta name="author" content="HY03">
+  
+  <meta property="article:author" content="HY03">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Bluesplatter">
+<meta property="og:title" content="01.시스템보안 - 02.컴퓨터 구조">
+<meta property="og:url" content="http://localhost:4000/is_certification/ISCert-01System-02Computer/">
+
+
+  <meta property="og:description" content="CPU (속도 빠름, 고가) - 연산처리 1. CPU 구조 CPU 구조 그림 삽입">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-10-22T16:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/is_certification/ISCert-01System-02Computer/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "HY03",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Bluesplatter Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo/logo.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          세상에 남기는 작은 흔적
+          <span class="site-subtitle">Bluesplatter</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/">연도별 포스트</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="http://localhost:4000/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#is_certification" itemprop="item"><span itemprop="name">Is_certification</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">01.시스템보안 - 02.컴퓨터 구조</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/profile/photo.jpg" alt="HY03" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">HY03</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>저는 전문가가 아니고 이것 저것 알아보는 비전문가 입니다. <br /> 틀린 내용이 기술되어도 너그러이 봐주시고 댓글을 남겨주셨으면 좋겠습니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="http://bluesplatter.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:hyunik03@gmail.com">
+            <meta itemprop="email" content="hyunik03@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">이메일</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="01.시스템보안 - 02.컴퓨터 구조">
+    <meta itemprop="description" content="CPU (속도 빠름, 고가) - 연산처리1. CPU 구조CPU 구조 그림 삽입">
+    <meta itemprop="datePublished" content="2020-10-22T16:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">01.시스템보안 - 02.컴퓨터 구조
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2020-10-22T16:00:00+09:00">October 22, 2020</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#cpu-속도-빠름-고가---연산처리">CPU (속도 빠름, 고가) - 연산처리</a>
+    <ul>
+      <li><a href="#1-cpu-구조">1. CPU 구조</a></li>
+      <li><a href="#2-register">2. Register</a></li>
+      <li><a href="#3-버스-전송-라인">3. 버스 (전송 라인)</a></li>
+      <li><a href="#4-instruction-cycle">4. Instruction Cycle</a></li>
+    </ul>
+  </li>
+  <li><a href="#메모리---임시-기억">메모리 - 임시 기억</a>
+    <ul>
+      <li><a href="#1-캐시-메모리-cpu와-memory-속도-차이-해결">1. 캐시 메모리 (CPU와 Memory 속도 차이 해결)</a></li>
+      <li><a href="#2-가상-메모리-보조기억장치를-주기억장치처럼-사용하여-주기억장치의-공간을-확대">2. 가상 메모리 (보조기억장치를 주기억장치처럼 사용하여 주기억장치의 공간을 확대)</a></li>
+    </ul>
+  </li>
+  <li><a href="#disk-보조기억장치-영구-저장">Disk 보조기억장치 (영구 저장)</a>
+    <ul>
+      <li><a href="#1-입출력-기법">1. 입출력 기법</a></li>
+    </ul>
+  </li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <h1 id="cpu-속도-빠름-고가---연산처리">CPU (속도 빠름, 고가) - 연산처리</h1>
+<h2 id="1-cpu-구조">1. CPU 구조</h2>
+<p><strong>CPU 구조 그림 삽입</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">구성요소</th>
+      <th style="text-align: left">상세 기능</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">ALU(연산장치)</td>
+      <td style="text-align: left"><ul><li>각종 산술연산들과 논리연산들을 수행하는 회로</li><li>산술연산 : +, -, \*, /</li><li>논리연산 : AND, OR, NOT, XOR</li></ul></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Register(레지스터)</td>
+      <td style="text-align: left"><ul><li>CPU 내부의 소규모 데이터나 중간 결과를 일시적으로 기억해 두는 고속의 전용 영역</li><li>컴퓨터 기억장치 중 Access 속도가 가장 빠름</li></ul></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Control Unit(제어장치)</td>
+      <td style="text-align: left">프로그램 코드(명령어)를 해석하고, 그것을 실행하기 위한 제어 신호들(Control Signals)을 발생시킴</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">내부 CPU 버스</td>
+      <td style="text-align: left">ALU와 레지스터 간의 데이터 이동을 위한 경로</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="2-register">2. Register</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">종류</th>
+      <th style="text-align: left">내용</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">PC(Program Counter)</td>
+      <td style="text-align: left">다음에 수행할 명령어가 저장된 주기억장치의 번지를 지정</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">MAR(Memory Address Register)</td>
+      <td style="text-align: left">주기억장치에 접근하기 위한 주기억장치의 번지를 기억</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">MBR(Memory Buffer Register)</td>
+      <td style="text-align: left">주기억장치에 입/출력할 자료를 기억하는 레지스터</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">IR(Instruction Register)</td>
+      <td style="text-align: left">주기억장치에서 인출한 명령코드를 기억하는 레지스터</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="3-버스-전송-라인">3. 버스 (전송 라인)</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">종류</th>
+      <th style="text-align: left">내용</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">데이터 버스(Data Bus)</td>
+      <td style="text-align: left">시스템 컴포넌트 간 처리 데이터를 전송하기 위한 용도</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">주소 버스(Address Bus)</td>
+      <td style="text-align: left"><ul><li>기억장소의 위치 또는 자이 식별을 지정하기 위한 라인</li><li>라인의 비트 수에 따라 접속될 수 있는 장치의 용량이 결정됨</li></ul></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">제어 버스(Control Bus)</td>
+      <td style="text-align: left">CPU와 기억장치 또는 I/O 장치 사이의 제어 신호를 전송하는 라인</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="4-instruction-cycle">4. Instruction Cycle</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">단계</th>
+      <th style="text-align: left">동작설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">인출(Instruction Fetch)</td>
+      <td style="text-align: left">인출단계는 메모리(Memory)에서 데이터를 로드(Load)하여 CPU에 있는 레지스터(Register)에 적재하는 과정</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">간접(Indirect)</td>
+      <td style="text-align: left"><ul><li>메모리를 참조할 때 간접주소 방식을 사용하는 경우에 실행</li><li>간접주소란 CPU가 메모리를 참조했을 때 데이터가 존재하는 것이 아니라 메모리에 주소가 존재하여 메모리 내에서 한 번 더 조회해서 데이터를 얻는 것</li></ul></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">실행(Execution)</td>
+      <td style="text-align: left">명령과 데이터로 CPU가 산술 및 논리연산을 수행하는 것</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">인터럽트(Inturrupt)</td>
+      <td style="text-align: left"><ul><li>컴퓨터 작동 중 예기치 않은 문제가 발생한 경우라도 업무 처리가 계속될 수 있도록 하는 컴퓨터 운영체제의 한 기능으로, 크게 하드웨어 인터럽트와 소프트웨어 인터럽트로 나눔</li><li>SVC 하드웨어 인터럽트 : 기계착오 인터럽트, 외부 인터럽트, 입출력 인터럽트, 프로그램 검사 인터럽트</li><li>소프트웨어 인터럽트 : CPU 내부에서 자신이 실행한 명령이나 CPU의 명령 실행에 관련된 모듈이 변화하는 경우 발생</li></ul></td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="메모리---임시-기억">메모리 - 임시 기억</h1>
+<h2 id="1-캐시-메모리-cpu와-memory-속도-차이-해결">1. <strong>캐시 메모리</strong> (CPU와 Memory 속도 차이 해결)</h2>
+<ul>
+  <li>캐시사상 방법
+    <ul>
+      <li>직접사상 : 메인 메모리를 분할하여 Cache 슬롯과 매핑</li>
+      <li>연관사상(가장 빠름) : 메인 메모리의 각 블록이 Cache 어느 슬롯이든 적재 가능</li>
+      <li>집합연관사상 : 직접/연관 절충안으로 메인메모리 구역을 셋으로 묶어 Cache 슬롯과 매핑</li>
+    </ul>
+  </li>
+  <li>
+    <p>교체기법 :</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">종류</th>
+          <th style="text-align: left">세부 내용</th>
+          <th style="text-align: left">특징</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left">Random</td>
+          <td style="text-align: left">교체될 page 를 임의 선정</td>
+          <td style="text-align: left">overhead 적음</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">FIFO <br />(First in First Out)</td>
+          <td style="text-align: left">캐시 내에 오래 있었던 page 교체</td>
+          <td style="text-align: left">자주 사용되는 page가 교체될 우려</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">LFU <br />(Least Frequently Used)</td>
+          <td style="text-align: left">사용 횟수가 가장 적은 page 교체</td>
+          <td style="text-align: left">최근 적재된 page가 교체될 우려</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">LRU <br />(Least Recently Used)</td>
+          <td style="text-align: left">가장 오랫동안 사용되지 않은 page 교체</td>
+          <td style="text-align: left">time stamping overhead 존재</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">Optimal</td>
+          <td style="text-align: left">향후 가장 참조되지 않을 page 교체</td>
+          <td style="text-align: left">실현 불가능</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">NUR <br />(Not Used Recently)</td>
+          <td style="text-align: left">참조비트, 수정비트로 미사용 page 교체</td>
+          <td style="text-align: left">최근 사용되지 않은 page 교체</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">SCR <br />(Second Chance Replacement)</td>
+          <td style="text-align: left">최초 참조비트 1로 셋, 1인 경우 0으로 셋, 0인 경우 교체</td>
+          <td style="text-align: left">기회를 한번 더 줌</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>페이지 부재 예방</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">종류</th>
+          <th style="text-align: left">세부 내용</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left">Load Control</td>
+          <td style="text-align: left">일정 시간 동안 새로운 프로세서가 생성되는 것을 지연시키고 Suspend Queue에 대기시켜서 Thrashing 현상을 감소시킴</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">Locality(구역성)</td>
+          <td style="text-align: left">시간과 공간 지역성을 집중적으로 참조함</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">Working Set(워킹셋)</td>
+          <td style="text-align: left">일정 시간 동안 참조되는 페이지 집합(Working Set)을 주기억장치에 유지</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">PFF(Page Fault Frequency)</td>
+          <td style="text-align: left">{::nomarkdown}&lt;ul&gt;&lt;li&gt;Process의 Page Fault 빈도에 따라 Residence set을 조정&lt;/li&gt;&lt;li&gt;PFF가 높으면 Residence set의 크기 증가, 낮으면 감소&lt;/li&gt;&lt;/ul&gt;</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<h2 id="2-가상-메모리-보조기억장치를-주기억장치처럼-사용하여-주기억장치의-공간을-확대">2. 가상 메모리 (보조기억장치를 주기억장치처럼 사용하여 주기억장치의 공간을 확대)</h2>
+<ul>
+  <li>할당기법
+    <ul>
+      <li><strong>페이지와 세그먼트</strong></li>
+      <li>페이지(page) : 가상 기억장치 상에서 동일한 크기의 최소 논리 분할 단위로 나눈 것</li>
+      <li>세그먼트(segment) : 사용자 주소 공간을 용도별로 논리적 단위로 나눈 것</li>
+    </ul>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: center">구분</th>
+          <th style="text-align: left">Paging 기법</th>
+          <th style="text-align: left">Segment 기법</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: center">할당</td>
+          <td style="text-align: left">고정(Static) 분할</td>
+          <td style="text-align: left">가변(Dynamic) 분할</td>
+        </tr>
+        <tr>
+          <td style="text-align: center">적재</td>
+          <td style="text-align: left">요구 Page만 일부 적재(On-demand)</td>
+          <td style="text-align: left">프로그램 전체 적재(On-demand)</td>
+        </tr>
+        <tr>
+          <td style="text-align: center">관점</td>
+          <td style="text-align: left">메모리 관리 측면</td>
+          <td style="text-align: left">파일 관리 측면</td>
+        </tr>
+        <tr>
+          <td style="text-align: center">장점</td>
+          <td style="text-align: left"><ul><li>요구 Page만 적재 Load</li><li>외부 단편화 해결</li><li>교체시간 최소</li></ul></td>
+          <td style="text-align: left"><ul><li>사용자 관점</li><li>개발/프로그래밍 용이</li><li>내부 단편화 해결</li><li>코드, 데이터 공유 용이</li></ul></td>
+        </tr>
+        <tr>
+          <td style="text-align: center">단점</td>
+          <td style="text-align: left"><ul><li>내부 단편화(Fragmentation) 발생</li><li>Thrashing, 잦은 디스크 I/O 유발</li></ul></td>
+          <td style="text-align: left"><ul><li>외부 단편화 심각</li><li>메인 메모리가 커야 함</li></ul></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>호출기법 : Demand Fetch, Pre Fetch</li>
+  <li>배치기법 : First Fit, Next Fit, Best Fit, Worst Fit</li>
+  <li>
+    <p>교체기법 : Random, FIFO, LFU, LRU, Optimal, NUR(참조비트, 수정비트), SCR(참조비트)</p>
+  </li>
+  <li>
+    <p>할당 정책(Allocation Pollicy)</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: center">구분</th>
+          <th style="text-align: center">종류</th>
+          <th style="text-align: left">세부 내용</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: center">연속 할당</td>
+          <td style="text-align: center">고정 분할</td>
+          <td style="text-align: left"><ul><li>고정된 크기의 단위로 메모리 할당</li><li>내부 단편화 발생</li></ul></td>
+        </tr>
+        <tr>
+          <td style="text-align: center"> </td>
+          <td style="text-align: center">가변 분할</td>
+          <td style="text-align: left"><ul><li>할당 단위를 요청마다 다른 크기로 할당</li><li>외부 단편화 발생</li></ul></td>
+        </tr>
+        <tr>
+          <td style="text-align: center">비연속 할당</td>
+          <td style="text-align: center">Paging</td>
+          <td style="text-align: left">가상 메모리 블록을 페이지 단위 관리. TLB와 MMU, Page table로 관리</td>
+        </tr>
+        <tr>
+          <td style="text-align: center"> </td>
+          <td style="text-align: center">Segmentation</td>
+          <td style="text-align: left">가변 크기인 세그먼트로 분할, Segment Table로 관리</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<h1 id="disk-보조기억장치-영구-저장">Disk 보조기억장치 (영구 저장)</h1>
+<h2 id="1-입출력-기법">1. 입출력 기법</h2>
+<ul>
+  <li>Program 에 의한 입출력</li>
+  <li>Interrupt 기법</li>
+  <li><strong>DMA</strong> : Direct Memory Access - CPU의 개입 없이 I/O 장치와 기억장치 사이의 데이터를 전송하는 방법, 속도가 빠르다.
+    <ul>
+      <li>Cycle Stealing : DMA 제어기와 CPU가 BUS 를 공유하며, CPU가 BUS를 사용하지 않는 사이클에만 접근한다. CPU보다 높은 우선순위를 가진다.</li>
+      <li>Burst Mode : DMA 제어기가 BUS를 점유하며, 동작 완료 후 BUS의 점유를 해제한다.</li>
+    </ul>
+  </li>
+  <li>IO Channel : Byte Muiltiplexer, Selector Channel, Block Multiplexer</li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#%EC%8B%9C%EC%8A%A4%ED%85%9C-%EB%B3%B4%EC%95%88" class="page__taxonomy-item" rel="tag">시스템 보안</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88%EA%B8%B0%EC%82%AC" class="page__taxonomy-item" rel="tag">정보보안기사</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#%EC%BB%B4%ED%93%A8%ED%84%B0-%EA%B5%AC%EC%A1%B0" class="page__taxonomy-item" rel="tag">컴퓨터 구조</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#is-certification" class="page__taxonomy-item" rel="tag">IS_Certification</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-10-22T16:00:00+09:00">October 22, 2020</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=01.%EC%8B%9C%EC%8A%A4%ED%85%9C%EB%B3%B4%EC%95%88+-+02.%EC%BB%B4%ED%93%A8%ED%84%B0+%EA%B5%AC%EC%A1%B0%20http%3A%2F%2Flocalhost%3A4000%2Fis_certification%2FISCert-01System-02Computer%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fis_certification%2FISCert-01System-02Computer%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fis_certification%2FISCert-01System-02Computer%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/is_certification/ISCert-05ISM-02IS_Law/" class="pagination--pager" title="05.정보보호 관리 - 02.정보보호 관련 윤리 및 법규
+">이전</a>
+    
+    
+      <a href="/is_certification/ISCert-01System-03Unix/" class="pagination--pager" title="01.시스템보안 - 03.유닉스&amp;리눅스 서버 보안
+">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/ISCert-01System-01OS/" rel="permalink">01.시스템보안 - 01.운영체제 이해 및 관리
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2020-10-23T17:10:00+09:00">October 23, 2020</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">운영체제 개요
+
+  운영체제의 정의 : 컴퓨터 시스템의 자원을 효율적으로 관리, 사용자가 컴퓨터를 효과적으로 사용할수 있도록 환경을 제공하는 여러 프로그램의 모임
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/ISCert-02Network-01Network/" rel="permalink">02.네트워크 보안 - 01.네트워크 개념
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2020-10-22T16:00:00+09:00">October 22, 2020</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">네트워크와 프로토콜
+
+  프로토콜
+    
+      메시지의 포맷, 언제 데이터를 보낼 것인지, 한번 전송하고 한번 응답할지 등.
+      OSI7 계층, TCP/IP 4계층
+      다른 약속을 한 송 수신자 간 통신 : 게이트웨이 장비 필요
+    
+  
+  데이터 전송방...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/ISCert-01System-04Window/" rel="permalink">01.시스템보안 - 04.윈도우 클라이언트 및 서버 보안
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2020-10-22T16:00:00+09:00">October 22, 2020</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">윈도우 아키텍처
+
+  (Ring 구조) - 경량화된 운영체제, Plug In Play
+  하드웨어 / HAL / 마이크로 커널 / 각종 관리자 / 응용 프로그램
+  그림 삽입
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/ISCert-01System-03Unix/" rel="permalink">01.시스템보안 - 03.유닉스&amp;리눅스 서버 보안
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2020-10-22T16:00:00+09:00">October 22, 2020</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">권한 설정
+1. umask : 디폴트 권한
+
+  0022
+    
+      666 - 022 : 644 (파일)
+      777 - 022 : 755 (디렉터리)
+    
+  
+  0077
+    
+      666 - 077 : 600 (파일)
+      777 - 077 :...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+<!--
+<script>
+	(function(d, h, m){
+    var js, fjs = d.getElementsByTagName(h)[0];
+    if (d.getElementById(m)){return;}
+    js = d.createElement(h); js.id = m;
+    js.onload = function(){
+        window.makerWidgetComInit({
+        position: "left",          
+        widget: "eqypoqmawbcz3azh-usiy9q7ma4ong1w1-juelcm3zfgcuwjds"                
+    })};
+    js.src = "https://makerwidget.com/js/embed.js";
+    fjs.parentNode.insertBefore(js, fjs)
+	}(document, "script", "dhm"))
+</script>
+-->
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:hyunik03@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 HY03. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://localhost:4000/is_certification/ISCert-01System-02Computer/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/is_certification/ISCert-01System-02Computer"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://bluesplatter.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

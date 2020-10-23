@@ -1,0 +1,22 @@
+I"Y<ul class="toc__menu">
+  <li><a href="#cpu-속도-빠름-고가---연산처리">CPU (속도 빠름, 고가) - 연산처리</a>
+    <ul>
+      <li><a href="#1-cpu-구조">1. CPU 구조</a></li>
+      <li><a href="#2-register">2. Register</a></li>
+      <li><a href="#3-버스-전송-라인">3. 버스 (전송 라인)</a></li>
+      <li><a href="#4-instruction-cycle">4. Instruction Cycle</a></li>
+    </ul>
+  </li>
+  <li><a href="#메모리---임시-기억">메모리 - 임시 기억</a>
+    <ul>
+      <li><a href="#1-캐시-메모리-cpu와-memory-속도-차이-해결">1. 캐시 메모리 (CPU와 Memory 속도 차이 해결)</a></li>
+      <li><a href="#2-가상-메모리-보조기억장치를-주기억장치처럼-사용하여-주기억장치의-공간을-확대">2. 가상 메모리 (보조기억장치를 주기억장치처럼 사용하여 주기억장치의 공간을 확대)</a></li>
+    </ul>
+  </li>
+  <li><a href="#disk-보조기억장치-영구-저장">Disk 보조기억장치 (영구 저장)</a>
+    <ul>
+      <li><a href="#1-입출력-기법">1. 입출력 기법</a></li>
+    </ul>
+  </li>
+</ul>
+:ET

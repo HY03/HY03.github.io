@@ -1,0 +1,27 @@
+I"H<ul class="toc__menu">
+  <li><a href="#데이터베이스database-개요">데이터베이스(Database) 개요</a>
+    <ul>
+      <li><a href="#1-데이터베이스database-개요">1. 데이터베이스(Database) 개요</a></li>
+      <li><a href="#2-데이터베이스-모델database-model">2. 데이터베이스 모델(Database Model)</a></li>
+    </ul>
+  </li>
+  <li><a href="#mysql-데이터베이스">MySQL 데이터베이스</a></li>
+  <li><a href="#oracle-데이터베이스">Oracle 데이터베이스</a></li>
+  <li><a href="#데이터베이스-보안">데이터베이스 보안</a>
+    <ul>
+      <li><a href="#1-데이터베이스-보안database-security">1. 데이터베이스 보안(Database Security)</a></li>
+      <li><a href="#2-데이터베이스-보안-위협요소">2. 데이터베이스 보안 위협요소</a></li>
+      <li><a href="#3-데이터베이스-보안-요구사항">3. 데이터베이스 보안 요구사항</a></li>
+    </ul>
+  </li>
+  <li><a href="#데이터베이스-보안-솔루션">데이터베이스 보안 솔루션</a>
+    <ul>
+      <li><a href="#1-db-암호화-솔루션">1. DB 암호화 솔루션</a></li>
+      <li><a href="#2-데이터베이스-감사-솔루션">2. 데이터베이스 감사 솔루션</a></li>
+      <li><a href="#3-데이터베이스-접근-제어-솔루션">3. 데이터베이스 접근 제어 솔루션</a></li>
+      <li><a href="#4-데이터베이스-암호화-및-접근-통제">4. 데이터베이스 암호화 및 접근 통제</a></li>
+    </ul>
+  </li>
+  <li><a href="#데이터베이스-백업">데이터베이스 백업</a></li>
+</ul>
+:ET

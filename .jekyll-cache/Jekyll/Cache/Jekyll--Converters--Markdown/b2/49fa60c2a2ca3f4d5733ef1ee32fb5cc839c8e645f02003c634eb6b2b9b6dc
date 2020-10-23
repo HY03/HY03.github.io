@@ -1,0 +1,89 @@
+I"�<ul class="toc__menu">
+  <li><a href="#암호화">암호화</a>
+    <ul>
+      <li><a href="#1-시저암호와-암호화의-개요">1. 시저암호와 암호화의 개요</a></li>
+      <li><a href="#2-암호화encryption">2. 암호화(Encryption)</a></li>
+      <li><a href="#3-치환-암호substitution-cipher">3. 치환 암호(Substitution Cipher)</a></li>
+      <li><a href="#4-다중-치환-암호-힐hill-암호화">4. 다중 치환 암호 힐(Hill) 암호화</a></li>
+      <li><a href="#5-암호화-기법">5. 암호화 기법</a></li>
+    </ul>
+  </li>
+  <li><a href="#스트림stream-암호화">스트림(Stream) 암호화</a>
+    <ul>
+      <li><a href="#1-스트림-암호화">1. 스트림 암호화</a></li>
+      <li><a href="#2-동기식-스트림-암호">2. 동기식 스트림 암호</a></li>
+      <li><a href="#3-비동기식-스트림-암호">3. 비동기식 스트림 암호</a></li>
+    </ul>
+  </li>
+  <li><a href="#블록-암호화">블록 암호화</a>
+    <ul>
+      <li><a href="#1-블록-암호화-알고리즘-구조">1. 블록 암호화 알고리즘 구조</a></li>
+      <li><a href="#2-블록-암호화-기법block-cipher">2. 블록 암호화 기법(Block Cipher)</a>
+        <ul>
+          <li><a href="#1-ecbelectronic-code-book-mode">1. ECB(Electronic Code Book) Mode</a></li>
+          <li><a href="#2-cbccipher-block-chaining-mode">2. CBC(Cipher Block Chaining) Mode</a></li>
+          <li><a href="#3-cfbcipher-feedback-mode">3. CFB(Cipher FeedBack) Mode</a></li>
+          <li><a href="#4-ofbouter-feedback-mode">4. OFB(Outer FeedBack) Mode</a></li>
+          <li><a href="#5-ctrcounter-mode">5. CTR(CounTeR) Mode</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#암호화-알고리즘의-종류">암호화 알고리즘의 종류</a>
+    <ul>
+      <li><a href="#1-desdata-encryption-standard">1. DES(Data Encryption Standard)</a></li>
+      <li><a href="#2-ideainternational-data-encryption-algorithm">2. IDEA(International Data Encryption Algorithm)</a></li>
+      <li><a href="#3-rc5rons-code-5-알고리즘">3. RC5(Ron’s Code 5) 알고리즘</a></li>
+      <li><a href="#4-aesadvanced-encryption-standard">4. AES(Advanced Encryption Standard)</a></li>
+      <li><a href="#5-seed">5. SEED</a></li>
+      <li><a href="#6-대칭키-암호화-기법-차이점">6. 대칭키 암호화 기법 차이점</a>
+        <ul>
+          <li><a href="#1-대칭키-암호화-기법">1. 대칭키 암호화 기법</a></li>
+          <li><a href="#2-대표적인-대칭키-암호화-기법">2. 대표적인 대칭키 암호화 기법</a></li>
+          <li><a href="#3-국내에서-개발한-암호화-알고리즘-종류">3. 국내에서 개발한 암호화 알고리즘 종류</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#암호분석-방법">암호분석 방법</a>
+    <ul>
+      <li><a href="#1-암호분석-방법의-종류">1. 암호분석 방법의 종류</a></li>
+    </ul>
+  </li>
+  <li><a href="#디피헬먼diffie-hellman-키-교환-알고리즘">디피헬먼(Diffie-Hellman) 키 교환 알고리즘</a>
+    <ul>
+      <li><a href="#1-diffie-hellman-키-교환-알고리즘-개념-및-특징">1. Diffie-Hellman 키 교환 알고리즘 개념 및 특징</a></li>
+      <li><a href="#2-diffie-hellman-키-교환-과정">2. Diffie-Hellman 키 교환 과정</a></li>
+    </ul>
+  </li>
+  <li><a href="#혼합-암호화">혼합 암호화</a>
+    <ul>
+      <li><a href="#1-대칭키-암호화-기법과-공개키비대칭키-암호화-기법의-장단점">1. 대칭키 암호화 기법과 공개키(비대칭키) 암호화 기법의 장/단점</a></li>
+      <li><a href="#2-문제-해결">2. 문제 해결</a></li>
+    </ul>
+  </li>
+  <li><a href="#rsarivest-shamir-adelman">RSA(Rivest, Shamir, Adelman)</a>
+    <ul>
+      <li><a href="#1-rsa-개념-및-특징">1. RSA 개념 및 특징</a></li>
+      <li><a href="#2-rsa-암호화-및-복호화-과정">2. RSA 암호화 및 복호화 과정</a></li>
+      <li><a href="#3-rsa-안전성-확보">3. RSA 안전성 확보</a></li>
+    </ul>
+  </li>
+  <li><a href="#해시hash함수">해시(Hash)함수</a>
+    <ul>
+      <li><a href="#1-해시hash-알고리즘-특징">1. 해시(Hash) 알고리즘 특징</a></li>
+      <li><a href="#2-해시함수의-조건">2. 해시함수의 조건</a></li>
+      <li><a href="#3-salt">3. Salt</a></li>
+      <li><a href="#4-해시함수-종류">4. 해시함수 종류</a>
+        <ul>
+          <li><a href="#1-md5-message-digest-algorithm-5">1. MD5 (Message Digest Algorithm 5)</a></li>
+          <li><a href="#2-sha-secure-hash-algorithm">2. SHA (Secure Hash Algorithm)</a></li>
+          <li><a href="#3-국내-해시함수-알고리즘-lsh">3. 국내 해시함수 알고리즘 LSH</a></li>
+        </ul>
+      </li>
+      <li><a href="#5-생일자-공격birthday-attacks">5. 생일자 공격(Birthday Attacks)</a></li>
+      <li><a href="#6-랜덤-오라클-모델">6. 랜덤 오라클 모델</a></li>
+    </ul>
+  </li>
+</ul>
+:ET

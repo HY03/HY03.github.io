@@ -1,0 +1,1582 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.20.2 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>04.정보보안 일반 - 02.접근 통제 | Bluesplatter</title>
+<meta name="description" content="접근 통제(Access Control) 정책의 이해 및 구성요소 1. 개요 (용어)    정당한 사용자에게는 권한을 부여하고 그 외의 다른 사용자는 거부하는 것   식별(Identification) : 사용자 ID를 확인하는 과정   인증(Authentication) : 패스워드가 정확한지 확인   인가(Authorization) : 읽고, 쓰고, 실행시키는 권한을 부여   주체 : 자원의 접근을 요구하는 활동 개체(사람, 프로그램, 프로세스 등)   객체 : 자원을 가진 수동적인 개체(Database, 컴퓨터, 파일 등)   접근 : 주체와 객체의 정보 흐름">
+
+
+  <meta name="author" content="HY03">
+  
+  <meta property="article:author" content="HY03">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Bluesplatter">
+<meta property="og:title" content="04.정보보안 일반 - 02.접근 통제">
+<meta property="og:url" content="http://localhost:4000/is_certification/ISCert-04IS-02AccessControl/">
+
+
+  <meta property="og:description" content="접근 통제(Access Control) 정책의 이해 및 구성요소 1. 개요 (용어)    정당한 사용자에게는 권한을 부여하고 그 외의 다른 사용자는 거부하는 것   식별(Identification) : 사용자 ID를 확인하는 과정   인증(Authentication) : 패스워드가 정확한지 확인   인가(Authorization) : 읽고, 쓰고, 실행시키는 권한을 부여   주체 : 자원의 접근을 요구하는 활동 개체(사람, 프로그램, 프로세스 등)   객체 : 자원을 가진 수동적인 개체(Database, 컴퓨터, 파일 등)   접근 : 주체와 객체의 정보 흐름">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-10-22T14:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/is_certification/ISCert-04IS-02AccessControl/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "HY03",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Bluesplatter Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo/logo.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          세상에 남기는 작은 흔적
+          <span class="site-subtitle">Bluesplatter</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/">연도별 포스트</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="http://localhost:4000/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#is_certification" itemprop="item"><span itemprop="name">Is_certification</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">04.정보보안 일반 - 02.접근 통제</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/profile/photo.jpg" alt="HY03" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">HY03</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>저는 전문가가 아니고 이것 저것 알아보는 비전문가 입니다. <br /> 틀린 내용이 기술되어도 너그러이 봐주시고 댓글을 남겨주셨으면 좋겠습니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="http://bluesplatter.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:hyunik03@gmail.com">
+            <meta itemprop="email" content="hyunik03@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">이메일</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="04.정보보안 일반 - 02.접근 통제">
+    <meta itemprop="description" content="접근 통제(Access Control) 정책의 이해 및 구성요소1. 개요 (용어)  정당한 사용자에게는 권한을 부여하고 그 외의 다른 사용자는 거부하는 것  식별(Identification) : 사용자 ID를 확인하는 과정  인증(Authentication) : 패스워드가 정확한지 확인  인가(Authorization) : 읽고, 쓰고, 실행시키는 권한을 부여  주체 : 자원의 접근을 요구하는 활동 개체(사람, 프로그램, 프로세스 등)  객체 : 자원을 가진 수동적인 개체(Database, 컴퓨터, 파일 등)  접근 : 주체와 객체의 정보 흐름">
+    <meta itemprop="datePublished" content="2020-10-22T14:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">04.정보보안 일반 - 02.접근 통제
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2020-10-22T14:00:00+09:00">October 22, 2020</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#접근-통제access-control-정책의-이해-및-구성요소">접근 통제(Access Control) 정책의 이해 및 구성요소</a>
+    <ul>
+      <li><a href="#1-개요-용어">1. 개요 (용어)</a></li>
+      <li><a href="#2-정보-접근의-단계">2. 정보 접근의 단계</a></li>
+      <li><a href="#3-접근-통제-정의">3. 접근 통제 정의</a></li>
+      <li><a href="#4-접근-통제-원칙">4. 접근 통제 원칙</a></li>
+      <li><a href="#5-참조-모니터reference-monitor">5. 참조 모니터(Reference Monitor)</a></li>
+      <li><a href="#6-식별과-인증">6. 식별과 인증</a></li>
+      <li><a href="#7-인증-방식에-따른-분류">7. 인증 방식에 따른 분류</a></li>
+    </ul>
+  </li>
+  <li><a href="#접근-통제-기술-정책의-특징-및-적용-범위">접근 통제 기술 정책의 특징 및 적용 범위</a>
+    <ul>
+      <li><a href="#1-접근-통제-기술-개요">1. 접근 통제 기술 개요</a></li>
+      <li><a href="#2-macmandatory-access-control">2. MAC(Mandatory Access Control)</a></li>
+      <li><a href="#3-dacdiscretionary-access-control">3. DAC(Discretionary Access Control)</a></li>
+      <li><a href="#4-rbacrole-base-access-control">4. RBAC(Role Base Access Control)</a></li>
+      <li><a href="#5-접근-통제-기술-간의-차이점">5. 접근 통제 기술 간의 차이점</a></li>
+    </ul>
+  </li>
+  <li><a href="#접근-통제-기법과-각-모델의-특징">접근 통제 기법과 각 모델의 특징</a>
+    <ul>
+      <li><a href="#1-접근-통제-방법">1. 접근 통제 방법</a></li>
+      <li><a href="#2-접근-통제-매트릭스-종류">2. 접근 통제 매트릭스 종류</a></li>
+      <li><a href="#3-접근-통제-모델access-control-model">3. 접근 통제 모델(Access Control Model)</a>
+        <ul>
+          <li><a href="#1-bell-lapadula-모델">1. Bell-Lapadula 모델</a></li>
+          <li><a href="#2-biba-모델">2. Biba 모델</a></li>
+          <li><a href="#3-clark-and-wilson클락윌슨-모델">3. Clark and Wilson(클락윌슨 모델)</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#보안-운영체제secure-os">보안 운영체제(Secure OS)</a>
+    <ul>
+      <li><a href="#1-secure-dbms-구조">1. Secure DBMS 구조</a></li>
+      <li><a href="#2-은닉채널convert-channel">2. 은닉채널(Convert Channel)</a></li>
+    </ul>
+  </li>
+  <li><a href="#키-분배-프로토콜">키 분배 프로토콜</a>
+    <ul>
+      <li><a href="#1-대칭키-암호화symmetric-key">1. 대칭키 암호화(Symmetric Key)</a></li>
+      <li><a href="#2-공개키-기반-키-분배-방식의-원리">2. 공개키 기반 키 분배 방식의 원리</a></li>
+      <li><a href="#3-공개키-암호화와-대칭키-암호화-방식의-차이점">3. 공개키 암호화와 대칭키 암호화 방식의 차이점</a></li>
+    </ul>
+  </li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <h1 id="접근-통제access-control-정책의-이해-및-구성요소">접근 통제(Access Control) 정책의 이해 및 구성요소</h1>
+<h2 id="1-개요-용어">1. 개요 (용어)</h2>
+<ul>
+  <li>정당한 사용자에게는 권한을 부여하고 그 외의 다른 사용자는 거부하는 것</li>
+  <li>식별(Identification) : 사용자 ID를 확인하는 과정</li>
+  <li>인증(Authentication) : 패스워드가 정확한지 확인</li>
+  <li>인가(Authorization) : 읽고, 쓰고, 실행시키는 권한을 부여</li>
+  <li>주체 : 자원의 접근을 요구하는 활동 개체(사람, 프로그램, 프로세스 등)</li>
+  <li>객체 : 자원을 가진 수동적인 개체(Database, 컴퓨터, 파일 등)</li>
+  <li>접근 : 주체와 객체의 정보 흐름</li>
+</ul>
+
+<h2 id="2-정보-접근의-단계">2. 정보 접근의 단계</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">단계</th>
+      <th style="text-align: left">내용</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">식별(Identification) 단계</td>
+      <td style="text-align: left">사용자가 시스템에 본인이 누구라는 것을 밝히는 행위(예: ID)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">인증(Authentication) 단계</td>
+      <td style="text-align: left">사용자가 맞음을 시스템이 인정(예: Password, 스마트카드, 생체인증)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">인가(Authorization) 단계</td>
+      <td style="text-align: left">접근 권한 유무 판별 후 접근 권한 부여</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="3-접근-통제-정의">3. 접근 통제 정의</h2>
+<ul>
+  <li>접근 통제(Access Control)는 주체에 대한 객체의 접근을 통제</li>
+  <li>A 라는 사용자가 b.html 파일객체에 대해 읽기, 쓰기, 실행 권한이 있는지 확인하고 권한이 있으면 권한을 부여</li>
+  <li>권한이 없으면 접근을 차단</li>
+  <li>통제 활동 : 비인가된 접근 감시, 접근을 요구하는 이용자를 식별, 정당한 이용인지 확인</li>
+  <li>통제 목적 : 주체의 접근으로부터 객체의 기밀성, 무결성, 가용성을 보장</li>
+</ul>
+
+<h2 id="4-접근-통제-원칙">4. 접근 통제 원칙</h2>
+<ul>
+  <li>최소 권한의 원칙 : 최소한의 권한만을 허용하여 권한의 남용을 방지</li>
+  <li>직무분리 : 업무의 발생, 승인, 변경, 확인, 배포 등이 한 사람에 의해 처리되지 않도록 직무를 분리 (예: 보안관리자와 감사자, 개발자와 운영자)</li>
+</ul>
+
+<h2 id="5-참조-모니터reference-monitor">5. 참조 모니터(Reference Monitor)</h2>
+<ul>
+  <li>개요
+    <ul>
+      <li>주체가 객체를 참조할 때 직접참조를 수행하지 않고 보안 커널을 통해 참조</li>
+      <li>보안 커널은 주체의 권한을 확인하고 접근한 객체에 대한 정보를 로그에 기록</li>
+      <li>취약점은 보안 커널을 통해 차단</li>
+      <li>주체의 객체에 대한 접근 통제 결정을 중재하는 OS의 보안 커널로서 일련의 소프트웨어임</li>
+    </ul>
+  </li>
+  <li>
+    <p>참조 모니터의 3가지 요소</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">요소</th>
+          <th style="text-align: left">내용</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left">완전성(Completeness)</td>
+          <td style="text-align: left">우회가 불가능해야 함</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">격리(Isolation)</td>
+          <td style="text-align: left">Tamper proof(부정 조작이 불가능해야 함)</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">검증성(Verifiability)</td>
+          <td style="text-align: left">분석하고 테스트할 정도로 충분히 작아야 함(Simple, Small, Understandable)</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<h2 id="6-식별과-인증">6. 식별과 인증</h2>
+<ul>
+  <li>식별 : 자신을 시스템에 밝히는 수단, Unique, 책임 추적성 분석의 기초</li>
+  <li>인증 : 시스템이 사용자가 맞음을 검증하고 인정하는 것</li>
+</ul>
+
+<h2 id="7-인증-방식에-따른-분류">7. 인증 방식에 따른 분류</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">인증 구분</th>
+      <th style="text-align: left">설명</th>
+      <th style="text-align: left">기반</th>
+      <th style="text-align: left">종류</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Type I 인증</td>
+      <td style="text-align: left">Something you know</td>
+      <td style="text-align: left">지식</td>
+      <td style="text-align: left">Password, Pin, Passphrase</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Type II 인증</td>
+      <td style="text-align: left">Something you have</td>
+      <td style="text-align: left">소유</td>
+      <td style="text-align: left">Smart Card, Tokens</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Type III 인증</td>
+      <td style="text-align: left">Something you are</td>
+      <td style="text-align: left">존재</td>
+      <td style="text-align: left">홍채, 지문, 정맥</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Type IV 인증</td>
+      <td style="text-align: left">Something you do</td>
+      <td style="text-align: left">행동</td>
+      <td style="text-align: left">음성, 서명, Keystroke Dynamics</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- **2-Factor 인증**
+    + 지식, 소유, 존재, 행동기반 인증에서 2개를 같이 인증하는 방법
+</code></pre></div></div>
+
+<h1 id="접근-통제-기술-정책의-특징-및-적용-범위"><strong>접근 통제 기술 정책의 특징 및 적용 범위</strong></h1>
+<h2 id="1-접근-통제-기술-개요">1. 접근 통제 기술 개요</h2>
+<ul>
+  <li>미국 국방성에서 기밀 분류 방법으로부터 유래하는 접근 통제 정책
+    <ul>
+      <li>MAC(Mandatory Access Control)
+        <ul>
+          <li>자동으로 시행되는 어떤 규칙에 기반</li>
+          <li>사용자와 타깃에 광범위한 그룹 형성이 요구됨</li>
+        </ul>
+      </li>
+      <li>DAC(Discretionary Access Control)
+        <ul>
+          <li>특별한 사용자별로 정보에 대한 접근을 제공</li>
+          <li>추가적 접근 통제를 사용자에게 일임</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>OSI 보안 구조
+    <ul>
+      <li>신분기반(Identity-based) : DAC 와 유사
+        <ul>
+          <li>개인기반(Individual-Based Policy:IBP)</li>
+          <li>그룹기반(Group-Based Policy:GBP)</li>
+        </ul>
+      </li>
+      <li>규칙기반(Rule-based) : MAC 와 유사
+        <ul>
+          <li>다중단계(Multi-Level Policy:MLP)</li>
+          <li>부서기반(Compartment-Based Policy:CBP)</li>
+        </ul>
+      </li>
+      <li>직무기반(Role-Based)
+        <ul>
+          <li>신분기반과 규칙기반 정책의 양쪽 특성</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>접근 통제 메커니즘
+    <ul>
+      <li>ACL(Access Control List)</li>
+      <li>CL(Capability List)</li>
+      <li>SL(Security Label)</li>
+      <li>통합정보 메커니즘 (3가지 정보를 종합적 고려)</li>
+      <li>PB(Protection Bit) : 각 파일에 접근 통제를 위한 Bit 부여</li>
+    </ul>
+  </li>
+  <li>접근 통제 보안모델
+    <ul>
+      <li>HRU 접근행렬 모델 : 접근행렬 이용</li>
+      <li>BLP 보안모델 : 엄격한 기밀성 통제</li>
+      <li>Biba 보안모델 : 무결성 정책을 지원</li>
+      <li>Clark-Wilson 모델 : 실행할 수 있는 프로그램에 의하여 통제
+        <h2 id="2-macmandatory-access-control">2. <strong>MAC(Mandatory Access Control)</strong></h2>
+      </li>
+    </ul>
+  </li>
+  <li>MAC(Mandatory Access Control) - 강제적 접근 통제
+    <ul>
+      <li>접근 권한이 주체의 비밀 취급 인가 레이블 및 객체의 민감도 레이블에 따라 지정되는 방식</li>
+      <li>관리자에 의해서 권한이 할당되고 해제됨</li>
+    </ul>
+  </li>
+  <li>MAC의 주요 특징
+    <ul>
+      <li>데이터에대한 접근을 시스템이 결정(Rule에 의해)</li>
+      <li>관리자만이 자원의 카테고리 변경 가능</li>
+      <li>비밀성을 포함하고 있는 객체에 대해 주체가 가지고 있는 권한에 근거하여 객체의 접근을 제한하는 정책</li>
+    </ul>
+  </li>
+  <li>
+    <p>MAC의 종류</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">종류</th>
+          <th style="text-align: left">설명</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left">Rule-based MAC</td>
+          <td style="text-align: left">주체와 객체의 특성에 관계된 특정 규칙에 따른 접근 통제 방화벽</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">Administratively-directed MAC</td>
+          <td style="text-align: left">객체에 접근할 수 있는 시스템 관리자에 의한 통제</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">CBP(Compartment-Based Policy)</td>
+          <td style="text-align: left"><ul><li>일련의 객체 집합을 다른 객체들과 분리</li><li>동일 수준의 접근허가를 갖는 부서라도 다른 보안등급을 가질 수 있음</li><li>예)팀장은 자기 팀원의 급여정보를 볼 수 있으나 다른 팀원 급여정보는 볼 수 없음</li></ul></td>
+        </tr>
+        <tr>
+          <td style="text-align: left">MLP(Multi-Level Policy)</td>
+          <td style="text-align: left"><ul><li>Top Secret, Secret, Confidentiality, Unclassified와 같이 각 객체별로 지정된 허용 등급을 할당하여 운영</li><li>미국 국방성 컴퓨터 보안 평가지표에 사용, BLP 수학적 모델로 표현 가능</li></ul></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<h2 id="3-dacdiscretionary-access-control">3. <strong>DAC(Discretionary Access Control)</strong></h2>
+<ul>
+  <li>DAC(Discretionary Access Control) - 자율적 접근 통제
+    <ul>
+      <li>객체의 소유자가 권한 부여 : 접근하려는 사용자에 대하여 권한을 추가 및 삭제할 수 있다.</li>
+      <li>User-based, Identity : 사용자의 신분에 따라 임의로 접근을 제어하는 방식</li>
+      <li>융통성이 좋아 UNIX, DBMS 등의 상용 OS에서 구현이 가능</li>
+      <li>접근 통제 목록(ACL, Access Control List) 사용 : Read, Write, Execute</li>
+      <li>MAC의 단점을 극복하기 위해 나온 것이 아님</li>
+    </ul>
+  </li>
+  <li>DAC 종류
+    <ul>
+      <li>Identity-based DAC : 주체와 객체의 ID에 따른 접근 통제, 주로 유닉스에서 사용</li>
+      <li>User-directed : 객체 소유자가 접근 권한을 설정 및 변경할 수 있는 방식</li>
+    </ul>
+  </li>
+  <li>Non-DAC(Non Discretionary Access Control) - 비임의적 접근 통제
+    <ul>
+      <li>주체의 역할에 따라 접근할 수 있는 객체를 지정하는 방식</li>
+      <li>기업 내 개인의 작은 이동(예:직무순환) 및 조직 특성에 밀접하게 적용하기 위한 통제 방식</li>
+      <li>Role-based 또는 Task-based 라고도 함</li>
+      <li>Central authority(중앙 인증) : 중앙 관리자에 의해 접근 규칙을 지정</li>
+      <li>사용자별 접근 통제 규칙을 설정할 필요가 없다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Non-DAC의 종류</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">종류</th>
+          <th style="text-align: left">설명</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left">Role-based Access Control(RBAC)</td>
+          <td style="text-align: left"><ul><li>사용자의 역할(임무)에 의해 권한이 부여(예:PM, 개발자, 디자이너)</li><li>사용자가 적절한 역할에 할당되고 역할에 적합한 권한이 할당된 경우만 사용자가 특정한 모드로 정보에 대한 접근을 통제할 수 있는 방법</li></ul></td>
+        </tr>
+        <tr>
+          <td style="text-align: left">Lattice-based Non-DAC</td>
+          <td style="text-align: left"><ul><li>역할에 할당된 민감도 레벨에 의해 결정</li><li>관련된 정보로만 접근 가능(예: 핵무기 임수 수행자는 관련된 상/하위 정보로만 접근 가능)</li><li>주체와 객체의 관계에 의거하여 접근을 통제할 수 있는 Upper bound와 Low bound를 설정하여 제어하는 방식, 정보의 흐름을 통제</li></ul></td>
+        </tr>
+        <tr>
+          <td style="text-align: left">Task-based Non-DAC</td>
+          <td style="text-align: left"><ul><li>조직 내 개인의 임무에 의한 접근 통제(알 필요성의 원칙)</li><li>핵무기와 관련된 임무를 수행하고 있는 경우 다른 관련 업무는 볼 수 없음</li></ul></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<h2 id="4-rbacrole-base-access-control">4. <strong>RBAC(Role Base Access Control)</strong></h2>
+<ul>
+  <li>권한들의 묶음으로 Role을 만들어서 사용자에게 Role 단위로 권한을 할당하고 관리</li>
+  <li>RBAC의 장점
+    <ul>
+      <li>관리 수월 : 관리자에게 편리한 관리 능력을 제공, 비용이 줄어듦</li>
+      <li>보안관리 단순화 : 권한 지정을 논리적, 독립적으로 할당하거나 회수 가능</li>
+      <li>최소 권한 : 최소한의 권한만을 허용하여 권한의 남용을 방지</li>
+      <li>직무분리 : 시스템상에서 오용을 일으킬 정도로 충분한 특권을 가진 사용자를 없게 한다는 것이 가장 큰 특징임</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="5-접근-통제-기술-간의-차이점">5. 접근 통제 기술 간의 차이점</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">항목</th>
+      <th style="text-align: left">MAC</th>
+      <th style="text-align: left">DAC</th>
+      <th style="text-align: left">RBAC</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">권한 부여자</td>
+      <td style="text-align: left">System</td>
+      <td style="text-align: left">Data Owner</td>
+      <td style="text-align: left">Central Authority</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">접근 여부 결정 기준</td>
+      <td style="text-align: left">Security Label</td>
+      <td style="text-align: left">Identity</td>
+      <td style="text-align: left">Role</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">오렌지북</td>
+      <td style="text-align: left">B</td>
+      <td style="text-align: left">C</td>
+      <td style="text-align: left">C</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">장점</td>
+      <td style="text-align: left">안전/중앙 집중관리</td>
+      <td style="text-align: left">유연, 구현 용이</td>
+      <td style="text-align: left">관리 용이</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">단점</td>
+      <td style="text-align: left">구현/운영 어려움, 높은 비용</td>
+      <td style="text-align: left">트로이목마 공격에 취약, ID 도용문제</td>
+      <td style="text-align: left">사용자-역할 중심이기 때문에 접근 요청이 발생하는 상황 정보 등이 접근 제어 정책에 제대로 반영되기 어려움</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">적용 사례</td>
+      <td style="text-align: left">방화벽</td>
+      <td style="text-align: left">Linux 파일시스템</td>
+      <td style="text-align: left">HIPAA(보건 보험)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="접근-통제-기법과-각-모델의-특징">접근 통제 기법과 각 모델의 특징</h1>
+<h2 id="1-접근-통제-방법">1. 접근 통제 방법</h2>
+<ul>
+  <li>Capability List
+    <ul>
+      <li>주체별로 객체를 링크드리스트로 연결하고 권한을 할당한 구조</li>
+      <li>A 에 대해 모든 파일을 리스트하고 파일별 접근권한을 나열한 구조</li>
+      <li>권한을 알기 위한 탐색시간이 오래 걸리는 문제점</li>
+    </ul>
+  </li>
+  <li>Access Control List
+    <ul>
+      <li>주체와 객체간의 접근 권한을 테이블로 구성한 것</li>
+      <li>행에는 주체, 열에는 객체를 두고 행과 열의 교차점에는 주체가 객체에 대한 접근 권한(W, R, D, E)을 기술하여 이름 기반으로 제어</li>
+      <li>사용자가 비교적 소수, 분포도가 안정적일 때 적합 (지속적 변경환경에서는 부적합)</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="2-접근-통제-매트릭스-종류">2. 접근 통제 매트릭스 종류</h2>
+<ul>
+  <li>ACL(Access Control List) : 객체 기반 접근 제어
+    <ul>
+      <li>객체 관점에서 접근 권한을 테이블 형태로 기술하여 접근 제어</li>
+      <li>사용자가 비교적 소수, 분포도가 안정적일 때 적합 (지속적 변경환경에서는 부적합)</li>
+    </ul>
+  </li>
+  <li>내용 의존 접근 통제(Content Dependent Access Control)
+    <ul>
+      <li>데이터베이스에서 가장 많이 사용, 접근제어가 내용에 의해 이루어짐</li>
+      <li>예) DB File에서 직원의 경력, 인사 등의 내용이 있을 때 일반 직원은 자신의 것만 볼 수 있지만 팀장의 경우 팀의 모든 직원을 볼 수 있게 하는 방식</li>
+    </ul>
+  </li>
+  <li>제한적 인터페이스(Restricted Interfaces, Constricted User Interface)
+    <ul>
+      <li>특정 기능이나 자원에 대한 접근 권한이 없을 경우 아예 접근을 요청하지 못하도록 하는 것</li>
+      <li>예) DB View</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="3-접근-통제-모델access-control-model">3. 접근 통제 모델(Access Control Model)</h2>
+<h3 id="1-bell-lapadula-모델">1. <strong>Bell-Lapadula 모델</strong></h3>
+<ul>
+  <li>개념
+    <ul>
+      <li>기밀성 모델로서 높은 등급의 정보가 낮은 레벨로 유출되는 것을 통제하는 모델</li>
+      <li>정보구분 : Top Secret, Secret, Unclassified</li>
+      <li>최초의 수학적 모델로서 보안 등급과 범주를 이용한 강제적 정책에 의한 접근 통제 모델</li>
+      <li>미 국방성(DOD)의 지원을 받아 설계된 모델로서 오렌지부긴 TCSEC의 근간이 됨</li>
+      <li>시스템의 비밀성을 보호하기 위한 보안 정책</li>
+    </ul>
+  </li>
+  <li>No Read-Up(NRU or ss-property) : 단순 보안 규칙
+    <ul>
+      <li>주체는 자신보다 높은 등급의 객체를 읽을 수 없다</li>
+      <li>주체의 취급인가가 객체의 비밀 등급보다 같거나 높아야 그 객체를 읽을 수 있다.</li>
+    </ul>
+  </li>
+  <li>No Write-Down(NWD or *-property) = Confinement property : *(스타-보안규칙)
+    <ul>
+      <li>주체는 자신보다 낮은 등급의 객체에 정보를 쓸 수 없다.</li>
+      <li>주체의 취급인가가 객체의 비밀 등급보다 낮거나 같을 경우 그 객체를 주체가 기록할 수 있다.</li>
+    </ul>
+  </li>
+  <li>Strong *-property
+    <ul>
+      <li>더욱 강화한 모델로, 주체는 자신과 등급이 다른 객체에 대해 읽거나 쓸 수 없다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>단계 등급별 구분</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: center">Level</th>
+          <th style="text-align: center">ss-property 읽기 권한(Read Access)</th>
+          <th style="text-align: center">*-property 쓰기 권한(Write Access)</th>
+          <th style="text-align: center">Strong*-property 읽기/쓰기(Read/Write Access)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: center">높은 등급</td>
+          <td style="text-align: center">통제</td>
+          <td style="text-align: center">가능(OK Write Up)</td>
+          <td style="text-align: center">통제</td>
+        </tr>
+        <tr>
+          <td style="text-align: center">같은 등급</td>
+          <td style="text-align: center">가능</td>
+          <td style="text-align: center">가능</td>
+          <td style="text-align: center">가능</td>
+        </tr>
+        <tr>
+          <td style="text-align: center">낮은 등급</td>
+          <td style="text-align: center">가능(OK Read Down)</td>
+          <td style="text-align: center">통제</td>
+          <td style="text-align: center">통제</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<h3 id="2-biba-모델">2. <strong>Biba 모델</strong></h3>
+<ul>
+  <li>개념
+    <ul>
+      <li>Bell-Lapadula 모델의 단점인 무결성을 보장할 수 있는 모델</li>
+      <li>주체에 의한 객체 접근의 하목으로 무결성을 다룸</li>
+    </ul>
+  </li>
+  <li>Biba 모델의 속성
+    <ul>
+      <li>No Read Down(NRD or Simple Integrity Axiom)</li>
+      <li>No Write Up(NWU or *Integrity Axiom)</li>
+    </ul>
+  </li>
+  <li>
+    <p>단계 등급별 구분</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: center">Level</th>
+          <th style="text-align: center">단순 무결성 규칙 (Simple Integrity Property) 읽기 권한(Read Access)</th>
+          <th style="text-align: center">(스타) - 무결성 규칙 (Integrity *-property) 쓰기 권한(Write Access)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: center">높은 등급</td>
+          <td style="text-align: center">가능(OK Read Up)</td>
+          <td style="text-align: center">통제</td>
+        </tr>
+        <tr>
+          <td style="text-align: center">같은 등급</td>
+          <td style="text-align: center">가능</td>
+          <td style="text-align: center">가능</td>
+        </tr>
+        <tr>
+          <td style="text-align: center">낮은 등급</td>
+          <td style="text-align: center">통제</td>
+          <td style="text-align: center">가능(OK Write Down)</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<h3 id="3-clark-and-wilson클락윌슨-모델">3. Clark and Wilson(클락윌슨 모델)</h3>
+<ul>
+  <li>클락 윌슨(Clark and Wilson)
+    <ul>
+      <li>무결성 중심의 상업용으로 설계한 것으로 Application의 보안 요구사항을 다룸</li>
+      <li>정보의 특성에 따라 비밀 노출 방지보다 자료의 변조 방지가 더 중요한 경우가 있음을 기초로 함</li>
+      <li>주체와 객체 사이에 프로그램이 존재, 객체는 항상 프로그램을 통해서만 접근이 가능</li>
+      <li>2가지 무결성을 정의 : 내부 일관성(시스템 이용), 외부 일관성(감사에 활용)</li>
+    </ul>
+  </li>
+  <li>만리장성 모델(Chinese Wall = Brewer-Nash)
+    <ul>
+      <li>서로 상충 관계에 있는 객체 간의 정보 접근을 통제하는 모델(이익의 상충 금지)이다.</li>
+      <li>상업적으로 기밀성 정책에 따른다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="보안-운영체제secure-os">보안 운영체제(Secure OS)</h1>
+<ul>
+  <li>보안 운영체제(Secure OS)
+    <ul>
+      <li>기존의 운영체제에서 발생 가능한 보안 취약성으로부터 시스템 자체를 보호하기 위해 기존 운영체제의 커널 등급에 부가적인 보안 기능을 강화시킨 운영체제</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="1-secure-dbms-구조">1. Secure DBMS 구조</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">구조</th>
+      <th style="text-align: left">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">신뢰 필터 구조</td>
+      <td style="text-align: left"><ul><li>신뢰할 수 없는 전위 사용자 인터페이스와 후위 데이터베이스 사이에 신뢰 필터를 사용하여 데이터에 대한 접근 통제 및 보안 서비스를 제공</li><li>신뢰 필터는 하부의 보안 운영체제가 제공하는 보안 서비스 및 메커니즘에 의존</li><li>장점 : 다른 구조에 비해 간단하며 작기 때문에 보안 기능의 검증 및 평가에 용이</li><li>단점 : 데이터의 보안을 침해하는 일부의 위협에 대해서는 취약점을 지님</li></ul></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">커널 구조</td>
+      <td style="text-align: left"><ul><li>커널 구조는 TCB 분할 개념에 의해서 구현됨. 따라서 데이터베이스 시스템은 보안 커널 외부에 존재하면서 임의적으로 보안만을 관리</li><li>데이터베이스 객체에 대한 임의적 접근 통제 : DBMS에 의해 수행</li><li>데이터베이스 파일에 대한 임의적 접근 통제 및 모든 강제적 접근 통제 : 하부의 보안 운영체제에 의하여 제공</li></ul></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">이중 커널 구조</td>
+      <td style="text-align: left">강제적 보안 기능을 갖는 데이터베이스 시스템으 구현하고, 이를 보안 운영체제와 함께 시스템의 TCB로 간주하여 보안 시스템을 평가</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">중복 구조</td>
+      <td style="text-align: left">낮은 보호 수준의 데이터를 데이터베이스에 중복하여 저장하는 방식</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="2-은닉채널convert-channel">2. 은닉채널(Convert Channel)</h2>
+<ul>
+  <li>기본 통신채널에 기생하는 통신채널로서 은닉메시지를 송신자와 수신자만 확인할 수 있다. 그 이유는 메시지가 스테가노그래피로 숨겨져 있어서 다른 사용자는 확인할 수 없기 때문이다.</li>
+</ul>
+
+<h1 id="키-분배-프로토콜"><strong>키 분배 프로토콜</strong></h1>
+<h2 id="1-대칭키-암호화symmetric-key">1. 대칭키 암호화(Symmetric Key)</h2>
+<ul>
+  <li>대칭키 암호화 기법
+    <ul>
+      <li>암호화 키와 복호화 키가 동일한 암호화 방식으로, 양방향 암호화 기법이다.</li>
+      <li>암호문을 송신하거나 수신하는 사용자는 사전에 암호화키를 교환해야 한다.</li>
+      <li>Session Key, Shared Key, Secret Key, 대칭키(Symmetric Key), 관용키 (Conventional Key) 라고도 함.</li>
+      <li><em>그림 삽입</em></li>
+    </ul>
+  </li>
+  <li>대칭키 암호화 기법의 특징
+    <ul>
+      <li>기밀성을 제공하나 무결성, 인증, 부인방지는 보장할 수 없으며, 암호화와 복호화 속도가 빠르다.</li>
+      <li>같은 키를 사용하므로 안전한 키 전달 및 공유 방법이 필요하며, 대용량 Data 암호화에 적합하다.</li>
+    </ul>
+  </li>
+  <li>세션키(Session Key)
+    <ul>
+      <li>IPSEC, SSL 등을 학습하다 보면 세션키라는 말이 나온다. 세션키는 송신자와 수신자가 연결하고 있는 동안만 사용하는 암호화키이며, 송신자와 수신자가 같은 암호화키를 가지고 있는 것이다. 세션키는 다른 말로 임시키라고도 한다. 즉, 연결이 종료되면 세션키는 사라진다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>대칭키 암호화의 종류</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">구분</th>
+          <th style="text-align: left">스트림 암호(Stream Cipher)</th>
+          <th style="text-align: left">블록 암호(Block Cipher)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left">개념</td>
+          <td style="text-align: left">하나의 Bit, 또는 바이트 단위로 암호화</td>
+          <td style="text-align: left">여러 개의 Bit를 묶어 블록 단위로 암호화</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">방법</td>
+          <td style="text-align: left">평문을 XOR로 1Bit 단위로 암호화</td>
+          <td style="text-align: left">블록 단위로 치환.대칭을 반복하여 암호화</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">장점</td>
+          <td style="text-align: left">실시간 암호, 복호화, 블록 암호화보다 빠름</td>
+          <td style="text-align: left">대용량의 평문 암호화</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">종류</td>
+          <td style="text-align: left">RC4, SEAL, OTP</td>
+          <td style="text-align: left">DES, 3DES, AES, IDEA, Blowfish, SEED</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<h2 id="2-공개키-기반-키-분배-방식의-원리">2. 공개키 기반 키 분배 방식의 원리</h2>
+<ul>
+  <li>공개키 암호화(Public Key)의 주요 특징
+    <ul>
+      <li>암호화 키와 복호화 키가 다른 암호화 방식, 키 교환은 키 합의 또는 키 전송을 사용한다.</li>
+      <li>공개키/개인키를 사용하여 인증, 서명, 암호화를 수행한다.</li>
+      <li>공개키로 암호화하여 메시지를 전송, 개인키로 복호화한다.</li>
+      <li>대칭키 암호화 기법의 키 공유 문제를 해결한 방법이지만 암호화키의 길이가 길어서 암호화 및 복호화의 성능이 떨어진다.</li>
+    </ul>
+  </li>
+  <li>공개키 암호화의 필요성</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">필요성</th>
+      <th style="text-align: left">주요 내용</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">키 관리 문제</td>
+      <td style="text-align: left">비밀키의 배분, 공유 문제, 수많은 키의 저장 및 관리 문제</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">인증</td>
+      <td style="text-align: left">메시지의 주인을 인증할 필요</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">부인방지</td>
+      <td style="text-align: left">메시지의 주인이 아니라고 부인하는 것을 방지</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>공개키 암호화 방식
+    <ul>
+      <li><em>그림 삽입</em></li>
+    </ul>
+  </li>
+  <li>
+    <p>공개키 암호화 종류</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">구분</th>
+          <th style="text-align: left">특징</th>
+          <th style="text-align: left">수학적 배경</th>
+          <th style="text-align: left">장점</th>
+          <th style="text-align: left">단점</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left">Diffie Hellman</td>
+          <td style="text-align: left"><ul><li>최초의 공개키 알고리즘</li><li>키 분배 전용 알고리즘</li></ul></td>
+          <td style="text-align: left">이산대수 문제</td>
+          <td style="text-align: left"><ul><li>키 분배에 최적화</li><li>키는 필요 시에만 생성, 저장 불필요</li></ul></td>
+          <td style="text-align: left"><ul><li>암호 모드로 사용 불가(인증 불가)</li><li>위조에 취약</li></ul></td>
+        </tr>
+        <tr>
+          <td style="text-align: left">RSA</td>
+          <td style="text-align: left">대표적 공개키 알고리즘</td>
+          <td style="text-align: left">소인수분해</td>
+          <td style="text-align: left">여러 Library 존재</td>
+          <td style="text-align: left">컴퓨터 속도의 발전으로 키 길이 증가</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">DSA</td>
+          <td style="text-align: left">전자서명 알고리즘 표준</td>
+          <td style="text-align: left">이산대수 문제</td>
+          <td style="text-align: left">간단한 구조(Yes or No의 결과만 가짐)</td>
+          <td style="text-align: left"><ul><li>전자서명 전용</li><li>암호화, 키 교환 불가</li></ul></td>
+        </tr>
+        <tr>
+          <td style="text-align: left">ECC</td>
+          <td style="text-align: left"><ul><li>짧은 키로 높은 암호 강도</li><li>PDA, 스마트폰, 핸드폰</li></ul></td>
+          <td style="text-align: left">타원 곡선</td>
+          <td style="text-align: left"><ul><li>오버헤드 적음</li><li>160키 = RSA 1024</li></ul></td>
+          <td style="text-align: left">키 테이블(20 Kbyte) 필요</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<h2 id="3-공개키-암호화와-대칭키-암호화-방식의-차이점">3. 공개키 암호화와 대칭키 암호화 방식의 차이점</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">항목</th>
+      <th style="text-align: left">대칭키 암호화</th>
+      <th style="text-align: left">공개키 암호화</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">키 관계</td>
+      <td style="text-align: left">암호화 키 = 복호화 키</td>
+      <td style="text-align: left">암호화 키 != 복호화 키</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">안전한 키 길이</td>
+      <td style="text-align: left">128Bit 이상</td>
+      <td style="text-align: left">2048Bit 이상</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">구성</td>
+      <td style="text-align: left">비밀키</td>
+      <td style="text-align: left">공개키,개인키</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">키 개수</td>
+      <td style="text-align: left">N(N-1)/2</td>
+      <td style="text-align: left">2N(키 쌍으로는 N)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">대표적인 예</td>
+      <td style="text-align: left">DES, 3DES, AES</td>
+      <td style="text-align: left">RSA, ECC</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">제공서비스</td>
+      <td style="text-align: left">기밀성</td>
+      <td style="text-align: left">기밀성, 부인방지, 인증</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">목적</td>
+      <td style="text-align: left">Data 암호화</td>
+      <td style="text-align: left">대칭키 암호화 전달(키 분배용)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">단점</td>
+      <td style="text-align: left">키 분배 어려움, 확장성 떨어짐</td>
+      <td style="text-align: left">중간자 공격(대응 PKI)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">암호화 속도</td>
+      <td style="text-align: left">공개키(비대칭키)보다 빠름</td>
+      <td style="text-align: left">대칭키보다 느림</td>
+    </tr>
+  </tbody>
+</table>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#%EC%A0%91%EA%B7%BC-%ED%86%B5%EC%A0%9C" class="page__taxonomy-item" rel="tag">접근 통제</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88-%EC%9D%BC%EB%B0%98" class="page__taxonomy-item" rel="tag">정보보안 일반</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88%EA%B8%B0%EC%82%AC" class="page__taxonomy-item" rel="tag">정보보안기사</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#is-certification" class="page__taxonomy-item" rel="tag">IS_Certification</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-10-22T14:00:00+09:00">October 22, 2020</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=04.%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+%EC%9D%BC%EB%B0%98+-+02.%EC%A0%91%EA%B7%BC+%ED%86%B5%EC%A0%9C%20http%3A%2F%2Flocalhost%3A4000%2Fis_certification%2FISCert-04IS-02AccessControl%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fis_certification%2FISCert-04IS-02AccessControl%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fis_certification%2FISCert-04IS-02AccessControl%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/is_certification/ISCert-04IS-01Principle/" class="pagination--pager" title="04.정보보안 일반 - 01.보안 요소 기술
+">이전</a>
+    
+    
+      <a href="/is_certification/ISCert-04IS-03DigitalSignature/" class="pagination--pager" title="04.정보보안 일반 - 03.전자서명
+">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/ISCert-01System-01OS/" rel="permalink">01.시스템보안 - 01.운영체제 이해 및 관리
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2020-10-23T17:10:00+09:00">October 23, 2020</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">운영체제 개요
+
+  운영체제의 정의 : 컴퓨터 시스템의 자원을 효율적으로 관리, 사용자가 컴퓨터를 효과적으로 사용할수 있도록 환경을 제공하는 여러 프로그램의 모임
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/ISCert-02Network-01Network/" rel="permalink">02.네트워크 보안 - 01.네트워크 개념
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2020-10-22T16:00:00+09:00">October 22, 2020</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">네트워크와 프로토콜
+
+  프로토콜
+    
+      메시지의 포맷, 언제 데이터를 보낼 것인지, 한번 전송하고 한번 응답할지 등.
+      OSI7 계층, TCP/IP 4계층
+      다른 약속을 한 송 수신자 간 통신 : 게이트웨이 장비 필요
+    
+  
+  데이터 전송방...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/ISCert-01System-04Window/" rel="permalink">01.시스템보안 - 04.윈도우 클라이언트 및 서버 보안
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2020-10-22T16:00:00+09:00">October 22, 2020</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">윈도우 아키텍처
+
+  (Ring 구조) - 경량화된 운영체제, Plug In Play
+  하드웨어 / HAL / 마이크로 커널 / 각종 관리자 / 응용 프로그램
+  그림 삽입
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/ISCert-01System-03Unix/" rel="permalink">01.시스템보안 - 03.유닉스&amp;리눅스 서버 보안
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2020-10-22T16:00:00+09:00">October 22, 2020</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">권한 설정
+1. umask : 디폴트 권한
+
+  0022
+    
+      666 - 022 : 644 (파일)
+      777 - 022 : 755 (디렉터리)
+    
+  
+  0077
+    
+      666 - 077 : 600 (파일)
+      777 - 077 :...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+<!--
+<script>
+	(function(d, h, m){
+    var js, fjs = d.getElementsByTagName(h)[0];
+    if (d.getElementById(m)){return;}
+    js = d.createElement(h); js.id = m;
+    js.onload = function(){
+        window.makerWidgetComInit({
+        position: "left",          
+        widget: "eqypoqmawbcz3azh-usiy9q7ma4ong1w1-juelcm3zfgcuwjds"                
+    })};
+    js.src = "https://makerwidget.com/js/embed.js";
+    fjs.parentNode.insertBefore(js, fjs)
+	}(document, "script", "dhm"))
+</script>
+-->
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:hyunik03@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 HY03. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://localhost:4000/is_certification/ISCert-04IS-02AccessControl/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/is_certification/ISCert-04IS-02AccessControl"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://bluesplatter.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

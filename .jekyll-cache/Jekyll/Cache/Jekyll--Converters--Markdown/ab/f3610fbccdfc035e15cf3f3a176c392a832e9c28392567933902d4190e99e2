@@ -1,0 +1,69 @@
+I"}<ul class="toc__menu">
+  <li><a href="#전자화폐">전자화폐</a>
+    <ul>
+      <li><a href="#1-전자화폐">1. 전자화폐</a></li>
+      <li><a href="#2-전자화폐-요구조건">2. 전자화폐 요구조건</a></li>
+      <li><a href="#3-ic-카드형-전자화폐-종류">3. IC 카드형 전자화폐 종류</a></li>
+    </ul>
+  </li>
+  <li><a href="#set">SET</a>
+    <ul>
+      <li><a href="#1-setsecure-electronic-transaction">1. SET(Secure Electronic Transaction)</a></li>
+      <li><a href="#2-set-거래-절차">2. SET 거래 절차</a></li>
+      <li><a href="#3-세부-절차">3. 세부 절차</a></li>
+      <li><a href="#4-set-구성요소">4. SET 구성요소</a></li>
+      <li><a href="#5-set-이중서명-dual-signature">5. SET 이중서명 (Dual Signature)</a></li>
+    </ul>
+  </li>
+  <li><a href="#ssl">SSL</a>
+    <ul>
+      <li><a href="#1-sslsecure-socket-layer-개요">1. SSL(Secure Socket Layer) 개요</a>
+        <ul>
+          <li><a href="#1-개요">1. 개요</a></li>
+          <li><a href="#2-sslsecure-socket-layer">2. SSL(Secure Socket Layer)</a></li>
+          <li><a href="#3-ssl-보안-서비스">3. SSL 보안 서비스</a></li>
+          <li><a href="#4-ssl-handshaking-과정">4. SSL Handshaking 과정</a></li>
+          <li><a href="#5-ssl-구성요소">5. SSL 구성요소</a></li>
+        </ul>
+      </li>
+      <li><a href="#2-ssl-handshaking-protocol-과정">2. SSL Handshaking Protocol 과정</a>
+        <ul>
+          <li><a href="#1-ssl-handshaking-protocol-세부-과정">1. SSL Handshaking Protocol 세부 과정</a></li>
+          <li><a href="#2-openssl-사용">2. OpenSSL 사용</a></li>
+          <li><a href="#3-openssl-보안-취약점">3. OpenSSL 보안 취약점</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#shttp">sHTTP</a>
+    <ul>
+      <li><a href="#1-shttp-개요">1. sHTTP 개요</a></li>
+      <li><a href="#2-shttp-기능">2. sHTTP 기능</a></li>
+    </ul>
+  </li>
+  <li><a href="#ipsec">IPSEC</a>
+    <ul>
+      <li><a href="#1-ipsecip-security-개요">1. IPSEC(IP Security) 개요</a></li>
+      <li><a href="#2-ipsec-header-구조">2. IPSEC Header 구조</a></li>
+    </ul>
+  </li>
+  <li><a href="#otp">OTP</a>
+    <ul>
+      <li><a href="#1-otpone-time-password-개요">1. OTP(One Time Password) 개요</a></li>
+      <li><a href="#2-동기-방식과-비동기-방식-인증-방법">2. 동기 방식과 비동기 방식 인증 방법</a></li>
+    </ul>
+  </li>
+  <li><a href="#전자문서와-ebxml">전자문서와 ebXML</a>
+    <ul>
+      <li><a href="#1-전자문서electronic-documents-개요">1. 전자문서(Electronic Documents) 개요</a></li>
+      <li><a href="#2-ebxmle-business-extensible-markup-language-개요">2. ebXML(e-business Extensible Markup Language) 개요</a></li>
+    </ul>
+  </li>
+  <li><a href="#web-service와-xmlextensible-markup-language-보안">Web Service와 XML(eXtensible Markup Language) 보안</a>
+    <ul>
+      <li><a href="#1-웹-서비스web-service-개요">1. 웹 서비스(Web Service) 개요</a></li>
+      <li><a href="#2-xmlextensible-markup-language-보안-기술">2. XML(eXtensible Markup Language) 보안 기술</a></li>
+    </ul>
+  </li>
+</ul>
+:ET

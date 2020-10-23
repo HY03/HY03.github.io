@@ -1,0 +1,10 @@
+I"�<h1 id="웹-취약점-및-버그-유형"><strong>웹 취약점 및 버그 유형</strong></h1>
+<h2 id="1-owasp-top-10">1. OWASP Top 10</h2>
+<ul>
+  <li>OWASP(The Open Web Application Security Project)
+    <ul>
+      <li>신뢰성 있는 웹 애플리케이션 개발 및 운영을 위한 웹 취약점의 우선순위와 위험도 기준의 정보보안 가이드라인을 제시</li>
+    </ul>
+  </li>
+</ul>
+:ET

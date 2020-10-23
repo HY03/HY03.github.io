@@ -1,0 +1,900 @@
+I"�<h1 id="권한-설정"><strong>권한 설정</strong></h1>
+<h2 id="1-umask--디폴트-권한">1. umask : 디폴트 권한</h2>
+<ul>
+  <li>0022
+    <ul>
+      <li>666 - 022 : 644 (파일)</li>
+      <li>777 - 022 : 755 (디렉터리)</li>
+    </ul>
+  </li>
+  <li>0077
+    <ul>
+      <li>666 - 077 : 600 (파일)</li>
+      <li>777 - 077 : 700 (디렉터리)</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="2-rwxrwxrwx--소유자-그룹-다른-사용자">2. rwxrwxrwx : 소유자, 그룹, 다른 사용자</h2>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">chmod 644 abc.txt</code>
+    <ul>
+      <li>유저 : 읽기, 쓰기, 실행</li>
+      <li>그룹 : 읽기, 실행</li>
+      <li>Others : 읽기, 실행</li>
+      <li><code class="language-plaintext highlighter-rouge">chmod u+x, g+x, o-r abc.txt</code> : 750</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">chown root:group abc.txt</code>
+    <ul>
+      <li>abc.txt 의 owner 를 root 로 설정</li>
+      <li>abc.txt 의 group 을 group 로 설정</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">chgrp group abc.txt</code>
+    <ul>
+      <li>abc.txt의 group을 group 로 설정</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="3-특수-권한-관리">3. 특수 권한 관리</h2>
+<ul>
+  <li>setuid : 4000, 실행 시에 소유자의 권한으로 실행
+    <ul>
+      <li>-rwsr-xr-x /usr/bin/passwd</li>
+      <li>일반 사용자가 패스워드 변경시 owner(root) 권한으로 /usr/bin/passwd 파일을 실행</li>
+      <li><code class="language-plaintext highlighter-rouge">chmod 4744 abc.txt</code></li>
+      <li><code class="language-plaintext highlighter-rouge">chmod u+s abc.txt</code></li>
+      <li>실행가능 파일 rws, 실행불가능 파일 rwS</li>
+    </ul>
+  </li>
+  <li>setgid : 2000, 실행 시에 그룹의 권한으로 실행
+    <ul>
+      <li>Mbox 의 경우 <code class="language-plaintext highlighter-rouge">/var/mail</code> 디렉터리의 소유자는 root, 그룹은 mail, setgid</li>
+      <li>일반 사용자는 메일 계정을 생성할 때 mail 디렉터리에 자신의 디렉터리를 생성하고 메일을 보관할 수 있게 됨</li>
+    </ul>
+  </li>
+  <li>sticky bit : 1000, /tmp, 임시 디렉터리
+    <ul>
+      <li>공용 디렉터리를 만들어 누구나 자유롭게 사용할 수 있도록 함</li>
+      <li>해당 디렉터리의 삭제는 소유자, root만 가능</li>
+      <li>drwxrwxrwt tmp</li>
+    </ul>
+  </li>
+  <li>검색법
+    <ul>
+      <li>find / -perm -4000 -print 2&gt;/dev/null</li>
+      <li>find / -perm -2000 -print 2&gt;/dev/null</li>
+      <li>find / -perm -1000 -print 2&gt;/dev/null
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">2&gt;/dev/null</code> : 에러, /dev/null 에 버리기 (1은 표준출력)</li>
+          <li><code class="language-plaintext highlighter-rouge">-</code> : 해당 권한을 포함한 모든 권한</li>
+          <li><code class="language-plaintext highlighter-rouge"> </code> : 정확히 일치하는 권한</li>
+          <li><code class="language-plaintext highlighter-rouge">+</code> : 해당 권한중 하나라도 포함하는 모든 권한</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="계정-정보"><strong>계정 정보</strong></h1>
+<h2 id="1-etcpasswd">1. <code class="language-plaintext highlighter-rouge">/etc/passwd</code></h2>
+<ul>
+  <li>해시로 암호화된 패스워드</li>
+  <li><code class="language-plaintext highlighter-rouge">/etc/shadow</code> -&gt; <code class="language-plaintext highlighter-rouge">/etc/passwd</code> : <code class="language-plaintext highlighter-rouge">pwunconv</code></li>
+  <li><code class="language-plaintext highlighter-rouge">root: x: 0: 0: root: /root: /bin/bash</code>
+    <ul>
+      <li>Login Name</li>
+      <li>Password : x -&gt; <code class="language-plaintext highlighter-rouge">/etc/shadow</code></li>
+      <li>User ID : root = 0</li>
+      <li>User Group ID : root = 0</li>
+      <li>Comments</li>
+      <li>Home Directory</li>
+      <li>Shell : 만약 <code class="language-plaintext highlighter-rouge">/bin/false</code> 이면 셸을 실행하지 않음.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="2-etcshadow">2. <code class="language-plaintext highlighter-rouge">/etc/shadow</code></h2>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">/etc/passwd</code> -&gt; <code class="language-plaintext highlighter-rouge">/etc/shadow</code> : <code class="language-plaintext highlighter-rouge">pwconv</code></li>
+  <li><code class="language-plaintext highlighter-rouge">root: $1$Fz4q1GjE$G/: 14806: 0: 99999: 7: : : </code>
+    <ul>
+      <li>Login Name</li>
+      <li>Encrypted : password</li>
+      <li>Last Changed : 1970년 1월 1일 부터 일수 계산</li>
+      <li>Minimum : 패스워드 변경 전 최소 사용기간 (일 수)</li>
+      <li>Maximum : 패스워드 변경 전 최대 사용기간 (일 수)</li>
+      <li>Warn : 패스워드 사용 만기일 전에 경고 메시지를 제공하는 일 수</li>
+      <li>Inactive : 로그인 접속차단 일 수</li>
+      <li>Expire : 로그인 사용을 금지하는 일 수(월/일/연도)</li>
+      <li>Reserved : 사용하지 않음</li>
+      <li><code class="language-plaintext highlighter-rouge">chage -l &lt;사용자명&gt;</code> : 패스워드 만료날짜 확인</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="3-usrbinpasswd">3. <code class="language-plaintext highlighter-rouge">/usr/bin/passwd</code></h2>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">-rwsr-xr-x</code> : setuid &gt; 실행시 소유자의 권한으로 실행</li>
+  <li><code class="language-plaintext highlighter-rouge">passwd</code>, <code class="language-plaintext highlighter-rouge">passwd &lt;사용자명&gt;</code></li>
+</ul>
+
+<h2 id="4-john-the-ripper">4. John the ripper</h2>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">john --format=raw-MD5 /root/passwd.txt --crack-status</code></li>
+  <li>Cracking : 패스워드를 알아내기 위한 공격</li>
+  <li>어떤 입력 값 X 에 대해 암호문 Y가 나오는 것을 알고 있을 때, 입력 값과 암호문을 파일에 저장하고 계속 입력해보면서 패스워드를 알아냄</li>
+</ul>
+
+<h2 id="5--etcmotd">5.  <code class="language-plaintext highlighter-rouge">/etc/motd</code></h2>
+<ul>
+  <li>로그인 시에 출력하는 배너 정보 -&gt; 확인필요</li>
+</ul>
+
+<h1 id="로그-파일-책임-추적성-및-주요-명령어-사용">로그 파일 (책임 추적성) 및 주요 명령어 사용</h1>
+<h2 id="1-로그파일">1. <strong>로그파일</strong></h2>
+<ul>
+  <li>WORM(Write Once Read Many) Storage : 한번만 기록하고 그 뒤로 읽기만 가능
+    <ul>
+      <li>로그파일 삭제,변조 불가 / 고비용</li>
+    </ul>
+  </li>
+  <li>utmp : 현재 사용자 정보를 가진 로그파일
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">/var/run/utmp</code></li>
+      <li><code class="language-plaintext highlighter-rouge">w</code>, <code class="language-plaintext highlighter-rouge">who</code> : 현재 사용자 정보를 utmp 파일을 읽어 출력</li>
+    </ul>
+  </li>
+  <li>btmp : 로그인 실패 정보
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">/var/log/btmp</code></li>
+      <li><code class="language-plaintext highlighter-rouge">lastb</code> : 해당 파일은 바이너리로 되어있기 때문에 <code class="language-plaintext highlighter-rouge">lastb</code> 로 확인</li>
+    </ul>
+  </li>
+  <li>wtmp : 로그인과 로그아웃 정보를 가진 로그파일
+    <ul>
+      <li>로그인/로그아웃 정보, 시스템 종료(shutdown) 및 부팅(booting) 정보, 재부팅(reboot) 정보, telnet/ftp 로그인 정보</li>
+      <li><code class="language-plaintext highlighter-rouge">/var/log/wtmp</code></li>
+      <li><code class="language-plaintext highlighter-rouge">last</code> : 로그인, 로그아웃 정보를 wtmp 파일을 읽어 출력</li>
+      <li><code class="language-plaintext highlighter-rouge">last reboot | more</code> : 재부팅 시간 정보 확인하기</li>
+    </ul>
+  </li>
+  <li>lastlog : 마지막 로그인</li>
+  <li>secure : 원격 접속 정보</li>
+  <li>syslog : 로그를 남기는 프로그램
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">/var/log/</code> 디렉터리에 로그가 기록됨</li>
+      <li>syslogd 에 의해 로그가 기록됨.</li>
+      <li><code class="language-plaintext highlighter-rouge">/etc/syslogd.conf</code> 파일을 읽어 로그 기록 수준을 결정함</li>
+      <li>syslog 주체별(Facility) 분류
+        <ul>
+          <li>kern : kernel 에서 요청하는 경우</li>
+          <li>mail : mail subsystem 에서 요청하는 경우</li>
+          <li>lpr : printing subsystem 에서 요청하는 경우</li>
+          <li>daemon : system server processes 에서 요청하는 경우</li>
+          <li>auth : login authentication system 에서 요청하는 경우</li>
+        </ul>
+      </li>
+      <li>emerg &gt; alert &gt; crit &gt; err &gt; warn &gt; notice &gt; info &gt; debug
+        <ul>
+          <li>kern.* : 커널 수준의 모든 로그를 기록하라.</li>
+          <li>mail.err : 메일에서 발생하는 err 수준의 로그를 기록하라.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>xferlog : ftp 사용 정보</li>
+  <li>sulog : su 명령로그</li>
+</ul>
+
+<h2 id="2-명령어-관련">2. 명령어 관련</h2>
+<ul>
+  <li>cron : 작업 스케줄 관리
+    <ul>
+      <li>일정한 날짜와 시간에 지정된 작업을 실행하는 프로세스</li>
+      <li><code class="language-plaintext highlighter-rouge">/etc/crontab</code> 에 설정된 것을 읽어서 작업을 수행</li>
+      <li>분 시 일 월 요일(0~6/일~토) 사용자 실행명령
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">30 3 * * 2 root /home/clean.sh</code> : 매주 화요일 3시 30분에 /home/clean/sh 명령을 실행</li>
+          <li><code class="language-plaintext highlighter-rouge">*/10 2-5 * * * root /home/user/abc</code> : 매일 2-5시 까지 10분마다 실행</li>
+          <li><code class="language-plaintext highlighter-rouge">0 7 1 1-10/2 * /bin/vipcheck.sh</code> : 1-10월 두 달 주기로 1일 7시에 실행</li>
+        </ul>
+      </li>
+      <li>crontab 옵션
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">-l</code> : 현재 로그인 된 계정에 잡혀있는 작업 스케줄 확인</li>
+          <li><code class="language-plaintext highlighter-rouge">-e</code> : 현재 로그인 중인 계정에 작업을 등록</li>
+          <li><code class="language-plaintext highlighter-rouge">-r</code> : 현재 crontab에 등록된 작업을 삭제</li>
+          <li><code class="language-plaintext highlighter-rouge">-u &lt;USER명&gt;</code> : 작업을 실행시킬 유저명 설정</li>
+          <li>주의사항 : <code class="language-plaintext highlighter-rouge">crontab</code> 명령 실행 시 현재 입력되는 내용으로 덮어씀.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>at : 예약한 명령어를 정해진 시간에 한 번만 실행
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">at 18:00</code>
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">hping --rand-source 127.0.0.1 -p 80 -S -flood &gt; log.txt</code></li>
+          <li>18시에 TCP Syn DDos 공격을 하고 그 로그를 log.txt에 저장</li>
+        </ul>
+      </li>
+      <li>at 옵션
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">-l</code> : 현재 실행 대기 중인 명령의 목록을 출력</li>
+          <li><code class="language-plaintext highlighter-rouge">-r</code> : 실행 대기 중인 명령에서 해당 작업번호를 삭제</li>
+          <li><code class="language-plaintext highlighter-rouge">-f</code> : 표준 입력 대신 실행할 명령을 파일로 지정</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>리다이렉션
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">&gt;</code> : 결과를 파일로 저장</li>
+      <li><code class="language-plaintext highlighter-rouge">&gt;&gt;</code> : 해당 파일에 결과를 추가</li>
+    </ul>
+  </li>
+  <li>파이프
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">명령어1 | 명령어2</code> : 명령어 1의 결과를 명령어 2의 입력으로 전달</li>
+    </ul>
+  </li>
+  <li>find
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">find /var/www -name "[a-z][a-z][0-9]*</code> : var/www 의 웹디렉터리에서 첫 번째 글자와 두 번째 글자는 영문자 소문자이고 세 번째 글자는 숫자로 되어있는 파일 찾기</li>
+      <li><code class="language-plaintext highlighter-rouge">find . -name "* *" -exec rm -f { }\;</code> : 현재 디렉터리에서 파일 이름에 공백이 들어간 모든 문자를 삭제</li>
+      <li><code class="language-plaintext highlighter-rouge">find / -perm +6000 2&gt;/dev/null</code> : setuid, setgid 중 하나라도 부여된 것을 찾음</li>
+      <li><code class="language-plaintext highlighter-rouge">find / - mtime -1</code> : 24시간 동안 변경된 파일 찾기
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">-atime</code> : access time 으로 파일을 열거나 접근한 시간을 기준</li>
+          <li><code class="language-plaintext highlighter-rouge">-mtime</code> : modify time 으로 파일이 변경된 시간을 기준</li>
+          <li><code class="language-plaintext highlighter-rouge">-ctime</code> : change time 으로 파일속성이 변경된 시간을 기준</li>
+        </ul>
+      </li>
+      <li><code class="language-plaintext highlighter-rouge">find / -nouser -o -nogroup</code> : 소유자가 없거나 그룹이 없는 파일</li>
+    </ul>
+  </li>
+  <li>파일 무결성 검사
+    <ul>
+      <li>파일 시간은 얼마든지 변조가 가능</li>
+      <li>해시 값을 사용해서 파일의 무결성 검사 : tripwire
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">tripwire --init</code> : 해시 값을 저장한 데이터베이스를 초기화</li>
+          <li><code class="language-plaintext highlighter-rouge">tripwire --check</code> : 무결성 검사를 실행</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="run-level-부팅-단계">Run Level (부팅 단계)</h1>
+<h2 id="1-loader--보조기억장치에-있는-운영체제의-커널을-주기억장치에-올리는-작업">1. Loader : 보조기억장치에 있는 운영체제의 커널을 주기억장치에 올리는 작업</h2>
+<ul>
+  <li>LILO (Linux Loader)</li>
+  <li>GRUB
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">/boot/grub/grub.conf</code></li>
+    </ul>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">설정 값</th>
+          <th style="text-align: left">설명</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left"><code class="language-plaintext highlighter-rouge">default=0</code></td>
+          <td style="text-align: left">부트 순서를 지정하는 번호로 멀티부트의 경우 운영체제 레이블 번호를 선택</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"><code class="language-plaintext highlighter-rouge">timeout=0</code></td>
+          <td style="text-align: left">지정된 시간이 경과되면 default로 지정된 운영체제로 부팅</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"><code class="language-plaintext highlighter-rouge">splashimg=(hd0,0)</code>&lt;/br&gt;<code class="language-plaintext highlighter-rouge">/grub/splash.xpm.gz</code></td>
+          <td style="text-align: left">부팅 이미지를 지정하는 부분</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">hiddenmenu</td>
+          <td style="text-align: left">부트로더를 보여주지 않음</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">title Fedora</td>
+          <td style="text-align: left">부팅되는 부트 엔트리를 의미</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ul>
+      <li>부트정보를 사용자가 임의로 변경할 수 있음</li>
+      <li>여러 운영체제를 사용할 수 있는 멀티부팅 지원</li>
+      <li>커널 경로 및 파일명만 알고 있다면 부팅이 가능함</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="2-리눅스-booting-순서">2. 리눅스 Booting 순서</h2>
+<ol>
+  <li>전원을 켜면 ROM BIOS를 읽고 디스크의 MBR(Master Boot Record)에 있는 부트로더(Boot Loader)가 실행된다.</li>
+  <li>부트로더는 보조장치에 저장되어 있는 리눅스 커널을 찾고 실행한다.</li>
+  <li>리눅스 커널은 하드웨어를 확인하고 root의 읽기전용으로 마운트를 수행한다.</li>
+  <li>디스크를 검사하고 root의 쓰기전용으로 다시 마운트를 수행한다.</li>
+  <li>리눅스 커널은 init 프로세스를 실행하고 PID 1번을 할당한다. init 프로세스는 자신의 설정파일인 /etc/initab 파일을 읽어서 디바이스 및 프로세스를 활성화 한다. init 프로세스의 작업 수행은 리눅스의 Run 레벨에 따라 다르게 부팅한다.</li>
+</ol>
+
+<h2 id="3-run-level">3. Run Level</h2>
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">init [Run Level]</code></p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">실행단계</th>
+          <th style="text-align: left">내용</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left">0</td>
+          <td style="text-align: left">PROM 감사 단계</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">1</td>
+          <td style="text-align: left"><ul><li>관리상태 단계. 사용자 로그인의 접근이 불가능한 단일 사용자 단계. 여러 개의 파일 시스템이 로드되어 있음.</li><li>암호를 변경할 때 사용</li></ul></td>
+        </tr>
+        <tr>
+          <td style="text-align: left">2</td>
+          <td style="text-align: left">공유 자원을 갖지 않은 다중 사용자 단계</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">3</td>
+          <td style="text-align: left">기본 실행단계로 자원을 가진 다중 사용자 단계, 텍스트 유저모드</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">4</td>
+          <td style="text-align: left">현재 사용되지 않음</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">5</td>
+          <td style="text-align: left">Run Level 3로 기동 후에 그래픽 모드인 X-Windows 를 실행</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">6</td>
+          <td style="text-align: left">재부팅 단계로 실행단계 3의 상태로 재부팅</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<h2 id="4-320-사이버테러">4. 3.20 사이버테러</h2>
+<ul>
+  <li>2013년 3월 20일 방송국과 금융사를 대상으로 전산망을 마비시킨 사건</li>
+  <li>악성코드는 kbs.exe, imbc.exe, sbs.exe 등 형태로 배포</li>
+  <li>윈도우 계열 : MBR(Master Boot Record), VBR(Volume Boot Record)삭제</li>
+  <li>리눅스(유닉스) : dd 및 rm 명령을 원격 전송해 디스크를 삭제</li>
+</ul>
+
+<h1 id="리눅스-방화벽"><strong>리눅스 방화벽</strong></h1>
+<h2 id="1-iptables">1. iptables</h2>
+<ul>
+  <li>리눅스에서 특정 패킷을 분석해 패킷을 차단하거나 허용할 수 있다.</li>
+  <li>패킷 필터링 정책
+    <ul>
+      <li>모든 것을 허용한 후에 일부 패킷을 제한한다.</li>
+      <li>모든 것을 거부한 후에 일부 패킷을 허용한다.</li>
+      <li>패킷 필터링 chain 종류
+        <ul>
+          <li>INPUT : 외부에서 방화벽 서버로 들어오는 패킷 제어</li>
+          <li>FORWARD : 외부 패킷이 방화벽을 통과해 다른 네트워크로 가는 것 제어</li>
+          <li>OUTPUT : 방화벽에서 외부로 나가는 패킷 제어</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>사용법
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">-A</code> : <code class="language-plaintext highlighter-rouge">--append</code> : 규칙을 추가한다.</li>
+      <li><code class="language-plaintext highlighter-rouge">-N</code> : <code class="language-plaintext highlighter-rouge">--new-chain</code> : 새로운 체인 생성</li>
+      <li><code class="language-plaintext highlighter-rouge">-X</code> : <code class="language-plaintext highlighter-rouge">--delete-chain</code> : 체인 제거</li>
+      <li><code class="language-plaintext highlighter-rouge">-P</code> : <code class="language-plaintext highlighter-rouge">--policy</code> : 체인 기본정책 변경</li>
+      <li><code class="language-plaintext highlighter-rouge">-L</code> : <code class="language-plaintext highlighter-rouge">--list</code> : 체인의 규칙상태 보기</li>
+      <li><code class="language-plaintext highlighter-rouge">-F</code> : <code class="language-plaintext highlighter-rouge">--flush</code> : 체인 내의 모든 규칙 제거 (방화벽 초기화)</li>
+      <li><code class="language-plaintext highlighter-rouge">-Z</code> : <code class="language-plaintext highlighter-rouge">--zero</code> : 체인내의 모든 규칙의 패킷과 바이트의 카운트를 0으로 초기화</li>
+      <li><code class="language-plaintext highlighter-rouge">-D</code> : <code class="language-plaintext highlighter-rouge">--delete</code> : 규칙을 삭제</li>
+      <li><code class="language-plaintext highlighter-rouge">-R</code> : <code class="language-plaintext highlighter-rouge">--replace</code> : 새로운 규칙으로 대체</li>
+      <li><code class="language-plaintext highlighter-rouge">-I</code> : <code class="language-plaintext highlighter-rouge">--insert</code> : 체인 가장 처음에 규칙을 추가</li>
+      <li><code class="language-plaintext highlighter-rouge">-E</code> : <code class="language-plaintext highlighter-rouge">--renmae-chain</code> : 체인의 이름을 변경</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">ifconfig</code>
+    <ul>
+      <li>네트워크의 인터페이스 정보를 확인하거나 시작, 종료할 수 있다.</li>
+      <li>eth0</li>
+      <li>lo : Loopback 주소 (127.0.0.1)
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">iptables -A OUTPUT -o lo -j DROP</code> : 루프백 차단</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">iptables -L</code> : 등록된 접근 제어를 확인</li>
+  <li><code class="language-plaintext highlighter-rouge">iptables -A INPUT -s 192.168.0.3 -j DROP</code> : 특정 소스 차단</li>
+  <li><code class="language-plaintext highlighter-rouge">iptables -A FORWARD -p udp -m udp --dport 53 -j DROP</code> : DNS 차단</li>
+</ul>
+
+<h1 id="유닉스-구조">유닉스 구조</h1>
+<h2 id="1-파일-시스템-구조">1. 파일 시스템 구조</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">구성 항목</th>
+      <th style="text-align: left">세부 내용</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">VTOC 디스크 레이블</td>
+      <td style="text-align: left">각 파티션의 기본 정보</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">부트블록</td>
+      <td style="text-align: left">부트스트랩에 필요한 파일들</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">프라이머리 슈퍼블록</td>
+      <td style="text-align: left">데이터 블록의 개수, 실린더 그룹의 개수, 마운트 정보</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">백업 슈퍼블록</td>
+      <td style="text-align: left">각 실린더마다 슈퍼블록에 대한 복사본을 가짐</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">실린더 그룹</td>
+      <td style="text-align: left">슈퍼블록, 실린더 그룹 블록, i-node 테이블, 데이터 블록을 포함</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">슈퍼블록</td>
+      <td style="text-align: left">파일 시스템 크기, i-node 테이블의 크기, 빈 블록 리스트 등 파일 시스템 관리 정보</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">실린더 그룹 블록</td>
+      <td style="text-align: left">실린더 그룹 내의 유효 블록들의 비트맵 정보나 통계 정보</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">i-node 테이블</td>
+      <td style="text-align: left">파일에 대한 중요한 정보, 파일 크기, 위치, 유형, 사용 허가권, 날짜 정보</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">데이터 블록</td>
+      <td style="text-align: left">실제 데이터가 저장되는 공간</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="1-리눅스-파일-시스템-구조">1. <strong>리눅스 파일 시스템 구조</strong></h3>
+<ul>
+  <li>부트 블록 (Boot Block)
+    <ul>
+      <li>파일 시스템으로부터 리눅스 커널을 적재시키기 위한 프로그램</li>
+    </ul>
+  </li>
+  <li>슈퍼 블록 (Super Block)
+    <ol>
+      <li>파일 시스템의 크기, 블록 수 등 이용 가능한 빈 블록 리스트(list)</li>
+      <li>빈 블록 리스트에서 그 다음의 빈 블록을 가리키는 인덱스</li>
+      <li>inode 목록의 크기, 파일 시스템에 있는 빈 inode의 수와 목록</li>
+      <li>빈 inode 목록에서 그 다음의 빈 inode의 수와 목록</li>
+      <li>슈퍼 블록들이 수정되었는지 나타내는 플래그</li>
+      <li>파일 시스템 이름과 파일 시스템 디스크의 이름</li>
+    </ol>
+  </li>
+  <li>아이노드(inode)
+    <ul>
+      <li>파일이나 디렉터리에 대한 모든 저보를 가지고 있는 구조</li>
+    </ul>
+  </li>
+  <li>데이터 블록(Data block)
+    <ul>
+      <li>실제 데이터가 저장되어 있는 파일 형태</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="2-아이노드inode">2. <strong>아이노드(inode)</strong></h3>
+<ul>
+  <li>inode Number : 유일한 일련번호 값, 파일 관리를 위함</li>
+  <li>inode 가 가진 정보
+    <ul>
+      <li>파일 소유자의 사용자 ID</li>
+      <li>파일 소유자의 그룹 ID</li>
+      <li>파일 크기</li>
+      <li>파일이 생성된 시간</li>
+      <li>최근 파일이 사용된 시간</li>
+      <li>최근 파일이 변경된 시간</li>
+      <li>파일이 링크된 수</li>
+      <li>접근모드 (퍼미션)</li>
+      <li>데이터 블록 주소</li>
+    </ul>
+  </li>
+  <li>심볼릭 링크 :
+    <ul>
+      <li>링크정보만 가진 새 inode 가 만들어지고 inode는 원래 파일의 포인터(주소)정보만을 가짐.</li>
+      <li>원본 파일 삭제시 삭제됨.</li>
+      <li><code class="language-plaintext highlighter-rouge">ln -s 대상파일 심볼릭링크</code></li>
+    </ul>
+  </li>
+  <li>하드 링크 :
+    <ul>
+      <li>원본 파일을 복사해서 동일한 inode를 만듦.</li>
+      <li>원본 파일을 삭제하거나 이동해도 하드링크는 존재</li>
+      <li><code class="language-plaintext highlighter-rouge">ln 대상파일 하드링크</code></li>
+      <li>원본 파일과 링크 정보는 다른 개념으로 하드 링크 시 원본파일은 하나만 존재.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">ls -il</code> 로 inode number 를 확인할 수 있음.</li>
+</ul>
+
+<h2 id="2-파일-시스템-종류">2. 파일 시스템 종류</h2>
+<ul>
+  <li>Ext(Extended File System)
+    <ul>
+      <li>최대 2GB</li>
+      <li>255byte 파일명</li>
+      <li>접근제어, inode 수정, 타임스템프 수정 등의 기능이 불가</li>
+      <li>사용할 수록 단편화가 심해짐</li>
+    </ul>
+  </li>
+  <li>Ext2(Second Extended File System)
+    <ul>
+      <li>파일 시스템은 2GB까지, 볼륨 크기는 32TB까지 지원, 서브 디렉터리 개수 제한이 대폭 증가(32768개)</li>
+      <li>FSCK를 사용한 파일 시스템 오류 수정을 지원</li>
+      <li>캐시의 데이터를 디스크에 저장 중 오류 발생 시 파일 시스템에 손상이 올 수 있다. (Sync 이전 데이터 손실)</li>
+      <li>FSCK 이용한 파일 복구 시간에 많은 시간이 소요됨(전체 섹터 검사)</li>
+    </ul>
+  </li>
+  <li>Ext3(Third Extended File System)
+    <ul>
+      <li>EXT2에 저널링 기능 추가 및 온라인 파일 시스템이 증대</li>
+      <li>파일 시스템 변경 시 저널에 먼저 수정 내용을 기록함(갑작스런 다운 시 빠르게 오류 복구)</li>
+      <li>온라인 조각 모음이 불필요(장시간 사용 시 조각화 발생)</li>
+      <li>디스크 조각화를 최소화</li>
+    </ul>
+  </li>
+  <li>Ext4(Fourth Extended File System)
+    <ul>
+      <li>16TB까지 파일 시스템을 지원, 볼륨은 1엑사바이트까지 지원</li>
+      <li>Block Mapping 방식 및 Extends 방식을 지원</li>
+      <li>저널 Checksum 기능이 추가되어 안전성 강화</li>
+      <li>하위 호환성 지원 : ext3, ext2와 호환</li>
+      <li>Delayed allocation : 디스크에 쓰이기 전까지 블록 할당을 미루는 기술로 조각화 방지에 효과적</li>
+      <li>온라인 조각 모음 : 조각화 방지를 위한 커널 레벨의 기술</li>
+      <li>Persistent pre-allocation : 파일 전체만큼의 공간을 사전 할당. 스트리밍, 데이터베이스 등에 유용</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="3-운영체제-핵심-구성요소">3. <strong>운영체제 핵심 구성요소</strong></h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">구성요소</th>
+      <th style="text-align: left">내용</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">커널(Kernel)</td>
+      <td style="text-align: left"><ul><li>주기억장치(Main Memory)에 상주하면서 사용자 프로그램을 관리하는 운영체제의 핵심 역할</li><li>커널은 프로세스, 메모리, 입출력(I/O), 파일 관리 등을 수행</li></ul></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">셸(Shell)</td>
+      <td style="text-align: left"><ul><li>명령어 해석기/번역기로 사용자 명령의 입출력을 수행하며 프로그램을 실행</li><li>셸의 종류에는 Bourne 셸, C 셸, Korn 셸 등이 있고 리눅스 표준 셸 인 bash 셸이 있음</li></ul></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">파일 시스템(File System)</td>
+      <td style="text-align: left">여러 가지 정보를 저장하는 기본적인 구조이며, 시스템 관리를 위한 기본 환경을 제공하고, 계층적인 트리 구조 형태(디렉터리, 서브 디렉터리, 파일)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="4-bash-셸-환경-설정">4. bash 셸 환경 설정</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">전역 설정파일</th>
+      <th style="text-align: left">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">.bash_profile</code></td>
+      <td style="text-align: left"><ul><li>사용자 홈 디렉터리에 있는 파일</li><li>개별적인 셸 환경을 설정</li></ul></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">.bashrc</code></td>
+      <td style="text-align: left">사용자 정의 변수, 함수 alias 를 정의</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">.bash_logout</code></td>
+      <td style="text-align: left">사용자가 로그아웃할 때 실행되는 파일을 정의</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">/etc</code> : 리눅스를 사용하는 모든 사용자에게 적용되는 환경파일</li>
+  <li><code class="language-plaintext highlighter-rouge">Home Directory</code> : 사용자별 설정파일</li>
+  <li>셸 환경변수
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">env</code> : 현재 환경에 설정되어 있는 모든 변수를 확인할 수 있음</li>
+      <li><code class="language-plaintext highlighter-rouge">echo $[환경변수명]</code> : 환경변수명에 해당하는 변수값을 확인</li>
+    </ul>
+  </li>
+  <li>Shell Shock
+    <ul>
+      <li>악의적 명령실행, 관리자 권한 획득 등</li>
+      <li>리눅스 환경변수에 빈 함수를 넣으면 그 뒤에 오는 코드는 무조건 실행됨</li>
+      <li><code class="language-plaintext highlighter-rouge">env x='(){ :;}; echo vulnerable' bash -c "echo print this"</code></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="5-리눅스-디렉터리-구조">5. 리눅스 디렉터리 구조</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">디렉터리 구조</th>
+      <th style="text-align: left">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/</code></td>
+      <td style="text-align: left">루트 디렉터리</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/bin</code></td>
+      <td style="text-align: left">기본적인 실행 명령</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/boot</code></td>
+      <td style="text-align: left">LILO 등 부팅에 관련된 파일</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/dev</code></td>
+      <td style="text-align: left">장치 파일 모음</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/etc</code></td>
+      <td style="text-align: left">시스템 설정 파일</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/home</code></td>
+      <td style="text-align: left">사용자 홈 디렉터리</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/lib</code></td>
+      <td style="text-align: left">C 라이브러리</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/mnt</code></td>
+      <td style="text-align: left">임시 마운트용 디렉터리</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/proc</code></td>
+      <td style="text-align: left">시스템 정보를 가진 가상 디렉터리</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/root</code></td>
+      <td style="text-align: left">루트 사용자의 홈 디렉터리</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/sbin</code></td>
+      <td style="text-align: left">시스템 관리용 실행파일</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/tmp</code></td>
+      <td style="text-align: left">임시파일 디렉터리</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/usr</code></td>
+      <td style="text-align: left">애플리케이션이 설치되는 디렉터리</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/var</code></td>
+      <td style="text-align: left">시스템에서 운영되는 임시파일 및 로그파일</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">usr 디렉터리 구조</th>
+      <th style="text-align: left">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/usr/X11</code></td>
+      <td style="text-align: left">Link</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/usr/bin</code></td>
+      <td style="text-align: left">Common Programs</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/usr/doc</code></td>
+      <td style="text-align: left">Documentation</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/usr/etc</code></td>
+      <td style="text-align: left">Configuration files</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/usr/lib</code></td>
+      <td style="text-align: left">Shared libraries</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/usr/local</code></td>
+      <td style="text-align: left">Other applications</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/usr/man</code></td>
+      <td style="text-align: left">Man page</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/usr/sbin</code></td>
+      <td style="text-align: left">System administration programs</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/usr/share</code></td>
+      <td style="text-align: left">Shared information</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/usr/src</code></td>
+      <td style="text-align: left">Source code</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Device 파일 시스템</th>
+      <th style="text-align: left">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/dev/fd</code></td>
+      <td style="text-align: left">플로피 디스크</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/dev/hda</code></td>
+      <td style="text-align: left">마스트 IDE 하드 디스크</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/dev/sda</code></td>
+      <td style="text-align: left">SCSI 및 SATA 하드 디스크</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/dev/cdrom</code></td>
+      <td style="text-align: left">CD ROM 드라이버</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/dev/mouse</code></td>
+      <td style="text-align: left">마우스</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/dev/hdb</code></td>
+      <td style="text-align: left">슬레이브 IDE 하드 디스크</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/dev/hd</code></td>
+      <td style="text-align: left">하드 디스크</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">proc 파일 시스템</th>
+      <th style="text-align: left">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/proc/buddyinfo</code></td>
+      <td style="text-align: left">버디 할당자 정보</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/proc/cmdline</code></td>
+      <td style="text-align: left">시스템 부팅 중 커널에 제출된 명령 내용</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/proc/cpuinfo</code></td>
+      <td style="text-align: left">시스템 cpu 정보</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/proc/devices</code></td>
+      <td style="text-align: left">디바이스들의 목록</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/proc/diskstats</code></td>
+      <td style="text-align: left">디스크의 상태 및 파티션 정보</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/proc/dma</code></td>
+      <td style="text-align: left">DMA 채널</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/proc/filesystems</code></td>
+      <td style="text-align: left">파일 시스템의 목록</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/proc/interrupts</code></td>
+      <td style="text-align: left">인터럽트에 대한 통계</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/proc/iomem</code></td>
+      <td style="text-align: left">할당된 메모리 영역</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/proc/ioport</code></td>
+      <td style="text-align: left">입출력 포트 정보</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/proc/kallsyms</code></td>
+      <td style="text-align: left">심볼들의 목록</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/proc/loadavg</code></td>
+      <td style="text-align: left">CPU 부하와 관련된 정보</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/proc/locks</code></td>
+      <td style="text-align: left">잠금 파일</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/proc/mdstat</code></td>
+      <td style="text-align: left">RAID 시스템의 정보를 제공</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/proc/meminfo</code></td>
+      <td style="text-align: left">시스템 메모리 정보</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/proc/modules</code></td>
+      <td style="text-align: left">사용중인 모듈들</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/proc/partitions</code></td>
+      <td style="text-align: left">파티션 정보</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/proc/slabinfo</code></td>
+      <td style="text-align: left">슬랩 할당기 통계 정보</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/proc/swaps</code></td>
+      <td style="text-align: left">스왑 파티션에 대한 정보</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/proc/uptime</code></td>
+      <td style="text-align: left">시스템이 부팅된 이후의 시간</td>
+    </tr>
+  </tbody>
+</table>
+:ET

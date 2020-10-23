@@ -1,0 +1,8 @@
+I"$<h1 id="ftp"><strong>FTP</strong></h1>
+<h2 id="1-ftp-개요">1. FTP 개요</h2>
+<h3 id="1-ftp-file-transfer-protocol">1. FTP (File Transfer Protocol)</h3>
+<ul>
+  <li>인터넷에 연결된 시스템 간 파일을 전송하는 통신 프로토콜</li>
+  <li>TCP 프로토콜 사용</li>
+</ul>
+:ET
