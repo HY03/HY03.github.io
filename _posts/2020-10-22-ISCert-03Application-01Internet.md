@@ -1,6 +1,6 @@
 ---
 title: 03.애플리케이션 보안 - 01.인터넷 응용 보안
-date: '2020-10-22 14:00:00'
+date: '2020-10-28 03:00:00'
 tags:
 - 정보보안기사
 - 애플리케이션 보안
@@ -44,7 +44,13 @@ toc: true
 |`/etc/hosts.allow`|특정 IP의 접근 허용|
 
 ### 5. FTP Active Mode 와 Passive Mode
-* *그림 삽입*
+![FTP Active](/assets/images/posts/ftp_active.png)
+
+[이미지 출처_FTP Active](https://infosys.beckhoff.com/english.php?content=../content/1033/cx8190_hw/27021604587584011.html&id=)
+
+![FTP Passive](/assets/images/posts/ftp_passive.png)
+
+[이미지 출처_FTP Passive_](https://infosys.beckhoff.com/english.php?content=../content/1033/cx8190_hw/27021604587584011.html&id=)
 
 |전송방식|내용|
 |:---|:---|
@@ -112,7 +118,10 @@ toc: true
     - IMAP 4는 프로토콜의 복잡성과 보안문제를 개선
 
 ### 4. SMTP 메일 처리 방식
-* *그림 삽입*
+![Schema of E-mail Delivery](/assets/images/posts/Schema_of_e-mail_delivery.svg.png)
+
+[이미지 출처](https://en.wikipedia.org/wiki/Email_agent_(infrastructure))
+
 * MTA(Mail Transfer Agent) : 메일을 전송하는 서버
 * MDA(Mail Delivery Agent) : 수신측에 고용된 우체부 역할, MTA에게 받은 메일을 사용자에게 전달
 * MUA(Mail User Agent) : 사용자들이 사용하는 클라이언트 애플리케이션
@@ -187,7 +196,16 @@ toc: true
 # 스팸메일(Spam Mail) 차단 방법
 ## 1. Spam Mail 차단 방법
 + Spam Mail 차단 기법의 종류
-    * *그림삽입*
+
+![RBL](/assets/images/posts/RBL.gif)
+
+[이미지 출처_RBL](https://spam.kisa.or.kr/rbl/sub2_R.do?idx=10&currentPage=1)
+
+
+![SPF](/assets/images/posts/spf.png)
+
+[이미지 출처_SPF](https://www.cyber.gov.au/acsc/view-all-content/publications/how-combat-fake-emails)
+
 
 |RBL(Real Time Blocking)|SPF(Sender Policy Framework)|
 |:---|:---|
@@ -457,13 +475,21 @@ toc: true
         + DNS 서버에게 질의
 
 ### 2. DNS 구조
-* *그림 삽입*
+
+![DNS Schema](/assets/images/posts/DNS_schema.svg.png)
+
+[이미지 출처](https://en.wikipedia.org/wiki/Domain_name)
+
 * Root Domain(.) : 모든 도메인의 근본이 되는 최상 Root level Domain
 * Top Level Domain : com, org, kr 등의 국가, 지역을 나타냄
 * Second Level : 사용자가 도메인 명을 신청해서 등록할 수 있는 영역
 
 ### 3. DNS 서비스 방식
-* *그림 삽입*
+
+![DNS Query](/assets/images/posts/dns_query.gif)
+
+[이미지 출처](https://www.internetsociety.org/resources/deploy360/dns-privacy/intro/)
+
 * DNS Query 종류
     - Recursive Query(순환) : Local DNS 서버에 Query를 보내 완성된 답을 요청
     - Iterative Query(반복) : Local DNS 서버가 다른 DNS 서버에게 Query를 보내어 답을 요청, 외부 도메인에서 개별적인 작업을 통해 정보를 얻어와 종합해서 알려줌
@@ -496,7 +522,9 @@ toc: true
 * 53번 포트로 전송되는 UDP 데이터를 모니터링 하고 있다가 지정된 URL에 대해 요청이 오면 특정 IP로 응답함
     - UDP는 세션이 존재하지 않아서 먼저 도착한 패킷을 신뢰하며 다음에 도착한 정보는 버림.
 * 한국인터넷진흥원 DNS 싱크홀
-    - *그림 삽입*
+    ![DNS Sinkhole](/assets/images/posts/kisa_dns_sinkhole.gif)
+
+    [이미지 출처](https://www.krcert.or.kr/webprotect/dnsSinkhole.do)
     - 악성봇에 감염된 PC를 공격자가 조종하지 못하도록 악성봇과 공격자의 명령을 차단하는 서비스
     - 자체 DNS 서버를 운영하는 민간기관을 대상으로 제공하는 서비스
 

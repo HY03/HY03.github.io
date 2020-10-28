@@ -1,6 +1,6 @@
 ---
 title: 03.애플리케이션 보안 - 03.전자상거래 보안
-date: '2020-10-22 14:00:00'
+date: '2020-10-28 05:00:00'
 tags:
 - 정보보안기사
 - 애플리케이션 보안
@@ -53,11 +53,30 @@ toc: true
 * 기밀성, 무결성, 인증, 부인봉쇄를 지원
 
 ## 2. SET 거래 절차
-* *그림 삽입*
+
+![SET Architecture](/assets/images/posts/set_architect.png)
+
+[이미지 출처](http://www.maithean.com/docs/set_bk2.pdf)
 
 ## 3. 세부 절차
-* *그림 삽입*
+
+* 전자봉투에 대해
+
+![Digital Envelope](/assets/images/posts/Digital_envelope.png)
+
+[이미지 출처](http://www.maithean.com/docs/set_bk1.pdf)
+
+
 * 구매자가 웹 사이트에서 물건을 구매하며 검증 정보를 준비
+
+    ![SET 01](/assets/images/posts/set_01.png)
+
+    [이미지 출처](https://blog.coledeman.com/2017/04/secure-electronic-transaction-set/)
+
+    ![SET 02](/assets/images/posts/set_02.png)
+
+    [이미지 출처](https://blog.coledeman.com/2017/04/secure-electronic-transaction-set/)
+
     - 구매자(Card Holder)가 상점(Merchant)의 웹 사이트서 상품을 선택
     - 구매자가 상점의 인증서를 수신, 상점 검증
     - 구매자가 아래의 정보를 상점에게 전송
@@ -67,14 +86,26 @@ toc: true
         + 검증해시값 = hash(구매정보), hash(결제정보)
         + 전자 서명 = 검증해시값 을 고객의 개인키로 암호화한 정보
         + 대칭키를 담은 전자봉투 = 결제정보를 암호화한 대칭키를 PG사의 공개키로 암호화한 정보
+
 * 상점의 검증
+
+    ![SET 03](/assets/images/posts/set_03.png)
+
+    [이미지 출처](https://blog.coledeman.com/2017/04/secure-electronic-transaction-set/)
+
     - 상점은 구매자의 인증서를 수신, 구매자 검증
     - 상점은 구매 정보 복호화
     - 구매 정보에 해시를 생성
     - 새로 생성한 해시와 전달받은 hash(구매 정보)의 일치 확인
     - 고객의 공개키로 전자서명을 풀어봄
     - 전자서명을 풀어 나온 값이 검증 해시값과 같은지 확인
+
 * PG사의 검증
+
+    ![SET 04](/assets/images/posts/set_04.png)
+
+    [이미지 출처](https://blog.coledeman.com/2017/04/secure-electronic-transaction-set/)
+
     - 상점으로부터 검증 정보 중 구매정보를 제외한 나머지 정보를 받음
     - PG사는 전자봉투를 자신의 개인키로 복호화
     - 대칭키를 받아서 암호화된 결제 정보를 복호화
@@ -104,7 +135,11 @@ toc: true
     * 사용자는 판매자에게 지불정보(계좌 정보)를 숨기고 싶다.
     * 사용자는 PG로부터 주문정보(물품명세서 등)를 숨기고 싶다.
     * PG(Payment Gateway)는 판매자가 전송한 결제요청이 실제 고객이 의뢰한 정보인지 확인하고 싶다.
-    * *그림 삽입*
+
+    ![SET 01](/assets/images/posts/set_01.png)
+
+    [이미지 출처](https://blog.coledeman.com/2017/04/secure-electronic-transaction-set/)
+
     * 주문정보와 지불정보를 각각 해시하고 생성된 두 개의 해시 다이제스트를 하나로 합치는 연접 과정 후에 또 다시 해시를 진행하고, 해시 다이제스트를 송신자의 개인키로 암호화한다.
 + SET 장점과 단점
     * 장점
@@ -256,14 +291,22 @@ toc: true
 
 ## 2. **동기 방식과 비동기 방식 인증 방법**
 + 동기화 방식
-    * *그림 삽입*
+
+    ![OTP Time Based](/assets/images/posts/TOTP-algorithm.png)
+
+    [이미지 출처](https://www.protectimus.com/blog/totp-algorithm-explained/)
+
     * 사용자의 OTP 생성 매체와 은행의 OTP 인증서버 사이에 동기화된 기준값에 따라 OTP가 생성되는 방식
     * 동기화된 기준값에 따라 시간 동기화방식과 이벤트 동기화방식으로 분류됨
     * 시간 동기화 방식은 OTP 생성 매체가 매시간 비밀번호를 자동으로 생성하는 형태로 시간을 기준값으로 하여 OTP 생성 매체와 OTP 인증서버가 동기화됨
     * 시간을 입력값으로 동기화하기 때문에 간편한장점을 가지지만, 일정 시간 동안 은행에 OTP를 전송하지 못하면 다시 새로운 OTP가 생성도리 때까지 기다려야 함
     * 이벤트 동기화 방식은 OTP 생성 매체와 인증서버의 동기화된 인증횟수를 기준값으로 생성, OTP 생성 매체에서 생성된 비밀번호 횟수와 인증서버가 생성한 비밀번호 횟수가 자동으로 동기화되기 때문에 시간 동기화의 불편성을 완화
 + 비동기 방식 : 질의응답(Challenge-Response)
-    * *그림 삽입*
+
+    ![OTP Challenge-Response](/assets/images/posts/otp-challenge-response.png)
+
+    [이미지 출처](https://cpl.thalesgroup.com/access-management/authenticators/one-time-password-otp/gold-challenge-response-token)
+
     * 사용자의 OTP 생성 매체와 은행의 OTP 인증 서버 사이에 동기화되는 기준값이 없으며 사용자가 직접 임의의 난수(질의 값)를 OTP 생성 매체에 입력하여 OTP를 생성하는 방식
     * 사용자가 은행의 OTP 인증서버로부터 받은 질의 값(Challenge)을 OTP 생성 매체에 직접 입력하면 응답 값(Response)이 생성됨
     * 사용자가 직접 OTP 생성 매체에 질의 값을 입력해야 하며, 응답 값인 OTP가 생성되기 때문에 전자금융 사고 발생 시 명백한 책임소재를 가릴 수 있고 보안성도 높은 방식
@@ -284,7 +327,11 @@ toc: true
 
 ## 2. ebXML(e-business Extensible Markup Language) 개요
 + ebXML 전자상거래 방법
-    * *그림 삽입*
+
+    ![ebXML](/assets/images/posts/ebXML.gif)
+
+    [이미지 출처](https://www.ibm.com/developerworks/library/x-ebxml/)
+
     * 기업 A가 기업 B와 전자상거래를 위해 ebXML 저장소에 비즈니스 상세항목을 요청
     * 비즈니스 상세항목은 기술적 요소와 비즈니스적 요소로 이루어짐
     * 기업 A는 ebXML로부터 상세항목을 받고 기업 A의 정보시스템을 개발
@@ -307,7 +354,11 @@ toc: true
 + 웹 서비스(Web Service)
     * 인터넷 표준 기술(WSDL, SOAP, UDDI, XML)을 활용하여 기업 내부 및 기업 외부의 정보시스템을 상호연계하기 위한 기술
 + Web Service 처리 방법
-    * *그림 삽입*
+
+    ![Web Service](/assets/images/posts/Webservices.png)
+
+    [이미지 출처](https://en.wikipedia.org/wiki/Web_service)
+
 + Web Service 표준기술
 
     |표준기술|세부내용|

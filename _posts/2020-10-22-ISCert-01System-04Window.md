@@ -1,6 +1,6 @@
 ---
 title: 01.시스템보안 - 04.윈도우 클라이언트 및 서버 보안
-date: '2020-10-22 16:00:00'
+date: '2020-10-25 16:00:00'
 tags:
 - 정보보안기사
 - 시스템 보안
@@ -14,7 +14,9 @@ toc: true
 # 윈도우 아키텍처
 - (Ring 구조) - 경량화된 운영체제, Plug In Play
 - 하드웨어 / HAL / 마이크로 커널 / 각종 관리자 / 응용 프로그램
-- *그림 삽입*
+![Win NT Kernel Architecture](/assets/images/posts/win_nt_kernel_architecture.png)
+
+[이미지 출처](https://en.wikipedia.org/wiki/Architecture_of_Windows_NT)
 
 |구성 내용|세부 내용|
 |:---|:---|
@@ -73,7 +75,10 @@ toc: true
     6. 메시지 처리 (WinProc), 화면에 출력
 
 # **윈도우 인증**
-- *윈도우 인증 시스템 그림 추가*
+
+![Security-Architecture-of-Windows](/assets/images/posts/Security-Architecture-of-Windows.jpg)
+[이미지 출처](https://networkencyclopedia.com/security-reference-monitor/)
+
 - Winlogon : 로그인 프로세스
     + GINA(msgina.dll) : 계정정보와 암호화 된 패스워드를 LSA에 전달
 - LSA(lsas.exe) : 계정 검증, 감사 기록

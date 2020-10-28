@@ -1,6 +1,6 @@
 ---
 title: 04.정보보안 일반 - 02.접근 통제
-date: '2020-10-22 14:00:00'
+date: '2020-10-28 08:00:00'
 tags:
 - 정보보안기사
 - 정보보안 일반
@@ -252,7 +252,11 @@ toc: true
     * 암호화 키와 복호화 키가 동일한 암호화 방식으로, 양방향 암호화 기법이다.
     * 암호문을 송신하거나 수신하는 사용자는 사전에 암호화키를 교환해야 한다.
     * Session Key, Shared Key, Secret Key, 대칭키(Symmetric Key), 관용키 (Conventional Key) 라고도 함.
-    * *그림 삽입*
+
+    ![Symmetric Key](/assets/images/posts/Symmetric_key_encryption.svg.png)
+
+    [이미지 출처](https://commons.wikimedia.org/wiki/File:Symmetric_key_encryption.svg)
+
 + 대칭키 암호화 기법의 특징
     * 기밀성을 제공하나 무결성, 인증, 부인방지는 보장할 수 없으며, 암호화와 복호화 속도가 빠르다.
     * 같은 키를 사용하므로 안전한 키 전달 및 공유 방법이 필요하며, 대용량 Data 암호화에 적합하다.
@@ -282,7 +286,11 @@ toc: true
 |부인방지|메시지의 주인이 아니라고 부인하는 것을 방지|
 
 + 공개키 암호화 방식
-    * *그림 삽입*
+
+    ![Public Key](/assets/images/posts/Public_key_encryption.svg.png)
+
+    [이미지 출처](https://en.wikipedia.org/wiki/Public-key_cryptography)
+
 + 공개키 암호화 종류
 
     |구분|특징|수학적 배경|장점|단점|

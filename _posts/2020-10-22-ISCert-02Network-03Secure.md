@@ -1,6 +1,6 @@
 ---
 title: 02.네트워크 보안 - 03.네트워크 대응 기술 및 응용
-date: '2020-10-22 14:00:00'
+date: '2020-10-28 01:00:00'
 tags:
 - 정보보안기사
 - 네트워크 보안
@@ -369,7 +369,9 @@ toc: true
 * OSI 4~7계층에서 동작
 
 ### 2. SSL VPN 구성
-+ *그림 삽입*
+![SSL VPN Topology](/assets/images/posts/SSL_VPN_Topology.png)
+
+[이미지 출처](https://commons.wikimedia.org/wiki/File:SSL_VPN_Topology-en.svg)
 + 브라우저와 웹 서버 사이의 통신을 위해 널리 사용되는 세션 기반 프로토콜
 + 브라우저와 서버 간 전송되는 모든 거래를 위한 안전한 통로를 제공
 + 대칭키 암호화(트래픽 암호)와 비대칭키 암호화(대칭키 암호)를 혼합해서 사용
@@ -400,7 +402,17 @@ toc: true
 * 보안에 취약한 인터넷에서 안전한 통신을 실현하는 통신 규약
 * 가상적인 전용 회선을 구축하여 데이터를 도청당하는 등의 행위를 방지하기 위한 통신 규약
 ### 2. IPSEC 터널링 모드
-* *그림삽입*
+
+* ESP Transport mode
+![ESP Transport mode](/assets/images/posts/ESP-transport.png)
+
+[이미지 출처](https://wiki.mikrotik.com/wiki/Manual:IP/IPsec)
+
+* ESP Tunnel mode
+![ESP Tunnel mode](/assets/images/posts/ESP-tunnel.png)
+
+[이미지 출처](https://wiki.mikrotik.com/wiki/Manual:IP/IPsec)
+
 * IPSEC의 전송 모드는 데이터에 대해 암호화를 수행하지만, IP 헤더에 대해서는 암호화를 수행하지 않음
 * 터널 모드는 보안 IPSEC 헤더를 추가하고 IP 헤더와 데이터 모두를 암호화함.
 ### 3. IPSEC VPN 전송 모드
@@ -590,7 +602,11 @@ toc: true
 * 무선 LAN 서비스 영역을 구분하기 위한 식별자로 AP(Access Point)는 동일한 SSID를 가진 클라이언트만 접속을 허용하는 방법
 
 ### 2. WEP(Wired Equivalent Privacy)
-* *그림삽입*
+
+![WEP](/assets/images/posts/wep.png)
+
+[이미지 출처](https://ko.wikipedia.org/wiki/%EC%9C%A0%EC%84%A0_%EB%8F%99%EB%93%B1_%ED%94%84%EB%9D%BC%EC%9D%B4%EB%B2%84%EC%8B%9C)
+
 * IEEE 802.11b 에서 표준화한 데이터 암호화 방식
 * RC4 대칭형 암호화 알고리즘을 사용한 40bit키를 사용
 * 24bit 길이의 초기화 벡터(IV : Initialization Vector)에 연결되어 64bit 혹은 128bit WEP 키열을 생성하여 해당 키를 통해 암호화를 수행

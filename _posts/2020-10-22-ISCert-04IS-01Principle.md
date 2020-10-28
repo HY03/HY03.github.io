@@ -1,6 +1,6 @@
 ---
 title: 04.정보보안 일반 - 01.보안 요소 기술
-date: '2020-10-22 14:00:00'
+date: '2020-10-28 07:00:00'
 tags:
 - 정보보안기사
 - 정보보안 일반
@@ -177,7 +177,11 @@ toc: true
     - 효과성: 손바닥>손>홍채>망막>지문>목소리
     - 수용성: 홍채>키 누름 동작>서명>목소리>얼굴>지문>손바닥>손>망막
 * 생체인증 평가항목
-    - *그림 삽입*
+
+    ![FAR FRR](/assets/images/posts/farfrr.gif)
+
+    [이미지 출처](http://www.biometrika.it/eng/wp_biointro.html)
+
     - FRR(False Reject Rate, Type I Error) : 잘못된 거부율, 편의성 관점, 정상적인 사람을 거부함
     - FAR(False Acceptance Rate, Type II Error) : 잘못된 승인율, 보안관점, 비인가자를 정상인으로 받아들임
     - CER(Crossover Error Rate), ERR(Equal Error Rate) : FRR와 FAR가 cross 되는 지점, 효율성 및 생체인증의 척도
@@ -212,7 +216,11 @@ toc: true
     * TimeStamp : 시간제한을 두어 다른 사람이 티켓을 복사하여 나중에 그 사용자인 것처럼 위장하여 티켓을 사용하는 것을 막음 (Replay 공격 예방)
 
 ### 3. 커버로스 인증의 동작 원리
-* *그림 삽입*
+
+![Kerberos](/assets/images/posts/kerberos.png)
+
+[이미지 출처](http://www.electricmonk.org.uk/2012/03/05/what-is-kerberos-and-how-does-it-work)
+
 * 사용자는 인증 서비스에 인증을 한다.
 * 인증 서비스는 사용자에게 시작 티켓을 전송한다(사용자 이름, 발급시간, 유효시간).
 * 사용자는 서비스 접근 요청을 한다.

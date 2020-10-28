@@ -1,6 +1,6 @@
 ---
 title: 02.네트워크 보안 - 01.네트워크 개념
-date: '2020-10-22 16:00:00'
+date: '2020-10-26 16:00:00'
 tags:
 - 정보보안기사
 - 네트워크 보안
@@ -79,7 +79,11 @@ toc: true
 |{::nomarkdown}<ul><li>Data Link</li><li>Physical</li></ul>{:/}|Network Access|케이블, 송수신기, 링크 프로토콜, LAN 접속과 같은 물리적 연결 구성을 정의|
 
 ## 2. TCP/IP 프로토콜의 구성 : TCP, UDP, IP, ICMP, ARP, RARP
-- *그림 추가*
+
+![TCP IP Protocols](/assets/images/posts/tcp_ip_protocols.png)
+
+[이미지 출처](http://www.tcpipguide.com/free/t_TCPIPProtocols.htm)
+
 - TCP : Connection Oriented Protocol (연결지향)로 사용자에게 신뢰성 있는 서비스를 지원. 신뢰성 있는 서비스를 지원하기 위해서 Error Control 기법을 포함하고 있으며, 송신자가 보낸 메시지를 수신자가 전송받았는지 확인하기 위해서 수신자를 ACK 를 송신자에게 전송. 만약 ACK가 오지 않거나 동일한 ACK 번호가 오면 다시 전송
 - UDP : Connectionless Protocol(비연결)로 데이터 전송을 보장하지 않는 비신뢰성 서비스를 제공하지만, TCP에 비해서 전송 속도가 빠른 특징을 가진다.
 - ARP : IP Address 를 LAN 카드의 물리적 주소인 MAC 주소로 변환한다.
@@ -118,7 +122,12 @@ toc: true
         - 헤더압축 : 헤더정보를 1/3 수준으로 압축, 보다 빠르게 메시지 처리
         - 서버푸시 : 웹 서버가 웹브라우저에게 필요한 데이터를 알아서 미리 전송할 수 있는 기술로 요청횟수와 전송해야 하는 데이터의 양을 줄임
 + HTTP 세션 연결 과정 (3-Way handshaking)
-    * *그림 삽입*
+
+![TLS Handshaking](/assets/images/posts/tls_handshake.gif)
+
+[이미지 출처](https://www.ibm.com/support/knowledgecenter/SSFKSJ_9.0.0/com.ibm.mq.sec.doc/q009930_.htm)
+
+
 + HTTP Request 시 Header 구조
     * HTTP Header 와 Body 의 구분은 `\r\n\r\n`
 
@@ -195,10 +204,17 @@ toc: true
     * 제어 접속과 데이터 접속 포트가 분리되어 있음
 + FTP 전송모드
     * Active Mode
-        - *그림 삽입*
+        ![FTP Active](/assets/images/posts/ftp_active.png)
+
+        [이미지 출처](https://infosys.beckhoff.com/english.php?content=../content/1033/cx8190_hw/27021604587584011.html&id=)
+
         - 서버 TCP/21번 포트로 접속 시도
         - 서버 TCP/20번 포트로 데이터를 송수신
     * Passive Mode
+        ![FTP Passive](/assets/images/posts/ftp_passive.png)
+
+        [이미지 출처](https://infosys.beckhoff.com/english.php?content=../content/1033/cx8190_hw/27021604587584011.html&id=)
+
         - 서버 TCP/21번 포트로 접속한 후 두 번쨰 포트를 질의
         - 서버는 클라이언트에게 데이터 연결을 위한 두 번째 포트(TCP/1024이상)을 알려줌
         - 클라이언트는 서버가 알려준 두 번째 포트로 접속
@@ -259,11 +275,16 @@ toc: true
         - Receive Windows : 수신자의 윈도우 크기 (메모리 버퍼). 수신자의 버퍼 상태를 보고 전송속도를 조절
         - Sender 에서 packet을 전송하는 비율과 Receiver 에서 수신된 ACK를 통해 congestion window(cwnd) 를 지수의 크기로 증가시키는 방법
 + TCP 상태전이
-    * *그림삽입*
+    ![TCP Status Diagram](/assets/images/posts/tcp_status_diagram.gif)
+
+    [이미지 출처](https://www.ibm.com/support/knowledgecenter/en/SSLTBW_2.1.0/com.ibm.zos.v2r1.halu101/constatus.htm)
     * `netstat` 명령어로 TCP 상태 확인
         - `netstat -b` : 어떤 프로세스가 네트워크를 사용하는지 확인
 + TCP 헤더 구조
-    * *그림삽입*
+
+    ![TCP Header](/assets/images/posts/TCP_Header.svg.png)
+
+    [이미지 출처](https://commons.wikimedia.org/wiki/File:TCP_Header.svg)
 
 ### 2. UDP (User Datagram Protocol)
 + 비연결성, 비신뢰성의 특성으로 Packet을 빠르게 전달
@@ -277,7 +298,10 @@ toc: true
     |빠른 전송|TCP에 비해 전송속도가 빠름|
 
 + UDP 프로토콜의 Header 구조
-    * *그림삽입*
+
+    ![UDP Header](/assets/images/posts/UDP_header.png)
+
+    [이미지 출처](https://commons.wikimedia.org/wiki/File:UDP_header.png)
     * 가상 선로(Virtual Circuit)의 개념이 없는 비연결성
     * 블록 단위로 데이터 전송
     * 블록 재전송 및 흐름 제어 등이 없음 (데이터 신뢰성이 없음)
@@ -364,7 +388,9 @@ toc: true
 |동작 원리|{::nomarkdown}<ul><li>Link의 delay, throughput, reliability 를 이용하여 기본적은 throughput 만 이용하고, Hop 수에 대한 제약이 없음</li><li>네트워크를 Area로 구분하여 많은 라우팅 정보의 교환으로 인한 라우터의 성능저하를 예방. 대역폭을 절약함</li><li>Link 변화 감지 시 해당 Link에 대한 정보만을 즉시 모든 라우터에 전달하여 Convergence가 매우 빠름</li><li>Supernetting 된 형태로 Routing Information 을 전달할 수 있어 라우터 메모리 절약, 상능 향상 및 대역폭 절약 가능</li></ul>{:/}|
 
 - OSPF의 동작 원리 구성도의 예
-    + *그림추가*
+    ![OSPF](/assets/images/posts/ospf.gif)
+
+    [이미지 출처](https://wiki.mikrotik.com/wiki/Testwiki/IP_routing)
     + ABR (Area Border Router, 영역 경계 라우터) : Area에 백본망을 연결해주는 라우터
     + ASBR (Autonomous System Boundary Router, 자율 시스템 경계 라우터) : 다른 AS(Autonomous System)에 속한 라우터와 경로정보 교환
     + IR (Internal Router, 내부 라우터) : Area에 접속한 라우터
@@ -383,7 +409,9 @@ toc: true
 + IPv4 : 32비트 주소체계를 사용하고 있고 이러한 주소체계는 네트워크 ID와 호스트 ID로 구분된다.
 + IPv6 : IP 주소의 부족 문제를 해결하기 위해서 주소 비트 수를 128비트로 늘린 것
 + 네트워크 계층 구조
-    * *그림 삽입*
+    ![IPv4 Packet](/assets/images/posts/IPv4_Packet.png)
+
+    [이미지 출처](https://en.wikipedia.org/wiki/IPv4)
 + IP Header 구조
     * Version : IPv4 버전
     * Header Length : Header의 전체 길이

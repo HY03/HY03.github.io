@@ -1,6 +1,6 @@
 ---
 title: 03.애플리케이션 보안 - 04.기타 애플리케이션 보안
-date: '2020-10-22 14:00:00'
+date: '2020-10-28 06:00:00'
 tags:
 - 정보보안기사
 - 애플리케이션 보안
@@ -464,7 +464,10 @@ toc: true
 + 단점 : SPOF(Single Point Of Failure)
 
 ## 2. SSO 통합인증
-+ *그림 삽입*
+
+![SSO](/assets/images/posts/sso-diagram.png)
+
+[이미지 출처](https://twiki.org/cgi-bin/view/Blog/BlogEntry201206x1)
 
 ## 3. SSO 종류
 
@@ -490,7 +493,10 @@ toc: true
 
 ## 2. DRM 처리방식
 + DRM 개념도
-    * *그림 삽입*
+
+    ![DRM](/assets/images/posts/DRM.gif)
+
+    [이미지 출처](http://www.indicare.org/tiki-read_article.php?articleId=125)
 
 # **Watermarking**
 ## 1. 워터마킹(Watermarking)

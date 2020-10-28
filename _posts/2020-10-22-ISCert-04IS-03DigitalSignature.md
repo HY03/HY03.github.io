@@ -1,6 +1,6 @@
 ---
 title: 04.정보보안 일반 - 03.전자서명
-date: '2020-10-22 14:00:00'
+date: '2020-10-28 09:00:00'
 tags:
 - 정보보안기사
 - 정보보안 일반
@@ -40,7 +40,11 @@ toc: true
         - 해시함수 이용
 
 ## 2. **전자서명 과정**
-+ *그림 삽입*
+
+![Digital Envelope](/assets/images/posts/Digital_envelope.png)
+
+[이미지 출처](http://www.maithean.com/docs/set_bk1.pdf)
+
 + 송신자
     * hash(message) -> message digest
     * enc(message digest, 송신자 개인키) -> 전자서명
@@ -116,7 +120,10 @@ toc: true
 
 ## 2. PKI 구성
 ### 1. PKI 구조와 구성요소
-* *그림 삽입*
+
+![PKI](/assets/images/posts/building-a-pki.jpg)
+
+[이미지 출처](https://cybersecuritynews.co.uk/how-does-public-key-infrastructure-pki-work/)
 
 ### 2. PKI 세부 구성 내용
 
@@ -132,17 +139,28 @@ toc: true
 ## 3. PKI 세부 내용
 ### 1. 인증서 발급센터와 인증기관
 * 인증서 발급센터
-    - *그림 삽입*
+
+    ![CA Hiearachy](/assets/images/posts/ca_hiearachy.png)
+
+    [이미지 출처](http://itwiki.kr/w/%EA%B3%B5%EA%B0%9C%ED%82%A4_%EA%B8%B0%EB%B0%98_%EA%B5%AC%EC%A1%B0)
+    
     - Root CA, 정책 승인 기관(Policy Approving Authority), 정책 인증기관(Policy Certification Authority), 인증기관(Certification Authority) 으로 나뉘어짐
     - 사용자들이 사용하는 X.509 인증서(공인 인증서)를 발급
     - 등록기관(RA)이 인증기관 하위에서 사용자 신원 확인 역할수행
     - 은행에서 발급받은 인증서를 증권회사에 인증받기 위해서 인증기관 간의 상호인증을 수행하는 실시간 프로토콜(OCSP)을 사용
 
 ### 2. OCSP(Online Certificate Status Protocol)
-* *그림 삽입*
+
+![OCSP](/assets/images/posts/OCSP.png)
+
+[이미지 출처](https://doc.nexusgroup.com/display/PUB/Nexus+OCSP+Responder+overview)
 
 ### 3. 디렉터리 서비스(Directory Services)
-* *그림 삽입*
+
+![Directory Service](/assets/images/posts/directory-service.jpg)
+
+[이미지 출처](http://what-when-how.com/networking/directory-services-networking/)
+
 * API(Application Program Interface)를 활용하여 데이터를 입력, 수정, 삭제, 조회할 수 있는 서비스
 * ITU-T 표준 X.500
 * IETF 표준 LDAP
@@ -179,7 +197,10 @@ toc: true
 + 속성인증서는 기존의 신원 확인을 위한 공개키 인증서의 확장 필드를 이용하거나, 신원 확인용과 별도의 속성인증서를 발급하여 관리하는 두 가지 구현 방안이 있음.
 
 ## 3. PMI의 구성요소
-+ *그림 삽입*
+
+![PMI](/assets/images/posts/pmi.png)
+
+[이미지 출처](http://article.nadiapub.com/IJCA/vol7_no5/26.pdf)
 
 ## 4. PMI 세부 내용
 

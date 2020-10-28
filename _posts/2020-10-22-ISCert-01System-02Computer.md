@@ -1,6 +1,6 @@
 ---
 title: 01.시스템보안 - 02.컴퓨터 구조
-date: '2020-10-22 16:00:00'
+date: '2020-10-23 16:00:00'
 tags:
 - 정보보안기사
 - 시스템 보안
@@ -13,7 +13,9 @@ toc: true
 
 # CPU (속도 빠름, 고가) - 연산처리
 ## 1. CPU 구조
-**CPU 구조 그림 삽입**
+![CPU Fetch Slow](/assets/images/posts/cpu_fetch_execute_slow.gif)
+
+[이미지 출처](https://www.doc.ic.ac.uk/~eedwards/compsys/cpu/)
 
 | 구성요소 | 상세 기능 |
 |:---|:---|

@@ -34,7 +34,7 @@
 
 
 
-  <meta property="article:published_time" content="2020-10-22T14:00:00+09:00">
+  <meta property="article:published_time" content="2020-10-28T11:00:00+09:00">
 
 
 
@@ -332,7 +332,7 @@
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="05.정보보호 관리 - 01.정보보호 관리">
     <meta itemprop="description" content="정보보호 관리 이해1. ISMS-P  개념          정보보호 및 개인정보보호 관리체계(ISMS-P : Information Security Management System-Personal)      ">
-    <meta itemprop="datePublished" content="2020-10-22T14:00:00+09:00">
+    <meta itemprop="datePublished" content="2020-10-28T11:00:00+09:00">
     
 
     <div class="page__inner-wrap">
@@ -347,7 +347,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        <time datetime="2020-10-22T14:00:00+09:00">October 22, 2020</time>
+        <time datetime="2020-10-28T11:00:00+09:00">October 28, 2020</time>
       </span>
     
 
@@ -458,7 +458,10 @@
       <li><a href="#4-사업영향분석bia-business-impact-analysis">4. 사업영향분석(BIA, Business Impact Analysis)</a>
         <ul>
           <li><a href="#1-정의">1. 정의</a></li>
+          <li><a href="#2-bia-복구-목표-수립">2. BIA 복구 목표 수립</a></li>
+          <li><a href="#3-bia-특징">3. BIA 특징</a></li>
           <li><a href="#4-bia-주요-활동">4. BIA 주요 활동</a></li>
+          <li><a href="#5-bia-단계">5. BIA 단계</a></li>
           <li><a href="#6-복구-전략-수립">6. 복구 전략 수립</a></li>
           <li><a href="#7-rto-rpo-mtd-rp">7. RTO, RPO, MTD, RP</a></li>
           <li><a href="#8-재해복구-시스템의-종류">8. 재해복구 시스템의 종류</a></li>
@@ -626,20 +629,30 @@
 
 <h2 id="4-isms-p-인증-관리체계">4. ISMS-P 인증 관리체계</h2>
 <ul>
-  <li>정보보호 및 개인정보보호 관리체계 인증
-    <ul>
-      <li><em>그림 삽입</em></li>
-    </ul>
+  <li>
+    <p>정보보호 및 개인정보보호 관리체계 인증</p>
+
+    <p><img src="/assets/images/posts/isms_p_law.png" alt="ISMS-P Law" /></p>
+
+    <p><a href="https://isms.kisa.or.kr/main/ispims/intro/">이미지 출처</a></p>
+
+    <p><img src="/assets/images/posts/isms_p_hiearachy.png" alt="ISMS-P Hiearachy" /></p>
+
+    <p><a href="https://isms.kisa.or.kr/main/ispims/intro/">이미지 출처</a></p>
   </li>
-  <li>정보보호 및 개인정보보호 관리체계 인증심사 기준
-    <ul>
-      <li><em>그림 삽입</em></li>
-    </ul>
+  <li>
+    <p>정보보호 및 개인정보보호 관리체계 인증심사 기준</p>
+
+    <p><img src="/assets/images/posts/isms_p_sector.jpg" alt="ISMS-P Sector" /></p>
+
+    <p><a href="https://isms.kisa.or.kr/main/ispims/intro/">이미지 출처</a></p>
   </li>
-  <li>정보보호 및 개인정보보호 관리체계 인증 신청 절차
-    <ul>
-      <li><em>그림 삽입</em></li>
-    </ul>
+  <li>
+    <p>정보보호 및 개인정보보호 관리체계 인증 신청 절차</p>
+
+    <p><img src="/assets/images/posts/isms_p_step.jpg" alt="ISMS-P Step" /></p>
+
+    <p><a href="https://isms.kisa.or.kr/main/ispims/request/">이미지 출처</a></p>
   </li>
 </ul>
 
@@ -795,8 +808,12 @@
 </table>
 
 <h3 id="3-위험관리-체계">3. 위험관리 체계</h3>
+
+<p><img src="/assets/images/posts/risk_management_analysis.png" alt="ISMS-P Step" /></p>
+
+<p><a href="https://www.kisa.or.kr/jsp/common/libraryDown.jsp?folder=010304">이미지 출처</a></p>
+
 <ul>
-  <li><em>그림 삽입</em></li>
   <li>위험관리의 핵심적인 활동 = 위험분석 + 위험평가</li>
   <li>위험분석 : 보호 대상, 위협 요소, 취약성 등에 대한 자료 수집 및 분석</li>
   <li>위험평가 : 분석 결과를 기초로 보안 현황을 평가하고 적절한 방법을 선택하여 효과적으로 위험 수준을 낮추기 위한 과정</li>
@@ -1378,63 +1395,155 @@
 
 <h2 id="4-사업영향분석bia-business-impact-analysis">4. 사업영향분석(BIA, Business Impact Analysis)</h2>
 <h3 id="1-정의">1. 정의</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        * BIA는 BCP에서 가장 중요한 활동으로 BIA의 궁극적인 목표는 비즈니스별로 위험을 분석해서 복구(Recovery) 목표를 수립하는 것임
-        * 업무 중단이 사업에 미치는 영향에 대한 정성적/정량적 분석 및 평가임 ### 2. BIA 복구 목표 수립
-        * *그림 삽입*
-        * 업무영향 분석을 통해서 업무별 복구시간 목표산정, 재해 시 업무 우선순위 파악, 업무 간 상호 연관성 분석을 수행해서 재해복구 목표를 설정
-        * 이 설정을 달성하기 위해 정보시스템으로 재해복구시스템(DRS)을 구축할 수 있고, 재해복구시스템의 유형도 결정함 ### 3. BIA 특징
+<ul>
+  <li>BIA는 BCP에서 가장 중요한 활동으로 BIA의 궁극적인 목표는 비즈니스별로 위험을 분석해서 복구(Recovery) 목표를 수립하는 것임</li>
+  <li>업무 중단이 사업에 미치는 영향에 대한 정성적/정량적 분석 및 평가임</li>
+</ul>
 
-    |목적|주요 내용|
-    |:---|:---|
-    |업무 프로세스 우선순위 결정|{::nomarkdown}&lt;ul&gt;&lt;li&gt;주요 업무 프로세스의 식별&lt;/li&gt;&lt;li&gt;재해 유형 식별 및 재해 발생 가능성과 업무 중단의 지속시간 평가&lt;/li&gt;&lt;li&gt;업무 프로세스별 중요도 평가&lt;/li&gt;&lt;li&gt;정성적 정량적 영향도 분석&lt;/li&gt;&lt;/ul&gt;{:/}|
-    |중단 가능시간 산정|{::nomarkdown}&lt;ul&gt;&lt;li&gt;업무 프로세스별 지연 감내 시간 산정&lt;/li&gt;&lt;li&gt;업무 복구 목표시간 RTO, 업무 복구 목표시점 RPO 산정&lt;/li&gt;&lt;/ul&gt;{:/}|
-    |자원 요건 산정|연속성 보장 위해 어떤 자원이 필요한지 산정|
-</code></pre></div></div>
+<h3 id="2-bia-복구-목표-수립">2. BIA 복구 목표 수립</h3>
+
+<ul>
+  <li>업무영향 분석을 통해서 업무별 복구시간 목표산정, 재해 시 업무 우선순위 파악, 업무 간 상호 연관성 분석을 수행해서 재해복구 목표를 설정</li>
+  <li>이 설정을 달성하기 위해 정보시스템으로 재해복구시스템(DRS)을 구축할 수 있고, 재해복구시스템의 유형도 결정함</li>
+</ul>
+
+<h3 id="3-bia-특징">3. BIA 특징</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">목적</th>
+      <th style="text-align: left">주요 내용</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">업무 프로세스 우선순위 결정</td>
+      <td style="text-align: left"><ul><li>주요 업무 프로세스의 식별</li><li>재해 유형 식별 및 재해 발생 가능성과 업무 중단의 지속시간 평가</li><li>업무 프로세스별 중요도 평가</li><li>정성적 정량적 영향도 분석</li></ul></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">중단 가능시간 산정</td>
+      <td style="text-align: left"><ul><li>업무 프로세스별 지연 감내 시간 산정</li><li>업무 복구 목표시간 RTO, 업무 복구 목표시점 RPO 산정</li></ul></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">자원 요건 산정</td>
+      <td style="text-align: left">연속성 보장 위해 어떤 자원이 필요한지 산정</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="4-bia-주요-활동">4. BIA 주요 활동</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        * 핵심 업무 프로세스와 Workflow를 식별(설문조사, 사용자 참여를 통해)함
-        * 자원 요구사항 식별 : 핵심 프로세스에 필요한 자원을 식별
-        * 업무 중단으로 인한 영향의 정성적, 정량적 평가 및 위험분석
-        * 최대 허용 유휴시간(MTD : Maximum Tolerable Downtime)을 산정
-        * 우선순위를 결정(고위 경영진 결정하며 복구전략 개발 시 참조)
-        * 위원회는 식별된 위협을 아래 사항과 매핑
-        * 고위 경영진과 사용자의 참여가 중요
-        * 최대 허용 유휴시간, 재정적인 고려사항, 법적 책임과 성명, 운영 중단과 생산력을 고려 ### 5. BIA 단계
+<ul>
+  <li>핵심 업무 프로세스와 Workflow를 식별(설문조사, 사용자 참여를 통해)함</li>
+  <li>자원 요구사항 식별 : 핵심 프로세스에 필요한 자원을 식별</li>
+  <li>업무 중단으로 인한 영향의 정성적, 정량적 평가 및 위험분석</li>
+  <li>최대 허용 유휴시간(MTD : Maximum Tolerable Downtime)을 산정</li>
+  <li>우선순위를 결정(고위 경영진 결정하며 복구전략 개발 시 참조)</li>
+  <li>위원회는 식별된 위협을 아래 사항과 매핑</li>
+  <li>고위 경영진과 사용자의 참여가 중요</li>
+  <li>최대 허용 유휴시간, 재정적인 고려사항, 법적 책임과 성명, 운영 중단과 생산력을 고려</li>
+</ul>
 
-    |단계|주요 활동|
-    |:---:|:---|
-    |1|데이터 수집을 위한 인터뷰 대상자 선정|
-    |2|데이터 수집 방법 결정(조사, 설명, 워크숍 등, 정성적/정량적 접근 방법)|
-    |3|회사의 핵심 업무 기능 식별|
-    |4|핵심 업무 기능이 의존하는 IT 자원의 식별|
-    |5|IT 자원이 없을 경우의 핵심업무 기능 생존 기간 산정|
-    |6|핵심 업무 기능에 관련된 취약점과 위협 식별|
-    |7|개별적 업무 기능에 대한 위험 산정|
-    |8|발견사항을 문서화하고 경영자에게 제출|
-</code></pre></div></div>
+<h3 id="5-bia-단계">5. BIA 단계</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">단계</th>
+      <th style="text-align: left">주요 활동</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td style="text-align: left">데이터 수집을 위한 인터뷰 대상자 선정</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2</td>
+      <td style="text-align: left">데이터 수집 방법 결정(조사, 설명, 워크숍 등, 정성적/정량적 접근 방법)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">3</td>
+      <td style="text-align: left">회사의 핵심 업무 기능 식별</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">4</td>
+      <td style="text-align: left">핵심 업무 기능이 의존하는 IT 자원의 식별</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">5</td>
+      <td style="text-align: left">IT 자원이 없을 경우의 핵심업무 기능 생존 기간 산정</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">6</td>
+      <td style="text-align: left">핵심 업무 기능에 관련된 취약점과 위협 식별</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">7</td>
+      <td style="text-align: left">개별적 업무 기능에 대한 위험 산정</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">8</td>
+      <td style="text-align: left">발견사항을 문서화하고 경영자에게 제출</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="6-복구-전략-수립">6. 복구 전략 수립</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        * 개요
-            - BIA는 모든 구성요소의 복구 전략 청사진을 제공한다.
-            - BCP 위원회는 BIA에서 식별된 위험에 대한 복구 전략을 비용효과 분석을 통해 발견해야 한다.
-            - 사업 지속을 위한 복구 전략의 정의 및 문서화, 장애 시 대체 운영을 위한 대응 전략이다.
-            - 세분화 : 업무 프로세스 복구, 시설 복구, 지원 및 기술 복구, 사용자 환경 복구, 데이터 복구
-        * 재해복구 수준별 유형 핵심 지표
+<ul>
+  <li>개요
+    <ul>
+      <li>BIA는 모든 구성요소의 복구 전략 청사진을 제공한다.</li>
+      <li>BCP 위원회는 BIA에서 식별된 위험에 대한 복구 전략을 비용효과 분석을 통해 발견해야 한다.</li>
+      <li>사업 지속을 위한 복구 전략의 정의 및 문서화, 장애 시 대체 운영을 위한 대응 전략이다.</li>
+      <li>세분화 : 업무 프로세스 복구, 시설 복구, 지원 및 기술 복구, 사용자 환경 복구, 데이터 복구</li>
+    </ul>
+  </li>
+  <li>
+    <p>재해복구 수준별 유형 핵심 지표</p>
 
-        |지표|설명|
-        |:---|:---|
-        |RPO|{::nomarkdown}&lt;ul&gt;&lt;li&gt;Recovery Point Objective(복구 목표 시점)&lt;/li&gt;&lt;li&gt;재해시점으로부터 Data Backup을 해야 하는 시점까지의 시간&lt;/li&gt;&lt;li&gt;RPO=0의 의미 : Mirroring, 고장 시점 복구 전략&lt;/li&gt;&lt;/ul&gt;{:/}|
-        |RTO|{::nomarkdown}&lt;ul&gt;&lt;li&gt;Recovery Time Objective(복구 목표 시간)&lt;/li&gt;&lt;li&gt;재해 후 시스템, 응용, 기능들이 반드시 복구되어야 하는 시간&lt;/li&gt;&lt;/ul&gt;{:/}|
-        |RP|Recovery Period(실제 복구 시간) : 실제 업무 기능 복구까지 걸린 시간|
-        |MTD|{::nomarkdown}&lt;ul&gt;&lt;li&gt;Maximum Tolerable Downtime(용인 가능 최대 정지 시간)&lt;/li&gt;&lt;li&gt;치명적인 손실 없이 조직이 중단/재해 영향을 견딜 수 있는 최대 시간&lt;/li&gt;&lt;li&gt;MTD = RTO + WRT(Work Recovery Time, 업무 복구 시간)&lt;/li&gt;&lt;li&gt;"MTD가 짧다"의 의미 : 중요 자산, 빠른 복구 필요, 높은 비용&lt;/li&gt;&lt;/ul&gt;{:/}|
-        |SDO|Service Delivery Objective : 2차 사이트에서 제공하는 업무 용량|
-</code></pre></div></div>
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">지표</th>
+          <th style="text-align: left">설명</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left">RPO</td>
+          <td style="text-align: left"><ul><li>Recovery Point Objective(복구 목표 시점)</li><li>재해시점으로부터 Data Backup을 해야 하는 시점까지의 시간</li><li>RPO=0의 의미 : Mirroring, 고장 시점 복구 전략</li></ul></td>
+        </tr>
+        <tr>
+          <td style="text-align: left">RTO</td>
+          <td style="text-align: left"><ul><li>Recovery Time Objective(복구 목표 시간)</li><li>재해 후 시스템, 응용, 기능들이 반드시 복구되어야 하는 시간</li></ul></td>
+        </tr>
+        <tr>
+          <td style="text-align: left">RP</td>
+          <td style="text-align: left">Recovery Period(실제 복구 시간) : 실제 업무 기능 복구까지 걸린 시간</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">MTD</td>
+          <td style="text-align: left"><ul><li>Maximum Tolerable Downtime(용인 가능 최대 정지 시간)</li><li>치명적인 손실 없이 조직이 중단/재해 영향을 견딜 수 있는 최대 시간</li><li>MTD = RTO + WRT(Work Recovery Time, 업무 복구 시간)</li><li>"MTD가 짧다"의 의미 : 중요 자산, 빠른 복구 필요, 높은 비용</li></ul></td>
+        </tr>
+        <tr>
+          <td style="text-align: left">SDO</td>
+          <td style="text-align: left">Service Delivery Objective : 2차 사이트에서 제공하는 업무 용량</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
 
 <h3 id="7-rto-rpo-mtd-rp">7. RTO, RPO, MTD, RP</h3>
+
+<p><img src="/assets/images/posts/Risk_Chart.png" alt="RTO RPO" /></p>
+
+<p><a href="http://seb.kr/w/RTO">이미지 출처</a></p>
+
 <ul>
   <li>RTO
     <ul>
-      <li><em>그림 삽입</em></li>
       <li>재해 시 복구 목표시간의 선정</li>
       <li>구축비용에 반비례</li>
       <li>재해 시 발생 손실에 비례</li>
@@ -1442,7 +1551,6 @@
   </li>
   <li>RPO
     <ul>
-      <li><em>그림 삽입</em></li>
       <li>업무 중단 시점부터 데이터가 복구되어 다시 정상가동 될 때까지의 시간</li>
       <li>데이터가 복구되어야 하는 시점</li>
     </ul>
@@ -1452,10 +1560,12 @@
       <li>업무가 회복할 수 없는 손실을 입지 않도록 업무 기능이 중단될 수 있는 최대 시간</li>
     </ul>
   </li>
-  <li>MTD, RTO, RP 관계
-    <ul>
-      <li><em>그림 삽입</em></li>
-    </ul>
+  <li>
+    <p>MTD, RTO, RP 관계</p>
+
+    <p><img src="/assets/images/posts/BCDRTimeline.jpg" alt="BCDR Timeline" /></p>
+
+    <p><a href="https://blog.centretechnologies.com/maximum_tolerable_downtime">이미지 출처</a></p>
   </li>
   <li>RTO 및 RPO에 따른 재해복구시스템 유형 결정
     <ul>
@@ -2164,7 +2274,7 @@
 
 
         
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-10-22T14:00:00+09:00">October 22, 2020</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-10-28T11:00:00+09:00">October 28, 2020</time></p>
 
 
       </footer>
@@ -2214,7 +2324,7 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/is_certification/ISCert-01System-01OS/" rel="permalink">01.시스템보안 - 01.운영체제 이해 및 관리
+        <a href="/is_certification/ISCert-05ISM-02IS_Law/" rel="permalink">05.정보보호 관리 - 02.정보보호 관련 윤리 및 법규
 </a>
       
     </h2>
@@ -2225,7 +2335,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        <time datetime="2020-10-23T17:10:00+09:00">October 23, 2020</time>
+        <time datetime="2020-10-28T12:00:00+09:00">October 28, 2020</time>
       </span>
     
 
@@ -2235,9 +2345,10 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">운영체제 개요
+    <p class="archive__item-excerpt" itemprop="description">정보보호 및 개인정보보호법 체계
+1. 개인정보보호원칙
 
-  운영체제의 정의 : 컴퓨터 시스템의 자원을 효율적으로 관리, 사용자가 컴퓨터를 효과적으로 사용할수 있도록 환경을 제공하는 여러 프로그램의 모임
+  개인정보보호원칙의 의미
 
 </p>
   </article>
@@ -2253,7 +2364,7 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/is_certification/ISCert-02Network-01Network/" rel="permalink">02.네트워크 보안 - 01.네트워크 개념
+        <a href="/is_certification/ISCert-04IS-04Cryptography/" rel="permalink">04.정보보안 일반 - 04.암호학
 </a>
       
     </h2>
@@ -2264,7 +2375,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        <time datetime="2020-10-22T16:00:00+09:00">October 22, 2020</time>
+        <time datetime="2020-10-28T10:00:00+09:00">October 28, 2020</time>
       </span>
     
 
@@ -2274,55 +2385,11 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">네트워크와 프로토콜
+    <p class="archive__item-excerpt" itemprop="description">암호화
+1. 시저암호와 암호화의 개요
 
-  프로토콜
-    
-      메시지의 포맷, 언제 데이터를 보낼 것인지, 한번 전송하고 한번 응답할지 등.
-      OSI7 계층, TCP/IP 4계층
-      다른 약속을 한 송 수신자 간 통신 : 게이트웨이 장비 필요
-    
-  
-  데이터 전송방...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/is_certification/ISCert-01System-04Window/" rel="permalink">01.시스템보안 - 04.윈도우 클라이언트 및 서버 보안
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        <time datetime="2020-10-22T16:00:00+09:00">October 22, 2020</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">윈도우 아키텍처
-
-  (Ring 구조) - 경량화된 운영체제, Plug In Play
-  하드웨어 / HAL / 마이크로 커널 / 각종 관리자 / 응용 프로그램
-  그림 삽입
+  시저암호(Caesar Cipher) : 최초의 암호화, 알파벳을 일정한 문자 수만큼 평행 이동을해서 암호화
+  평문
 
 </p>
   </article>
@@ -2338,7 +2405,7 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/is_certification/ISCert-01System-03Unix/" rel="permalink">01.시스템보안 - 03.유닉스&amp;리눅스 서버 보안
+        <a href="/is_certification/ISCert-04IS-03DigitalSignature/" rel="permalink">04.정보보안 일반 - 03.전자서명
 </a>
       
     </h2>
@@ -2349,7 +2416,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        <time datetime="2020-10-22T16:00:00+09:00">October 22, 2020</time>
+        <time datetime="2020-10-28T09:00:00+09:00">October 28, 2020</time>
       </span>
     
 
@@ -2359,19 +2426,52 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">권한 설정
-1. umask : 디폴트 권한
+    <p class="archive__item-excerpt" itemprop="description">전자서명 인증 구조 및 주요 특징
+1. 전자서명(Digital Signature)의 이해
 
-  0022
+  전자서명(Digital Signature)의 정의
     
-      666 - 022 : 644 (파일)
-      777 - 022 : 755 (디렉터리)
+      작성자의 신원과 전자문서 변경 여부를 확인할 수 있도록 전자문서를 비대칭 암호화 방식을 이용하여 전자서명 생성키로 생...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
-  
-  0077
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/ISCert-04IS-02AccessControl/" rel="permalink">04.정보보안 일반 - 02.접근 통제
+</a>
+      
+    </h2>
     
-      666 - 077 : 600 (파일)
-      777 - 077 :...</p>
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2020-10-28T08:00:00+09:00">October 28, 2020</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">접근 통제(Access Control) 정책의 이해 및 구성요소
+1. 개요 (용어)
+
+  정당한 사용자에게는 권한을 부여하고 그 외의 다른 사용자는 거부하는 것
+  식별(Identification) : 사용자 ID를 확인하는 과정
+  인증(Authentication) : 패스워드가...</p>
   </article>
 </div>
 

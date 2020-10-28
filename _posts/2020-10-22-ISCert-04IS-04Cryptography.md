@@ -1,6 +1,6 @@
 ---
 title: 04.정보보안 일반 - 04.암호학
-date: '2020-10-22 14:00:00'
+date: '2020-10-28 10:00:00'
 tags:
 - 정보보안기사
 - 정보보안 일반
@@ -34,7 +34,11 @@ toc: true
 + 암호화
     * 평문을 암호화키를 사용해서 암호문으로 만들고, 암호문을 복호화키를 사용해서 평문으로 만드는 일련의 과정
 + 암호화와 복호화 과정
-    * *그림 삽입*
+  
+    ![Symmetric Encryption](/assets/images/posts/symmetric.gif)
+
+    [이미지 출처](https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/encryption/what-types-of-encryption-are-there/)
+
     * 평문(Plaintext)을 암호화키(Encryption)를 사용해서 암호문(Ciphertext)으로 만들고 복호화키(Decryption Key)를 사용해서 평문으로 복원하는 과정
 + 암호화 세부 내용
 
@@ -106,7 +110,11 @@ toc: true
     * 고속으로 암호화할 수 있고 경량임 -> 무선 환경, 고속으로 동작하는 시스템에 적용
     * 하드웨어로 구현이 용이
 + 무선 LAN의 WEP에서 사용하는 RC4 암호화
-    * *그림 삽입*
+
+    ![WEP RC4](/assets/images/posts/Wep-crypt-alt.svg.png)
+
+    [이미지 출처](https://ko.wikipedia.org/wiki/%EC%9C%A0%EC%84%A0_%EB%8F%99%EB%93%B1_%ED%94%84%EB%9D%BC%EC%9D%B4%EB%B2%84%EC%8B%9C)
+
     * 정적키에서 난수(셔플링 기법-256개의 바이트 수를 섞은 후 256 바이트 중 하나를 선택)로 임의의 키를 선택해서 키 스트림을 결정
     * 송신자와 수신자 사이에 키 스트림을 사전에 교환
     * 메시지를 비트(Bit)로 변경하고 키 스트림과 XOR 하여 암호화
@@ -137,16 +145,29 @@ toc: true
 
 ## 2. **블록 암호화 기법(Block Cipher)**
 ### 1. ECB(Electronic Code Book) Mode
-* *그림 삽입*
+
+![ECB_Enc](/assets/images/posts/Ecb_encryption.png)
+
+[이미지 출처](https://ko.wikipedia.org/wiki/%EB%B8%94%EB%A1%9D_%EC%95%94%ED%98%B8_%EC%9A%B4%EC%9A%A9_%EB%B0%A9%EC%8B%9D#%EC%A0%84%EC%9E%90_%EC%BD%94%EB%93%9C%EB%B6%81_(ECB))
+
 * 가장 단순한 모드
 * 평문을 일정한 블록단위로 나누어 순차적으로 암호화하는 구조
 * DES : 64Bit, AES : 128Bit
 * 각각의 블록은 독립적 -> 특정 블록의 에러가 다른 블록에 영향을 주지 않음
 * 평문을 각각의 단위로 나눌 때, 배수에 미치지 못하여 남는 Bit는 패딩(Padding, 빈 데이터)을 추가하여 크기를 맞춰야 함
+
+![ECB_Result](/assets/images/posts/Tux_ecb.jpg)
+
+[이미지 출처](https://ko.wikipedia.org/wiki/%EB%B8%94%EB%A1%9D_%EC%95%94%ED%98%B8_%EC%9A%B4%EC%9A%A9_%EB%B0%A9%EC%8B%9D#%EC%A0%84%EC%9E%90_%EC%BD%94%EB%93%9C%EB%B6%81_(ECB))
+
 * 한 개의 블록만 해독이 되면 나머지 블록 또한 해독되는 단점
 
 ### 2. CBC(Cipher Block Chaining) Mode
-* *그림 삽입*
+
+![CBC_Enc](/assets/images/posts/Cbc_encryption.png)
+
+[이미지 출처](https://ko.wikipedia.org/wiki/%EB%B8%94%EB%A1%9D_%EC%95%94%ED%98%B8_%EC%9A%B4%EC%9A%A9_%EB%B0%A9%EC%8B%9D#%EC%A0%84%EC%9E%90_%EC%BD%94%EB%93%9C%EB%B6%81_(ECB))
+
 * ECB 모드와 동일한 방법으로 평문을 일정한 블록단위로 나눔
 * 최초 키의 생성 버퍼로 IV(Initialization Vector)가 사용되어 첫 번째 블록과 XOR 연산을 통해 암호화가 됨
 * IV는 나누어진 일정한 블록 중 하나가 되거나 단위 블록과 길이가 같은 임의의 값이 될 수 있음
@@ -154,27 +175,54 @@ toc: true
 * 암호문 한 개의 블록에서 에러 발생 시 현재 복호화 되는 평문 블록과 다음 복호화되는 평문 블록에 영향을 줌
 * 블록 암호화 모드 중 보안이 가장 강력한 암호화 모드로 평가되며 가장 많이 사용
 * ECB와 동일하게 배수를 맞추기 위한 패딩을 추가하여 크기를 맞춰야 함.
+
+![CBC_Dec](/assets/images/posts/Cbc_decryption.png)
+
+[이미지 출처](https://ko.wikipedia.org/wiki/%EB%B8%94%EB%A1%9D_%EC%95%94%ED%98%B8_%EC%9A%B4%EC%9A%A9_%EB%B0%A9%EC%8B%9D#%EC%A0%84%EC%9E%90_%EC%BD%94%EB%93%9C%EB%B6%81_(ECB))
+
 * 암호화 및 복호화 시 병렬처리가 불가능하여 순차적으로 암호화해야 한다는 단점을 가지고 있음.
 
 ### 3. CFB(Cipher FeedBack) Mode
-* *그림 삽입*
+
+![CFB_Enc](/assets/images/posts/Cfb_encryption.png)
+
+[이미지 출처](https://ko.wikipedia.org/wiki/%EB%B8%94%EB%A1%9D_%EC%95%94%ED%98%B8_%EC%9A%B4%EC%9A%A9_%EB%B0%A9%EC%8B%9D#%EC%A0%84%EC%9E%90_%EC%BD%94%EB%93%9C%EB%B6%81_(ECB))
+
 * ECB, CBC와 달리 평문과 암호문의 길이가 같음.
 * 패딩을 추가하지 않고 블록단위 암호화를 스트림 암호화 방식으로 구성하여 Bit 단위로 암호화를 수행 (패딩이 필요 없음, 암호문에 대해서 암호화를 반복하면 평문이 됨) 하기 때문
 * CBC와 마찬가지로 IV가 사용되고, 암호화는 순차적으로 처리하며 복호화는 병렬처리가 가능
+
+![CFB_Dec](/assets/images/posts/Cfb_decryption.png)
+
+[이미지 출처](https://ko.wikipedia.org/wiki/%EB%B8%94%EB%A1%9D_%EC%95%94%ED%98%B8_%EC%9A%B4%EC%9A%A9_%EB%B0%A9%EC%8B%9D#%EC%A0%84%EC%9E%90_%EC%BD%94%EB%93%9C%EB%B6%81_(ECB))
+
 * 암호문 한 개의 블록에서 에러 발생 시 현재 복호화 되는 평문 블록과 다음 복호화되는 평문 블록에 영향을 줌
 
 ### 4. OFB(Outer FeedBack) Mode
-* *그림 삽입*
+
+![OFB_Enc](/assets/images/posts/Ofb_encryption.png)
+
+[이미지 출처](https://ko.wikipedia.org/wiki/%EB%B8%94%EB%A1%9D_%EC%95%94%ED%98%B8_%EC%9A%B4%EC%9A%A9_%EB%B0%A9%EC%8B%9D#%EC%A0%84%EC%9E%90_%EC%BD%94%EB%93%9C%EB%B6%81_(ECB))
+
 * CFB와 동일하게 평문과 암호문의 길이가 같음
 * 패딩을 추가하지 않고 블록단위 암호화를 스트림 암호화 방식으로 구성
 * 암호화 함수는 키의 생성시에만 사용됨
+
+![OFB_Dec](/assets/images/posts/Ofb_decryption.png)
+
+[이미지 출처](https://ko.wikipedia.org/wiki/%EB%B8%94%EB%A1%9D_%EC%95%94%ED%98%B8_%EC%9A%B4%EC%9A%A9_%EB%B0%A9%EC%8B%9D#%EC%A0%84%EC%9E%90_%EC%BD%94%EB%93%9C%EB%B6%81_(ECB))
+
 * 암호화와 복호화의 방법이 동일, 암호문을 다시 암호화하면 평문이 나옴
 * 최초 키의 생성 버퍼로 IV가 사용됨
 * 암호문 한 개의 블록에서 에러 발생 시 현재 복호화되는 평문 블록에만 영향을 줌
 * 영상 데이터, 음성 데이터와 같은 디지털화된 아날로그(Digitized analog) 신호에 주로 사용됨.
 
 ### 5. CTR(CounTeR) Mode
-* *그림 삽입*
+
+![CTR_Enc](/assets/images/posts/Ctr_encryption.png)
+
+[이미지 출처](https://ko.wikipedia.org/wiki/%EB%B8%94%EB%A1%9D_%EC%95%94%ED%98%B8_%EC%9A%B4%EC%9A%A9_%EB%B0%A9%EC%8B%9D#%EC%A0%84%EC%9E%90_%EC%BD%94%EB%93%9C%EB%B6%81_(ECB))
+
 * 평문블록과 키스트림을 XOR 연산하여 암호문을 만듦
 * 키 스트림은 암호화 시마다 1씩 증가하는 카운터를 암호화한 Bit열
 * 암호화와 복호화 방법이 동일하므로 구현이 간단
@@ -194,10 +242,25 @@ toc: true
     * 치환 암호(Substitution Cipher)와 전치 암호(Transposition Cipher)를 혼합한 혼합 암호(Product Cipher)를 사용
     * DES는 내부에서 XOR, 자리바꿈, 순환이동, 치환 등을 사용하고 S-BOX를 제외하고 나머지 연산은 모두 선형임.
     * 즉, S-BOX를 제외하고 나머지는 역으로 취할 수 있으므로 DES의 안전성에서 S-BOX가 가장 중요한 부분이다.
+
+    ![Feistel](/assets/images/posts/Feistel_cipher_diagram_en.svg.png)
+
+    [이미지 출처](
+https://en.wikipedia.org/wiki/Feistel_cipher#/media/File:Feistel_cipher_diagram_en.svg)
+
     * Feistel 구조이다.
 + DES 암호화 및 복호화의 혼합 암호화(Product Cipher)
-    * *그림 삽입*
+
+    ![DES Structure](/assets/images/posts/des_structure.jpg)
+
+    [이미지 출처](https://www.tutorialspoint.com/cryptography/data_encryption_standard.htm)
+
     * DES는 64Bit의 블록을 입력 받아 56Bit의 키 (실제로는 패리티 Bit를 넣어 64Bit)로 암호화해서 64Bit의 블록을 출력한다.
+
+    ![Permutation](/assets/images/posts/initial_and_final_permutation.jpg)
+
+    [이미지 출처](https://www.tutorialspoint.com/cryptography/data_encryption_standard.htm)
+
     * 입력 받은 64Bit를 초기 순열을 이용해서 재배열한다. 초기 순열에는 전치할 순서가 들어있다. 예를 들어 1번 자리는 45번으로, 34번은 4번으로 등의 순서가 저장된다. 그리고 치환되어 나온값은 키를 이용해 XOR 연산과 Feistel 연산을 거쳐서 변환한다.
     * 역 순열을 이용해 다시 재배열한다. 이것이 1라운드이며 16번 반복한다. 즉, 총 16라운드를 수행한다.
     * 현재의 암호화는 대칭키 암호화를 위해서 키의 길이는 128Bit 이상으로 사용한다.
@@ -218,6 +281,11 @@ toc: true
 ## 4. AES(Advanced Encryption Standard)
 + AES(Advanced Encryption Standard)
     * Rijindael 알고리즘
+
+    ![SPN](/assets/images/posts/SubstitutionPermutationNetwork2.png)
+
+    [이미지 출처](https://en.wikipedia.org/wiki/Substitution%E2%80%93permutation_network)
+    
     * SPN 구조
     * 미국 연방표준 알고리즘
     * DES를 대신하는 차세대 표준 암호화 알고리즘
@@ -335,7 +403,11 @@ toc: true
 + 세션 키
     * 연결할 때마다 새롭게 생성된 키를 암호화 키로 사용
     * 대칭키로 사용
-    * *그림 삽입*
+
+    ![Session Key](/assets/images/posts/session_key.png)
+
+    [이미지 출처](https://docs.microsoft.com/en-us/windows/win32/seccrypto/manual-session-key-exchanges)
+
 + 상호 인증
     * 세션 키 공유도 중간자 공격에서 자유롭지 않음
     * 인증기관이 클라이언트 인증서와 서버 인증서를 발급하고 인증서는 정당한 사용자만 확인할 수 있도록 함
@@ -350,7 +422,24 @@ toc: true
 + 암호화 및 디지털 서명 용도로 사용이 가능하다.
 
 ## 2. RSA 암호화 및 복호화 과정
-* *그림 삽입*
+
+![RSA](/assets/images/posts/rsa.png)
+
+[이미지 출처](https://hackernoon.com/how-does-rsa-work-f44918df914b)
+
+A와 B가 보안이 보장되어 있지 않은 환경에서 서로 비밀 메시지를 주고 받고 싶다고 가정하자. B가 A에게 메시지를 전달하기 위해서는 A의 공개키가 필요하다. A는 아래와 같은 방법을 통해 그만의 공개키와 개인키를 제작한다.
+
+
+p 와 q 라고 하는 두 개의 서로 다른 ({\displaystyle p\neq q}p\neq q) 소수를 고른다.
+
+
+1. 두 수를 곱하여 {\displaystyle N=pq\,}N=pq\, 을 찾는다.
+2. {\displaystyle \varphi (N)=(p-1)(q-1)\,}\varphi (N)=(p-1)(q-1)\, 를 구한다.
+3. {\displaystyle \varphi (N)}\varphi (N) 보단 작고, {\displaystyle \varphi (N)}\varphi (N)와 서로소인 정수 e를 찾는다.
+4. 확장된 유클리드 호제법을 이용하여 {\displaystyle d\times e}d\times e를 {\displaystyle \varphi (N)}\varphi (N)로 나누었을 때 나머지가 1인 정수 d를 구한다. ({\displaystyle de\equiv 1{\pmod {\varphi (N)}}}de\equiv 1{\pmod  {\varphi (N)}})
+
+
+A의 공개키는 위에서 구한 두 개의 숫자로 이루어진 <N, e>이고, 개인키는 <N, d>이다. A는 <N, e>만을 B에게 공개하고, B는 이 공개키를 사용하여 자신의 메시지를 암호화하게 된다. 여기서 p와 q의 보안은 매우 중요하다. 이를 가지고 d와 e의 계산이 가능하기 때문이다. 그리하여 공개키와 개인키가 생성이 된 후에는 이 두 숫자를 지워버리는 것이 안전하다.
 
 ## 3. RSA 안전성 확보
 
