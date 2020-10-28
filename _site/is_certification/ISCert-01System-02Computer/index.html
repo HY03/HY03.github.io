@@ -376,8 +376,8 @@
   </li>
   <li><a href="#메모리---임시-기억">메모리 - 임시 기억</a>
     <ul>
-      <li><a href="#1-캐시-메모리-cpu와-memory-속도-차이-해결">1. 캐시 메모리 (CPU와 Memory 속도 차이 해결)</a></li>
-      <li><a href="#2-가상-메모리-보조기억장치를-주기억장치처럼-사용하여-주기억장치의-공간을-확대">2. 가상 메모리 (보조기억장치를 주기억장치처럼 사용하여 주기억장치의 공간을 확대)</a></li>
+      <li><a href="#1-캐시-메모리">1. 캐시 메모리</a></li>
+      <li><a href="#2-가상-메모리">2. 가상 메모리</a></li>
     </ul>
   </li>
   <li><a href="#disk-보조기억장치-영구-저장">Disk 보조기억장치 (영구 저장)</a>
@@ -507,8 +507,9 @@
 </table>
 
 <h1 id="메모리---임시-기억">메모리 - 임시 기억</h1>
-<h2 id="1-캐시-메모리-cpu와-memory-속도-차이-해결">1. <strong>캐시 메모리</strong> (CPU와 Memory 속도 차이 해결)</h2>
+<h2 id="1-캐시-메모리">1. <strong>캐시 메모리</strong></h2>
 <ul>
+  <li>CPU와 Memory 속도 차이 해결</li>
   <li>캐시사상 방법
     <ul>
       <li>직접사상 : 메인 메모리를 분할하여 Cache 슬롯과 매핑</li>
@@ -591,58 +592,66 @@
         </tr>
         <tr>
           <td style="text-align: left">PFF(Page Fault Frequency)</td>
-          <td style="text-align: left">{::nomarkdown}&lt;ul&gt;&lt;li&gt;Process의 Page Fault 빈도에 따라 Residence set을 조정&lt;/li&gt;&lt;li&gt;PFF가 높으면 Residence set의 크기 증가, 낮으면 감소&lt;/li&gt;&lt;/ul&gt;</td>
+          <td style="text-align: left"><ul><li>Process의 Page Fault 빈도에 따라 Residence set을 조정</li><li>PFF가 높으면 Residence set의 크기 증가, 낮으면 감소</li></ul></td>
         </tr>
       </tbody>
     </table>
   </li>
 </ul>
 
-<h2 id="2-가상-메모리-보조기억장치를-주기억장치처럼-사용하여-주기억장치의-공간을-확대">2. 가상 메모리 (보조기억장치를 주기억장치처럼 사용하여 주기억장치의 공간을 확대)</h2>
+<h2 id="2-가상-메모리">2. 가상 메모리</h2>
 <ul>
+  <li>보조기억장치를 주기억장치처럼 사용하여 주기억장치의 공간을 확대</li>
   <li>할당기법
     <ul>
       <li><strong>페이지와 세그먼트</strong></li>
       <li>페이지(page) : 가상 기억장치 상에서 동일한 크기의 최소 논리 분할 단위로 나눈 것</li>
-      <li>세그먼트(segment) : 사용자 주소 공간을 용도별로 논리적 단위로 나눈 것</li>
-    </ul>
+      <li>
+        <p>세그먼트(segment) : 사용자 주소 공간을 용도별로 논리적 단위로 나눈 것</p>
 
-    <table>
-      <thead>
-        <tr>
-          <th style="text-align: center">구분</th>
-          <th style="text-align: left">Paging 기법</th>
-          <th style="text-align: left">Segment 기법</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="text-align: center">할당</td>
-          <td style="text-align: left">고정(Static) 분할</td>
-          <td style="text-align: left">가변(Dynamic) 분할</td>
-        </tr>
-        <tr>
-          <td style="text-align: center">적재</td>
-          <td style="text-align: left">요구 Page만 일부 적재(On-demand)</td>
-          <td style="text-align: left">프로그램 전체 적재(On-demand)</td>
-        </tr>
-        <tr>
-          <td style="text-align: center">관점</td>
-          <td style="text-align: left">메모리 관리 측면</td>
-          <td style="text-align: left">파일 관리 측면</td>
-        </tr>
-        <tr>
-          <td style="text-align: center">장점</td>
-          <td style="text-align: left"><ul><li>요구 Page만 적재 Load</li><li>외부 단편화 해결</li><li>교체시간 최소</li></ul></td>
-          <td style="text-align: left"><ul><li>사용자 관점</li><li>개발/프로그래밍 용이</li><li>내부 단편화 해결</li><li>코드, 데이터 공유 용이</li></ul></td>
-        </tr>
-        <tr>
-          <td style="text-align: center">단점</td>
-          <td style="text-align: left"><ul><li>내부 단편화(Fragmentation) 발생</li><li>Thrashing, 잦은 디스크 I/O 유발</li></ul></td>
-          <td style="text-align: left"><ul><li>외부 단편화 심각</li><li>메인 메모리가 커야 함</li></ul></td>
-        </tr>
-      </tbody>
-    </table>
+        <table>
+          <thead>
+            <tr>
+              <th style="text-align: center">구분</th>
+              <th style="text-align: left">Paging 기법</th>
+              <th style="text-align: left">Segment 기법</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="text-align: center">할당</td>
+              <td style="text-align: left">고정(Static) 분할</td>
+              <td style="text-align: left">가변(Dynamic) 분할</td>
+            </tr>
+            <tr>
+              <td style="text-align: center">적재</td>
+              <td style="text-align: left">요구 Page만 일부 적재(On-demand)</td>
+              <td style="text-align: left">프로그램 전체 적재(On-demand)</td>
+            </tr>
+            <tr>
+              <td style="text-align: center">관점</td>
+              <td style="text-align: left">메모리 관리 측면</td>
+              <td style="text-align: left">파일 관리 측면</td>
+            </tr>
+            <tr>
+              <td style="text-align: center">장점</td>
+              <td style="text-align: left"><ul><li>요구 Page만 적재 Load</li><li>외부 단편화 해결</li><li>교체시간 최소</li></ul></td>
+              <td style="text-align: left"><ul><li>사용자 관점</li><li>개발/프로그래밍 용이</li><li>내부 단편화 해결</li><li>코드, 데이터 공유 용이</li></ul></td>
+            </tr>
+            <tr>
+              <td style="text-align: center">단점</td>
+              <td style="text-align: left"><ul><li>내부 단편화(Fragmentation) 발생</li><li>Thrashing, 잦은 디스크 I/O 유발</li></ul></td>
+              <td style="text-align: left"><ul><li>외부 단편화 심각</li><li>메인 메모리가 커야 함</li></ul></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <ul>
+          <li>내부 단편화 : 블록 내 할당 공간을 모두 사용하지 않고 빈 공간이 생김</li>
+          <li>외부 단편화 : 블록과 블록사이의 빈 공간이 프로그램보다 작아 활용할 수 없음</li>
+        </ul>
+      </li>
+    </ul>
   </li>
   <li>호출기법 : Demand Fetch, Pre Fetch</li>
   <li>배치기법 : First Fit, Next Fit, Best Fit, Worst Fit</li>

@@ -1,0 +1,54 @@
+I"�
+<ul class="toc__menu">
+  <li><a href="#윈도우-아키텍처">윈도우 아키텍처</a></li>
+  <li><a href="#윈도우-파일시스템">윈도우 파일시스템</a>
+    <ul>
+      <li><a href="#1-fat16-file-allocation-table">1. FAT16 (File Allocation Table)</a></li>
+      <li><a href="#2-fat32">2. FAT32</a></li>
+      <li><a href="#3-ntfs">3. NTFS</a></li>
+    </ul>
+  </li>
+  <li><a href="#윈도우-프로세스-구조-message-driven">윈도우 프로세스 구조 (Message Driven)</a></li>
+  <li><a href="#윈도우-인증">윈도우 인증</a></li>
+  <li><a href="#윈도우-로그-책임-추적성">윈도우 로그 (책임 추적성)</a>
+    <ul>
+      <li><a href="#1-윈도우-이벤트-로그-event-log">1. 윈도우 이벤트 로그 (Event Log)</a></li>
+      <li><a href="#2-웹-아티팩트-분석">2. 웹 아티팩트 분석</a></li>
+    </ul>
+  </li>
+  <li><a href="#윈도우-계정">윈도우 계정</a>
+    <ul>
+      <li><a href="#1-내장된-계정">1. 내장된 계정</a></li>
+      <li><a href="#2-유니버설-그룹-mac-별-권한-관리">2. 유니버설 그룹 (MAC 별 권한 관리)</a></li>
+    </ul>
+  </li>
+  <li><a href="#윈도우-디렉터리">윈도우 디렉터리</a></li>
+  <li><a href="#공유-폴더">공유 폴더</a></li>
+  <li><a href="#레지스트리">레지스트리</a>
+    <ul>
+      <li><a href="#1-레지스트리">1. 레지스트리</a></li>
+      <li><a href="#2-하이브hive-파일--cwindowssystem32config-에-위치">2. 하이브(Hive) 파일 : c:\windows\system32\config 에 위치</a></li>
+    </ul>
+  </li>
+  <li><a href="#바이러스와-악성코드">바이러스와 악성코드</a>
+    <ul>
+      <li><a href="#1-세대별-컴퓨터-바이러스">1. 세대별 컴퓨터 바이러스</a></li>
+      <li><a href="#2-감염대상에-따른-바이러스">2. 감염대상에 따른 바이러스</a></li>
+    </ul>
+  </li>
+  <li><a href="#그-외">그 외</a>
+    <ul>
+      <li><a href="#1-netbios">1. NetBIOS</a></li>
+      <li><a href="#2-systeminfo">2. systeminfo</a></li>
+      <li><a href="#3-ddedynamic-data-exchange-취약점">3. DDE(Dynamic Data Exchange) 취약점</a></li>
+      <li><a href="#4-shellcode">4. Shellcode</a></li>
+      <li><a href="#5-heap-spray">5. Heap Spray</a></li>
+      <li><a href="#6-aslradress-space-layout-randomization">6. ASLR(Adress Space Layout Randomization)</a></li>
+      <li><a href="#7-버퍼-오버플로우buffer-overflow">7. 버퍼 오버플로우(Buffer Overflow)</a></li>
+      <li><a href="#8-race-condition-공격">8. Race Condition 공격</a></li>
+      <li><a href="#9-apt-공격">9. APT 공격</a></li>
+      <li><a href="#10-바이너리-디핑binary">10. 바이너리 디핑(Binary)</a></li>
+    </ul>
+  </li>
+</ul>
+:ET

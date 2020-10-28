@@ -171,7 +171,8 @@ toc: true
         - `tripwire --check` : 무결성 검사를 실행
 
 # Run Level (부팅 단계)
-## 1. Loader : 보조기억장치에 있는 운영체제의 커널을 주기억장치에 올리는 작업
+## 1. Loader
++  보조기억장치에 있는 운영체제의 커널을 주기억장치에 올리는 작업
 +  LILO (Linux Loader)
 +  GRUB
     *  `/boot/grub/grub.conf`
@@ -271,7 +272,7 @@ toc: true
     5. 슈퍼 블록들이 수정되었는지 나타내는 플래그
     6. 파일 시스템 이름과 파일 시스템 디스크의 이름
 * 아이노드(inode)
-    - 파일이나 디렉터리에 대한 모든 저보를 가지고 있는 구조
+    - 파일이나 디렉터리에 대한 모든 정보를 가지고 있는 구조
     
 * 데이터 블록(Data block)
     - 실제 데이터가 저장되어 있는 파일 형태
@@ -288,6 +289,12 @@ toc: true
     - 파일이 링크된 수
     - 접근모드 (퍼미션)
     - 데이터 블록 주소
+
+
+![Symbolic Link vs Hard Link](/assets/images/posts/sym_hard.png)
+
+[이미지 출처](https://dev.to/robogeek/reflinks-vs-symlinks-vs-hard-links-and-how-they-can-help-machine-learning-projects-1cj4)
+
 * 심볼릭 링크 :  
     - 링크정보만 가진 새 inode 가 만들어지고 inode는 원래 파일의 포인터(주소)정보만을 가짐.
     - 원본 파일 삭제시 삭제됨.

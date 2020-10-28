@@ -1,0 +1,52 @@
+I"	<ul class="toc__menu">
+  <li><a href="#권한-설정">권한 설정</a>
+    <ul>
+      <li><a href="#1-umask--디폴트-권한">1. umask : 디폴트 권한</a></li>
+      <li><a href="#2-rwxrwxrwx--소유자-그룹-다른-사용자">2. rwxrwxrwx : 소유자, 그룹, 다른 사용자</a></li>
+      <li><a href="#3-특수-권한-관리">3. 특수 권한 관리</a></li>
+    </ul>
+  </li>
+  <li><a href="#계정-정보">계정 정보</a>
+    <ul>
+      <li><a href="#1-etcpasswd">1. /etc/passwd</a></li>
+      <li><a href="#2-etcshadow">2. /etc/shadow</a></li>
+      <li><a href="#3-usrbinpasswd">3. /usr/bin/passwd</a></li>
+      <li><a href="#4-john-the-ripper">4. John the ripper</a></li>
+      <li><a href="#5--etcmotd">5.  /etc/motd</a></li>
+    </ul>
+  </li>
+  <li><a href="#로그-파일-책임-추적성-및-주요-명령어-사용">로그 파일 (책임 추적성) 및 주요 명령어 사용</a>
+    <ul>
+      <li><a href="#1-로그파일">1. 로그파일</a></li>
+      <li><a href="#2-명령어-관련">2. 명령어 관련</a></li>
+    </ul>
+  </li>
+  <li><a href="#run-level-부팅-단계">Run Level (부팅 단계)</a>
+    <ul>
+      <li><a href="#1-loader">1. Loader</a></li>
+      <li><a href="#2-리눅스-booting-순서">2. 리눅스 Booting 순서</a></li>
+      <li><a href="#3-run-level">3. Run Level</a></li>
+      <li><a href="#4-320-사이버테러">4. 3.20 사이버테러</a></li>
+    </ul>
+  </li>
+  <li><a href="#리눅스-방화벽">리눅스 방화벽</a>
+    <ul>
+      <li><a href="#1-iptables">1. iptables</a></li>
+    </ul>
+  </li>
+  <li><a href="#유닉스-구조">유닉스 구조</a>
+    <ul>
+      <li><a href="#1-파일-시스템-구조">1. 파일 시스템 구조</a>
+        <ul>
+          <li><a href="#1-리눅스-파일-시스템-구조">1. 리눅스 파일 시스템 구조</a></li>
+          <li><a href="#2-아이노드inode">2. 아이노드(inode)</a></li>
+        </ul>
+      </li>
+      <li><a href="#2-파일-시스템-종류">2. 파일 시스템 종류</a></li>
+      <li><a href="#3-운영체제-핵심-구성요소">3. 운영체제 핵심 구성요소</a></li>
+      <li><a href="#4-bash-셸-환경-설정">4. bash 셸 환경 설정</a></li>
+      <li><a href="#5-리눅스-디렉터리-구조">5. 리눅스 디렉터리 구조</a></li>
+    </ul>
+  </li>
+</ul>
+:ET

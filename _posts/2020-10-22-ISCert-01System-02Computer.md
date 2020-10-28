@@ -52,7 +52,8 @@ toc: true
 
 
 # 메모리 - 임시 기억
-## 1. **캐시 메모리** (CPU와 Memory 속도 차이 해결)
+## 1. **캐시 메모리** 
++ CPU와 Memory 속도 차이 해결
 + 캐시사상 방법
     + 직접사상 : 메인 메모리를 분할하여 Cache 슬롯과 매핑
     + 연관사상(가장 빠름) : 메인 메모리의 각 블록이 Cache 어느 슬롯이든 적재 가능
@@ -76,21 +77,25 @@ toc: true
     |Load Control|일정 시간 동안 새로운 프로세서가 생성되는 것을 지연시키고 Suspend Queue에 대기시켜서 Thrashing 현상을 감소시킴|
     |Locality(구역성)|시간과 공간 지역성을 집중적으로 참조함|
     |Working Set(워킹셋)|일정 시간 동안 참조되는 페이지 집합(Working Set)을 주기억장치에 유지|
-    |PFF(Page Fault Frequency)|{::nomarkdown}<ul><li>Process의 Page Fault 빈도에 따라 Residence set을 조정</li><li>PFF가 높으면 Residence set의 크기 증가, 낮으면 감소</li></ul>
+    |PFF(Page Fault Frequency)|{::nomarkdown}<ul><li>Process의 Page Fault 빈도에 따라 Residence set을 조정</li><li>PFF가 높으면 Residence set의 크기 증가, 낮으면 감소</li></ul>{:/}|
 
-## 2. 가상 메모리 (보조기억장치를 주기억장치처럼 사용하여 주기억장치의 공간을 확대)
+## 2. 가상 메모리 
++ 보조기억장치를 주기억장치처럼 사용하여 주기억장치의 공간을 확대
 + 할당기법
     * **페이지와 세그먼트**
     * 페이지(page) : 가상 기억장치 상에서 동일한 크기의 최소 논리 분할 단위로 나눈 것
     * 세그먼트(segment) : 사용자 주소 공간을 용도별로 논리적 단위로 나눈 것
 
-    | 구분 | Paging 기법 | Segment 기법 |
-    |:---:|:---|:---|
-    |할당|고정(Static) 분할|가변(Dynamic) 분할|
-    |적재|요구 Page만 일부 적재(On-demand)|프로그램 전체 적재(On-demand)|
-    |관점|메모리 관리 측면|파일 관리 측면|
-    |장점|{::nomarkdown}<ul><li>요구 Page만 적재 Load</li><li>외부 단편화 해결</li><li>교체시간 최소</li></ul>{:/}|{::nomarkdown}<ul><li>사용자 관점</li><li>개발/프로그래밍 용이</li><li>내부 단편화 해결</li><li>코드, 데이터 공유 용이</li></ul>{:/}|
-    |단점|{::nomarkdown}<ul><li>내부 단편화(Fragmentation) 발생</li><li>Thrashing, 잦은 디스크 I/O 유발</li></ul>{:/}|{::nomarkdown}<ul><li>외부 단편화 심각</li><li>메인 메모리가 커야 함</li></ul>{:/}|
+        | 구분 | Paging 기법 | Segment 기법 |
+        |:---:|:---|:---|
+        |할당|고정(Static) 분할|가변(Dynamic) 분할|
+        |적재|요구 Page만 일부 적재(On-demand)|프로그램 전체 적재(On-demand)|
+        |관점|메모리 관리 측면|파일 관리 측면|
+        |장점|{::nomarkdown}<ul><li>요구 Page만 적재 Load</li><li>외부 단편화 해결</li><li>교체시간 최소</li></ul>{:/}|{::nomarkdown}<ul><li>사용자 관점</li><li>개발/프로그래밍 용이</li><li>내부 단편화 해결</li><li>코드, 데이터 공유 용이</li></ul>{:/}|
+        |단점|{::nomarkdown}<ul><li>내부 단편화(Fragmentation) 발생</li><li>Thrashing, 잦은 디스크 I/O 유발</li></ul>{:/}|{::nomarkdown}<ul><li>외부 단편화 심각</li><li>메인 메모리가 커야 함</li></ul>{:/}|
+
+        + 내부 단편화 : 블록 내 할당 공간을 모두 사용하지 않고 빈 공간이 생김
+        + 외부 단편화 : 블록과 블록사이의 빈 공간이 프로그램보다 작아 활용할 수 없음
 
 + 호출기법 : Demand Fetch, Pre Fetch
 + 배치기법 : First Fit, Next Fit, Best Fit, Worst Fit

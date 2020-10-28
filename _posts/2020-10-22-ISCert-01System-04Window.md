@@ -20,7 +20,7 @@ toc: true
 
 |구성 내용|세부 내용|
 |:---|:---|
-|HAL</br>(Hardware Abstraction Layer)|드라이버 개발자가 HAL 표준을 준수하면 하드웨어-시스템 간 원할한 통신 가능|
+|HAL<br/>(Hardware Abstraction Layer)|드라이버 개발자가 HAL 표준을 준수하면 하드웨어-시스템 간 원할한 통신 가능|
 |Micro Kernel|Manager 에게 작업을 분담시키고 하드웨어를 제어|
 |IO Manager|시스템 입출력을 제어, 장치 드라이버 사이에서 메시지를 전달, 응용 프로그램이 하드웨어와 통신할 수 있는 통로를 제공|
 |Object Manager|파일, 포트, 프로세스, 스레드와 같은 각 객체에 대한 정보를 제공|
@@ -55,14 +55,13 @@ toc: true
 - ADS(Alternate Data Stream) : MAC 파일 시스템과 호환성을 위해 만든 공간
 - Quotas : 사용자별 디스크 사용량 제한
 - 대용량 지원 (2TB 이상)
-
-    |Volume Boot Record|Master File Table|Data Area|
-    |:---:|:---:|:---:|
-
+    + Volume Boot Record
+    + Master File Table
+    + Data Area
 - VBR(Volume Boot Record) : 부트섹터, 부트코드, NTLDR 위치 정보
 - MFT(Master File Table) : NTFS의 메타정보, 파일 및 디렉터리 정보, 파일위치, 속성, 시간정보, 파일명, 크기 등의 정보
 
-- Covert 로 FAT 에서 NTFS로 파일 시스템 변경
+- Convert 로 FAT 에서 NTFS로 파일 시스템 변경
     + `CONVERT D: /FS:NTFS`
 
 # 윈도우 프로세스 구조 (Message Driven)
@@ -94,7 +93,7 @@ toc: true
     |:---|:---|
     |wininit.exe|윈도우 시작 프로그램|
     |services.exe|윈도우 서비스를 관리|
-    |lsm.exe|{::nomarkdown}<ul><li>Local Session Manager</li><li>시스템 관리 작업, 주요 함수 실행, 호스트 컴퓨터와 서버의 연결을 관리</li></ul>
+    |lsm.exe|{::nomarkdown}<ul><li>Local Session Manager</li><li>시스템 관리 작업, 주요 함수 실행, 호스트 컴퓨터와 서버의 연결을 관리</li></ul>{:/}|
     |lsass.exe|{::nomarkdown}<ul><li>LSASS(Local Security Authority Subsystem Service)</li><li>사용자 로그인 검사, 비밀번호 변경관리, 액세스 토큰을 생성</li><li>Windows Security Log를 작성</li></ul>{:/}|
     |svchost.ext|서비스를 관리하기 위한 프로세스|
     |conhost.exe|키보드, 마우스 입력 허용, 문자 출력, 콘솔 API 등 셸의 기본 기능을 수행|
@@ -131,7 +130,8 @@ toc: true
 + Print Operators : 도메인 컨트롤러에 프린터를 생성
 + Server Operators : 도메인 컨트롤러의 자원의 공유, 폴더 백업 및 복구 
 
-## 2. 유니버설 그룹 (MAC 별 권한 관리) : 복수의 도메인 환경에서 상호 관련되어 있는 자원에 대한 허가를 부여할 때 사용
+## 2. 유니버설 그룹 (MAC 별 권한 관리)
++ 복수의 도메인 환경에서 상호 관련되어 있는 자원에 대한 허가를 부여할 때 사용
 + Administrators : 모든 권한을 보유
 + Users : 로컬 사용자 계정
 + Guests : 네트워크 접근 가능, 허락된 권한만 보유
@@ -174,7 +174,8 @@ toc: true
     |HKEY_USERS|사용자에 대한 정보|
     |HKEY_CURRENT_CONFIG|디스플레이 설정과 프린트 설정에 관한 정보|
 
-## 2. 하이브(Hive) 파일 : `c:\windows\system32\config` 에 위치
+## 2. 하이브(Hive) 파일
+- `c:\windows\system32\config` 에 위치
 - 레지스트리 정보를 가지고 있는 물리적인 파일
 - `regedit.ext` : 하이브 파일을 읽어서 보여주거나 변경하는 프로그램
 - 일반적인 에디터로 변경 불가능, 커널에 의해서 관리
@@ -228,7 +229,7 @@ toc: true
 * 시스템의 기본적인 정보 획득
 
 ## 3. DDE(Dynamic Data Exchange) 취약점
-+ DDE : 윈도우 에서애플리케이션 간 데이터 전송을 위한 프로토콜
++ DDE : 윈도우 에서 애플리케이션 간 데이터 전송을 위한 프로토콜
 + 애플리케이션 간 공유 메모리를 사용하여 데이터를 공유
 + 특정 프로그램을 실행하면 다른 프로그램이 자동으로 실행됨.
     * 예: MS Word : 문서 열 때 자동 연결 업데이트
