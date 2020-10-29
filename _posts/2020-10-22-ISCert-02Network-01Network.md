@@ -51,9 +51,10 @@ toc: true
 |5. Session|{::nomarkdown}<ul><li>세션 연결 및 동기화 수행, 통신 방식 결정</li><li>가상 연결을 제공하여 Login/Logout 수행</li></ul>{:/}|반이중, 전이중, 완전이중 결정|
 |4. Transport|{::nomarkdown}<ul><li>가상연결, 에러 제어, Data 흐름 제어, Segment 단위</li><li>두 개의 종단 간 End-to-End 데이터 흐름이 가능하도록 논리적 주소 연결</li><li>신뢰도, 품질보증, 오류탐지 및 교정 기능 제공</li><li>다중화(Multiplexing) 발생</li></ul>{:/}|TCP, UDP|
 |3. Network(Router)|{::nomarkdown}<ul><li>경로선택, 라우팅 수행, 논리적 주소 연결(IP)</li><li>데이터 흐름 조절, 주소 지정 메커니즘 구현</li><li>네트워크에서 노드에 전송되는 패킷 흐름을 통제하고, 상태 메시지가 네트워크 상에서 어떻게 노드로 전송되는가를 정의, Datagram(Packet) 단위</li></ul>{:/}|{::nomarkdown}<ul><li>IP, ICMP, IGMP, ARP, RAPR</li><li>라우팅 프로토콜(RIP, OSPF, BGP)</li></ul>{:/}|
-|2. Data Link(Switch, Bridge)|{::nomarkdown}<ul><li>물리주소 결정, 에러 제어, 흐름 제어, 데이터 전송</li><li>Frame 단위, 전송 오류를 처리하는 최초의 계층</li></ul>{:/}|{::nomarkdown}<ul><li>흐름 제어, 오류 제어(ARQ)</li><li>브리지, PPTP, L2TP, HDLC</li><li>Frame Relay</li></ul>{:/}|
+|2. Data Link(Switch, Bridge)|{::nomarkdown}<ul><li>물리주소 결정, 에러 제어, 흐름 제어, 데이터 전송</li><li>Frame 단위, 전송 오류를 처리하는 최초의 계층</li></ul>{:/}|{::nomarkdown}<ul><li>흐름 제어, 오류 제어(ARQ)</li><li>브릿지, PPTP, L2TP, HDLC</li><li>Frame Relay</li></ul>{:/}|
 |1. Physical(Repeater)|{::nomarkdown}<ul><li>전기적, 기계적 연결 정의, 실제 Data Bit 전송</li><li>Bit 단위, 전기적 신호, 전압구성, 케이블, 인터페이스 등을 구성</li><li>Data Rates, line noise control, 동기화 기능 수행</li></ul>{:/}|매체: 동축케이블, 광섬유, Twisted Pair Cable|
-
+    
+    - 다중화(Multiplexing) : 여러 개의 소캣으로부터 데이터를 수집하여 헤더를 붙여 전송
     - End-to-End : 7~4 계층, 송수신자 간의 에러 Control
     - Point-to-Point : 3~1 계층, 각 구간에 대해 에러 Control
 
@@ -108,7 +109,7 @@ toc: true
 + HTTP 프로토콜 개요
     * WWW(World Wide Web)로 시작되는 인터넷에서 웹 서버와 사용자의 인터넷 브라우저 사이에 문서를 전송하기 위해 사용되는 통신 프로토콜
     * TCP 기반 프로토콜의 80번 Port 를 사용하고 Request 및 Response 구조를 가짐
-    * State-less 로 프로토콜을 구성함
+    * State-less 로 프로토콜을 구성함 (요청 / 응답 후 연결종료)
 + HTTP Version 1.0
     * 연결을 수행할 때마다 3-Way handshaking 기법을 사용
     * HTML 페이지를 수신 받고 완전히 연결을 종료시킴
@@ -145,8 +146,8 @@ toc: true
 
     |요청 방식|내용|
     |:---|:---|
-    |GET 방식|{::nomarkdown}<ul><li>서버에 전달할 때 데이터를 URL에 포함시켜서 요청</li><li>전송할 수 있는 데이터 양이 제한됨(2Kbyte 또는 4Kbyte)</li><li>예) `aa.php?userid=a&password=a`</li></ul>{:/}|
-    |POST 방식|{::nomarkdown}<ul><li>서버에 전달할 때 데이터를 Request Body에 포함시킴</li><li>데이터 전송량의 제한이 없음</li><li>예)`aa.php`</br>`userid=a;password=a`</li></ul>{:/}|
+    |GET 방식|{::nomarkdown}<ul><li>서버에 전달할 때 데이터를 URL에 포함시켜서 요청</li><li>전송할 수 있는 데이터 양이 제한됨(2Kbyte 또는 4Kbyte)</li><li>예) aa.php?userid=a&password=a</li></ul>{:/}|
+    |POST 방식|{::nomarkdown}<ul><li>서버에 전달할 때 데이터를 Request Body에 포함시킴</li><li>데이터 전송량의 제한이 없음</li><li>예)aa.php<br/>userid=a;password=a</li></ul>{:/}|
 
 - HTTP Response 시 Header 구조
 
@@ -169,11 +170,16 @@ toc: true
     |:---|:---|:---|
     |저장 위치|클라이언트|서버|
     |저장 형태|Text 형식|Object 형식|
-    |종료 시점|쿠키 저장 시에 종료 시점을 설정하며, 설정하지 않으면 브라우저 종료 시점이 됨|정확한 시점을 알 수 없음|
+    |종료 시점|쿠키 저장 시에 종료 시점을 설정하며, <br/>설정하지 않으면 브라우저 종료 시점이 됨|정확한 시점을 알 수 없음|
     |자원|클라이원트 자원|서버 자원|
     |용량|한 도메인당 20개, 쿠키 하나에 4Kb, 총 300개|용량 제한 없음|
 
 ### 2. SMTP (Simple Mail Transfer Protocol)
+
+![SMTP](/assets/images/posts/how-does-email-work-mta-mua-msa-mda-smtp.svg)
+
+[이미지 출처](https://afreshcloud.com/sysadmin/mail-terminology-mta-mua-msa-mda-smtp-dkim-spf-dmarc)
+
 + SMTP 개요
     * RFC 821에 명시되어 있는 인터넷 전자우편 표준 프로토콜
     * Store-and-Forward 방식으로 메시지를 전달
@@ -199,7 +205,7 @@ toc: true
 ### 3. FTP (File Transfer Protocol)
 + FTP 개요
     * 인터넷 표준으로 파일 전송을 위한 프로토콜
-    * 해당 컴퓨터에 등록된 사용자만 전송 가능, 그 외에는 익명(Anonymous)로 사용
+    * 해당 컴퓨터에 등록된 사용자만 전송 가능, 그 외에는 익명(Anonymous)으로 사용
     * ftpusers 에 등록된 사용자는 FTP 접근이 허용되지 않음
     * 제어 접속과 데이터 접속 포트가 분리되어 있음
 + FTP 전송모드
