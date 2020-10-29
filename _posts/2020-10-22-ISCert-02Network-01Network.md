@@ -288,9 +288,9 @@ toc: true
         - `netstat -b` : 어떤 프로세스가 네트워크를 사용하는지 확인
 + TCP 헤더 구조
 
-    ![TCP Header](/assets/images/posts/TCP_Header.svg.png)
+    ![TCP Header](/assets/images/posts/Ntwk_tcp_header.jpg)
 
-    [이미지 출처](https://commons.wikimedia.org/wiki/File:TCP_Header.svg)
+    [이미지 출처](https://commons.wikimedia.org/wiki/File:Ntwk_tcp_header.jpg)
 
 ### 2. UDP (User Datagram Protocol)
 + 비연결성, 비신뢰성의 특성으로 Packet을 빠르게 전달
@@ -351,6 +351,16 @@ toc: true
     * IGP(Internal Gateway routing protocol) : 동일 그룹(기업 또는 ISP) 내에서 라우팅 정보를 교환
     * EGP(Exterior Gateway routing protocol) : 다른 그룹과의 라우팅 정보를 교환
 + 라우팅 프로토콜 분류
+
+    |구분|Distance Vector|Link State|
+    |:---|:---|:---|
+    |알고리즘|최단경로(Shorter Path)를 구하는 벨만 포드(Bellman-Ford) 알고리즘 기반|최소 신장 트리(Shortest Path Tree)를 구하는 다익스트라(Dijkstra) 알고리즘 기반|
+    |동작 원리|네트워크 변화 발생 시 해당 정보를 인접한 라우터에 정기적으로 전달 하고, 인접 라우터에서는 라우팅 테이블에 정보 갱신|{::nomarkdown}<ul><li>라우터와 라우터를 연결하는 Link 상태에 따라 최적의 경로 설정</li><li>라우터가 Network 변화 감지 시 링크 상태변경 정보를 인접한 라우터에게 즉각 전달하고 이를 저장함</li></ul>{:/}|
+    |라우팅 정보|모든 라우터까지의 거리 정보 보관|인접 라우터까지의 Link Cost 계산|
+    |정보전송 시점|일정주기(30초, 이웃 라우터와 공유)|변화 발생 시에만|
+    |대표 프로토콜|RIP, IGRP, EIGRP(내부 라우팅), BGP|OSPF(가장 많이 사용됨), IS-IS(소규모 N/W에서 사용)|
+    |단점|{::nomarkdown}<ul><li>변화되는 라우팅 정보를 모든 라우터에 주기적으로 갱신하므로 망 자체의 트래픽을 유발</li><li>라우팅 정보를 변경하는 문제 발생 시 Routing Loop가 발생할 가능성이 있음</li></ul>{:/}|{::nomarkdown}<ul><li>네트워크 전체 정보 유지를 위한 많은 메모리 소요</li><li>라우터의 CPU 사용량이 많아짐</li><li>라우터간 회선의 대역차이로 동기화 실패할 가능성이 있음</li></ul>{:/}|
+
     * Distance Vector
         - 통과해야 하는 라우터의 수가 적은 쪽으로 경로를 결정
         - 홉 카운터(Hop count) / TTL (Time to Live)
@@ -364,15 +374,6 @@ toc: true
         - Hop count 및 Bandwidth, Delay 등의 다양한 정보로 경로를 설정
         - 정책기반으로 라우팅 정보 업데이트
         - BGP
-
-    |구분|Distance Vector|Link State|
-    |:---|:---|:---|
-    |알고리즘|최단경로(Shorter Path)를 구하는 벨만 포드(Bellman-Ford) 알고리즘 기반|최소 신장 트리(Shortest Path Tree)를 구하는 다익스트라(Dijkstra) 알고리즘 기반|
-    |동작 원리|네트워크 변화 발생 시 해당 정보를 인접한 라우터에 정기적으로 전달 하고, 인접 라우터에서는 라우팅 테이블에 정보 갱신|{::nomarkdown}<ul><li>라우터와 라우터를 연결하는 Link 상태에 따라 최적의 경로 설정</li><li>라우터가 Network 변화 감지 시 링크 상태변경 정보를 인접한 라우터에게 즉각 전달하고 이를 저장함</li></ul>{:/}|
-    |라우팅 정보|모든 라우터까지의 거리 정보 보관|인접 라우터까지의 Link Cost 계산|
-    |정보전송 시점|일정주기(30초, 이웃 라우터와 공유)|변화 발생 시에만|
-    |대표 프로토콜|RIP, IGRP, EIGRP(내부 라우팅), BGP|OSPF(가장 많이 사용됨), IS-IS(소규모 N/W에서 사용)|
-    |단점|{::nomarkdown}<ul><li>변화되는 라우팅 정보를 모든 라우터에 주기적으로 갱신하므로 망 자체의 트래픽을 유발</li><li>라우팅 정보를 변경하는 문제 발생 시 Routing Loop가 발생할 가능성이 있음</li></ul>{:/}|{::nomarkdown}<ul><li>네트워크 전체 정보 유지를 위한 많은 메모리 소요</li><li>라우터의 CPU 사용량이 많아짐</li><li>라우터간 회선의 대역차이로 동기화 실패할 가능성이 있음</li></ul>{:/}|
 
 + 스패닝 트리(Spanning Tree)
     * 스위치나 브리지에서 발생하는 루핑을 막는 프로토콜 
@@ -415,7 +416,7 @@ toc: true
 + IPv4 : 32비트 주소체계를 사용하고 있고 이러한 주소체계는 네트워크 ID와 호스트 ID로 구분된다.
 + IPv6 : IP 주소의 부족 문제를 해결하기 위해서 주소 비트 수를 128비트로 늘린 것
 + 네트워크 계층 구조
-    ![IPv4 Packet](/assets/images/posts/IPv4_Packet.png)
+    ![IPv4 Packet](/assets/images/posts/IPv4_Packet_-en.svg.png)
 
     [이미지 출처](https://en.wikipedia.org/wiki/IPv4)
 + IP Header 구조
@@ -435,7 +436,7 @@ toc: true
         - Header 의 무결성을 검사하기 위함
 + IP 주소의 구조
     * 클래스(Class)
-        - 클래스의구조|네트워크ID|호스트ID
+        - 클래스의구조 / 네트워크ID / 호스트ID
         - 네트워크 ID : 네트워크에 부여될 수 있는 것
         - 호스트 ID : 하나의 네트워크에 부여될 수 있는 호스트 IP 주소 자릿수
 
@@ -454,12 +455,12 @@ toc: true
         - 예) 1.0.0.1 / 24 : 서브넷마스크를 2진수 표현 시 1의 개수(CIDR 표기법)
         - 예) 255.255.255.192/26 : 4개의 네트워크, 네트워크당 IP 64개
         
-        |클래스 종류|네트워크 ID|||호스트 ID|
-        |:---:|:---:|:---:|:---:|:---:|
-        |일반적인 Class C|11111111|11111111|11111111|00000000|
-        |subnet mask|255|255|255|0|
-        |2비트를 사용하여 서브넷팅|11111111|11111111|11111111|11000000|
-        |subnet mask|255|255|255|192|
+            |클래스 종류|네트워크 ID|||호스트 ID|
+            |:---:|:---:|:---:|:---:|:---:|
+            |일반적인 Class C|11111111|11111111|11111111|00000000|
+            |subnet mask|255|255|255|0|
+            |2비트를 사용하여 서브넷팅|11111111|11111111|11111111|11000000|
+            |subnet mask|255|255|255|192|
 
     * 수퍼넷팅(Supernetting) : ISP 사업자가 많은 네트워크 망을 관리하기 위해 묶은 것
     * VLSM(Variable Length Subnet Mask) :서로 다른 크기의 Subnet을 지원, 필요한 호스트의 수가 많은 Subnet을 먼저 계산
@@ -474,21 +475,20 @@ toc: true
     + 오류 보고 메시지 : IP 패킷 처리 도중 발견된 문제를 보고
     + 질의 메시지 : 다른 호스트로부터 특정 정보를 획득하기 위해 사용
 - ICMP 메시지 구조
-
     + Type : ICMP 메시지 유형 표시
     + Code : Type과 같이 사용되며 세부적인 유형을 표현
     + Checksum : IP Datagram Checksum
 - ICMP 메시지
 
-|Type|Message|설명|
-|:---:|:---|:---|
-|3|Destination unreachable|Router가 목적지를 찾지 못할 경우 보내는 메시지|
-|4|Source quench|패킷을 너무 빨리 보내 Network에 무리를 주는 호스트를 제지할 떄 사용|
-|5|Redirection|패킷 Routing 경로를 수정, Smurf 공격에서 사용|
-|8 or 0|Echo request or reply|Host의 존재를 확인|
-|11|Time exceeded|패킷을 보냈으나 시간이 경과하여 Packet이 삭제되었을 때 보내는 메시지|
-|12|Parameter problem|IP Header field에 잘못된 정보가 있다는 것을 알림|
-|13 or 14|Timestamp request and reply|Echo와 비슷하나 시간에 대한 정보 추가|
+    |Type|Message|설명|
+    |:---:|:---|:---|
+    |3|Destination unreachable|Router가 목적지를 찾지 못할 경우 보내는 메시지|
+    |4|Source quench|패킷을 너무 빨리 보내 Network에 무리를 주는 호스트를 제지할 떄 사용|
+    |5|Redirection|패킷 Routing 경로를 수정, Smurf 공격에서 사용|
+    |8 or 0|Echo request or reply|Host의 존재를 확인|
+    |11|Time exceeded|패킷을 보냈으나 시간이 경과하여 Packet이 삭제되었을 때 보내는 메시지|
+    |12|Parameter problem|IP Header field에 잘못된 정보가 있다는 것을 알림|
+    |13 or 14|Timestamp request and reply|Echo와 비슷하나 시간에 대한 정보 추가|
 
 - ping 명령어 실행
     + 윈도우 기본 TTL : 128
@@ -498,24 +498,24 @@ toc: true
 
 - 데이터 전송방식
 
-|전송방식|내용|
-|:---|:---|
-|Unicast|1:1 전송 방식|
-|Broadcast (IPv4)|1:N 전송방식 (동일한 서브넷 상의 모든 수신자에게 전송)|
-|Multicast|M:N 전송방식 (하나 이상의 송신자들이 특정 그룹의 수신자에게 전송)|
-|Anycast (IPv6)|그룹에 등록된 노드 중에서 최단 경로 노드 한개에만 전송|
+    |전송방식|내용|
+    |:---|:---|
+    |Unicast|1:1 전송 방식|
+    |Broadcast (IPv4)|1:N 전송방식 (동일한 서브넷 상의 모든 수신자에게 전송)|
+    |Multicast|M:N 전송방식 (하나 이상의 송신자들이 특정 그룹의 수신자에게 전송)|
+    |Anycast (IPv6)|그룹에 등록된 노드 중에서 최단 경로 노드 한개에만 전송|
 
 #### 4. 멀티캐스트와 IGMP (Internet Group Management Protocol)
 - 멀티캐스트는 그룹에 등록된 사용자에게만 데이터를 전송하는 것
 - IGMP 는 그룹에 등록된 사용자를 관리하는 프로토콜
 - IGMP 메시지 구조
 
-<table>
-    <tr><td>14bytes</td><td>20bytes</td><td colspan=4>8bytes</td></tr>
-    <tr><td>이더넷 헤더</td><td>IP 헤더</td><td colspan=4>IGMP 메시지</td></tr>
-    <tr><td colspan=2></td><td>Version(=0)</td><td>Type(=1-2)</td><td>(unused)</td><td>Checksum</td></tr>
-    <tr><td colspan=2></td><td colspan=4>32bit 클래스 D 주소</td></tr>
-</table>
+    <table>
+        <tr><td>14bytes</td><td>20bytes</td><td colspan=4>8bytes</td></tr>
+        <tr><td>이더넷 헤더</td><td>IP 헤더</td><td colspan=4>IGMP 메시지</td></tr>
+        <tr><td colspan=2></td><td>Version(=0)</td><td>Type(=1-2)</td><td>(unused)</td><td>Checksum</td></tr>
+        <tr><td colspan=2></td><td colspan=4>32bit 클래스 D 주소</td></tr>
+    </table>
 
     + 8Byte 구성
     + Version : IGMP 프로토콜의 버전 표시, 현재 IGMP Version 2

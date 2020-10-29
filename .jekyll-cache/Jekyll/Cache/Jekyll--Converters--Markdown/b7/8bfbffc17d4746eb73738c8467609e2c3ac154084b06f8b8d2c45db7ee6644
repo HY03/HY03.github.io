@@ -1,440 +1,4 @@
-<!doctype html>
-<!--
-  Minimal Mistakes Jekyll Theme 4.20.2 by Michael Rose
-  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
-  Free for personal and commercial use under the MIT license
-  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
--->
-<html lang="ko" class="no-js">
-  <head>
-    <meta charset="utf-8">
-
-<!-- begin _includes/seo.html --><title>02.네트워크 보안 - 01.네트워크 개념 | Bluesplatter</title>
-<meta name="description" content="네트워크와 프로토콜    프로토콜            메시지의 포맷, 언제 데이터를 보낼 것인지, 한번 전송하고 한번 응답할지 등.       OSI7 계층, TCP/IP 4계층       다른 약속을 한 송 수신자 간 통신 : 게이트웨이 장비 필요           데이터 전송방식 (OSI7 -&gt; 세션계층)            단방향 (Simplex) : 키보드, 모니터       반이중 (Half Duplex) : 송수신을 동시에 하는 것이 불가능       전이중(Full Duplex) : 동시에 양방향 송수신">
-
-
-  <meta name="author" content="HY03">
-  
-  <meta property="article:author" content="HY03">
-  
-
-
-<meta property="og:type" content="article">
-<meta property="og:locale" content="ko_KR">
-<meta property="og:site_name" content="Bluesplatter">
-<meta property="og:title" content="02.네트워크 보안 - 01.네트워크 개념">
-<meta property="og:url" content="http://localhost:4000/is_certification/ISCert-02Network-01Network/">
-
-
-  <meta property="og:description" content="네트워크와 프로토콜    프로토콜            메시지의 포맷, 언제 데이터를 보낼 것인지, 한번 전송하고 한번 응답할지 등.       OSI7 계층, TCP/IP 4계층       다른 약속을 한 송 수신자 간 통신 : 게이트웨이 장비 필요           데이터 전송방식 (OSI7 -&gt; 세션계층)            단방향 (Simplex) : 키보드, 모니터       반이중 (Half Duplex) : 송수신을 동시에 하는 것이 불가능       전이중(Full Duplex) : 동시에 양방향 송수신">
-
-
-
-
-
-
-
-  <meta property="article:published_time" content="2020-10-26T16:00:00+09:00">
-
-
-
-
-
-  
-
-  
-
-
-<link rel="canonical" href="http://localhost:4000/is_certification/ISCert-02Network-01Network/">
-
-
-
-
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    
-      "@type": "Person",
-      "name": "HY03",
-      "url": "http://localhost:4000/"
-    
-  }
-</script>
-
-
-
-
-
-
-<!-- end _includes/seo.html -->
-
-
-<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Bluesplatter Feed">
-
-<!-- https://t.co/dKP3o1e -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<script>
-  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
-</script>
-
-<!-- For all browsers -->
-<link rel="stylesheet" href="/assets/css/main.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
-
-<!--[if IE]>
-  <style>
-    /* old IE unsupported flexbox fixes */
-    .greedy-nav .site-title {
-      padding-right: 3em;
-    }
-    .greedy-nav button {
-      position: absolute;
-      top: 0;
-      right: 0;
-      height: 100%;
-    }
-  </style>
-<![endif]-->
-
-
-
-    <!-- start custom head snippets -->
-
-<!-- insert favicons. use https://realfavicongenerator.net/ -->
-
-<!-- end custom head snippets -->
-
-  </head>
-
-  <body class="layout--single">
-    <nav class="skip-links">
-  <h2 class="screen-reader-text">Skip links</h2>
-  <ul>
-    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
-    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
-    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
-  </ul>
-</nav>
-
-    <!--[if lt IE 9]>
-<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
-<![endif]-->
-
-    
-
-<div class="masthead">
-  <div class="masthead__inner-wrap">
-    <div class="masthead__menu">
-      <nav id="site-nav" class="greedy-nav">
-        
-          <a class="site-logo" href="/"><img src="/assets/images/logo/logo.png" alt=""></a>
-        
-        <a class="site-title" href="/">
-          세상에 남기는 작은 흔적
-          <span class="site-subtitle">Bluesplatter</span>
-        </a>
-        <ul class="visible-links"><li class="masthead__menu-item">
-              <a href="/categories/">Categories</a>
-            </li><li class="masthead__menu-item">
-              <a href="/tags/">Tags</a>
-            </li><li class="masthead__menu-item">
-              <a href="/posts/">연도별 포스트</a>
-            </li></ul>
-        
-        <button class="search__toggle" type="button">
-          <span class="visually-hidden">Toggle search</span>
-          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
-            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
-          </svg>
-        </button>
-        
-        <button class="greedy-nav__toggle hidden" type="button">
-          <span class="visually-hidden">토글 메뉴</span>
-          <div class="navicon"></div>
-        </button>
-        <ul class="hidden-links hidden"></ul>
-      </nav>
-    </div>
-  </div>
-</div>
-
-
-    <div class="initial-content">
-      
-
-
-  
-    
-
-
-
-<nav class="breadcrumbs">
-  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
-    
-    
-    
-      
-        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-          <a href="http://localhost:4000/" itemprop="item"><span itemprop="name">Home</span></a>
-          <meta itemprop="position" content="1" />
-        </li>
-        <span class="sep">/</span>
-      
-      
-        
-        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-          <a href="/categories/#is_certification" itemprop="item"><span itemprop="name">Is_certification</span></a>
-          <meta itemprop="position" content="2" />
-        </li>
-        <span class="sep">/</span>
-      
-    
-      
-      
-        <li class="current">02.네트워크 보안 - 01.네트워크 개념</li>
-      
-    
-  </ol>
-</nav>
-
-  
-
-
-<div id="main" role="main">
-  
-  <div class="sidebar sticky">
-  
-
-
-<div itemscope itemtype="https://schema.org/Person">
-
-  
-    <div class="author__avatar">
-      
-        <img src="/assets/images/profile/photo.jpg" alt="HY03" itemprop="image">
-      
-    </div>
-  
-
-  <div class="author__content">
-    
-      <h3 class="author__name" itemprop="name">HY03</h3>
-    
-    
-      <div class="author__bio" itemprop="description">
-        <p>저는 전문가가 아니고 이것 저것 알아보는 비전문가 입니다. <br /> 틀린 내용이 기술되어도 너그러이 봐주시고 댓글을 남겨주셨으면 좋겠습니다.</p>
-
-      </div>
-    
-  </div>
-
-  <div class="author__urls-wrapper">
-    <button class="btn btn--inverse">팔로우</button>
-    <ul class="author__urls social-icons">
-      
-        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
-          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
-        </li>
-      
-
-      
-        
-          
-        
-          
-            <li><a href="http://bluesplatter.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
-          
-        
-          
-        
-          
-        
-          
-            <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
-          
-        
-          
-        
-      
-
-      
-
-      
-        <li>
-          <a href="mailto:hyunik03@gmail.com">
-            <meta itemprop="email" content="hyunik03@gmail.com" />
-            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">이메일</span>
-          </a>
-        </li>
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      <!--
-  <li>
-    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
-      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
-    </a>
-  </li>
--->
-    </ul>
-  </div>
-</div>
-
-  
-  </div>
-
-
-
-  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="02.네트워크 보안 - 01.네트워크 개념">
-    <meta itemprop="description" content="네트워크와 프로토콜  프로토콜          메시지의 포맷, 언제 데이터를 보낼 것인지, 한번 전송하고 한번 응답할지 등.      OSI7 계층, TCP/IP 4계층      다른 약속을 한 송 수신자 간 통신 : 게이트웨이 장비 필요        데이터 전송방식 (OSI7 -&gt; 세션계층)          단방향 (Simplex) : 키보드, 모니터      반이중 (Half Duplex) : 송수신을 동시에 하는 것이 불가능      전이중(Full Duplex) : 동시에 양방향 송수신      ">
-    <meta itemprop="datePublished" content="2020-10-26T16:00:00+09:00">
-    
-
-    <div class="page__inner-wrap">
-      
-        <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">02.네트워크 보안 - 01.네트워크 개념
-</h1>
-          
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        <time datetime="2020-10-26T16:00:00+09:00">October 26, 2020</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-        </header>
-      
-
-      <section class="page__content" itemprop="text">
-        
-          <aside class="sidebar__right ">
-            <nav class="toc">
-              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
-              <ul class="toc__menu">
-  <li><a href="#네트워크와-프로토콜">네트워크와 프로토콜</a></li>
-  <li><a href="#네트워크-토폴로지">네트워크 토폴로지</a></li>
-  <li><a href="#osi-7계층">OSI 7계층</a>
-    <ul>
-      <li><a href="#1-osi-7계층-구조">1. OSI 7계층 구조</a></li>
-      <li><a href="#2-osi-계층별-하드웨어-장비">2. OSI 계층별 하드웨어 장비</a></li>
-    </ul>
-  </li>
-  <li><a href="#tcpip-4계층">TCP/IP 4계층</a>
-    <ul>
-      <li><a href="#1-tcpip-구조">1. TCP/IP 구조</a></li>
-      <li><a href="#2-tcpip-프로토콜의-구성--tcp-udp-ip-icmp-arp-rarp">2. TCP/IP 프로토콜의 구성 : TCP, UDP, IP, ICMP, ARP, RARP</a></li>
-    </ul>
-  </li>
-  <li><a href="#네트워크-활용tcpip-구조">네트워크 활용(TCP/IP 구조)</a>
-    <ul>
-      <li><a href="#1-애플리케이션-계층">1. 애플리케이션 계층</a>
-        <ul>
-          <li><a href="#1-httphyper-text-transfer-protocol">1. HTTP(Hyper Text Transfer Protocol)</a></li>
-          <li><a href="#2-smtp-simple-mail-transfer-protocol">2. SMTP (Simple Mail Transfer Protocol)</a></li>
-          <li><a href="#3-ftp-file-transfer-protocol">3. FTP (File Transfer Protocol)</a></li>
-          <li><a href="#4-snmp--와-nms">4. SNMP  와 NMS</a></li>
-        </ul>
-      </li>
-      <li><a href="#2-전송-계층transport-layer">2. 전송 계층(Transport Layer)</a>
-        <ul>
-          <li><a href="#1-tcp-transmission-control-protocol">1. TCP (Transmission Control Protocol)</a></li>
-          <li><a href="#2-udp-user-datagram-protocol">2. UDP (User Datagram Protocol)</a></li>
-        </ul>
-      </li>
-      <li><a href="#3-인터넷-계층internet-layer">3. 인터넷 계층(Internet Layer)</a>
-        <ul>
-          <li><a href="#1-라우팅">1. 라우팅</a>
-            <ul>
-              <li><a href="#1-개념">1. 개념</a></li>
-              <li><a href="#2-rip-routing-information-protocol">2. RIP (Routing Information Protocol)</a></li>
-              <li><a href="#3-ospf-open-shortest-path-first">3. OSPF (Open Shortest Path First)</a></li>
-              <li><a href="#4-bgp-border-gateway-protocol">4. BGP (Border Gateway Protocol)</a></li>
-            </ul>
-          </li>
-          <li><a href="#2-ipinternet-protocol">2. IP(Internet Protocol)</a>
-            <ul>
-              <li><a href="#1개념">1.개념</a></li>
-              <li><a href="#2-icmp-internet-control-message-protocol">2. ICMP (Internet Control Message Protocol)</a></li>
-              <li><a href="#3-데이터-전송-방식과-멀티캐스트">3. 데이터 전송 방식과 멀티캐스트</a></li>
-              <li><a href="#4-멀티캐스트와-igmp-internet-group-management-protocol">4. 멀티캐스트와 IGMP (Internet Group Management Protocol)</a></li>
-              <li><a href="#5-arp-address-resolution-protocol">5. ARP (Address Resolution Protocol)</a></li>
-              <li><a href="#6-rarp-reverse-address-resolution-protocol">6. RARP (Reverse Address Resolution Protocol)</a></li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-      <li><a href="#3-네트워크-접근network-access-계층">3. 네트워크 접근(Network Access) 계층</a>
-        <ul>
-          <li><a href="#1-네트워크-접근network-access-계층">1. 네트워크 접근(Network Access) 계층</a></li>
-          <li><a href="#2-네트워크-접근-주요-기능">2. 네트워크 접근 주요 기능</a></li>
-          <li><a href="#3-csmacd-carrier-sense-multiple-accesscollision-detection">3. CSMA/CD (Carrier Sense Multiple Access/Collision Detection)</a></li>
-          <li><a href="#4-csmaca-carrier-sense-multiple-accesscollision-avoidance">4. CSMA/CA (Carrier Sense Multiple Access/Collision Avoidance)</a></li>
-          <li><a href="#5-lan-switch">5. LAN Switch</a></li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-            </nav>
-          </aside>
-        
-        <h1 id="네트워크와-프로토콜">네트워크와 프로토콜</h1>
+I"��<h1 id="네트워크와-프로토콜">네트워크와 프로토콜</h1>
 <ul>
   <li><strong>프로토콜</strong>
     <ul>
@@ -1133,9 +697,9 @@
   <li>
     <p>TCP 헤더 구조</p>
 
-    <p><img src="/assets/images/posts/Ntwk_tcp_header.jpg" alt="TCP Header" /></p>
+    <p><img src="/assets/images/posts/TCP_Header.svg.png" alt="TCP Header" /></p>
 
-    <p><a href="https://commons.wikimedia.org/wiki/File:Ntwk_tcp_header.jpg">이미지 출처</a></p>
+    <p><a href="https://commons.wikimedia.org/wiki/File:TCP_Header.svg">이미지 출처</a></p>
   </li>
 </ul>
 
@@ -1245,8 +809,31 @@
       <li>EGP(Exterior Gateway routing protocol) : 다른 그룹과의 라우팅 정보를 교환</li>
     </ul>
   </li>
-  <li>
-    <p>라우팅 프로토콜 분류</p>
+  <li>라우팅 프로토콜 분류
+    <ul>
+      <li>Distance Vector
+        <ul>
+          <li>통과해야 하는 라우터의 수가 적은 쪽으로 경로를 결정</li>
+          <li>홉 카운터(Hop count) / TTL (Time to Live)</li>
+          <li>RIP, IGRP</li>
+        </ul>
+      </li>
+      <li>Link State
+        <ul>
+          <li>네트워크 대역폭, 지연 정보 등을 종합적으로 고려해 Cost 산정</li>
+          <li>주기적으로 지연과 같은 정보를 라우터 간에 공유해야 하고 라우터 브로드캐스트를 통해서 공유함</li>
+          <li>OSPF, EIGRP(애매함)</li>
+        </ul>
+      </li>
+      <li>Path Vector
+        <ul>
+          <li>Distance Vector 와 Link State 의 Hybrid 형태</li>
+          <li>Hop count 및 Bandwidth, Delay 등의 다양한 정보로 경로를 설정</li>
+          <li>정책기반으로 라우팅 정보 업데이트</li>
+          <li>BGP</li>
+        </ul>
+      </li>
+    </ul>
 
     <table>
       <thead>
@@ -1289,31 +876,6 @@
         </tr>
       </tbody>
     </table>
-
-    <ul>
-      <li>Distance Vector
-        <ul>
-          <li>통과해야 하는 라우터의 수가 적은 쪽으로 경로를 결정</li>
-          <li>홉 카운터(Hop count) / TTL (Time to Live)</li>
-          <li>RIP, IGRP</li>
-        </ul>
-      </li>
-      <li>Link State
-        <ul>
-          <li>네트워크 대역폭, 지연 정보 등을 종합적으로 고려해 Cost 산정</li>
-          <li>주기적으로 지연과 같은 정보를 라우터 간에 공유해야 하고 라우터 브로드캐스트를 통해서 공유함</li>
-          <li>OSPF, EIGRP(애매함)</li>
-        </ul>
-      </li>
-      <li>Path Vector
-        <ul>
-          <li>Distance Vector 와 Link State 의 Hybrid 형태</li>
-          <li>Hop count 및 Bandwidth, Delay 등의 다양한 정보로 경로를 설정</li>
-          <li>정책기반으로 라우팅 정보 업데이트</li>
-          <li>BGP</li>
-        </ul>
-      </li>
-    </ul>
   </li>
   <li>스패닝 트리(Spanning Tree)
     <ul>
@@ -1451,7 +1013,17 @@
     <ul>
       <li>클래스(Class)
         <ul>
-          <li>클래스의구조 / 네트워크ID / 호스트ID</li>
+          <li>
+            <table>
+              <tbody>
+                <tr>
+                  <td>클래스의구조</td>
+                  <td>네트워크ID</td>
+                  <td>호스트ID</td>
+                </tr>
+              </tbody>
+            </table>
+          </li>
           <li>네트워크 ID : 네트워크에 부여될 수 있는 것</li>
           <li>호스트 ID : 하나의 네트워크에 부여될 수 있는 호스트 IP 주소 자릿수</li>
         </ul>
@@ -1491,52 +1063,50 @@
           <li>주어진 네트워크 주소를 작게 나누어 여러 개의 서브넷(논리적)으로 구성</li>
           <li>네트워크 식별자 부분을 구분하기 위한 mask를 서브넷 마스크(Subnet Mask)라고 함</li>
           <li>예) 1.0.0.1 / 24 : 서브넷마스크를 2진수 표현 시 1의 개수(CIDR 표기법)</li>
-          <li>
-            <p>예) 255.255.255.192/26 : 4개의 네트워크, 네트워크당 IP 64개</p>
-
-            <table>
-              <thead>
-                <tr>
-                  <th style="text-align: center">클래스 종류</th>
-                  <th style="text-align: center">네트워크 ID</th>
-                  <th style="text-align: center"> </th>
-                  <th style="text-align: center"> </th>
-                  <th style="text-align: center">호스트 ID</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="text-align: center">일반적인 Class C</td>
-                  <td style="text-align: center">11111111</td>
-                  <td style="text-align: center">11111111</td>
-                  <td style="text-align: center">11111111</td>
-                  <td style="text-align: center">00000000</td>
-                </tr>
-                <tr>
-                  <td style="text-align: center">subnet mask</td>
-                  <td style="text-align: center">255</td>
-                  <td style="text-align: center">255</td>
-                  <td style="text-align: center">255</td>
-                  <td style="text-align: center">0</td>
-                </tr>
-                <tr>
-                  <td style="text-align: center">2비트를 사용하여 서브넷팅</td>
-                  <td style="text-align: center">11111111</td>
-                  <td style="text-align: center">11111111</td>
-                  <td style="text-align: center">11111111</td>
-                  <td style="text-align: center">11000000</td>
-                </tr>
-                <tr>
-                  <td style="text-align: center">subnet mask</td>
-                  <td style="text-align: center">255</td>
-                  <td style="text-align: center">255</td>
-                  <td style="text-align: center">255</td>
-                  <td style="text-align: center">192</td>
-                </tr>
-              </tbody>
-            </table>
-          </li>
+          <li>예) 255.255.255.192/26 : 4개의 네트워크, 네트워크당 IP 64개</li>
         </ul>
+
+        <table>
+          <thead>
+            <tr>
+              <th style="text-align: center">클래스 종류</th>
+              <th style="text-align: center">네트워크 ID</th>
+              <th style="text-align: center"> </th>
+              <th style="text-align: center"> </th>
+              <th style="text-align: center">호스트 ID</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="text-align: center">일반적인 Class C</td>
+              <td style="text-align: center">11111111</td>
+              <td style="text-align: center">11111111</td>
+              <td style="text-align: center">11111111</td>
+              <td style="text-align: center">00000000</td>
+            </tr>
+            <tr>
+              <td style="text-align: center">subnet mask</td>
+              <td style="text-align: center">255</td>
+              <td style="text-align: center">255</td>
+              <td style="text-align: center">255</td>
+              <td style="text-align: center">0</td>
+            </tr>
+            <tr>
+              <td style="text-align: center">2비트를 사용하여 서브넷팅</td>
+              <td style="text-align: center">11111111</td>
+              <td style="text-align: center">11111111</td>
+              <td style="text-align: center">11111111</td>
+              <td style="text-align: center">11000000</td>
+            </tr>
+            <tr>
+              <td style="text-align: center">subnet mask</td>
+              <td style="text-align: center">255</td>
+              <td style="text-align: center">255</td>
+              <td style="text-align: center">255</td>
+              <td style="text-align: center">192</td>
+            </tr>
+          </tbody>
+        </table>
       </li>
       <li>수퍼넷팅(Supernetting) : ISP 사업자가 많은 네트워크 망을 관리하기 위해 묶은 것</li>
       <li>VLSM(Variable Length Subnet Mask) :서로 다른 크기의 Subnet을 지원, 필요한 호스트의 수가 많은 Subnet을 먼저 계산</li>
@@ -1557,63 +1127,66 @@
       <li>질의 메시지 : 다른 호스트로부터 특정 정보를 획득하기 위해 사용</li>
     </ul>
   </li>
-  <li>ICMP 메시지 구조
+  <li>
+    <p>ICMP 메시지 구조</p>
+
     <ul>
       <li>Type : ICMP 메시지 유형 표시</li>
       <li>Code : Type과 같이 사용되며 세부적인 유형을 표현</li>
       <li>Checksum : IP Datagram Checksum</li>
     </ul>
   </li>
-  <li>
-    <p>ICMP 메시지</p>
+  <li>ICMP 메시지</li>
+</ul>
 
-    <table>
-      <thead>
-        <tr>
-          <th style="text-align: center">Type</th>
-          <th style="text-align: left">Message</th>
-          <th style="text-align: left">설명</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="text-align: center">3</td>
-          <td style="text-align: left">Destination unreachable</td>
-          <td style="text-align: left">Router가 목적지를 찾지 못할 경우 보내는 메시지</td>
-        </tr>
-        <tr>
-          <td style="text-align: center">4</td>
-          <td style="text-align: left">Source quench</td>
-          <td style="text-align: left">패킷을 너무 빨리 보내 Network에 무리를 주는 호스트를 제지할 떄 사용</td>
-        </tr>
-        <tr>
-          <td style="text-align: center">5</td>
-          <td style="text-align: left">Redirection</td>
-          <td style="text-align: left">패킷 Routing 경로를 수정, Smurf 공격에서 사용</td>
-        </tr>
-        <tr>
-          <td style="text-align: center">8 or 0</td>
-          <td style="text-align: left">Echo request or reply</td>
-          <td style="text-align: left">Host의 존재를 확인</td>
-        </tr>
-        <tr>
-          <td style="text-align: center">11</td>
-          <td style="text-align: left">Time exceeded</td>
-          <td style="text-align: left">패킷을 보냈으나 시간이 경과하여 Packet이 삭제되었을 때 보내는 메시지</td>
-        </tr>
-        <tr>
-          <td style="text-align: center">12</td>
-          <td style="text-align: left">Parameter problem</td>
-          <td style="text-align: left">IP Header field에 잘못된 정보가 있다는 것을 알림</td>
-        </tr>
-        <tr>
-          <td style="text-align: center">13 or 14</td>
-          <td style="text-align: left">Timestamp request and reply</td>
-          <td style="text-align: left">Echo와 비슷하나 시간에 대한 정보 추가</td>
-        </tr>
-      </tbody>
-    </table>
-  </li>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Type</th>
+      <th style="text-align: left">Message</th>
+      <th style="text-align: left">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">3</td>
+      <td style="text-align: left">Destination unreachable</td>
+      <td style="text-align: left">Router가 목적지를 찾지 못할 경우 보내는 메시지</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">4</td>
+      <td style="text-align: left">Source quench</td>
+      <td style="text-align: left">패킷을 너무 빨리 보내 Network에 무리를 주는 호스트를 제지할 떄 사용</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">5</td>
+      <td style="text-align: left">Redirection</td>
+      <td style="text-align: left">패킷 Routing 경로를 수정, Smurf 공격에서 사용</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">8 or 0</td>
+      <td style="text-align: left">Echo request or reply</td>
+      <td style="text-align: left">Host의 존재를 확인</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">11</td>
+      <td style="text-align: left">Time exceeded</td>
+      <td style="text-align: left">패킷을 보냈으나 시간이 경과하여 Packet이 삭제되었을 때 보내는 메시지</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">12</td>
+      <td style="text-align: left">Parameter problem</td>
+      <td style="text-align: left">IP Header field에 잘못된 정보가 있다는 것을 알림</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">13 or 14</td>
+      <td style="text-align: left">Timestamp request and reply</td>
+      <td style="text-align: left">Echo와 비슷하나 시간에 대한 정보 추가</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
   <li>ping 명령어 실행
     <ul>
       <li>윈도우 기본 TTL : 128</li>
@@ -1625,65 +1198,57 @@
 <h4 id="3-데이터-전송-방식과-멀티캐스트">3. 데이터 전송 방식과 멀티캐스트</h4>
 
 <ul>
-  <li>
-    <p>데이터 전송방식</p>
-
-    <table>
-      <thead>
-        <tr>
-          <th style="text-align: left">전송방식</th>
-          <th style="text-align: left">내용</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="text-align: left">Unicast</td>
-          <td style="text-align: left">1:1 전송 방식</td>
-        </tr>
-        <tr>
-          <td style="text-align: left">Broadcast (IPv4)</td>
-          <td style="text-align: left">1:N 전송방식 (동일한 서브넷 상의 모든 수신자에게 전송)</td>
-        </tr>
-        <tr>
-          <td style="text-align: left">Multicast</td>
-          <td style="text-align: left">M:N 전송방식 (하나 이상의 송신자들이 특정 그룹의 수신자에게 전송)</td>
-        </tr>
-        <tr>
-          <td style="text-align: left">Anycast (IPv6)</td>
-          <td style="text-align: left">그룹에 등록된 노드 중에서 최단 경로 노드 한개에만 전송</td>
-        </tr>
-      </tbody>
-    </table>
-  </li>
+  <li>데이터 전송방식</li>
 </ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">전송방식</th>
+      <th style="text-align: left">내용</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Unicast</td>
+      <td style="text-align: left">1:1 전송 방식</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Broadcast (IPv4)</td>
+      <td style="text-align: left">1:N 전송방식 (동일한 서브넷 상의 모든 수신자에게 전송)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Multicast</td>
+      <td style="text-align: left">M:N 전송방식 (하나 이상의 송신자들이 특정 그룹의 수신자에게 전송)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Anycast (IPv6)</td>
+      <td style="text-align: left">그룹에 등록된 노드 중에서 최단 경로 노드 한개에만 전송</td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 id="4-멀티캐스트와-igmp-internet-group-management-protocol">4. 멀티캐스트와 IGMP (Internet Group Management Protocol)</h4>
 <ul>
   <li>멀티캐스트는 그룹에 등록된 사용자에게만 데이터를 전송하는 것</li>
   <li>IGMP 는 그룹에 등록된 사용자를 관리하는 프로토콜</li>
-  <li>
-    <p>IGMP 메시지 구조</p>
-
-    <table>
-      <tr><td>14bytes</td><td>20bytes</td><td colspan="4">8bytes</td></tr>
-      <tr><td>이더넷 헤더</td><td>IP 헤더</td><td colspan="4">IGMP 메시지</td></tr>
-      <tr><td colspan="2"></td><td>Version(=0)</td><td>Type(=1-2)</td><td>(unused)</td><td>Checksum</td></tr>
-      <tr><td colspan="2"></td><td colspan="4">32bit 클래스 D 주소</td></tr>
-  </table>
-
-    <ul>
-      <li>8Byte 구성</li>
-      <li>Version : IGMP 프로토콜의 버전 표시, 현재 IGMP Version 2</li>
-      <li>Type : 메시지 유형, 1 = 보고, 2 = 질의메시지</li>
-      <li>Group id
-        <ul>
-          <li>보고 메시지 : 호스트에서 신규 가입하고자 하는 멀티캐스트 서비스 group id / 계속 받아보기를 원하는 멀티캐스트 서비스의 group id</li>
-          <li>질의 메시지 : 0</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
+  <li>IGMP 메시지 구조</li>
 </ul>
+
+<table>
+    <tr><td>14bytes</td><td>20bytes</td><td colspan="4">8bytes</td></tr>
+    <tr><td>이더넷 헤더</td><td>IP 헤더</td><td colspan="4">IGMP 메시지</td></tr>
+    <tr><td colspan="2"></td><td>Version(=0)</td><td>Type(=1-2)</td><td>(unused)</td><td>Checksum</td></tr>
+    <tr><td colspan="2"></td><td colspan="4">32bit 클래스 D 주소</td></tr>
+</table>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+ 8Byte 구성
++ Version : IGMP 프로토콜의 버전 표시, 현재 IGMP Version 2
++ Type : 메시지 유형, 1 = 보고, 2 = 질의메시지
++ Group id
+    * 보고 메시지 : 호스트에서 신규 가입하고자 하는 멀티캐스트 서비스 group id / 계속 받아보기를 원하는 멀티캐스트 서비스의 group id
+    * 질의 메시지 : 0
+</code></pre></div></div>
 
 <h4 id="5-arp-address-resolution-protocol">5. ARP (Address Resolution Protocol)</h4>
 <ul>
@@ -1782,380 +1347,4 @@
     </tr>
   </tbody>
 </table>
-
-        
-      </section>
-
-      <footer class="page__meta">
-        
-        
-  
-
-
-  
-  
-  
-
-  <p class="page__taxonomy">
-    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
-    <span itemprop="keywords">
-    
-      
-      
-      <a href="/tags/#%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EA%B0%9C%EB%85%90" class="page__taxonomy-item" rel="tag">네트워크 개념</a><span class="sep">, </span>
-    
-      
-      
-      <a href="/tags/#%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EB%B3%B4%EC%95%88" class="page__taxonomy-item" rel="tag">네트워크 보안</a><span class="sep">, </span>
-    
-      
-      
-      <a href="/tags/#%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88%EA%B8%B0%EC%82%AC" class="page__taxonomy-item" rel="tag">정보보안기사</a>
-    
-    </span>
-  </p>
-
-
-
-
-  
-
-
-  
-  
-  
-
-  <p class="page__taxonomy">
-    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
-    <span itemprop="keywords">
-    
-      
-      
-      <a href="/categories/#is-certification" class="page__taxonomy-item" rel="tag">IS_Certification</a>
-    
-    </span>
-  </p>
-
-
-        
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-10-26T16:00:00+09:00">October 26, 2020</time></p>
-
-
-      </footer>
-
-      <section class="page__share">
-  
-    <h4 class="page__share-title">공유하기</h4>
-  
-
-  <a href="https://twitter.com/intent/tweet?text=02.%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC+%EB%B3%B4%EC%95%88+-+01.%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC+%EA%B0%9C%EB%85%90%20http%3A%2F%2Flocalhost%3A4000%2Fis_certification%2FISCert-02Network-01Network%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
-
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fis_certification%2FISCert-02Network-01Network%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
-
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fis_certification%2FISCert-02Network-01Network%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
-</section>
-
-
-      
-  <nav class="pagination">
-    
-      <a href="/is_certification/ISCert-01System-04Window/" class="pagination--pager" title="01.시스템보안 - 04.윈도우 클라이언트 및 서버 보안
-">이전</a>
-    
-    
-      <a href="/is_certification/ISCert-02Network-02Attack/" class="pagination--pager" title="02.네트워크 보안 - 02.네트워크 공격기법
-">다음</a>
-    
-  </nav>
-
-    </div>
-
-    
-  </article>
-
-  
-  
-    <div class="page__related">
-      <h4 class="page__related-title">참고</h4>
-      <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/is_certification/ISCert-05ISM-02IS_Law/" rel="permalink">05.정보보호 관리 - 02.정보보호 관련 윤리 및 법규
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        <time datetime="2020-10-28T12:00:00+09:00">October 28, 2020</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">정보보호 및 개인정보보호법 체계
-1. 개인정보보호원칙
-
-  개인정보보호원칙의 의미
-
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/is_certification/ISCert-05ISM-01IS_Management/" rel="permalink">05.정보보호 관리 - 01.정보보호 관리
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        <time datetime="2020-10-28T11:00:00+09:00">October 28, 2020</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">정보보호 관리 이해
-1. ISMS-P
-
-  개념
-    
-      정보보호 및 개인정보보호 관리체계(ISMS-P : Information Security Management System-Personal)
-    
-  
-
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/is_certification/ISCert-04IS-04Cryptography/" rel="permalink">04.정보보안 일반 - 04.암호학
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        <time datetime="2020-10-28T10:00:00+09:00">October 28, 2020</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">암호화
-1. 시저암호와 암호화의 개요
-
-  시저암호(Caesar Cipher) : 최초의 암호화, 알파벳을 일정한 문자 수만큼 평행 이동을해서 암호화
-  평문
-
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/is_certification/ISCert-04IS-03DigitalSignature/" rel="permalink">04.정보보안 일반 - 03.전자서명
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        <time datetime="2020-10-28T09:00:00+09:00">October 28, 2020</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">전자서명 인증 구조 및 주요 특징
-1. 전자서명(Digital Signature)의 이해
-
-  전자서명(Digital Signature)의 정의
-    
-      작성자의 신원과 전자문서 변경 여부를 확인할 수 있도록 전자문서를 비대칭 암호화 방식을 이용하여 전자서명 생성키로 생...</p>
-  </article>
-</div>
-
-        
-      </div>
-    </div>
-  
-  
-</div>
-
-    </div>
-
-    
-      <div class="search-content">
-        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
-    <label class="sr-only" for="search">
-      Enter your search term...
-    </label>
-    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
-  </form>
-  <div id="results" class="results"></div></div>
-
-      </div>
-    
-
-    <div id="footer" class="page__footer">
-      <footer>
-        <!-- start custom footer snippets -->
-<!--
-<script>
-	(function(d, h, m){
-    var js, fjs = d.getElementsByTagName(h)[0];
-    if (d.getElementById(m)){return;}
-    js = d.createElement(h); js.id = m;
-    js.onload = function(){
-        window.makerWidgetComInit({
-        position: "left",          
-        widget: "eqypoqmawbcz3azh-usiy9q7ma4ong1w1-juelcm3zfgcuwjds"                
-    })};
-    js.src = "https://makerwidget.com/js/embed.js";
-    fjs.parentNode.insertBefore(js, fjs)
-	}(document, "script", "dhm"))
-</script>
--->
-<!-- end custom footer snippets -->
-        <div class="page__footer-follow">
-  <ul class="social-icons">
-    
-      <li><strong>팔로우:</strong></li>
-    
-
-    
-      
-        
-          <li><a href="mailto:hyunik03@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
-        
-      
-        
-      
-        
-      
-        
-          <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
-        
-      
-        
-      
-        
-      
-        
-      
-    
-
-    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
-  </ul>
-</div>
-
-<div class="page__footer-copyright">&copy; 2020 HY03. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
-
-      </footer>
-    </div>
-
-    
-  <script src="/assets/js/main.min.js"></script>
-
-
-
-
-<script src="/assets/js/lunr/lunr.min.js"></script>
-<script src="/assets/js/lunr/lunr-store.js"></script>
-<script src="/assets/js/lunr/lunr-en.js"></script>
-
-
-
-
-    
-  <script>
-    var disqus_config = function () {
-      this.page.url = "http://localhost:4000/is_certification/ISCert-02Network-01Network/";  /* Replace PAGE_URL with your page's canonical URL variable */
-      this.page.identifier = "/is_certification/ISCert-02Network-01Network"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
-    };
-    (function() { /* DON'T EDIT BELOW THIS LINE */
-      var d = document, s = d.createElement('script');
-      s.src = 'https://bluesplatter.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', +new Date());
-      (d.head || d.body).appendChild(s);
-    })();
-  </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-
-  
-
-
-
-
-
-  </body>
-</html>
+:ET
