@@ -78,8 +78,8 @@ toc: true
 |메시지|내용|
 |:---|:---|
 |Source Quench(Type-4)|사용 중 전송자에게 패킷 전송 속도를 줄여 줄 것을 요구하는 메시지로 전송 속도의 지연 발생|
-|Time to live exceeded in Transit</br>(Type-11, Code-0)|시간 초과로 패킷이 폐기되었기 때문에 재전송함|
-|Destination unreachable</br>(Type-3, Code-0,1,2,3)|ICMP 트래픽 처리에 자원을 사용하게 되므로 시스템이 조금씩 느려지는 현상 발생|
+|Time to live exceeded in Transit<br/>(Type-11, Code-0)|시간 초과로 패킷이 폐기되었기 때문에 재전송함|
+|Destination unreachable<br/>(Type-3, Code-0,1,2,3)|ICMP 트래픽 처리에 자원을 사용하게 되므로 시스템이 조금씩 느려지는 현상 발생|
 
 ### 4. ICMP 및 UDP Flooding 대응 방법
 
@@ -100,7 +100,7 @@ toc: true
 |:---|:---|
 |Tiny Fragment|최초의 Fragment를 아주 작게 만들어서 네트워크 침입탐지 시스템이나 패킷 필터링 장비를 우회하는 공격|
 |Fragment Overlap|{::nomarkdown}<ul><li>Tiny Fragment 공격 기법에 비해 더욱 정교한 방법</li><li>IDS의 Fragment 처리 방법과 패킷 필터링의 재조합과 Overwrite 처리를 이용</li></ul>{:/}|
-|IP Fragmentation을 이용한</br> 서비스 거부 공격|{::nomarkdown}<ul><li>Ping of Death : Ping을 이용하여 ICMP 패킷을 규정된 길이 이상으로 큰 IP 패킷을 전송, 수신 받은 OS에서 처리하지 못함으로써 시스템을 마비시키는 공격</li><li>Tear Drop : fragment 재조합 과정의 취약점을 이용한 공격으로 목표시스템 정지나 재부팅을 유발하는 공격. TCP Header 부분의 offset field 값이 중첩되는 데이터 패킷을 대상 시스템에 전송</li></ul>{:/}|
+|IP Fragmentation을 이용한<br/> 서비스 거부 공격|{::nomarkdown}<ul><li>Ping of Death : Ping을 이용하여 ICMP 패킷을 규정된 길이 이상으로 큰 IP 패킷을 전송, 수신 받은 OS에서 처리하지 못함으로써 시스템을 마비시키는 공격</li><li>Tear Drop : fragment 재조합 과정의 취약점을 이용한 공격으로 목표시스템 정지나 재부팅을 유발하는 공격. TCP Header 부분의 offset field 값이 중첩되는 데이터 패킷을 대상 시스템에 전송</li></ul>{:/}|
 
 ### 3. Ping of Death 공격 방법
 * 하나의 큰 패킷을 전송하면 패킷은 MTU(Maximun Transmission Unit)의 크기를 넘을 수 없기 때문에 분할되어서 응답을 받음
@@ -156,9 +156,9 @@ toc: true
 |대응 방법|내용|
 |:---|:---|
 |접속 임계치 설정|특정 발신지에서 IP로 연결할 수 있는 최대값 설정|
-|방화벽 설정 도구인</br>iptables로 차단|{::nomarkdown}<ul><li>`iptables -A INPUT -p tcp -dport 80 -m connlimit-above 30 -j DROP`</li><li>30개 이상의 Concurrent Connection 에 대한 차단</li></ul>{:/}|
-|Connection Timeout과</br>Keepalivetime 설정|{::nomarkdown}<ul><li>Connection Timeout 설정으로 클라이언트와 서버 간에 데이터 전송이 없을 경우 연결 종료</li><li>웹 서버의 Keepalivetime을 설정하여 차단</li></ul>{:/}|
-|RequestReadTimeout</br>설정으로 차단|{::nomarkdown}<ul><li>Apache 2.2.15버전 이후에서 사용</li><li>Slow Attack를 차단하기 위해서 RequestReadTimeout header=5 body=8 설정</li><li>5초 내에 연결이 안 되면 연결 종료, POST 요청 이후 8초 내에 데이터가 오지 않으면 연결 종료</li></ul>{:/}|
+|방화벽 설정 도구인<br/>iptables로 차단|{::nomarkdown}<ul><li>`iptables -A INPUT -p tcp -dport 80 -m connlimit-above 30 -j DROP`</li><li>30개 이상의 Concurrent Connection 에 대한 차단</li></ul>{:/}|
+|Connection Timeout과<br/>Keepalivetime 설정|{::nomarkdown}<ul><li>Connection Timeout 설정으로 클라이언트와 서버 간에 데이터 전송이 없을 경우 연결 종료</li><li>웹 서버의 Keepalivetime을 설정하여 차단</li></ul>{:/}|
+|RequestReadTimeout<br/>설정으로 차단|{::nomarkdown}<ul><li>Apache 2.2.15버전 이후에서 사용</li><li>Slow Attack를 차단하기 위해서 RequestReadTimeout header=5 body=8 설정</li><li>5초 내에 연결이 안 되면 연결 종료, POST 요청 이후 8초 내에 데이터가 오지 않으면 연결 종료</li></ul>{:/}|
 |그 외|{::nomarkdown}<ul><li>POST 메시지의 크기를 제한(POST_MAX_SIZE) 한다.</li><li>최저 데이터 전송 속도를 제한한다.</li><li>TCP 상태를 모니터링한다.</li></ul>{:/}|
 
 ### 4. Slow HTTP Read DoS
@@ -190,8 +190,8 @@ toc: true
 
 |대응 방법|내용|
 |:---|:---|
-|HTTP Post 파라미터 수 제한|TOMCAT,PHP,Ruby 등의 최신 버전은 파라미터의 수를 제한할 수 있음. 즉, 개수 제한을 적용</br>예)tomcat 은 TOMCAT_HOME/conf/server.xml 에 maxParameterCount = "XX"|
-|Post 메시지 크기 제한|POST 메시지의 사이즈를 제한하는 서비스 설정</br>예)tomcat 의 TOMCAT_HOME/conf/server.xml 에 MaxPostSize = "XX"|
+|HTTP Post 파라미터 수 제한|TOMCAT,PHP,Ruby 등의 최신 버전은 파라미터의 수를 제한할 수 있음. 즉, 개수 제한을 적용<br/>예)tomcat 은 TOMCAT_HOME/conf/server.xml 에 maxParameterCount = "XX"|
+|Post 메시지 크기 제한|POST 메시지의 사이즈를 제한하는 서비스 설정<br/>예)tomcat 의 TOMCAT_HOME/conf/server.xml 에 MaxPostSize = "XX"|
 |PHP에서 Hash DoS 차단|php.ini 파일에서 max_input_var 로 최대 HTTP POST Parameter 개수 설정|
 
 ## 10. Hulk DoS
@@ -204,8 +204,8 @@ toc: true
 
 |대응 방안|내용|
 |:---|:---|
-|접속 임계치 설정을 통한 차단|발신 IP에서 연결할 수 있는 동시 접속 수에 대한 최댓값을 설정하여 한 개의 IP에서 대량의 연결 시도를 차단</br>`iptables -A INPUT -p tcp -dport 80 -m connlimit-aboce 30 -j DROP`</br># 30개 이상의 Concurrent Connection에 대한 차단|
-|HTTP Request HOST 필드 값에</br>대한 임계치 설정을 통한 차단|Hulk DoS는 URL을 계속 변경하기 때문에 URL이 아닌 HTTP Request에 포함된</br>HOST 필드 값을 카운트하여 임계치 이상인 경우 차단함|
+|접속 임계치 설정을 통한 차단|발신 IP에서 연결할 수 있는 동시 접속 수에 대한 최댓값을 설정하여 한 개의 IP에서 대량의 연결 시도를 차단<br/>`iptables -A INPUT -p tcp -dport 80 -m connlimit-aboce 30 -j DROP`<br/># 30개 이상의 Concurrent Connection에 대한 차단|
+|HTTP Request HOST 필드 값에<br/>대한 임계치 설정을 통한 차단|Hulk DoS는 URL을 계속 변경하기 때문에 URL이 아닌 HTTP Request에 포함된<br/>HOST 필드 값을 카운트하여 임계치 이상인 경우 차단함|
 |302-Redirect를 이용한 차단|{::nomarkdown}<ul><li>대부분의 DDoS 공격 툴은 302-Redirect 요청에 대해 반응하지 않는 것이 특징임</li><li>URL 중에서 공격 당하기 쉬운 웹 사이트에 대한 Redirect 처리를 통해서 자동화된 DDoS 공격 툴을 이용한 공격을 사전에 차단</li></ul>{:/}|
 
 # **스캐닝**
@@ -357,7 +357,7 @@ toc: true
     * fragrouter를 통하여 연결이 끊어지지 않도록 Release를 해줘야 함
 + 특징
     * ARP는 인증을 하지 않기 때문에 ARP Reply 패킷을 각 호스트에 보내서 쉽게 ARP Cache를 업데이트한다.
-    * 즉, 변조돤 ARP Reply 를 지속적으로 보내서 각 호스트들이 ARP Cache에 변조된 MAC 주소정보를 계속 유지시켜야 한다.
+    * 즉, 변조된 ARP Reply 를 지속적으로 보내서 각 호스트들이 ARP Cache에 변조된 MAC 주소정보를 계속 유지시켜야 한다.
 + 방법
     * `arp` : 현재 IP 주소와 MAC 주소를 확인 (linux)
     * `arp -a` : 현재 IP 주소와 MAC 주소를 확인 (windows)
@@ -371,12 +371,12 @@ toc: true
     * 원격으로 윈도우 시스템에 연결하여 윈도우 시스템을 모니터링하거나 명령을 실행하는 공격
 + 윈도우 원격접속 프로그램
 
-|구분|내용|
-|:---|:---|
-|RDP|Remote Desktop Protocol, RDP는 MS에서 개발한 원격 데스크톱 연결 프로그램이 사용하는 프로토콜|
-|Teamviewer|원격으로 시스템에 연결하는 프로그램|
-|VNC|Virtual Networking Computing, 원격으로 대상 시스템을 모니터링하거나 관리할 수 있는 프로그램|
-|NetCat(NC)|원격으로 연결하여 명령을 실행할 수 있는 프로그램|
+    |구분|내용|
+    |:---|:---|
+    |RDP|Remote Desktop Protocol, RDP는 MS에서 개발한 원격 데스크톱 연결 프로그램이 사용하는 프로토콜|
+    |Teamviewer|원격으로 시스템에 연결하는 프로그램|
+    |VNC|Virtual Networking Computing, 원격으로 대상 시스템을 모니터링하거나 관리할 수 있는 프로그램|
+    |NetCat(NC)|원격으로 연결하여 명령을 실행할 수 있는 프로그램|
 
 + 대응 방법
     * 윈도우 원격 데스크톱 프로토콜(RDP)

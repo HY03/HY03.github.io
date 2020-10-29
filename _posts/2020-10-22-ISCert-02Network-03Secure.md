@@ -133,7 +133,7 @@ toc: true
 
 |구분|오용탐지(Misuse)|비정상탐지(Anomaly)|
 |:---:|:---|:---|
-|동작 방식|시그니처(Signature) 기반,</br>지식(Knowledge) 기반|프로파일(Profile) 기반, 행동(Behavior) 기반,</br>통계(Statistical) 기반|
+|동작 방식|시그니처(Signature) 기반,<br/>지식(Knowledge) 기반|프로파일(Profile) 기반, 행동(Behavior) 기반,<br/>통계(Statistical) 기반|
 |침입판단 방법|{::nomarkdown}<ul><li>미리 정의된 Rule에 매칭</li><li>이미 정립된 공격패턴을 미리 입력하고 매칭</li></ul>{:/}|{::nomarkdown}<ul><li>미리 학습된 사용자 패턴에 어긋남</li><li>정상적, 평균적 상태를 기준, 급격한 변화 있을 때 침입 판단</li></ul>{:/}|
 |사용기술|패턴 비교, 전문가시스템|신경망, 통계적 방법, 특징 추출|
 |장점|{::nomarkdown}<ul><li>빠른 속도, 구현이 쉬움, 이해가 쉬움</li><li>False Positive가 낮음</li></ul>{:/}|{::nomarkdown}<ul><li>알려지지 않은 공격(Zero Day Attack) 대응 가능</li><li>사용자가 미리 공격 패턴을 정의할 필요가 없음</li></ul>{:/}|

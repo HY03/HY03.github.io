@@ -249,7 +249,7 @@ toc: true
 
 |보안 설정|내용|
 |:---|:---|
-|주요 디렉터리 및 파일 접근 권한|Root에 의해 실행 가능한 모든 명령어는 다른 사용자가 수정하지 못하도록 설정</br><ul><li>`# chown 0. bin conf logs`</li><li>`# chgrp 0. bin conf logs`</li><li>`#chmod 755 . bin conf logs`</li><li>`#chmod 511 /user/loca/httpd/bin/httpd`</li></ul>{:/}|
+|주요 디렉터리 및 파일 접근 권한|Root에 의해 실행 가능한 모든 명령어는 다른 사용자가 수정하지 못하도록 설정<br/><ul><li>`# chown 0. bin conf logs`</li><li>`# chgrp 0. bin conf logs`</li><li>`#chmod 755 . bin conf logs`</li><li>`#chmod 511 /user/loca/httpd/bin/httpd`</li></ul>{:/}|
 |불필요한 파일 삭제|{::nomarkdown}<ul><li>아파치 설치 시 기본적으로 설치되는 cgi-bin은 공격에 이용될 수 있으므로 삭제</li><li>매뉴얼 파일은 시스템에 대한 정보를 제공할 수 있어서 공격에 도움이 될 수 있으므로 삭제</li><li>/var/www/manual 및 /var/www/cgi_bin 삭제</li></ul>{:/}|
 |Directory Listing|index.html이 없거나 Listing을 보여주는 옵션이 indexes에 설정되어 있는 경우 웹 페이지의 디렉터리가 보임|
 |FollowSynLinks|심볼릭 링크를 이용해서 파일 시스템에 접근하여 Root 권한을 획득할 수 있으므로 FollowSymLink를 제거|

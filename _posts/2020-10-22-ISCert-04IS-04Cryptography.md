@@ -314,7 +314,7 @@ https://en.wikipedia.org/wiki/Feistel_cipher#/media/File:Feistel_cipher_diagram_
     |구분|특징|
     |:---|:---|
     |평문 블록화|128Bit 평문을 64Bit씩 Lo, Ro 블록으로 나눔|
-    |F 함수|64Bit Fiestel 형태로 구성(16Round)</br>입력:64Bit 블록과 64Bit 라운드 키, 출력:64Bit 블록 출력|
+    |F 함수|64Bit Fiestel 형태로 구성(16Round)<br/>입력:64Bit 블록과 64Bit 라운드 키, 출력:64Bit 블록 출력|
     |암호문|암호화된 64Bit 블록 조합하여 128Bit 암호문 출력|
 
 ## 6. 대칭키 암호화 기법 차이점
