@@ -33,6 +33,7 @@ toc: true
 |Security Sub System|사용자가 로그인할 때 데이터를 보호하고 운영체제가 이를 제어할 수 있도록 만든 서브 시스템|
 
 # 윈도우 파일시스템
+
 ## 1. FAT16 (File Allocation Table)
 + 최대 디스크 2GB 지원
 + 암호화 및 압축이 불가능(접근 제어 불가)
@@ -65,6 +66,7 @@ toc: true
     + `CONVERT D: /FS:NTFS`
 
 # 윈도우 프로세스 구조 (Message Driven)
+
 - 키보드에서 발생시킨 이벤트를 윈도우 시스템에 전송하고 윈도우 시스템은 메시지 큐에 저장한 후 각 윈도우 별 핸들을 식별 후 해당 윈도우를 호출한다.
     1. 이벤트 발생 (입력장치)
     2. 이벤트 감지 (윈도우 시스템)
@@ -124,6 +126,7 @@ toc: true
     |쿠키정보|호스트 저보, 경로, 수정시간, 만료시간 등의 값이 있음|
 
 # **윈도우 계정**
+
 ## 1. 내장된 계정
 + Users : 기본적인 권한이 없고 Domain Users 그룹 구성원
 + Account Operators : 서버 관리자, 도메인 추가, 그룹 생성, 삭제 등
@@ -199,6 +202,7 @@ toc: true
     + `HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\RunMRU` : 최근에 실행한 명령어
 
 # 바이러스와 악성코드
+
 ## 1. 세대별 컴퓨터 바이러스
 + 1세대 : 원시형 바이러스 (Primitive Virus)
     * 단순, 분석이 쉬움

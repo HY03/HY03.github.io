@@ -724,42 +724,45 @@
       <li>MIME(Multipurpose Internet Mail Extension, RFC 1521) 객체에 암호화와 전자서명 기능을 추가한 암호화 프로토콜</li>
       <li>네트워크를 통해 주고받는 메시지에 대해 송수신자에게 보안서비스를 제공</li>
       <li>평문 메시지 암호화</li>
-      <li>서명, 압출, 분할, 전자 우편 호환성</li>
+      <li>서명, 압축, 분할, 전자 우편 호환성</li>
+      <li>수신 부인 방지와 메시지 부인 방지는 제공하지 않는다.</li>
     </ul>
   </li>
-  <li>PGP 특징</li>
-</ul>
+  <li>
+    <p>PGP 특징</p>
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left">PGP 서비스</th>
-      <th style="text-align: left">상세 내용</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left">전자서명</td>
-      <td style="text-align: left">DSS/SHA 또는 RSA/SHA로 전자서명이 가능</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">메시지 암호화</td>
-      <td style="text-align: left">CAST-128, IDEA, 3DES로 메시지 암호화</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">1회용 세션키 생성</td>
-      <td style="text-align: left">Diffie-Hellman 혹은 RSA로 키 분배</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">이메일 호환</td>
-      <td style="text-align: left">RADIX-64로 바이너리를 ACS Code로 변환</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">세그먼테이션</td>
-      <td style="text-align: left">메시지 최대 사이즈를 제한</td>
-    </tr>
-  </tbody>
-</table>
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">PGP 서비스</th>
+          <th style="text-align: left">상세 내용</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left">전자서명</td>
+          <td style="text-align: left">DSS/SHA 또는 RSA/SHA로 전자서명이 가능</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">메시지 암호화</td>
+          <td style="text-align: left">CAST-128, IDEA, 3DES로 메시지 암호화</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">1회용 세션키 생성</td>
+          <td style="text-align: left">Diffie-Hellman 혹은 RSA로 키 분배</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">이메일 호환</td>
+          <td style="text-align: left">RADIX-64로 바이너리를 ACS Code로 변환</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">세그먼테이션</td>
+          <td style="text-align: left">메시지 최대 사이즈를 제한</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
 
 <h3 id="2-pemprivacy-enhanced-mail">2. PEM(Privacy Enhanced Mail)</h3>
 <ul>
@@ -783,12 +786,14 @@
     <ul>
       <li>DSS : 디지털 서명 알고리즘</li>
       <li>3중 DES : 메시지의 암호</li>
-      <li>SHA-1 : 디지털 서명을 지원하기 위한 해시함수
-        <h1 id="sendmail-보안">Sendmail 보안</h1>
-        <h2 id="1-sendmail">1. Sendmail</h2>
-      </li>
+      <li>SHA-1 : 디지털 서명을 지원하기 위한 해시함수</li>
     </ul>
   </li>
+</ul>
+
+<h1 id="sendmail-보안">Sendmail 보안</h1>
+<h2 id="1-sendmail">1. Sendmail</h2>
+<ul>
   <li>대표적인 Mail Transport Agent(MTA)</li>
 </ul>
 
@@ -846,11 +851,11 @@
 
 <p><img src="/assets/images/posts/RBL.gif" alt="RBL" /></p>
 
-<p><a href="https://spam.kisa.or.kr/rbl/sub2_R.do?idx=10&amp;currentPage=1">이미지 출처_RBL</a></p>
+<p><a href="https://spam.kisa.or.kr/rbl/sub2_R.do?idx=10&amp;currentPage=1">이미지 출처</a></p>
 
 <p><img src="/assets/images/posts/spf.png" alt="SPF" /></p>
 
-<p><a href="https://www.cyber.gov.au/acsc/view-all-content/publications/how-combat-fake-emails">이미지 출처_SPF</a></p>
+<p><a href="https://www.cyber.gov.au/acsc/view-all-content/publications/how-combat-fake-emails">이미지 출처</a></p>
 
 <table>
   <thead>
@@ -871,6 +876,7 @@
 <ul>
   <li>정의 : 점수를 이용하여 스팸 여부를 판단, Perl로 개발됨</li>
   <li>특징 : Rule 기반 하에 Header와 Body를 분석하여 실시간 차단 리스트 (Internet-based real time blacklist(RBL)) 를 참고하여 각각의 룰에 매칭될 경우 점수를 매겨서 총 점수가 기준점을 초과하는지 여부에 따라 스팸 여부를 결정</li>
+  <li>첨부파일 검사 X</li>
 </ul>
 
 <h1 id="웹-서버-보안web-server-security"><strong>웹 서버 보안(Web Server Security)</strong></h1>
@@ -954,7 +960,7 @@
   <tbody>
     <tr>
       <td style="text-align: left">주요 디렉터리 및 파일 접근 권한</td>
-      <td style="text-align: left">Root에 의해 실행 가능한 모든 명령어는 다른 사용자가 수정하지 못하도록 설정<br />&lt;ul&gt;&lt;li&gt;<code class="language-plaintext highlighter-rouge"># chown 0. bin conf logs</code>&lt;/li&gt;&lt;li&gt;<code class="language-plaintext highlighter-rouge"># chgrp 0. bin conf logs</code>&lt;/li&gt;&lt;li&gt;<code class="language-plaintext highlighter-rouge">#chmod 755 . bin conf logs</code>&lt;/li&gt;&lt;li&gt;<code class="language-plaintext highlighter-rouge">#chmod 511 /user/loca/httpd/bin/httpd</code>&lt;/li&gt;&lt;/ul&gt;{:/}</td>
+      <td style="text-align: left">Root에 의해 실행 가능한 모든 명령어는 다른 사용자가 수정하지 못하도록 설정<ul><li>`# chown 0. bin conf logs`</li><li>`# chgrp 0. bin conf logs`</li><li>`#chmod 755 . bin conf logs`</li><li>`#chmod 511 /user/loca/httpd/bin/httpd`</li></ul></td>
     </tr>
     <tr>
       <td style="text-align: left">불필요한 파일 삭제</td>
@@ -970,7 +976,7 @@
     </tr>
     <tr>
       <td style="text-align: left">Directory indexes</td>
-      <td style="text-align: left"><ul><li>우선순위를 결정함</li><li>index.cgi>index.html>index.htm의 순서</li><li>`# DirectoryIndex: sets the file that Apache will serve iof a directory is requested.`</li><li>`<IfModule dir-module>DirectoryIndex index.html</IfModule>`</li></ul></td>
+      <td style="text-align: left"><ul><li>우선순위를 결정함</li><li>index.cgi>index.html>index.htm의 순서</li><li># DirectoryIndex: sets the file that Apache will serve iof a directory is requested.</li><li><IfModule dir-module>DirectoryIndex index.html</IfModule></li></ul></td>
     </tr>
     <tr>
       <td style="text-align: left">Server Tokens</td>
@@ -982,7 +988,7 @@
     </tr>
     <tr>
       <td style="text-align: left">접근 제어</td>
-      <td style="text-align: left">클라이언트의 이름 및 IP 주소 등을 사용해 접근 제어 수행&lt;ul&gt;&lt;li&gt;<code class="language-plaintext highlighter-rouge">&lt;Directory /&gt;</code>&lt;/li&gt;&lt;li&gt;<code class="language-plaintext highlighter-rouge">    Options FollowSynLinks</code>&lt;/li&gt;&lt;li&gt;<code class="language-plaintext highlighter-rouge">    AllowOverride None</code>&lt;/li&gt;&lt;li&gt;<code class="language-plaintext highlighter-rouge">    Order deny,allow</code>&lt;/li&gt;&lt;li&gt;<code class="language-plaintext highlighter-rouge">    Deny from all</code>&lt;/li&gt;&lt;li&gt;<code class="language-plaintext highlighter-rouge">&lt;/Directory&gt;</code>&lt;/li&gt;&lt;/ul&gt;{:/}</td>
+      <td style="text-align: left">클라이언트의 이름 및 IP 주소 등을 사용해 접근 제어 수행<ul><li><Directory /></li><li>    Options FollowSynLinks</li><li>    AllowOverride None</li><li>    Order deny,allow</li><li>    Deny from all</li><li></Directory></li></ul></td>
     </tr>
     <tr>
       <td style="text-align: left">put 과 post의 제한</td>
@@ -1076,35 +1082,37 @@
 <h3 id="4-웹-서버-iis-구성">4. 웹 서버 IIS 구성</h3>
 <ul>
   <li>윈도우에서 제공하는 웹 서버</li>
-  <li>웹 서버 및 FTP, SMTP, NNTP 등의 다양한 서비스 제공</li>
-</ul>
+  <li>
+    <p>웹 서버 및 FTP, SMTP, NNTP 등의 다양한 서비스 제공</p>
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left">IIS 구성요소</th>
-      <th style="text-align: left">내용</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left">서비스</td>
-      <td style="text-align: left"><ul><li>웹과 FTP 관리를 위한 IIS 관리 서비스</li><li>World Wide Web 서버 서비스</li><li>FTP 서비스</li><li>메일 발송을 위한 SMTP(Simple Mail Transport Protocol)</li><li>뉴스그룹을 위한 NNTP(Network News Transport Protocol)</li></ul></td>
-    </tr>
-    <tr>
-      <td style="text-align: left">계정 및 그룹</td>
-      <td style="text-align: left"><ul><li>IUSR_MACHINE(인터넷으로 접근하는 익명 계정)</li><li>IWAM_MACHINE(out-of-process로 실행되는 웹 애플리케이션이 실행되는 계정)</li></ul></td>
-    </tr>
-    <tr>
-      <td style="text-align: left">폴더</td>
-      <td style="text-align: left"><ul><li>%windir%\system32\inetsrv(IIS 프로그램)</li><li>%windir%\system32\inetsrv\iisadmin(IIS 관리 프로그램)</li><li>%windir%\help\iishelp(IIS 도움말 파일)</li><li>%systemdrive%\inetpub(웹,FTP,SMTP 루트 폴더)</li></ul></td>
-    </tr>
-    <tr>
-      <td style="text-align: left">웹 사이트</td>
-      <td style="text-align: left"><ul><li>기본 웹 사이트(80번 포트) : %systemdrive%\inetpub\wwwroot</li><li>관리 웹 사이트(3693번 포트) : %systemdrive%\system32\inetsrv\iisadmin</li></ul></td>
-    </tr>
-  </tbody>
-</table>
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">IIS 구성요소</th>
+          <th style="text-align: left">내용</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left">서비스</td>
+          <td style="text-align: left"><ul><li>웹과 FTP 관리를 위한 IIS 관리 서비스</li><li>World Wide Web 서버 서비스</li><li>FTP 서비스</li><li>메일 발송을 위한 SMTP(Simple Mail Transport Protocol)</li><li>뉴스그룹을 위한 NNTP(Network News Transport Protocol)</li></ul></td>
+        </tr>
+        <tr>
+          <td style="text-align: left">계정 및 그룹</td>
+          <td style="text-align: left"><ul><li>IUSR_MACHINE(인터넷으로 접근하는 익명 계정)</li><li>IWAM_MACHINE(out-of-process로 실행되는 웹 애플리케이션이 실행되는 계정)</li></ul></td>
+        </tr>
+        <tr>
+          <td style="text-align: left">폴더</td>
+          <td style="text-align: left"><ul><li>%windir%\system32\inetsrv(IIS 프로그램)</li><li>%windir%\system32\inetsrv\iisadmin(IIS 관리 프로그램)</li><li>%windir%\help\iishelp(IIS 도움말 파일)</li><li>%systemdrive%\inetpub(웹,FTP,SMTP 루트 폴더)</li></ul></td>
+        </tr>
+        <tr>
+          <td style="text-align: left">웹 사이트</td>
+          <td style="text-align: left"><ul><li>기본 웹 사이트(80번 포트) : %systemdrive%\inetpub\wwwroot</li><li>관리 웹 사이트(3693번 포트) : %systemdrive%\system32\inetsrv\iisadmin</li></ul></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
 
 <h1 id="웹-로그web-log-분석">웹 로그(Web Log) 분석</h1>
 <h2 id="1-웹-로그web-log-개요">1. 웹 로그(Web Log) 개요</h2>
@@ -1170,53 +1178,52 @@
       <li><code class="language-plaintext highlighter-rouge">ErrorLog syslog</code> : 에러 발생 시 로그를 syslog에 기록</li>
     </ul>
   </li>
-  <li>ErrorLog Level</li>
-</ul>
+  <li>
+    <p>ErrorLog Level</p>
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left">Error Level</th>
-      <th style="text-align: left">내용</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left">Emerg</td>
-      <td style="text-align: left">에러를 의미함</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Alert</td>
-      <td style="text-align: left">불안정한 시스템 상황</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Crit</td>
-      <td style="text-align: left">중대한 에러 발생</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Error</td>
-      <td style="text-align: left">비교적 중대하지 않은 에러</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Warn</td>
-      <td style="text-align: left">경고 발생</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Notice</td>
-      <td style="text-align: left">일반적인 메시지 발생</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Info</td>
-      <td style="text-align: left">정보 제공</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Debug</td>
-      <td style="text-align: left">디버깅 정보</td>
-    </tr>
-  </tbody>
-</table>
-
-<ul>
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">Error Level</th>
+          <th style="text-align: left">내용</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left">Emerg</td>
+          <td style="text-align: left">에러를 의미함</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">Alert</td>
+          <td style="text-align: left">불안정한 시스템 상황</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">Crit</td>
+          <td style="text-align: left">중대한 에러 발생</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">Error</td>
+          <td style="text-align: left">비교적 중대하지 않은 에러</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">Warn</td>
+          <td style="text-align: left">경고 발생</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">Notice</td>
+          <td style="text-align: left">일반적인 메시지 발생</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">Info</td>
+          <td style="text-align: left">정보 제공</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">Debug</td>
+          <td style="text-align: left">디버깅 정보</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
   <li>Error Level별 설정
     <ul>
       <li>기본값 local7 퍼실리티를 통해 에러 기록</li>
@@ -1240,59 +1247,61 @@
       <li>TransferLog 및 LogFormat 지시자를 하나로 합쳐 놓은 지시자</li>
       <li><code class="language-plaintext highlighter-rouge">CustomLog logfile format|nickname env=[!]environment-variable</code></li>
       <li><code class="language-plaintext highlighter-rouge">CustomLog /logs/referrer_log "%{Referer}i -&gt; %U</code></li>
-      <li>Common Log Format의 의미</li>
-    </ul>
+      <li>
+        <p>Common Log Format의 의미</p>
 
-    <table>
-      <thead>
-        <tr>
-          <th style="text-align: left">구분</th>
-          <th style="text-align: left">세부 내용</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%h</code></td>
-          <td style="text-align: left">원격지 호스트. 즉, 접속한 클라이언트 IP 주소를 의미</td>
-        </tr>
-        <tr>
-          <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%I</code></td>
-          <td style="text-align: left">원격지 사용자 ID</td>
-        </tr>
-        <tr>
-          <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%u</code></td>
-          <td style="text-align: left">인증이 요청된 원격 사용자 이름</td>
-        </tr>
-        <tr>
-          <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%t</code></td>
-          <td style="text-align: left">요청한 시간과 날짜</td>
-        </tr>
-        <tr>
-          <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%r</code></td>
-          <td style="text-align: left">HTTP 메소드를 포함한 요청의 첫 라인</td>
-        </tr>
-        <tr>
-          <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%s</code></td>
-          <td style="text-align: left">HTTP 상태코드</td>
-        </tr>
-        <tr>
-          <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%b</code></td>
-          <td style="text-align: left">HTTP 헤더를 제외하고 전송된 바이트</td>
-        </tr>
-        <tr>
-          <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%{Referer}i</code></td>
-          <td style="text-align: left">요청된 URL이 참조되거나 링크된 URL</td>
-        </tr>
-        <tr>
-          <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%{User-Agent}i</code></td>
-          <td style="text-align: left">접속한 클라이언트의 운영체제 및 브라우저 버전</td>
-        </tr>
-        <tr>
-          <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%T</code></td>
-          <td style="text-align: left">요청을 처리하는 데 걸린 시간(초)</td>
-        </tr>
-      </tbody>
-    </table>
+        <table>
+          <thead>
+            <tr>
+              <th style="text-align: left">구분</th>
+              <th style="text-align: left">세부 내용</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%h</code></td>
+              <td style="text-align: left">원격지 호스트. 즉, 접속한 클라이언트 IP 주소를 의미</td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%I</code></td>
+              <td style="text-align: left">원격지 사용자 ID</td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%u</code></td>
+              <td style="text-align: left">인증이 요청된 원격 사용자 이름</td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%t</code></td>
+              <td style="text-align: left">요청한 시간과 날짜</td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%r</code></td>
+              <td style="text-align: left">HTTP 메소드를 포함한 요청의 첫 라인</td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%s</code></td>
+              <td style="text-align: left">HTTP 상태코드</td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%b</code></td>
+              <td style="text-align: left">HTTP 헤더를 제외하고 전송된 바이트</td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%{Referer}i</code></td>
+              <td style="text-align: left">요청된 URL이 참조되거나 링크된 URL</td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%{User-Agent}i</code></td>
+              <td style="text-align: left">접속한 클라이언트의 운영체제 및 브라우저 버전</td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%T</code></td>
+              <td style="text-align: left">요청을 처리하는 데 걸린 시간(초)</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+    </ul>
   </li>
 </ul>
 
@@ -1512,51 +1521,53 @@
       <li>DoS 공격으로, DNS Reflector Attack 이라고도 함</li>
     </ul>
   </li>
-  <li>DNS 레코드</li>
-</ul>
+  <li>
+    <p>DNS 레코드</p>
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left">종류</th>
-      <th style="text-align: left">내용</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left">A(Address)</td>
-      <td style="text-align: left">호스트 이름을 IPv4 주소로 매핑</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">AAAA(IPv6 Address)</td>
-      <td style="text-align: left">호스트 이름을 IPv6 주소로 매핑</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">PTR(Reverse-lookup Pointer records)</td>
-      <td style="text-align: left">IP 주소를 기반으로 도메인 이름을 찾는 데 사용</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">NS(Name Server)</td>
-      <td style="text-align: left">주어진 호스트에 대한 공식적인 Name Server를 알려줌</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">MX(Mail Exchanger)</td>
-      <td style="text-align: left">DNS 도메인 이름에 대한 메일 교환 서버를 알려줌. 이 정보는 SMTP 가 전자 메일을 적절한 호스트로 라우팅하는데 사용.</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">CNAME(Canonical Name)</td>
-      <td style="text-align: left">호스트의 다른 이름(별칭)을 정의하는 데 사용, A레코드의 별명을 달아 주는 것</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">SOA(Start of Authority)</td>
-      <td style="text-align: left">도메인에 대한 권한을 갖는 서버를 표시함. 도메인에서 가장큰 권한을 부여받은 호스트를 선언 (기본 Name Server, 도메인 관리자의 전자메일, 도메인 일련번호 등 DNS 핵심정보)</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Any(ALL)</td>
-      <td style="text-align: left">위의 모든 레코드를 표시</td>
-    </tr>
-  </tbody>
-</table>
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">종류</th>
+          <th style="text-align: left">내용</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left">A(Address)</td>
+          <td style="text-align: left">호스트 이름을 IPv4 주소로 매핑</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">AAAA(IPv6 Address)</td>
+          <td style="text-align: left">호스트 이름을 IPv6 주소로 매핑</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">PTR(Reverse-lookup Pointer records)</td>
+          <td style="text-align: left">IP 주소를 기반으로 도메인 이름을 찾는 데 사용</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">NS(Name Server)</td>
+          <td style="text-align: left">주어진 호스트에 대한 공식적인 Name Server를 알려줌</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">MX(Mail Exchanger)</td>
+          <td style="text-align: left">DNS 도메인 이름에 대한 메일 교환 서버를 알려줌. 이 정보는 SMTP 가 전자 메일을 적절한 호스트로 라우팅하는데 사용.</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">CNAME(Canonical Name)</td>
+          <td style="text-align: left">호스트의 다른 이름(별칭)을 정의하는 데 사용, A레코드의 별명을 달아 주는 것</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">SOA(Start of Authority)</td>
+          <td style="text-align: left">도메인에 대한 권한을 갖는 서버를 표시함. 도메인에서 가장큰 권한을 부여받은 호스트를 선언 (기본 Name Server, 도메인 관리자의 전자메일, 도메인 일련번호 등 DNS 핵심정보)</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">Any(ALL)</td>
+          <td style="text-align: left">위의 모든 레코드를 표시</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
 
 <h2 id="2-dns-보안">2. DNS 보안</h2>
 <h3 id="1-dnsspoof">1. dnsspoof</h3>

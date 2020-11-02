@@ -12,7 +12,9 @@ toc: true
 ---
 
 # CPU (속도 빠름, 고가) - 연산처리
+
 ## 1. CPU 구조
+
 ![CPU Fetch Slow](/assets/images/posts/cpu_fetch_execute_slow.gif)
 
 [이미지 출처](https://www.doc.ic.ac.uk/~eedwards/compsys/cpu/)
@@ -52,7 +54,9 @@ toc: true
 
 
 # 메모리 - 임시 기억
+
 ## 1. **캐시 메모리** 
+
 + CPU와 Memory 속도 차이 해결
 + 캐시사상 방법
     + 직접사상 : 메인 메모리를 분할하여 Cache 슬롯과 매핑
@@ -80,6 +84,7 @@ toc: true
     |PFF(Page Fault Frequency)|{::nomarkdown}<ul><li>Process의 Page Fault 빈도에 따라 Residence set을 조정</li><li>PFF가 높으면 Residence set의 크기 증가, 낮으면 감소</li></ul>{:/}|
 
 ## 2. 가상 메모리 
+
 + 보조기억장치를 주기억장치처럼 사용하여 주기억장치의 공간을 확대
 + 할당기법
     * **페이지와 세그먼트**
@@ -111,7 +116,9 @@ toc: true
     ||Segmentation|가변 크기인 세그먼트로 분할, Segment Table로 관리|
 
 # Disk 보조기억장치 (영구 저장)
+
 ## 1. 입출력 기법
+
 + Program 에 의한 입출력
 + Interrupt 기법
 + **DMA** : Direct Memory Access - CPU의 개입 없이 I/O 장치와 기억장치 사이의 데이터를 전송하는 방법, 속도가 빠르다.

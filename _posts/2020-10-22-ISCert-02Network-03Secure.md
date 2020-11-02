@@ -11,6 +11,7 @@ categories:
 toc: true
 ---
 # 침입차단 시스템
+
 ## 1. **침입차단 시스템(Firewall)**
 + 개요
     * 접근통제 (Access Control List) 를 적용하여 시스템에 접근이 허용 가능한 사용자, IP, 포트를 결정
@@ -19,6 +20,7 @@ toc: true
         - 리버스 텔넷(Reverse Telnet) : 내부 망에서 공격자의 PC로 연결
 
 ## 2. 침입차단 시스템 구현방식에 따른 유형
+
 ### 1. 패킷 필터링(Packet Filtering)
 
 |구분|내용|
@@ -64,57 +66,76 @@ toc: true
 |단점|구축 및 관리의 어려움|
 
 ### 6. 심층 패킷분석(Deep Packet Inspection)
-    * 패킷이 가지고 있는 컨텐츠까지 모두 검사
-    * OSI 전 게층에서 동작, 전 계층에 대한 접근 통제
+
+* 패킷이 가지고 있는 컨텐츠까지 모두 검사
+* OSI 전 게층에서 동작, 전 계층에 대한 접근 통제
 
 ## 3. 침입차단 시스템 구축 유형
+
 ### 1. 스크리닝 라우터(Screening Router)
+
+![Screening Router](/assets/images/posts/screening_router.gif)
+
+[이미지 출처](http://sunsite.uakom.sk/sunworldonline/swol-01-1996/swol-01-firewall.html)
 
 |구분|내용|
 |:---|:---|
-|개념도||
 |내용|IP, TCP, UDP 헤더 부분에 포함된 내용만 분석하여 동작하며 내부 네트워크와 외부 네트워크 사이의 패킷 트래픽을 perm/drop 하는 라우터|
 |장점|{::nomarkdown}<ul><li>필터링 속도가 빠르고 비용 적음</li><li>클라이언트와 서버 환경 변화 없이 설치가 가능</li><li>전체 네트워크에 동일한 보호 유지</li></ul>{:/}|
 |단점|{::nomarkdown}<ul><li>OSI 3,4 계층만 방어하여 필터링 규칙을 검증하기 어려움</li><li>패킷 내의 데이터는 차단 불가 및 로그 관리가 어려움</li></ul>{:/}|
 
 ### 2. 베스천 호스트(Bastion Host)
 
+![Bastion Host](/assets/images/posts/bastion_host.gif)
+
+[이미지 출처](https://www.cs.ait.ac.th/~on/O/oreilly/tcpip/firewall/ch05_06.htm)
+
 |구분|내용|
 |:---|:---|
-|개념도||
 |내용|{::nomarkdown}<ul><li>내부 네트워크 전면에서 내부 네트워크 전체를 보호하며 외부 인터넷과 내부 네트워크를 연결하는 라우터 뒤에 위치</li><li>Lock down 된 상태에 있으며 인터넷에서 접근이 가능한 서버</li></ul>{:/}|
 |장점|{::nomarkdown}<ul><li>스크리닝 라우터보다 안전</li><li>Logging 정보 생성 관리가 편리</li><li>접근 제어와 인증 및 로그 기능 제공</li></ul>{:/}|
 |단점|{::nomarkdown}<ul><li>Bastion Host 손상 시 내부망 손상</li><li>로그인 정보 유출 시 내부망 침해 가능</li></ul>{:/}|        
 
 ### 3. 듀얼 홈드 호스트(Dual-Homed Host)
 
+![Dual-Homed Host](/assets/images/posts/dual_homed_host.gif)
+
+[이미지 출처](http://sunsite.uakom.sk/sunworldonline/swol-01-1996/swol-01-firewall.html)
+
 |구분|내용|
 |:---|:---|
-|개념도||
 |내용|{::nomarkdown}<ul><li>2개의 네트워크 인터페이스를 가진 Bastion Host로서 하나의 NIC(Network Interface Card)는 내부 네트워크와 연결하고 다른 NIC는 외부 네트워크와 연결</li><li>방화벽은 하나의 네트워크에서 다른 네트워크로 IP 패킷을 라우팅하지 않기 때문에 Proxy 기능을 부여</li></ul>{:/}|
 |장점|{::nomarkdown}<ul><li>정보 지향적인 공격 방어</li><li>Logging 정보 생성 관리가 편리</li><li>설치 및 유지보수가 쉬움</li></ul>{:/}|
 |단점|{::nomarkdown}<ul><li>방화벽에서 보안 위반 초래 가능</li><li>서비스가 증가할수록 Proxy 구성 복잡</li></ul>{:/}|
 
 ### 4. 스크린드 호스트(Screened Host)
 
+![Screened Host](/assets/images/posts/screened_host.gif)
+
+[이미지 출처](http://sunsite.uakom.sk/sunworldonline/swol-01-1996/swol-01-firewall.html)
+
 |구분|내용|
 |:---|:---|
-|개념도||
 |내용|{::nomarkdown}<ul><li>Packet Filtering Router와 Bastion Host로 구성되어 있음</li><li>Packet Filtering Router는 외부 및 내부 네트워크에서 발생하는 패킷을 통과시킬 것인지를 검사하고 외부에서 내부로 유입되는 패킷에 대해서는 Bastion Host로 검사된 패킷을 전달</li><li>Bastion Host는 내부 및 외부 네트워크 시스템에 대한 인증을 담당</li></ul>{:/}|
 |장점|{::nomarkdown}<ul><li>네트워크 계층과 응용 계층의 2단계 방어이므로 매우 안전</li><li>가장 많이 사용, 융통성 우수</li><li>Dual-Homed 장점 유지</li></ul>{:/}|
 |단점|{::nomarkdown}<ul><li>스크리닝 라우터의 정보가 변경되면 방어가 불가능</li><li>구축 비용이 높음</li></ul>{:/}|
 
 ### 5. 스크린드 서브넷(Screened Subnet)
 
+![Screened Subnet](/assets/images/posts/screened_subnet.gif)
+
+[이미지 출처](http://sunsite.uakom.sk/sunworldonline/swol-01-1996/swol-01-firewall.html)
+
 |구분|내용|
 |:---|:---|
-|개념도||
 |내용|{::nomarkdown}<ul><li>스크린드 호스트 보안상의 문제점을 보완</li><li>외부 네트워크와 내부 네트워크 사이에 하나 이상의 경계 네트워크를 두어 내부 네트워크를 외부 네트워크로 분리하기 위한 구조</li><li>일반적으로 두 개의 스크리닝 라우터와 한 개의 베스천 호스트를 이용하여 구축</li></ul>{:/}|
 |장점|{::nomarkdown}<ul><li>스크린드 호스트 구조의 장점 유지</li><li>가장 안전한 구조</li></ul>{:/}|
 |단점|{::nomarkdown}<ul><li>설치 및 관리가 어려움</li><li>구축 비용이 높고, 서비스 속도가 느림</li></ul>{:/}|
 
 # 침입탐지 시스템
+
 ## 1. **침입탐지 시스템(Intrusion Detection System)**
+
 ### 1. 개요
 * 침입 패턴 정보를 데이터베이스에 저장하고 지능형 엔진을 사용하여 네트워크나 시스템의 침입을 실시간 모니터링, 침입탐지 여부를 확인하는 보안시스템
 * 조직 IT 시스템의 기밀성, 무결성, 가용성을 침해하고, 보안정책을 위반하는 침입사건을 사전 또는 사후에 감시, 탐지, 대응하는 보안 시스템
@@ -139,8 +160,8 @@ toc: true
 |장점|{::nomarkdown}<ul><li>빠른 속도, 구현이 쉬움, 이해가 쉬움</li><li>False Positive가 낮음</li></ul>{:/}|{::nomarkdown}<ul><li>알려지지 않은 공격(Zero Day Attack) 대응 가능</li><li>사용자가 미리 공격 패턴을 정의할 필요가 없음</li></ul>{:/}|
 |단점|{::nomarkdown}<ul><li>False Negative가 큼</li><li>알려지지 않은 공격탐지 불가</li><li>대량의 자료 분석에 부적합</li></ul>{:/}|{::nomarkdown}<ul><li>정상인지, 비정상인지 결정하는 임계치 설정이 어려움</li><li>False Positive가 큼</li><li>구현이 어려움</li></ul>{:/}|
 
-    * False Positive : false(+)로 표현, 공격이 아닌데도 공격이라고 오판하는 것
-    * False negative : false(-)로 표현, 공격이지만 공격이 아니라고 오판하는 것
+* False Positive : false(+)로 표현, 공격이 아닌데도 공격이라고 오판하는 것
+* False negative : false(-)로 표현, 공격이지만 공격이 아니라고 오판하는 것
 
 ### 4. 침입탐지 시스템 분류
 
@@ -152,7 +173,7 @@ toc: true
 |장점|{::nomarkdown}<ul><li>네트워크 자원의 손실 및 패킷의 변조가 없음(캡처만 하기 때문)</li><li>거의 실시간으로 탐지가 가능함</li><li>감시 영역이 하나의 네트워크 서브넷으로서 HIDS에 비해 큼</li></ul>{:/}|{::nomarkdown}<ul><li>침입의 성공 여부 식별이 가능함</li><li>실제 해킹 및 해킹시도 판단이 용이</li><li>주로 S/W적으로 서버와 같은 시스템에 인스톨되며, 설치 및 관리가 간단함</li></ul>{:/}|
 |동작|{::nomarkdown}<ul><li>부가 장비가 필요함(스위치 등)</li><li>암호화된 패킷은 분석 불가</li><li>False Positive가 높음</li><li>오탐으로 인해 정상적인 세션이 종료</li><li>DoS의 경우 대응이 불가능(탐지만 가능)</li><li>능동적인 대응 기능 미비</li></ul>{:/}|{::nomarkdown}<ul><li>감시 영역이 하나의 시스템으로 한정됨</li><li>탐지 가능한 공격에 한계가 있음(주로 이벤트 로그로만 탐지)</li><li>오탐으로 인해 정상적인 사용자가 자신의 계정을 사용할 수 없는 문제</li></ul>{:/}|
 
-    * Hybrid IDS : NIDS + HIDS, 단일 호스트를 출입하는 네트워크 패킷을 검색 시스템의 이벤트, 데이터, 디렉터리, 레지스트리에서 공격 여부를 감시하여 보호한다.
+* Hybrid IDS : NIDS + HIDS, 단일 호스트를 출입하는 네트워크 패킷을 검색 시스템의 이벤트, 데이터, 디렉터리, 레지스트리에서 공격 여부를 감시하여 보호한다.
 
 + IDS의 지식기반 탐지 기법과 행위기반 탐지기법
 
@@ -161,6 +182,7 @@ toc: true
     |{::nomarkdown}<ul><li>전문가 시스템</li><li>시그니처 분석</li><li>페트리넷</li><li>상태전이</li><li>신경망</li><li>유전 알고리즘</li></ul>{:/}|{::nomarkdown}<ul><li>통계적 방법</li><li>전문가 시스템</li><li>신경망</li><li>컴퓨터 면역학</li><li>데이터 마이닝</li><li>기계학습</li></ul>{:/}|
 
 ## 2. **Snort**
+
 ### 1. 개요
 * 패킷을 스니핑해서 지정한 Rule과 동일한 패킷을 탐지하는 침입탐지 시스템
 * 침입탐지 시스템을 구현한 공개 소프트웨어, Plug-in 형태로 기능을 추가함
@@ -217,35 +239,35 @@ toc: true
     * 탐지 조건을 여러 개 설정할 때는 각 조건마다 ; 를 넣어 구분
     * 간단한 탐지 조건
     
-    |룰 옵션| 내용|
-    |:---|:---|
-    |msg|{::nomarkdown}<ul><li>alert가 발생하면 msg가 설정된 문장을 로그파일에 기록한다.</li><li>예: `msg:"Hack TCP"`</li></ul>{:/}|
-    |sid|{::nomarkdown}<ul><li>시그니처 아이디를 지정하는 것으로 0~99는 예약되어 있고 100~1000000은 snort.org에서 공식적으로 배포하는 룰이다.</li><li>1000000 이상의 값으로 사용자가 지정해서 사용한다.</li></ul>{:/}|
-    |dsize|{::nomarkdown}<ul><li>버퍼 오버플로우 탐지할 때 자주 사용</li><li>전송되는 패킷의 사이즈를 식별할 수 있어서 dsize보다 큰 값과 작은 값에 대한 설정이 가능하다</li><li>예: `dsize:100<>500` -> 100에서 500바이트의 패킷을 탐지</li></ul>{:/}|
-    |nocase|패턴을 매칭할 때 대문자와 소문자를 구분하지 않는다.|
+        |룰 옵션| 내용|
+        |:---|:---|
+        |msg|{::nomarkdown}<ul><li>alert가 발생하면 msg가 설정된 문장을 로그파일에 기록한다.</li><li>예: `msg:"Hack TCP"`</li></ul>{:/}|
+        |sid|{::nomarkdown}<ul><li>시그니처 아이디를 지정하는 것으로 0~99는 예약되어 있고 100~1000000은 snort.org에서 공식적으로 배포하는 룰이다.</li><li>1000000 이상의 값으로 사용자가 지정해서 사용한다.</li></ul>{:/}|
+        |dsize|{::nomarkdown}<ul><li>버퍼 오버플로우 탐지할 때 자주 사용</li><li>전송되는 패킷의 사이즈를 식별할 수 있어서 dsize보다 큰 값과 작은 값에 대한 설정이 가능하다</li><li>예: `dsize:100<>500` -> 100에서 500바이트의 패킷을 탐지</li></ul>{:/}|
+        |nocase|패턴을 매칭할 때 대문자와 소문자를 구분하지 않는다.|
 
     * content
         - 전송하는 페이로드를 검색해서 지정한 문자열이 있는지 확인 (문자열/바이너리)
         - 패턴 매칭 옵션
         
-        |옵션|내용|예제|
-        |:---|:---|:---|
-        |`!`|입력한 값과 일치하지 않으면 탐지|`content:!"google";`|
-        |`|`|Hex 값을 표현할 때 사용|`content:"|30|";`|
-        |`\`|특수 기호를 탐지할 때 사용|`content:"\"google\|";`|
+            |옵션|내용|예제|
+            |:---|:---|:---|
+            |`!`|입력한 값과 일치하지 않으면 탐지|`content:!"google";`|
+            |`|`|Hex 값을 표현할 때 사용|`content:"|30|";`|
+            |`\`|특수 기호를 탐지할 때 사용|`content:"\"google\|";`|
 
     * flags
         - TCP 프로토콜에서 Control Flags (SYN,FIN,URG,ACK)를 지정하는 것
         - Control Flags
 
-        |구분|내용|
-        |:---|:---|
-        |SYN|TCP 연결 시에 동기화를 요구한다.|
-        |ACK|응답에 대한 확인을 요구한다.|
-        |PSH|데이터 버퍼링을 하지 않고 수신자에게 송신을 요구한다.|
-        |URG|긴급 포인터 Flag이다.|
-        |FIN|정상 접속 종료이다.|
-        |RST|비정상 종료를 위한 Reset을 한다.|
+            |구분|내용|
+            |:---|:---|
+            |SYN|TCP 연결 시에 동기화를 요구한다.|
+            |ACK|응답에 대한 확인을 요구한다.|
+            |PSH|데이터 버퍼링을 하지 않고 수신자에게 송신을 요구한다.|
+            |URG|긴급 포인터 Flag이다.|
+            |FIN|정상 접속 종료이다.|
+            |RST|비정상 종료를 위한 Reset을 한다.|
 
         - 예 : `flags:SF` - SYN과 FIN 모두 탐지
     * flow
@@ -266,13 +288,13 @@ toc: true
         - `treshold: type [limit, treshold, both], track [by_src, by_dst], count [횟수], seconds [몇 초]`
         - treshold 옵션
 
-        |구분|내용|
-        |:---|:---|
-        |limit|count 동안에 횟수 번째 트래픽까지 탐지한다.|
-        |treshold|횟수마다 계속 탐지한다.|
-        |both|count 동안 횟수만큼 트래픽이 탐지 될 시에 한번만 탐지한다.|
-        |by_src|출발지의 패킷만 탐지한다.|
-        |by_dst|목적지 패킷만 탐지한다.|
+            |구분|내용|
+            |:---|:---|
+            |limit|count 동안에 횟수 번째 트래픽까지 탐지한다.|
+            |treshold|횟수마다 계속 탐지한다.|
+            |both|count 동안 횟수만큼 트래픽이 탐지 될 시에 한번만 탐지한다.|
+            |by_src|출발지의 패킷만 탐지한다.|
+            |by_dst|목적지 패킷만 탐지한다.|
 
         - 사용 예 : ICMP 패킷이 20초 동안 5번 발생하면 한 번씩 경고 메시지를 기록
         - `alert icmp any any -> any any (msg:"ICMP";threshold: type both, track by_src, count 5, seconds 20; sid:10000495;)`
@@ -309,6 +331,7 @@ toc: true
     - `alert tcp any any -> any 80 (msg:"Web Server"; content:"GET/admin/index.html";nocase;sid:100000495;)`
 
 # 침입대응 시스템
+
 ## 1. 침입대응 시스템 (Intrusion Prevention System)
 + 공격 시그니처를 찾아내 네트워크에 연결된 기기에서 비정상적인 활동이 이루어지는지 감시, 자동으로 해결조치하는 보안솔루션
 + 침입 경고 이전에 공격을 중단시키는 것이 주요 목적
@@ -322,6 +345,7 @@ toc: true
 |HIPS(Host IPS)|호스트 OS 위에서 수행, 공격 탐지 후 실행 전에 공격 프로세스 차단 기능|
 
 # 허니팟
+
 ## 1. 개요
 * 해커들의 정보를 얻기 위한 하나의 개별 시스템
 * 해커의 행동, 공격 기법 등을 분석하는데 사용
@@ -350,17 +374,19 @@ toc: true
 * 시스템 접속자에 대해 관리자에게 알려야 한다.
 
 # 가상사설망
+
 ## 1. 가상사설망 개요
 * Virtual Private Network
-* 공중망(인터넷)을 이용하여 사설망(기업 전용 네트워크)과 같은 효과를 얻기 위한 컴퓨터 시스템과 프로토코릐 집합
+* 공중망(인터넷)을 이용하여 사설망(기업 전용 네트워크)과 같은 효과를 얻기 위한 컴퓨터 시스템과 프로토콜의 집합
 * 보안성이 우수하고 사용자 인증, 주소 및 라우터 체계의 비공개와 데이터 암호화, 사용자 Access 권한을 제어한다.
 * 패스워드 인증과 함께 USB를 사용한 2-Factor 인증 제공
-* 터널링 : VPN 클라이언트와 VPN 서버 간에 암호화 키 교환 과저을 수행한 후에 암호화를 사용해서 메시지를 주고 받음
+* 터널링 : VPN 클라이언트와 VPN 서버 간에 암호화 키 교환 과정을 수행한 후에 암호화를 사용해서 메시지를 주고 받음
 * SSL VPN : 별도 소프트웨어 설치 필요 없음 (웹 브라우저 사용)
 * IPSEC VPN : 별도의 소프트웨어 설치 필요
 * PPTP VPN : 윈도우에서 기본적으로 지원
 
 ## 2. SSL VPN
+
 ### 1. SSL (Secured Socket Layer) VPN
 * 웹브라우저만 있으면 언제 어디에서나 사용이 가능
     - 웹 브라우저와 웹 서버 간에 SSL 협상과정을 한 후 세션키를 생성, 세션키로 암호화 하여 터널링을 구현
@@ -389,32 +415,35 @@ toc: true
 
 |보안서비스|설명|
 |:---|:---|
-|인증(Authentication)|{::nomarkdown}<ul><li>Client가 접속하는 서버가 신뢰할 수 있는 서버인지 또는 서버에 접속한 Client가 허가된 사용자인지를 확인</li><li>전자서명과 X.509 공개키 인증서 사용</li></ul>{:/}|
-|무결성(Integrity)|함께 키를 사용하는 MAC 기법을 사용하여 데이터 변조 여부 확인|
-|기밀성(Confidentiality)|대칭키 암호 사용|
-|부인봉쇄(Non-repudiation)|부가적인 SW를 사용하여 응용 계층에서 메시지에 대한 전자서명 허용|
+|인증 (Authentication)|{::nomarkdown}<ul><li>Client가 접속하는 서버가 신뢰할 수 있는 서버인지 또는 서버에 접속한 Client가 허가된 사용자인지를 확인</li><li>전자서명과 X.509 공개키 인증서 사용</li></ul>{:/}|
+|무결성 (Integrity)|함께 키를 사용하는 MAC 기법을 사용하여 데이터 변조 여부 확인|
+|기밀성 (Confidentiality)|대칭키 암호 사용|
+|부인봉쇄 (Non-repudiation)|부가적인 SW를 사용하여 응용 계층에서 메시지에 대한 전자서명 허용|
 
 - 주로 클라우드 서비스와 함께 사용
 - 공개된 네트워크 망에서 접근할 수 있기 때문에 추가적인 인증 기능인 OTP 단말기를 같이 사용
 
 ## 3. IPSEC VPN
+
 ### 1. IPSEC(IP Security) VPN
 * 보안에 취약한 인터넷에서 안전한 통신을 실현하는 통신 규약
 * 가상적인 전용 회선을 구축하여 데이터를 도청당하는 등의 행위를 방지하기 위한 통신 규약
+
 ### 2. IPSEC 터널링 모드
 
 * ESP Transport mode
-![ESP Transport mode](/assets/images/posts/ESP-transport.png)
+    ![ESP Transport mode](/assets/images/posts/ESP-transport.png)
 
-[이미지 출처](https://wiki.mikrotik.com/wiki/Manual:IP/IPsec)
+    [이미지 출처](https://wiki.mikrotik.com/wiki/Manual:IP/IPsec)
 
 * ESP Tunnel mode
-![ESP Tunnel mode](/assets/images/posts/ESP-tunnel.png)
+    ![ESP Tunnel mode](/assets/images/posts/ESP-tunnel.png)
 
-[이미지 출처](https://wiki.mikrotik.com/wiki/Manual:IP/IPsec)
+    [이미지 출처](https://wiki.mikrotik.com/wiki/Manual:IP/IPsec)
 
 * IPSEC의 전송 모드는 데이터에 대해 암호화를 수행하지만, IP 헤더에 대해서는 암호화를 수행하지 않음
 * 터널 모드는 보안 IPSEC 헤더를 추가하고 IP 헤더와 데이터 모두를 암호화함.
+
 ### 3. IPSEC VPN 전송 모드
 
 |종류|설명|
@@ -470,6 +499,7 @@ toc: true
 * 2계층 데이터 링크에서 동작한다.
 
 # **NAC(Network Access Control)**
+
 ## 1. 개요
 + 엔드 포인트(End Point) 보안 솔루션으로 등록되지 않은 단말기를 식별하여 차단
 + NAC는 네트워크에 연결된 단말기에 대해서 사전에 IP주소, MAC주소를 등록하고 등록되지 않은 단말기의 네트워크 접근을 차단
@@ -529,6 +559,7 @@ toc: true
 |장점|Patch지원, 하드웨어 및 프로세스 정보, 백신 연동 등|{::nomarkdown}<ul><li>Agent 설치 없이 IP 관리, 사용자 PC에 연결된  스위치 및 포트 정보</li><li>호스트명, 도메인명 관리 등</li></ul>{:/}|
 
 # ESM (Enterprise Security Management)
+
 ## 1. 개요
 + 다수 보안 시스템을 통합한 통합 보안관제 시스템
 + 침입차단 시스템, 침입탐지 시스템, VPN 등의 각종 이벤트를 수집하고 분석
@@ -547,7 +578,11 @@ toc: true
     * 스케줄러를 사용해서 자동적으로 보고서를 생성
 
 ## 3. ESM 구성요소
-+ *그림삽입*
+
+![ESM](/assets/images/posts/esm.png)
+
+[이미지 출처](http://certsrv.ru/esm_help.en/ch01s04.htm)
+
 + ESM Agent
     * ESM Agent는 각종 보안 솔루션의 로그를 수집하는 역할 수행
     * 실시간으로 로그를 수집하여 정규 표현식으로 변환 후 ESM Manager에게 전달
@@ -574,6 +609,7 @@ toc: true
 |기반기술|{::nomarkdown}<ul><li>빅데이터 기술인 MapReduce, Indexing 등을 사용</li><li>고성능의 데이터 분석이 가능</li></ul>{:/}|{::nomarkdown}<ul><li>Agent 혹은 API를 사용해서 로그를 수집</li><li>관계형 데이터베이스의 테이블에 데이터를 입력하고 분석</li></ul>{:/}|
 
 # 무선 LAN 보안 기법
+
 ## 1. 무선 LAN(Wireless Local Area Network)
 + LAN 기반 망과 단말기 사이를 무선주파수(RF: Radio Frequency)를 이용하여 전송하는 근거리 통신 기술
 + 무선 LAN 표준 IEEE 802 위원회에서 진행
@@ -598,6 +634,7 @@ toc: true
 |암호화(Encryption)|무선 LAN 구간에서 안전한 데이터 통신을 위한 기밀성, 무결성을 지원|
 
 ## 4. 무선 LAN 보안 기술
+
 ### 1. SSID(Service Set ID)
 * 무선 LAN 서비스 영역을 구분하기 위한 식별자로 AP(Access Point)는 동일한 SSID를 가진 클라이언트만 접속을 허용하는 방법
 
@@ -638,11 +675,14 @@ toc: true
 |크랙(Crack)|{::nomarkdown}<ul><li>`aircrack-ng`를 실행하여 크랙을 수행함</li><li>`aircrack-ng -b <AP MAC> -w <사전파일> <패킷파일>`</li></ul>{:/}|
 
 # RFID 보안
-## 1. RFID/USN(Radio Frequency Identification & Ubiquitous Sensor Network)
+
+## 1. RFID/USN
++ Radio Frequency Identification & Ubiquitous Sensor Network
 + Micro-chip을 내장한 Tag, Label, Card 등에 저장된 Data를 무선 주파수를 이용하여 Reader기가 자동으로 인식하는 기술
     * ID 바코드 : 바코드 번호 Read Only 기반 식별, 유통관련 서비스
     * RFID : 무선주파수 R/W Tag, 컨테이너,우편,도서
     * USN : Ad-hoc Net (별도의 베이스 스테이션 없음) 기반 센서간 서비스, Zigbee(IEEE802.15.4), 상시접속
+
 ## 2. RFID 보안 기술
 
 |보안 기술|내용|

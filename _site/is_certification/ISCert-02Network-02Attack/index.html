@@ -396,10 +396,10 @@
           <li><a href="#3-ping-of-death-공격-방법">3. Ping of Death 공격 방법</a></li>
         </ul>
       </li>
-      <li><a href="#5-land-attack">5. Land Attack</a></li>
-      <li><a href="#6-http-get-flooding">6. HTTP Get Flooding</a></li>
-      <li><a href="#7-cache-control">7. Cache Control</a></li>
-      <li><a href="#8-slow-http-getpost-attack">8. Slow HTTP Get/Post Attack</a>
+      <li><a href="#4-land-attack">4. Land Attack</a></li>
+      <li><a href="#5-http-get-flooding">5. HTTP Get Flooding</a></li>
+      <li><a href="#6-cache-control">6. Cache Control</a></li>
+      <li><a href="#7-slow-http-getpost-attack">7. Slow HTTP Get/Post Attack</a>
         <ul>
           <li><a href="#1-slow-http-get-방식">1. Slow HTTP Get 방식</a></li>
           <li><a href="#2-slow-http-post-방식">2. Slow HTTP Post 방식</a></li>
@@ -408,7 +408,7 @@
           <li><a href="#5-slow-http-header-dosslowloris">5. Slow HTTP Header DoS(Slowloris)</a></li>
         </ul>
       </li>
-      <li><a href="#9-hash-dos">9. Hash DoS</a>
+      <li><a href="#8-hash-dos">8. Hash DoS</a>
         <ul>
           <li><a href="#1-개요-2">1. 개요</a></li>
           <li><a href="#2-hash-dos-대응방안">2. Hash DoS 대응방안</a></li>
@@ -520,7 +520,9 @@
 </table>
 
 <h1 id="분산-서비스-거부-공격ddos"><strong>분산 서비스 거부 공격(DDoS)</strong></h1>
+
 <h2 id="1-tcp-syn-flooding">1. TCP SYN Flooding</h2>
+
 <h3 id="1-공격방법">1. 공격방법</h3>
 <ul>
   <li>TCP 패킷의 SYN 비트를 이용한 공격 방법으로 많은 연결 요청을 전송해서 대상 시스템이 Flooding(범람)하게 만들어 서비스를 중단시키는 공격</li>
@@ -600,6 +602,7 @@
 </ul>
 
 <h2 id="3-icmp-flooding">3. ICMP Flooding</h2>
+
 <h3 id="1-개요">1. 개요</h3>
 <ul>
   <li>IP특징(Broadcast 주소 방식)과 ICMP 패킷을 이용한 공격 방법</li>
@@ -660,6 +663,7 @@
 </table>
 
 <h2 id="4-tear-drop--ip-fragmentation-ping-of-death">4. Tear Drop : IP Fragmentation (Ping of Death)</h2>
+
 <h3 id="1-개요-1">1. 개요</h3>
 <ul>
   <li>네트워크 패킷은 MTU(Maximum Transmission Unit)보다 큰 패킷이 오면 분할(Fragmentation)하고 분할 된 정보를 flags와 offset이 가지고 있다.</li>
@@ -698,7 +702,7 @@
   <li>5000 Byte 의 패킷을 보냈을 경우 1500 MTU의 네트워크 환경에서 offset:0 1500 bytes, offset 1480 1500 bytes, offset 2960 1500 bytes, offset 4440, 580 bytes</li>
 </ul>
 
-<h2 id="5-land-attack">5. Land Attack</h2>
+<h2 id="4-land-attack">4. Land Attack</h2>
 <ul>
   <li>개요
     <ul>
@@ -717,7 +721,7 @@
   </li>
 </ul>
 
-<h2 id="6-http-get-flooding">6. HTTP Get Flooding</h2>
+<h2 id="5-http-get-flooding">5. HTTP Get Flooding</h2>
 <ul>
   <li>개요
     <ul>
@@ -758,7 +762,7 @@
   </li>
 </ul>
 
-<h2 id="7-cache-control">7. Cache Control</h2>
+<h2 id="6-cache-control">6. Cache Control</h2>
 <ul>
   <li>개요
     <ul>
@@ -779,7 +783,8 @@
   </li>
 </ul>
 
-<h2 id="8-slow-http-getpost-attack">8. Slow HTTP Get/Post Attack</h2>
+<h2 id="7-slow-http-getpost-attack">7. Slow HTTP Get/Post Attack</h2>
+
 <h3 id="1-slow-http-get-방식">1. Slow HTTP Get 방식</h3>
 <ul>
   <li>TCP/UDP 기반 공격 : 변조 IP가 아닌 정상 IP 기반 공격, 탐지 어려움</li>
@@ -815,7 +820,7 @@
     </tr>
     <tr>
       <td style="text-align: left">방화벽 설정 도구인<br />iptables로 차단</td>
-      <td style="text-align: left"><ul><li>`iptables -A INPUT -p tcp -dport 80 -m connlimit-above 30 -j DROP`</li><li>30개 이상의 Concurrent Connection 에 대한 차단</li></ul></td>
+      <td style="text-align: left"><ul><li>iptables -A INPUT -p tcp -dport 80 -m connlimit-above 30 -j DROP</li><li>30개 이상의 Concurrent Connection 에 대한 차단</li></ul></td>
     </tr>
     <tr>
       <td style="text-align: left">Connection Timeout과<br />Keepalivetime 설정</td>
@@ -858,7 +863,8 @@
   </li>
 </ul>
 
-<h2 id="9-hash-dos">9. Hash DoS</h2>
+<h2 id="8-hash-dos">8. Hash DoS</h2>
+
 <h3 id="1-개요-2">1. 개요</h3>
 <ul>
   <li>클라이언트에서 전달되는 각종 파라미터 값을 관리하는 해시테이블의 인덱스 정보가 중복되도록 유도 -&gt; 사전에 저장된 정보 조회 시 많은 CPU 자원을 소모하도록 하는 공격</li>
@@ -898,6 +904,7 @@
 </table>
 
 <h2 id="10-hulk-dos">10. Hulk DoS</h2>
+
 <h3 id="1-개요-3">1. 개요</h3>
 <ul>
   <li>웹 서버의 가용량을 모두 사용하여 정상적인 서비스가 불가능하도록 하는 Get Flooding 의 공격 유형이다.</li>
@@ -931,46 +938,51 @@
 </table>
 
 <h1 id="스캐닝"><strong>스캐닝</strong></h1>
+
 <h2 id="1-포트-스캐닝port-scanning">1. 포트 스캐닝(Port Scanning)</h2>
+
 <h3 id="1-개요-4">1. 개요</h3>
 <ul>
   <li>포트 스캐닝은 서버에 열려 있는 포트를 확인하기 위한 방법으로 NMAP 이라는 도구를 사용해서 스캐닝을 수행한다.</li>
   <li>포트 스캐닝을 사용하면 서버에 열려 있는 포트를 확인하고 해당 포트의 취약점을 이용하여 공격할 수 있다.</li>
-  <li>NMAP 포트 스캐닝</li>
+  <li>
+    <p>NMAP 포트 스캐닝</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">NMAP Port Scan</th>
+          <th style="text-align: left">설명</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left">TCP connect() Scan</td>
+          <td style="text-align: left">3-Way Handshaking 를 수립하고 Target System 에서 쉽게 탐지가 가능하다.</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">TCP SYN Scan</td>
+          <td style="text-align: left"><ul><li>SYN 패킷을 대상 포트로 발송하여 SYN/ACK 패킷을 수신 받으면 Open 상태이다.</li><li>SYN 패킷을 대상 포트로 발송하여 RST/ACK을 수신 받으면 Close 상태이다.</li><li>Half Open 또는 Stealth Scan이라고 한다.</li></ul></td>
+        </tr>
+        <tr>
+          <td style="text-align: left">TCP FIN Scan</td>
+          <td style="text-align: left"><ul><li>대상 포트로 FIN 패킷을 전송하고 닫혀 있는 포트는 RST를 전송한다.</li><li>포트가 개방되어 있으면 패킷을 무시한다.</li></ul></td>
+        </tr>
+        <tr>
+          <td style="text-align: left">TCP Null Scan</td>
+          <td style="text-align: left"><ul><li>모든 플래그를 지운다.</li><li>대상 포트가 닫혀 있으면 RST를 돌려보내고 개방 상태이면 패킷을 무시한다.</li></ul></td>
+        </tr>
+        <tr>
+          <td style="text-align: left">TCP X-MAS Tree Scan</td>
+          <td style="text-align: left"><ul><li>대상 포트로 FIN, URG, PSH 패킷을 전송한다.</li><li>대상 시스템에서 포트가 닫혀 있으면 RST를 되돌려 보낸다.</li><li>포트가 개방되어 있으면 패킷을 무시한다.</li></ul></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
 </ul>
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left">NMAP Port Scan</th>
-      <th style="text-align: left">설명</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left">TCP connect() Scan</td>
-      <td style="text-align: left">3-Way Handshaking 를 수립하고 Target System 에서 쉽게 탐지가 가능하다.</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">TCP SYN Scan</td>
-      <td style="text-align: left"><ul><li>SYN 패킷을 대상 포트로 발송하여 SYN/ACK 패킷을 수신 받으면 Open 상태이다.</li><li>SYN 패킷을 대상 포트로 발송하여 RST/ACK을 수신 받으면 Close 상태이다.</li><li>Half Open 또는 Stealth Scan이라고 한다.</li></ul></td>
-    </tr>
-    <tr>
-      <td style="text-align: left">TCP FIN Scan</td>
-      <td style="text-align: left"><ul><li>대상 포트로 FIN 패킷을 전송하고 닫혀 있는 포트는 RST를 전송한다.</li><li>포트가 개방되어 있으면 패킷을 무시한다.</li></ul></td>
-    </tr>
-    <tr>
-      <td style="text-align: left">TCP Null Scan</td>
-      <td style="text-align: left"><ul><li>모든 플래그를 지운다.</li><li>대상 포트가 닫혀 있으면 RST를 돌려보내고 개방 상태이면 패킷을 무시한다.</li></ul></td>
-    </tr>
-    <tr>
-      <td style="text-align: left">TCP X-MAS Tree Scan</td>
-      <td style="text-align: left"><ul><li>대상 포트로 FIN, URG, PSH 패킷을 전송한다.</li><li>대상 시스템에서 포트가 닫혀 있으면 RST를 되돌려 보낸다.</li><li>포트가 개방되어 있으면 패킷을 무시한다.</li></ul></td>
-    </tr>
-  </tbody>
-</table>
-
 <h3 id="2-포트-스캐닝-기법">2. 포트 스캐닝 기법</h3>
+
 <h4 id="1-nmap-옵션">1. NMAP 옵션</h4>
 <ul>
   <li>SCAN Type
@@ -1089,6 +1101,7 @@
 </ul>
 
 <h1 id="스니핑-공격"><strong>스니핑 공격</strong></h1>
+
 <h2 id="1-스니핑sniffing">1. 스니핑(Sniffing)</h2>
 <ul>
   <li>개요
@@ -1124,56 +1137,60 @@
           <li>공격자는 웹프록시를 사용하여 세션값을 피해자의 세션 값으로 변경후 사이트 접속</li>
         </ul>
       </li>
-      <li>세션 하이재킹 도구</li>
-    </ul>
+      <li>
+        <p>세션 하이재킹 도구</p>
 
-    <table>
-      <thead>
-        <tr>
-          <th style="text-align: left">도구</th>
-          <th style="text-align: left">내용</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="text-align: left">Hunt</td>
-          <td style="text-align: left">네트워크상의 감시, 가로채기</td>
-        </tr>
-        <tr>
-          <td style="text-align: left">Arpspoof</td>
-          <td style="text-align: left">공격자의 주소로 속이는 행위</td>
-        </tr>
-        <tr>
-          <td style="text-align: left">IP Watcher</td>
-          <td style="text-align: left">네트워크상의 연결, 감시 및 세션을 가로채기 위한 다양한 기능</td>
-        </tr>
-        <tr>
-          <td style="text-align: left">Ferret</td>
-          <td style="text-align: left">세션 정보를 가로채는 도구</td>
-        </tr>
-        <tr>
-          <td style="text-align: left">Hamster</td>
-          <td style="text-align: left">Proxy 서버 상태로 만들어 주는 도구</td>
-        </tr>
-        <tr>
-          <td style="text-align: left">Paros</td>
-          <td style="text-align: left">웹 Proxy 서버로서 쓸 수 있는 도구</td>
-        </tr>
-        <tr>
-          <td style="text-align: left">Cain &amp; Abel</td>
-          <td style="text-align: left">스푸핑과 스캐닝 등 다양한 기능</td>
-        </tr>
-        <tr>
-          <td style="text-align: left">WireShark</td>
-          <td style="text-align: left">네트워크 패킷 분석, 다양한 패킷 정보를 볼 수 있음</td>
-        </tr>
-      </tbody>
-    </table>
+        <table>
+          <thead>
+            <tr>
+              <th style="text-align: left">도구</th>
+              <th style="text-align: left">내용</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="text-align: left">Hunt</td>
+              <td style="text-align: left">네트워크상의 감시, 가로채기</td>
+            </tr>
+            <tr>
+              <td style="text-align: left">Arpspoof</td>
+              <td style="text-align: left">공격자의 주소로 속이는 행위</td>
+            </tr>
+            <tr>
+              <td style="text-align: left">IP Watcher</td>
+              <td style="text-align: left">네트워크상의 연결, 감시 및 세션을 가로채기 위한 다양한 기능</td>
+            </tr>
+            <tr>
+              <td style="text-align: left">Ferret</td>
+              <td style="text-align: left">세션 정보를 가로채는 도구</td>
+            </tr>
+            <tr>
+              <td style="text-align: left">Hamster</td>
+              <td style="text-align: left">Proxy 서버 상태로 만들어 주는 도구</td>
+            </tr>
+            <tr>
+              <td style="text-align: left">Paros</td>
+              <td style="text-align: left">웹 Proxy 서버로서 쓸 수 있는 도구</td>
+            </tr>
+            <tr>
+              <td style="text-align: left">Cain &amp; Abel</td>
+              <td style="text-align: left">스푸핑과 스캐닝 등 다양한 기능</td>
+            </tr>
+            <tr>
+              <td style="text-align: left">WireShark</td>
+              <td style="text-align: left">네트워크 패킷 분석, 다양한 패킷 정보를 볼 수 있음</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+    </ul>
   </li>
 </ul>
 
 <h1 id="스푸핑-공격"><strong>스푸핑 공격</strong></h1>
+
 <h2 id="1-ip-spoofing">1. IP Spoofing</h2>
+
 <h3 id="1-개요-5">1. 개요</h3>
 <ul>
   <li>자신의 IP를 속이는 행위</li>

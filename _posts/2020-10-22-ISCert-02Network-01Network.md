@@ -42,6 +42,7 @@ toc: true
     + 가장 많은 통신 선로가 필요
 
 # **OSI 7계층**
+
 ## 1. OSI 7계층 구조
 
 |OSI 7계층|주요 내용|주요 프로토콜(매체)|
@@ -70,6 +71,7 @@ toc: true
 |Application|Gateway|{::nomarkdown}<ul><li>서로 다른 네트워크망과의 연결(PSTN, Internet, Wireless Network 등)</li><li>패킷 헤더의 주소 및 포트 외 거의 모든 정보를 참조</li></ul>{:/}|
 
 # TCP/IP 4계층
+
 ## 1. **TCP/IP 구조**
 
 |OSI 7계층|TCP/IP 4계층|주요 기능|
@@ -93,6 +95,7 @@ toc: true
 - IP : 네트워크 주소와 호스트 주소 정의에 의한 네트워크의 논리적 관리를 담당하는 것으로 송신자와 수신자의 주소를 지정한다.
 
 # 네트워크 활용(TCP/IP 구조)
+
 ## 1. 애플리케이션 계층
 - 일반 사용자들이 사용하는 프로그램이 있는 계층
     
@@ -336,6 +339,7 @@ toc: true
     + 데이터그램(Datagram) : 기존 패킷(Packet)에 IP Header 를 붙이는 것을 의미
 
 ### 1. 라우팅
+
 #### 1. 개념
 + 정적 경로 (Static Routing) 
     * 관리자가 최적의 경로로 설정
@@ -411,6 +415,7 @@ toc: true
 |특징|{::nomarkdown}<ul><li>EGP라고 하는 Inter-domain routing protocol</li><li>인터넷을 AS 상호 간 연결 Path로 이뤄진 방향성 그래프의 집단으로 인식 : 경로 벡터 라우팅(path vector routing) 방법을 적용하며, 경로 벡터 라우팅 테이블을 유지</li><li>Looping free routing</li><li>TCP 기반 routing : BGP 라우팅 정보는 router 간에 179번 포트를 통하여 TCP에 의해 신뢰성 있게 전달</li><li>Routing 정보의 점진적 갱신 : BGP 는 주기적으로 라우팅 정보를 갱신하지 않고, 변화가 있을 때 neighbor router에게 갱신 정보를 advertising 함</li><li>다양한 routing metric 사용 : 최상위 경로 선택을 위해 우선순위가 있는 각 metric을 참조</li><li>Class 없는 주소체계 지원 : CIDR(Classless Inter-Domain Routing) 지원</li><li>IBGP(Internal BGP) : 동일한 AS에 속한 BGP 라우터 간의 동작</li><li>EBGP(External BGP) : 서로 다른 AS에서 동작하는 BGP 프로토콜</li></ul>{:/}|
 
 ### 2. **IP(Internet Protocol)**
+
 #### 1.개념
 + TCP/IP 의 네트워크 계층(IP계층) 은 주소화, 데이터그램 포맷, 패킷 핸들링 등을 정의해놓은 인터넷 규약이다.
 + IPv4 : 32비트 주소체계를 사용하고 있고 이러한 주소체계는 네트워크 ID와 호스트 ID로 구분된다.
@@ -543,6 +548,7 @@ toc: true
 - RARP 서버는 인터넷 주소를 RARP Response 패킷으로 응답 (유니캐스트)
 
 ## 3. 네트워크 접근(Network Access) 계층
+
 ### 1. 네트워크 접근(Network Access) 계층
 + 논리적 주소인 IP 주소를 물리적 MAC 주소로 변환
 + Physical Layer 가 이해할 수 있는 헤더를 붙여주는 Layer

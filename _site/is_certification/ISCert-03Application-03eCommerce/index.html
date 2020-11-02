@@ -488,15 +488,22 @@
   </tbody>
 </table>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+ FDS(Fraud Detection System)
-    * 전자금융거래에서 사용되는 단말정보, 접속로그, 거래정보 등을 분석
-    * 각종 부정 거래행위를 탐지, 예방 (탐지통제, 예방통제)
-+ 가상화폐 비트코인(Bitcoin)
-    * 2009년 나카모토 사토시가 만든 디지털 통화
-    * 중앙관리 장치가 없으며 P2P(Peer to Peer) 기반의 분산 데이터로 이루어져 있음
-    * 공개 키 암호방식을 사용해서 거래
-    * 지갑파일의 형태로 저장 관리되고 지갑에는 고유의 ID가 부여됨
-</code></pre></div></div>
+<ul>
+  <li>FDS(Fraud Detection System)
+    <ul>
+      <li>전자금융거래에서 사용되는 단말정보, 접속로그, 거래정보 등을 분석</li>
+      <li>각종 부정 거래행위를 탐지, 예방 (탐지통제, 예방통제)</li>
+    </ul>
+  </li>
+  <li>가상화폐 비트코인(Bitcoin)
+    <ul>
+      <li>2009년 나카모토 사토시가 만든 디지털 통화</li>
+      <li>중앙관리 장치가 없으며 P2P(Peer to Peer) 기반의 분산 데이터로 이루어져 있음</li>
+      <li>공개 키 암호방식을 사용해서 거래</li>
+      <li>지갑파일의 형태로 저장 관리되고 지갑에는 고유의 ID가 부여됨</li>
+    </ul>
+  </li>
+</ul>
 
 <h1 id="set">SET</h1>
 <h2 id="1-setsecure-electronic-transaction">1. SET(Secure Electronic Transaction)</h2>
@@ -828,8 +835,9 @@
   </tbody>
 </table>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* SSL 버전은 SSL 3.0 이상, TLS 1.1 이상을 사용해야 보안 취약점에 문제가 없음 
-</code></pre></div></div>
+<ul>
+  <li>SSL 버전은 SSL 3.0 이상, TLS 1.1 이상을 사용해야 보안 취약점에 문제가 없음</li>
+</ul>
 
 <h3 id="2-openssl-사용">2. OpenSSL 사용</h3>
 <ul>
@@ -876,27 +884,29 @@
       <li>인터넷상에 전용 회선처럼 이용 가능한 가상 전용 회선을 구축, 안전한 통신을 실현하는 통신 규약</li>
     </ul>
   </li>
-  <li><strong>IPSEC 전송 방법</strong></li>
-</ul>
+  <li>
+    <p><strong>IPSEC 전송 방법</strong></p>
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left">종류</th>
-      <th style="text-align: left">설명</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left">터널 모드</td>
-      <td style="text-align: left">VPN과 같은 구성으로 패킷의 출발지에서 일반 패킷이 보내지면 중간에서 IPSec을 탑재한 중계 장비가 패킷 전체를 암호화(인증)하고 중계 장비의 IP 주소를 붙여 전송, IP 헤더까지 암호화</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">전송 모드</td>
-      <td style="text-align: left">패킷의 출발지에서 암호화(인증)를 하고 목적지에서 복호화가 이루어지므로 End-to-End 보안을 제공, 메시지만 암호화</td>
-    </tr>
-  </tbody>
-</table>
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">종류</th>
+          <th style="text-align: left">설명</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left">터널 모드</td>
+          <td style="text-align: left">VPN과 같은 구성으로 패킷의 출발지에서 일반 패킷이 보내지면 중간에서 IPSec을 탑재한 중계 장비가 패킷 전체를 암호화(인증)하고 중계 장비의 IP 주소를 붙여 전송, IP 헤더까지 암호화</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">전송 모드</td>
+          <td style="text-align: left">패킷의 출발지에서 암호화(인증)를 하고 목적지에서 복호화가 이루어지므로 End-to-End 보안을 제공, 메시지만 암호화</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
 
 <h2 id="2-ipsec-header-구조">2. IPSEC Header 구조</h2>
 <ul>

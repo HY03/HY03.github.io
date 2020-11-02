@@ -10,7 +10,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>02.네트워크 보안 - 03.네트워크 대응 기술 및 응용 | Bluesplatter</title>
-<meta name="description" content="침입차단 시스템 1. 침입차단 시스템(Firewall)    개요            접근통제 (Access Control List) 를 적용하여 시스템에 접근이 허용 가능한 사용자, IP, 포트를 결정       인바운드 : 외부 네트워크에서 내부 네트워크로 들어오는 것       아웃바운드 : 내부에서 외부로 나가는 것                    리버스 텔넷(Reverse Telnet) : 내부 망에서 공격자의 PC로 연결">
+<meta name="description" content="침입차단 시스템">
 
 
   <meta name="author" content="HY03">
@@ -26,7 +26,7 @@
 <meta property="og:url" content="http://localhost:4000/is_certification/ISCert-02Network-03Secure/">
 
 
-  <meta property="og:description" content="침입차단 시스템 1. 침입차단 시스템(Firewall)    개요            접근통제 (Access Control List) 를 적용하여 시스템에 접근이 허용 가능한 사용자, IP, 포트를 결정       인바운드 : 외부 네트워크에서 내부 네트워크로 들어오는 것       아웃바운드 : 내부에서 외부로 나가는 것                    리버스 텔넷(Reverse Telnet) : 내부 망에서 공격자의 PC로 연결">
+  <meta property="og:description" content="침입차단 시스템">
 
 
 
@@ -331,7 +331,7 @@
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="02.네트워크 보안 - 03.네트워크 대응 기술 및 응용">
-    <meta itemprop="description" content="침입차단 시스템1. 침입차단 시스템(Firewall)  개요          접근통제 (Access Control List) 를 적용하여 시스템에 접근이 허용 가능한 사용자, IP, 포트를 결정      인바운드 : 외부 네트워크에서 내부 네트워크로 들어오는 것      아웃바운드 : 내부에서 외부로 나가는 것                  리버스 텔넷(Reverse Telnet) : 내부 망에서 공격자의 PC로 연결                    ">
+    <meta itemprop="description" content="침입차단 시스템">
     <meta itemprop="datePublished" content="2020-10-28T01:00:00+09:00">
     
 
@@ -485,7 +485,7 @@
   </li>
   <li><a href="#rfid-보안">RFID 보안</a>
     <ul>
-      <li><a href="#1-rfidusnradio-frequency-identification--ubiquitous-sensor-network">1. RFID/USN(Radio Frequency Identification &amp; Ubiquitous Sensor Network)</a></li>
+      <li><a href="#1-rfidusn">1. RFID/USN</a></li>
       <li><a href="#2-rfid-보안-기술">2. RFID 보안 기술</a></li>
     </ul>
   </li>
@@ -495,6 +495,7 @@
           </aside>
         
         <h1 id="침입차단-시스템">침입차단 시스템</h1>
+
 <h2 id="1-침입차단-시스템firewall">1. <strong>침입차단 시스템(Firewall)</strong></h2>
 <ul>
   <li>개요
@@ -511,6 +512,7 @@
 </ul>
 
 <h2 id="2-침입차단-시스템-구현방식에-따른-유형">2. 침입차단 시스템 구현방식에 따른 유형</h2>
+
 <h3 id="1-패킷-필터링packet-filtering">1. 패킷 필터링(Packet Filtering)</h3>
 
 <table>
@@ -653,12 +655,19 @@
 </table>
 
 <h3 id="6-심층-패킷분석deep-packet-inspection">6. 심층 패킷분석(Deep Packet Inspection)</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* 패킷이 가지고 있는 컨텐츠까지 모두 검사
-* OSI 전 게층에서 동작, 전 계층에 대한 접근 통제
-</code></pre></div></div>
+
+<ul>
+  <li>패킷이 가지고 있는 컨텐츠까지 모두 검사</li>
+  <li>OSI 전 게층에서 동작, 전 계층에 대한 접근 통제</li>
+</ul>
 
 <h2 id="3-침입차단-시스템-구축-유형">3. 침입차단 시스템 구축 유형</h2>
+
 <h3 id="1-스크리닝-라우터screening-router">1. 스크리닝 라우터(Screening Router)</h3>
+
+<p><img src="/assets/images/posts/screening_router.gif" alt="Screening Router" /></p>
+
+<p><a href="http://sunsite.uakom.sk/sunworldonline/swol-01-1996/swol-01-firewall.html">이미지 출처</a></p>
 
 <table>
   <thead>
@@ -668,10 +677,6 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td style="text-align: left">개념도</td>
-      <td style="text-align: left"> </td>
-    </tr>
     <tr>
       <td style="text-align: left">내용</td>
       <td style="text-align: left">IP, TCP, UDP 헤더 부분에 포함된 내용만 분석하여 동작하며 내부 네트워크와 외부 네트워크 사이의 패킷 트래픽을 perm/drop 하는 라우터</td>
@@ -689,6 +694,10 @@
 
 <h3 id="2-베스천-호스트bastion-host">2. 베스천 호스트(Bastion Host)</h3>
 
+<p><img src="/assets/images/posts/bastion_host.gif" alt="Bastion Host" /></p>
+
+<p><a href="https://www.cs.ait.ac.th/~on/O/oreilly/tcpip/firewall/ch05_06.htm">이미지 출처</a></p>
+
 <table>
   <thead>
     <tr>
@@ -697,10 +706,6 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td style="text-align: left">개념도</td>
-      <td style="text-align: left"> </td>
-    </tr>
     <tr>
       <td style="text-align: left">내용</td>
       <td style="text-align: left"><ul><li>내부 네트워크 전면에서 내부 네트워크 전체를 보호하며 외부 인터넷과 내부 네트워크를 연결하는 라우터 뒤에 위치</li><li>Lock down 된 상태에 있으며 인터넷에서 접근이 가능한 서버</li></ul></td>
@@ -718,6 +723,10 @@
 
 <h3 id="3-듀얼-홈드-호스트dual-homed-host">3. 듀얼 홈드 호스트(Dual-Homed Host)</h3>
 
+<p><img src="/assets/images/posts/dual_homed_host.gif" alt="Dual-Homed Host" /></p>
+
+<p><a href="http://sunsite.uakom.sk/sunworldonline/swol-01-1996/swol-01-firewall.html">이미지 출처</a></p>
+
 <table>
   <thead>
     <tr>
@@ -726,10 +735,6 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td style="text-align: left">개념도</td>
-      <td style="text-align: left"> </td>
-    </tr>
     <tr>
       <td style="text-align: left">내용</td>
       <td style="text-align: left"><ul><li>2개의 네트워크 인터페이스를 가진 Bastion Host로서 하나의 NIC(Network Interface Card)는 내부 네트워크와 연결하고 다른 NIC는 외부 네트워크와 연결</li><li>방화벽은 하나의 네트워크에서 다른 네트워크로 IP 패킷을 라우팅하지 않기 때문에 Proxy 기능을 부여</li></ul></td>
@@ -747,6 +752,10 @@
 
 <h3 id="4-스크린드-호스트screened-host">4. 스크린드 호스트(Screened Host)</h3>
 
+<p><img src="/assets/images/posts/screened_host.gif" alt="Screened Host" /></p>
+
+<p><a href="http://sunsite.uakom.sk/sunworldonline/swol-01-1996/swol-01-firewall.html">이미지 출처</a></p>
+
 <table>
   <thead>
     <tr>
@@ -755,10 +764,6 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td style="text-align: left">개념도</td>
-      <td style="text-align: left"> </td>
-    </tr>
     <tr>
       <td style="text-align: left">내용</td>
       <td style="text-align: left"><ul><li>Packet Filtering Router와 Bastion Host로 구성되어 있음</li><li>Packet Filtering Router는 외부 및 내부 네트워크에서 발생하는 패킷을 통과시킬 것인지를 검사하고 외부에서 내부로 유입되는 패킷에 대해서는 Bastion Host로 검사된 패킷을 전달</li><li>Bastion Host는 내부 및 외부 네트워크 시스템에 대한 인증을 담당</li></ul></td>
@@ -776,6 +781,10 @@
 
 <h3 id="5-스크린드-서브넷screened-subnet">5. 스크린드 서브넷(Screened Subnet)</h3>
 
+<p><img src="/assets/images/posts/screened_subnet.gif" alt="Screened Subnet" /></p>
+
+<p><a href="http://sunsite.uakom.sk/sunworldonline/swol-01-1996/swol-01-firewall.html">이미지 출처</a></p>
+
 <table>
   <thead>
     <tr>
@@ -784,10 +793,6 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td style="text-align: left">개념도</td>
-      <td style="text-align: left"> </td>
-    </tr>
     <tr>
       <td style="text-align: left">내용</td>
       <td style="text-align: left"><ul><li>스크린드 호스트 보안상의 문제점을 보완</li><li>외부 네트워크와 내부 네트워크 사이에 하나 이상의 경계 네트워크를 두어 내부 네트워크를 외부 네트워크로 분리하기 위한 구조</li><li>일반적으로 두 개의 스크리닝 라우터와 한 개의 베스천 호스트를 이용하여 구축</li></ul></td>
@@ -804,7 +809,9 @@
 </table>
 
 <h1 id="침입탐지-시스템">침입탐지 시스템</h1>
+
 <h2 id="1-침입탐지-시스템intrusion-detection-system">1. <strong>침입탐지 시스템(Intrusion Detection System)</strong></h2>
+
 <h3 id="1-개요">1. 개요</h3>
 <ul>
   <li>침입 패턴 정보를 데이터베이스에 저장하고 지능형 엔진을 사용하여 네트워크나 시스템의 침입을 실시간 모니터링, 침입탐지 여부를 확인하는 보안시스템</li>
@@ -880,9 +887,10 @@
   </tbody>
 </table>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* False Positive : false(+)로 표현, 공격이 아닌데도 공격이라고 오판하는 것
-* False negative : false(-)로 표현, 공격이지만 공격이 아니라고 오판하는 것
-</code></pre></div></div>
+<ul>
+  <li>False Positive : false(+)로 표현, 공격이 아닌데도 공격이라고 오판하는 것</li>
+  <li>False negative : false(-)로 표현, 공격이지만 공격이 아니라고 오판하는 것</li>
+</ul>
 
 <h3 id="4-침입탐지-시스템-분류">4. 침입탐지 시스템 분류</h3>
 
@@ -923,10 +931,10 @@
   </tbody>
 </table>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* Hybrid IDS : NIDS + HIDS, 단일 호스트를 출입하는 네트워크 패킷을 검색 시스템의 이벤트, 데이터, 디렉터리, 레지스트리에서 공격 여부를 감시하여 보호한다.
-</code></pre></div></div>
-
 <ul>
+  <li>
+    <p>Hybrid IDS : NIDS + HIDS, 단일 호스트를 출입하는 네트워크 패킷을 검색 시스템의 이벤트, 데이터, 디렉터리, 레지스트리에서 공격 여부를 감시하여 보호한다.</p>
+  </li>
   <li>
     <p>IDS의 지식기반 탐지 기법과 행위기반 탐지기법</p>
 
@@ -948,6 +956,7 @@
 </ul>
 
 <h2 id="2-snort">2. <strong>Snort</strong></h2>
+
 <h3 id="1-개요-1">1. 개요</h3>
 <ul>
   <li>패킷을 스니핑해서 지정한 Rule과 동일한 패킷을 탐지하는 침입탐지 시스템</li>
@@ -1067,112 +1076,112 @@
   <li>룰 옵션(Rule Option)
     <ul>
       <li>탐지 조건을 여러 개 설정할 때는 각 조건마다 ; 를 넣어 구분</li>
-      <li>간단한 탐지 조건</li>
-    </ul>
-
-    <table>
-      <thead>
-        <tr>
-          <th style="text-align: left">룰 옵션</th>
-          <th style="text-align: left">내용</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="text-align: left">msg</td>
-          <td style="text-align: left"><ul><li>alert가 발생하면 msg가 설정된 문장을 로그파일에 기록한다.</li><li>예: `msg:"Hack TCP"`</li></ul></td>
-        </tr>
-        <tr>
-          <td style="text-align: left">sid</td>
-          <td style="text-align: left"><ul><li>시그니처 아이디를 지정하는 것으로 0~99는 예약되어 있고 100~1000000은 snort.org에서 공식적으로 배포하는 룰이다.</li><li>1000000 이상의 값으로 사용자가 지정해서 사용한다.</li></ul></td>
-        </tr>
-        <tr>
-          <td style="text-align: left">dsize</td>
-          <td style="text-align: left"><ul><li>버퍼 오버플로우 탐지할 때 자주 사용</li><li>전송되는 패킷의 사이즈를 식별할 수 있어서 dsize보다 큰 값과 작은 값에 대한 설정이 가능하다</li><li>예: `dsize:100<>500` -> 100에서 500바이트의 패킷을 탐지</li></ul></td>
-        </tr>
-        <tr>
-          <td style="text-align: left">nocase</td>
-          <td style="text-align: left">패턴을 매칭할 때 대문자와 소문자를 구분하지 않는다.</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <ul>
-      <li>content
-        <ul>
-          <li>전송하는 페이로드를 검색해서 지정한 문자열이 있는지 확인 (문자열/바이너리)</li>
-          <li>패턴 매칭 옵션</li>
-        </ul>
+      <li>
+        <p>간단한 탐지 조건</p>
 
         <table>
           <thead>
             <tr>
-              <th style="text-align: left">옵션</th>
+              <th style="text-align: left">룰 옵션</th>
               <th style="text-align: left">내용</th>
-              <th style="text-align: left">예제</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">!</code></td>
-              <td style="text-align: left">입력한 값과 일치하지 않으면 탐지</td>
-              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">content:!"google";</code></td>
+              <td style="text-align: left">msg</td>
+              <td style="text-align: left"><ul><li>alert가 발생하면 msg가 설정된 문장을 로그파일에 기록한다.</li><li>예: `msg:"Hack TCP"`</li></ul></td>
             </tr>
             <tr>
-              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">|</code></td>
-              <td style="text-align: left">Hex 값을 표현할 때 사용</td>
-              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">content:"|30|";</code></td>
+              <td style="text-align: left">sid</td>
+              <td style="text-align: left"><ul><li>시그니처 아이디를 지정하는 것으로 0~99는 예약되어 있고 100~1000000은 snort.org에서 공식적으로 배포하는 룰이다.</li><li>1000000 이상의 값으로 사용자가 지정해서 사용한다.</li></ul></td>
             </tr>
             <tr>
-              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">\</code></td>
-              <td style="text-align: left">특수 기호를 탐지할 때 사용</td>
-              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">content:"\"google\|";</code></td>
+              <td style="text-align: left">dsize</td>
+              <td style="text-align: left"><ul><li>버퍼 오버플로우 탐지할 때 자주 사용</li><li>전송되는 패킷의 사이즈를 식별할 수 있어서 dsize보다 큰 값과 작은 값에 대한 설정이 가능하다</li><li>예: `dsize:100<>500` -> 100에서 500바이트의 패킷을 탐지</li></ul></td>
+            </tr>
+            <tr>
+              <td style="text-align: left">nocase</td>
+              <td style="text-align: left">패턴을 매칭할 때 대문자와 소문자를 구분하지 않는다.</td>
             </tr>
           </tbody>
         </table>
       </li>
+      <li>content
+        <ul>
+          <li>전송하는 페이로드를 검색해서 지정한 문자열이 있는지 확인 (문자열/바이너리)</li>
+          <li>
+            <p>패턴 매칭 옵션</p>
+
+            <table>
+              <thead>
+                <tr>
+                  <th style="text-align: left">옵션</th>
+                  <th style="text-align: left">내용</th>
+                  <th style="text-align: left">예제</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="text-align: left"><code class="language-plaintext highlighter-rouge">!</code></td>
+                  <td style="text-align: left">입력한 값과 일치하지 않으면 탐지</td>
+                  <td style="text-align: left"><code class="language-plaintext highlighter-rouge">content:!"google";</code></td>
+                </tr>
+                <tr>
+                  <td style="text-align: left"><code class="language-plaintext highlighter-rouge">|</code></td>
+                  <td style="text-align: left">Hex 값을 표현할 때 사용</td>
+                  <td style="text-align: left"><code class="language-plaintext highlighter-rouge">content:"|30|";</code></td>
+                </tr>
+                <tr>
+                  <td style="text-align: left"><code class="language-plaintext highlighter-rouge">\</code></td>
+                  <td style="text-align: left">특수 기호를 탐지할 때 사용</td>
+                  <td style="text-align: left"><code class="language-plaintext highlighter-rouge">content:"\"google\|";</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </li>
+        </ul>
+      </li>
       <li>flags
         <ul>
           <li>TCP 프로토콜에서 Control Flags (SYN,FIN,URG,ACK)를 지정하는 것</li>
-          <li>Control Flags</li>
-        </ul>
+          <li>
+            <p>Control Flags</p>
 
-        <table>
-          <thead>
-            <tr>
-              <th style="text-align: left">구분</th>
-              <th style="text-align: left">내용</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="text-align: left">SYN</td>
-              <td style="text-align: left">TCP 연결 시에 동기화를 요구한다.</td>
-            </tr>
-            <tr>
-              <td style="text-align: left">ACK</td>
-              <td style="text-align: left">응답에 대한 확인을 요구한다.</td>
-            </tr>
-            <tr>
-              <td style="text-align: left">PSH</td>
-              <td style="text-align: left">데이터 버퍼링을 하지 않고 수신자에게 송신을 요구한다.</td>
-            </tr>
-            <tr>
-              <td style="text-align: left">URG</td>
-              <td style="text-align: left">긴급 포인터 Flag이다.</td>
-            </tr>
-            <tr>
-              <td style="text-align: left">FIN</td>
-              <td style="text-align: left">정상 접속 종료이다.</td>
-            </tr>
-            <tr>
-              <td style="text-align: left">RST</td>
-              <td style="text-align: left">비정상 종료를 위한 Reset을 한다.</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <ul>
+            <table>
+              <thead>
+                <tr>
+                  <th style="text-align: left">구분</th>
+                  <th style="text-align: left">내용</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="text-align: left">SYN</td>
+                  <td style="text-align: left">TCP 연결 시에 동기화를 요구한다.</td>
+                </tr>
+                <tr>
+                  <td style="text-align: left">ACK</td>
+                  <td style="text-align: left">응답에 대한 확인을 요구한다.</td>
+                </tr>
+                <tr>
+                  <td style="text-align: left">PSH</td>
+                  <td style="text-align: left">데이터 버퍼링을 하지 않고 수신자에게 송신을 요구한다.</td>
+                </tr>
+                <tr>
+                  <td style="text-align: left">URG</td>
+                  <td style="text-align: left">긴급 포인터 Flag이다.</td>
+                </tr>
+                <tr>
+                  <td style="text-align: left">FIN</td>
+                  <td style="text-align: left">정상 접속 종료이다.</td>
+                </tr>
+                <tr>
+                  <td style="text-align: left">RST</td>
+                  <td style="text-align: left">비정상 종료를 위한 Reset을 한다.</td>
+                </tr>
+              </tbody>
+            </table>
+          </li>
           <li>예 : <code class="language-plaintext highlighter-rouge">flags:SF</code> - SYN과 FIN 모두 탐지</li>
         </ul>
       </li>
@@ -1208,41 +1217,40 @@
         <ul>
           <li>동일한 특정 패킷에 대해 설정한 시간 내에 일정 수가 발생하면 탐지 (무작위 공격 (Brute Force) 을 탐지)</li>
           <li><code class="language-plaintext highlighter-rouge">treshold: type [limit, treshold, both], track [by_src, by_dst], count [횟수], seconds [몇 초]</code></li>
-          <li>treshold 옵션</li>
-        </ul>
+          <li>
+            <p>treshold 옵션</p>
 
-        <table>
-          <thead>
-            <tr>
-              <th style="text-align: left">구분</th>
-              <th style="text-align: left">내용</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="text-align: left">limit</td>
-              <td style="text-align: left">count 동안에 횟수 번째 트래픽까지 탐지한다.</td>
-            </tr>
-            <tr>
-              <td style="text-align: left">treshold</td>
-              <td style="text-align: left">횟수마다 계속 탐지한다.</td>
-            </tr>
-            <tr>
-              <td style="text-align: left">both</td>
-              <td style="text-align: left">count 동안 횟수만큼 트래픽이 탐지 될 시에 한번만 탐지한다.</td>
-            </tr>
-            <tr>
-              <td style="text-align: left">by_src</td>
-              <td style="text-align: left">출발지의 패킷만 탐지한다.</td>
-            </tr>
-            <tr>
-              <td style="text-align: left">by_dst</td>
-              <td style="text-align: left">목적지 패킷만 탐지한다.</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <ul>
+            <table>
+              <thead>
+                <tr>
+                  <th style="text-align: left">구분</th>
+                  <th style="text-align: left">내용</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="text-align: left">limit</td>
+                  <td style="text-align: left">count 동안에 횟수 번째 트래픽까지 탐지한다.</td>
+                </tr>
+                <tr>
+                  <td style="text-align: left">treshold</td>
+                  <td style="text-align: left">횟수마다 계속 탐지한다.</td>
+                </tr>
+                <tr>
+                  <td style="text-align: left">both</td>
+                  <td style="text-align: left">count 동안 횟수만큼 트래픽이 탐지 될 시에 한번만 탐지한다.</td>
+                </tr>
+                <tr>
+                  <td style="text-align: left">by_src</td>
+                  <td style="text-align: left">출발지의 패킷만 탐지한다.</td>
+                </tr>
+                <tr>
+                  <td style="text-align: left">by_dst</td>
+                  <td style="text-align: left">목적지 패킷만 탐지한다.</td>
+                </tr>
+              </tbody>
+            </table>
+          </li>
           <li>사용 예 : ICMP 패킷이 20초 동안 5번 발생하면 한 번씩 경고 메시지를 기록</li>
           <li><code class="language-plaintext highlighter-rouge">alert icmp any any -&gt; any any (msg:"ICMP";threshold: type both, track by_src, count 5, seconds 20; sid:10000495;)</code></li>
         </ul>
@@ -1330,6 +1338,7 @@
 </ul>
 
 <h1 id="침입대응-시스템">침입대응 시스템</h1>
+
 <h2 id="1-침입대응-시스템-intrusion-prevention-system">1. 침입대응 시스템 (Intrusion Prevention System)</h2>
 <ul>
   <li>공격 시그니처를 찾아내 네트워크에 연결된 기기에서 비정상적인 활동이 이루어지는지 감시, 자동으로 해결조치하는 보안솔루션</li>
@@ -1359,6 +1368,7 @@
 </table>
 
 <h1 id="허니팟">허니팟</h1>
+
 <h2 id="1-개요-2">1. 개요</h2>
 <ul>
   <li>해커들의 정보를 얻기 위한 하나의 개별 시스템</li>
@@ -1410,19 +1420,21 @@
 </ul>
 
 <h1 id="가상사설망">가상사설망</h1>
+
 <h2 id="1-가상사설망-개요">1. 가상사설망 개요</h2>
 <ul>
   <li>Virtual Private Network</li>
-  <li>공중망(인터넷)을 이용하여 사설망(기업 전용 네트워크)과 같은 효과를 얻기 위한 컴퓨터 시스템과 프로토코릐 집합</li>
+  <li>공중망(인터넷)을 이용하여 사설망(기업 전용 네트워크)과 같은 효과를 얻기 위한 컴퓨터 시스템과 프로토콜의 집합</li>
   <li>보안성이 우수하고 사용자 인증, 주소 및 라우터 체계의 비공개와 데이터 암호화, 사용자 Access 권한을 제어한다.</li>
   <li>패스워드 인증과 함께 USB를 사용한 2-Factor 인증 제공</li>
-  <li>터널링 : VPN 클라이언트와 VPN 서버 간에 암호화 키 교환 과저을 수행한 후에 암호화를 사용해서 메시지를 주고 받음</li>
+  <li>터널링 : VPN 클라이언트와 VPN 서버 간에 암호화 키 교환 과정을 수행한 후에 암호화를 사용해서 메시지를 주고 받음</li>
   <li>SSL VPN : 별도 소프트웨어 설치 필요 없음 (웹 브라우저 사용)</li>
   <li>IPSEC VPN : 별도의 소프트웨어 설치 필요</li>
   <li>PPTP VPN : 윈도우에서 기본적으로 지원</li>
 </ul>
 
 <h2 id="2-ssl-vpn">2. SSL VPN</h2>
+
 <h3 id="1-ssl-secured-socket-layer-vpn">1. SSL (Secured Socket Layer) VPN</h3>
 <ul>
   <li>웹브라우저만 있으면 언제 어디에서나 사용이 가능
@@ -1479,19 +1491,19 @@
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">인증(Authentication)</td>
+      <td style="text-align: left">인증 (Authentication)</td>
       <td style="text-align: left"><ul><li>Client가 접속하는 서버가 신뢰할 수 있는 서버인지 또는 서버에 접속한 Client가 허가된 사용자인지를 확인</li><li>전자서명과 X.509 공개키 인증서 사용</li></ul></td>
     </tr>
     <tr>
-      <td style="text-align: left">무결성(Integrity)</td>
+      <td style="text-align: left">무결성 (Integrity)</td>
       <td style="text-align: left">함께 키를 사용하는 MAC 기법을 사용하여 데이터 변조 여부 확인</td>
     </tr>
     <tr>
-      <td style="text-align: left">기밀성(Confidentiality)</td>
+      <td style="text-align: left">기밀성 (Confidentiality)</td>
       <td style="text-align: left">대칭키 암호 사용</td>
     </tr>
     <tr>
-      <td style="text-align: left">부인봉쇄(Non-repudiation)</td>
+      <td style="text-align: left">부인봉쇄 (Non-repudiation)</td>
       <td style="text-align: left">부가적인 SW를 사용하여 응용 계층에서 메시지에 대한 전자서명 허용</td>
     </tr>
   </tbody>
@@ -1503,31 +1515,33 @@
 </ul>
 
 <h2 id="3-ipsec-vpn">3. IPSEC VPN</h2>
+
 <h3 id="1-ipsecip-security-vpn">1. IPSEC(IP Security) VPN</h3>
 <ul>
   <li>보안에 취약한 인터넷에서 안전한 통신을 실현하는 통신 규약</li>
-  <li>가상적인 전용 회선을 구축하여 데이터를 도청당하는 등의 행위를 방지하기 위한 통신 규약
-    <h3 id="2-ipsec-터널링-모드">2. IPSEC 터널링 모드</h3>
+  <li>가상적인 전용 회선을 구축하여 데이터를 도청당하는 등의 행위를 방지하기 위한 통신 규약</li>
+</ul>
+
+<h3 id="2-ipsec-터널링-모드">2. IPSEC 터널링 모드</h3>
+
+<ul>
+  <li>
+    <p>ESP Transport mode
+  <img src="/assets/images/posts/ESP-transport.png" alt="ESP Transport mode" /></p>
+
+    <p><a href="https://wiki.mikrotik.com/wiki/Manual:IP/IPsec">이미지 출처</a></p>
   </li>
-  <li>ESP Transport mode
-<img src="/assets/images/posts/ESP-transport.png" alt="ESP Transport mode" /></li>
-</ul>
+  <li>
+    <p>ESP Tunnel mode
+  <img src="/assets/images/posts/ESP-tunnel.png" alt="ESP Tunnel mode" /></p>
 
-<p><a href="https://wiki.mikrotik.com/wiki/Manual:IP/IPsec">이미지 출처</a></p>
-
-<ul>
-  <li>ESP Tunnel mode
-<img src="/assets/images/posts/ESP-tunnel.png" alt="ESP Tunnel mode" /></li>
-</ul>
-
-<p><a href="https://wiki.mikrotik.com/wiki/Manual:IP/IPsec">이미지 출처</a></p>
-
-<ul>
+    <p><a href="https://wiki.mikrotik.com/wiki/Manual:IP/IPsec">이미지 출처</a></p>
+  </li>
   <li>IPSEC의 전송 모드는 데이터에 대해 암호화를 수행하지만, IP 헤더에 대해서는 암호화를 수행하지 않음</li>
-  <li>터널 모드는 보안 IPSEC 헤더를 추가하고 IP 헤더와 데이터 모두를 암호화함.
-    <h3 id="3-ipsec-vpn-전송-모드">3. IPSEC VPN 전송 모드</h3>
-  </li>
+  <li>터널 모드는 보안 IPSEC 헤더를 추가하고 IP 헤더와 데이터 모두를 암호화함.</li>
 </ul>
+
+<h3 id="3-ipsec-vpn-전송-모드">3. IPSEC VPN 전송 모드</h3>
 
 <table>
   <thead>
@@ -1698,6 +1712,7 @@
 </ul>
 
 <h1 id="nacnetwork-access-control"><strong>NAC(Network Access Control)</strong></h1>
+
 <h2 id="1-개요-3">1. 개요</h2>
 <ul>
   <li>엔드 포인트(End Point) 보안 솔루션으로 등록되지 않은 단말기를 식별하여 차단</li>
@@ -1820,6 +1835,7 @@
 </table>
 
 <h1 id="esm-enterprise-security-management">ESM (Enterprise Security Management)</h1>
+
 <h2 id="1-개요-4">1. 개요</h2>
 <ul>
   <li>다수 보안 시스템을 통합한 통합 보안관제 시스템</li>
@@ -1851,8 +1867,12 @@
 </ul>
 
 <h2 id="3-esm-구성요소">3. ESM 구성요소</h2>
+
+<p><img src="/assets/images/posts/esm.png" alt="ESM" /></p>
+
+<p><a href="http://certsrv.ru/esm_help.en/ch01s04.htm">이미지 출처</a></p>
+
 <ul>
-  <li><em>그림삽입</em></li>
   <li>ESM Agent
     <ul>
       <li>ESM Agent는 각종 보안 솔루션의 로그를 수집하는 역할 수행</li>
@@ -1916,6 +1936,7 @@
 </table>
 
 <h1 id="무선-lan-보안-기법">무선 LAN 보안 기법</h1>
+
 <h2 id="1-무선-lanwireless-local-area-network">1. 무선 LAN(Wireless Local Area Network)</h2>
 <ul>
   <li>LAN 기반 망과 단말기 사이를 무선주파수(RF: Radio Frequency)를 이용하여 전송하는 근거리 통신 기술</li>
@@ -1964,6 +1985,7 @@
 </table>
 
 <h2 id="4-무선-lan-보안-기술">4. 무선 LAN 보안 기술</h2>
+
 <h3 id="1-ssidservice-set-id">1. SSID(Service Set ID)</h3>
 <ul>
   <li>무선 LAN 서비스 영역을 구분하기 위한 식별자로 AP(Access Point)는 동일한 SSID를 가진 클라이언트만 접속을 허용하는 방법</li>
@@ -2042,18 +2064,20 @@
 </table>
 
 <h1 id="rfid-보안">RFID 보안</h1>
-<h2 id="1-rfidusnradio-frequency-identification--ubiquitous-sensor-network">1. RFID/USN(Radio Frequency Identification &amp; Ubiquitous Sensor Network)</h2>
+
+<h2 id="1-rfidusn">1. RFID/USN</h2>
 <ul>
+  <li>Radio Frequency Identification &amp; Ubiquitous Sensor Network</li>
   <li>Micro-chip을 내장한 Tag, Label, Card 등에 저장된 Data를 무선 주파수를 이용하여 Reader기가 자동으로 인식하는 기술
     <ul>
       <li>ID 바코드 : 바코드 번호 Read Only 기반 식별, 유통관련 서비스</li>
       <li>RFID : 무선주파수 R/W Tag, 컨테이너,우편,도서</li>
-      <li>USN : Ad-hoc Net (별도의 베이스 스테이션 없음) 기반 센서간 서비스, Zigbee(IEEE802.15.4), 상시접속
-        <h2 id="2-rfid-보안-기술">2. RFID 보안 기술</h2>
-      </li>
+      <li>USN : Ad-hoc Net (별도의 베이스 스테이션 없음) 기반 센서간 서비스, Zigbee(IEEE802.15.4), 상시접속</li>
     </ul>
   </li>
 </ul>
+
+<h2 id="2-rfid-보안-기술">2. RFID 보안 기술</h2>
 
 <table>
   <thead>

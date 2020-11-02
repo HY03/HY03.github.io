@@ -586,13 +586,14 @@
     </tr>
     <tr>
       <td style="text-align: left">추론(Inference)</td>
-      <td style="text-align: left"><ul><li>보안 등급이 없는 일반 사용자가 보안으로 분류되지 않은 정보에 정당하게 접근하여 기밀 정보를 유추해 내는 행위</li><li>로우 데이터(Raw data)로부터 민감한 데이터를 유출하는 행위</li><li>파티션(Partition), 셀 은닉(Cell suppression) 등을 방지</li><li>파티션 내 보안대책을 암호화하여 정당하지 않은 사용자의 접근을 방지</li><li>보안대책:다중인스턴스화(Polyinstantiation)</li></ul></td>
+      <td style="text-align: left"><ul><li>보안 등급이 없는 일반 사용자가 보안으로 분류되지 않은 정보에 정당하게 접근하여 기밀 정보를 유추해 내는 행위</li><li>로우 데이터(Raw data)로부터 민감한 데이터를 유출하는 행위</li><li>파티션(Partition), 셀 은닉(Cell suppression) 등을 방지</li><li>파티션 내 보안대책을 암호화하여 정당하지 않은 사용자의 접근을 방지</li><li>보안대책 : 다중인스턴스화(Polyinstantiation)</li></ul></td>
     </tr>
   </tbody>
 </table>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* 다중 인스턴스화(Polyinstantiation) : 추론으로부터 정보 유출을 막기 위한 기술, 변수를 값 또는 다른 변수와 함께 있게 함으로써 상호 작용을 하도록 하는 프로세스
-</code></pre></div></div>
+<ul>
+  <li>다중 인스턴스화(Polyinstantiation) : 추론으로부터 정보 유출을 막기 위한 기술, 변수를 값 또는 다른 변수와 함께 있게 함으로써 상호 작용을 하도록 하는 프로세스</li>
+</ul>
 
 <h2 id="3-데이터베이스-보안-요구사항">3. 데이터베이스 보안 요구사항</h2>
 
@@ -762,70 +763,80 @@
 
 <h1 id="데이터베이스-백업">데이터베이스 백업</h1>
 <ul>
-  <li>백업 방법</li>
-</ul>
+  <li>
+    <p>백업 방법</p>
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: center">백업 방법</th>
-      <th style="text-align: center">월요일</th>
-      <th style="text-align: center">화요일</th>
-      <th style="text-align: center">수요일</th>
-      <th style="text-align: center">목요일</th>
-      <th style="text-align: center">금요일</th>
-      <th style="text-align: center">토요일</th>
-      <th style="text-align: center">일요일</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: center">전체 백업</td>
-      <td style="text-align: center">전체 백업</td>
-      <td style="text-align: center">전체 백업</td>
-      <td style="text-align: center">전체 백업</td>
-      <td style="text-align: center">전체 백업</td>
-      <td style="text-align: center">전체 백업</td>
-      <td style="text-align: center">전체 백업</td>
-      <td style="text-align: center">전체 백업</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">증분 백업</td>
-      <td style="text-align: center">전체 백업</td>
-      <td style="text-align: center">인사</td>
-      <td style="text-align: center">급여</td>
-      <td style="text-align: center">복지</td>
-      <td style="text-align: center">주문</td>
-      <td style="text-align: center">계좌</td>
-      <td style="text-align: center">고객</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">차등 백업</td>
-      <td style="text-align: center">전체 백업</td>
-      <td style="text-align: center">인사</td>
-      <td style="text-align: center">인사,급여</td>
-      <td style="text-align: center">인사,급여,복지</td>
-      <td style="text-align: center">인사,급여,복지,주문</td>
-      <td style="text-align: center">인사,급여,복지,주문,계좌</td>
-      <td style="text-align: center">인사,급여,복지,주문,계좌,고객</td>
-    </tr>
-  </tbody>
-</table>
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: center">백업 방법</th>
+          <th style="text-align: center">월요일</th>
+          <th style="text-align: center">화요일</th>
+          <th style="text-align: center">수요일</th>
+          <th style="text-align: center">목요일</th>
+          <th style="text-align: center">금요일</th>
+          <th style="text-align: center">토요일</th>
+          <th style="text-align: center">일요일</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: center">전체 백업</td>
+          <td style="text-align: center">전체 백업</td>
+          <td style="text-align: center">전체 백업</td>
+          <td style="text-align: center">전체 백업</td>
+          <td style="text-align: center">전체 백업</td>
+          <td style="text-align: center">전체 백업</td>
+          <td style="text-align: center">전체 백업</td>
+          <td style="text-align: center">전체 백업</td>
+        </tr>
+        <tr>
+          <td style="text-align: center">증분 백업</td>
+          <td style="text-align: center">전체 백업</td>
+          <td style="text-align: center">인사</td>
+          <td style="text-align: center">급여</td>
+          <td style="text-align: center">복지</td>
+          <td style="text-align: center">주문</td>
+          <td style="text-align: center">계좌</td>
+          <td style="text-align: center">고객</td>
+        </tr>
+        <tr>
+          <td style="text-align: center">차등 백업</td>
+          <td style="text-align: center">전체 백업</td>
+          <td style="text-align: center">인사</td>
+          <td style="text-align: center">인사,급여</td>
+          <td style="text-align: center">인사,급여,복지</td>
+          <td style="text-align: center">인사,급여,복지,주문</td>
+          <td style="text-align: center">인사,급여,복지,주문,계좌</td>
+          <td style="text-align: center">인사,급여,복지,주문,계좌,고객</td>
+        </tr>
+      </tbody>
+    </table>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+ 전체 백업
-    * 데이터베이스 전체를 백업받는 것
-    * 가장 단순한 형태, 간단한 방법
-    * 매일 전체 백업을 받으면 시간과 공간이 많이 필요
-+ 차등 백업
-    * 가장 최근 전체 백업을 받은 후 이후에 변경된 모든 것을 백업
-+ 증분 백업
-    * 마지막 백업 이후 변경된 것만 백업
-    * 저장 매체의 효율적 이용
-    * 복구 시 많은 매체가 필요
-</code></pre></div></div>
-
-<ul>
-  <li>mysqldump를 통한 MySQL 백업
+    <ul>
+      <li>전체 백업
+        <ul>
+          <li>데이터베이스 전체를 백업받는 것</li>
+          <li>가장 단순한 형태, 간단한 방법</li>
+          <li>매일 전체 백업을 받으면 시간과 공간이 많이 필요</li>
+        </ul>
+      </li>
+      <li>차등 백업
+        <ul>
+          <li>가장 최근 전체 백업을 받은 후 이후에 변경된 모든 것을 백업</li>
+        </ul>
+      </li>
+      <li>증분 백업
+        <ul>
+          <li>마지막 백업 이후 변경된 것만 백업</li>
+          <li>저장 매체의 효율적 이용</li>
+          <li>복구 시 많은 매체가 필요</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>mysqldump를 통한 MySQL 백업</p>
     <ul>
       <li><code class="language-plaintext highlighter-rouge">mysqldump -u root -p 1234 test &gt; test.sql</code> : SQL문을 Text 형태로 백업</li>
       <li><code class="language-plaintext highlighter-rouge">mysqldump -u root -p 1234 test &lt; test.sql</code> : 데이터 복구</li>

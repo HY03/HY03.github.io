@@ -31,7 +31,9 @@ toc: true
 |Agent<->Master|313335/udp|ICMP echo Reply|ICMP echo Reply|
 
 # **분산 서비스 거부 공격(DDoS)**
+
 ## 1. TCP SYN Flooding
+
 ### 1. 공격방법
 * TCP 패킷의 SYN 비트를 이용한 공격 방법으로 많은 연결 요청을 전송해서 대상 시스템이 Flooding(범람)하게 만들어 서비스를 중단시키는 공격
 * Hacker가 의미없는 발신주소로 변조한 TCP SYN packet 를 Victim에게 전송
@@ -64,6 +66,7 @@ toc: true
     * 서버들은 변조된 공격대상 IP 로 SYN/ACK packet 전송
 
 ## 3. ICMP Flooding
+
 ### 1. 개요
 * IP특징(Broadcast 주소 방식)과 ICMP 패킷을 이용한 공격 방법
 * 통신을 위해 서비스 및 포트가 필요 없는 유일한 프로토콜
@@ -89,6 +92,7 @@ toc: true
 |Inbound 패킷 임계치 설정|{::nomarkdown}<ul><li>운영 장비로 유입되는 Inbound 패킷을 기준으로 PPS 수치를 유입되는 수치보다 낮게 설정</li><li>임계치 이상의 ICMP 및 UDP를 차단</li></ul>{:/}|
 
 ## 4. Tear Drop : IP Fragmentation (Ping of Death)
+
 ### 1. 개요
 * 네트워크 패킷은 MTU(Maximum Transmission Unit)보다 큰 패킷이 오면 분할(Fragmentation)하고 분할 된 정보를 flags와 offset이 가지고 있다.
 * 이 때 offset을 임의로 조작하여 다시 조립될 수 없도록 하는 공격
@@ -106,7 +110,7 @@ toc: true
 * 하나의 큰 패킷을 전송하면 패킷은 MTU(Maximun Transmission Unit)의 크기를 넘을 수 없기 때문에 분할되어서 응답을 받음
 * 5000 Byte 의 패킷을 보냈을 경우 1500 MTU의 네트워크 환경에서 offset:0 1500 bytes, offset 1480 1500 bytes, offset 2960 1500 bytes, offset 4440, 580 bytes
 
-## 5. Land Attack
+## 4. Land Attack
 + 개요
     * 송신자와 수신자의 IP 주소와 Port 주소를 동일하게 하여 네트워크 장비에 부하를 일으킴
 + 공격 방법
@@ -114,7 +118,7 @@ toc: true
 + 대응 방법
     * 송신자와 수신자의 IP 주소가 동일한 패킷을 삭제
 
-## 6. HTTP Get Flooding
+## 5. HTTP Get Flooding
 + 개요
     * 정상적인 TCP 연결 이후 정상적으로 보이는 HTTP Transaction 과정을 수행하는 Dos/DDos 공격 방법
     * HTTP Get을 지속적으로 요청하여 HTTP 연결 및 HTTP 처리 로직의 과부하를 유발
@@ -128,7 +132,7 @@ toc: true
     |시간대별 웹 페이지 URL 접속 임계치 설정 차단|시간대별 임계치를 설정하여 임의의 시간 안에 설정한 임계치 이상의 요청이 들어온 경우 해당 IP를 탐지하여 방화벽 차단 목록에 등록|
     |Web Scraping 기법을 이용한 차단|L7 스위치를 운영하는 경우 웹 스크래핑 기능을 사용하여 요청 패킷에 대한 쿠키 값이나 자바 스크립트를 보내어 클라이언트로부터 원하는 값에 재요청 패킷이 없는 경우 해당 패킷을 차단|
 
-## 7. Cache Control
+## 6. Cache Control
 + 개요
     * no cache : 임시 인터넷 파일의 저장된 페이지 새 버전 확인을 웹 페이지를 열때마다 로 설정
 + Cache Control Attack 공격 방법
@@ -138,7 +142,8 @@ toc: true
 + 대응 방법
     * 임계치 기반 대응을 실시
 
-## 8. Slow HTTP Get/Post Attack
+## 7. Slow HTTP Get/Post Attack
+
 ### 1. Slow HTTP Get 방식
 * TCP/UDP 기반 공격 : 변조 IP가 아닌 정상 IP 기반 공격, 탐지 어려움
 * 소량의 트래픽을 사용한 공격 : 소량의 트래픽과 세션 연결을 통해서 공격
@@ -156,7 +161,7 @@ toc: true
 |대응 방법|내용|
 |:---|:---|
 |접속 임계치 설정|특정 발신지에서 IP로 연결할 수 있는 최대값 설정|
-|방화벽 설정 도구인<br/>iptables로 차단|{::nomarkdown}<ul><li>`iptables -A INPUT -p tcp -dport 80 -m connlimit-above 30 -j DROP`</li><li>30개 이상의 Concurrent Connection 에 대한 차단</li></ul>{:/}|
+|방화벽 설정 도구인<br/>iptables로 차단|{::nomarkdown}<ul><li>iptables -A INPUT -p tcp -dport 80 -m connlimit-above 30 -j DROP</li><li>30개 이상의 Concurrent Connection 에 대한 차단</li></ul>{:/}|
 |Connection Timeout과<br/>Keepalivetime 설정|{::nomarkdown}<ul><li>Connection Timeout 설정으로 클라이언트와 서버 간에 데이터 전송이 없을 경우 연결 종료</li><li>웹 서버의 Keepalivetime을 설정하여 차단</li></ul>{:/}|
 |RequestReadTimeout<br/>설정으로 차단|{::nomarkdown}<ul><li>Apache 2.2.15버전 이후에서 사용</li><li>Slow Attack를 차단하기 위해서 RequestReadTimeout header=5 body=8 설정</li><li>5초 내에 연결이 안 되면 연결 종료, POST 요청 이후 8초 내에 데이터가 오지 않으면 연결 종료</li></ul>{:/}|
 |그 외|{::nomarkdown}<ul><li>POST 메시지의 크기를 제한(POST_MAX_SIZE) 한다.</li><li>최저 데이터 전송 속도를 제한한다.</li><li>TCP 상태를 모니터링한다.</li></ul>{:/}|
@@ -177,7 +182,8 @@ toc: true
     - HTTP Header 와 Body 는 개행문자`(\r\n\r\n)` 로 구분됨.
     - Slow HTTP Header DoS 는 `\r\n` 만 전송하여 불완전 Header 를 전송
 
-## 9. Hash DoS
+## 8. Hash DoS
+
 ### 1. 개요
 * 클라이언트에서 전달되는 각종 파라미터 값을 관리하는 해시테이블의 인덱스 정보가 중복되도록 유도 -> 사전에 저장된 정보 조회 시 많은 CPU 자원을 소모하도록 하는 공격
 * HTTP Request 요청 시 Get, Post 방식으로 전송되는 변수를 Hash 구조로 관리함. (Get 방식은 길이에 제한이 있으나 Post 전송 방식은 파라미터 개수의 제한이 없음)
@@ -195,6 +201,7 @@ toc: true
 |PHP에서 Hash DoS 차단|php.ini 파일에서 max_input_var 로 최대 HTTP POST Parameter 개수 설정|
 
 ## 10. Hulk DoS
+
 ### 1. 개요
 * 웹 서버의 가용량을 모두 사용하여 정상적인 서비스가 불가능하도록 하는 Get Flooding 의 공격 유형이다.
 * 공격 대상 URL을 지속적으로 변경하여 DDoS 차단정책을 우회하는 특성을 가진다.
@@ -209,21 +216,24 @@ toc: true
 |302-Redirect를 이용한 차단|{::nomarkdown}<ul><li>대부분의 DDoS 공격 툴은 302-Redirect 요청에 대해 반응하지 않는 것이 특징임</li><li>URL 중에서 공격 당하기 쉬운 웹 사이트에 대한 Redirect 처리를 통해서 자동화된 DDoS 공격 툴을 이용한 공격을 사전에 차단</li></ul>{:/}|
 
 # **스캐닝**
+
 ## 1. 포트 스캐닝(Port Scanning)
+
 ### 1. 개요
 * 포트 스캐닝은 서버에 열려 있는 포트를 확인하기 위한 방법으로 NMAP 이라는 도구를 사용해서 스캐닝을 수행한다.
 * 포트 스캐닝을 사용하면 서버에 열려 있는 포트를 확인하고 해당 포트의 취약점을 이용하여 공격할 수 있다.
 * NMAP 포트 스캐닝
 
-|NMAP Port Scan|설명|
-|:---|:---|
-|TCP connect() Scan|3-Way Handshaking 를 수립하고 Target System 에서 쉽게 탐지가 가능하다.|
-|TCP SYN Scan|{::nomarkdown}<ul><li>SYN 패킷을 대상 포트로 발송하여 SYN/ACK 패킷을 수신 받으면 Open 상태이다.</li><li>SYN 패킷을 대상 포트로 발송하여 RST/ACK을 수신 받으면 Close 상태이다.</li><li>Half Open 또는 Stealth Scan이라고 한다.</li></ul>{:/}|
-|TCP FIN Scan|{::nomarkdown}<ul><li>대상 포트로 FIN 패킷을 전송하고 닫혀 있는 포트는 RST를 전송한다.</li><li>포트가 개방되어 있으면 패킷을 무시한다.</li></ul>{:/}|
-|TCP Null Scan|{::nomarkdown}<ul><li>모든 플래그를 지운다.</li><li>대상 포트가 닫혀 있으면 RST를 돌려보내고 개방 상태이면 패킷을 무시한다.</li></ul>{:/}|
-|TCP X-MAS Tree Scan|{::nomarkdown}<ul><li>대상 포트로 FIN, URG, PSH 패킷을 전송한다.</li><li>대상 시스템에서 포트가 닫혀 있으면 RST를 되돌려 보낸다.</li><li>포트가 개방되어 있으면 패킷을 무시한다.</li></ul>{:/}|
+    |NMAP Port Scan|설명|
+    |:---|:---|
+    |TCP connect() Scan|3-Way Handshaking 를 수립하고 Target System 에서 쉽게 탐지가 가능하다.|
+    |TCP SYN Scan|{::nomarkdown}<ul><li>SYN 패킷을 대상 포트로 발송하여 SYN/ACK 패킷을 수신 받으면 Open 상태이다.</li><li>SYN 패킷을 대상 포트로 발송하여 RST/ACK을 수신 받으면 Close 상태이다.</li><li>Half Open 또는 Stealth Scan이라고 한다.</li></ul>{:/}|
+    |TCP FIN Scan|{::nomarkdown}<ul><li>대상 포트로 FIN 패킷을 전송하고 닫혀 있는 포트는 RST를 전송한다.</li><li>포트가 개방되어 있으면 패킷을 무시한다.</li></ul>{:/}|
+    |TCP Null Scan|{::nomarkdown}<ul><li>모든 플래그를 지운다.</li><li>대상 포트가 닫혀 있으면 RST를 돌려보내고 개방 상태이면 패킷을 무시한다.</li></ul>{:/}|
+    |TCP X-MAS Tree Scan|{::nomarkdown}<ul><li>대상 포트로 FIN, URG, PSH 패킷을 전송한다.</li><li>대상 시스템에서 포트가 닫혀 있으면 RST를 되돌려 보낸다.</li><li>포트가 개방되어 있으면 패킷을 무시한다.</li></ul>{:/}|
 
 ### 2. 포트 스캐닝 기법
+
 #### 1. NMAP 옵션
 - SCAN Type
     + `-sS` : TCP SYN Scan
@@ -287,6 +297,7 @@ toc: true
     - 첫 번째 패킷은 IP 주소 정보가 있고 두 번째 패킷은 Port 정보만 있음
 
 # **스니핑 공격**
+
 ## 1. 스니핑(Sniffing)
 + 개요
     * 네트워크로 전송되는 패킷을 훔쳐보는 도구
@@ -311,19 +322,21 @@ toc: true
         - 공격자는 웹프록시를 사용하여 세션값을 피해자의 세션 값으로 변경후 사이트 접속
     * 세션 하이재킹 도구
 
-    |도구|내용|
-    |:---|:---|
-    |Hunt|네트워크상의 감시, 가로채기|
-    |Arpspoof|공격자의 주소로 속이는 행위|
-    |IP Watcher|네트워크상의 연결, 감시 및 세션을 가로채기 위한 다양한 기능|
-    |Ferret|세션 정보를 가로채는 도구|
-    |Hamster|Proxy 서버 상태로 만들어 주는 도구|
-    |Paros|웹 Proxy 서버로서 쓸 수 있는 도구|
-    |Cain & Abel|스푸핑과 스캐닝 등 다양한 기능|
-    |WireShark|네트워크 패킷 분석, 다양한 패킷 정보를 볼 수 있음|
+        |도구|내용|
+        |:---|:---|
+        |Hunt|네트워크상의 감시, 가로채기|
+        |Arpspoof|공격자의 주소로 속이는 행위|
+        |IP Watcher|네트워크상의 연결, 감시 및 세션을 가로채기 위한 다양한 기능|
+        |Ferret|세션 정보를 가로채는 도구|
+        |Hamster|Proxy 서버 상태로 만들어 주는 도구|
+        |Paros|웹 Proxy 서버로서 쓸 수 있는 도구|
+        |Cain & Abel|스푸핑과 스캐닝 등 다양한 기능|
+        |WireShark|네트워크 패킷 분석, 다양한 패킷 정보를 볼 수 있음|
 
 # **스푸핑 공격**
+
 ## 1. IP Spoofing
+
 ### 1. 개요
 * 자신의 IP를 속이는 행위
 * TCP/IP의 취약점을 이용

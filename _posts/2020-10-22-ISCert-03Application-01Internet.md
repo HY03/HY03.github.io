@@ -132,16 +132,17 @@ toc: true
     * MIME(Multipurpose Internet Mail Extension, RFC 1521) 객체에 암호화와 전자서명 기능을 추가한 암호화 프로토콜
     * 네트워크를 통해 주고받는 메시지에 대해 송수신자에게 보안서비스를 제공
     * 평문 메시지 암호화
-    * 서명, 압출, 분할, 전자 우편 호환성
+    * 서명, 압축, 분할, 전자 우편 호환성
+    * 수신 부인 방지와 메시지 부인 방지는 제공하지 않는다.
 + PGP 특징
 
-|PGP 서비스|상세 내용|
-|:---|:---|
-|전자서명|DSS/SHA 또는 RSA/SHA로 전자서명이 가능|
-|메시지 암호화|CAST-128, IDEA, 3DES로 메시지 암호화|
-|1회용 세션키 생성|Diffie-Hellman 혹은 RSA로 키 분배|
-|이메일 호환|RADIX-64로 바이너리를 ACS Code로 변환|
-|세그먼테이션|메시지 최대 사이즈를 제한|
+    |PGP 서비스|상세 내용|
+    |:---|:---|
+    |전자서명|DSS/SHA 또는 RSA/SHA로 전자서명이 가능|
+    |메시지 암호화|CAST-128, IDEA, 3DES로 메시지 암호화|
+    |1회용 세션키 생성|Diffie-Hellman 혹은 RSA로 키 분배|
+    |이메일 호환|RADIX-64로 바이너리를 ACS Code로 변환|
+    |세그먼테이션|메시지 최대 사이즈를 제한|
 
 ### 2. PEM(Privacy Enhanced Mail)
 * 프라이버시 향상 이메일
@@ -159,6 +160,7 @@ toc: true
     * DSS : 디지털 서명 알고리즘
     * 3중 DES : 메시지의 암호
     * SHA-1 : 디지털 서명을 지원하기 위한 해시함수
+
 # Sendmail 보안
 ## 1. Sendmail
 + 대표적인 Mail Transport Agent(MTA)   
@@ -199,12 +201,12 @@ toc: true
 
 ![RBL](/assets/images/posts/RBL.gif)
 
-[이미지 출처_RBL](https://spam.kisa.or.kr/rbl/sub2_R.do?idx=10&currentPage=1)
+[이미지 출처](https://spam.kisa.or.kr/rbl/sub2_R.do?idx=10&currentPage=1)
 
 
 ![SPF](/assets/images/posts/spf.png)
 
-[이미지 출처_SPF](https://www.cyber.gov.au/acsc/view-all-content/publications/how-combat-fake-emails)
+[이미지 출처](https://www.cyber.gov.au/acsc/view-all-content/publications/how-combat-fake-emails)
 
 
 |RBL(Real Time Blocking)|SPF(Sender Policy Framework)|
@@ -214,6 +216,7 @@ toc: true
 ## 2. SpamAssassin
 + 정의 : 점수를 이용하여 스팸 여부를 판단, Perl로 개발됨
 + 특징 : Rule 기반 하에 Header와 Body를 분석하여 실시간 차단 리스트 (Internet-based real time blacklist(RBL)) 를 참고하여 각각의 룰에 매칭될 경우 점수를 매겨서 총 점수가 기준점을 초과하는지 여부에 따라 스팸 여부를 결정
++ 첨부파일 검사 X
 
 # **웹 서버 보안(Web Server Security)**
 ## 1. 웹(World Wide Web) 개요
@@ -249,14 +252,14 @@ toc: true
 
 |보안 설정|내용|
 |:---|:---|
-|주요 디렉터리 및 파일 접근 권한|Root에 의해 실행 가능한 모든 명령어는 다른 사용자가 수정하지 못하도록 설정<br/><ul><li>`# chown 0. bin conf logs`</li><li>`# chgrp 0. bin conf logs`</li><li>`#chmod 755 . bin conf logs`</li><li>`#chmod 511 /user/loca/httpd/bin/httpd`</li></ul>{:/}|
+|주요 디렉터리 및 파일 접근 권한|Root에 의해 실행 가능한 모든 명령어는 다른 사용자가 수정하지 못하도록 설정{::nomarkdown}<ul><li>`# chown 0. bin conf logs`</li><li>`# chgrp 0. bin conf logs`</li><li>`#chmod 755 . bin conf logs`</li><li>`#chmod 511 /user/loca/httpd/bin/httpd`</li></ul>{:/}|
 |불필요한 파일 삭제|{::nomarkdown}<ul><li>아파치 설치 시 기본적으로 설치되는 cgi-bin은 공격에 이용될 수 있으므로 삭제</li><li>매뉴얼 파일은 시스템에 대한 정보를 제공할 수 있어서 공격에 도움이 될 수 있으므로 삭제</li><li>/var/www/manual 및 /var/www/cgi_bin 삭제</li></ul>{:/}|
 |Directory Listing|index.html이 없거나 Listing을 보여주는 옵션이 indexes에 설정되어 있는 경우 웹 페이지의 디렉터리가 보임|
 |FollowSynLinks|심볼릭 링크를 이용해서 파일 시스템에 접근하여 Root 권한을 획득할 수 있으므로 FollowSymLink를 제거|
-|Directory indexes|{::nomarkdown}<ul><li>우선순위를 결정함</li><li>index.cgi>index.html>index.htm의 순서</li><li>`# DirectoryIndex: sets the file that Apache will serve iof a directory is requested.`</li><li>`<IfModule dir-module>DirectoryIndex index.html</IfModule>`</li></ul>{:/}|
+|Directory indexes|{::nomarkdown}<ul><li>우선순위를 결정함</li><li>index.cgi>index.html>index.htm의 순서</li><li># DirectoryIndex: sets the file that Apache will serve iof a directory is requested.</li><li><IfModule dir-module>DirectoryIndex index.html</IfModule></li></ul>{:/}|
 |Server Tokens|웹 서버에 접속할 경우 최소한의 정보만 보이도록 설정|
 |ServerSignature|ServerSignature on:on 으로 설정된 경우 아파치 버전 및 서버 이름이 노출됨|
-|접근 제어|클라이언트의 이름 및 IP 주소 등을 사용해 접근 제어 수행<ul><li>`<Directory />`</li><li>`    Options FollowSynLinks`</li><li>`    AllowOverride None`</li><li>`    Order deny,allow`</li><li>`    Deny from all`</li><li>`</Directory>`</li></ul>{:/}|
+|접근 제어|클라이언트의 이름 및 IP 주소 등을 사용해 접근 제어 수행{::nomarkdown}<ul><li><Directory /></li><li>    Options FollowSynLinks</li><li>    AllowOverride None</li><li>    Order deny,allow</li><li>    Deny from all</li><li></Directory></li></ul>{:/}|
 |put 과 post의 제한||
 |CGI 스크립트 제한|AddHandler cgi-script.cgi 주석처리|
 
@@ -306,12 +309,12 @@ toc: true
 * 윈도우에서 제공하는 웹 서버
 * 웹 서버 및 FTP, SMTP, NNTP 등의 다양한 서비스 제공
 
-|IIS 구성요소|내용|
-|:---|:---|
-|서비스|{::nomarkdown}<ul><li>웹과 FTP 관리를 위한 IIS 관리 서비스</li><li>World Wide Web 서버 서비스</li><li>FTP 서비스</li><li>메일 발송을 위한 SMTP(Simple Mail Transport Protocol)</li><li>뉴스그룹을 위한 NNTP(Network News Transport Protocol)</li></ul>{:/}|
-|계정 및 그룹|{::nomarkdown}<ul><li>IUSR_MACHINE(인터넷으로 접근하는 익명 계정)</li><li>IWAM_MACHINE(out-of-process로 실행되는 웹 애플리케이션이 실행되는 계정)</li></ul>{:/}|
-|폴더|{::nomarkdown}<ul><li>%windir%\system32\inetsrv(IIS 프로그램)</li><li>%windir%\system32\inetsrv\iisadmin(IIS 관리 프로그램)</li><li>%windir%\help\iishelp(IIS 도움말 파일)</li><li>%systemdrive%\inetpub(웹,FTP,SMTP 루트 폴더)</li></ul>{:/}|
-|웹 사이트|{::nomarkdown}<ul><li>기본 웹 사이트(80번 포트) : %systemdrive%\inetpub\wwwroot</li><li>관리 웹 사이트(3693번 포트) : %systemdrive%\system32\inetsrv\iisadmin</li></ul>{:/}|
+    |IIS 구성요소|내용|
+    |:---|:---|
+    |서비스|{::nomarkdown}<ul><li>웹과 FTP 관리를 위한 IIS 관리 서비스</li><li>World Wide Web 서버 서비스</li><li>FTP 서비스</li><li>메일 발송을 위한 SMTP(Simple Mail Transport Protocol)</li><li>뉴스그룹을 위한 NNTP(Network News Transport Protocol)</li></ul>{:/}|
+    |계정 및 그룹|{::nomarkdown}<ul><li>IUSR_MACHINE(인터넷으로 접근하는 익명 계정)</li><li>IWAM_MACHINE(out-of-process로 실행되는 웹 애플리케이션이 실행되는 계정)</li></ul>{:/}|
+    |폴더|{::nomarkdown}<ul><li>%windir%\system32\inetsrv(IIS 프로그램)</li><li>%windir%\system32\inetsrv\iisadmin(IIS 관리 프로그램)</li><li>%windir%\help\iishelp(IIS 도움말 파일)</li><li>%systemdrive%\inetpub(웹,FTP,SMTP 루트 폴더)</li></ul>{:/}|
+    |웹 사이트|{::nomarkdown}<ul><li>기본 웹 사이트(80번 포트) : %systemdrive%\inetpub\wwwroot</li><li>관리 웹 사이트(3693번 포트) : %systemdrive%\system32\inetsrv\iisadmin</li></ul>{:/}|
 
 # 웹 로그(Web Log) 분석
 ## 1. 웹 로그(Web Log) 개요
@@ -341,16 +344,16 @@ toc: true
     * `ErrorLog syslog` : 에러 발생 시 로그를 syslog에 기록
 + ErrorLog Level
 
-|Error Level|내용|
-|:---|:---|
-|Emerg|에러를 의미함|
-|Alert|불안정한 시스템 상황|
-|Crit|중대한 에러 발생|
-|Error|비교적 중대하지 않은 에러|
-|Warn|경고 발생|
-|Notice|일반적인 메시지 발생|
-|Info|정보 제공|
-|Debug|디버깅 정보|
+    |Error Level|내용|
+    |:---|:---|
+    |Emerg|에러를 의미함|
+    |Alert|불안정한 시스템 상황|
+    |Crit|중대한 에러 발생|
+    |Error|비교적 중대하지 않은 에러|
+    |Warn|경고 발생|
+    |Notice|일반적인 메시지 발생|
+    |Info|정보 제공|
+    |Debug|디버깅 정보|
 
 + Error Level별 설정
     * 기본값 local7 퍼실리티를 통해 에러 기록
@@ -367,18 +370,18 @@ toc: true
     * `CustomLog /logs/referrer_log "%{Referer}i -> %U`
     * Common Log Format의 의미
 
-    |구분|세부 내용|
-    |:---|:---|
-    |`%h`|원격지 호스트. 즉, 접속한 클라이언트 IP 주소를 의미|
-    |`%I`|원격지 사용자 ID|
-    |`%u`|인증이 요청된 원격 사용자 이름|
-    |`%t`|요청한 시간과 날짜|
-    |`%r`|HTTP 메소드를 포함한 요청의 첫 라인|
-    |`%s`|HTTP 상태코드|
-    |`%b`|HTTP 헤더를 제외하고 전송된 바이트|
-    |`%{Referer}i`|요청된 URL이 참조되거나 링크된 URL|
-    |`%{User-Agent}i`|접속한 클라이언트의 운영체제 및 브라우저 버전|
-    |`%T`|요청을 처리하는 데 걸린 시간(초)|
+        |구분|세부 내용|
+        |:---|:---|
+        |`%h`|원격지 호스트. 즉, 접속한 클라이언트 IP 주소를 의미|
+        |`%I`|원격지 사용자 ID|
+        |`%u`|인증이 요청된 원격 사용자 이름|
+        |`%t`|요청한 시간과 날짜|
+        |`%r`|HTTP 메소드를 포함한 요청의 첫 라인|
+        |`%s`|HTTP 상태코드|
+        |`%b`|HTTP 헤더를 제외하고 전송된 바이트|
+        |`%{Referer}i`|요청된 URL이 참조되거나 링크된 URL|
+        |`%{User-Agent}i`|접속한 클라이언트의 운영체제 및 브라우저 버전|
+        |`%T`|요청을 처리하는 데 걸린 시간(초)|
 
 ## 2. HTTP 상태 코드(Status Code)
 + 100 Continue
@@ -504,16 +507,16 @@ toc: true
     - DoS 공격으로, DNS Reflector Attack 이라고도 함
 * DNS 레코드
 
-|종류|내용|
-|:---|:---|
-|A(Address)|호스트 이름을 IPv4 주소로 매핑|
-|AAAA(IPv6 Address)|호스트 이름을 IPv6 주소로 매핑|
-|PTR(Reverse-lookup Pointer records)|IP 주소를 기반으로 도메인 이름을 찾는 데 사용|
-|NS(Name Server)|주어진 호스트에 대한 공식적인 Name Server를 알려줌|
-|MX(Mail Exchanger)|DNS 도메인 이름에 대한 메일 교환 서버를 알려줌. 이 정보는 SMTP 가 전자 메일을 적절한 호스트로 라우팅하는데 사용.|
-|CNAME(Canonical Name)|호스트의 다른 이름(별칭)을 정의하는 데 사용, A레코드의 별명을 달아 주는 것|
-|SOA(Start of Authority)|도메인에 대한 권한을 갖는 서버를 표시함. 도메인에서 가장큰 권한을 부여받은 호스트를 선언 (기본 Name Server, 도메인 관리자의 전자메일, 도메인 일련번호 등 DNS 핵심정보)|
-|Any(ALL)|위의 모든 레코드를 표시|
+    |종류|내용|
+    |:---|:---|
+    |A(Address)|호스트 이름을 IPv4 주소로 매핑|
+    |AAAA(IPv6 Address)|호스트 이름을 IPv6 주소로 매핑|
+    |PTR(Reverse-lookup Pointer records)|IP 주소를 기반으로 도메인 이름을 찾는 데 사용|
+    |NS(Name Server)|주어진 호스트에 대한 공식적인 Name Server를 알려줌|
+    |MX(Mail Exchanger)|DNS 도메인 이름에 대한 메일 교환 서버를 알려줌. 이 정보는 SMTP 가 전자 메일을 적절한 호스트로 라우팅하는데 사용.|
+    |CNAME(Canonical Name)|호스트의 다른 이름(별칭)을 정의하는 데 사용, A레코드의 별명을 달아 주는 것|
+    |SOA(Start of Authority)|도메인에 대한 권한을 갖는 서버를 표시함. 도메인에서 가장큰 권한을 부여받은 호스트를 선언 (기본 Name Server, 도메인 관리자의 전자메일, 도메인 일련번호 등 DNS 핵심정보)|
+    |Any(ALL)|위의 모든 레코드를 표시|
 
 ## 2. DNS 보안
 ### 1. dnsspoof
