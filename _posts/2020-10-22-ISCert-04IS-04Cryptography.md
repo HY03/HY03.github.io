@@ -429,15 +429,9 @@ https://en.wikipedia.org/wiki/Feistel_cipher#/media/File:Feistel_cipher_diagram_
 
 A와 B가 보안이 보장되어 있지 않은 환경에서 서로 비밀 메시지를 주고 받고 싶다고 가정하자. B가 A에게 메시지를 전달하기 위해서는 A의 공개키가 필요하다. A는 아래와 같은 방법을 통해 그만의 공개키와 개인키를 제작한다.
 
+![RSA Formula](/assets/images/posts/rsa_formula.png)
 
-p 와 q 라고 하는 두 개의 서로 다른 ({\displaystyle p\neq q}p\neq q) 소수를 고른다.
-
-
-1. 두 수를 곱하여 {\displaystyle N=pq\,}N=pq\, 을 찾는다.
-2. {\displaystyle \varphi (N)=(p-1)(q-1)\,}\varphi (N)=(p-1)(q-1)\, 를 구한다.
-3. {\displaystyle \varphi (N)}\varphi (N) 보단 작고, {\displaystyle \varphi (N)}\varphi (N)와 서로소인 정수 e를 찾는다.
-4. 확장된 유클리드 호제법을 이용하여 {\displaystyle d\times e}d\times e를 {\displaystyle \varphi (N)}\varphi (N)로 나누었을 때 나머지가 1인 정수 d를 구한다. ({\displaystyle de\equiv 1{\pmod {\varphi (N)}}}de\equiv 1{\pmod  {\varphi (N)}})
-
+[이미지 출처](https://ko.wikipedia.org/wiki/RSA_%EC%95%94%ED%98%B8)
 
 A의 공개키는 위에서 구한 두 개의 숫자로 이루어진 <N, e>이고, 개인키는 <N, d>이다. A는 <N, e>만을 B에게 공개하고, B는 이 공개키를 사용하여 자신의 메시지를 암호화하게 된다. 여기서 p와 q의 보안은 매우 중요하다. 이를 가지고 d와 e의 계산이 가능하기 때문이다. 그리하여 공개키와 개인키가 생성이 된 후에는 이 두 숫자를 지워버리는 것이 안전하다.
 
@@ -451,7 +445,7 @@ A의 공개키는 위에서 구한 두 개의 숫자로 이루어진 <N, e>이�
 # **해시(Hash)함수**
 ## 1. 해시(Hash) 알고리즘 특징
 + 키가 없고 복호화가 불가능한 특징을 가지는 암호화 방식, 일방향 암호 기술
-+ MD(Message Digest)는 부결성만 제공하는 메커니즘
++ MD(Message Digest)는 결성만 제공하는 메커니즘
 + 다양한 길이의 입력을 고정된 짧은 길이의 출력으로 변환하는 함수(고정 길이 출력: 128Bit, 160Bit, 256Bit 등)
 + 표현 방식 : y=h(x)에서 x 는 가변 길이의 메시지, y는 해시함수를 통해서 생성, h는 해시값(Hash code)을 생성 
 
@@ -479,7 +473,7 @@ A의 공개키는 위에서 구한 두 개의 숫자로 이루어진 <N, e>이�
 |SHA|Secure Hash Algorithm, MD 계열의 알고리즘과는 달리 160Bit의 출력 해시값을 생성|
 |SHA-1|미국 표준의 메시지 압축 알고리즘으로 160Bit의 출력 해시값을 생성|
 
-    * 국내에서 해시함수를 통하여 주민등록번호 및 패스워드 암호화 시 가장 권고하는 해시함수는 SHA-256임
+* 국내에서 해시함수를 통하여 주민등록번호 및 패스워드 암호화 시 가장 권고하는 해시함수는 SHA-256임
 
 ### 1. MD5 (Message Digest Algorithm 5)
 * 데이터 무결성을 보장하기 위한 단방향 해시함수
