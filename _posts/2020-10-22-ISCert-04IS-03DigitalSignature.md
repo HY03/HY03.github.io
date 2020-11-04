@@ -63,6 +63,7 @@ toc: true
     * hash(message) -> message digest
 
     * message digest 비교
+
 ## 3. 전자서명 기법의 종류
 
 ### 1. RSA 전자서명
@@ -78,7 +79,7 @@ toc: true
 
 ### 3. Schnorr 전자서명
 * IC 카드에 적합한 전자서명 방식이다.
-* ElGamal를 기반으로 하고 서명의 크기를줄이기 위해서 제안된 방식이다.
+* ElGamal를 기반으로 하고 서명의 크기를 줄이기 위해서 제안된 방식이다.
 
 ### 4. DSS
 * Digital Signature Standard
@@ -94,7 +95,7 @@ toc: true
 
 ### 6. ECC 전자서명
 * ECDSA(Elliptic Curve Digital Signature Algorithm)로 타원곡선을 기반으로 하는 전자서명이다.
-* 타원곡선 알고리즘은 짧은 키를 사용하기 때문에 전자서명을 짧은 시간 내에 생성이 가능하게 되었다.
+* 타원곡선 알고리즘은 짧은 키를 사용하기 때문에 전자서명을 짧은 시간 내에 생성가능하게 되었다.
 
 # PKI 구조
 ## 1. PKI(Public Key Infrastructure) 개요
@@ -192,7 +193,7 @@ toc: true
 
 ## 2. 속성인증서(AC : Attribute Certificate)
 + 속성인증서(AC : Attribute Certificate)는 속성관계를 확인하는 PMI용 인증서
-+ 속성 관리 기관에서 속성정보를 바타으로 발급
++ 속성 관리 기관에서 속성정보를 바탕으로 발급
 + 속성인증서와 속성인증서의 공개키 인증서를 연결하여 권한을 검증
 + 속성인증서는 기존의 신원 확인을 위한 공개키 인증서의 확장 필드를 이용하거나, 신원 확인용과 별도의 속성인증서를 발급하여 관리하는 두 가지 구현 방안이 있음.
 
