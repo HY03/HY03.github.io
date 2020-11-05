@@ -1,4 +1,4 @@
-I"Y8<h1 id="cpu-속도-빠름-고가---연산처리">CPU (속도 빠름, 고가) - 연산처리</h1>
+I"X8<h1 id="cpu-속도-빠름-고가---연산처리">CPU (속도 빠름, 고가) - 연산처리</h1>
 
 <h2 id="1-cpu-구조">1. CPU 구조</h2>
 
@@ -272,7 +272,7 @@
     <p>교체기법 : Random, FIFO, LFU, LRU, Optimal, NUR(참조비트, 수정비트), SCR(참조비트)</p>
   </li>
   <li>
-    <p>할당 정책(Allocation Pollicy)</p>
+    <p>할당 정책(Allocation Policy)</p>
 
     <table>
       <thead>

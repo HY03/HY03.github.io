@@ -106,7 +106,7 @@ toc: true
 + 배치기법 : First Fit, Next Fit, Best Fit, Worst Fit
 + 교체기법 : Random, FIFO, LFU, LRU, Optimal, NUR(참조비트, 수정비트), SCR(참조비트)
 
-+ 할당 정책(Allocation Pollicy)
++ 할당 정책(Allocation Policy)
 
     |구분|종류|세부 내용|
     |:---:|:---:|:---|

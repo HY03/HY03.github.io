@@ -185,7 +185,7 @@ toc: true
     |:---|:---|
     |`default=0`|부트 순서를 지정하는 번호로 멀티부트의 경우 운영체제 레이블 번호를 선택|
     |`timeout=0`|지정된 시간이 경과되면 default로 지정된 운영체제로 부팅|
-    |`splashimg=(hd0,0)`</br>`/grub/splash.xpm.gz`|부팅 이미지를 지정하는 부분|
+    |`splashimg=(hd0,0)`<br/>`/grub/splash.xpm.gz`|부팅 이미지를 지정하는 부분|
     |hiddenmenu|부트로더를 보여주지 않음|
     |title Fedora|부팅되는 부트 엔트리를 의미|
 
@@ -241,7 +241,7 @@ toc: true
     * `-D` : `--delete` : 규칙을 삭제
     * `-R` : `--replace` : 새로운 규칙으로 대체
     * `-I` : `--insert` : 체인 가장 처음에 규칙을 추가
-    * `-E` : `--renmae-chain` : 체인의 이름을 변경
+    * `-E` : `--rename-chain` : 체인의 이름을 변경
 + `ifconfig`
     * 네트워크의 인터페이스 정보를 확인하거나 시작, 종료할 수 있다.
     * eth0
