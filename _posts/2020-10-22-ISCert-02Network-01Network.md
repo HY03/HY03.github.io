@@ -326,7 +326,7 @@ toc: true
     * DDoS 보안 취약점
 
 ## 3. 인터넷 계층(Internet Layer)
-- 송신자의 IP 주소와 수신자의 IP 주소를읽어 경로 결정, 전송하는 역할
+- 송신자의 IP 주소와 수신자의 IP 주소를 읽어 경로 결정, 전송하는 역할
 - 다중 네트워크 링크를 통해 패킷의 발신지 대 목적지 전달에 대한 책임을 가짐 (DataLink 층은 노드간 전달 책임) (Point to Point)
 - 인터넷 계층은 IP, ICMP 의 TCP/IP 프로토콜 군이 존재하고 멀티캐스팅을 위한 IGMP(Internet Group Management Protocol), 라우팅을 위한 BGP, OSPF, RIP 등이 존재
 - 경로결정(Routing) 은 수신자의 IP 주소를 읽어서 어떻게 목적지까지 가는 것이 최적의 경로인지를 판단하는 것이며, 이러한 작업을 하는 것은 라우터(Router)라는 네트워크 장비이다.
@@ -433,7 +433,7 @@ toc: true
     * Flags & Offset : IP Datagram 단편화 정보
         - MTU(Maximum Transmission Unit) : 네트워크 상 한 번에 통과할 수 있는 패킷의 최대 크기
         - 패킷의 크기가 너무 크면  (MTU 보다 크면) 분할되고, 패킷이 분할된 경우 패킷 수신자가 다시 조립을 해야 하는데 이와 관계된 정보
-    * Time to Live : Datagram이 통고할 수 있는 라우터 수
+    * Time to Live : Datagram이 통과할 수 있는 라우터 수
         - 0이 되면 자동 폐기
     * Protocol : ICMP, TCP, UDP
         - IP Header 위의 상위 프로토콜의 종류
@@ -474,7 +474,7 @@ toc: true
 #### 2. **ICMP (Internet Control Message Protocol)**
 - TCP/IP 에서 오류 제어 프로토콜
 - 호스트 및 라우터는 다른 호스트나 라우터가 현재 도달 가능한지 여부를 결정함
-- 라우터는 특정 목적지 네트워크로 후속 IP 데이터그램을 보냈는데, 사용할 수 있는 더 좋은 경로가 있을 때 근원지 호스트에거 통지함.
+- 라우터는 특정 목적지 네트워크로 후속 IP 데이터그램을 보냈는데, 사용할 수 있는 더 좋은 경로가 있을 때 근원지 호스트에게 통지함.
 - 호스트나 라우터는 그들이 처리하기에 너무 빠른 IP 데이터그램이 도착하면 다른 시스템에게 통보함.
 - ICMP 주요 기능
     + 오류 보고 메시지 : IP 패킷 처리 도중 발견된 문제를 보고

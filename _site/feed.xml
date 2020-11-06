@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-11-05T17:26:46+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Bluesplatter</title><subtitle>전문적이지 않은 정보들, 감상, 즉흥적인 내용들</subtitle><author><name>HY03</name><email>hyunik03@gmail.com</email></author><entry><title type="html">05.정보보호 관리 - 02.정보보호 관련 윤리 및 법규</title><link href="http://localhost:4000/is_certification/ISCert-05ISM-02IS_Law/" rel="alternate" type="text/html" title="05.정보보호 관리 - 02.정보보호 관련 윤리 및 법규" /><published>2020-10-28T12:00:00+09:00</published><updated>2020-10-28T12:00:00+09:00</updated><id>http://localhost:4000/is_certification/ISCert-05ISM-02IS_Law</id><content type="html" xml:base="http://localhost:4000/is_certification/ISCert-05ISM-02IS_Law/">&lt;h1 id=&quot;정보보호-및-개인정보보호법-체계&quot;&gt;정보보호 및 개인정보보호법 체계&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-11-06T17:37:34+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Bluesplatter</title><subtitle>전문적이지 않은 정보들, 감상, 즉흥적인 내용들</subtitle><author><name>HY03</name><email>hyunik03@gmail.com</email></author><entry><title type="html">05.정보보호 관리 - 02.정보보호 관련 윤리 및 법규</title><link href="http://localhost:4000/is_certification/ISCert-05ISM-02IS_Law/" rel="alternate" type="text/html" title="05.정보보호 관리 - 02.정보보호 관련 윤리 및 법규" /><published>2020-10-28T12:00:00+09:00</published><updated>2020-10-28T12:00:00+09:00</updated><id>http://localhost:4000/is_certification/ISCert-05ISM-02IS_Law</id><content type="html" xml:base="http://localhost:4000/is_certification/ISCert-05ISM-02IS_Law/">&lt;h1 id=&quot;정보보호-및-개인정보보호법-체계&quot;&gt;정보보호 및 개인정보보호법 체계&lt;/h1&gt;
 &lt;h2 id=&quot;1-개인정보보호원칙&quot;&gt;1. 개인정보보호원칙&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;
@@ -7060,7 +7060,7 @@
       &lt;li&gt;사용자의 OTP 생성 매체와 은행의 OTP 인증서버 사이에 동기화된 기준값에 따라 OTP가 생성되는 방식&lt;/li&gt;
       &lt;li&gt;동기화된 기준값에 따라 시간 동기화방식과 이벤트 동기화방식으로 분류됨&lt;/li&gt;
       &lt;li&gt;시간 동기화 방식은 OTP 생성 매체가 매시간 비밀번호를 자동으로 생성하는 형태로 시간을 기준값으로 하여 OTP 생성 매체와 OTP 인증서버가 동기화됨&lt;/li&gt;
-      &lt;li&gt;시간을 입력값으로 동기화하기 때문에 간편한장점을 가지지만, 일정 시간 동안 은행에 OTP를 전송하지 못하면 다시 새로운 OTP가 생성도리 때까지 기다려야 함&lt;/li&gt;
+      &lt;li&gt;시간을 입력값으로 동기화하기 때문에 간편한 장점을 가지지만, 일정 시간 동안 은행에 OTP를 전송하지 못하면 다시 새로운 OTP가 생성될 때까지 기다려야 함&lt;/li&gt;
       &lt;li&gt;이벤트 동기화 방식은 OTP 생성 매체와 인증서버의 동기화된 인증횟수를 기준값으로 생성, OTP 생성 매체에서 생성된 비밀번호 횟수와 인증서버가 생성한 비밀번호 횟수가 자동으로 동기화되기 때문에 시간 동기화의 불편성을 완화&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
@@ -7747,7 +7747,7 @@
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;sFTP&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;전송 구가네 암호화 기법을 사용하여 기밀성을 제공&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;전송 구간에 암호화 기법을 사용하여 기밀성을 제공&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
@@ -8205,7 +8205,7 @@
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;접근 제어&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;클라이언트의 이름 및 IP 주소 등을 사용해 접근 제어 수행&lt;ul&gt;&lt;li&gt;&lt;Directory /&gt;&lt;/li&gt;&lt;li&gt;    Options FollowSynLinks&lt;/li&gt;&lt;li&gt;    AllowOverride None&lt;/li&gt;&lt;li&gt;    Order deny,allow&lt;/li&gt;&lt;li&gt;    Deny from all&lt;/li&gt;&lt;li&gt;&lt;/Directory&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;클라이언트의 이름 및 IP 주소 등을 사용해 접근 제어 수행&lt;br /&gt;&amp;lt;Directory /&amp;gt;&lt;br /&gt;    Options FollowSynLinks&lt;br /&gt;    AllowOverride None&lt;br /&gt;    Order deny,allow&lt;br /&gt;    Deny from all&lt;br /&gt;&amp;lt;/Directory&amp;gt;&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;put 과 post의 제한&lt;/td&gt;
@@ -8655,7 +8655,12 @@
 
 &lt;h3 id=&quot;5-워터링-홀watering-hole-공격&quot;&gt;5. 워터링 홀(Watering Hole) 공격&lt;/h3&gt;
 
+&lt;p&gt;&lt;img src=&quot;/assets/images/posts/water-hole.jpg&quot; alt=&quot;Watering Hole&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.profwoodward.org/2013/04/beware-watering-hole.html&quot;&gt;이미지 출처&lt;/a&gt;&lt;/p&gt;
+
 &lt;ul&gt;
+  &lt;li&gt;사막의 오아시스(특정 사이트) 에 다가오는 초식동물(Victim) 을 노리는 육식동물 (Hacker)&lt;/li&gt;
   &lt;li&gt;워터링 홀 공격(특정 타겟)은 홈페이지에 접속하는 특정 사회적 그룹을 대상으로 악성코드를 유포하여 특정 사회적 그룹에 추가적인 APT 공격 등을 목적으로 한다.
     &lt;ul&gt;
       &lt;li&gt;예) 외교 관련 사이트에 악성코드를 심고 외교부 관계자가 접속하면 해당 PC에 악성코드를 설치, 그 PC에서 정보를 빼냄&lt;/li&gt;

@@ -33,7 +33,7 @@ toc: true
 |:---|:---|
 |FTP|ID 및 Password 인증을 수행하고 TCP 프로토콜을 사용하여 사용자의 데이터를 송수신|
 |tFTP|인증 과정 없이 UDP 기반으로 데이터를 빠르게 송수신 함. 69번 포트 사용|
-|sFTP|전송 구가네 암호화 기법을 사용하여 기밀성을 제공|
+|sFTP|전송 구간에 암호화 기법을 사용하여 기밀성을 제공|
 
 ### 4. FTP 접근 통제 파일
 
@@ -259,7 +259,7 @@ toc: true
 |Directory indexes|{::nomarkdown}<ul><li>우선순위를 결정함</li><li>index.cgi>index.html>index.htm의 순서</li><li># DirectoryIndex: sets the file that Apache will serve iof a directory is requested.</li><li><IfModule dir-module>DirectoryIndex index.html</IfModule></li></ul>{:/}|
 |Server Tokens|웹 서버에 접속할 경우 최소한의 정보만 보이도록 설정|
 |ServerSignature|ServerSignature on:on 으로 설정된 경우 아파치 버전 및 서버 이름이 노출됨|
-|접근 제어|클라이언트의 이름 및 IP 주소 등을 사용해 접근 제어 수행{::nomarkdown}<ul><li><Directory /></li><li>    Options FollowSynLinks</li><li>    AllowOverride None</li><li>    Order deny,allow</li><li>    Deny from all</li><li></Directory></li></ul>{:/}|
+|접근 제어|클라이언트의 이름 및 IP 주소 등을 사용해 접근 제어 수행<br/>\<Directory /\><br/>    Options FollowSynLinks<br/>    AllowOverride None<br/>    Order deny,allow<br/>    Deny from all<br/>\</Directory\>|
 |put 과 post의 제한||
 |CGI 스크립트 제한|AddHandler cgi-script.cgi 주석처리|
 
@@ -456,6 +456,11 @@ toc: true
 
 ### 5. 워터링 홀(Watering Hole) 공격
 
+![Watering Hole](/assets/images/posts/water-hole.jpg)
+
+[이미지 출처](https://www.profwoodward.org/2013/04/beware-watering-hole.html)
+
+* 사막의 오아시스(특정 사이트) 에 다가오는 초식동물(Victim) 을 노리는 육식동물 (Hacker)
 * 워터링 홀 공격(특정 타겟)은 홈페이지에 접속하는 특정 사회적 그룹을 대상으로 악성코드를 유포하여 특정 사회적 그룹에 추가적인 APT 공격 등을 목적으로 한다.
     - 예) 외교 관련 사이트에 악성코드를 심고 외교부 관계자가 접속하면 해당 PC에 악성코드를 설치, 그 PC에서 정보를 빼냄
 

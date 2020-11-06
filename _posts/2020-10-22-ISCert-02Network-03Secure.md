@@ -285,13 +285,13 @@ toc: true
         - `log tcp any any -> any 110 (session: printable);`
     * threshold
         - 동일한 특정 패킷에 대해 설정한 시간 내에 일정 수가 발생하면 탐지 (무작위 공격 (Brute Force) 을 탐지)
-        - `treshold: type [limit, treshold, both], track [by_src, by_dst], count [횟수], seconds [몇 초]`
-        - treshold 옵션
+        - `threshold: type [limit, threshold, both], track [by_src, by_dst], count [횟수], seconds [몇 초]`
+        - threshold 옵션
 
             |구분|내용|
             |:---|:---|
             |limit|count 동안에 횟수 번째 트래픽까지 탐지한다.|
-            |treshold|횟수마다 계속 탐지한다.|
+            |threshold|횟수마다 계속 탐지한다.|
             |both|count 동안 횟수만큼 트래픽이 탐지 될 시에 한번만 탐지한다.|
             |by_src|출발지의 패킷만 탐지한다.|
             |by_dst|목적지 패킷만 탐지한다.|
