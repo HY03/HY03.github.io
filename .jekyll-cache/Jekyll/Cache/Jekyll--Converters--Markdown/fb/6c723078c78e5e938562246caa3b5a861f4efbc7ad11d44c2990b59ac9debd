@@ -1,0 +1,23 @@
+I"g<ul class="toc__menu">
+  <li><a href="#cpu-속도-빠름-고가---연산처리">CPU (속도 빠름, 고가) - 연산처리</a>
+    <ul>
+      <li><a href="#1-cpu-구조">1. CPU 구조</a></li>
+      <li><a href="#2-register">2. Register</a></li>
+      <li><a href="#3-버스-전송-라인">3. 버스 (전송 라인)</a></li>
+      <li><a href="#4-instruction-cycle">4. Instruction Cycle</a></li>
+    </ul>
+  </li>
+  <li><a href="#메모리---임시-기억">메모리 - 임시 기억</a>
+    <ul>
+      <li><a href="#1-캐시-메모리">1. 캐시 메모리</a></li>
+      <li><a href="#2-가상-메모리">2. 가상 메모리</a></li>
+    </ul>
+  </li>
+  <li><a href="#io--인터페이스">I/O  인터페이스</a>
+    <ul>
+      <li><a href="#1-io-interface">1. I/O Interface</a></li>
+      <li><a href="#2-io-processor">2. I/O Processor</a></li>
+    </ul>
+  </li>
+</ul>
+:ET

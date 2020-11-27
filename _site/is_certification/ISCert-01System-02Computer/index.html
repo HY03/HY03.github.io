@@ -380,9 +380,10 @@
       <li><a href="#2-가상-메모리">2. 가상 메모리</a></li>
     </ul>
   </li>
-  <li><a href="#disk-보조기억장치-영구-저장">Disk 보조기억장치 (영구 저장)</a>
+  <li><a href="#io--인터페이스">I/O  인터페이스</a>
     <ul>
-      <li><a href="#1-입출력-기법">1. 입출력 기법</a></li>
+      <li><a href="#1-io-interface">1. I/O Interface</a></li>
+      <li><a href="#2-io-processor">2. I/O Processor</a></li>
     </ul>
   </li>
 </ul>
@@ -407,19 +408,19 @@
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">ALU(연산장치)</td>
-      <td style="text-align: left"><ul><li>각종 산술연산들과 논리연산들을 수행하는 회로</li><li>산술연산 : +, -, \*, /</li><li>논리연산 : AND, OR, NOT, XOR</li></ul></td>
+      <td style="text-align: left"><strong>ALU(연산장치)</strong></td>
+      <td style="text-align: left">⦁ 각종 산술연산들과 논리연산들을 수행하는 회로<br />⦁ 산술연산 : +, -, *, /<br />⦁ 논리연산 : AND, OR, NOT, XOR</td>
     </tr>
     <tr>
-      <td style="text-align: left">Register(레지스터)</td>
-      <td style="text-align: left"><ul><li>CPU 내부의 소규모 데이터나 중간 결과를 일시적으로 기억해 두는 고속의 전용 영역</li><li>컴퓨터 기억장치 중 Access 속도가 가장 빠름</li></ul></td>
+      <td style="text-align: left"><strong>Register(레지스터)</strong></td>
+      <td style="text-align: left">⦁ CPU 내부의 소규모 데이터나 중간 결과를 일시적으로 기억해 두는 고속의 전용 영역<br />⦁ 컴퓨터 기억장치 중 Access 속도가 가장 빠름</td>
     </tr>
     <tr>
-      <td style="text-align: left">Control Unit(제어장치)</td>
+      <td style="text-align: left"><strong>Control Unit(제어장치)</strong></td>
       <td style="text-align: left">프로그램 코드(명령어)를 해석하고, 그것을 실행하기 위한 제어 신호들(Control Signals)을 발생시킴</td>
     </tr>
     <tr>
-      <td style="text-align: left">내부 CPU 버스</td>
+      <td style="text-align: left"><strong>내부 CPU 버스</strong></td>
       <td style="text-align: left">ALU와 레지스터 간의 데이터 이동을 위한 경로</td>
     </tr>
   </tbody>
@@ -436,19 +437,19 @@
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">PC(Program Counter)</td>
+      <td style="text-align: left"><strong>PC(Program Counter)</strong></td>
       <td style="text-align: left">다음에 수행할 명령어가 저장된 주기억장치의 번지를 지정</td>
     </tr>
     <tr>
-      <td style="text-align: left">MAR(Memory Address Register)</td>
+      <td style="text-align: left"><strong>MAR(Memory Address Register)</strong></td>
       <td style="text-align: left">주기억장치에 접근하기 위한 주기억장치의 번지를 기억</td>
     </tr>
     <tr>
-      <td style="text-align: left">MBR(Memory Buffer Register)</td>
+      <td style="text-align: left"><strong>MBR(Memory Buffer Register)</strong></td>
       <td style="text-align: left">주기억장치에 입/출력할 자료를 기억하는 레지스터</td>
     </tr>
     <tr>
-      <td style="text-align: left">IR(Instruction Register)</td>
+      <td style="text-align: left"><strong>IR(Instruction Register)</strong></td>
       <td style="text-align: left">주기억장치에서 인출한 명령코드를 기억하는 레지스터</td>
     </tr>
   </tbody>
@@ -470,7 +471,7 @@
     </tr>
     <tr>
       <td style="text-align: left">주소 버스(Address Bus)</td>
-      <td style="text-align: left"><ul><li>기억장소의 위치 또는 자이 식별을 지정하기 위한 라인</li><li>라인의 비트 수에 따라 접속될 수 있는 장치의 용량이 결정됨</li></ul></td>
+      <td style="text-align: left">⦁ 기억장소의 위치 또는 장치 식별을 지정하기 위한 라인<br />⦁ 라인의 비트 수에 따라 접속될 수 있는 장치의 용량이 결정됨</td>
     </tr>
     <tr>
       <td style="text-align: left">제어 버스(Control Bus)</td>
@@ -490,35 +491,53 @@
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">인출(Instruction Fetch)</td>
+      <td style="text-align: left"><strong>인출(Instruction Fetch)</strong></td>
       <td style="text-align: left">인출단계는 메모리(Memory)에서 데이터를 로드(Load)하여 CPU에 있는 레지스터(Register)에 적재하는 과정</td>
     </tr>
     <tr>
-      <td style="text-align: left">간접(Indirect)</td>
-      <td style="text-align: left"><ul><li>메모리를 참조할 때 간접주소 방식을 사용하는 경우에 실행</li><li>간접주소란 CPU가 메모리를 참조했을 때 데이터가 존재하는 것이 아니라 메모리에 주소가 존재하여 메모리 내에서 한 번 더 조회해서 데이터를 얻는 것</li></ul></td>
+      <td style="text-align: left"><strong>간접(Indirect)</strong></td>
+      <td style="text-align: left">⦁ 메모리를 참조할 때 간접주소 방식을 사용하는 경우에 실행<br />⦁ 간접주소란 CPU가 메모리를 참조했을 때 데이터가 존재하는 것이 아니라 메모리에 주소가 존재하여 메모리 내에서 한 번 더 조회해서 데이터를 얻는 것</td>
     </tr>
     <tr>
-      <td style="text-align: left">실행(Execution)</td>
+      <td style="text-align: left"><strong>실행(Execution)</strong></td>
       <td style="text-align: left">명령과 데이터로 CPU가 산술 및 논리연산을 수행하는 것</td>
     </tr>
     <tr>
-      <td style="text-align: left">인터럽트(Inturrupt)</td>
-      <td style="text-align: left"><ul><li>컴퓨터 작동 중 예기치 않은 문제가 발생한 경우라도 업무 처리가 계속될 수 있도록 하는 컴퓨터 운영체제의 한 기능으로, 크게 하드웨어 인터럽트와 소프트웨어 인터럽트로 나눔</li><li>SVC 하드웨어 인터럽트 : 기계착오 인터럽트, 외부 인터럽트, 입출력 인터럽트, 프로그램 검사 인터럽트</li><li>소프트웨어 인터럽트 : CPU 내부에서 자신이 실행한 명령이나 CPU의 명령 실행에 관련된 모듈이 변화하는 경우 발생</li></ul></td>
+      <td style="text-align: left"><strong>인터럽트(Inturrupt)</strong></td>
+      <td style="text-align: left">⦁ 컴퓨터 작동 중 예기치 않은 문제가 발생한 경우라도 업무 처리가 계속될 수 있도록 하는 컴퓨터 운영체제의 한 기능으로, 크게 하드웨어 인터럽트와 소프트웨어 인터럽트로 나눔<br />⦁ SVC 하드웨어 인터럽트 : 기계착오 인터럽트, 외부 인터럽트, 입출력 인터럽트, 프로그램 검사 인터럽트<br />⦁ 소프트웨어 인터럽트 : CPU 내부에서 자신이 실행한 명령이나 CPU의 명령 실행에 관련된 모듈이 변화하는 경우 발생</td>
     </tr>
   </tbody>
 </table>
 
 <h1 id="메모리---임시-기억">메모리 - 임시 기억</h1>
 
-<h2 id="1-캐시-메모리">1. <strong>캐시 메모리</strong></h2>
+<h2 id="1-캐시-메모리">1. 캐시 메모리</h2>
 
 <ul>
   <li>CPU와 Memory 속도 차이 해결</li>
   <li>캐시사상 방법
     <ul>
-      <li>직접사상 : 메인 메모리를 분할하여 Cache 슬롯과 매핑</li>
-      <li>연관사상(가장 빠름) : 메인 메모리의 각 블록이 Cache 어느 슬롯이든 적재 가능</li>
-      <li>집합연관사상 : 직접/연관 절충안으로 메인메모리 구역을 셋으로 묶어 Cache 슬롯과 매핑</li>
+      <li><strong>직접사상</strong>
+        <ul>
+          <li>메인 메모리를 분할하여 Cache 슬롯과 매핑</li>
+          <li>장점 : 매핑 절차가 단순하고 신속하게 처리</li>
+          <li>단점 : 높은 캐시 미스율 (같으 블록에 사상되는 데이터 캐시 적재 시 교체 발생)</li>
+        </ul>
+      </li>
+      <li><strong>연관사상(가장 빠름)</strong>
+        <ul>
+          <li>메인 메모리의 각 블록이 Cache 어느 슬롯이든 적재 가능</li>
+          <li>장점 : 지역성 높은 접근 시 캐시 적중률 높음</li>
+          <li>단점 : 구현 하드웨어가 복잡하여 구현 비용 상승</li>
+        </ul>
+      </li>
+      <li><strong>집합연관사상</strong>
+        <ul>
+          <li>직접/연관 절충안으로 메인메모리 구역을 셋으로 묶어 Cache 슬롯과 매핑</li>
+          <li>장점 : 직접사상과 연관사상의 장점 수용</li>
+          <li>단점 : 캐시 Fin/Fout 발생 증가. 구현 비용이 많이 듦.</li>
+        </ul>
+      </li>
     </ul>
   </li>
   <li>
@@ -534,39 +553,65 @@
       </thead>
       <tbody>
         <tr>
-          <td style="text-align: left">Random</td>
+          <td style="text-align: left">**Random</td>
           <td style="text-align: left">교체될 page 를 임의 선정</td>
           <td style="text-align: left">overhead 적음</td>
         </tr>
         <tr>
-          <td style="text-align: left">FIFO <br />(First in First Out)</td>
+          <td style="text-align: left"><strong>FIFO <br />(First in First Out)</strong></td>
           <td style="text-align: left">캐시 내에 오래 있었던 page 교체</td>
           <td style="text-align: left">자주 사용되는 page가 교체될 우려</td>
         </tr>
         <tr>
-          <td style="text-align: left">LFU <br />(Least Frequently Used)</td>
+          <td style="text-align: left"><strong>LFU <br />(Least Frequently Used)</strong></td>
           <td style="text-align: left">사용 횟수가 가장 적은 page 교체</td>
           <td style="text-align: left">최근 적재된 page가 교체될 우려</td>
         </tr>
         <tr>
-          <td style="text-align: left">LRU <br />(Least Recently Used)</td>
+          <td style="text-align: left"><strong>LRU <br />(Least Recently Used)</strong></td>
           <td style="text-align: left">가장 오랫동안 사용되지 않은 page 교체</td>
           <td style="text-align: left">time stamping overhead 존재</td>
         </tr>
         <tr>
-          <td style="text-align: left">Optimal</td>
+          <td style="text-align: left">**Optimal</td>
           <td style="text-align: left">향후 가장 참조되지 않을 page 교체</td>
           <td style="text-align: left">실현 불가능</td>
         </tr>
         <tr>
-          <td style="text-align: left">NUR <br />(Not Used Recently)</td>
+          <td style="text-align: left"><strong>NUR <br />(Not Used Recently)</strong></td>
           <td style="text-align: left">참조비트, 수정비트로 미사용 page 교체</td>
           <td style="text-align: left">최근 사용되지 않은 page 교체</td>
         </tr>
         <tr>
-          <td style="text-align: left">SCR <br />(Second Chance Replacement)</td>
+          <td style="text-align: left"><strong>SCR <br />(Second Chance Replacement)</strong></td>
           <td style="text-align: left">최초 참조비트 1로 셋, 1인 경우 0으로 셋, 0인 경우 교체</td>
           <td style="text-align: left">기회를 한번 더 줌</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>페이지 교체 관리 시 문제점 :</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">문제점</th>
+          <th style="text-align: left">세부 내용</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left">Page Fault 발생<br />(페이지 부재)</td>
+          <td style="text-align: left">기억장치에 적재되지 않은 Page를 사용하려 할 때 Page Fault 발생</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">Demand Paging<br />(요구 페이징)</td>
+          <td style="text-align: left">요구될 때에만 Process가 Page를 적재하는 방식</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">Thrashing 발생<br />(스레싱)</td>
+          <td style="text-align: left">Page 부재가 너무 빈번하게 발생하여 CPU가 Process 수행보다 Page 교체에 더 많은 시간을 소요하는 비정상적인 현상</td>
         </tr>
       </tbody>
     </table>
@@ -583,43 +628,65 @@
       </thead>
       <tbody>
         <tr>
-          <td style="text-align: left">Load Control</td>
+          <td style="text-align: left"><strong>Load Control</strong></td>
           <td style="text-align: left">일정 시간 동안 새로운 프로세서가 생성되는 것을 지연시키고 Suspend Queue에 대기시켜서 Thrashing 현상을 감소시킴</td>
         </tr>
         <tr>
-          <td style="text-align: left">Locality(구역성)</td>
+          <td style="text-align: left"><strong>Locality(구역성)</strong></td>
           <td style="text-align: left">시간과 공간 지역성을 집중적으로 참조함</td>
         </tr>
         <tr>
-          <td style="text-align: left">Working Set(워킹셋)</td>
+          <td style="text-align: left"><strong>Working Set(워킹셋)</strong></td>
           <td style="text-align: left">일정 시간 동안 참조되는 페이지 집합(Working Set)을 주기억장치에 유지</td>
         </tr>
         <tr>
-          <td style="text-align: left">PFF(Page Fault Frequency)</td>
-          <td style="text-align: left"><ul><li>Process의 Page Fault 빈도에 따라 Residence set을 조정</li><li>PFF가 높으면 Residence set의 크기 증가, 낮으면 감소</li></ul></td>
+          <td style="text-align: left"><strong>PFF(Page Fault Frequency)</strong></td>
+          <td style="text-align: left">⦁ Process의 Page Fault 빈도에 따라 Residence set을 조정<br />⦁ PFF가 높으면 Residence set의 크기 증가, 낮으면 감소</td>
         </tr>
       </tbody>
     </table>
+  </li>
+  <li>캐시 메모리 일관성 (Cache Coherence)
+    <ul>
+      <li>캐시 메모리 일관성 유지 방식
+        <ul>
+          <li>멀티프로세서 환경에서 각 프로세서가 캐시를 보유하며 캐시에 로드된 데이터를 변경한 경우 주기억장치의 데이터와 동일하게 유지하는 메커니즘</li>
+        </ul>
+      </li>
+      <li>Write through
+        <ul>
+          <li>CPU가 캐시 메모리와 주기억장치를 동시에 수정</li>
+        </ul>
+      </li>
+      <li>Write back
+        <ul>
+          <li>캐시 메모리만 수정 후 나중에 일괄적으로 주 기억장치를 수정</li>
+        </ul>
+      </li>
+    </ul>
   </li>
 </ul>
 
 <h2 id="2-가상-메모리">2. 가상 메모리</h2>
 
 <ul>
-  <li>보조기억장치를 주기억장치처럼 사용하여 주기억장치의 공간을 확대</li>
-  <li>할당기법
+  <li>가상 메모리의 개념
     <ul>
-      <li><strong>페이지와 세그먼트</strong></li>
-      <li>페이지(page) : 가상 기억장치 상에서 동일한 크기의 최소 논리 분할 단위로 나눈 것</li>
+      <li>보조기억장치를 주기억장치처럼 사용하여 주기억장치의 공간을 확대</li>
+    </ul>
+  </li>
+  <li>가상 메모리 관리 단위
+    <ul>
+      <li><strong>페이지(page)</strong> : 가상 기억장치 상에서 동일한 크기의 최소 논리 분할 단위로 나눈 것</li>
       <li>
-        <p>세그먼트(segment) : 사용자 주소 공간을 용도별로 논리적 단위로 나눈 것</p>
+        <p><strong>세그먼트(segment)</strong> : 사용자 주소 공간을 용도별로 논리적 단위로 나눈 것</p>
 
         <table>
           <thead>
             <tr>
               <th style="text-align: center">구분</th>
-              <th style="text-align: left">Paging 기법</th>
-              <th style="text-align: left">Segment 기법</th>
+              <th style="text-align: left"><strong>Paging 기법</strong></th>
+              <th style="text-align: left"><strong>Segment 기법</strong></th>
             </tr>
           </thead>
           <tbody>
@@ -640,13 +707,13 @@
             </tr>
             <tr>
               <td style="text-align: center">장점</td>
-              <td style="text-align: left"><ul><li>요구 Page만 적재 Load</li><li>외부 단편화 해결</li><li>교체시간 최소</li></ul></td>
-              <td style="text-align: left"><ul><li>사용자 관점</li><li>개발/프로그래밍 용이</li><li>내부 단편화 해결</li><li>코드, 데이터 공유 용이</li></ul></td>
+              <td style="text-align: left">⦁ 요구 Page만 적재 Load<br />⦁ 외부 단편화 해결<br />⦁ 교체시간 최소</td>
+              <td style="text-align: left">⦁ 사용자 관점<br />⦁ 개발/프로그래밍 용이<br />⦁ 내부 단편화 해결<br />⦁ 코드, 데이터 공유 용이</td>
             </tr>
             <tr>
               <td style="text-align: center">단점</td>
-              <td style="text-align: left"><ul><li>내부 단편화(Fragmentation) 발생</li><li>Thrashing, 잦은 디스크 I/O 유발</li></ul></td>
-              <td style="text-align: left"><ul><li>외부 단편화 심각</li><li>메인 메모리가 커야 함</li></ul></td>
+              <td style="text-align: left">⦁ <strong>내부 단편화(Fragmentation) 발생</strong><br />⦁ Thrashing, 잦은 디스크 I/O 유발</td>
+              <td style="text-align: left">⦁ <strong>외부 단편화 심각</strong><br />⦁ 메인 메모리가 커야 함</td>
             </tr>
           </tbody>
         </table>
@@ -658,10 +725,40 @@
       </li>
     </ul>
   </li>
-  <li>호출기법 : Demand Fetch, Pre Fetch</li>
-  <li>배치기법 : First Fit, Next Fit, Best Fit, Worst Fit</li>
   <li>
-    <p>교체기법 : Random, FIFO, LFU, LRU, Optimal, NUR(참조비트, 수정비트), SCR(참조비트)</p>
+    <p>가상 메모리 관리 정책</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">종류</th>
+          <th style="text-align: left">세부 내용</th>
+          <th style="text-align: left">기법의 유형</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left"><strong>할당 기법</strong><br />(Allocation)</td>
+          <td style="text-align: left">프로세스에게 할당되는 메모리 블록의 단위를 결정</td>
+          <td style="text-align: left">고정 할당, 가변 할당, Paging, Segmentation</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"><strong>호출 기법</strong><br />(Fetch Policy)</td>
+          <td style="text-align: left">보조기억장치에서 주기억장치로 적재할 시점 결정</td>
+          <td style="text-align: left">Demand Fetch, Pre Fetch</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"><strong>배치 기법</strong><br />(Placement)</td>
+          <td style="text-align: left">요구된 페이지를 주기억장치의 어느 곳에 적재할 것인지를 결정</td>
+          <td style="text-align: left">First fit, Best fit, Next fit, Worst fit</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"><strong>교체 기법</strong><br />(Replacement)</td>
+          <td style="text-align: left">주기억장치 공간 부족 시 교체 대상 결정</td>
+          <td style="text-align: left">Random, FIFO, LRU, LFU, NUR, SCR, Optimal</td>
+        </tr>
+      </tbody>
+    </table>
   </li>
   <li>
     <p>할당 정책(Allocation Policy)</p>
@@ -678,12 +775,12 @@
         <tr>
           <td style="text-align: center">연속 할당</td>
           <td style="text-align: center">고정 분할</td>
-          <td style="text-align: left"><ul><li>고정된 크기의 단위로 메모리 할당</li><li>내부 단편화 발생</li></ul></td>
+          <td style="text-align: left">⦁ 고정된 크기의 단위로 메모리 할당<br />⦁ 내부 단편화 발생</td>
         </tr>
         <tr>
           <td style="text-align: center"> </td>
           <td style="text-align: center">가변 분할</td>
-          <td style="text-align: left"><ul><li>할당 단위를 요청마다 다른 크기로 할당</li><li>외부 단편화 발생</li></ul></td>
+          <td style="text-align: left">⦁ 할당 단위를 요청마다 다른 크기로 할당<br />⦁ 외부 단편화 발생</td>
         </tr>
         <tr>
           <td style="text-align: center">비연속 할당</td>
@@ -700,20 +797,93 @@
   </li>
 </ul>
 
-<h1 id="disk-보조기억장치-영구-저장">Disk 보조기억장치 (영구 저장)</h1>
+<h1 id="io--인터페이스">I/O  인터페이스</h1>
 
-<h2 id="1-입출력-기법">1. 입출력 기법</h2>
+<h2 id="1-io-interface">1. I/O Interface</h2>
 
 <ul>
-  <li>Program 에 의한 입출력</li>
-  <li>Interrupt 기법</li>
-  <li><strong>DMA</strong> : Direct Memory Access - CPU의 개입 없이 I/O 장치와 기억장치 사이의 데이터를 전송하는 방법, 속도가 빠르다.
+  <li>CPU 경유 유무에 따른 분류
     <ul>
-      <li>Cycle Stealing : DMA 제어기와 CPU가 BUS 를 공유하며, CPU가 BUS를 사용하지 않는 사이클에만 접근한다. CPU보다 높은 우선순위를 가진다.</li>
-      <li>Burst Mode : DMA 제어기가 BUS를 점유하며, 동작 완료 후 BUS의 점유를 해제한다.</li>
+      <li>CPU 경유 : 프로그램에 의한 I/O, 인터럽트에 의한 I/O
+        <ul>
+          <li>프로그램에 의한 I/O
+            <ul>
+              <li>컴퓨터 메모리에 기록된 입출력 명령에 의해 수행</li>
+              <li>CPU가 주변장치를 연속 감시하는 Polling 방식</li>
+              <li>프로세서의 시간을 낭비하고 처리 효율이 낮음</li>
+            </ul>
+          </li>
+          <li>인터럽트에 의한 I/O
+            <ul>
+              <li>CPU가 주변 장치들의 데이터 전송을 위한 인터럽트 요청을 감지하면 수행 중이던 작업을 중단하고 데이터 전송을 처리하기 위해 서브루틴으로 분기하여 전송을 수행</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>CPU 비경유 : <strong>DMA (Direct Memory Access Controller) Channel I/O</strong>
+        <ul>
+          <li>CPU의 개입 없이 I/O 장치와 기억장치 사이의 데이터를 전송하는 방법</li>
+          <li>속도가 빠르다.</li>
+        </ul>
+      </li>
     </ul>
   </li>
-  <li>IO Channel : Byte Muiltiplexer, Selector Channel, Block Multiplexer</li>
+  <li>DMA 동작 방식
+    <ul>
+      <li><strong>Cycle Stealing</strong> : DMA 제어기와 CPU가 BUS 를 공유하며, CPU가 BUS를 사용하지 않는 사이클에만 접근한다. CPU보다 높은 우선순위를 가진다.</li>
+      <li><strong>Burst Mode</strong> : DMA 제어기가 BUS를 점유하며, 동작 완료 후 BUS의 점유를 해제한다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="2-io-processor">2. I/O Processor</h2>
+
+<ul>
+  <li>채널에 의한 입출력
+    <ul>
+      <li><strong>Selector 채널</strong> : 한 번에 한 개씩 데이터를 주기억장치에게 전송</li>
+      <li><strong>Multiplexer 채널</strong> : 동시에 많은 데이터를 전송
+        <ul>
+          <li>Byte Multiplexer</li>
+          <li>Block Multiplexer</li>
+        </ul>
+      </li>
+      <li>I/O 장치의 다양함, 복잡함
+        <ul>
+          <li>CPU나 DMA 대신 독립된 입출력 프로세서인 채널이 입출력을 담당</li>
+          <li>채널이 입출력을 수행하는 동안 CPU는 다른 작업을 처리해 효율 향상</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>I/O Processor의 종류
+    <ul>
+      <li><strong>Multiplexer Channel</strong>
+        <ul>
+          <li>저속장치(Printer, Serial 등) 연결</li>
+          <li>시분할 방식으로 Byte 단위 전송</li>
+        </ul>
+      </li>
+      <li><strong>Selector Channel</strong>
+        <ul>
+          <li>고속장치(Disk, CDROM), 단일 입출력만 가능</li>
+          <li>Burst Mode 동작</li>
+        </ul>
+      </li>
+      <li><strong>Block Multiplexer Channel</strong>
+        <ul>
+          <li>Hybrid 모드</li>
+          <li>동시에 여러 I/O 처리 (블록 단위)</li>
+        </ul>
+      </li>
+      <li><strong>Byte Multiplexer Channel</strong>
+        <ul>
+          <li>한 개의 채널에 여러 개의 입출력 장치를 연결하여 시분할 공유하는 방식</li>
+          <li>저속 입출력 방식</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
 </ul>
 
         
@@ -888,10 +1058,8 @@
   개념
     
       정보보호 및 개인정보보호 관리체계(ISMS-P : Information Security Management System-Personal)
-    
-  
-
-</p>
+        
+          과학기술정보통신부가 공시한 “정보보호 관리...</p>
   </article>
 </div>
 

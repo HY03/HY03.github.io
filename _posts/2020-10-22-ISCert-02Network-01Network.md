@@ -22,22 +22,22 @@ toc: true
     + 전이중(Full Duplex) : 동시에 양방향 송수신
 
 # 네트워크 토폴로지
-- 계층형
+- **계층형**
     + Tree 구조 / 최상위 노드가 네트워크 제어
     + 통제 및 유지보수 용이
     + 중앙 컴퓨터 장애 시 전체 통신망 영향
-- 버스형
+- **버스형**
     + 중앙 통신 회선 하나에 여러 대의 노드 연결
     + 하나의 컴퓨터가 다운되어도 나머지에 지장 없음
     + 우선순위 제어가 어렵고 충돌이 자주 발생
-- 스타형
+- **스타형**
     + 중앙 컴퓨터를 중심으로 터미널이 연결된 중앙집중형
     + 유지보수 및 관리가 용이
     + 중앙 컴퓨터 고장 시 네트워크 전체 마비
-- 링형
+- **링형**
     + 인접해 있는 노드들을 연결하는 단방향 전송 형태
     + 단말기 추가 및 삭제가 어려움
-- 망형
+- **망형**
     + 모든 노드들이 상호 연결
     + 가장 많은 통신 선로가 필요
 
@@ -47,13 +47,13 @@ toc: true
 
 |OSI 7계층|주요 내용|주요 프로토콜(매체)|
 |:---|:---|:---|
-|7. Application(Gateway)|{::nomarkdown}<ul><li>사용자 소프트웨어를 네트워크에 접근 가능하도록 함</li><li>사용자에게 최종 서비스를 제공</li></ul>{:/}|FTP, SNMP, HTTP, Mail, Telnet 등|
-|6. Presentation|{::nomarkdown}<ul><li>포맷기능, 압축, 암호화</li><li>텍스트 및 그래픽 정보를 컴퓨터가 이해할 수 있는 16진수 데이터로 변환</li></ul>{:/}|{::nomarkdown}<ul><li>압축, 암호, 코드 변환</li><li>GIF, ASCII, EBCDIC</li></ul>{:/}|
-|5. Session|{::nomarkdown}<ul><li>세션 연결 및 동기화 수행, 통신 방식 결정</li><li>가상 연결을 제공하여 Login/Logout 수행</li></ul>{:/}|반이중, 전이중, 완전이중 결정|
-|4. Transport|{::nomarkdown}<ul><li>가상연결, 에러 제어, Data 흐름 제어, Segment 단위</li><li>두 개의 종단 간 End-to-End 데이터 흐름이 가능하도록 논리적 주소 연결</li><li>신뢰도, 품질보증, 오류탐지 및 교정 기능 제공</li><li>다중화(Multiplexing) 발생</li></ul>{:/}|TCP, UDP|
-|3. Network(Router)|{::nomarkdown}<ul><li>경로선택, 라우팅 수행, 논리적 주소 연결(IP)</li><li>데이터 흐름 조절, 주소 지정 메커니즘 구현</li><li>네트워크에서 노드에 전송되는 패킷 흐름을 통제하고, 상태 메시지가 네트워크 상에서 어떻게 노드로 전송되는가를 정의, Datagram(Packet) 단위</li></ul>{:/}|{::nomarkdown}<ul><li>IP, ICMP, IGMP, ARP, RAPR</li><li>라우팅 프로토콜(RIP, OSPF, BGP)</li></ul>{:/}|
-|2. Data Link(Switch, Bridge)|{::nomarkdown}<ul><li>물리주소 결정, 에러 제어, 흐름 제어, 데이터 전송</li><li>Frame 단위, 전송 오류를 처리하는 최초의 계층</li></ul>{:/}|{::nomarkdown}<ul><li>흐름 제어, 오류 제어(ARQ)</li><li>브릿지, PPTP, L2TP, HDLC</li><li>Frame Relay</li></ul>{:/}|
-|1. Physical(Repeater)|{::nomarkdown}<ul><li>전기적, 기계적 연결 정의, 실제 Data Bit 전송</li><li>Bit 단위, 전기적 신호, 전압구성, 케이블, 인터페이스 등을 구성</li><li>Data Rates, line noise control, 동기화 기능 수행</li></ul>{:/}|매체: 동축케이블, 광섬유, Twisted Pair Cable|
+|**7. Application(Gateway)**|⦁ 사용자 소프트웨어를 네트워크에 접근 가능하도록 함<br/>⦁ 사용자에게 최종 서비스를 제공|FTP, SNMP, HTTP, Mail, Telnet 등|
+|**6. Presentation**|⦁ 포맷기능, 압축, 암호화<br/>⦁ 텍스트 및 그래픽 정보를 컴퓨터가 이해할 수 있는 16진수 데이터로 변환|⦁ 압축, 암호, 코드 변환<br/>⦁ GIF, ASCII, EBCDIC|
+|**5. Session**|⦁ 세션 연결 및 동기화 수행, 통신 방식 결정<br/>⦁ 가상 연결을 제공하여 Login/Logout 수행|반이중, 전이중, 완전이중 결정|
+|**4. Transport**|⦁ 가상연결, 에러 제어, Data 흐름 제어, Segment 단위<br/>⦁ 두 개의 종단 간 End-to-End 데이터 흐름이 가능하도록 논리적 주소 연결<br/>⦁ 신뢰도, 품질보증, 오류탐지 및 교정 기능 제공<br/>⦁ 다중화(Multiplexing) 발생|TCP, UDP|
+|**3. Network(Router)**|⦁ 경로선택, 라우팅 수행, 논리적 주소 연결(IP)<br/>⦁ 데이터 흐름 조절, 주소 지정 메커니즘 구현<br/>⦁ 네트워크에서 노드에 전송되는 패킷 흐름을 통제하고, 상태 메시지가 네트워크 상에서 어떻게 노드로 전송되는가를 정의, Datagram(Packet) 단위|⦁ IP, ICMP, IGMP, ARP, RAPR<br/>⦁ 라우팅 프로토콜(RIP, OSPF, BGP)|
+|**2. Data Link(Switch, Bridge)**|⦁ 물리주소 결정, 에러 제어, 흐름 제어, 데이터 전송<br/>⦁ Frame 단위, 전송 오류를 처리하는 최초의 계층|⦁ 흐름 제어, 오류 제어(ARQ)<br/>⦁ 브릿지, PPTP, L2TP, HDLC<br/>⦁ Frame Relay|
+|**1. Physical(Repeater)**|⦁ 전기적, 기계적 연결 정의, 실제 Data Bit 전송<br/>⦁ Bit 단위, 전기적 신호, 전압구성, 케이블, 인터페이스 등을 구성<br/>⦁ Data Rates, line noise control, 동기화 기능 수행|매체: 동축케이블, 광섬유, Twisted Pair Cable|
     
     - 다중화(Multiplexing) : 여러 개의 소캣으로부터 데이터를 수집하여 헤더를 붙여 전송
     - End-to-End : 7~4 계층, 송수신자 간의 에러 Control
@@ -63,12 +63,12 @@ toc: true
 
 |계층|장비명|설명|
 |:---|:---|:---|
-|Physical|Cable|Twisted Pair Cable, Coaxial, Fiber-Optic Cable|
-||Repeater|{::nomarkdown}<ul><li>네트워크 구간 케이블의 전기적 신호를 재생하고 증폭하는 장치</li><li>디지털 신호를 제공, 아날로그 신호 증폭 시 잡음과 왜곡까지 증폭</li></ul>{:/}|
-|Data Link|Bridge|{::nomarkdown}<ul><li>서로 다른 LAN Segment를 연결, 관리자에게 MAC 주소 기반 필터링 제공하여 더 나은 대역폭(Bandwidth) 사용과 트래픽을 통제</li><li>리피터와 같이 데이터 신호를 증폭하지만, MAC 기반에서 동작</li></ul>{:/}|
-||Switch|{::nomarkdown}<ul><li>목적지의 MAC 주소를 알고 있는 지정된 포트로 데이터를 전송</li><li>Repeater 와 Bridge의 기능을 결합</li><li>네트워크의 속도 및 효율적 운영, Data Link 계층에서도 작동</li></ul>{:/}|
-|Network|Router|{::nomarkdown}<ul><li>패킷을 받아 경로를 설정하고 패킷을 전달</li><li>Bridge는 MAC 주소를 참조하지만, Router는 네트워크 주소까지 참조하여 경로를 설정</li><li>패킷 헤더 정보에서 IP 주소를 확인하여 목적지 네트워크로만 전달하며 Broadcasting을 차단</li></ul>{:/}|
-|Application|Gateway|{::nomarkdown}<ul><li>서로 다른 네트워크망과의 연결(PSTN, Internet, Wireless Network 등)</li><li>패킷 헤더의 주소 및 포트 외 거의 모든 정보를 참조</li></ul>{:/}|
+|Physical|**Cable**|Twisted Pair Cable, Coaxial, Fiber-Optic Cable|
+||**Repeater**|⦁ 네트워크 구간 케이블의 전기적 신호를 재생하고 증폭하는 장치<br/>⦁ 디지털 신호를 제공, 아날로그 신호 증폭 시 잡음과 왜곡까지 증폭|
+|Data Link|**Bridge**|⦁ 서로 다른 LAN Segment를 연결, 관리자에게 MAC 주소 기반 필터링 제공하여 더 나은 대역폭(Bandwidth) 사용과 트래픽을 통제<br/>⦁ 리피터와 같이 데이터 신호를 증폭하지만, MAC 기반에서 동작|
+||**Switch**|⦁ 목적지의 MAC 주소를 알고 있는 지정된 포트로 데이터를 전송<br/>⦁ Repeater 와 Bridge의 기능을 결합<br/>⦁ 네트워크의 속도 및 효율적 운영, Data Link 계층에서도 작동|
+|Network|**Router**|⦁ 패킷을 받아 경로를 설정하고 패킷을 전달<br/>⦁ Bridge는 MAC 주소를 참조하지만, Router는 네트워크 주소까지 참조하여 경로를 설정<br/>⦁ 패킷 헤더 정보에서 IP 주소를 확인하여 목적지 네트워크로만 전달하며 Broadcasting을 차단|
+|Application|**Gateway**|⦁ 서로 다른 네트워크망과의 연결(PSTN, Internet, Wireless Network 등)<br/>⦁ 패킷 헤더의 주소 및 포트 외 거의 모든 정보를 참조|
 
 # TCP/IP 4계층
 
@@ -76,10 +76,10 @@ toc: true
 
 |OSI 7계층|TCP/IP 4계층|주요 기능|
 |:---|:---|:---|
-|{::nomarkdown}<ul><li>Application</li><li>Presentaion</li><li>Session</li></ul>{:/}|Application|{::nomarkdown}<ul><li>네트워크를 실제로 사용하는 응용 프로그램으로 구성</li><li>FTP, TELNET, SMTP 등이 있음</li></ul>{:/}|
-|Transport|Transport|{::nomarkdown}<ul><li>도착하고자 하는 시스템까지 데이터를 전송</li><li>Port를 가지고 있으며, 프로세스를 연결 또는 비연결해서 통신함</li><li>TCP,UDP</li></ul>{:/}|
-|Network|Internet|{::nomarkdown}<ul><li>Datagram을 정의하고 Routing하는 일을 담당</li><li>IP, ARP, RARP, ICMP, IGMP</li></ul>{:/}|
-|{::nomarkdown}<ul><li>Data Link</li><li>Physical</li></ul>{:/}|Network Access|케이블, 송수신기, 링크 프로토콜, LAN 접속과 같은 물리적 연결 구성을 정의|
+|⦁ Application<br/>⦁ Presentaion<br/>⦁ Session|Application|⦁ 네트워크를 실제로 사용하는 응용 프로그램으로 구성<br/>⦁ FTP, TELNET, SMTP 등이 있음|
+|Transport|Transport|⦁ 도착하고자 하는 시스템까지 데이터를 전송<br/>⦁ Port를 가지고 있으며, 프로세스를 연결 또는 비연결해서 통신함<br/>⦁ TCP,UDP|
+|Network|Internet|⦁ Datagram을 정의하고 Routing하는 일을 담당<br/>⦁ IP, ARP, RARP, ICMP, IGMP|
+|⦁ Data Link<br/>⦁ Physical|Network Access|케이블, 송수신기, 링크 프로토콜, LAN 접속과 같은 물리적 연결 구성을 정의|
 
 ## 2. TCP/IP 프로토콜의 구성 : TCP, UDP, IP, ICMP, ARP, RARP
 
@@ -87,12 +87,12 @@ toc: true
 
 [이미지 출처](http://www.tcpipguide.com/free/t_TCPIPProtocols.htm)
 
-- TCP : Connection Oriented Protocol (연결지향)로 사용자에게 신뢰성 있는 서비스를 지원. 신뢰성 있는 서비스를 지원하기 위해서 Error Control 기법을 포함하고 있으며, 송신자가 보낸 메시지를 수신자가 전송받았는지 확인하기 위해서 수신자를 ACK 를 송신자에게 전송. 만약 ACK가 오지 않거나 동일한 ACK 번호가 오면 다시 전송
-- UDP : Connectionless Protocol(비연결)로 데이터 전송을 보장하지 않는 비신뢰성 서비스를 제공하지만, TCP에 비해서 전송 속도가 빠른 특징을 가진다.
-- ARP : IP Address 를 LAN 카드의 물리적 주소인 MAC 주소로 변환한다.
-- RARP : MAC 주소를 IP Address 로 변환하는 역할을 수행한다.
-- ICMP : 네트워크 오류와 상태를 점검하기 위해서 사용된다.
-- IP : 네트워크 주소와 호스트 주소 정의에 의한 네트워크의 논리적 관리를 담당하는 것으로 송신자와 수신자의 주소를 지정한다.
+- **TCP** : Connection Oriented Protocol (연결지향)로 사용자에게 신뢰성 있는 서비스를 지원. 신뢰성 있는 서비스를 지원하기 위해서 Error Control 기법을 포함하고 있으며, 송신자가 보낸 메시지를 수신자가 전송받았는지 확인하기 위해서 수신자를 ACK 를 송신자에게 전송. 만약 ACK가 오지 않거나 동일한 ACK 번호가 오면 다시 전송
+- **UDP** : Connectionless Protocol(비연결)로 데이터 전송을 보장하지 않는 비신뢰성 서비스를 제공하지만, TCP에 비해서 전송 속도가 빠른 특징을 가진다.
+- **ARP** : IP Address 를 LAN 카드의 물리적 주소인 MAC 주소로 변환한다.
+- **RARP** : MAC 주소를 IP Address 로 변환하는 역할을 수행한다.
+- **ICMP** : 네트워크 오류와 상태를 점검하기 위해서 사용된다.
+- **IP** : 네트워크 주소와 호스트 주소 정의에 의한 네트워크의 논리적 관리를 담당하는 것으로 송신자와 수신자의 주소를 지정한다.
 
 # 네트워크 활용(TCP/IP 구조)
 
@@ -101,56 +101,56 @@ toc: true
     
     |서비스|내용|
     |:---|:---|
-    |FTP|{::nomarkdown}<ul><li>File Transfer Protocol</li><li>사용자 파일의 업로드 혹은 다운로드를 수행하는 프로그램</li><li>파일 전송을 위한 인터넷 표준으로 제어 접속과 데이터 접속을 위한 분리된 포트를 사용함</li></ul>{:/}|
-    |DNS|{::nomarkdown}<ul><li>Domain Name Service</li><li>DNS Query를 사용해서 DNS Server에 URL을 전송하고 해당 URL에 매핑되는 IP 주소를 제공하는 서비스</li></ul>{:/}|
-    |HTTP|{::nomarkdown}<ul><li>Hyper Text Transfer Protocol</li><li>웹브라우저와 웹 서버 사이에 웹 페이지의 Request 와 Response 를 수행하는 프로토콜</li></ul>{:/}|
-    |Telnet|{::nomarkdown}<ul><li>특정 지역의 사용자가 지역적으로 다른 곳에 위치한 컴퓨터를 온라인으로 연결하여 사용하는 서비스</li></ul>{:/}|
-    |SMTP|{::nomarkdown}<ul><li>Simple Mail Transfer Protocol</li><li>RFC 821에 명시된 인터넷 전자우편을 위한 프로토콜로 메시지 전달을 위해서 Store and Forward 방식을 사용</li><li>암호화 및 인증 기능 없이 사용자의 e-Mail을 전송하는 프로토콜</li></ul>{:/}|
-    |SNMP|{::nomarkdown}<ul><li>Simple Network Management Protocol</li><li>네트워크에 대한 트래픽, 세션 등의 네트워크 상태를 모니터링하고 정보를 전달할 때 사용되는 프로토콜</li></ul>{:/}|
+    |FTP|⦁ File Transfer Protocol<br/>⦁ 사용자 파일의 업로드 혹은 다운로드를 수행하는 프로그램<br/>⦁ 파일 전송을 위한 인터넷 표준으로 제어 접속과 데이터 접속을 위한 분리된 포트를 사용함|
+    |DNS|⦁ Domain Name Service<br/>⦁ DNS Query를 사용해서 DNS Server에 URL을 전송하고 해당 URL에 매핑되는 IP 주소를 제공하는 서비스|
+    |HTTP|⦁ Hyper Text Transfer Protocol<br/>⦁ 웹브라우저와 웹 서버 사이에 웹 페이지의 Request 와 Response 를 수행하는 프로토콜|
+    |Telnet|⦁ 특정 지역의 사용자가 지역적으로 다른 곳에 위치한 컴퓨터를 온라인으로 연결하여 사용하는 서비스|
+    |SMTP|⦁ Simple Mail Transfer Protocol<br/>⦁ RFC 821에 명시된 인터넷 전자우편을 위한 프로토콜로 메시지 전달을 위해서 **Store and Forward** 방식을 사용<br/>⦁ 암호화 및 인증 기능 없이 사용자의 e-Mail을 전송하는 프로토콜|
+    |SNMP|⦁ Simple Network Management Protocol<br/>⦁ 네트워크에 대한 트래픽, 세션 등의 네트워크 상태를 모니터링하고 정보를 전달할 때 사용되는 프로토콜|
 
 ### 1. HTTP(Hyper Text Transfer Protocol)
 + HTTP 프로토콜 개요
     * WWW(World Wide Web)로 시작되는 인터넷에서 웹 서버와 사용자의 인터넷 브라우저 사이에 문서를 전송하기 위해 사용되는 통신 프로토콜
-    * TCP 기반 프로토콜의 80번 Port 를 사용하고 Request 및 Response 구조를 가짐
-    * State-less 로 프로토콜을 구성함 (요청 / 응답 후 연결종료)
-+ HTTP Version 1.0
+    * **TCP 기반 프로토콜의 80번 Port 를 사용하고 Request 및 Response 구조를 가짐**
+    * **State-less 로 프로토콜을 구성함 (요청 / 응답 후 연결종료)w**
++ **HTTP Version 1.0**
     * 연결을 수행할 때마다 3-Way handshaking 기법을 사용
     * HTML 페이지를 수신 받고 완전히 연결을 종료시킴
     * 필요 시 다시 연결하고 페이지를 수신받음
-+ HTTP Version 1.1
++ **HTTP Version 1.1**
     * 연결을 종료하지 않고 유지되는 Keep Alive Connection 을 지원
     * 연속된 연결 요청이 있을 경우 HTML 페이지를 수신받고 연결을 종료하지 않은 상태에서 이미지 등을 요청하는 형태의 서비스
-+ HTTP Version 2.0
++ **HTTP Version 2.0**
     * 멀티플랙싱(Multiplexing), 헤더압축(Header Compression), 서버 푸시(Server Push) 등의 기술이 추가됨
         - 멀티플랙싱 : 순차적 연결이 아니라 동시 다발적인 양방향 통신 지원
         - 헤더압축 : 헤더정보를 1/3 수준으로 압축, 보다 빠르게 메시지 처리
         - 서버푸시 : 웹 서버가 웹브라우저에게 필요한 데이터를 알아서 미리 전송할 수 있는 기술로 요청횟수와 전송해야 하는 데이터의 양을 줄임
-+ HTTP 세션 연결 과정 (3-Way handshaking)
++ **HTTP 세션 연결 과정 (3-Way handshaking)**
 
 ![TLS Handshaking](/assets/images/posts/tls_handshake.gif)
 
 [이미지 출처](https://www.ibm.com/support/knowledgecenter/SSFKSJ_9.0.0/com.ibm.mq.sec.doc/q009930_.htm)
 
 
-+ HTTP Request 시 Header 구조
++ **HTTP Request 시 Header 구조**
     * HTTP Header 와 Body 의 구분은 `\r\n\r\n`
 
     |구조|설명|
     |:---|:---|
-    |Request Method|호출되는 메소드로 GET 혹은 POST, OPTIONS, PUT, DELETE, TRACE, CONNECT 인지를 나타냄|
-    |Accept|웹 브라우저에서 사용 가능한 미디어 타입을 의미, text/*, text/html 등|
-    |Accept-Language|웹브라우저가 인식할 수 있는 언어를 의미|
-    |User-Agent|웹브라우저 정보를 의미|
-    |Accept-Encoding|웹브라우저에서 제공되는 인코딩 방식을 의미|
-    |Host|웹 서버의 기본 URL을 의미|
-    |Connection|연결 지속 및 연결 끊기를 나타내며 Keep Alive 혹은 close|
+    |**Request Method**|호출되는 메소드로 GET 혹은 POST, OPTIONS, PUT, DELETE, TRACE, CONNECT 인지를 나타냄|
+    |**Accept**|웹 브라우저에서 사용 가능한 미디어 타입을 의미, text/*, text/html 등|
+    |**Accept-Language**|웹브라우저가 인식할 수 있는 언어를 의미|
+    |**User-Agent**|웹브라우저 정보를 의미|
+    |**Accept-Encoding**|웹브라우저에서 제공되는 인코딩 방식을 의미|
+    |**Host**|웹 서버의 기본 URL을 의미|
+    |**Connection**|연결 지속 및 연결 끊기를 나타내며 Keep Alive 혹은 close|
 
 * HTTP 요청 방식
 
     |요청 방식|내용|
     |:---|:---|
-    |GET 방식|{::nomarkdown}<ul><li>서버에 전달할 때 데이터를 URL에 포함시켜서 요청</li><li>전송할 수 있는 데이터 양이 제한됨(2Kbyte 또는 4Kbyte)</li><li>예) aa.php?userid=a&password=a</li></ul>{:/}|
-    |POST 방식|{::nomarkdown}<ul><li>서버에 전달할 때 데이터를 Request Body에 포함시킴</li><li>데이터 전송량의 제한이 없음</li><li>예)aa.php<br/>userid=a;password=a</li></ul>{:/}|
+    |**GET 방식**|⦁ 서버에 전달할 때 데이터를 URL에 포함시켜서 요청<br/>⦁ 전송할 수 있는 데이터 양이 제한됨(2Kbyte 또는 4Kbyte)<br/>⦁ 예) aa.php?userid=a&password=a|
+    |**POST 방식**|⦁ 서버에 전달할 때 데이터를 Request Body에 포함시킴<br/>⦁ 데이터 전송량의 제한이 없음<br/>⦁ 예)aa.php<br/>userid=a;password=a|
 
 - HTTP Response 시 Header 구조
 
@@ -184,10 +184,10 @@ toc: true
 [이미지 출처](https://afreshcloud.com/sysadmin/mail-terminology-mta-mua-msa-mda-smtp-dkim-spf-dmarc)
 
 + SMTP 개요
-    * RFC 821에 명시되어 있는 인터넷 전자우편 표준 프로토콜
-    * Store-and-Forward 방식으로 메시지를 전달
-    * 송신자 메일 -> Store -> Mbox -> Forward -> 수신자 메일
-    * TCP 25
+    * **RFC 821에 명시되어 있는 인터넷 전자우편 표준 프로토콜**
+    * **Store-and-Forward 방식으로 메시지를 전달**
+    * **송신자 메일 -> Store -> Mbox -> Forward -> 수신자 메일**
+    * **TCP 25**
 + SMTP 기본 동작 방식
     * 송신자가 보낸 전자우편은 전자우편을 관리하는 메일서버에 전달됨
     * 메일 서버는 수신자의 전자우편 주소를 분석, 최단 경로를 찾아 근접한 메일 서버에게 편지를 전달
@@ -203,7 +203,7 @@ toc: true
 
     |POP3|IMAP 및 IMAP3|
     |:---|:---|
-    |{::nomarkdown}<ul><li>TCP 110번으로 메일서버에 접속하여 저장된 메일을 내려받는 MDA 프로그램</li><li>메시지를 읽은 후 메일 서버에서 해당 메일을 삭제함</li></ul>{:/}|{::nomarkdown}<ul><li>POP과 달리 메일을 내려받아도 메일 서버에 원본을 계속 저장</li><li>IMAP 143 Port</li></ul>{:/}|
+    |⦁ **TCP 110번**으로 메일서버에 접속하여 저장된 메일을 내려받는 MDA 프로그램<br/>⦁ **메시지를 읽은 후 메일 서버에서 해당 메일을 삭제함**|⦁ **POP과 달리 메일을 내려받아도 메일 서버에 원본을 계속 저장**<br/>⦁ **IMAP 143 Port**|
 
 ### 3. FTP (File Transfer Protocol)
 + FTP 개요
@@ -217,16 +217,16 @@ toc: true
 
         [이미지 출처](https://infosys.beckhoff.com/english.php?content=../content/1033/cx8190_hw/27021604587584011.html&id=)
 
-        - 서버 TCP/21번 포트로 접속 시도
-        - 서버 TCP/20번 포트로 데이터를 송수신
+        - **서버 TCP/21번 포트로 접속 시도**
+        - **서버 TCP/20번 포트로 데이터를 송수신**
     * Passive Mode
         ![FTP Passive](/assets/images/posts/ftp_passive.png)
 
         [이미지 출처](https://infosys.beckhoff.com/english.php?content=../content/1033/cx8190_hw/27021604587584011.html&id=)
 
-        - 서버 TCP/21번 포트로 접속한 후 두 번쨰 포트를 질의
-        - 서버는 클라이언트에게 데이터 연결을 위한 두 번째 포트(TCP/1024이상)을 알려줌
-        - 클라이언트는 서버가 알려준 두 번째 포트로 접속
+        - **서버 TCP/21번 포트로 접속한 후 두 번쨰 포트를 질의**
+        - **서버는 클라이언트에게 데이터 연결을 위한 두 번째 포트(TCP/1024이상)을 알려줌**
+        - **클라이언트는 서버가 알려준 두 번째 포트로 접속**
 
 ### 4. SNMP  와 NMS 
 + NMS (Network Management System) : 운영되는 네트워크의 안정성, 효율성을 높이기 위해서 구성,장애,통계,상태정보를 실시간 수집 및 분석하는 네트워크 관리시스템
@@ -235,24 +235,24 @@ toc: true
 ## 2. 전송 계층(Transport Layer)
 - 수신측에 전달되는 데이터에 오류가 없고 데이터의 순서가 그대로 보존되도록 보장하는 연결 지향 서비스(Connection Oriented Service)의 역할을 하는 종단 간(End-to-End) 서비스 계층
 - 신뢰성 있는 전송을 하는 TCP / 비신뢰성 전송을 하는 UDP 프로토콜이 존재
-- 애플리케이션 계층의 메시지에 TCP 혹은 UDP의 Header 를 붙인 것을 Segment 라 함.
+- **애플리케이션 계층의 메시지에 TCP 혹은 UDP의 Header 를 붙인 것을 Segment 라 함.**
 
 ### 1. **TCP** (Transmission Control Protocol)
 + 전송 계층의 프로토콜
-+ 연결지향(Connection Oriented)
++ **연결지향(Connection Oriented)**
     * 가상 연결을 수행
         - 실제 물리적으로 연결된 것이 아니어서 주기적으로 메시지(ICMP 프로토콜)를 송수신하여 송수신 가능 여부를 확인함.
-+ 3-Way Handshaking
++ **3-Way Handshaking**
     * SYN -> SYN+ACK -> ACK
-+ 신뢰성 있는 데이터 전송
++ **신뢰성 있는 데이터 전송**
     * 송신자가 메시지를 전송하면 수신자는 ACK를 되돌려서 수신 여부를 확인해줌
     * 동일한 ACK 번호를 반복적으로 전송한다면 어떤 이유로든 데이터를 받지 못하는 것이고, 반복적인 ACK가 되돌아오면 TCP는 에러 제어기법을 통해 재전송을 수행함
-+ 순서 제어(Sequence Control)
++ **순서 제어(Sequence Control)**
     * Sequence 번호를 가지고 메시지의 순서를 파악
         - 비동기 방식으로 데이터 전송 시 다른 경로로 보내질 수 있기 때문에 송신자의 메시지가 꼭 순서에 따라 도착하지 않음
-+ 완전 이중(Full Duplex)
++ **완전 이중(Full Duplex)**
     * 송신과 수신을 동시에 함
-+ 에러 제어
++ **에러 제어**
     * FEC(Forward Error Correction)
         - 송신 측이 특정한 정보 비트를 함께 전송하여 수신측에서 이 정보 비트로 에러 발생 시 수정하는 방식 (수신측이 에러 처리)
         - 재전송 요구가 없음
@@ -268,16 +268,16 @@ toc: true
         |:---|:---|:---|:---|
         |재전송 요청 방법|에러발생 즉시 재전송|오류 발생 또는 잃어버린 프레임 이후의 모든 프레임을 재요청하거나 타임아웃으로 자동 재송신 됨|오류 발생 또는 잃어버린 프레임에 대해서만 재요청 또는 타임아웃으로 인한 자동 재송신|
         |수신 방법|순차적으로 수신|프레임의 송신 순서와 수신 순서가 동일해야 수신|순서와 상관없이 윈도우 크기만큼의 범위 내에서 자유롭게 수신|
-        |장단점|{::nomarkdown}<ul><li>가장 단순한 구현</li><li>신뢰성 있는 전송</li><li>대기시간 존재로 전송 효율 저하</li></ul>{:/}|{::nomarkdown}<ul><li>간단한 구현</li><li>적은 수신측 버퍼 사용량</li></ul>{:/}|{::nomarkdown}<ul><li>구현이 복잡</li><li>버퍼 사용량이 많음</li><li>보다 적은 재전송</li><li>대역폭</li></ul>{:/}|
+        |장단점|⦁ 가장 단순한 구현<br/>⦁ 신뢰성 있는 전송<br/>⦁ 대기시간 존재로 전송 효율 저하|⦁ 간단한 구현<br/>⦁ 적은 수신측 버퍼 사용량|⦁ 구현이 복잡<br/>⦁ 버퍼 사용량이 많음<br/>⦁ 보다 적은 재전송<br/>⦁ 대역폭|
 
-+ 흐름 제어 (Flow Control)
++ **흐름 제어 (Flow Control)**
     * 송수신측 사이의 전송 패킷의 양, 속도를 조절하여 네트워크를 효율적으로 사용
     * 수신자가 메시지를 제대로 받지 못하면 송신자가 전송 속도를 낮춤
     * 수신자의 Buffer Overflow 를 방지
     * 슬라이딩 윈도우(Sliding Window) (TCP)
         - TCP 호스트 간 효율적 데이터전송을 위해 송수신 할 수 있는 Size 정보를 제공, Size를 맞춤 / Ack 를 묶어서 처리
         - Stop-and-Wait의 단점을 보완한 방식으로 수신측의 확인 신호를 받지 않더라도 미리 정해진 프레임의 수만큼 연속적으로 전송
-+ 혼잡제어 (Congestion Control) 
++ **혼잡제어 (Congestion Control)** 
     * Router 가 처리할 수 있는 packet 양보다 더 많은 packet 전송 시 비효율
     * TCP Slow Start
         - TCP가 시작될 때 전송속도를 초기값부터 지속적으로 올리는 방법
@@ -287,13 +287,21 @@ toc: true
     ![TCP Status Diagram](/assets/images/posts/tcp_status_diagram.gif)
 
     [이미지 출처](https://www.ibm.com/support/knowledgecenter/en/SSLTBW_2.1.0/com.ibm.zos.v2r1.halu101/constatus.htm)
-    * `netstat` 명령어로 TCP 상태 확인
-        - `netstat -b` : 어떤 프로세스가 네트워크를 사용하는지 확인
+    * **`netstat`** 명령어로 TCP 상태 확인
+        - **`netstat -b`** : 어떤 프로세스가 네트워크를 사용하는지 확인
 + TCP 헤더 구조
 
     ![TCP Header](/assets/images/posts/Ntwk_tcp_header.jpg)
 
     [이미지 출처](https://commons.wikimedia.org/wiki/File:Ntwk_tcp_header.jpg)
+
+* **Control Flag**
+    - SYN : 연결 동기화
+    - ACK : 응답 확인
+    - PSH : 버퍼링 미 수행, 송신요구
+    - URG : 긴급 포인터
+    - FIN : 정상 접속 종료
+    - RST : 비정상 종료를 위한 Reset
 
 ### 2. UDP (User Datagram Protocol)
 + 비연결성, 비신뢰성의 특성으로 Packet을 빠르게 전달
@@ -301,10 +309,10 @@ toc: true
 
     |특징|내용|
     |:---|:---|
-    |비신뢰성(Unreliable)|Packet을 목적지에 성공적으로 전송한다는 것을 보장하지 않음|
-    |비접속형(Connectionless)|전달되는 Packet에 대한 상태 정보를 유지하지 않음|
-    |간단한 Header 구조|TCP에 비해 헤더 구조가 간단하여 처리가 단순함 (TCP 세그먼트의 헤더 20byte, UDP 세그먼트의 헤더 8byte)|
-    |빠른 전송|TCP에 비해 전송속도가 빠름|
+    |**비신뢰성(Unreliable)**|Packet을 목적지에 성공적으로 전송한다는 것을 보장하지 않음|
+    |**비접속형(Connectionless)**|전달되는 Packet에 대한 상태 정보를 유지하지 않음|
+    |**간단한 Header 구조**|TCP에 비해 헤더 구조가 간단하여 처리가 단순함 (TCP 세그먼트의 헤더 20byte, UDP 세그먼트의 헤더 8byte)|
+    |**빠른 전송**|TCP에 비해 전송속도가 빠름|
 
 + UDP 프로토콜의 Header 구조
 
@@ -314,10 +322,11 @@ toc: true
     * 가상 선로(Virtual Circuit)의 개념이 없는 비연결성
     * 블록 단위로 데이터 전송
     * 블록 재전송 및 흐름 제어 등이 없음 (데이터 신뢰성이 없음)
+    * CRC 무결성 검사
     * 슬라이딩 윈도우 등의 복잡한 기술을 사용하지 않음
     * UDP의 각 사용자는 16bit의 포트 번호를 할당 받음
 
-+ UDP 를 사용하는 VoIP(Voice Over IP)
++ **UDP 를 사용하는 VoIP(Voice Over IP)**
     * 빠르게 데이터를 전송해야 하는 서비스
     * 내부적으로 2개의 프로토콜을 사용
         - RTP(Real Time Protocol) - 음성을 전송
@@ -354,16 +363,16 @@ toc: true
 + 라우팅 범위에 따른 라우팅 프로토콜 종류
     * IGP(Internal Gateway routing protocol) : 동일 그룹(기업 또는 ISP) 내에서 라우팅 정보를 교환
     * EGP(Exterior Gateway routing protocol) : 다른 그룹과의 라우팅 정보를 교환
-+ 라우팅 프로토콜 분류
++ **라우팅 프로토콜 분류**
 
     |구분|Distance Vector|Link State|
     |:---|:---|:---|
     |알고리즘|최단경로(Shorter Path)를 구하는 벨만 포드(Bellman-Ford) 알고리즘 기반|최소 신장 트리(Shortest Path Tree)를 구하는 다익스트라(Dijkstra) 알고리즘 기반|
-    |동작 원리|네트워크 변화 발생 시 해당 정보를 인접한 라우터에 정기적으로 전달 하고, 인접 라우터에서는 라우팅 테이블에 정보 갱신|{::nomarkdown}<ul><li>라우터와 라우터를 연결하는 Link 상태에 따라 최적의 경로 설정</li><li>라우터가 Network 변화 감지 시 링크 상태변경 정보를 인접한 라우터에게 즉각 전달하고 이를 저장함</li></ul>{:/}|
+    |동작 원리|네트워크 변화 발생 시 해당 정보를 인접한 라우터에 정기적으로 전달 하고, 인접 라우터에서는 라우팅 테이블에 정보 갱신|⦁ 라우터와 라우터를 연결하는 Link 상태에 따라 최적의 경로 설정<br/>⦁ 라우터가 Network 변화 감지 시 링크 상태변경 정보를 인접한 라우터에게 즉각 전달하고 이를 저장함|
     |라우팅 정보|모든 라우터까지의 거리 정보 보관|인접 라우터까지의 Link Cost 계산|
     |정보전송 시점|일정주기(30초, 이웃 라우터와 공유)|변화 발생 시에만|
     |대표 프로토콜|RIP, IGRP, EIGRP(내부 라우팅), BGP|OSPF(가장 많이 사용됨), IS-IS(소규모 N/W에서 사용)|
-    |단점|{::nomarkdown}<ul><li>변화되는 라우팅 정보를 모든 라우터에 주기적으로 갱신하므로 망 자체의 트래픽을 유발</li><li>라우팅 정보를 변경하는 문제 발생 시 Routing Loop가 발생할 가능성이 있음</li></ul>{:/}|{::nomarkdown}<ul><li>네트워크 전체 정보 유지를 위한 많은 메모리 소요</li><li>라우터의 CPU 사용량이 많아짐</li><li>라우터간 회선의 대역차이로 동기화 실패할 가능성이 있음</li></ul>{:/}|
+    |단점|⦁ 변화되는 라우팅 정보를 모든 라우터에 주기적으로 갱신하므로 망 자체의 트래픽을 유발<br/>⦁ 라우팅 정보를 변경하는 문제 발생 시 Routing Loop가 발생할 가능성이 있음|⦁ 네트워크 전체 정보 유지를 위한 많은 메모리 소요<br/>⦁ 라우터의 CPU 사용량이 많아짐<br/>⦁ 라우터간 회선의 대역차이로 동기화 실패할 가능성이 있음|
 
     * Distance Vector
         - 통과해야 하는 라우터의 수가 적은 쪽으로 경로를 결정
@@ -388,15 +397,15 @@ toc: true
 |구분|내용|
 |:---|:---|
 |개념|RFC 1058에 정의되어 있고 대표적인 거리 벡터 라우팅 프로토콜|
-|동작 원리|{::nomarkdown}<ul><li>라우터 간 거리 계산을 위한 척도로 홉수(Hop count) 사용</li><li>16Hop 이상이면 패킷을 폐기</li><li>180초 이내에 새로운 라우팅 정보가 수신되지 않으면 해당 경로를 이상 상태로 간주</li><li>수신된 목적지의 거리 값과 현재 거리 값을 비교하여 작을 것을 기준으로 라우팅 테이블을 변경</li></ul>{:/}|
+|동작 원리|⦁ 라우터 간 거리 계산을 위한 척도로 홉수(Hop count) 사용<br/>⦁ 16Hop 이상이면 패킷을 폐기<br/>⦁ 180초 이내에 새로운 라우팅 정보가 수신되지 않으면 해당 경로를 이상 상태로 간주<br/>⦁ 수신된 목적지의 거리 값과 현재 거리 값을 비교하여 작을 것을 기준으로 라우팅 테이블을 변경|
 |라우팅 정보|라우팅 정보 변경 시 모든 망에 적용하므로 큰 규모의 망에는 적합하지 않음|
 
 #### 3. OSPF (Open Shortest Path First)
 
 |구분|내용|
 |:---|:---|
-|개념 및 특징|{::nomarkdown}<ul><li>RFC 1247에 정의되어 있는 IP 라우팅 프로토콜</li><li>대규모 IP 망에서 사용되며 Link State Routing Protocol</li><li>링크에서의 전송 시간을 링크 비용으로 사용하여 각 목적지별 최단경로를 구함</li><li>네트워크에 변화가 발생했을 때 상대적으로 짧고 간단한 링크 상태 정보를 교환</li></ul>{:/}|
-|동작 원리|{::nomarkdown}<ul><li>Link의 delay, throughput, reliability 를 이용하여 기본적은 throughput 만 이용하고, Hop 수에 대한 제약이 없음</li><li>네트워크를 Area로 구분하여 많은 라우팅 정보의 교환으로 인한 라우터의 성능저하를 예방. 대역폭을 절약함</li><li>Link 변화 감지 시 해당 Link에 대한 정보만을 즉시 모든 라우터에 전달하여 Convergence가 매우 빠름</li><li>Supernetting 된 형태로 Routing Information 을 전달할 수 있어 라우터 메모리 절약, 상능 향상 및 대역폭 절약 가능</li></ul>{:/}|
+|개념 및 특징|⦁ RFC 1247에 정의되어 있는 IP 라우팅 프로토콜<br/>⦁ 대규모 IP 망에서 사용되며 Link State Routing Protocol<br/>⦁ 링크에서의 전송 시간을 링크 비용으로 사용하여 각 목적지별 최단경로를 구함<br/>⦁ 네트워크에 변화가 발생했을 때 상대적으로 짧고 간단한 링크 상태 정보를 교환|
+|동작 원리|⦁ Link의 delay, throughput, reliability 를 이용하여 기본적은 throughput 만 이용하고, Hop 수에 대한 제약이 없음<br/>⦁ 네트워크를 Area로 구분하여 많은 라우팅 정보의 교환으로 인한 라우터의 성능저하를 예방. 대역폭을 절약함<br/>⦁ Link 변화 감지 시 해당 Link에 대한 정보만을 즉시 모든 라우터에 전달하여 Convergence가 매우 빠름<br/>⦁ Supernetting 된 형태로 Routing Information 을 전달할 수 있어 라우터 메모리 절약, 상능 향상 및 대역폭 절약 가능|
 
 - OSPF의 동작 원리 구성도의 예
     ![OSPF](/assets/images/posts/ospf.gif)
@@ -412,47 +421,49 @@ toc: true
 |구분|내용|
 |:---|:---|
 |개념|AS(Autonomous System) 상호 간의 routing 에 적용되는 routing protocol 로 ISP(Internet Service Provider) 사업자들 상호 간에 주로 사용되는 routing protocol|
-|특징|{::nomarkdown}<ul><li>EGP라고 하는 Inter-domain routing protocol</li><li>인터넷을 AS 상호 간 연결 Path로 이뤄진 방향성 그래프의 집단으로 인식 : 경로 벡터 라우팅(path vector routing) 방법을 적용하며, 경로 벡터 라우팅 테이블을 유지</li><li>Looping free routing</li><li>TCP 기반 routing : BGP 라우팅 정보는 router 간에 179번 포트를 통하여 TCP에 의해 신뢰성 있게 전달</li><li>Routing 정보의 점진적 갱신 : BGP 는 주기적으로 라우팅 정보를 갱신하지 않고, 변화가 있을 때 neighbor router에게 갱신 정보를 advertising 함</li><li>다양한 routing metric 사용 : 최상위 경로 선택을 위해 우선순위가 있는 각 metric을 참조</li><li>Class 없는 주소체계 지원 : CIDR(Classless Inter-Domain Routing) 지원</li><li>IBGP(Internal BGP) : 동일한 AS에 속한 BGP 라우터 간의 동작</li><li>EBGP(External BGP) : 서로 다른 AS에서 동작하는 BGP 프로토콜</li></ul>{:/}|
+|특징|⦁ EGP라고 하는 Inter-domain routing protocol<br/>⦁ 인터넷을 AS 상호 간 연결 Path로 이뤄진 방향성 그래프의 집단으로 인식 : 경로 벡터 라우팅(path vector routing) 방법을 적용하며, 경로 벡터 라우팅 테이블을 유지<br/>⦁ Looping free routing<br/>⦁ TCP 기반 routing : BGP 라우팅 정보는 router 간에 179번 포트를 통하여 TCP에 의해 신뢰성 있게 전달<br/>⦁ Routing 정보의 점진적 갱신 : BGP 는 주기적으로 라우팅 정보를 갱신하지 않고, 변화가 있을 때 neighbor router에게 갱신 정보를 advertising 함<br/>⦁ 다양한 routing metric 사용 : 최상위 경로 선택을 위해 우선순위가 있는 각 metric을 참조<br/>⦁ Class 없는 주소체계 지원 : CIDR(Classless Inter-Domain Routing) 지원<br/>⦁ IBGP(Internal BGP) : 동일한 AS에 속한 BGP 라우터 간의 동작<br/>⦁ EBGP(External BGP) : 서로 다른 AS에서 동작하는 BGP 프로토콜|
 
-### 2. **IP(Internet Protocol)**
+### 2. IP(Internet Protocol)
 
 #### 1.개념
-+ TCP/IP 의 네트워크 계층(IP계층) 은 주소화, 데이터그램 포맷, 패킷 핸들링 등을 정의해놓은 인터넷 규약이다.
-+ IPv4 : 32비트 주소체계를 사용하고 있고 이러한 주소체계는 네트워크 ID와 호스트 ID로 구분된다.
-+ IPv6 : IP 주소의 부족 문제를 해결하기 위해서 주소 비트 수를 128비트로 늘린 것
++ TCP/IP 의 네트워크 계층(IP계층) 은 **주소화, 데이터그램 포맷, 패킷 핸들링** 등을 정의해놓은 인터넷 규약이다.
++ IPv4 : **32비트** 주소체계를 사용하고 있고 이러한 주소체계는 네트워크 ID와 호스트 ID로 구분된다.
++ IPv6 : IP 주소의 부족 문제를 해결하기 위해서 주소 비트 수를 **128비트**로 늘린 것
 + 네트워크 계층 구조
     ![IPv4 Packet](/assets/images/posts/IPv4_Packet_-en.svg.png)
 
     [이미지 출처](https://en.wikipedia.org/wiki/IPv4)
-+ IP Header 구조
-    * Version : IPv4 버전
-    * Header Length : Header의 전체 길이
-    * Type of Service : 서비스 유형
-    * Total Length : IP Datagram의 byte 수
-    * Identification : Host에서 보낸 Datagram 식별
-    * Flags & Offset : IP Datagram 단편화 정보
-        - MTU(Maximum Transmission Unit) : 네트워크 상 한 번에 통과할 수 있는 패킷의 최대 크기
-        - 패킷의 크기가 너무 크면  (MTU 보다 크면) 분할되고, 패킷이 분할된 경우 패킷 수신자가 다시 조립을 해야 하는데 이와 관계된 정보
-    * Time to Live : Datagram이 통과할 수 있는 라우터 수
++ **IP Header 구조**
+    * **Version** : **IPv4 버전**
+    * **Header Length** : **Header의 전체 길이**
+    * **Type of Service** : **서비스 유형**
+    * **Total Length** : **IP Datagram의 byte 수**
+    * **Identification** : **Host에서 보낸 Datagram 식별**
+    * **Flags & Offset** : **IP Datagram 단편화 정보**
+        - **MTU(Maximum Transmission Unit)** : **네트워크 상 한 번에 통과할 수 있는 패킷의 최대 크기**
+        - **패킷의 크기가 너무 크면  (MTU 보다 크면) 분할되고, 패킷이 분할된 경우 패킷 수신자가 다시 조립을 해야 하는데 이와 관계된 정보**
+    * **Time to Live(TTL)** : **Datagram이 통과할 수 있는 라우터 수**
         - 0이 되면 자동 폐기
-    * Protocol : ICMP, TCP, UDP
+    * **Protocol** : **ICMP, TCP, UDP**
         - IP Header 위의 상위 프로토콜의 종류
-    * Header Checksum : IP Header Checksum 계산
+    * **Header Checksum** : **IP Header Checksum 계산**
         - Header 의 무결성을 검사하기 위함
++ **IPv4의 단편화(Fragmentation) 와 재결합(Reassembly)**
+    * `ifconfig` 로 MTU 확인 (1500 = 국제표준)
 + IP 주소의 구조
     * 클래스(Class)
         - 클래스의구조 / 네트워크ID / 호스트ID
         - 네트워크 ID : 네트워크에 부여될 수 있는 것
         - 호스트 ID : 하나의 네트워크에 부여될 수 있는 호스트 IP 주소 자릿수
 
-    * 클래스(Class) 구조
+    * **클래스(Class) 구조**
 
         |Class|Message|
         |:---|:---|
-        |Class A|{::nomarkdown}<ul><li>첫 바이트 7Bit가 네트워크 식별자</li><li>한 네트워크에 가장 많은 호스트를 가짐</li></ul>{:/}|
-        |Class B|{::nomarkdown}<ul><li>14Bit의 네트워크 식별자</li><li>한 네트워크에 약 2^16대의 호스트 수용</li></ul>{:/}|
-        |Class C|{::nomarkdown}<ul><li>세 번째 바이트까지 네트워크 식별자</li><li>한 네트워크에 254대까지 수용</li></ul>{:/}|
-        |Class D|멀티캐스트 주소로 사용|
+        |Class A|⦁ 첫 바이트 7Bit가 네트워크 식별자<br/>⦁ 한 네트워크에 가장 많은 호스트를 가짐<br/>⦁ 최상위 비트 0|
+        |Class B|⦁ 14Bit의 네트워크 식별자<br/>⦁ 한 네트워크에 약 2^16대의 호스트 수용<br/>⦁ 최상위 비트 10|
+        |Class C|⦁ 세 번째 바이트까지 네트워크 식별자<br/>⦁ 한 네트워크에 254대까지 수용<br/>⦁ 최상위 비트 110|
+        |Class D|멀티캐스트 주소로 사용 <br/>⦁ 최상위 비트 1110|
 
     * 서브넷팅(Subnetting)
         - 주어진 네트워크 주소를 작게 나누어 여러 개의 서브넷(논리적)으로 구성
@@ -471,7 +482,7 @@ toc: true
     * VLSM(Variable Length Subnet Mask) :서로 다른 크기의 Subnet을 지원, 필요한 호스트의 수가 많은 Subnet을 먼저 계산
     * CIDR : IP 주소와 서브넷 마스크를 이진 표기법으로 표현하여 기존의 고정크기 네트워크를 다양하고 세부적으로 분할. 기존 클래스 A,B,C 네트워크 주소의 개념을 무시 (IPv4 주소 공간의 효율적 할당)
 
-#### 2. **ICMP (Internet Control Message Protocol)**
+#### 2. ICMP (Internet Control Message Protocol)
 - TCP/IP 에서 오류 제어 프로토콜
 - 호스트 및 라우터는 다른 호스트나 라우터가 현재 도달 가능한지 여부를 결정함
 - 라우터는 특정 목적지 네트워크로 후속 IP 데이터그램을 보냈는데, 사용할 수 있는 더 좋은 경로가 있을 때 근원지 호스트에게 통지함.
@@ -483,21 +494,21 @@ toc: true
     + Type : ICMP 메시지 유형 표시
     + Code : Type과 같이 사용되며 세부적인 유형을 표현
     + Checksum : IP Datagram Checksum
-- ICMP 메시지
+- **ICMP 메시지**
 
     |Type|Message|설명|
     |:---:|:---|:---|
-    |3|Destination unreachable|Router가 목적지를 찾지 못할 경우 보내는 메시지|
-    |4|Source quench|패킷을 너무 빨리 보내 Network에 무리를 주는 호스트를 제지할 떄 사용|
-    |5|Redirection|패킷 Routing 경로를 수정, Smurf 공격에서 사용|
-    |8 or 0|Echo request or reply|Host의 존재를 확인|
-    |11|Time exceeded|패킷을 보냈으나 시간이 경과하여 Packet이 삭제되었을 때 보내는 메시지|
-    |12|Parameter problem|IP Header field에 잘못된 정보가 있다는 것을 알림|
-    |13 or 14|Timestamp request and reply|Echo와 비슷하나 시간에 대한 정보 추가|
+    |3|**Destination unreachable**|Router가 목적지를 찾지 못할 경우 보내는 메시지|
+    |4|**Source quench**|패킷을 너무 빨리 보내 Network에 무리를 주는 호스트를 제지할 떄 사용|
+    |5|**Redirection**|패킷 Routing 경로를 수정, Smurf 공격에서 사용|
+    |8 or 0|**Echo request or reply**|Host의 존재를 확인|
+    |11|**Time exceeded**|패킷을 보냈으나 시간이 경과하여 Packet이 삭제되었을 때 보내는 메시지|
+    |12|**Parameter problem**|IP Header field에 잘못된 정보가 있다는 것을 알림|
+    |13 or 14|**Timestamp request and reply**|Echo와 비슷하나 시간에 대한 정보 추가|
 
-- ping 명령어 실행
-    + 윈도우 기본 TTL : 128
-    + 리눅스 기본 TTL : 64
+- **ping 명령어 실행**
+    + **윈도우 기본 TTL** : 128
+    + **리눅스 기본 TTL** : 64
 
 #### 3. 데이터 전송 방식과 멀티캐스트
 
@@ -505,10 +516,10 @@ toc: true
 
     |전송방식|내용|
     |:---|:---|
-    |Unicast|1:1 전송 방식|
-    |Broadcast (IPv4)|1:N 전송방식 (동일한 서브넷 상의 모든 수신자에게 전송)|
-    |Multicast|M:N 전송방식 (하나 이상의 송신자들이 특정 그룹의 수신자에게 전송)|
-    |Anycast (IPv6)|그룹에 등록된 노드 중에서 최단 경로 노드 한개에만 전송|
+    |**Unicast**|1:1 전송 방식|
+    |**Broadcast (IPv4)**|1:N 전송방식 (동일한 서브넷 상의 모든 수신자에게 전송)|
+    |**Multicast**|M:N 전송방식 (하나 이상의 송신자들이 특정 그룹의 수신자에게 전송)|
+    |**Anycast (IPv6)**|그룹에 등록된 노드 중에서 최단 경로 노드 한개에만 전송|
 
 #### 4. 멀티캐스트와 IGMP (Internet Group Management Protocol)
 - 멀티캐스트는 그룹에 등록된 사용자에게만 데이터를 전송하는 것
@@ -530,8 +541,8 @@ toc: true
         * 질의 메시지 : 0
 
 #### 5. ARP (Address Resolution Protocol)
-- IP 주소를 물리적 하드웨어 주소인 MAC 주소로 변경하는 프로토콜
-- ARP Request를 보내고 인접에 있는 컴퓨터가 ARP Reply 로 응답한 것을 통해서 ARP Cache Table을 유지한 후 인접 컴퓨터의 IP 주소와 MAC 주소를 가지고 있게 됨
+- **IP 주소를 물리적 하드웨어 주소인 MAC 주소로 변경하는 프로토콜**
+- ARP Request를 보내고 인접에 있는 컴퓨터가 ARP Reply 로 응답한 것을 통해서 **ARP Cache Table**을 유지한 후 인접 컴퓨터의 IP 주소와 MAC 주소를 가지고 있게 됨
 - ARP Cache Table : MAC 주소와 IP 주소 매핑 테이블
 - ARP Operation Code (1-9)
     + 1 : ARP Request
@@ -542,7 +553,7 @@ toc: true
 - `arp -a` : 윈도우에서 ARP Cache Table 확인
 
 #### 6. RARP (Reverse Address Resolution Protocol)
-- 물리적인 주소 MAC을 기반으로 논리적인 주소 IP를 알아오는 프로토콜
+- **물리적인 주소 MAC을 기반으로 논리적인 주소 IP를 알아오는 프로토콜**
 - 하나의 호스트를 RARP 서버로 지정
 - 디스크 없는 워크스테이션은 RARP Request 패킷을 전송 (브로드캐스트)
 - RARP 서버는 인터넷 주소를 RARP Response 패킷으로 응답 (유니캐스트)
@@ -564,7 +575,7 @@ toc: true
 + Frame 으로 변환
 
 ### 3. CSMA/CD (Carrier Sense Multiple Access/Collision Detection)
-+ 유선 LAN(Local Area Network) 에서 메시지를 송수신하기 위한 접근 방법
++ **유선 LAN(Local Area Network) 에서 메시지를 송수신하기 위한 접근 방법**
 + 충돌이 발생하지 않는 경우
     * 전송을 원하는 호스트는 네트워크에 캐리어를 감지해 전송이 가능한지 검사 (데이터 프레임 전송)
     * 발생한 프레임은 네트워크 내에서 Broadcast 됨
@@ -578,7 +589,7 @@ toc: true
     * Switch는 브로드캐스트를 막을 수 없고, Router 가 브로드캐스트를 막을 수 있음.
 
 ### 4. CSMA/CA (Carrier Sense Multiple Access/Collision Avoidance)
-+ 무선 LAN(Local Area Network) 에서 메시지를 송수신하기 위한 접근 방법
++ **무선 LAN(Local Area Network) 에서 메시지를 송수신하기 위한 접근 방법**
 + 프레임 전송 이전에 제어 메시지를 이용하여 수신자로부터 간단한 전송을 유발
 + 제어 신호에 대한 응답이 도착하면 프레임을 전송
 
@@ -586,6 +597,8 @@ toc: true
 
 |LAN Swtich 방식|설명|
 |:---|:---|
-|Cut through|목적지의 MAC Address만 확인 후 해당 포트로 전송|
-|Store and Forward|전채 Frame을 모두 저장하여 Error Check를 수행 후 전송|
-|Fragment Free|{::nomarkdown}<ul><li>Modify Cut Through</li><li>Frame의 64 Bit를 검사, Header의 Error를 검사 후 전송</li><li>512Bit가 수신 될 때까지 대기 후 에러가 존재하지 않으면 전송하는 방식</li></ul>{:/}|
+|**Cut through**|목적지의 MAC Address만 확인 후 해당 포트로 전송|
+|**Store and Forward**|전채 Frame을 모두 저장하여 Error Check를 수행 후 전송|
+|**Fragment Free**|⦁ Modify Cut Through<br/>⦁ Frame의 64 Bit를 검사, Header의 Error를 검사 후 전송<br/>⦁ 512Bit가 수신 될 때까지 대기 후 에러가 존재하지 않으면 전송하는 방식|
+
+

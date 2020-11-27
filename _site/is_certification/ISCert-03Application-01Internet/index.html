@@ -416,6 +416,7 @@
     <ul>
       <li><a href="#1-spam-mail-차단-방법">1. Spam Mail 차단 방법</a></li>
       <li><a href="#2-spamassassin">2. SpamAssassin</a></li>
+      <li><a href="#3-메일-보안-기술도구의-종류">3. 메일 보안 기술(도구)의 종류</a></li>
     </ul>
   </li>
   <li><a href="#웹-서버-보안web-server-security">웹 서버 보안(Web Server Security)</a>
@@ -510,6 +511,23 @@
   <li>FTP 서비스는 보안에 취약(Sniffing) -&gt; sFTP 사용</li>
 </ul>
 
+<p><img src="/assets/images/posts/ftp_3way.png" alt="FTP 로그인 과정" /></p>
+
+<p><a href="https://www.programmersought.com/article/28932461830/">이미지 출처</a></p>
+
+<ul>
+  <li><strong>FTP 로그인 과정</strong>
+    <ul>
+      <li>3Way Handshaking</li>
+      <li>Recv : 220</li>
+      <li>Send : 사용자 ID</li>
+      <li>Recv : 331</li>
+      <li>Send : Password</li>
+      <li>Recv : 230 (로그인 성공)</li>
+    </ul>
+  </li>
+</ul>
+
 <h3 id="3-ftp-종류">3. FTP 종류</h3>
 
 <table>
@@ -522,15 +540,15 @@
   <tbody>
     <tr>
       <td style="text-align: left">FTP</td>
-      <td style="text-align: left">ID 및 Password 인증을 수행하고 TCP 프로토콜을 사용하여 사용자의 데이터를 송수신</td>
+      <td style="text-align: left">ID 및 Password 인증을 수행하고 <strong>TCP 프로토콜</strong>을 사용하여 사용자의 데이터를 송수신</td>
     </tr>
     <tr>
       <td style="text-align: left">tFTP</td>
-      <td style="text-align: left">인증 과정 없이 UDP 기반으로 데이터를 빠르게 송수신 함. 69번 포트 사용</td>
+      <td style="text-align: left"><strong>인증 과정 없이 UDP 기반</strong>으로 데이터를 빠르게 송수신 함. <strong>69번 포트</strong> 사용</td>
     </tr>
     <tr>
       <td style="text-align: left">sFTP</td>
-      <td style="text-align: left">전송 구간에 암호화 기법을 사용하여 기밀성을 제공</td>
+      <td style="text-align: left"><strong>전송 구간에 암호화 기법을 사용</strong>하여 기밀성을 제공</td>
     </tr>
   </tbody>
 </table>
@@ -547,15 +565,15 @@
   <tbody>
     <tr>
       <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/etc/ftpusers</code></td>
-      <td style="text-align: left">파일에 적용된 사용자에 대한 FTP 접근 제한</td>
+      <td style="text-align: left">파일에 적용된 <strong>사용자에 대한 FTP 접근 제한</strong></td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/etc/hosts.deny</code></td>
-      <td style="text-align: left">특정 IP의 접근 제한</td>
+      <td style="text-align: left"><strong>특정 IP의 접근 제한</strong></td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/etc/hosts.allow</code></td>
-      <td style="text-align: left">특정 IP의 접근 허용</td>
+      <td style="text-align: left"><strong>특정 IP의 접근 허용</strong></td>
     </tr>
   </tbody>
 </table>
@@ -578,19 +596,19 @@
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">Active Mode</td>
-      <td style="text-align: left"><ul><li>FTP Client에서 FTP Server 21번 포트로 접속</li><li>FTP Client는 FTP Server 20번 포트로 데이터 전송</li></ul></td>
+      <td style="text-align: left"><strong>Active Mode</strong></td>
+      <td style="text-align: left">⦁ Client : Server 21번 포트로 접속, 데이터채널 포트 제공 / Server : 응답<br />⦁ <strong>Server : Client 제공 포트로 데이터채널 연결 요청</strong> / Client : 응답</td>
     </tr>
     <tr>
-      <td style="text-align: left">Passive Mode</td>
-      <td style="text-align: left"><ul><li>FTP Client에서 FTP Server 21번 포트로 접속</li><li>FTP Server가 FTP Client로 데이터 송수신을 위해서 1024~65535 범위의 Random 포트를 선택</li><li>FTP Client에서 데이터 송수신을 위해서 Random 포트 사용</li></ul></td>
+      <td style="text-align: left"><strong>Passive Mode</strong></td>
+      <td style="text-align: left">⦁ <strong>Client</strong> : Server 21번 포트로 접속, <strong>PASV 모드 요청</strong> / <strong>Server</strong> : 응답, <strong>데이터채널 포트 (1024~65535 범위의 Random 포트) 제공</strong><br />⦁ <strong>Client : Server 제공 포트로 데이터채널 연결 요청</strong> / Server : 응답</td>
     </tr>
   </tbody>
 </table>
 
 <h3 id="6-ftp-서비스-로그-기록">6. FTP 서비스 로그 기록</h3>
 <ul>
-  <li>FTP 서비스 기동 시에 <code class="language-plaintext highlighter-rouge">-l</code> 옵션을 부여해서 실행하면 xferlog 파일을 기록</li>
+  <li><strong>FTP 서비스 기동 시에 <code class="language-plaintext highlighter-rouge">-l</code> 옵션을 부여해서 실행하면 xferlog 파일을 기록</strong></li>
   <li><code class="language-plaintext highlighter-rouge">Sat Oct 29 21:35:39 2016 1 1.226.137.47 70 /home/devtest/aa.html a _ i r devtest ftp 0 * c</code>
     <ul>
       <li>70 : 파일전송 크기</li>
@@ -601,6 +619,21 @@
   <li><code class="language-plaintext highlighter-rouge">Sat Oct 29 22:58:38 2016 1 110.15.241.24 70 /home/devtest/aa.html b _ o r devtest ftp 0 * c</code>
     <ul>
       <li>o : 파일 다운로드</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">Thu Apr 8 15:40:32 2016 1 201.1.1.10 254 /usr/kisa.z b_o r test ftp 0 * c</code>
+    <ul>
+      <li>Thu Apr 8 15:40:32 2016 1 : 접근 날짜 및 시간</li>
+      <li>201.1.1.10 : 접속 IP</li>
+      <li>254 : 전송 파일 Size</li>
+      <li>/usr/kisa.z : 전송 파일</li>
+      <li>b(Binary), a(ASCII) : 파일 종류</li>
+      <li>_(아무일도 수행하지 않음) : 행위</li>
+      <li>o(파일을 받았음) : 파일 동작</li>
+      <li>r(인증된 사용자) : 사용자 접근 방식</li>
+      <li>test : 로그인 ID</li>
+      <li>0(없음) : 인증 방법</li>
+      <li>c(전송성공) : 전송 상태</li>
     </ul>
   </li>
 </ul>
@@ -617,27 +650,27 @@
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">Bounce Attack</td>
-      <td style="text-align: left"><ul><li>익명 FTP 서버를 경유하여 호스트를 스캔</li><li>네트워크 포트 스캐닝을 위해서 사용</li><li>FTP 바운스 공격을 통해서 전자메일을 보내는 공격을 Fake Mail이라고 함</li></ul></td>
+      <td style="text-align: left"><strong>Bounce Attack</strong></td>
+      <td style="text-align: left">⦁ 익명 FTP 서버를 경유하여 호스트를 스캔<br />⦁ <strong>네트워크 포트 스캐닝을 위해서 사용</strong><br />⦁ <strong>FTP 바운스 공격을 통해서 전자메일을 보내는 공격을 Fake Mail</strong>이라고 함</td>
     </tr>
     <tr>
-      <td style="text-align: left">tFTP Attack</td>
-      <td style="text-align: left"><ul><li>인증절차를 요구하지 않기 때문에 설정이 잘못되어 있으면 누구나 해당 호스트에 접근하여 파일을 다운로드 할 수 있음</li><li>FTP보다 간단함</li></ul></td>
+      <td style="text-align: left"><strong>tFTP Attack</strong></td>
+      <td style="text-align: left">⦁ 인증절차를 요구하지 않기 때문에 설정이 잘못되어 있으면 누구나 해당 호스트에 접근하여 파일을 다운로드 할 수 있음<br />⦁ FTP보다 간단함</td>
     </tr>
     <tr>
-      <td style="text-align: left">Anonymous FTP Attack</td>
-      <td style="text-align: left"><ul><li>보안 절차를 거치지 않은 익명의 사용자에게 FTP 서버 접근 허용</li><li>익명 사용자가 서버에 쓰기 권한이 있을 떄 악성코드 생성이 가능</li></ul></td>
+      <td style="text-align: left"><strong>Anonymous FTP Attack</strong></td>
+      <td style="text-align: left">⦁ 보안 절차를 거치지 않은 익명의 사용자에게 FTP 서버 접근 허용<br />⦁ 익명 사용자가 서버에 쓰기 권한이 있을 떄 악성코드 생성이 가능</td>
     </tr>
     <tr>
-      <td style="text-align: left">FTP 서버 취약점</td>
+      <td style="text-align: left"><strong>FTP 서버 취약점</strong></td>
       <td style="text-align: left">wuftp 포맷 스트링 취약점 및 각종 버퍼 오버플로우 공격</td>
     </tr>
     <tr>
-      <td style="text-align: left">스니핑</td>
+      <td style="text-align: left"><strong>스니핑</strong></td>
       <td style="text-align: left">ID 및 Password 입력 후 접속 시도 시 암호화가 이루어지지 않음. 네트워크 스니핑에 취약</td>
     </tr>
     <tr>
-      <td style="text-align: left">Brute Force Attack</td>
+      <td style="text-align: left"><strong>Brute Force Attack</strong></td>
       <td style="text-align: left">무작위 대입법을 사용</td>
     </tr>
   </tbody>
@@ -645,30 +678,30 @@
 
 <h3 id="2-ftp-보안대책">2. FTP 보안대책</h3>
 <ul>
-  <li>Anonymous
+  <li><strong>Anonymous</strong>
     <ul>
       <li>사용자의 Root 디렉터리, bin, etc, pub 디렉터리 소유자의 권한을 관리</li>
       <li><code class="language-plaintext highlighter-rouge">$root/etc/passwd</code> 파일에서 anonymous ftp에 불필요한 항목을 제거</li>
     </ul>
   </li>
-  <li>tFTP
+  <li><strong>tFTP</strong>
     <ul>
       <li>tFTP가 필요한 경우 secure mode로 운영</li>
     </ul>
   </li>
-  <li>inetd FTP 서비스(inetd.conf 설정파일)
+  <li><strong>inetd FTP 서비스(inetd.conf 설정파일)</strong>
     <ul>
       <li><code class="language-plaintext highlighter-rouge">/etc/passwd</code> 파일에 FTP 사용자를 <code class="language-plaintext highlighter-rouge">/sbin/nologin</code> 으로 설정</li>
     </ul>
   </li>
 </ul>
 
-<h1 id="e-mail-보안"><strong>E-Mail 보안</strong></h1>
+<h1 id="e-mail-보안">E-Mail 보안</h1>
 <h2 id="1-e-mail-전송-방법">1. E-Mail 전송 방법</h2>
 <h3 id="1-smtpsimple-mail-transfer-protocol">1. SMTP(Simple Mail Transfer Protocol)</h3>
 <ul>
   <li>인터넷에서 전자우편을 보낼 때 사용되는 표준 통신 규약</li>
-  <li>E-Mail을 보내기 위해서 TCP 25번 포트를 사용</li>
+  <li><strong>E-Mail을 보내기 위해서 TCP 25번 포트를 사용</strong></li>
   <li>상대 서버를 지시하기 위해 DNS의 MX 레코드가 사용됨</li>
   <li>OSI 7 계층의 응용 계층(Application Layer)에서 동작</li>
 </ul>
@@ -677,8 +710,8 @@
 <ul>
   <li>응용 계층 프로토콜</li>
   <li>원격 서버로부터 TCP/IP 연결을 통해 E-Mail을 읽어오는 데 사용</li>
-  <li>E-Mail을 읽은 후 원격 서버의 E-Mail을 삭제</li>
-  <li>TCP 110번으로 메일 서버에 접속하여 저장된 메일을 내려받는 MDA 프로그램</li>
+  <li><strong>E-Mail을 읽은 후 원격 서버의 E-Mail을 삭제</strong></li>
+  <li><strong>TCP 110번으로 메일 서버에 접속하여 저장된 메일을 내려받는 MDA 프로그램</strong></li>
   <li>POP3 특징
     <ul>
       <li>항상 연결 상태가 아닌 네트워크 접근에 유리</li>
@@ -691,7 +724,8 @@
 
 <h3 id="3-imap-및-imap4">3. IMAP 및 IMAP4</h3>
 <ul>
-  <li>POP과 달리 메일을 내려 받더라도 메일 박스에 원본은 계속 저장됨</li>
+  <li><strong>POP과 달리 메일을 내려 받더라도 메일 박스에 원본은 계속 저장됨</strong></li>
+  <li><strong>TCP 143</strong></li>
   <li>IMAP 및 IMAP4의 특징
     <ul>
       <li>온라인 및 오프라인에서도 유효</li>
@@ -711,9 +745,9 @@
 <p><a href="https://en.wikipedia.org/wiki/Email_agent_(infrastructure)">이미지 출처</a></p>
 
 <ul>
-  <li>MTA(Mail Transfer Agent) : 메일을 전송하는 서버</li>
-  <li>MDA(Mail Delivery Agent) : 수신측에 고용된 우체부 역할, MTA에게 받은 메일을 사용자에게 전달</li>
-  <li>MUA(Mail User Agent) : 사용자들이 사용하는 클라이언트 애플리케이션</li>
+  <li><strong>MTA(Mail Transfer Agent)</strong> : 메일을 전송하는 서버</li>
+  <li><strong>MDA(Mail Delivery Agent)</strong> : 수신측에 고용된 우체부 역할, MTA에게 받은 메일을 사용자에게 전달</li>
+  <li><strong>MUA(Mail User Agent)</strong> : 사용자들이 사용하는 클라이언트 애플리케이션</li>
 </ul>
 
 <h2 id="2-e-mail-보안-기법">2. E-Mail 보안 기법</h2>
@@ -721,11 +755,12 @@
 <ul>
   <li>개요
     <ul>
-      <li>MIME(Multipurpose Internet Mail Extension, RFC 1521) 객체에 암호화와 전자서명 기능을 추가한 암호화 프로토콜</li>
+      <li><strong>MIME(Multipurpose Internet Mail Extension, RFC 1521) 객체에 암호화와 전자서명 기능을 추가한 암호화 프로토콜</strong></li>
       <li>네트워크를 통해 주고받는 메시지에 대해 송수신자에게 보안서비스를 제공</li>
       <li>평문 메시지 암호화</li>
       <li>서명, 압축, 분할, 전자 우편 호환성</li>
       <li>수신 부인 방지와 메시지 부인 방지는 제공하지 않는다.</li>
+      <li><strong>분산형 키관리</strong></li>
     </ul>
   </li>
   <li>
@@ -741,15 +776,15 @@
       <tbody>
         <tr>
           <td style="text-align: left">전자서명</td>
-          <td style="text-align: left">DSS/SHA 또는 RSA/SHA로 전자서명이 가능</td>
+          <td style="text-align: left"><strong>DSS/SHA 또는 RSA/SHA로 전자서명이 가능</strong></td>
         </tr>
         <tr>
           <td style="text-align: left">메시지 암호화</td>
-          <td style="text-align: left">CAST-128, IDEA, 3DES로 메시지 암호화</td>
+          <td style="text-align: left"><strong>CAST-128, IDEA, 3DES로 메시지 암호화</strong></td>
         </tr>
         <tr>
           <td style="text-align: left">1회용 세션키 생성</td>
-          <td style="text-align: left">Diffie-Hellman 혹은 RSA로 키 분배</td>
+          <td style="text-align: left"><strong>Diffie-Hellman 혹은 RSA로 키 분배</strong></td>
         </tr>
         <tr>
           <td style="text-align: left">이메일 호환</td>
@@ -767,19 +802,21 @@
 <h3 id="2-pemprivacy-enhanced-mail">2. PEM(Privacy Enhanced Mail)</h3>
 <ul>
   <li>프라이버시 향상 이메일</li>
-  <li>중앙집중화된 키 인증 방식</li>
+  <li><strong>중앙집중화된 키 인증 방식</strong></li>
   <li>구현이 어렵고 높은 보안성 제공 (군사, 은행)</li>
+  <li><strong>DES CBC MD5</strong></li>
 </ul>
 
 <h3 id="3-smimesecure-multi-purpose-internet-mail-extensions">3. S/MIME(Secure Multi-Purpose Internet Mail Extensions)</h3>
 <ul>
   <li>개요
     <ul>
-      <li>표준 보안 메일 규약, 송신자와 수신자를 인증, 메시지 무결성 증명, 첨부파일</li>
+      <li><strong>표준 보안 메일 규약, 송신자와 수신자를 인증, 메시지 무결성 증명, 첨부파일 포함</strong></li>
       <li>메시지 내용의 Privacy를 보증하는 표준 보안 메일 프로토콜, 메일 전체를 암호화</li>
-      <li>인터넷 MIME 메시지에 전자 서명과 함께 암호화를 더한 프로토콜로서 RSA 암호 사용</li>
+      <li>인터넷 MIME 메시지에 전자 서명과 함께 암호화를 더한 프로토콜로서 <strong>RSA 암호 사용</strong></li>
       <li>CA(인증기관)로부터 자신의 공개키를 보증하는 인증서를 받아야 함</li>
       <li>첨부 파일을 보안</li>
+      <li><strong>서명 기능</strong></li>
     </ul>
   </li>
   <li>S/MIME에 사용되는 암호화 키
@@ -799,7 +836,7 @@
 
 <h2 id="2-sendmail-운영-모드">2. Sendmail 운영 모드</h2>
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">/usr/sbin/sendmail -&lt;Option&gt;</code>
+  <li><strong><code class="language-plaintext highlighter-rouge">/usr/sbin/sendmail -&lt;Option&gt;</code></strong>
     <ul>
       <li><code class="language-plaintext highlighter-rouge">-bd</code> : 데몬 모드로 실행</li>
       <li><code class="language-plaintext highlighter-rouge">-bi</code> : 앨리어스 데이터베이스 파일을 초기화</li>
@@ -821,12 +858,12 @@
 
 <h2 id="3-sendmail-접근-파일spam-mail-차단">3. Sendmail 접근 파일(SPAM Mail 차단)</h2>
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">/etc/mail/access</code> 작성 규칙
+  <li><strong><code class="language-plaintext highlighter-rouge">/etc/mail/access</code> 작성 규칙</strong>
     <ul>
-      <li>OK : 다른 rule이 거부하여도 들어오는 메일을 받아들임</li>
-      <li>RELAY : relay를 허용, 다른 rule이 거부하는 경우도 지정된 특정 도메인이 있는 사용자에게 오는 메일을 받음</li>
-      <li>REJECT : 수신 및 발신을 완전히 거부</li>
-      <li>DISCARD : 메일을 받기만 하고 메시지를 완전히 폐기</li>
+      <li>OK : <strong>다른 rule이 거부하여도 들어오는 메일을 받아들임</strong></li>
+      <li>RELAY : <strong>relay를 허용</strong>, 다른 rule이 거부하는 경우도 지정된 특정 도메인이 있는 사용자에게 오는 메일을 받음</li>
+      <li>REJECT : <strong>수신 및 발신을 완전히 거부</strong></li>
+      <li>DISCARD : 메일을 받기만 하고 <strong>메시지를 완전히 폐기</strong></li>
       <li>501 : 지정된 e-mail 또는 도메인에 대해 보내는 사람의 주소가 전체 또는 부분적으로 일치할 경우 메일 거부</li>
       <li>550 : 특정 도메인에 관련된 메일을 거부</li>
     </ul>
@@ -860,14 +897,14 @@
 <table>
   <thead>
     <tr>
-      <th style="text-align: left">RBL(Real Time Blocking)</th>
-      <th style="text-align: left">SPF(Sender Policy Framework)</th>
+      <th style="text-align: left"><strong>RBL(Real Time Blocking)</strong></th>
+      <th style="text-align: left"><strong>SPF(Sender Policy Framework)</strong></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left"><ul><li>스팸메일에 사용되는 IP 리스트를 등록하고 차단</li><li>국내 : KISA의 RBL 서버에 특정 IP를 등록하고 차단함</li></ul></td>
-      <td style="text-align: left"><ul><li>발신자 : 자신의 메일 서버 정보와 정책을 나타내는 SPF 레코드를 해당 DNS에 등록함</li><li>수신자 : 메일 수신 시 발송자의 DNS에 등록된 SPF 레코드를 확인하여 해당 메일에 표시된 발송 IP와 비교하고 그 결과에 따라 수신 여부를 결정함</li></ul></td>
+      <td style="text-align: left">⦁ 스팸메일에 사용되는 IP 리스트를 등록하고 차단<br />⦁ 국내 : KISA의 RBL 서버에 특정 IP를 등록하고 차단함</td>
+      <td style="text-align: left">⦁ 발신자 : 자신의 메일 서버 정보와 정책을 나타내는 SPF 레코드를 해당 DNS에 등록함<br />⦁ 수신자 : 메일 수신 시 발송자의 DNS에 등록된 SPF 레코드를 확인하여 해당 메일에 표시된 발송 IP와 비교하고 그 결과에 따라 수신 여부를 결정함</td>
     </tr>
   </tbody>
 </table>
@@ -875,8 +912,51 @@
 <h2 id="2-spamassassin">2. SpamAssassin</h2>
 <ul>
   <li>정의 : 점수를 이용하여 스팸 여부를 판단, Perl로 개발됨</li>
-  <li>특징 : Rule 기반 하에 Header와 Body를 분석하여 실시간 차단 리스트 (Internet-based real time blacklist(RBL)) 를 참고하여 각각의 룰에 매칭될 경우 점수를 매겨서 총 점수가 기준점을 초과하는지 여부에 따라 스팸 여부를 결정</li>
+  <li>특징 : Rule 기반 하에 Header와 Body를 분석하여 실시간 차단 리스트 (Internet-based real time blacklist(RBL)) 를 참고하여 각각의 룰에 매칭될 경우 <strong>점수를 매겨서 총 점수가 기준점을 초과하는지 여부에 따라 스팸 여부를 결정</strong></li>
   <li>첨부파일 검사 X</li>
+</ul>
+
+<h2 id="3-메일-보안-기술도구의-종류">3. 메일 보안 기술(도구)의 종류</h2>
+<ul>
+  <li><strong>RBL(Real time Black List)</strong>
+    <ul>
+      <li>SPAM 메일 방지를 위해서 IP Black List 관리</li>
+      <li>한국에서는 KISA 에 IP 등록</li>
+    </ul>
+  </li>
+  <li><strong>SPF(Send Policy Framework)</strong>
+    <ul>
+      <li>허용된 도메인 혹은 IP 등에서 발송 여부를 확인</li>
+      <li>DNS를 설정하여 SPAM 메일을 방지함</li>
+      <li><strong>DNS 에 발신 IP 등록</strong></li>
+    </ul>
+  </li>
+  <li><strong>Spamassassin</strong>
+    <ul>
+      <li>Rule을 기반으로 하여 메일 헤더 및 내용을 분석</li>
+      <li>RBL 참조</li>
+      <li>Rule 매칭되고 <strong>총점수가 임계치를 넘으면 Spam 메일로 결정</strong></li>
+    </ul>
+  </li>
+  <li><strong>Inflex</strong>
+    <ul>
+      <li>내부 혹은 외부로 발송되는 메일을 검사하고 <strong>첨부파일을 필터링</strong></li>
+      <li>내용스캔, 메일 In 혹은 Out 정책, 첨부파일 필터링</li>
+    </ul>
+  </li>
+  <li><strong>Sanitizer</strong>
+    <ul>
+      <li>확장자를 사용한 필터링</li>
+      <li>MS Office 매크로 검사</li>
+      <li>악성파일 Score</li>
+      <li>감염된 메시지 보관장소 설정</li>
+    </ul>
+  </li>
+  <li><strong>Procmail</strong>
+    <ul>
+      <li>메일크기, 내용, 보낸 사람 등으로 필터링을 지원</li>
+    </ul>
+  </li>
 </ul>
 
 <h1 id="웹-서버-보안web-server-security"><strong>웹 서버 보안(Web Server Security)</strong></h1>
@@ -959,35 +1039,35 @@
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">주요 디렉터리 및 파일 접근 권한</td>
-      <td style="text-align: left">Root에 의해 실행 가능한 모든 명령어는 다른 사용자가 수정하지 못하도록 설정<ul><li>`# chown 0. bin conf logs`</li><li>`# chgrp 0. bin conf logs`</li><li>`#chmod 755 . bin conf logs`</li><li>`#chmod 511 /user/loca/httpd/bin/httpd`</li></ul></td>
+      <td style="text-align: left"><strong>주요 디렉터리 및 파일 접근 권한</strong></td>
+      <td style="text-align: left">Root에 의해 실행 가능한 모든 명령어는 다른 사용자가 수정하지 못하도록 설정⦁ <code class="language-plaintext highlighter-rouge"># chown 0. bin conf logs</code><br />⦁ <code class="language-plaintext highlighter-rouge"># chgrp 0. bin conf logs</code><br />⦁ <code class="language-plaintext highlighter-rouge">#chmod 755 . bin conf logs</code><br />⦁ <code class="language-plaintext highlighter-rouge">#chmod 511 /user/loca/httpd/bin/httpd</code></td>
     </tr>
     <tr>
-      <td style="text-align: left">불필요한 파일 삭제</td>
-      <td style="text-align: left"><ul><li>아파치 설치 시 기본적으로 설치되는 cgi-bin은 공격에 이용될 수 있으므로 삭제</li><li>매뉴얼 파일은 시스템에 대한 정보를 제공할 수 있어서 공격에 도움이 될 수 있으므로 삭제</li><li>/var/www/manual 및 /var/www/cgi_bin 삭제</li></ul></td>
+      <td style="text-align: left"><strong>불필요한 파일 삭제</strong></td>
+      <td style="text-align: left">⦁ 아파치 설치 시 기본적으로 설치되는 cgi-bin은 공격에 이용될 수 있으므로 삭제<br />⦁ 매뉴얼 파일은 시스템에 대한 정보를 제공할 수 있어서 공격에 도움이 될 수 있으므로 삭제<br />⦁ /var/www/manual 및 /var/www/cgi_bin 삭제</td>
     </tr>
     <tr>
-      <td style="text-align: left">Directory Listing</td>
+      <td style="text-align: left"><strong>Directory Listing</strong></td>
       <td style="text-align: left">index.html이 없거나 Listing을 보여주는 옵션이 indexes에 설정되어 있는 경우 웹 페이지의 디렉터리가 보임</td>
     </tr>
     <tr>
-      <td style="text-align: left">FollowSynLinks</td>
+      <td style="text-align: left"><strong>FollowSynLinks</strong></td>
       <td style="text-align: left">심볼릭 링크를 이용해서 파일 시스템에 접근하여 Root 권한을 획득할 수 있으므로 FollowSymLink를 제거</td>
     </tr>
     <tr>
-      <td style="text-align: left">Directory indexes</td>
-      <td style="text-align: left"><ul><li>우선순위를 결정함</li><li>index.cgi>index.html>index.htm의 순서</li><li># DirectoryIndex: sets the file that Apache will serve iof a directory is requested.</li><li><IfModule dir-module>DirectoryIndex index.html</IfModule></li></ul></td>
+      <td style="text-align: left"><strong>Directory indexes</strong></td>
+      <td style="text-align: left">⦁ 우선순위를 결정함<br />⦁ index.cgi&gt;index.html&gt;index.htm의 순서<br />⦁ # DirectoryIndex: sets the file that Apache will serve iof a directory is requested.<br />⦁ <IfModule dir-module="">DirectoryIndex index.html</IfModule></td>
     </tr>
     <tr>
-      <td style="text-align: left">Server Tokens</td>
+      <td style="text-align: left"><strong>Server Tokens</strong></td>
       <td style="text-align: left">웹 서버에 접속할 경우 최소한의 정보만 보이도록 설정</td>
     </tr>
     <tr>
-      <td style="text-align: left">ServerSignature</td>
+      <td style="text-align: left"><strong>ServerSignature</strong></td>
       <td style="text-align: left">ServerSignature on:on 으로 설정된 경우 아파치 버전 및 서버 이름이 노출됨</td>
     </tr>
     <tr>
-      <td style="text-align: left">접근 제어</td>
+      <td style="text-align: left"><strong>접근 제어</strong></td>
       <td style="text-align: left">클라이언트의 이름 및 IP 주소 등을 사용해 접근 제어 수행<br />&lt;Directory /&gt;<br />    Options FollowSynLinks<br />    AllowOverride None<br />    Order deny,allow<br />    Deny from all<br />&lt;/Directory&gt;</td>
     </tr>
     <tr>
@@ -1013,11 +1093,11 @@
   <tbody>
     <tr>
       <td style="text-align: left">Timeout</td>
-      <td style="text-align: left"><ul><li>웹브라우저가 웹 페이지에 접근한 뒤, 클라이언트의 요청에 서버가 대기하는 시간을 설정</li><li>기본값은 300초</li></ul></td>
+      <td style="text-align: left">⦁ 웹브라우저가 웹 페이지에 접근한 뒤, 클라이언트의 요청에 서버가 대기하는 시간을 설정<br />⦁ 기본값은 300초</td>
     </tr>
     <tr>
       <td style="text-align: left">MaxKeepAliveRequests</td>
-      <td style="text-align: left"><ul><li>하나의 지속적인 연결에서 서비스를 제공할 요청의 최대 값을 설정</li><li>0일 경우 무제한 기본값은 100</li></ul></td>
+      <td style="text-align: left">⦁ 하나의 지속적인 연결에서 서비스를 제공할 요청의 최대 값을 설정<br />⦁ 0일 경우 무제한 기본값은 100</td>
     </tr>
     <tr>
       <td style="text-align: left">KeepAliveTimeout</td>
@@ -1025,14 +1105,14 @@
     </tr>
     <tr>
       <td style="text-align: left">KeepAlive</td>
-      <td style="text-align: left"><ul><li>접속 연결에 대한 재요청을 허용할 것인지 설정</li><li>기본값은 off이며 on으로 설정되면 MaxKeepAliveRequests 값과 연계됨</li></ul></td>
+      <td style="text-align: left">⦁ 접속 연결에 대한 재요청을 허용할 것인지 설정<br />⦁ 기본값은 off이며 on으로 설정되면 MaxKeepAliveRequests 값과 연계됨</td>
     </tr>
   </tbody>
 </table>
 
 <h3 id="3-apache-웹-서버-httpdconf-파일-설정">3. Apache 웹 서버 httpd.conf 파일 설정</h3>
 <ul>
-  <li>예시
+  <li><strong>예시</strong>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &lt;Directory "D:/document"&gt;
       Options Indexes FollowSynLinks
       AllowOverride All
@@ -1095,19 +1175,19 @@
       <tbody>
         <tr>
           <td style="text-align: left">서비스</td>
-          <td style="text-align: left"><ul><li>웹과 FTP 관리를 위한 IIS 관리 서비스</li><li>World Wide Web 서버 서비스</li><li>FTP 서비스</li><li>메일 발송을 위한 SMTP(Simple Mail Transport Protocol)</li><li>뉴스그룹을 위한 NNTP(Network News Transport Protocol)</li></ul></td>
+          <td style="text-align: left">⦁ 웹과 FTP 관리를 위한 IIS 관리 서비스<br />⦁ World Wide Web 서버 서비스<br />⦁ FTP 서비스<br />⦁ 메일 발송을 위한 SMTP(Simple Mail Transport Protocol)<br />⦁ 뉴스그룹을 위한 NNTP(Network News Transport Protocol)</td>
         </tr>
         <tr>
           <td style="text-align: left">계정 및 그룹</td>
-          <td style="text-align: left"><ul><li>IUSR_MACHINE(인터넷으로 접근하는 익명 계정)</li><li>IWAM_MACHINE(out-of-process로 실행되는 웹 애플리케이션이 실행되는 계정)</li></ul></td>
+          <td style="text-align: left">⦁ IUSR_MACHINE(인터넷으로 접근하는 익명 계정)<br />⦁ IWAM_MACHINE(out-of-process로 실행되는 웹 애플리케이션이 실행되는 계정)</td>
         </tr>
         <tr>
           <td style="text-align: left">폴더</td>
-          <td style="text-align: left"><ul><li>%windir%\system32\inetsrv(IIS 프로그램)</li><li>%windir%\system32\inetsrv\iisadmin(IIS 관리 프로그램)</li><li>%windir%\help\iishelp(IIS 도움말 파일)</li><li>%systemdrive%\inetpub(웹,FTP,SMTP 루트 폴더)</li></ul></td>
+          <td style="text-align: left">⦁ %windir%\system32\inetsrv(IIS 프로그램)<br />⦁ %windir%\system32\inetsrv\iisadmin(IIS 관리 프로그램)<br />⦁ %windir%\help\iishelp(IIS 도움말 파일)<br />⦁ %systemdrive%\inetpub(웹,FTP,SMTP 루트 폴더)</td>
         </tr>
         <tr>
           <td style="text-align: left">웹 사이트</td>
-          <td style="text-align: left"><ul><li>기본 웹 사이트(80번 포트) : %systemdrive%\inetpub\wwwroot</li><li>관리 웹 사이트(3693번 포트) : %systemdrive%\system32\inetsrv\iisadmin</li></ul></td>
+          <td style="text-align: left">⦁ 기본 웹 사이트(80번 포트) : %systemdrive%\inetpub\wwwroot<br />⦁ 관리 웹 사이트(3693번 포트) : %systemdrive%\system32\inetsrv\iisadmin</td>
         </tr>
       </tbody>
     </table>
@@ -1143,11 +1223,11 @@
         </tr>
         <tr>
           <td style="text-align: left">dent</td>
-          <td style="text-align: left"><ul><li>IdentityCheck 가 enable되고 있고, 클라이언트가 ident에 응답을 보내면 identity 정보를 기록</li><li>보통은 "-"로 대체</li></ul></td>
+          <td style="text-align: left">⦁ IdentityCheck 가 enable되고 있고, 클라이언트가 ident에 응답을 보내면 identity 정보를 기록<br />⦁ 보통은 “-“로 대체</td>
         </tr>
         <tr>
           <td style="text-align: left">Authuser</td>
-          <td style="text-align: left"><ul><li>인증이 있는 경우 사용자명이 기록됨</li><li>보통은 "-"로 대체</li></ul></td>
+          <td style="text-align: left">⦁ 인증이 있는 경우 사용자명이 기록됨<br />⦁ 보통은 “-“로 대체</td>
         </tr>
         <tr>
           <td style="text-align: left">Date</td>
@@ -1179,7 +1259,7 @@
     </ul>
   </li>
   <li>
-    <p>ErrorLog Level</p>
+    <p><strong>ErrorLog Level</strong></p>
 
     <table>
       <thead>
@@ -1234,6 +1314,7 @@
   <li>웹 서버 접속로그 access log
     <ul>
       <li><code class="language-plaintext highlighter-rouge">TransferLog /var/log/access.log</code> : TransferLog 지시어를 사용, 로그위치 지정</li>
+      <li>IP, 요청일, 시간, HTTP 메소드, HTTP 상태 코드, 전송 바이트, 시간 기록</li>
     </ul>
   </li>
   <li>로그파일 포맷 지정</li>
@@ -1248,7 +1329,7 @@
       <li><code class="language-plaintext highlighter-rouge">CustomLog logfile format|nickname env=[!]environment-variable</code></li>
       <li><code class="language-plaintext highlighter-rouge">CustomLog /logs/referrer_log "%{Referer}i -&gt; %U</code></li>
       <li>
-        <p>Common Log Format의 의미</p>
+        <p><strong>Common Log Format의 의미</strong></p>
 
         <table>
           <thead>
@@ -1307,43 +1388,47 @@
 
 <h2 id="2-http-상태-코드status-code">2. HTTP 상태 코드(Status Code)</h2>
 <ul>
-  <li>100 Continue</li>
-  <li>101 Switching Protocols</li>
-  <li>200 OK</li>
-  <li>201 Created</li>
-  <li>202 Accepted</li>
-  <li>203 Non-Authoritative Information</li>
-  <li>204 No Content</li>
-  <li>205 Reset Content</li>
-  <li>206 Partial Content</li>
-  <li>300 Multiple Choices</li>
-  <li>301 Moved Permanently</li>
-  <li>302 Moved Temporarily</li>
-  <li>303 See Other</li>
-  <li>304 Not Modified</li>
-  <li>305 Use Proxy</li>
-  <li>400 Bad Request</li>
-  <li>401 Unauthorized</li>
-  <li>402 Payment Required</li>
-  <li>403 Forbidden</li>
-  <li>404 Not Found</li>
-  <li>405 Method Not Allowed</li>
-  <li>406 Not Acceptable</li>
-  <li>407 Proxy Authentication Require</li>
-  <li>408 Request Time-out</li>
-  <li>409 Conflict</li>
-  <li>410 Gone</li>
-  <li>411 Length Required</li>
-  <li>412 Precondition Failed</li>
-  <li>413 Request Entity Too Large</li>
-  <li>414 Request-URI Too Large</li>
-  <li>415 Unsupported Media Type</li>
-  <li>500 Internal Server Error</li>
-  <li>501 Not Implemented</li>
-  <li>502 Bad Gateway</li>
-  <li>503 Service Unavailable</li>
-  <li>504 Gateway Time-out</li>
-  <li>505 HTTP Version not supported</li>
+  <li><strong>HTTP 상태코드</strong>
+    <ul>
+      <li>100 Continue</li>
+      <li>101 Switching Protocols</li>
+      <li>200 OK</li>
+      <li>201 Created</li>
+      <li>202 Accepted</li>
+      <li>203 Non-Authoritative Information</li>
+      <li>204 No Content</li>
+      <li>205 Reset Content</li>
+      <li>206 Partial Content</li>
+      <li>300 Multiple Choices</li>
+      <li>301 Moved Permanently</li>
+      <li>302 Moved Temporarily</li>
+      <li>303 See Other</li>
+      <li>304 Not Modified</li>
+      <li>305 Use Proxy</li>
+      <li>400 Bad Request</li>
+      <li>401 Unauthorized</li>
+      <li>402 Payment Required</li>
+      <li>403 Forbidden</li>
+      <li>404 Not Found</li>
+      <li>405 Method Not Allowed</li>
+      <li>406 Not Acceptable</li>
+      <li>407 Proxy Authentication Require</li>
+      <li>408 Request Time-out</li>
+      <li>409 Conflict</li>
+      <li>410 Gone</li>
+      <li>411 Length Required</li>
+      <li>412 Precondition Failed</li>
+      <li>413 Request Entity Too Large</li>
+      <li>414 Request-URI Too Large</li>
+      <li>415 Unsupported Media Type</li>
+      <li>500 Internal Server Error</li>
+      <li>501 Not Implemented</li>
+      <li>502 Bad Gateway</li>
+      <li>503 Service Unavailable</li>
+      <li>504 Gateway Time-out</li>
+      <li>505 HTTP Version not supported</li>
+    </ul>
+  </li>
 </ul>
 
 <h1 id="웹-방화벽web-firewall">웹 방화벽(Web Firewall)</h1>
@@ -1370,10 +1455,10 @@
   <tbody>
     <tr>
       <td style="text-align: center">취약점</td>
-      <td style="text-align: left"><ul><li>XSS</li><li>ActiveX</li></ul></td>
-      <td style="text-align: left"><ul><li>Sniffing</li></ul></td>
-      <td style="text-align: left"><ul><li>Web Server S/W 취약성</li><li>입력 값 검증 부재</li><li>사이트 구조</li><li>Application 로직 공격</li></ul></td>
-      <td style="text-align: left"><ul><li>질의 조작</li><li>질의 조작을 통한 System Call</li></ul></td>
+      <td style="text-align: left">⦁ XSS<br />⦁ ActiveX</td>
+      <td style="text-align: left">⦁ Sniffing</td>
+      <td style="text-align: left">⦁ Web Server S/W 취약성<br />⦁ 입력 값 검증 부재<br />⦁ 사이트 구조<br />⦁ Application 로직 공격</td>
+      <td style="text-align: left">⦁ 질의 조작<br />⦁ 질의 조작을 통한 System Call</td>
     </tr>
   </tbody>
 </table>
@@ -1390,7 +1475,7 @@
   <tbody>
     <tr>
       <td style="text-align: left">네트워크 기반 방화벽</td>
-      <td style="text-align: left"><ul><li>방화벽이나 침입방지 시스템과 유사하게 네트워크 구간에 인라인 Transparent 및 Proxy 방식으로 구성</li><li>웹 트래픽에 대한 분석 및 차단 기능</li></ul></td>
+      <td style="text-align: left">⦁ 방화벽이나 침입방지 시스템과 유사하게 네트워크 구간에 인라인 Transparent 및 Proxy 방식으로 구성<br />⦁ 웹 트래픽에 대한 분석 및 차단 기능</td>
     </tr>
     <tr>
       <td style="text-align: left">호스트 기반 방화벽</td>
@@ -1398,11 +1483,11 @@
     </tr>
     <tr>
       <td style="text-align: left">Proxy Method</td>
-      <td style="text-align: left"><ul><li>웹 서버 앞 단에서 클라이언트 요청을 받아 필터링 처리 후 웹 서버와 재접속 하는 방식</li><li>소프트웨어 기반 및 하드웨어 기반 방화벽 지원</li></ul></td>
+      <td style="text-align: left">⦁ 웹 서버 앞 단에서 클라이언트 요청을 받아 필터링 처리 후 웹 서버와 재접속 하는 방식<br />⦁ 소프트웨어 기반 및 하드웨어 기반 방화벽 지원</td>
     </tr>
     <tr>
       <td style="text-align: left">Filtering Module Method</td>
-      <td style="text-align: left"><ul><li>웹 방화벽이 웹 서버의 플러그인 모듈처럼 동작하는 방식</li><li>웹 서버가 처리 대기상태에서 보안 모듈에 필터링 처리된 후 정상 트래픽만 클라이언트에 응답하는 방식</li></ul></td>
+      <td style="text-align: left">⦁ 웹 방화벽이 웹 서버의 플러그인 모듈처럼 동작하는 방식<br />⦁ 웹 서버가 처리 대기상태에서 보안 모듈에 필터링 처리된 후 정상 트래픽만 클라이언트에 응답하는 방식</td>
     </tr>
   </tbody>
 </table>
@@ -1444,7 +1529,7 @@
 
 <ul>
   <li>사막의 오아시스(특정 사이트) 에 다가오는 초식동물(Victim) 을 노리는 육식동물 (Hacker)</li>
-  <li>워터링 홀 공격(특정 타겟)은 홈페이지에 접속하는 특정 사회적 그룹을 대상으로 악성코드를 유포하여 특정 사회적 그룹에 추가적인 APT 공격 등을 목적으로 한다.
+  <li><strong>워터링 홀 공격(특정 타겟)은 홈페이지에 접속하는 특정 사회적 그룹을 대상으로 악성코드를 유포하여 특정 사회적 그룹에 추가적인 APT 공격 등을 목적으로 한다.</strong>
     <ul>
       <li>예) 외교 관련 사이트에 악성코드를 심고 외교부 관계자가 접속하면 해당 PC에 악성코드를 설치, 그 PC에서 정보를 빼냄</li>
     </ul>
@@ -1457,7 +1542,7 @@
 <ul>
   <li>인터넷 네트워크상에서 컴퓨터의 이름을 IP 주소로 변환하거나 해석하는 데 사용되는 분산 네이밍 시스템</li>
   <li>URL 주소에 대한 IP 주소를 알려주는 서비스</li>
-  <li><code class="language-plaintext highlighter-rouge">nslookup</code> : DNS 확인 도구
+  <li><strong><code class="language-plaintext highlighter-rouge">nslookup</code></strong> : DNS 확인 도구
     <ul>
       <li><code class="language-plaintext highlighter-rouge">nslookup www.naver.com</code></li>
     </ul>
@@ -1470,6 +1555,7 @@
           <li><code class="language-plaintext highlighter-rouge">C:\windows\system32\drivers\etc\hosts.ics</code> 파일 내용 확인</li>
           <li><code class="language-plaintext highlighter-rouge">C:\windows\system32\drivers\etc\hosts</code> 파일 내용 확인</li>
           <li>DNS 서버에게 질의</li>
+          <li><code class="language-plaintext highlighter-rouge">ipconfig /flushdns</code> : DNS 캐시 테이블을 모두 삭제</li>
         </ul>
       </li>
       <li>Linux
@@ -1504,8 +1590,8 @@
 <ul>
   <li>DNS Query 종류
     <ul>
-      <li>Recursive Query(순환) : Local DNS 서버에 Query를 보내 완성된 답을 요청</li>
-      <li>Iterative Query(반복) : Local DNS 서버가 다른 DNS 서버에게 Query를 보내어 답을 요청, 외부 도메인에서 개별적인 작업을 통해 정보를 얻어와 종합해서 알려줌</li>
+      <li><strong>Recursive Query(순환)</strong> : Local DNS 서버에 Query를 보내 완성된 답을 요청</li>
+      <li><strong>Iterative Query(반복)</strong> : Local DNS 서버가 다른 DNS 서버에게 Query를 보내어 답을 요청, 외부 도메인에서 개별적인 작업을 통해 정보를 얻어와 종합해서 알려줌</li>
     </ul>
   </li>
   <li>DNS Query 세부 방식
@@ -1514,7 +1600,7 @@
       <li>DNS 서버는 DNS Request에 대해서 DNS Response로 응답, 요청한 IP 주소를 넣어서 보내줌</li>
     </ul>
   </li>
-  <li>DNS 증폭공격
+  <li><strong>DNS 증폭공격</strong>
     <ul>
       <li>출발지 IP를 Victim의 IP (DNS Server) 로 변조함</li>
       <li>Open DNS Resolver 서버를 이용</li>
@@ -1527,7 +1613,7 @@
     </ul>
   </li>
   <li>
-    <p>DNS 레코드</p>
+    <p><strong>DNS 레코드</strong></p>
 
     <table>
       <thead>
@@ -1538,27 +1624,27 @@
       </thead>
       <tbody>
         <tr>
-          <td style="text-align: left">A(Address)</td>
+          <td style="text-align: left"><strong>A(Address)</strong></td>
           <td style="text-align: left">호스트 이름을 IPv4 주소로 매핑</td>
         </tr>
         <tr>
-          <td style="text-align: left">AAAA(IPv6 Address)</td>
+          <td style="text-align: left"><strong>AAAA(IPv6 Address</strong>)</td>
           <td style="text-align: left">호스트 이름을 IPv6 주소로 매핑</td>
         </tr>
         <tr>
-          <td style="text-align: left">PTR(Reverse-lookup Pointer records)</td>
+          <td style="text-align: left"><strong>PTR</strong><br /><strong>(Reverse-lookup Pointer records)</strong></td>
           <td style="text-align: left">IP 주소를 기반으로 도메인 이름을 찾는 데 사용</td>
         </tr>
         <tr>
-          <td style="text-align: left">NS(Name Server)</td>
+          <td style="text-align: left"><strong>NS(Name Server)</strong></td>
           <td style="text-align: left">주어진 호스트에 대한 공식적인 Name Server를 알려줌</td>
         </tr>
         <tr>
-          <td style="text-align: left">MX(Mail Exchanger)</td>
+          <td style="text-align: left"><strong>MX(Mail Exchanger)</strong></td>
           <td style="text-align: left">DNS 도메인 이름에 대한 메일 교환 서버를 알려줌. 이 정보는 SMTP 가 전자 메일을 적절한 호스트로 라우팅하는데 사용.</td>
         </tr>
         <tr>
-          <td style="text-align: left">CNAME(Canonical Name)</td>
+          <td style="text-align: left"><strong>CNAME(Canonical Name)</strong></td>
           <td style="text-align: left">호스트의 다른 이름(별칭)을 정의하는 데 사용, A레코드의 별명을 달아 주는 것</td>
         </tr>
         <tr>
@@ -1585,12 +1671,12 @@
     </ul>
   </li>
   <li>
-    <p>한국인터넷진흥원 DNS 싱크홀
+    <p><strong>한국인터넷진흥원 DNS 싱크홀</strong>
   <img src="/assets/images/posts/kisa_dns_sinkhole.gif" alt="DNS Sinkhole" /></p>
 
     <p><a href="https://www.krcert.or.kr/webprotect/dnsSinkhole.do">이미지 출처</a></p>
     <ul>
-      <li>악성봇에 감염된 PC를 공격자가 조종하지 못하도록 악성봇과 공격자의 명령을 차단하는 서비스</li>
+      <li>악성봇에 감염된 PC를 공격자가 조종하지 못하도록 <strong>악성봇과 공격자의 명령을 차단</strong>하는 서비스</li>
       <li>자체 DNS 서버를 운영하는 민간기관을 대상으로 제공하는 서비스</li>
     </ul>
   </li>
@@ -1600,16 +1686,16 @@
 <ul>
   <li>DNSSEC
     <ul>
-      <li>DNS 캐시 포이즈닝과 DNS의 보안 취약점을 보완하기 위해서 등장한 기술</li>
-      <li>DNS 응답 정보에 전자서명 값을 첨부하여 보내고 수신측이 해당 서명 값을 검증</li>
-      <li>DNS 위변조 방지, 정보 무결성 제공</li>
+      <li><strong>DNS 캐시 포이즈닝과 DNS의 보안 취약점을 보완하기 위해서 등장</strong>한 기술</li>
+      <li>DNS 응답 정보에 <strong>전자서명 값을 첨부</strong>하여 보내고 수신측이 해당 서명 값을 검증</li>
+      <li><strong>DNS 위변조 방지</strong>, 정보 무결성 제공</li>
     </ul>
   </li>
   <li>DNSSEC 정보 제공
     <ul>
-      <li>공개키로 서명용 키 쌍을 생성하여 사전에 배포</li>
-      <li>개인키를 가지고 자신이 제공하려는 정보의 해시값을 서명 처리하여 전자서명 값을 생성</li>
-      <li>원본 데이터와 추가된 전자서명 값을 함께 인터넷상에 제공</li>
+      <li><strong>공개키로 서명용 키 쌍을 생성하여 사전에 배포</strong></li>
+      <li><strong>개인키를 가지고 자신이 제공하려는 정보의 해시값을 서명 처리하여 전자서명 값을 생성</strong></li>
+      <li><strong>원본 데이터와 추가된 전자서명 값을 함께 인터넷상에 제공</strong></li>
     </ul>
   </li>
   <li>DNSSEC 정보 이용자
@@ -1626,12 +1712,12 @@
   <li>DNS 조회 방식
     <ul>
       <li>Client는 Local 네트워크인 DNS에 DNS Query를 보내면 Root DNS 로부터 시작해서 Query를 조회한 다음 사용자가 요청한 <code class="language-plaintext highlighter-rouge">www.abc.com</code> 의 정보를 받아서 쿼리에 대한 응답을 제공한다.</li>
-      <li>Local DNS는 해당 정보를 Cache에 저장해 두고 비슷한 요청이 오면 다른 서버에 묻지 않고 바로 전송한다.</li>
+      <li><strong>Local DNS는 해당 정보를 Cache에 저장해 두고 비슷한 요청이 오면 다른 서버에 묻지 않고 바로 전송</strong>한다.</li>
     </ul>
   </li>
   <li>DNS Cache Poisoning Server 공격
     <ul>
-      <li>Local DNS Server로 DNS 쿼리 응답 패킷을 전송한다.</li>
+      <li><strong>Local DNS Server로 DNS 쿼리 응답 패킷을 전송</strong>한다.</li>
       <li>DNS 유효 패킷은 출발지 포트번호, 목적지 포트번호, 트랜잭션 ID가 맞아야 한다.</li>
       <li>트랜잭션 ID 는 16Bit 필드이고 0부터 값을 유추해서 계속 넣으면 32768번의 공격으로 트랜잭션 ID를 맞출 수 있다</li>
       <li>이 때 Local DNS 서버에 잘못된 쿼리를 삽입한다.</li>
@@ -1811,10 +1897,8 @@
   개념
     
       정보보호 및 개인정보보호 관리체계(ISMS-P : Information Security Management System-Personal)
-    
-  
-
-</p>
+        
+          과학기술정보통신부가 공시한 “정보보호 관리...</p>
   </article>
 </div>
 

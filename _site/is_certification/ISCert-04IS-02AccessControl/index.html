@@ -374,7 +374,13 @@
       <li><a href="#4-접근-통제-원칙">4. 접근 통제 원칙</a></li>
       <li><a href="#5-참조-모니터reference-monitor">5. 참조 모니터(Reference Monitor)</a></li>
       <li><a href="#6-식별과-인증">6. 식별과 인증</a></li>
-      <li><a href="#7-인증-방식에-따른-분류">7. 인증 방식에 따른 분류</a></li>
+      <li><a href="#7-인증-방식에-따른-분류">7. 인증 방식에 따른 분류</a>
+        <ul>
+          <li><a href="#지식기반-인증">지식기반 인증</a></li>
+          <li><a href="#소유기반-인증">소유기반 인증</a></li>
+          <li><a href="#존재생체기반-인증">존재(생체)기반 인증</a></li>
+        </ul>
+      </li>
     </ul>
   </li>
   <li><a href="#접근-통제-기술-정책의-특징-및-적용-범위">접근 통제 기술 정책의 특징 및 적용 범위</a>
@@ -528,25 +534,25 @@
     <tr>
       <td style="text-align: left">Type I 인증</td>
       <td style="text-align: left">Something you know</td>
-      <td style="text-align: left">지식</td>
+      <td style="text-align: left"><strong>지식</strong></td>
       <td style="text-align: left">Password, Pin, Passphrase</td>
     </tr>
     <tr>
       <td style="text-align: left">Type II 인증</td>
       <td style="text-align: left">Something you have</td>
-      <td style="text-align: left">소유</td>
+      <td style="text-align: left"><strong>소유</strong></td>
       <td style="text-align: left">Smart Card, Tokens</td>
     </tr>
     <tr>
       <td style="text-align: left">Type III 인증</td>
       <td style="text-align: left">Something you are</td>
-      <td style="text-align: left">존재</td>
+      <td style="text-align: left"><strong>존재</strong></td>
       <td style="text-align: left">홍채, 지문, 정맥</td>
     </tr>
     <tr>
       <td style="text-align: left">Type IV 인증</td>
       <td style="text-align: left">Something you do</td>
-      <td style="text-align: left">행동</td>
+      <td style="text-align: left"><strong>행동</strong></td>
       <td style="text-align: left">음성, 서명, Keystroke Dynamics</td>
     </tr>
   </tbody>
@@ -555,9 +561,39 @@
 <ul>
   <li><strong>2-Factor 인증</strong>
     <ul>
-      <li>지식, 소유, 존재, 행동기반 인증에서 2개를 같이 인증하는 방법</li>
+      <li><strong>지식, 소유, 존재, 행동기반 인증에서 2개를 같이 인증</strong>하는 방법</li>
     </ul>
   </li>
+</ul>
+
+<h3 id="지식기반-인증">지식기반 인증</h3>
+
+<ul>
+  <li><strong>패스워드</strong></li>
+  <li><strong>로그인 횟수 제한</strong></li>
+  <li><strong>마지막 로그인 시간 제공</strong></li>
+  <li><strong>무차별 공격 및 사전공격과 사회공학 공격에 취약</strong></li>
+</ul>
+
+<h3 id="소유기반-인증">소유기반 인증</h3>
+
+<ul>
+  <li><strong>OTP</strong>
+    <ul>
+      <li><strong>동기식(시간,이벤트)</strong></li>
+      <li><strong>비동기식(질의응답)</strong></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="존재생체기반-인증">존재(생체)기반 인증</h3>
+
+<ul>
+  <li><strong>생체인증</strong></li>
+  <li><strong>보편성, 유일성, 지속성, 성능, 수용성, 저항성</strong></li>
+  <li><strong>FRR(False Reject Rate) : 정상적인 사람을 거부함</strong></li>
+  <li><strong>FAR(False Acceptance Rate) : 비인가자를 정상적인 인가로 받아들임</strong></li>
+  <li><strong>CER(Cross over Error Rate)</strong></li>
 </ul>
 
 <h1 id="접근-통제-기술-정책의-특징-및-적용-범위"><strong>접근 통제 기술 정책의 특징 및 적용 범위</strong></h1>
@@ -565,13 +601,13 @@
 <ul>
   <li>미국 국방성에서 기밀 분류 방법으로부터 유래하는 접근 통제 정책
     <ul>
-      <li>MAC(Mandatory Access Control)
+      <li><strong>MAC(Mandatory Access Control)</strong>
         <ul>
           <li>자동으로 시행되는 어떤 규칙에 기반</li>
           <li>사용자와 타깃에 광범위한 그룹 형성이 요구됨</li>
         </ul>
       </li>
-      <li>DAC(Discretionary Access Control)
+      <li><strong>DAC(Discretionary Access Control)</strong>
         <ul>
           <li>특별한 사용자별로 정보에 대한 접근을 제공</li>
           <li>추가적 접근 통제를 사용자에게 일임</li>
@@ -614,15 +650,17 @@
       <li>HRU 접근행렬 모델 : 접근행렬 이용</li>
       <li>BLP 보안모델 : 엄격한 기밀성 통제</li>
       <li>Biba 보안모델 : 무결성 정책을 지원</li>
-      <li>Clark-Wilson 모델 : 실행할 수 있는 프로그램에 의하여 통제
-        <h2 id="2-macmandatory-access-control">2. <strong>MAC(Mandatory Access Control)</strong></h2>
-      </li>
+      <li>Clark-Wilson 모델 : 실행할 수 있는 프로그램에 의하여 통제</li>
     </ul>
   </li>
-  <li>MAC(Mandatory Access Control) - 강제적 접근 통제
+</ul>
+
+<h2 id="2-macmandatory-access-control">2. MAC(Mandatory Access Control)</h2>
+<ul>
+  <li><strong>MAC(Mandatory Access Control) - 강제적 접근 통제</strong>
     <ul>
-      <li>접근 권한이 주체의 비밀 취급 인가 레이블 및 객체의 민감도 레이블에 따라 지정되는 방식</li>
-      <li>관리자에 의해서 권한이 할당되고 해제됨</li>
+      <li>접근 권한이 <strong>주체의 비밀 취급 인가 레이블</strong> 및 <strong>객체의 민감도 레이블</strong>에 따라 지정되는 방식</li>
+      <li><strong>관리자에 의해서 권한이 할당되고 해제</strong>됨</li>
     </ul>
   </li>
   <li>MAC의 주요 특징
@@ -653,23 +691,23 @@
         </tr>
         <tr>
           <td style="text-align: left">CBP(Compartment-Based Policy)</td>
-          <td style="text-align: left"><ul><li>일련의 객체 집합을 다른 객체들과 분리</li><li>동일 수준의 접근허가를 갖는 부서라도 다른 보안등급을 가질 수 있음</li><li>예)팀장은 자기 팀원의 급여정보를 볼 수 있으나 다른 팀원 급여정보는 볼 수 없음</li></ul></td>
+          <td style="text-align: left">⦁ 일련의 객체 집합을 다른 객체들과 분리<br />⦁ 동일 수준의 접근허가를 갖는 부서라도 다른 보안등급을 가질 수 있음<br />⦁ 예)팀장은 자기 팀원의 급여정보를 볼 수 있으나 다른 팀원 급여정보는 볼 수 없음</td>
         </tr>
         <tr>
-          <td style="text-align: left">MLP(Multi-Level Policy)</td>
-          <td style="text-align: left"><ul><li>Top Secret, Secret, Confidentiality, Unclassified와 같이 각 객체별로 지정된 허용 등급을 할당하여 운영</li><li>미국 국방성 컴퓨터 보안 평가지표에 사용, BLP 수학적 모델로 표현 가능</li></ul></td>
+          <td style="text-align: left"><strong>MLP(Multi-Level Policy)</strong></td>
+          <td style="text-align: left">⦁ Top Secret, Secret, Confidentiality, Unclassified와 같이 각 객체별로 지정된 허용 등급을 할당하여 운영<br />⦁ 미국 국방성 컴퓨터 보안 평가지표에 사용, BLP 수학적 모델로 표현 가능<br />⦁ 일종의 다단계 접근 통제방법<br />⦁ 주체와 객체에 대하여 접근 권한에 대한 보안등급이나 역할에 따른 보호번주 등의 보안 레이블을 부여하여 접근을 통제하는 방법</td>
         </tr>
       </tbody>
     </table>
   </li>
 </ul>
 
-<h2 id="3-dacdiscretionary-access-control">3. <strong>DAC(Discretionary Access Control)</strong></h2>
+<h2 id="3-dacdiscretionary-access-control">3. DAC(Discretionary Access Control)</h2>
 <ul>
-  <li>DAC(Discretionary Access Control) - 자율적 접근 통제
+  <li><strong>DAC(Discretionary Access Control) - 자율적 접근 통제</strong>
     <ul>
-      <li>객체의 소유자가 권한 부여 : 접근하려는 사용자에 대하여 권한을 추가 및 삭제할 수 있다.</li>
-      <li>User-based, Identity : 사용자의 신분에 따라 임의로 접근을 제어하는 방식</li>
+      <li><strong>객체의 소유자가 권한 부여</strong> : 접근하려는 사용자에 대하여 권한을 추가 및 삭제할 수 있다.</li>
+      <li>User-based, Identity : <strong>사용자의 신분</strong>에 따라 임의로 접근을 제어하는 방식</li>
       <li>융통성이 좋아 UNIX, DBMS 등의 상용 OS에서 구현이 가능</li>
       <li>접근 통제 목록(ACL, Access Control List) 사용 : Read, Write, Execute</li>
       <li>MAC의 단점을 극복하기 위해 나온 것이 아님</li>
@@ -691,7 +729,7 @@
     </ul>
   </li>
   <li>
-    <p>Non-DAC의 종류</p>
+    <p><strong>Non-DAC의 종류</strong></p>
 
     <table>
       <thead>
@@ -702,25 +740,25 @@
       </thead>
       <tbody>
         <tr>
-          <td style="text-align: left">Role-based Access Control(RBAC)</td>
-          <td style="text-align: left"><ul><li>사용자의 역할(임무)에 의해 권한이 부여(예:PM, 개발자, 디자이너)</li><li>사용자가 적절한 역할에 할당되고 역할에 적합한 권한이 할당된 경우만 사용자가 특정한 모드로 정보에 대한 접근을 통제할 수 있는 방법</li></ul></td>
+          <td style="text-align: left"><strong>Role-based Access Control(RBAC)</strong></td>
+          <td style="text-align: left">⦁ 사용자의 역할(임무)에 의해 권한이 부여(예:PM, 개발자, 디자이너)<br />⦁ 사용자가 적절한 역할에 할당되고 역할에 적합한 권한이 할당된 경우만 사용자가 특정한 모드로 정보에 대한 접근을 통제할 수 있는 방법</td>
         </tr>
         <tr>
-          <td style="text-align: left">Lattice-based Non-DAC</td>
-          <td style="text-align: left"><ul><li>역할에 할당된 민감도 레벨에 의해 결정</li><li>관련된 정보로만 접근 가능(예: 핵무기 임수 수행자는 관련된 상/하위 정보로만 접근 가능)</li><li>주체와 객체의 관계에 의거하여 접근을 통제할 수 있는 Upper bound와 Low bound를 설정하여 제어하는 방식, 정보의 흐름을 통제</li></ul></td>
+          <td style="text-align: left"><strong>Lattice-based Non-DAC</strong></td>
+          <td style="text-align: left">⦁ 역할에 할당된 민감도 레벨에 의해 결정<br />⦁ 관련된 정보로만 접근 가능(예: 핵무기 임수 수행자는 관련된 상/하위 정보로만 접근 가능)<br />⦁ 주체와 객체의 관계에 의거하여 접근을 통제할 수 있는 Upper bound와 Low bound를 설정하여 제어하는 방식, 정보의 흐름을 통제</td>
         </tr>
         <tr>
-          <td style="text-align: left">Task-based Non-DAC</td>
-          <td style="text-align: left"><ul><li>조직 내 개인의 임무에 의한 접근 통제(알 필요성의 원칙)</li><li>핵무기와 관련된 임무를 수행하고 있는 경우 다른 관련 업무는 볼 수 없음</li></ul></td>
+          <td style="text-align: left"><strong>Task-based Non-DAC</strong></td>
+          <td style="text-align: left">⦁ 조직 내 개인의 임무에 의한 접근 통제(알 필요성의 원칙)<br />⦁ 핵무기와 관련된 임무를 수행하고 있는 경우 다른 관련 업무는 볼 수 없음</td>
         </tr>
       </tbody>
     </table>
   </li>
 </ul>
 
-<h2 id="4-rbacrole-base-access-control">4. <strong>RBAC(Role Base Access Control)</strong></h2>
+<h2 id="4-rbacrole-base-access-control">4. RBAC(Role Base Access Control)</h2>
 <ul>
-  <li>권한들의 묶음으로 Role을 만들어서 사용자에게 Role 단위로 권한을 할당하고 관리</li>
+  <li><strong>권한들의 묶음으로 Role을 만들어서 사용자에게 Role 단위로 권한을 할당하고 관리</strong></li>
   <li>RBAC의 장점
     <ul>
       <li>관리 수월 : 관리자에게 편리한 관리 능력을 제공, 비용이 줄어듦</li>
@@ -790,17 +828,17 @@
 <p><a href="https://srl.cs.jhu.edu/pubs/SRL2003-02.pdf">이미지 출처</a></p>
 
 <ul>
-  <li>Capability List
+  <li><strong>Capability List</strong>
     <ul>
-      <li>주체별로 객체를 링크드리스트로 연결하고 권한을 할당한 구조</li>
+      <li><strong>주체별로 객체를 링크드리스트로 연결하고 권한을 할당한 구조</strong></li>
       <li>A 에 대해 모든 파일을 리스트하고 파일별 접근권한을 나열한 구조</li>
       <li>권한을 알기 위한 탐색시간이 오래 걸리는 문제점</li>
     </ul>
   </li>
-  <li>Access Control List
+  <li><strong>Access Control List</strong>
     <ul>
       <li>주체와 객체간의 접근 권한을 테이블로 구성한 것</li>
-      <li>행에는 주체, 열에는 객체를 두고 행과 열의 교차점에는 주체가 객체에 대한 접근 권한(W, R, D, E)을 기술하여 이름 기반으로 제어</li>
+      <li><strong>행에는 주체, 열에는 객체를 두고 행과 열의 교차점에는 주체가 객체에 대한 접근 권한(W, R, D, E)을 기술하여 이름 기반으로 제어</strong></li>
       <li>사용자가 비교적 소수, 분포도가 안정적일 때 적합 (지속적 변경환경에서는 부적합)</li>
     </ul>
   </li>
@@ -829,30 +867,30 @@
 </ul>
 
 <h2 id="3-접근-통제-모델access-control-model">3. 접근 통제 모델(Access Control Model)</h2>
-<h3 id="1-bell-lapadula-모델">1. <strong>Bell-Lapadula 모델</strong></h3>
+<h3 id="1-bell-lapadula-모델">1. Bell-Lapadula 모델</h3>
 <ul>
   <li>개념
     <ul>
-      <li>기밀성 모델로서 높은 등급의 정보가 낮은 레벨로 유출되는 것을 통제하는 모델</li>
+      <li><strong>기밀성 모델로서 높은 등급의 정보가 낮은 레벨로 유출되는 것을 통제하는 모델</strong></li>
       <li>정보구분 : Top Secret, Secret, Unclassified</li>
-      <li>최초의 수학적 모델로서 보안 등급과 범주를 이용한 강제적 정책에 의한 접근 통제 모델</li>
-      <li>미 국방성(DOD)의 지원을 받아 설계된 모델로서 오렌지북인 TCSEC의 근간이 됨</li>
+      <li><strong>최초의 수학적 모델</strong>로서 보안 등급과 범주를 이용한 강제적 정책에 의한 접근 통제 모델</li>
+      <li>미 국방성(DOD)의 지원을 받아 설계된 모델로서 <strong>오렌지북인 TCSEC의 근간</strong>이 됨</li>
       <li>시스템의 비밀성을 보호하기 위한 보안 정책</li>
     </ul>
   </li>
-  <li>No Read-Up(NRU or ss-property) : 단순 보안 규칙
+  <li><strong>No Read-Up(NRU or ss-property) : 단순 보안 규칙</strong>
     <ul>
       <li>주체는 자신보다 높은 등급의 객체를 읽을 수 없다</li>
       <li>주체의 취급인가가 객체의 비밀 등급보다 같거나 높아야 그 객체를 읽을 수 있다.</li>
     </ul>
   </li>
-  <li>No Write-Down(NWD or *-property) = Confinement property : *(스타-보안규칙)
+  <li><strong>No Write-Down(NWD or *-property) = Confinement property : *(스타-보안규칙)</strong>
     <ul>
       <li>주체는 자신보다 낮은 등급의 객체에 정보를 쓸 수 없다.</li>
       <li>주체의 취급인가가 객체의 비밀 등급보다 낮거나 같을 경우 그 객체를 주체가 기록할 수 있다.</li>
     </ul>
   </li>
-  <li>Strong *-property
+  <li><strong>Strong *-property</strong>
     <ul>
       <li>더욱 강화한 모델로, 주체는 자신과 등급이 다른 객체에 대해 읽거나 쓸 수 없다.</li>
     </ul>
@@ -893,11 +931,11 @@
   </li>
 </ul>
 
-<h3 id="2-biba-모델">2. <strong>Biba 모델</strong></h3>
+<h3 id="2-biba-모델">2. Biba 모델</h3>
 <ul>
   <li>개념
     <ul>
-      <li>Bell-Lapadula 모델의 단점인 무결성을 보장할 수 있는 모델</li>
+      <li>Bell-Lapadula 모델의 단점인 <strong>무결성을 보장할 수 있는 모델</strong></li>
       <li>주체에 의한 객체 접근의 하목으로 무결성을 다룸</li>
     </ul>
   </li>
@@ -959,7 +997,7 @@
 
 <h1 id="보안-운영체제secure-os">보안 운영체제(Secure OS)</h1>
 <ul>
-  <li>보안 운영체제(Secure OS)
+  <li><strong>보안 운영체제(Secure OS)</strong>
     <ul>
       <li>기존의 운영체제에서 발생 가능한 보안 취약성으로부터 시스템 자체를 보호하기 위해 기존 운영체제의 커널 등급에 부가적인 보안 기능을 강화시킨 운영체제</li>
     </ul>
@@ -978,11 +1016,11 @@
   <tbody>
     <tr>
       <td style="text-align: left">신뢰 필터 구조</td>
-      <td style="text-align: left"><ul><li>신뢰할 수 없는 전위 사용자 인터페이스와 후위 데이터베이스 사이에 신뢰 필터를 사용하여 데이터에 대한 접근 통제 및 보안 서비스를 제공</li><li>신뢰 필터는 하부의 보안 운영체제가 제공하는 보안 서비스 및 메커니즘에 의존</li><li>장점 : 다른 구조에 비해 간단하며 작기 때문에 보안 기능의 검증 및 평가에 용이</li><li>단점 : 데이터의 보안을 침해하는 일부의 위협에 대해서는 취약점을 지님</li></ul></td>
+      <td style="text-align: left">⦁ 신뢰할 수 없는 전위 사용자 인터페이스와 후위 데이터베이스 사이에 신뢰 필터를 사용하여 데이터에 대한 접근 통제 및 보안 서비스를 제공<br />⦁ 신뢰 필터는 하부의 보안 운영체제가 제공하는 보안 서비스 및 메커니즘에 의존<br />⦁ 장점 : 다른 구조에 비해 간단하며 작기 때문에 보안 기능의 검증 및 평가에 용이<br />⦁ 단점 : 데이터의 보안을 침해하는 일부의 위협에 대해서는 취약점을 지님</td>
     </tr>
     <tr>
       <td style="text-align: left">커널 구조</td>
-      <td style="text-align: left"><ul><li>커널 구조는 TCB 분할 개념에 의해서 구현됨. 따라서 데이터베이스 시스템은 보안 커널 외부에 존재하면서 임의적으로 보안만을 관리</li><li>데이터베이스 객체에 대한 임의적 접근 통제 : DBMS에 의해 수행</li><li>데이터베이스 파일에 대한 임의적 접근 통제 및 모든 강제적 접근 통제 : 하부의 보안 운영체제에 의하여 제공</li></ul></td>
+      <td style="text-align: left">⦁ 커널 구조는 TCB 분할 개념에 의해서 구현됨. 따라서 데이터베이스 시스템은 보안 커널 외부에 존재하면서 임의적으로 보안만을 관리<br />⦁ 데이터베이스 객체에 대한 임의적 접근 통제 : DBMS에 의해 수행<br />⦁ 데이터베이스 파일에 대한 임의적 접근 통제 및 모든 강제적 접근 통제 : 하부의 보안 운영체제에 의하여 제공</td>
     </tr>
     <tr>
       <td style="text-align: left">이중 커널 구조</td>
@@ -1000,10 +1038,10 @@
   <li>기본 통신채널에 기생하는 통신채널로서 은닉메시지를 송신자와 수신자만 확인할 수 있다. 그 이유는 메시지가 스테가노그래피로 숨겨져 있어서 다른 사용자는 확인할 수 없기 때문이다.</li>
 </ul>
 
-<h1 id="키-분배-프로토콜"><strong>키 분배 프로토콜</strong></h1>
+<h1 id="키-분배-프로토콜">키 분배 프로토콜</h1>
 <h2 id="1-대칭키-암호화symmetric-key">1. 대칭키 암호화(Symmetric Key)</h2>
 <ul>
-  <li>대칭키 암호화 기법
+  <li><strong>대칭키 암호화 기법</strong>
     <ul>
       <li>암호화 키와 복호화 키가 동일한 암호화 방식으로, 양방향 암호화 기법이다.</li>
       <li>암호문을 송신하거나 수신하는 사용자는 사전에 암호화키를 교환해야 한다.</li>
@@ -1026,7 +1064,7 @@
     </ul>
   </li>
   <li>
-    <p>대칭키 암호화의 종류</p>
+    <p><strong>대칭키 암호화의 종류</strong></p>
 
     <table>
       <thead>
@@ -1064,11 +1102,11 @@
 
 <h2 id="2-공개키-기반-키-분배-방식의-원리">2. 공개키 기반 키 분배 방식의 원리</h2>
 <ul>
-  <li>공개키 암호화(Public Key)의 주요 특징
+  <li><strong>공개키 암호화(Public Key)의 주요 특징</strong>
     <ul>
       <li>암호화 키와 복호화 키가 다른 암호화 방식, 키 교환은 키 합의 또는 키 전송을 사용한다.</li>
       <li>공개키/개인키를 사용하여 인증, 서명, 암호화를 수행한다.</li>
-      <li>공개키로 암호화하여 메시지를 전송, 개인키로 복호화한다.</li>
+      <li><strong>공개키로 암호화하여 메시지를 전송, 개인키로 복호화한다.</strong></li>
       <li>대칭키 암호화 기법의 키 공유 문제를 해결한 방법이지만 암호화키의 길이가 길어서 암호화 및 복호화의 성능이 떨어진다.</li>
     </ul>
   </li>
@@ -1106,7 +1144,7 @@
     <p><a href="https://en.wikipedia.org/wiki/Public-key_cryptography">이미지 출처</a></p>
   </li>
   <li>
-    <p>공개키 암호화 종류</p>
+    <p><strong>공개키 암호화 종류</strong></p>
 
     <table>
       <thead>
@@ -1121,10 +1159,10 @@
       <tbody>
         <tr>
           <td style="text-align: left">Diffie Hellman</td>
-          <td style="text-align: left"><ul><li>최초의 공개키 알고리즘</li><li>키 분배 전용 알고리즘</li></ul></td>
+          <td style="text-align: left">⦁ 최초의 공개키 알고리즘<br />⦁ 키 분배 전용 알고리즘</td>
           <td style="text-align: left">이산대수 문제</td>
-          <td style="text-align: left"><ul><li>키 분배에 최적화</li><li>키는 필요 시에만 생성, 저장 불필요</li></ul></td>
-          <td style="text-align: left"><ul><li>암호 모드로 사용 불가(인증 불가)</li><li>위조에 취약</li></ul></td>
+          <td style="text-align: left">⦁ 키 분배에 최적화<br />⦁ 키는 필요 시에만 생성, 저장 불필요</td>
+          <td style="text-align: left">⦁ 암호 모드로 사용 불가(인증 불가)<br />⦁ 위조에 취약</td>
         </tr>
         <tr>
           <td style="text-align: left">RSA</td>
@@ -1138,13 +1176,13 @@
           <td style="text-align: left">전자서명 알고리즘 표준</td>
           <td style="text-align: left">이산대수 문제</td>
           <td style="text-align: left">간단한 구조(Yes or No의 결과만 가짐)</td>
-          <td style="text-align: left"><ul><li>전자서명 전용</li><li>암호화, 키 교환 불가</li></ul></td>
+          <td style="text-align: left">⦁ 전자서명 전용<br />⦁ 암호화, 키 교환 불가</td>
         </tr>
         <tr>
           <td style="text-align: left">ECC</td>
-          <td style="text-align: left"><ul><li>짧은 키로 높은 암호 강도</li><li>PDA, 스마트폰, 핸드폰</li></ul></td>
+          <td style="text-align: left">⦁ 짧은 키로 높은 암호 강도<br />⦁ PDA, 스마트폰, 핸드폰</td>
           <td style="text-align: left">타원 곡선</td>
-          <td style="text-align: left"><ul><li>오버헤드 적음</li><li>160키 = RSA 1024</li></ul></td>
+          <td style="text-align: left">⦁ 오버헤드 적음<br />⦁ 160키 = RSA 1024</td>
           <td style="text-align: left">키 테이블(20 Kbyte) 필요</td>
         </tr>
       </tbody>
@@ -1164,52 +1202,53 @@
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">키 관계</td>
+      <td style="text-align: left"><strong>키 관계</strong></td>
       <td style="text-align: left">암호화 키 = 복호화 키</td>
       <td style="text-align: left">암호화 키 != 복호화 키</td>
     </tr>
     <tr>
-      <td style="text-align: left">안전한 키 길이</td>
+      <td style="text-align: left"><strong>안전한 키 길이</strong></td>
       <td style="text-align: left">128Bit 이상</td>
       <td style="text-align: left">2048Bit 이상</td>
     </tr>
     <tr>
-      <td style="text-align: left">구성</td>
+      <td style="text-align: left"><strong>구성</strong></td>
       <td style="text-align: left">비밀키</td>
       <td style="text-align: left">공개키,개인키</td>
     </tr>
     <tr>
-      <td style="text-align: left">키 개수</td>
+      <td style="text-align: left"><strong>키 개수</strong></td>
       <td style="text-align: left">N(N-1)/2</td>
       <td style="text-align: left">2N(키 쌍으로는 N)</td>
     </tr>
     <tr>
-      <td style="text-align: left">대표적인 예</td>
+      <td style="text-align: left"><strong>대표적인 예</strong></td>
       <td style="text-align: left">DES, 3DES, AES</td>
       <td style="text-align: left">RSA, ECC</td>
     </tr>
     <tr>
-      <td style="text-align: left">제공서비스</td>
+      <td style="text-align: left"><strong>제공서비스</strong></td>
       <td style="text-align: left">기밀성</td>
       <td style="text-align: left">기밀성, 부인방지, 인증</td>
     </tr>
     <tr>
-      <td style="text-align: left">목적</td>
+      <td style="text-align: left"><strong>목적</strong></td>
       <td style="text-align: left">Data 암호화</td>
       <td style="text-align: left">대칭키 암호화 전달(키 분배용)</td>
     </tr>
     <tr>
-      <td style="text-align: left">단점</td>
+      <td style="text-align: left"><strong>단점</strong></td>
       <td style="text-align: left">키 분배 어려움, 확장성 떨어짐</td>
       <td style="text-align: left">중간자 공격(대응 PKI)</td>
     </tr>
     <tr>
-      <td style="text-align: left">암호화 속도</td>
+      <td style="text-align: left"><strong>암호화 속도</strong></td>
       <td style="text-align: left">공개키(비대칭키)보다 빠름</td>
       <td style="text-align: left">대칭키보다 느림</td>
     </tr>
   </tbody>
 </table>
+
 
         
       </section>
@@ -1383,10 +1422,8 @@
   개념
     
       정보보호 및 개인정보보호 관리체계(ISMS-P : Information Security Management System-Personal)
-    
-  
-
-</p>
+        
+          과학기술정보통신부가 공시한 “정보보호 관리...</p>
   </article>
 </div>
 

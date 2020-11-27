@@ -1,0 +1,117 @@
+I"�<ul class="toc__menu">
+  <li><a href="#ftp">FTP</a>
+    <ul>
+      <li><a href="#1-ftp-개요">1. FTP 개요</a>
+        <ul>
+          <li><a href="#1-ftp-file-transfer-protocol">1. FTP (File Transfer Protocol)</a></li>
+          <li><a href="#2-ftp-특징">2. FTP 특징</a></li>
+          <li><a href="#3-ftp-종류">3. FTP 종류</a></li>
+          <li><a href="#4-ftp-접근-통제-파일">4. FTP 접근 통제 파일</a></li>
+          <li><a href="#5-ftp-active-mode-와-passive-mode">5. FTP Active Mode 와 Passive Mode</a></li>
+          <li><a href="#6-ftp-서비스-로그-기록">6. FTP 서비스 로그 기록</a></li>
+        </ul>
+      </li>
+      <li><a href="#2-ftp-보안">2. FTP 보안</a>
+        <ul>
+          <li><a href="#1-ftp-보안-취약점">1. FTP 보안 취약점</a></li>
+          <li><a href="#2-ftp-보안대책">2. FTP 보안대책</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#e-mail-보안">E-Mail 보안</a>
+    <ul>
+      <li><a href="#1-e-mail-전송-방법">1. E-Mail 전송 방법</a>
+        <ul>
+          <li><a href="#1-smtpsimple-mail-transfer-protocol">1. SMTP(Simple Mail Transfer Protocol)</a></li>
+          <li><a href="#2-pop3post-office-protocol-version-3">2. POP3(Post Office Protocol Version 3)</a></li>
+          <li><a href="#3-imap-및-imap4">3. IMAP 및 IMAP4</a></li>
+          <li><a href="#4-smtp-메일-처리-방식">4. SMTP 메일 처리 방식</a></li>
+        </ul>
+      </li>
+      <li><a href="#2-e-mail-보안-기법">2. E-Mail 보안 기법</a>
+        <ul>
+          <li><a href="#1-pgppretty-good-privacy">1. PGP(Pretty Good Privacy)</a></li>
+          <li><a href="#2-pemprivacy-enhanced-mail">2. PEM(Privacy Enhanced Mail)</a></li>
+          <li><a href="#3-smimesecure-multi-purpose-internet-mail-extensions">3. S/MIME(Secure Multi-Purpose Internet Mail Extensions)</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#sendmail-보안">Sendmail 보안</a>
+    <ul>
+      <li><a href="#1-sendmail">1. Sendmail</a></li>
+      <li><a href="#2-sendmail-운영-모드">2. Sendmail 운영 모드</a></li>
+      <li><a href="#3-sendmail-접근-파일spam-mail-차단">3. Sendmail 접근 파일(SPAM Mail 차단)</a></li>
+    </ul>
+  </li>
+  <li><a href="#스팸메일spam-mail-차단-방법">스팸메일(Spam Mail) 차단 방법</a>
+    <ul>
+      <li><a href="#1-spam-mail-차단-방법">1. Spam Mail 차단 방법</a></li>
+      <li><a href="#2-spamassassin">2. SpamAssassin</a></li>
+      <li><a href="#3-메일-보안-기술도구의-종류">3. 메일 보안 기술(도구)의 종류</a></li>
+    </ul>
+  </li>
+  <li><a href="#웹-서버-보안web-server-security">웹 서버 보안(Web Server Security)</a>
+    <ul>
+      <li><a href="#1-웹world-wide-web-개요">1. 웹(World Wide Web) 개요</a>
+        <ul>
+          <li><a href="#1-wwwworld-wide-web">1. WWW(World Wide Web)</a></li>
+          <li><a href="#2-www-특징">2. WWW 특징</a></li>
+          <li><a href="#3-apache-웹-서버">3. Apache 웹 서버</a></li>
+        </ul>
+      </li>
+      <li><a href="#2-웹-서버web-server-보안">2. 웹 서버(Web Server) 보안</a>
+        <ul>
+          <li><a href="#1-apache-웹-서버-보안-설정">1. Apache 웹 서버 보안 설정</a></li>
+          <li><a href="#2-apache-웹-서버-session-관리">2. Apache 웹 서버 Session 관리</a></li>
+          <li><a href="#3-apache-웹-서버-httpdconf-파일-설정">3. Apache 웹 서버 httpd.conf 파일 설정</a></li>
+          <li><a href="#4-웹-서버-iis-구성">4. 웹 서버 IIS 구성</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#웹-로그web-log-분석">웹 로그(Web Log) 분석</a>
+    <ul>
+      <li><a href="#1-웹-로그web-log-개요">1. 웹 로그(Web Log) 개요</a>
+        <ul>
+          <li><a href="#1-웹-로그web-log">1. 웹 로그(Web Log)</a></li>
+          <li><a href="#2-errorlog">2. ErrorLog</a></li>
+        </ul>
+      </li>
+      <li><a href="#2-http-상태-코드status-code">2. HTTP 상태 코드(Status Code)</a></li>
+    </ul>
+  </li>
+  <li><a href="#웹-방화벽web-firewall">웹 방화벽(Web Firewall)</a>
+    <ul>
+      <li><a href="#1-웹-방화벽web-firewall-개요">1. 웹 방화벽(Web Firewall) 개요</a>
+        <ul>
+          <li><a href="#1-웹-방화벽web-firewall">1. 웹 방화벽(Web Firewall)</a></li>
+          <li><a href="#2-구간별-웹-취약점">2. 구간별 웹 취약점</a></li>
+          <li><a href="#3-웹-방화벽-종류">3. 웹 방화벽 종류</a></li>
+          <li><a href="#4-웹-방화벽-주요-기능">4. 웹 방화벽 주요 기능</a></li>
+          <li><a href="#5-워터링-홀watering-hole-공격">5. 워터링 홀(Watering Hole) 공격</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#dns-보안">DNS 보안</a>
+    <ul>
+      <li><a href="#1-dnsdomain-name-service-query">1. DNS(Domain Name Service) Query</a>
+        <ul>
+          <li><a href="#1-dns-domain-name-service">1. DNS (Domain Name Service)</a></li>
+          <li><a href="#2-dns-구조">2. DNS 구조</a></li>
+          <li><a href="#3-dns-서비스-방식">3. DNS 서비스 방식</a></li>
+        </ul>
+      </li>
+      <li><a href="#2-dns-보안">2. DNS 보안</a>
+        <ul>
+          <li><a href="#1-dnsspoof">1. dnsspoof</a></li>
+          <li><a href="#2-dnssec">2. DNSSEC</a></li>
+          <li><a href="#3-dns-cache-poisoning-server-attack">3. DNS Cache Poisoning Server Attack</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+:ET

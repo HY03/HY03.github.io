@@ -1,0 +1,543 @@
+I"�c<h1 id="정보보호-개요">정보보호 개요</h1>
+<h2 id="1-정보보호-목표">1. 정보보호 목표</h2>
+<ul>
+  <li><strong>기밀성(Confidentiality)</strong>
+    <ul>
+      <li>정보가 허가되지 않은 사용자(조직)에게 노출되지 않는 것을 보장</li>
+      <li>허가되지 않은 접근/유출 시 내용을 알 수 없도록 암호화</li>
+      <li>중요자료에 대해 보안등급 부여, 접근 제어</li>
+    </ul>
+  </li>
+  <li><strong>무결성(Integrity)</strong>
+    <ul>
+      <li>정보가 권한이 없는 사용자의 악의적 또는 비악의적 접근에 의해 변경되지 않는 것을 보장</li>
+      <li>중요정보가 변경되면 변경된 사실을 알 수 있게 하는 것</li>
+      <li>해시함수(Hash Function)</li>
+    </ul>
+  </li>
+  <li><strong>가용성(Availability)</strong>
+    <ul>
+      <li>인가된 사용자(조직)가 정보시스템의 데이터 또는 자원을 필요로 할 때 원하는 객체 또는 자원에 접근하고 사용할 수 있는 것을 보장</li>
+      <li>시스템 이중화, RAID, DRS</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="2-정보보호-공격유형과-보호대책">2. 정보보호 공격유형과 보호대책</h2>
+<ul>
+  <li>변조(Modification)
+    <ul>
+      <li>원래의 데이터를 조작하는 행위</li>
+      <li><strong>예</strong>: <code class="language-plaintext highlighter-rouge">echo "&lt;iframe src=http://www.abc.com&gt;&lt;/iframe&gt;" &gt;&gt; index.html</code> &gt; index.html 파일에 iframe 구문의 스크립트 추가</li>
+    </ul>
+  </li>
+  <li><strong>가로채기(Interception)</strong>
+    <ul>
+      <li>네트워크상 전송되는 데이터에 대해 복사, 열람 등을 하는 공격</li>
+      <li><strong>수동적 공격(Passive Attack)</strong></li>
+      <li><strong>스니핑(Sniffing) : 전송되는 데이터를 모니터링</strong></li>
+      <li>Web Proxy 를 사용한 사용자 ID, 패스워드 가로채기</li>
+    </ul>
+  </li>
+  <li>차단(Interruption)
+    <ul>
+      <li>정상적인 서비스를 방해하는 행위</li>
+      <li>DoS, 프로세스 고갈 공격</li>
+      <li>가용성 보장을 위협하는 공격</li>
+      <li>사이버 대피소 : 한국인터넷진흥원의 DoS 공격 트래픽을 우회시켜주는 중소기업 무료지원 서비스</li>
+    </ul>
+  </li>
+  <li><strong>위조(Fabrication)</strong>
+    <ul>
+      <li>송신되는 메시지를 변조하여 상대방을 속이는 것</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="3-정보보호-대책">3. 정보보호 대책</h2>
+<h3 id="1-일반통제와-응용통제">1. 일반통제와 응용통제</h3>
+<ul>
+  <li>일반통제 : 소프트웨어 생명주기에 대한 통제, IT조직, 직무분리, 시스템개발, 논리적 및 물리적 보안, 하드웨어 통제, 백업 및 복구, 비상계획수립</li>
+  <li>응용통제 : 트랜잭션(Transaction)과 데이터 무결성을 확보하기 위한 통제, 트랜잭션을 처리하기 위한 입력, 처리, 출력을 통제, 무결성 확보</li>
+</ul>
+
+<h3 id="2-통제의-시점별-분류">2. 통제의 시점별 분류</h3>
+<ul>
+  <li><strong>예방통제</strong>
+    <ul>
+      <li>능동적인 통제로 발생가능한 문제점을 <strong>사전에 식별하여 통제를 수행</strong></li>
+      <li><strong>물리적 접근 통제</strong> : 승인되지 않은 사람이 주요 정보시스템에 출입할 수 없도록 하는 것</li>
+      <li><strong>논리적 접근 통제</strong> : 인증받지 못한 사람이 정보시스템에 접근할 수 없게 함</li>
+    </ul>
+  </li>
+  <li><strong>탐지통제</strong>
+    <ul>
+      <li><strong>위협을 탐지하는 통제</strong></li>
+    </ul>
+  </li>
+  <li><strong>교정통제</strong>
+    <ul>
+      <li>탐지된 위협과 취약점에 대응, <strong>위협과 취약점을 감소</strong>시킴</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="3-통제-수행시점에-따른-분류">3. 통제 수행시점에 따른 분류</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">통제 유형</th>
+      <th style="text-align: left">설명</th>
+      <th style="text-align: left">사례</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>예방(Preventive)</strong></td>
+      <td style="text-align: left">바람직하지 못한 사건이 발생하는 것을 피하기 위해 사용되는 통제</td>
+      <td style="text-align: left">담장, 자물쇠, 보안 경비원, 백신, 직무분리, 암호화, 방화벽</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>탐지(Detective)</strong></td>
+      <td style="text-align: left">발생한 사건을 식별하기 위해 사용</td>
+      <td style="text-align: left">CCTV, 보안 감사, 감사로그, 침입탐지, 경보</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>교정(Corrective)</strong></td>
+      <td style="text-align: left">발생한 사건을 교정하기 위해 사용</td>
+      <td style="text-align: left">백신 소프트웨어</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>복구(Recovery)</strong></td>
+      <td style="text-align: left">자원과 능력을 복구하기 위해 사용</td>
+      <td style="text-align: left">백업과 복구</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="4-랜섬웨어ransomware">4. 랜섬웨어(Ransomware)</h3>
+<ul>
+  <li>개요
+    <ul>
+      <li><strong>ransom(몸값)과 ware(제품)의 합성어</strong></li>
+      <li>암호화 기법을 사용해서 피해자의 문서, 이미지, 동영상 등을 암호화</li>
+      <li>금품을 요구</li>
+    </ul>
+  </li>
+  <li>종류
+    <ul>
+      <li><strong>록키(Locky)</strong>
+        <ul>
+          <li>자바 스크립트 파일이 들어있는 압축파일들을 첨부</li>
+          <li>실행 시 감염, 파일이 암호화되고 확장자가 .locky로 변경됨</li>
+        </ul>
+      </li>
+      <li><strong>크립트XXX(CryptXXX)</strong>
+        <ul>
+          <li>감염되면 파일 확장자가 .crypt 등으로 변경, 비트코인 지불 안내서를 제공</li>
+          <li>악성코드는 DLL 형태로 배포되면서 감염됨</li>
+        </ul>
+      </li>
+      <li><strong>케르베르(CERBER)</strong>
+        <ul>
+          <li>취약한 웹 사이트 방문으로 감염되며 파일을 암호화하고 확장자가 .cerber로 변경됨</li>
+          <li>윈도우의 볼륨 셰도우(Volume Shadow)를 삭제하여 윈도우를 복구 불가능하게 함</li>
+        </ul>
+      </li>
+      <li><strong>워너크라이(WannaCry)</strong>
+        <ul>
+          <li>SMB(Server Message Block) 취약점을 이용하여 전파되는 것</li>
+          <li>파일 암호화 이후 금품을 요구</li>
+          <li>대응하기 위해 SMB 프로토콜은 UDP 137,138 포트와 TCP 139,445를 차단해야 함</li>
+        </ul>
+      </li>
+      <li><strong>페티야(Petya)</strong>
+        <ul>
+          <li>공격자는 Office 파일에 랜섬웨어 코드를 삽입하고 피해자에게 메일을 발송</li>
+          <li>피해자는 메일의 첨부파일을 클릭</li>
+          <li>페티야는 감염 PC를 재부팅하고 하드디스크의 MFT(Master File Table)을 암호화</li>
+          <li>MBR(Master Boot Record)을 파괴</li>
+          <li>공격자는 300$의 비트코인을 요구함</li>
+        </ul>
+      </li>
+      <li><strong>이터널블루</strong>
+        <ul>
+          <li>NSA가 만든 익스플로잇으로 볼티모어 랜섬웨어 사건과 연관</li>
+          <li>윈도우 XP, Vista 에 존재하는 취약점을 익스플로잇</li>
+          <li>WannaCry, NotPetya</li>
+          <li>SMB(Server Message Block)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="사용자-인증-방식-및-원리"><strong>사용자 인증 방식 및 원리</strong></h1>
+<h2 id="1-지식기반-인증">1. 지식기반 인증</h2>
+
+<ul>
+  <li>사용자의 기억으로만 인증하는 방식</li>
+  <li>패스워드, Pin 번호 등</li>
+</ul>
+
+<h3 id="1-패스워드">1. 패스워드</h3>
+<ul>
+  <li>패스워드(Password)의 문제점
+    <ul>
+      <li>많이 사용되는 인증 방식, 인증 요소 중 가장 안전하지 않음</li>
+      <li>주기적으로 보안인식에 대한 교육이 필요</li>
+      <li>암호화하지 않으면 스니핑 툴로 도청이 가능</li>
+    </ul>
+  </li>
+  <li><strong>패스워드(Password) 정책</strong>
+    <ul>
+      <li>최소 8문자 이상으로 조합하여 구성(대소문자, 숫자, 특수문자)</li>
+      <li>책임 추적성 성립이 어렵기 때문에 공유되어서는 안 된다.</li>
+      <li>신규 사용자를 생성한 후 처음 로그인 시 반드시 새로운 패스워드를 변경하도록 강제 적용</li>
+      <li>로그인 정보(날짜, 시간, 사용자 ID, OS)에 대해 정확한 감사기록이 유지되어야 함</li>
+      <li>시스템은 <strong>실패한 로그인 횟수를 제한하도록 임계치(Clipping level)를 설정</strong></li>
+      <li>마지막 로그인 시간을 보여줌</li>
+      <li>휴면 계정은 사용 불가/삭제, Password는 저장소에 One-way 암호화를 수행</li>
+    </ul>
+  </li>
+  <li>
+    <p>패스워드 공격 기법</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">공격 기법</th>
+          <th style="text-align: left">내용</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left">무차별 공격</td>
+          <td style="text-align: left">Brute Force Attack, 임의의 값을 반복적으로 입력하여 패스워드를 크랙 (John the Ripper, hydra)</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">사전 공격</td>
+          <td style="text-align: left">Dictionary Attack, 사전의 용어를 반복적으로 입력하여 패스워드를 크랙</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">트로이목마 프로그램</td>
+          <td style="text-align: left">정상적인 프로그램으로 가장한 정보 유출</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">사회 공학적 공격</td>
+          <td style="text-align: left">심리적 공격 방법(예:콜 센터 등에 전화하여 패스워드를 알아냄)</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">전자적 모니터링</td>
+          <td style="text-align: left">패스워드 입력 시 또는 전송 시에 sniffing 하여 훔침(해결책: OTP 사용)</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<h3 id="2-악성코드malicious-software-종류">2. 악성코드(Malicious Software) 종류</h3>
+<ul>
+  <li><strong>논리폭탄(Logic Bomb)</strong> : 특정 조건이 발생할 때 실행되는 악성코드, 특정 조건이 발생하지 않으면 악성코드로 기동되지 않기 때문에 탐지가 어려움</li>
+  <li><strong>키로거(Key-Logger)</strong> : 사용자가 입력하는 정보를 갈취하는 악성코드, 윈도우 후킹(Hooking)을 통해서 키보드 입력정보를 획득</li>
+  <li><strong>트로이목마(Trojan Horse)</strong> : 자가복제 능력이 없으며 시스템 정보, 개인정보 등을 유출하거나 특정 시스템 파일을 삭제</li>
+  <li><strong>백도어(Backdoor, Trapdoor)</strong> : 인증과정을 우회해서 시스템에 접근할 수 있도록 열어둔 뒷문으로 원격조정을 통해서 시스템을 장악할 수 있도록 함</li>
+  <li><strong>루트킷(Rootkit)</strong> : 공격자가 루트권한 획득을 위해서 심은 악성코드</li>
+</ul>
+
+<h2 id="2-소유기반-인증type-ii-인증-something-you-have">2. 소유기반 인증(Type II 인증, Something you have)</h2>
+<ul>
+  <li>개념
+    <ul>
+      <li>가장 대표적인 예는 열쇠</li>
+      <li>소유기반 인증은 복제와 분실의 문제점을 가짐</li>
+      <li>스마트 카드, OTP(One Time Password)</li>
+    </ul>
+  </li>
+  <li>스마트 카드
+    <ul>
+      <li>마이크로프로세스 칩과 메모리를 내장한 일종의 소형컴퓨터, 높은 보안성 요구</li>
+      <li>메모리 토큰과 달리 프로세스 능력을 가짐</li>
+      <li>Global Standard 부족(통일성 결여) : 어떤 정보가 어떻게 저장되는지에 대한 표준이 미흡</li>
+      <li>취약점 : 부 채널 공격
+        <ul>
+          <li>카드가 가동될 때 발생하는 온도, 전파를 이용</li>
+          <li>무선 주파수를 복제하여 전파를 보내면 카드가 작동함</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>스마트 카드의 구성요소</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">구성요소</th>
+          <th style="text-align: left">내용</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left">CPU(Microprocessor)</td>
+          <td style="text-align: left">산술 및 사칙연산, 논리연산을 수행하는 연산 장치</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">ROM</td>
+          <td style="text-align: left">운영체제(Chip OS) 탑재, 보안 알고리즘(3DES), 카드 제작 시 저장하고 변경이 불가능함</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">RAM</td>
+          <td style="text-align: left">임시 데이터 저장용(4KByte 이상)</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">EEPROM</td>
+          <td style="text-align: left">파일 시스템, 프로그램 및 응용 프로그램 키, 비밀번호, 카드 발급 시 저장</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">I/O 시스템</td>
+          <td style="text-align: left">접촉식과 비접촉식, 2가지 동시 지원 콤비형</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<h2 id="3-존재생체기반-인증type-iii-something-you-are">3. 존재(생체)기반 인증(Type III, Something you are)</h2>
+<ul>
+  <li>생체인증(Biometrics)
+    <ul>
+      <li>개념
+        <ul>
+          <li>평생 불변의 특성을 지닌 생체적, 행동적 특징을 자동화된 수단으로 등록, 사용자가 제시한 정보와 패턴을 비교(검증)한 후 인증하는 기술</li>
+          <li>물리적 접근 통제에서 식별되어 사용될 수 있음</li>
+        </ul>
+      </li>
+      <li>
+        <p>생체인증 분류</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th style="text-align: left">분류</th>
+              <th style="text-align: left">내용</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="text-align: left">존재 특징(Type III)</td>
+              <td style="text-align: left">생체특성, 지문, 장문, 얼굴, 손 모양, 홍채, 망막, 정맥</td>
+            </tr>
+            <tr>
+              <td style="text-align: left">행동 특징(Type IV)</td>
+              <td style="text-align: left">서명, 음성, 키보드 입력</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>
+        <p>생체인증 특징</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th style="text-align: left">평가항목</th>
+              <th style="text-align: left">내용</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="text-align: left"><strong>보편성(University)</strong></td>
+              <td style="text-align: left">모든 사람들이 보편적으로 지니고 있어야 함</td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><strong>유일성(Uniqueness)</strong></td>
+              <td style="text-align: left">개인별로 특징이 명확히 구분 되어야 함</td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><strong>지속성(Permanence)</strong></td>
+              <td style="text-align: left">개인의 생체 정보는 지속적이어야 함</td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><strong>성능(Performance)</strong></td>
+              <td style="text-align: left">개인 확인 및 인식의 우수성, 시스템 성능</td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><strong>수용성(Acceptance)</strong></td>
+              <td style="text-align: left">거부감이 없어야 함</td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><strong>저항성(Resistance)</strong></td>
+              <td style="text-align: left">위조 가능성이 없어야 함</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+    </ul>
+  </li>
+  <li>생체인증 도구의 효과성과 사회적 수용성
+    <ul>
+      <li>효과성: 손바닥&gt;손&gt;홍채&gt;망막&gt;지문&gt;목소리</li>
+      <li>수용성: 홍채&gt;키 누름 동작&gt;서명&gt;목소리&gt;얼굴&gt;지문&gt;손바닥&gt;손&gt;망막</li>
+    </ul>
+  </li>
+  <li>
+    <p>생체인증 평가항목</p>
+
+    <p><img src="/assets/images/posts/farfrr.gif" alt="FAR FRR" /></p>
+
+    <p><a href="http://www.biometrika.it/eng/wp_biointro.html">이미지 출처</a></p>
+
+    <ul>
+      <li><strong>FRR(False Reject Rate, Type I Error)</strong> : 잘못된 거부율(오거부율), 편의성 관점, 정상적인 사람을 거부함</li>
+      <li><strong>FAR(False Acceptance Rate, Type II Error)</strong> : 잘못된 승인율(오인식율), 보안관점, 비인가자를 정상인으로 받아들임</li>
+      <li><strong>CER(Crossover Error Rate), ERR(Equal Error Rate)</strong> : FRR와 FAR가 cross 되는 지점, 효율성 및 생체인증의 척도</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="4-행동기반-인증">4. 행동기반 인증</h2>
+<ul>
+  <li>개인의 고유한 행동적 특성을 사용해서 인증, 생체인식 기술의 하나</li>
+  <li>서명, 키스트로크(Keystroke), 마우스 움직임, 걸음걸이, 모바일 단말기 사용패턴</li>
+  <li>
+    <p>행위정보를 평상시에 축적하여 프로파일 정보를 구축해야 함</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">종류</th>
+          <th style="text-align: left">장점</th>
+          <th style="text-align: left">단점</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left">음성인식(Voice)</td>
+          <td style="text-align: left">원격지 사용 가능, 가격 저렴</td>
+          <td style="text-align: left">신체적, 감정적 변화에 민감</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">서명(Signature)</td>
+          <td style="text-align: left">입력기기 가격 저렴, 편의성 좋음</td>
+          <td style="text-align: left">타인이 사용할 가능성 존재, 정확도 떨어짐</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">키보드 입력(Keystroke Dynamic)</td>
+          <td style="text-align: left">키 누름 도작</td>
+          <td style="text-align: left">패스워드 노출 위험성이 높아 공격자의 주된 공격 대상이 될 수 있음</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<h2 id="5-커버로스kerberos-인증">5. 커버로스(Kerberos) 인증</h2>
+<h3 id="1-커버로스kerberos-인증">1. 커버로스(Kerberos) 인증</h3>
+<ul>
+  <li><strong>중앙 집중형 사용자 인증 프로토콜</strong> / RFC1510</li>
+  <li><strong>대칭키 암호화 기법</strong>에 바탕을 둔 <strong>티켓기반 인증 프로토콜</strong></li>
+  <li>3A 지원 : <strong>Authentication(인증)</strong>, <strong>Authorization(인가)</strong>, <strong>Accounting(과금)</strong>(AAA 서버라고도 함)</li>
+</ul>
+
+<h3 id="2-커버로스의-구성요소">2. 커버로스의 구성요소</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">구성요소</th>
+      <th style="text-align: left">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">KDC</td>
+      <td style="text-align: left">키 분배센터(Key Distribution Center), TGS + AS로 구성<br />사용자와 서비스 암호화 키(비밀키)를 유지하고 인증 서비스를 제공하며 세션 키를 만들고 분배</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">AS</td>
+      <td style="text-align: left">인증 서비스(Authentication Service), 실질적 인증 수행</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Principals</td>
+      <td style="text-align: left">인증을 위하여 커버로스 프로토콜을 사용하는 모든 실제를 이르는 말</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">TGS</td>
+      <td style="text-align: left">티켓 부여 서비스(Ticket Granting Service)<br />티켓을 만들고 세션 키를 포함한 Principals에 티켓을 분배하는 KDC의 한 부분</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Ticket</td>
+      <td style="text-align: left">인증 토큰</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>TimeStamp : 시간제한을 두어 다른 사람이 티켓을 복사하여 나중에 그 사용자인 것처럼 위장하여 티켓을 사용하는 것을 막음 (Replay 공격 예방)</li>
+</ul>
+
+<h3 id="3-커버로스-인증의-동작-원리">3. 커버로스 인증의 동작 원리</h3>
+
+<p><img src="/assets/images/posts/kerberos.png" alt="Kerberos" /></p>
+
+<p><a href="http://www.electricmonk.org.uk/2012/03/05/what-is-kerberos-and-how-does-it-work">이미지 출처</a></p>
+
+<ul>
+  <li><strong>절차</strong>
+    <ul>
+      <li>사용자는 인증 서비스에 인증을 한다.</li>
+      <li>인증 서비스는 사용자에게 시작 티켓을 전송한다(사용자 이름, 발급시간, 유효시간).</li>
+      <li>사용자는 서비스 접근 요청을 한다.</li>
+      <li>TGS는 세션 키가 포함된 새로운 티켓을 만든다.</li>
+      <li>사용자는 하나의 세션 키를 추출하고 티켓을 파일서버로 전송한다.</li>
+      <li>티켓을 받은 서버는 사용자에 대한 서비스 제공 여부를 결정한다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="ssosingle-sign-on">SSO(Single Sign On)</h1>
+<h2 id="1-sso-개요">1. SSO 개요</h2>
+<ul>
+  <li><strong>다수의 서비스를 한 번의 Login으로 기업의 업무 시스템이나 인터넷 서비스에 접속할 수 있게 해 주는 보안시스템</strong></li>
+  <li><strong>중앙집중형 접근 관리, 보안 기능 PKI(Public key Infrastructure), 암호화 기능</strong></li>
+  <li>장점 : 보안성 우수, 사용자 편의성 증가, 패스워드 분실에 따른 관리자의 부담 감소</li>
+  <li>단점 : SPOF(Single Point Of Failure)</li>
+</ul>
+
+<h2 id="2-sso-통합인증">2. SSO 통합인증</h2>
+
+<p><img src="/assets/images/posts/sso-diagram.png" alt="SSO" /></p>
+
+<p><a href="https://twiki.org/cgi-bin/view/Blog/BlogEntry201206x1">이미지 출처</a></p>
+
+<h2 id="3-sso-종류">3. SSO 종류</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">종류</th>
+      <th style="text-align: left">상세 내용</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Delegation 방식</strong></td>
+      <td style="text-align: left">대상 애플리케이션의 인증 방식을 변경하기 어려울 때 많이 사용. 대상 애플리케이션의 인증 방식을 전혀 변경하지 않고, 사용자의 대상 애플리케이션 인증 정보를 에이전트가 관리해 사용자 대신 로그온해 주는 방식</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Propagation 방식</strong></td>
+      <td style="text-align: left">통합인증을 수행하는 곳에서 인증을 받아 대상 애플리케이션으로 전달할 토큰을 발급받음. 대상 애플리케이션에 사용자가 접근할 때 토큰을 자동으로 전달해 대상 애플리케이션이 사용자를 확인할 수 있도록 하는 방식. 웹 환경에서 쿠키라는 기술을 이용해 토큰을 자동으로 대상 애플리케이션에 전달할 수도 있음. 이러한 웹 환경의 이점으로 웹 환경에서의 SSO는 대부분 이 모델을 채택함.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Delegation &amp; Propagation 방식</strong></td>
+      <td style="text-align: left">웹 애플리케이션의 변경이 불가능하고 사용자 통합이 어려운 경우 Delegation 방식을 활용. 또한 대상 애플리케이션이 많고 특성들이 다양한 경우 각 애플리케이션에 Delegation 방식과 Propagtaion 방식을 혼용해서 전체 시스템의 SSO를 구성함.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Web 기반 One Cookie Domain SSO</strong></td>
+      <td style="text-align: left">SSO 대상 서비스와 애플리케이션들이 하나의 Cookie Domain 안에 존재할 때 사용. 일반적인 기업 내부의 컴퓨팅 환경. 통합인증을 받은 사용자는 토큰을 발급받고, 이 토큰은 Cookie Domain에 Cookie로 설정되어 Cookie Domain 내의 다른 서비스로 접근할 때 자동으로 토큰을 서비스에 제공함. 서비스에서 동작하는 SSO 에이전트는 토큰으로부터 사용자 신원을 확인하고 요청된 자원에 대한 접근을 허가함.</td>
+    </tr>
+  </tbody>
+</table>
+:ET

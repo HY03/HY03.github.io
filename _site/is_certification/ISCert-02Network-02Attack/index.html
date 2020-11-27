@@ -461,7 +461,7 @@
             </nav>
           </aside>
         
-        <h1 id="서비스-거부-공격dos--denial-of-service"><strong>서비스 거부 공격(DoS : Denial of Service)</strong></h1>
+        <h1 id="서비스-거부-공격dos--denial-of-service">서비스 거부 공격(DoS : Denial of Service)</h1>
 <ul>
   <li>특정 서비스를 계속적으로 호출하여 CPU, Memory, Network 자원을 고갈시킴</li>
 </ul>
@@ -519,7 +519,7 @@
   </tbody>
 </table>
 
-<h1 id="분산-서비스-거부-공격ddos"><strong>분산 서비스 거부 공격(DDoS)</strong></h1>
+<h1 id="분산-서비스-거부-공격ddos">분산 서비스 거부 공격(DDoS)</h1>
 
 <h2 id="1-tcp-syn-flooding">1. TCP SYN Flooding</h2>
 
@@ -548,7 +548,7 @@
     </tr>
     <tr>
       <td style="text-align: left">First SYN Drop(Spoofed) 설정</td>
-      <td style="text-align: left"><ul><li>SYN 패킷을 보낸 클라이언트의 존재 여부를 파악하여 차단하는 방법</li><li>클라이언트에서 전송된 첫 번째 SYN을 DROP하여 재요청 여부를 확인 후 Spoofing 여부를 판단함</li></ul></td>
+      <td style="text-align: left">⦁ SYN 패킷을 보낸 클라이언트의 존재 여부를 파악하여 차단하는 방법<br />⦁ 클라이언트에서 전송된 첫 번째 SYN을 DROP하여 재요청 여부를 확인 후 Spoofing 여부를 판단함</td>
     </tr>
     <tr>
       <td style="text-align: left">TCP 세션 연결 차단</td>
@@ -556,11 +556,11 @@
     </tr>
     <tr>
       <td style="text-align: left">Back queue 증가</td>
-      <td style="text-align: left"><ul><li>임시적 방법으로 서버의 Queue 사이즈를 증가시킴</li><li>`sysctl -w net.ipv4.tcp_max_syn_backlog = 1024`</li></ul></td>
+      <td style="text-align: left">⦁ 임시적 방법으로 서버의 Queue 사이즈를 증가시킴<br />⦁ <code class="language-plaintext highlighter-rouge">sysctl -w net.ipv4.tcp_max_syn_backlog = 1024</code></td>
     </tr>
     <tr>
       <td style="text-align: left">L4/방화벽 SYN cookies 설정</td>
-      <td style="text-align: left"><ul><li>L4/방화벽은 ACK에 필요한 Seq값을 인코딩하여 같이 전달하고 잊어버림</li><li>`sysctl -w net.ipv4.tcp_syncookies=1`</li></ul></td>
+      <td style="text-align: left">⦁ L4/방화벽은 ACK에 필요한 Seq값을 인코딩하여 같이 전달하고 잊어버림<br />⦁ <code class="language-plaintext highlighter-rouge">sysctl -w net.ipv4.tcp_syncookies=1</code></td>
     </tr>
   </tbody>
 </table>
@@ -579,12 +579,12 @@
       </thead>
       <tbody>
         <tr>
-          <td style="text-align: left">Watch Mode</td>
-          <td style="text-align: left">SYN 패킷을 통과시키고 일정 시간 동안 연결이 이루어지지 않으면 라우터가 SYN 패킷을 차단함</td>
+          <td style="text-align: left"><strong>Watch Mode</strong></td>
+          <td style="text-align: left">SYN 패킷을 통과시키고 <strong>일정 시간 동안 연결이 이루어지지 않으면 라우터가 SYN 패킷을 차단함</strong></td>
         </tr>
         <tr>
-          <td style="text-align: left">Intercept Mode</td>
-          <td style="text-align: left">라우터에 유입되는 SYN 패킷 요청을 서버로 전송하지 않고, 라우터에서 가로채어 SYN 패킷을 요청한 클라이언트와 서버를 대신 연결하는 것</td>
+          <td style="text-align: left"><strong>Intercept Mode</strong></td>
+          <td style="text-align: left">라우터에 유입되는 SYN 패킷 요청을 서버로 전송하지 않고, <strong>라우터에서 가로채어 SYN 패킷을 요청한 클라이언트와 서버를 대신 연결</strong>하는 것</td>
         </tr>
       </tbody>
     </table>
@@ -595,8 +595,9 @@
 <ul>
   <li>공격방법
     <ul>
-      <li>Victim IP로 출발지 IP를 변조하여 반사서버 (정상 TCP 서버 또는 라우터) 에 SYN packet 전송</li>
-      <li>서버들은 변조된 공격대상 IP 로 SYN/ACK packet 전송</li>
+      <li><strong>별도의 Agent를 설치하지 않고 TCP Half Open의 취약점을 이용하는 공격기법</strong></li>
+      <li><strong>Victim IP로 출발지 IP를 변조하여 반사서버 (정상 TCP 서버 또는 라우터) 에 SYN packet 전송</strong></li>
+      <li><strong>서버들은 변조된 공격대상 IP 로 SYN/ACK packet 전송</strong></li>
     </ul>
   </li>
 </ul>
@@ -605,14 +606,14 @@
 
 <h3 id="1-개요">1. 개요</h3>
 <ul>
-  <li>IP특징(Broadcast 주소 방식)과 ICMP 패킷을 이용한 공격 방법</li>
-  <li>통신을 위해 서비스 및 포트가 필요 없는 유일한 프로토콜</li>
-  <li>Smurfing Attack 이라고도 함.</li>
+  <li><strong>IP특징(Broadcast 주소 방식)과 ICMP 패킷을 이용한 공격 방법</strong></li>
+  <li>통신을 위해 <strong>서비스 및 포트가 필요 없는 유일한 프로토콜</strong></li>
+  <li><strong>Smurfing Attack</strong> 이라고도 함.</li>
 </ul>
 
 <h3 id="2-공격-방법">2. 공격 방법</h3>
 <ul>
-  <li>공격자는 다수의 호스트가 존재하는 서브 네트워크에 변조된 ICMP Echo 패킷을 Broadcast 전송 (Source IP를 피해자의 IP로 변조함)</li>
+  <li>공격자는 <strong>다수의 호스트가 존재하는 서브 네트워크에 변조된 ICMP Echo 패킷을 Broadcast 전송 (Source IP를 피해자의 IP로 변조함)</strong></li>
   <li>다량의 응답 패킷이 공격대상 서버로 집중됨</li>
 </ul>
 
@@ -657,7 +658,7 @@
     </tr>
     <tr>
       <td style="text-align: left">Inbound 패킷 임계치 설정</td>
-      <td style="text-align: left"><ul><li>운영 장비로 유입되는 Inbound 패킷을 기준으로 PPS 수치를 유입되는 수치보다 낮게 설정</li><li>임계치 이상의 ICMP 및 UDP를 차단</li></ul></td>
+      <td style="text-align: left">⦁ 운영 장비로 유입되는 Inbound 패킷을 기준으로 PPS 수치를 유입되는 수치보다 낮게 설정<br />⦁ 임계치 이상의 ICMP 및 UDP를 차단</td>
     </tr>
   </tbody>
 </table>
@@ -668,7 +669,7 @@
 <ul>
   <li>네트워크 패킷은 MTU(Maximum Transmission Unit)보다 큰 패킷이 오면 분할(Fragmentation)하고 분할 된 정보를 flags와 offset이 가지고 있다.</li>
   <li>이 때 offset을 임의로 조작하여 다시 조립될 수 없도록 하는 공격</li>
-  <li>Fragment를 조작하여 패킷 필터링 장비나 IDS를 우회하여 서비스 거부 공격을 유발</li>
+  <li>Fragment를 조작하여 <strong>패킷 필터링 장비나 IDS를 우회하여 서비스 거부 공격을 유발</strong></li>
 </ul>
 
 <h3 id="2-tear-drop-공격-종류">2. Tear drop 공격 종류</h3>
@@ -682,23 +683,23 @@
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">Tiny Fragment</td>
-      <td style="text-align: left">최초의 Fragment를 아주 작게 만들어서 네트워크 침입탐지 시스템이나 패킷 필터링 장비를 우회하는 공격</td>
+      <td style="text-align: left"><strong>Tiny Fragment</strong></td>
+      <td style="text-align: left"><strong>최초의 Fragment를 아주 작게 만들어서 네트워크 침입탐지 시스템이나 패킷 필터링 장비를 우회</strong>하는 공격</td>
     </tr>
     <tr>
-      <td style="text-align: left">Fragment Overlap</td>
-      <td style="text-align: left"><ul><li>Tiny Fragment 공격 기법에 비해 더욱 정교한 방법</li><li>IDS의 Fragment 처리 방법과 패킷 필터링의 재조합과 Overwrite 처리를 이용</li></ul></td>
+      <td style="text-align: left"><strong>Fragment Overlap</strong></td>
+      <td style="text-align: left">⦁ Tiny Fragment 공격 기법에 비해 더욱 정교한 방법<br />⦁ <strong>IDS의 Fragment 처리 방법과 패킷 필터링의 재조합과 Overwrite 처리를 이용</strong></td>
     </tr>
     <tr>
       <td style="text-align: left">IP Fragmentation을 이용한<br /> 서비스 거부 공격</td>
-      <td style="text-align: left"><ul><li>Ping of Death : Ping을 이용하여 ICMP 패킷을 규정된 길이 이상으로 큰 IP 패킷을 전송, 수신 받은 OS에서 처리하지 못함으로써 시스템을 마비시키는 공격</li><li>Tear Drop : fragment 재조합 과정의 취약점을 이용한 공격으로 목표시스템 정지나 재부팅을 유발하는 공격. TCP Header 부분의 offset field 값이 중첩되는 데이터 패킷을 대상 시스템에 전송</li></ul></td>
+      <td style="text-align: left">⦁ <strong>Ping of Death</strong> : Ping을 이용하여 ICMP 패킷을 규정된 길이 이상으로 큰 IP 패킷을 전송, 수신 받은 OS에서 처리하지 못함으로써 시스템을 마비시키는 공격<br />⦁ <strong>Tear Drop</strong> : fragment 재조합 과정의 취약점을 이용한 공격으로 목표시스템 정지나 재부팅을 유발하는 공격. <strong>TCP Header 부분의 offset field 값이 중첩되는 데이터 패킷을 대상 시스템에 전송</strong><br />⦁ <strong>Targra Attack</strong> : 작업 중에 저장 되지 않는 데이터를 모두 삭제하는 공격방법. IP 단편화가 발생하면, 수신자는 재 조립시에 정확한 조립을 위하여 오프셋을 더하게 되는데, 이 때 더 큰 오프셋을 더해서 오버플로우를 발생시키는 공격 방법. New Tear, Nestea Attack</td>
     </tr>
   </tbody>
 </table>
 
 <h3 id="3-ping-of-death-공격-방법">3. Ping of Death 공격 방법</h3>
 <ul>
-  <li>하나의 큰 패킷을 전송하면 패킷은 MTU(Maximun Transmission Unit)의 크기를 넘을 수 없기 때문에 분할되어서 응답을 받음</li>
+  <li><strong>하나의 큰 패킷을 전송</strong>하면 패킷은 <strong>MTU(Maximun Transmission Unit)의 크기를 넘을 수 없기 때문에 분할</strong>되어서 응답을 받음</li>
   <li>5000 Byte 의 패킷을 보냈을 경우 1500 MTU의 네트워크 환경에서 offset:0 1500 bytes, offset 1480 1500 bytes, offset 2960 1500 bytes, offset 4440, 580 bytes</li>
 </ul>
 
@@ -706,7 +707,7 @@
 <ul>
   <li>개요
     <ul>
-      <li>송신자와 수신자의 IP 주소와 Port 주소를 동일하게 하여 네트워크 장비에 부하를 일으킴</li>
+      <li><strong>송신자와 수신자의 IP 주소와 Port 주소를 동일하게 설정</strong>하여 네트워크 장비에 부하를 일으킴</li>
     </ul>
   </li>
   <li>공격 방법
@@ -726,7 +727,7 @@
   <li>개요
     <ul>
       <li>정상적인 TCP 연결 이후 정상적으로 보이는 HTTP Transaction 과정을 수행하는 Dos/DDos 공격 방법</li>
-      <li>HTTP Get을 지속적으로 요청하여 HTTP 연결 및 HTTP 처리 로직의 과부하를 유발</li>
+      <li><strong>HTTP Get을 지속적으로 요청</strong>하여 HTTP 연결 및 HTTP 처리 로직의 과부하를 유발</li>
       <li>TCP 3-Way Handshaking 이후 공격을 수행하기에 IP를 변조하지 않음</li>
     </ul>
   </li>
@@ -743,7 +744,7 @@
       <tbody>
         <tr>
           <td style="text-align: left">선별적 IP 차단</td>
-          <td style="text-align: left"><ul><li>TCP 연결요청 임계치 값과 HTTP Get의 임계치 값을 모니터링한 후 비정상적인 트래픽은 차단함</li><li>연결기반 공격이므로 IP를 변조할 수 없는 특성을 이용</li></ul></td>
+          <td style="text-align: left">⦁ TCP 연결요청 임계치 값과 HTTP Get의 임계치 값을 모니터링한 후 비정상적인 트래픽은 차단함<br />⦁ 연결기반 공격이므로 IP를 변조할 수 없는 특성을 이용</td>
         </tr>
         <tr>
           <td style="text-align: left">컨텐츠 요청횟수에 의한 임계치 설정</td>
@@ -760,6 +761,11 @@
       </tbody>
     </table>
   </li>
+  <li>탐지
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">ngrep -l Serverl.pcap -twbyline | grep GET | sort | uniq -c | sort -rn</code></li>
+    </ul>
+  </li>
 </ul>
 
 <h2 id="6-cache-control">6. Cache Control</h2>
@@ -771,8 +777,8 @@
   </li>
   <li>Cache Control Attack 공격 방법
     <ul>
-      <li>Cache-Control Header 옵션 값을 사용</li>
-      <li>no-cache 로 설정하면 항상 최신의 페이지를 요청하여 부하를 발생시킴</li>
+      <li><strong>Cache-Control Header 옵션 값을 사용</strong></li>
+      <li><strong>no-cache 로 설정</strong>하면 항상 최신의 페이지를 요청하여 부하를 발생시킴</li>
       <li>웹 서버 호출</li>
     </ul>
   </li>
@@ -787,19 +793,19 @@
 
 <h3 id="1-slow-http-get-방식">1. Slow HTTP Get 방식</h3>
 <ul>
-  <li>TCP/UDP 기반 공격 : 변조 IP가 아닌 정상 IP 기반 공격, 탐지 어려움</li>
+  <li>TCP/UDP 기반 공격 : <strong>변조 IP가 아닌 정상 IP 기반 공격, 탐지 어려움</strong></li>
   <li>소량의 트래픽을 사용한 공격 : 소량의 트래픽과 세션 연결을 통해서 공격</li>
   <li>애플리케이션 대상 : 서비스의 취약점을 이용한 공격</li>
 </ul>
 
 <h3 id="2-slow-http-post-방식">2. Slow HTTP Post 방식</h3>
 <ul>
-  <li>HTTP의 Post 지시자를 사용하여 서버에게 전달할 대량의 데이터를 장시간에 걸쳐 분할 전송</li>
+  <li><strong>HTTP의 Post 지시자를 사용하여 서버에게 전달할 대량의 데이터를 장시간에 걸쳐 분할 전송</strong></li>
   <li>Post 데이터가 모두 수신되지 않으면 연결을 장시간 유지</li>
   <li>공격 방법
     <ul>
-      <li>HTTP Header의 Content-Length 필드에 임의의 큰 값을 입력</li>
-      <li>공격자는 소량의 데이터를 느린 속도로 전송하여 장기간 동안 세션을 유지</li>
+      <li><strong>HTTP Header의 Content-Length 필드에 임의의 큰 값을 입력</strong></li>
+      <li><strong>공격자는 소량의 데이터를 느린 속도로 전송하여 장기간 동안 세션을 유지</strong></li>
     </ul>
   </li>
 </ul>
@@ -820,26 +826,26 @@
     </tr>
     <tr>
       <td style="text-align: left">방화벽 설정 도구인<br />iptables로 차단</td>
-      <td style="text-align: left"><ul><li>iptables -A INPUT -p tcp -dport 80 -m connlimit-above 30 -j DROP</li><li>30개 이상의 Concurrent Connection 에 대한 차단</li></ul></td>
+      <td style="text-align: left">⦁ iptables -A INPUT -p tcp -dport 80 -m connlimit-above 30 -j DROP<br />⦁ 30개 이상의 Concurrent Connection 에 대한 차단</td>
     </tr>
     <tr>
       <td style="text-align: left">Connection Timeout과<br />Keepalivetime 설정</td>
-      <td style="text-align: left"><ul><li>Connection Timeout 설정으로 클라이언트와 서버 간에 데이터 전송이 없을 경우 연결 종료</li><li>웹 서버의 Keepalivetime을 설정하여 차단</li></ul></td>
+      <td style="text-align: left">⦁ Connection Timeout 설정으로 클라이언트와 서버 간에 데이터 전송이 없을 경우 연결 종료<br />⦁ 웹 서버의 Keepalivetime을 설정하여 차단</td>
     </tr>
     <tr>
       <td style="text-align: left">RequestReadTimeout<br />설정으로 차단</td>
-      <td style="text-align: left"><ul><li>Apache 2.2.15버전 이후에서 사용</li><li>Slow Attack를 차단하기 위해서 RequestReadTimeout header=5 body=8 설정</li><li>5초 내에 연결이 안 되면 연결 종료, POST 요청 이후 8초 내에 데이터가 오지 않으면 연결 종료</li></ul></td>
+      <td style="text-align: left">⦁ Apache 2.2.15버전 이후에서 사용<br />⦁ Slow Attack를 차단하기 위해서 RequestReadTimeout header=5 body=8 설정<br />⦁ 5초 내에 연결이 안 되면 연결 종료, POST 요청 이후 8초 내에 데이터가 오지 않으면 연결 종료</td>
     </tr>
     <tr>
       <td style="text-align: left">그 외</td>
-      <td style="text-align: left"><ul><li>POST 메시지의 크기를 제한(POST_MAX_SIZE) 한다.</li><li>최저 데이터 전송 속도를 제한한다.</li><li>TCP 상태를 모니터링한다.</li></ul></td>
+      <td style="text-align: left">⦁ POST 메시지의 크기를 제한(POST_MAX_SIZE) 한다.<br />⦁ 최저 데이터 전송 속도를 제한한다.<br />⦁ TCP 상태를 모니터링한다.</td>
     </tr>
   </tbody>
 </table>
 
 <h3 id="4-slow-http-read-dos">4. Slow HTTP Read DoS</h3>
 <ul>
-  <li>공격자가 웹 서버와 TCP 연결 시 TCP 윈도우 크기 및 데이터 처리율을 감소시킨 후 HTTP 데이터를 송신하여 웹 서버가 정상적으로 응답하지 못하도록 하는 Dos/DDoS 기법</li>
+  <li>공격자가 웹 서버와 TCP 연결 시 <strong>TCP 윈도우 크기 및 데이터 처리율을 감소</strong>시킨 후 HTTP 데이터를 송신하여 웹 서버가 정상적으로 응답하지 못하도록 하는 Dos/DDoS 기법</li>
   <li>TCP 윈도우 크기 및 데이터 처리율을 감소시키면 서버는 정상상태로 회복될 때까지 대기상태에 빠지게 되어 부하를 유발함</li>
   <li>공격 방법
     <ul>
@@ -857,8 +863,8 @@
   <li>웹 서버는 클라이언트로부터 요청이 끝나지않은 것으로 판단하기 때문에 웹 로그에 기록하지 않음</li>
   <li>공격 방법
     <ul>
-      <li>HTTP Header 와 Body 는 개행문자<code class="language-plaintext highlighter-rouge">(\r\n\r\n)</code> 로 구분됨.</li>
-      <li>Slow HTTP Header DoS 는 <code class="language-plaintext highlighter-rouge">\r\n</code> 만 전송하여 불완전 Header 를 전송</li>
+      <li>HTTP Header 와 Body 는 개행문자 <strong><code class="language-plaintext highlighter-rouge">(\r\n\r\n)</code></strong> 로 구분됨.</li>
+      <li>Slow HTTP Header DoS 는 <strong><code class="language-plaintext highlighter-rouge">\r\n</code></strong> 만 전송하여 불완전 Header 를 전송</li>
     </ul>
   </li>
 </ul>
@@ -867,7 +873,7 @@
 
 <h3 id="1-개요-2">1. 개요</h3>
 <ul>
-  <li>클라이언트에서 전달되는 각종 파라미터 값을 관리하는 해시테이블의 인덱스 정보가 중복되도록 유도 -&gt; 사전에 저장된 정보 조회 시 많은 CPU 자원을 소모하도록 하는 공격</li>
+  <li>클라이언트에서 전달되는 각종 파라미터 값을 관리하는 <strong>해시테이블의 인덱스 정보가 중복되도록 유도</strong> -&gt; 사전에 저장된 정보 조회 시 <strong>많은 CPU 자원을 소모</strong>하도록 하는 공격</li>
   <li>HTTP Request 요청 시 Get, Post 방식으로 전송되는 변수를 Hash 구조로 관리함. (Get 방식은 길이에 제한이 있으나 Post 전송 방식은 파라미터 개수의 제한이 없음)</li>
   <li>많은 수의 매개변수를 전달하면 매개변수를 저장하는 해시테이블에서 해시 충돌이 발생하여 해시테이블에 접근하는 시간이 증가함.</li>
   <li>동일한 Hash Bucket 에 element 가 삽입될 경우 Hash Table은 이를 Linked List 로 구성하게 되는데 이 때 O(n^2) 의 시간이 소요됨.</li>
@@ -908,7 +914,7 @@
 <h3 id="1-개요-3">1. 개요</h3>
 <ul>
   <li>웹 서버의 가용량을 모두 사용하여 정상적인 서비스가 불가능하도록 하는 Get Flooding 의 공격 유형이다.</li>
-  <li>공격 대상 URL을 지속적으로 변경하여 DDoS 차단정책을 우회하는 특성을 가진다.</li>
+  <li><strong>공격 대상 URL을 지속적으로 변경</strong>하여 DDoS 차단정책을 우회하는 특성을 가진다.</li>
   <li>특정 URL이 계속 변경되면 임계치 설정 기반 방어가 불가능하게 된다. 즉, 임계치는 고정된 URL에만 설정이 가능하다는 특성을 이용, 우회한다.</li>
 </ul>
 
@@ -932,12 +938,12 @@
     </tr>
     <tr>
       <td style="text-align: left">302-Redirect를 이용한 차단</td>
-      <td style="text-align: left"><ul><li>대부분의 DDoS 공격 툴은 302-Redirect 요청에 대해 반응하지 않는 것이 특징임</li><li>URL 중에서 공격 당하기 쉬운 웹 사이트에 대한 Redirect 처리를 통해서 자동화된 DDoS 공격 툴을 이용한 공격을 사전에 차단</li></ul></td>
+      <td style="text-align: left">⦁ 대부분의 DDoS 공격 툴은 302-Redirect 요청에 대해 반응하지 않는 것이 특징임<br />⦁ URL 중에서 공격 당하기 쉬운 웹 사이트에 대한 Redirect 처리를 통해서 자동화된 DDoS 공격 툴을 이용한 공격을 사전에 차단</td>
     </tr>
   </tbody>
 </table>
 
-<h1 id="스캐닝"><strong>스캐닝</strong></h1>
+<h1 id="스캐닝">스캐닝</h1>
 
 <h2 id="1-포트-스캐닝port-scanning">1. 포트 스캐닝(Port Scanning)</h2>
 
@@ -946,7 +952,7 @@
   <li>포트 스캐닝은 서버에 열려 있는 포트를 확인하기 위한 방법으로 NMAP 이라는 도구를 사용해서 스캐닝을 수행한다.</li>
   <li>포트 스캐닝을 사용하면 서버에 열려 있는 포트를 확인하고 해당 포트의 취약점을 이용하여 공격할 수 있다.</li>
   <li>
-    <p>NMAP 포트 스캐닝</p>
+    <p><strong>NMAP 포트 스캐닝</strong></p>
 
     <table>
       <thead>
@@ -957,27 +963,31 @@
       </thead>
       <tbody>
         <tr>
-          <td style="text-align: left">TCP connect() Scan</td>
+          <td style="text-align: left"><strong>TCP connect() Scan</strong></td>
           <td style="text-align: left">3-Way Handshaking 를 수립하고 Target System 에서 쉽게 탐지가 가능하다.</td>
         </tr>
         <tr>
-          <td style="text-align: left">TCP SYN Scan</td>
-          <td style="text-align: left"><ul><li>SYN 패킷을 대상 포트로 발송하여 SYN/ACK 패킷을 수신 받으면 Open 상태이다.</li><li>SYN 패킷을 대상 포트로 발송하여 RST/ACK을 수신 받으면 Close 상태이다.</li><li>Half Open 또는 Stealth Scan이라고 한다.</li></ul></td>
+          <td style="text-align: left"><strong>TCP SYN Scan</strong></td>
+          <td style="text-align: left">⦁ SYN 패킷을 대상 포트로 발송하여 SYN/ACK 패킷을 수신 받으면 Open 상태이다.<br />⦁ SYN 패킷을 대상 포트로 발송하여 RST/ACK을 수신 받으면 Close 상태이다.<br />⦁ Half Open 또는 Stealth Scan이라고 한다.</td>
         </tr>
         <tr>
-          <td style="text-align: left">TCP FIN Scan</td>
-          <td style="text-align: left"><ul><li>대상 포트로 FIN 패킷을 전송하고 닫혀 있는 포트는 RST를 전송한다.</li><li>포트가 개방되어 있으면 패킷을 무시한다.</li></ul></td>
+          <td style="text-align: left"><strong>TCP FIN Scan</strong></td>
+          <td style="text-align: left">⦁ 대상 포트로 FIN 패킷을 전송하고 닫혀 있는 포트는 RST를 전송한다.<br />⦁ 포트가 개방되어 있으면 패킷을 무시한다.</td>
         </tr>
         <tr>
-          <td style="text-align: left">TCP Null Scan</td>
-          <td style="text-align: left"><ul><li>모든 플래그를 지운다.</li><li>대상 포트가 닫혀 있으면 RST를 돌려보내고 개방 상태이면 패킷을 무시한다.</li></ul></td>
+          <td style="text-align: left"><strong>TCP Null Scan</strong></td>
+          <td style="text-align: left">⦁ 모든 플래그를 지운다.<br />⦁ 대상 포트가 닫혀 있으면 RST를 돌려보내고 개방 상태이면 패킷을 무시한다.</td>
         </tr>
         <tr>
-          <td style="text-align: left">TCP X-MAS Tree Scan</td>
-          <td style="text-align: left"><ul><li>대상 포트로 FIN, URG, PSH 패킷을 전송한다.</li><li>대상 시스템에서 포트가 닫혀 있으면 RST를 되돌려 보낸다.</li><li>포트가 개방되어 있으면 패킷을 무시한다.</li></ul></td>
+          <td style="text-align: left"><strong>TCP X-MAS Tree Scan</strong></td>
+          <td style="text-align: left">⦁ 대상 포트로 FIN, URG, PSH 패킷을 전송한다.<br />⦁ 대상 시스템에서 포트가 닫혀 있으면 RST를 되돌려 보낸다.<br />⦁ 포트가 개방되어 있으면 패킷을 무시한다.</td>
         </tr>
       </tbody>
     </table>
+
+    <ul>
+      <li><strong><code class="language-plaintext highlighter-rouge">nmap -O</code></strong> : TTL 값을 사용해서 해당 시스템의 운영체제를 식별하기 위함</li>
+    </ul>
   </li>
 </ul>
 
@@ -1018,7 +1028,7 @@
 
 <h4 id="2-nmap-포트-스캐닝">2. NMAP 포트 스캐닝</h4>
 <ul>
-  <li>UDP SCAN
+  <li><strong>UDP SCAN</strong>
     <ul>
       <li>공격자는 UDP Packet을 전송해서 스캐닝하는 것으로 UDP 특성상 신뢰성이 떨어짐
         <ul>
@@ -1092,7 +1102,7 @@
       </li>
     </ul>
   </li>
-  <li>TCP Fragmentation
+  <li><strong>TCP Fragmentation</strong>
     <ul>
       <li>20Byte의 헤더를 2개로 분할하여 보안장비의 탐지를 우회하는 방법</li>
       <li>첫 번째 패킷은 IP 주소 정보가 있고 두 번째 패킷은 Port 정보만 있음</li>
@@ -1100,7 +1110,7 @@
   </li>
 </ul>
 
-<h1 id="스니핑-공격"><strong>스니핑 공격</strong></h1>
+<h1 id="스니핑-공격">스니핑 공격</h1>
 
 <h2 id="1-스니핑sniffing">1. 스니핑(Sniffing)</h2>
 <ul>
@@ -1108,8 +1118,8 @@
     <ul>
       <li>네트워크로 전송되는 패킷을 훔쳐보는 도구</li>
       <li>송신자와 수신자의 IP주소, 포트번호 및 송수신 메시지 확인</li>
-      <li>Normal Mode : 자신의 컴퓨터에 전송되는 패킷만 수신받고 나머지 패킷은 Drop 한다.</li>
-      <li>Promiscuous Mode : 네트워크에 흐르는 모든 패킷을 모니터링 한다.
+      <li><strong>Normal Mode</strong> : 자신의 컴퓨터에 전송되는 패킷만 수신받고 나머지 패킷은 Drop 한다.</li>
+      <li><strong>Promiscuous Mode</strong> : 네트워크에 흐르는 모든 패킷을 모니터링 한다.
         <ul>
           <li><code class="language-plaintext highlighter-rouge">#&gt; ifconfig eth0 promisc</code></li>
         </ul>
@@ -1124,7 +1134,7 @@
 <ul>
   <li>개요
     <ul>
-      <li>로그인 사용자에게 웹 서버가 세션 값이라는 문자열을 생성해서 전송할 때 세션 값이라는 문자열만 획득하면 로그인 과정없이 홈페이지에 접근할 수 있음</li>
+      <li>로그인 사용자에게 웹 서버가 세션 값이라는 문자열을 생성해서 전송할 때 <strong>세션 값이라는 문자열만 획득하면 로그인 과정없이 홈페이지에 접근할 수 있음</strong></li>
       <li>이미 인증을 받아 세션을 생성, 유지하고 있는 연결을 빼앗는 공격</li>
       <li>인증을 위한 모든 검증을 우회</li>
       <li>TCP를 이용해 통신하고 있을 때 RST 패킷을 보내 일시적으로 TCP 세션을 끊고 시퀀스 넘버를 새로 생성하여 세션을 빼앗고 인증을 회피</li>
@@ -1187,13 +1197,13 @@
   </li>
 </ul>
 
-<h1 id="스푸핑-공격"><strong>스푸핑 공격</strong></h1>
+<h1 id="스푸핑-공격">스푸핑 공격</h1>
 
 <h2 id="1-ip-spoofing">1. IP Spoofing</h2>
 
 <h3 id="1-개요-5">1. 개요</h3>
 <ul>
-  <li>자신의 IP를 속이는 행위</li>
+  <li><strong>자신의 IP를 속이는 행위</strong></li>
   <li>TCP/IP의 취약점을 이용
     <ul>
       <li>순서 제어 번호 추측 (Sequence Number Guessing)</li>
@@ -1218,11 +1228,11 @@
   <tbody>
     <tr>
       <td style="text-align: left">Router에서 Source Routing 차단</td>
-      <td style="text-align: left"><ul><li>외부에서 유입되는 패킷 중 출발지 IP(Source)에 내부망 IP 주소를 가지고 있는 패킷을 라우터 등에서 차단함</li><li>내부에서 발생한 IP Spoofing은 차단하지 못함</li></ul></td>
+      <td style="text-align: left">⦁ 외부에서 유입되는 패킷 중 출발지 IP(Source)에 내부망 IP 주소를 가지고 있는 패킷을 라우터 등에서 차단함<br />⦁ 내부에서 발생한 IP Spoofing은 차단하지 못함</td>
     </tr>
     <tr>
       <td style="text-align: left">Sequence Number를 Random하게 발생시키도록 함</td>
-      <td style="text-align: left"><ul><li>일부 운영체제 중에서 Sequence Number를 일정하게 증가시키면서 사용함</li><li>Random하게 발생하도록 서버 설정을 변경</li></ul></td>
+      <td style="text-align: left">⦁ 일부 운영체제 중에서 Sequence Number를 일정하게 증가시키면서 사용함<br />⦁ Random하게 발생하도록 서버 설정을 변경</td>
     </tr>
     <tr>
       <td style="text-align: left">R-Command 취약점 제거</td>
@@ -1247,11 +1257,11 @@
   <tbody>
     <tr>
       <td style="text-align: left">DNS Spoofing</td>
-      <td style="text-align: left"><ul><li>DNS(Domain Name System) : www.abc.com 등의 도메인 이름을 IP 주소로 바꾸는 역할</li><li>www.abc.com의 IP 주소를 바꾸어 엉뚱한 사이트로 접속하게 하는 공격 (예:위장된 금융사이트 접속)</li></ul></td>
+      <td style="text-align: left">⦁ DNS(Domain Name System) : www.abc.com 등의 도메인 이름을 IP 주소로 바꾸는 역할<br />⦁ www.abc.com의 IP 주소를 바꾸어 엉뚱한 사이트로 접속하게 하는 공격 (예:위장된 금융사이트 접속)</td>
     </tr>
     <tr>
       <td style="text-align: left">Web Spoofing</td>
-      <td style="text-align: left"><ul><li>공격자가 다른 컴퓨터(공격대상)로 전송되는 웹 페이지를 보거나 바꿀 수 있는 방법</li><li>가짜 홈페이지를 만들어 두고 로그인을 유도하여 정보 획득(ID/PW, 신용카드 정보 등)</li></ul></td>
+      <td style="text-align: left">⦁ 공격자가 다른 컴퓨터(공격대상)로 전송되는 웹 페이지를 보거나 바꿀 수 있는 방법<br />⦁ 가짜 홈페이지를 만들어 두고 로그인을 유도하여 정보 획득(ID/PW, 신용카드 정보 등)</td>
     </tr>
   </tbody>
 </table>
@@ -1262,23 +1272,23 @@
     <ul>
       <li>로컬 통신 과정에서 서버와 클라이언트는 IP와 MAC 주소로 통신</li>
       <li>클라이언트의 MAC 주소를 중간에 공격자가 자신의 MAC 주소로 변조하여 마치 서버와 클라이언트가 통신하는 것처럼 속이는 공격</li>
-      <li>fragrouter를 통하여 연결이 끊어지지 않도록 Release를 해줘야 함</li>
+      <li>이러한 공격은 <strong>fragrouter를 통하여 연결이 끊어지지 않도록 Release</strong>를 해줘야 함</li>
     </ul>
   </li>
   <li>특징
     <ul>
-      <li>ARP는 인증을 하지 않기 때문에 ARP Reply 패킷을 각 호스트에 보내서 쉽게 ARP Cache를 업데이트한다.</li>
+      <li>ARP는 인증을 하지 않기 때문에 <strong>ARP Reply 패킷을 각 호스트에 보내서 쉽게 ARP Cache를 업데이트</strong>한다.</li>
       <li>즉, 변조된 ARP Reply 를 지속적으로 보내서 각 호스트들이 ARP Cache에 변조된 MAC 주소정보를 계속 유지시켜야 한다.</li>
     </ul>
   </li>
-  <li>방법
+  <li><strong>방법</strong>
     <ul>
       <li><code class="language-plaintext highlighter-rouge">arp</code> : 현재 IP 주소와 MAC 주소를 확인 (linux)</li>
       <li><code class="language-plaintext highlighter-rouge">arp -a</code> : 현재 IP 주소와 MAC 주소를 확인 (windows)</li>
       <li><code class="language-plaintext highlighter-rouge">arpspoof -i eth0 -t [victim ip] [gateway ip]</code></li>
     </ul>
   </li>
-  <li>정적 설정법
+  <li><strong>정적 설정법</strong>
     <ul>
       <li><code class="language-plaintext highlighter-rouge">arp -s [IP 주소] [MAC 주소]</code></li>
     </ul>
@@ -1305,19 +1315,19 @@
       </thead>
       <tbody>
         <tr>
-          <td style="text-align: left">RDP</td>
+          <td style="text-align: left"><strong>RDP</strong></td>
           <td style="text-align: left">Remote Desktop Protocol, RDP는 MS에서 개발한 원격 데스크톱 연결 프로그램이 사용하는 프로토콜</td>
         </tr>
         <tr>
-          <td style="text-align: left">Teamviewer</td>
+          <td style="text-align: left"><strong>Teamviewer</strong></td>
           <td style="text-align: left">원격으로 시스템에 연결하는 프로그램</td>
         </tr>
         <tr>
-          <td style="text-align: left">VNC</td>
+          <td style="text-align: left"><strong>VNC</strong></td>
           <td style="text-align: left">Virtual Networking Computing, 원격으로 대상 시스템을 모니터링하거나 관리할 수 있는 프로그램</td>
         </tr>
         <tr>
-          <td style="text-align: left">NetCat(NC)</td>
+          <td style="text-align: left"><strong>NetCat(NC)</strong></td>
           <td style="text-align: left">원격으로 연결하여 명령을 실행할 수 있는 프로그램</td>
         </tr>
       </tbody>
@@ -1342,7 +1352,6 @@
     </ul>
   </li>
 </ul>
-
 
         
       </section>
@@ -1516,10 +1525,8 @@
   개념
     
       정보보호 및 개인정보보호 관리체계(ISMS-P : Information Security Management System-Personal)
-    
-  
-
-</p>
+        
+          과학기술정보통신부가 공시한 “정보보호 관리...</p>
   </article>
 </div>
 

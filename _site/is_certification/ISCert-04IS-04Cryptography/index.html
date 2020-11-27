@@ -568,7 +568,7 @@
       <tbody>
         <tr>
           <td style="text-align: left">암호학(Cryptology)</td>
-          <td style="text-align: left"><ul><li>암호 기법(Cryptography) : 암호화와 복호화의 원리, 절차 및 방법론에 관한 학문</li><li>암호 해독(Cryptanalysis) : 암호문으로부터 복호화 키를 찾아내거나 암호문을 평문으로 복원하려는 노력 또는 그에 관한 학문</li></ul></td>
+          <td style="text-align: left">⦁ 암호 기법(Cryptography) : 암호화와 복호화의 원리, 절차 및 방법론에 관한 학문<br />⦁ 암호 해독(Cryptanalysis) : 암호문으로부터 복호화 키를 찾아내거나 암호문을 평문으로 복원하려는 노력 또는 그에 관한 학문</td>
         </tr>
         <tr>
           <td style="text-align: left">평문(Plaintext)</td>
@@ -610,15 +610,15 @@
       <tbody>
         <tr>
           <td style="text-align: left">고전 암호</td>
-          <td style="text-align: left"><ul><li>단순한 문자 대입 방법으로 통계적 특성을 분석하여 암호문 해독이 가능했음</li><li>대표적 암호 : 시저 암호, Vigenere(비제네르, 비즈네르) 암호</li></ul></td>
+          <td style="text-align: left">⦁ 단순한 문자 대입 방법으로 통계적 특성을 분석하여 암호문 해독이 가능했음<br />⦁ 대표적 암호 : 시저 암호, Vigenere(비제네르, 비즈네르) 암호</td>
         </tr>
         <tr>
           <td style="text-align: left">근대 암호</td>
-          <td style="text-align: left"><ul><li>기계를 이용하여 암호 알고리즘을 실현</li><li>대표적 암호 : ENIGMA(평문을 자판으로 입력하면 각 회전자에 의해 암호문 변환)</li></ul></td>
+          <td style="text-align: left">⦁ 기계를 이용하여 암호 알고리즘을 실현<br />⦁ 대표적 암호 : ENIGMA(평문을 자판으로 입력하면 각 회전자에 의해 암호문 변환)</td>
         </tr>
         <tr>
           <td style="text-align: left">현대 암호</td>
-          <td style="text-align: left"><ul><li>1940년 말 Claude elwood shannon(클로드 섀넌)의 정보 이론에 의해 현대 암호학 시작</li><li>다양한 이론에 의해 복잡도가 높은 암호 알고리즘의 실현</li></ul></td>
+          <td style="text-align: left">⦁ 1940년 말 Claude elwood shannon(클로드 섀넌)의 정보 이론에 의해 현대 암호학 시작<br />⦁ 다양한 이론에 의해 복잡도가 높은 암호 알고리즘의 실현</td>
         </tr>
       </tbody>
     </table>
@@ -672,12 +672,12 @@
         <tr>
           <td style="text-align: left">고대</td>
           <td style="text-align: left">치환(Substitution)</td>
-          <td style="text-align: left"><ul><li>문자열을 다른 문자열로 이동하면서 교체</li><li>평문을 추론하기 어렵게 만듦</li></ul></td>
+          <td style="text-align: left">⦁ 문자열을 다른 문자열로 이동하면서 교체<br />⦁ 평문을 추론하기 어렵게 만듦</td>
         </tr>
         <tr>
           <td style="text-align: left"> </td>
           <td style="text-align: left">전치(Transposition) 순열(Permutation)</td>
-          <td style="text-align: left"><ul><li>무작위로 보이는 원칙에 따라서 문자의 순서를 바꾸는 것</li><li>확산의 성질로 암호문을 퍼뜨려 숨김</li></ul></td>
+          <td style="text-align: left">⦁ 무작위로 보이는 원칙에 따라서 문자의 순서를 바꾸는 것<br />⦁ 확산의 성질로 암호문을 퍼뜨려 숨김</td>
         </tr>
         <tr>
           <td style="text-align: left">현대</td>
@@ -692,12 +692,12 @@
         <tr>
           <td style="text-align: left"> </td>
           <td style="text-align: left">타원곡선암호(ECC)</td>
-          <td style="text-align: left"><ul><li>Elliptic Curve Cryptography</li><li>공개키 암호 시스템의 큰 키값을 이용해야 하는 단점을 보완</li></ul></td>
+          <td style="text-align: left">⦁ Elliptic Curve Cryptography<br />⦁ 공개키 암호 시스템의 큰 키값을 이용해야 하는 단점을 보완</td>
         </tr>
         <tr>
           <td style="text-align: left"> </td>
           <td style="text-align: left">양자암호</td>
-          <td style="text-align: left"><ul><li>Quantum Cryptography, 현재 활발한 연구 중</li><li>이론적으로만 존재하는 것으로 여기던 완벽한 암호 시스템</li></ul></td>
+          <td style="text-align: left">⦁ Quantum Cryptography, 현재 활발한 연구 중<br />⦁ 이론적으로만 존재하는 것으로 여기던 완벽한 암호 시스템</td>
         </tr>
       </tbody>
     </table>
@@ -710,12 +710,61 @@
           <li>코드북은 날짜 키를 가지고 있음</li>
         </ul>
       </li>
+      <li>공개키 암호화
+        <ul>
+          <li>RSA : 소인수분해</li>
+          <li>DSA : 이산대수</li>
+          <li>ECC : 타원곡선</li>
+          <li>Diffie-Hellman : 키 교환</li>
+        </ul>
+      </li>
+      <li>대칭키 암호화
+        <ul>
+          <li>스트림 암호화
+            <ul>
+              <li>비트단위 암호화</li>
+              <li>XOR로 1Bit 암호화</li>
+              <li>하드웨어로 구현이 용이, 빠름</li>
+              <li>RC4, SEAL, OTP</li>
+            </ul>
+          </li>
+          <li>블록 암호화
+            <ul>
+              <li>종류
+                <ul>
+                  <li>Feistel 구조 : 역함수 없음, DES, SEED</li>
+                  <li>SPN (Substitution Permutation Network)</li>
+                  <li>구조 : 역함수 있음, AES</li>
+                </ul>
+              </li>
+              <li>종류
+                <ul>
+                  <li>ECB : 가장 간단, 병렬처리</li>
+                  <li>CBC : 초기화 벡터 사용, 가장 강력함</li>
+                  <li>CFB : 순차적 암호화, 병렬적 복호화</li>
+                  <li>OFB : 디지털화 된 아날로그 신호 등</li>
+                  <li>CTR : 카운터를 사용한 암호화</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>종류
+            <ul>
+              <li>DES : 56Bit 키, 16라운드</li>
+              <li>3DES : 168Bit 키, 48라운드</li>
+              <li>AES : NIST 표준, 128Bit 키</li>
+              <li>IDEA : 128Bit, 8라운드</li>
+              <li>SEED : 128Bit, 16라운드</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
     </ul>
   </li>
   <li>Claude Shannon의 Information Theory(정보이론)
     <ul>
-      <li>혼돈 : 암호문과 평문과의 상관관계를 숨김, 대치를 통해 구현함</li>
-      <li>확산 : 평문의 통계적 성질을 암호문 전반에 퍼뜨러 숨김, 전치로 구현, 평문과 암호화 키의 각 Bit들은 암호문의 모든 Bit에 영향을 주어야 함.</li>
+      <li><strong>혼돈</strong> : <strong>암호문과 평문과의 상관관계를 숨김</strong>, <strong>대치를 통해 구현</strong>함</li>
+      <li><strong>확산</strong> : 평문의 <strong>통계적 성질을 암호문을 전반에 퍼뜨러 숨김</strong>, 전치로 구현, 평문과 암호화 키의 각 Bit들은 암호문의 모든 Bit에 영향을 주어야 함.</li>
     </ul>
   </li>
   <li>암호화가 해독되는 이유
@@ -757,7 +806,7 @@
 <h2 id="2-동기식-스트림-암호">2. 동기식 스트림 암호</h2>
 <ul>
   <li>Gilbert Vernam이 개발한 One Time Pad</li>
-  <li>랜덤 번호를 생성해서 송신자와 수신자가 랜덤 키를 교환</li>
+  <li><strong>랜덤 번호를 생성해서 송신자와 수신자가 랜덤 키를 교환</strong></li>
 </ul>
 
 <h2 id="3-비동기식-스트림-암호">3. 비동기식 스트림 암호</h2>
@@ -768,20 +817,20 @@
 <h1 id="블록-암호화">블록 암호화</h1>
 <h2 id="1-블록-암호화-알고리즘-구조">1. 블록 암호화 알고리즘 구조</h2>
 <ul>
-  <li>사전에 공유한 암호키를 사용해서 고정된 길이의 입력 블록을 고정된 길이의 출력 블록으로 변환하는 알고리즘</li>
+  <li>사전에 공유한 암호키를 사용해서 <strong>고정된 길이의 입력 블록을 고정된 길이의 출력 블록으로 변환하는 알고리즘</strong></li>
   <li>암호화를 수행하기 전에 평문을 고정된 블록으로 나누어 각각 암호화를 수행</li>
-  <li>Feistel 구조
+  <li><strong>Feistel 구조</strong>
     <ul>
-      <li>암호화와 복호화 과정이 동일</li>
-      <li>역변환이 가능한 방법</li>
+      <li><strong>암호화와 복호화 과정이 동일</strong></li>
+      <li><strong>역변환이 가능한 방법</strong></li>
       <li>하드웨어 및 소프트웨어로 구현이 쉬움</li>
       <li>DES, SEED, CAST-128, BLOWFISH</li>
     </ul>
   </li>
-  <li>SPN(Substitution Permutation Network) 구조
+  <li><strong>SPN(Substitution Permutation Network) 구조</strong>
     <ul>
-      <li>혼돈과 확산 이론에 기반</li>
-      <li>암호화 과정과 복호화 과정이 다름</li>
+      <li><strong>혼돈과 확산 이론에 기반</strong></li>
+      <li><strong>암호화 과정과 복호화 과정이 다름</strong></li>
       <li>AES, SAFER, SHARK, CRYPTON</li>
     </ul>
   </li>
@@ -792,7 +841,7 @@
   </li>
 </ul>
 
-<h2 id="2-블록-암호화-기법block-cipher">2. <strong>블록 암호화 기법(Block Cipher)</strong></h2>
+<h2 id="2-블록-암호화-기법block-cipher">2. 블록 암호화 기법(Block Cipher)</h2>
 <h3 id="1-ecbelectronic-code-book-mode">1. ECB(Electronic Code Book) Mode</h3>
 
 <p><img src="/assets/images/posts/Ecb_encryption.png" alt="ECB_Enc" /></p>
@@ -800,7 +849,7 @@
 <p><a href="https://ko.wikipedia.org/wiki/%EB%B8%94%EB%A1%9D_%EC%95%94%ED%98%B8_%EC%9A%B4%EC%9A%A9_%EB%B0%A9%EC%8B%9D#%EC%A0%84%EC%9E%90_%EC%BD%94%EB%93%9C%EB%B6%81_(ECB)">이미지 출처</a></p>
 
 <ul>
-  <li>가장 단순한 모드</li>
+  <li><strong>가장 단순한 모드</strong></li>
   <li>평문을 일정한 블록단위로 나누어 순차적으로 암호화하는 구조</li>
   <li>DES : 64Bit, AES : 128Bit</li>
   <li>각각의 블록은 독립적 -&gt; 특정 블록의 에러가 다른 블록에 영향을 주지 않음</li>
@@ -812,7 +861,7 @@
 <p><a href="https://ko.wikipedia.org/wiki/%EB%B8%94%EB%A1%9D_%EC%95%94%ED%98%B8_%EC%9A%B4%EC%9A%A9_%EB%B0%A9%EC%8B%9D#%EC%A0%84%EC%9E%90_%EC%BD%94%EB%93%9C%EB%B6%81_(ECB)">이미지 출처</a></p>
 
 <ul>
-  <li>한 개의 블록만 해독이 되면 나머지 블록 또한 해독되는 단점</li>
+  <li><strong>한 개의 블록만 해독이 되면 나머지 블록 또한 해독되는 단점</strong></li>
 </ul>
 
 <h3 id="2-cbccipher-block-chaining-mode">2. CBC(Cipher Block Chaining) Mode</h3>
@@ -823,11 +872,11 @@
 
 <ul>
   <li>ECB 모드와 동일한 방법으로 평문을 일정한 블록단위로 나눔</li>
-  <li>최초 키의 생성 버퍼로 IV(Initialization Vector)가 사용되어 첫 번째 블록과 XOR 연산을 통해 암호화가 됨</li>
+  <li><strong>최초 키의 생성 버퍼로 IV(Initialization Vector)가 사용</strong>되어 첫 번째 블록과 XOR 연산을 통해 암호화가 됨</li>
   <li>IV는 나누어진 일정한 블록 중 하나가 되거나 단위 블록과 길이가 같은 임의의 값이 될 수 있음</li>
   <li>두 번째 블록부터는 첫 번째 블록의 암호화된 블록과 XOR 연산을 하여 암호화가 진행됨</li>
   <li>암호문 한 개의 블록에서 에러 발생 시 현재 복호화 되는 평문 블록과 다음 복호화되는 평문 블록에 영향을 줌</li>
-  <li>블록 암호화 모드 중 보안이 가장 강력한 암호화 모드로 평가되며 가장 많이 사용</li>
+  <li>블록 암호화 모드 중 <strong>보안이 가장 강력한 암호화 모드</strong>로 평가되며 가장 많이 사용</li>
   <li>ECB와 동일하게 배수를 맞추기 위한 패딩을 추가하여 크기를 맞춰야 함.</li>
 </ul>
 
@@ -847,8 +896,8 @@
 
 <ul>
   <li>ECB, CBC와 달리 평문과 암호문의 길이가 같음.</li>
-  <li>패딩을 추가하지 않고 블록단위 암호화를 스트림 암호화 방식으로 구성하여 Bit 단위로 암호화를 수행 (패딩이 필요 없음, 암호문에 대해서 암호화를 반복하면 평문이 됨) 하기 때문</li>
-  <li>CBC와 마찬가지로 IV가 사용되고, 암호화는 순차적으로 처리하며 복호화는 병렬처리가 가능</li>
+  <li><strong>패딩을 추가하지 않고 블록단위 암호화를 스트림 암호화 방식으로 구성하여 Bit 단위로 암호화를 수행</strong> (패딩이 필요 없음, 암호문에 대해서 암호화를 반복하면 평문이 됨) 하기 때문</li>
+  <li>CBC와 마찬가지로 IV가 사용되고, <strong>암호화는 순차적</strong>으로 처리하며 <strong>복호화는 병렬처리</strong>가 가능</li>
 </ul>
 
 <p><img src="/assets/images/posts/Cfb_decryption.png" alt="CFB_Dec" /></p>
@@ -867,7 +916,7 @@
 
 <ul>
   <li>CFB와 동일하게 평문과 암호문의 길이가 같음</li>
-  <li>패딩을 추가하지 않고 블록단위 암호화를 스트림 암호화 방식으로 구성</li>
+  <li><strong>패딩을 추가하지 않고 블록단위 암호화를 스트림 암호화 방식</strong>으로 구성</li>
   <li>암호화 함수는 키의 생성시에만 사용됨</li>
 </ul>
 
@@ -878,8 +927,8 @@
 <ul>
   <li>암호화와 복호화의 방법이 동일, 암호문을 다시 암호화하면 평문이 나옴</li>
   <li>최초 키의 생성 버퍼로 IV가 사용됨</li>
-  <li>암호문 한 개의 블록에서 에러 발생 시 현재 복호화되는 평문 블록에만 영향을 줌</li>
-  <li>영상 데이터, 음성 데이터와 같은 디지털화된 아날로그(Digitized analog) 신호에 주로 사용됨.</li>
+  <li><strong>암호문 한 개의 블록에서 에러 발생 시 현재 복호화되는 평문 블록에만 영향을 줌</strong></li>
+  <li><strong>영상 데이터, 음성 데이터와 같은 디지털화된 아날로그(Digitized analog) 신호에 주로 사용</strong>됨.</li>
 </ul>
 
 <h3 id="5-ctrcounter-mode">5. CTR(CounTeR) Mode</h3>
@@ -890,7 +939,7 @@
 
 <ul>
   <li>평문블록과 키스트림을 XOR 연산하여 암호문을 만듦</li>
-  <li>키 스트림은 암호화 시마다 1씩 증가하는 카운터를 암호화한 Bit열</li>
+  <li><strong>키 스트림은 암호화 시마다 1씩 증가하는 카운터를 암호화한 Bit열</strong></li>
   <li>암호화와 복호화 방법이 동일하므로 구현이 간단</li>
   <li>블록의 암호화 순서가 임의의 순서가 될 수 있음 -&gt; 병렬처리 가능</li>
   <li>OFB와 마찬가지로 암호문 블록의 에러 발생 시, 한 개의 평문 블록에만 영향을 줌.</li>
@@ -966,7 +1015,7 @@
 
 <h2 id="4-aesadvanced-encryption-standard">4. AES(Advanced Encryption Standard)</h2>
 <ul>
-  <li>AES(Advanced Encryption Standard)
+  <li><strong>AES(Advanced Encryption Standard)</strong>
     <ul>
       <li>Rijindael 알고리즘</li>
     </ul>
@@ -980,7 +1029,7 @@
       <li>미국 연방표준 알고리즘</li>
       <li>DES를 대신하는 차세대 표준 암호화 알고리즘</li>
       <li>미국 상무성 산하 NIST(National Institute of Standards and Technology) 표준 알고리즘</li>
-      <li>블록길이는 128Bit, 192Bit, 256Bit 의 3종류로 구성됨</li>
+      <li>블록길이는 <strong>128Bit, 192Bit, 256Bit 의 3종류로 구성</strong>됨</li>
     </ul>
   </li>
   <li>AES 특징
@@ -1017,7 +1066,7 @@
         </tr>
         <tr>
           <td style="text-align: left">블록 암호화</td>
-          <td style="text-align: left">128Bit 길이 블록단위 암호화, 16Round</td>
+          <td style="text-align: left"><strong>128Bit 길이 블록단위 암호화</strong>, 16Round</td>
         </tr>
         <tr>
           <td style="text-align: left">암호화 방식</td>
@@ -1073,35 +1122,35 @@
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">DES</td>
+      <td style="text-align: left"><strong>DES</strong></td>
       <td style="text-align: left">64Bit</td>
       <td style="text-align: left">56Bit</td>
       <td style="text-align: left">16</td>
       <td style="text-align: left">키 길이가 짧아 해독이 용이</td>
     </tr>
     <tr>
-      <td style="text-align: left">3DES</td>
+      <td style="text-align: left"><strong>3DES</strong></td>
       <td style="text-align: left">64Bit</td>
       <td style="text-align: left">168Bit</td>
       <td style="text-align: left">48</td>
       <td style="text-align: left">DES의 Round 수를 늘려 보안성을 강화</td>
     </tr>
     <tr>
-      <td style="text-align: left">AES</td>
+      <td style="text-align: left"><strong>AES</strong></td>
       <td style="text-align: left">128Bit</td>
       <td style="text-align: left">128/192/256Bit</td>
       <td style="text-align: left">10/12/14</td>
       <td style="text-align: left">미국 표준 암호화 알고리즘</td>
     </tr>
     <tr>
-      <td style="text-align: left">IDEA</td>
+      <td style="text-align: left"><strong>IDEA</strong></td>
       <td style="text-align: left">64Bit</td>
       <td style="text-align: left">128Bit</td>
       <td style="text-align: left">8</td>
       <td style="text-align: left">암호화 강도가 DES 보다 강하고, 2배 빠름</td>
     </tr>
     <tr>
-      <td style="text-align: left">SEED</td>
+      <td style="text-align: left"><strong>SEED</strong></td>
       <td style="text-align: left">128Bit</td>
       <td style="text-align: left">128Bit</td>
       <td style="text-align: left">16</td>
@@ -1151,7 +1200,7 @@
 
 <h3 id="3-국내에서-개발한-암호화-알고리즘-종류">3. 국내에서 개발한 암호화 알고리즘 종류</h3>
 <ul>
-  <li>HIGHT
+  <li><strong>HIGHT</strong>
     <ul>
       <li>HIGh security and light weigHT</li>
       <li>RFID, USN 등과 같이 저전력, 경량화를 요구하는 컴퓨팅 환경에서 기밀성을 제공</li>
@@ -1159,21 +1208,21 @@
       <li>KISA, ETRI, 고려대학교 공동 개발</li>
     </ul>
   </li>
-  <li>ARIA
+  <li><strong>ARIA</strong>
     <ul>
       <li>경량 환경 및 하드웨어 구현을 위해서 최적화된 Involutional SPN 구조를 가지는 범용 블록 암호화 알고리즘</li>
       <li>128Bit 블록</li>
       <li>128/192/256 Bit 키 길이</li>
     </ul>
   </li>
-  <li>LEA
+  <li><strong>LEA</strong>
     <ul>
       <li>Lightweight Encryption Algorithm</li>
       <li>빅데이터, 클라우드 등 고속 환경 및 모바일 기기 등 경량 환경에서 기밀성 제공</li>
       <li>128Bit 블록 암호화 알고리즘</li>
     </ul>
   </li>
-  <li>LSH 해시함수
+  <li><strong>LSH 해시함수</strong>
     <ul>
       <li>메시지 인증, 사용자 인증, 전자서명 등 다양한 암호 응용분야에서 활용 가능한 암호학적 해시함수</li>
     </ul>
@@ -1181,7 +1230,7 @@
 </ul>
 
 <h1 id="암호분석-방법">암호분석 방법</h1>
-<h2 id="1-암호분석-방법의-종류">1. <strong>암호분석 방법의 종류</strong></h2>
+<h2 id="1-암호분석-방법의-종류">1. 암호분석 방법의 종류</h2>
 
 <table>
   <thead>
@@ -1192,20 +1241,20 @@
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">암호문 단독 공격 (COA, Ciphertext only Attack)</td>
-      <td style="text-align: left"><ul><li>암호 해독자에게 가장 불리한 방법</li><li>공격자는 단지 암호문만을 가지고 공격</li><li>암호문으로부터 평문이나 암호키를 찾아내는 방법으로 통계적 성질과 문장의 특성등을 추정하여 해독</li></ul></td>
+      <td style="text-align: left"><strong>암호문 단독 공격 (COA, Ciphertext only Attack)</strong></td>
+      <td style="text-align: left">⦁ 암호 해독자에게 가장 불리한 방법<br />⦁ 공격자는 <strong>단지 암호문만을 가지고 공격</strong><br />⦁ 암호문으로부터 평문이나 암호키를 찾아내는 방법으로 <strong>통계적 성질과 문장의 특성등을 추정하여 해독</strong></td>
     </tr>
     <tr>
-      <td style="text-align: left">알려진 평문 공격 (KPA, Known Plaintext Attack)</td>
-      <td style="text-align: left"><ul><li>암호문에 대응하는 일부 평문이 가용한 상황에서의 공격, 선형 공격</li><li>공격자는 약간의 평문에 대응하는 암호문을 가지고 있는 상태에서 나머지 암호문에 대한 공격을 하는 방법으로 이미 입수한 암호문의 관계를 이용하여 새로운 암호문을 해독하는 방법</li></ul></td>
+      <td style="text-align: left"><strong>알려진 평문 공격 (KPA, Known Plaintext Attack)</strong></td>
+      <td style="text-align: left">⦁ <strong>암호문에 대응하는 일부 평문이 가용한 상황에서의 공격</strong>, 선형 공격<br />⦁ 공격자는 약간의 평문에 대응하는 암호문을 가지고 있는 상태에서 나머지 암호문에 대한 공격을 하는 방법으로 이미 입수한 암호문의 관계를 이용하여 새로운 암호문을 해독하는 방법</td>
     </tr>
     <tr>
-      <td style="text-align: left">선택 평문 공격 (CPA, Chosen Plaintext Attack)</td>
-      <td style="text-align: left"><ul><li>평문을 선택하면 대응되는 암호문을 얻을 수 있는 상황에서의 공격</li><li>공격자가 사용된 암호기에 접근할 수 있을 때 사용하는 공격 방법</li><li>적당한 평문을 선택하여 그 평문에 대응하는 암호문을 얻을 수 있음</li></ul></td>
+      <td style="text-align: left"><strong>선택 평문 공격 (CPA, Chosen Plaintext Attack)</strong></td>
+      <td style="text-align: left">⦁ <strong>평문을 선택하면 대응되는 암호문을 얻을 수 있는 상황에서의 공격</strong><br />⦁ 공격자가 사용된 암호기에 접근할 수 있을 때 사용하는 공격 방법<br />⦁ 적당한 평문을 선택하여 그 평문에 대응하는 암호문을 얻을 수 있음</td>
     </tr>
     <tr>
-      <td style="text-align: left">선택 암호문 공격 (CCA, Chosen Ciphertext Attack)</td>
-      <td style="text-align: left"><ul><li>암호문을 선택하면 대응되는평문을 얻을 수 있는 상태에서의 공격</li><li>적당한 암호문을 선택하고 그에 대응하는 평문을 얻을 수 있다.</li></ul></td>
+      <td style="text-align: left"><strong>선택 암호문 공격 (CCA, Chosen Ciphertext Attack)</strong></td>
+      <td style="text-align: left">⦁ <strong>암호문을 선택하면 대응되는 평문을 얻을 수 있는 상태에서의 공격</strong><br />⦁ 적당한 암호문을 선택하고 그에 대응하는 평문을 얻을 수 있다.</td>
     </tr>
   </tbody>
 </table>
@@ -1215,21 +1264,25 @@
 <ul>
   <li>최초의 공개키 암호화 알고리즘</li>
   <li>1976년 미국 스탠퍼드 대학 연구원 W.Diffie와 M.Hellman이 공동으로 개발한 암호화 방식</li>
-  <li>공개키는 1개의 정수와 1개의 소수로 통신 직전에 통신하고자 하는 상대방과 공유</li>
+  <li><strong>공개키는 1개의 정수와 1개의 소수로 통신 직전에 통신하고자 하는 상대방과 공유</strong></li>
   <li>다른 비밀키 전용의 숫자는 양쪽에서 각각 보유하도록 하여 이들과 공개키의 수치를 사용하여 공통 암호키용 수치를 산출하는 방식</li>
-  <li>IPSEC에서 IKE(Inter Key Exchange)의 디폴트 키 교환 알고리즘으로 채택됨</li>
-  <li>중간자 공격(MITM, Man-in-the-middle) 공격에 취약한 문제점을 가짐</li>
+  <li>IPSEC에서 <strong>IKE(Inter Key Exchange)의 디폴트 키 교환 알고리즘</strong>으로 채택됨</li>
+  <li><strong>중간자 공격(MITM, Man-in-the-middle) 공격에 취약</strong>한 문제점을 가짐</li>
 </ul>
 
 <h2 id="2-diffie-hellman-키-교환-과정">2. Diffie-Hellman 키 교환 과정</h2>
 <ul>
-  <li>송신자 A는 소수 P, 그리고 1부터 p-1까지의 정수 g를 선택하여 사전에 수신자 B와 공유</li>
-  <li>송신자 A는 정수 a를 선택(정수 a는 외부 미공개, 수신자 B도 알 수 없음)</li>
-  <li>송신자 A는 g^a mod p, 즉 g^a를 p로 나눈 나머지를 계산</li>
-  <li>수신자 B도 마찬가지로 정수 b를 선택, B=g^b mod p 를 계산</li>
-  <li>송신자 A와 수신자 B가 서로에게 A와 B를 전송</li>
-  <li>송신자 A가 B^a mod p, 수신자 B가 A^b mod p를 계산</li>
-  <li>마지막 단계에서 B^a = (g^b)^a = (g^a)^b, A^b = (g^a)^b = g^ab 이며, 따라서 K=g^ab mod p 라는 공통의 비밀키가 공유됨</li>
+  <li><strong>키 교환 과정</strong>
+    <ul>
+      <li>송신자 A는 소수 P, 그리고 1부터 p-1까지의 정수 g를 선택하여 사전에 수신자 B와 공유</li>
+      <li>송신자 A는 정수 a를 선택(정수 a는 외부 미공개, 수신자 B도 알 수 없음)</li>
+      <li>송신자 A는 g^a mod p, 즉 g^a를 p로 나눈 나머지를 계산</li>
+      <li>수신자 B도 마찬가지로 정수 b를 선택, B=g^b mod p 를 계산</li>
+      <li>송신자 A와 수신자 B가 서로에게 A와 B를 전송</li>
+      <li>송신자 A가 B^a mod p, 수신자 B가 A^b mod p를 계산</li>
+      <li>마지막 단계에서 B^a = (g^b)^a = (g^a)^b, A^b = (g^a)^b = g^ab 이며, 따라서 K=g^ab mod p 라는 공통의 비밀키가 공유됨</li>
+    </ul>
+  </li>
 </ul>
 
 <h1 id="혼합-암호화">혼합 암호화</h1>
@@ -1288,13 +1341,13 @@
   </li>
 </ul>
 
-<h1 id="rsarivest-shamir-adelman"><strong>RSA(Rivest, Shamir, Adelman)</strong></h1>
+<h1 id="rsarivest-shamir-adelman">RSA(Rivest, Shamir, Adelman)</h1>
 <h2 id="1-rsa-개념-및-특징">1. RSA 개념 및 특징</h2>
 <ul>
   <li>1976년 공개키 암호 방식의 개념 등장 이후에 1978년 Rivest, Shamir, Adelman 이 개발한 암호화 방식</li>
-  <li>대표적인 공개키 암호화 방식으로 De-Facto Standard(산업표준)이다.</li>
-  <li>소인수분해의 어려움을 기반으로 안정성을 제공한다.</li>
-  <li>암호화 및 디지털 서명 용도로 사용이 가능하다.</li>
+  <li>대표적인 공개키 암호화 방식으로 <strong>De-Facto Standard(산업표준)</strong>이다.</li>
+  <li><strong>소인수분해의 어려움을 기반</strong>으로 안정성을 제공한다.</li>
+  <li><strong>암호화 및 디지털 서명 용도</strong>로 사용이 가능하다.</li>
 </ul>
 
 <h2 id="2-rsa-암호화-및-복호화-과정">2. RSA 암호화 및 복호화 과정</h2>
@@ -1303,13 +1356,13 @@
 
 <p><a href="https://hackernoon.com/how-does-rsa-work-f44918df914b">이미지 출처</a></p>
 
-<p>A와 B가 보안이 보장되어 있지 않은 환경에서 서로 비밀 메시지를 주고 받고 싶다고 가정하자. B가 A에게 메시지를 전달하기 위해서는 A의 공개키가 필요하다. A는 아래와 같은 방법을 통해 그만의 공개키와 개인키를 제작한다.</p>
+<p><strong>A와 B가 보안이 보장되어 있지 않은 환경에서 서로 비밀 메시지를 주고 받고 싶다고 가정하자. B가 A에게 메시지를 전달하기 위해서는 A의 공개키가 필요하다. A는 아래와 같은 방법을 통해 그만의 공개키와 개인키를 제작한다.</strong></p>
 
 <p><img src="/assets/images/posts/rsa_formula.png" alt="RSA Formula" /></p>
 
 <p><a href="https://ko.wikipedia.org/wiki/RSA_%EC%95%94%ED%98%B8">이미지 출처</a></p>
 
-<p>A의 공개키는 위에서 구한 두 개의 숫자로 이루어진 &lt;N, e&gt;이고, 개인키는 &lt;N, d&gt;이다. A는 &lt;N, e&gt;만을 B에게 공개하고, B는 이 공개키를 사용하여 자신의 메시지를 암호화하게 된다. 여기서 p와 q의 보안은 매우 중요하다. 이를 가지고 d와 e의 계산이 가능하기 때문이다. 그리하여 공개키와 개인키가 생성이 된 후에는 이 두 숫자를 지워버리는 것이 안전하다.</p>
+<p><strong>A의 공개키는 위에서 구한 두 개의 숫자로 이루어진 &lt;N, e&gt;이고, 개인키는 &lt;N, d&gt;이다. A는 &lt;N, e&gt;만을 B에게 공개하고, B는 이 공개키를 사용하여 자신의 메시지를 암호화하게 된다. 여기서 p와 q의 보안은 매우 중요하다. 이를 가지고 d와 e의 계산이 가능하기 때문이다. 그리하여 공개키와 개인키가 생성이 된 후에는 이 두 숫자를 지워버리는 것이 안전하다.</strong></p>
 
 <h2 id="3-rsa-안전성-확보">3. RSA 안전성 확보</h2>
 
@@ -1323,7 +1376,7 @@
   <tbody>
     <tr>
       <td style="text-align: left">소수 선택</td>
-      <td style="text-align: left"><ul><li>p, q는 거의 같은 크기의 소수여야 안전함</li><li>p-1, q-1은 큰 소수를 인수로 가져야 안전함</li><li>p-1, q-1의 최대 공약수는 작아야 안전함</li></ul></td>
+      <td style="text-align: left">⦁ p, q는 거의 같은 크기의 소수여야 안전함<br />⦁ p-1, q-1은 큰 소수를 인수로 가져야 안전함<br />⦁ p-1, q-1의 최대 공약수는 작아야 안전함</td>
     </tr>
     <tr>
       <td style="text-align: left">키 사이즈</td>
@@ -1335,9 +1388,9 @@
 <h1 id="해시hash함수"><strong>해시(Hash)함수</strong></h1>
 <h2 id="1-해시hash-알고리즘-특징">1. 해시(Hash) 알고리즘 특징</h2>
 <ul>
-  <li>키가 없고 복호화가 불가능한 특징을 가지는 암호화 방식, 일방향 암호 기술</li>
-  <li>MD(Message Digest)는 결성만 제공하는 메커니즘</li>
-  <li>다양한 길이의 입력을 고정된 짧은 길이의 출력으로 변환하는 함수(고정 길이 출력: 128Bit, 160Bit, 256Bit 등)</li>
+  <li><strong>키가 없고 복호화가 불가능한 특징을 가지는 암호화 방식, 일방향 암호 기술</strong></li>
+  <li><strong>MD(Message Digest)는 무결성만 제공</strong>하는 메커니즘</li>
+  <li><strong>다양한 길이의 입력을 고정된 짧은 길이의 출력으로 변환</strong>하는 함수(고정 길이 출력: 128Bit, 160Bit, 256Bit 등)</li>
   <li>표현 방식 : y=h(x)에서 x 는 가변 길이의 메시지, y는 해시함수를 통해서 생성, h는 해시값(Hash code)을 생성</li>
 </ul>
 
@@ -1356,7 +1409,7 @@
       <td style="text-align: left">임의 길이의 평문을 고정된 길이의 출력 값으로 변환함</td>
     </tr>
     <tr>
-      <td style="text-align: left">일방향 (One Way Function, 선이미지 회피성)</td>
+      <td style="text-align: left"><strong>일방향</strong> (One Way Function, <strong>선이미지 회피성</strong>)</td>
       <td style="text-align: left">매시지에서 해시값(Hash code)을 구하는 것은 쉽지만 반대로 해시값에서 원래 메시지를 구하는 것은 매우 어려움(역방향 계산 불가능)</td>
     </tr>
     <tr>
@@ -1364,12 +1417,12 @@
       <td style="text-align: left">메시지로부터 h(메시지)를 구하는 데 많은 자원과 노력이 소요되지 않아야 함</td>
     </tr>
     <tr>
-      <td style="text-align: left">충돌회피 (Collision free, 강한 충돌회피성)</td>
-      <td style="text-align: left"><ul><li>다른 문장을 사용하였는데도 동일한 암호문이 나오는 현상</li><li>h(M1)=h(M2)인 서로 다른 M1과 M2를 구하기는 계산상 불가능해야 함</li></ul></td>
+      <td style="text-align: left"><strong>충돌회피</strong> (Collision free, <strong>강한 충돌회피성</strong>)</td>
+      <td style="text-align: left">⦁ 다른 문장을 사용하였는데도 동일한 암호문이 나오는 현상<br />⦁ h(M1)=h(M2)인 서로 다른 M1과 M2를 구하기는 계산상 불가능해야 함</td>
     </tr>
     <tr>
-      <td style="text-align: left">2차 선이미지 회피성</td>
-      <td style="text-align: left"><ul><li>어떤 블록 x에 대해서 H(y)=H(x)인 y != x인 것을 찾는 것이 계산적으로 불가능해야 함</li><li>약한 충돌 회피성</li></ul></td>
+      <td style="text-align: left"><strong>2차 선이미지 회피성</strong></td>
+      <td style="text-align: left">⦁ 어떤 블록 x에 대해서 H(y)=H(x)인 y != x인 것을 찾는 것이 계산적으로 불가능해야 함<br />⦁ <strong>약한 충돌 회피성</strong></td>
     </tr>
   </tbody>
 </table>
@@ -1392,15 +1445,15 @@
   <tbody>
     <tr>
       <td style="text-align: left">MD2</td>
-      <td style="text-align: left"><ul><li>Rivest 가 개발한 것으로 8Bit 컴퓨터를 위해 고안됨</li><li>매우 안전하지만 계산할 때 많은 시간이 걸림</li><li>128Bit의 출력 해시값을 생성</li></ul></td>
+      <td style="text-align: left">⦁ Rivest 가 개발한 것으로 8Bit 컴퓨터를 위해 고안됨<br />⦁ 매우 안전하지만 계산할 때 많은 시간이 걸림<br />⦁ 128Bit의 출력 해시값을 생성</td>
     </tr>
     <tr>
       <td style="text-align: left">MD4</td>
-      <td style="text-align: left"><ul><li>Rivest 가 개발, MD2 보다 메시지 압축 속도가 빠름</li><li>속도가 빠른 반면 안정성이 떨어짐</li><li>128Bit 출력 해시값 생성</li></ul></td>
+      <td style="text-align: left">⦁ Rivest 가 개발, MD2 보다 메시지 압축 속도가 빠름<br />⦁ 속도가 빠른 반면 안정성이 떨어짐<br />⦁ 128Bit 출력 해시값 생성</td>
     </tr>
     <tr>
       <td style="text-align: left">MD5</td>
-      <td style="text-align: left"><ul><li>Rivest 가 개발, 안정성이 떨어지는 MD4 알고리즘을 수정하여 만듦</li><li>128Bit의 출력 해시 값을 생성</li></ul></td>
+      <td style="text-align: left">⦁ Rivest 가 개발, 안정성이 떨어지는 MD4 알고리즘을 수정하여 만듦<br />⦁ 128Bit의 출력 해시 값을 생성</td>
     </tr>
     <tr>
       <td style="text-align: left">SHA</td>
@@ -1444,13 +1497,14 @@
 <h2 id="5-생일자-공격birthday-attacks">5. 생일자 공격(Birthday Attacks)</h2>
 <ul>
   <li>23명 중에서 같은 생일을 가지는 사람이 두 사람이나 그 이상이 있을 확률은 1/2보다 크다는 결과이다.</li>
-  <li>생일자 역설을 근거로 한 해시함수의 최소 비트는 160비트 이상이 되어야 한다.</li>
+  <li>생일자 역설을 근거로 한 <strong>해시함수의 최소 비트는 160비트 이상이 되어야 한다.</strong></li>
 </ul>
 
 <h2 id="6-랜덤-오라클-모델">6. 랜덤 오라클 모델</h2>
 <ul>
-  <li>가장 이상적인 해시함수 모델로 사용자가 원하는 대로 오라클의 크기를 변경해서 사용할 수 있다.</li>
+  <li><strong>가장 이상적인 해시함수 모델로 사용자가 원하는 대로 오라클의 크기를 변경해서 사용</strong>할 수 있다.</li>
 </ul>
+
 
         
       </section>
@@ -1624,10 +1678,8 @@
   개념
     
       정보보호 및 개인정보보호 관리체계(ISMS-P : Information Security Management System-Personal)
-    
-  
-
-</p>
+        
+          과학기술정보통신부가 공시한 “정보보호 관리...</p>
   </article>
 </div>
 
