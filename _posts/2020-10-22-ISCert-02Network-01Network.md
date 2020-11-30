@@ -47,13 +47,13 @@ toc: true
 
 |OSI 7계층|주요 내용|주요 프로토콜(매체)|
 |:---|:---|:---|
-|**7. Application(Gateway)**|⦁ 사용자 소프트웨어를 네트워크에 접근 가능하도록 함<br/>⦁ 사용자에게 최종 서비스를 제공|FTP, SNMP, HTTP, Mail, Telnet 등|
+|**7. Application**<br/>**(Gateway)**|⦁ 사용자 소프트웨어를 네트워크에 접근 가능하도록 함<br/>⦁ 사용자에게 최종 서비스를 제공|FTP, SNMP, HTTP, Mail, Telnet 등|
 |**6. Presentation**|⦁ 포맷기능, 압축, 암호화<br/>⦁ 텍스트 및 그래픽 정보를 컴퓨터가 이해할 수 있는 16진수 데이터로 변환|⦁ 압축, 암호, 코드 변환<br/>⦁ GIF, ASCII, EBCDIC|
 |**5. Session**|⦁ 세션 연결 및 동기화 수행, 통신 방식 결정<br/>⦁ 가상 연결을 제공하여 Login/Logout 수행|반이중, 전이중, 완전이중 결정|
 |**4. Transport**|⦁ 가상연결, 에러 제어, Data 흐름 제어, Segment 단위<br/>⦁ 두 개의 종단 간 End-to-End 데이터 흐름이 가능하도록 논리적 주소 연결<br/>⦁ 신뢰도, 품질보증, 오류탐지 및 교정 기능 제공<br/>⦁ 다중화(Multiplexing) 발생|TCP, UDP|
-|**3. Network(Router)**|⦁ 경로선택, 라우팅 수행, 논리적 주소 연결(IP)<br/>⦁ 데이터 흐름 조절, 주소 지정 메커니즘 구현<br/>⦁ 네트워크에서 노드에 전송되는 패킷 흐름을 통제하고, 상태 메시지가 네트워크 상에서 어떻게 노드로 전송되는가를 정의, Datagram(Packet) 단위|⦁ IP, ICMP, IGMP, ARP, RAPR<br/>⦁ 라우팅 프로토콜(RIP, OSPF, BGP)|
-|**2. Data Link(Switch, Bridge)**|⦁ 물리주소 결정, 에러 제어, 흐름 제어, 데이터 전송<br/>⦁ Frame 단위, 전송 오류를 처리하는 최초의 계층|⦁ 흐름 제어, 오류 제어(ARQ)<br/>⦁ 브릿지, PPTP, L2TP, HDLC<br/>⦁ Frame Relay|
-|**1. Physical(Repeater)**|⦁ 전기적, 기계적 연결 정의, 실제 Data Bit 전송<br/>⦁ Bit 단위, 전기적 신호, 전압구성, 케이블, 인터페이스 등을 구성<br/>⦁ Data Rates, line noise control, 동기화 기능 수행|매체: 동축케이블, 광섬유, Twisted Pair Cable|
+|**3. Network**<br/>**(Router)**|⦁ 경로선택, 라우팅 수행, 논리적 주소 연결(IP)<br/>⦁ 데이터 흐름 조절, 주소 지정 메커니즘 구현<br/>⦁ 네트워크에서 노드에 전송되는 패킷 흐름을 통제하고, 상태 메시지가 네트워크 상에서 어떻게 노드로 전송되는가를 정의, Datagram(Packet) 단위|⦁ IP, ICMP, IGMP, ARP, RAPR<br/>⦁ 라우팅 프로토콜(RIP, OSPF, BGP)|
+|**2. Data Link**<br/>**(Switch, Bridge)**|⦁ 물리주소 결정, 에러 제어, 흐름 제어, 데이터 전송<br/>⦁ Frame 단위, 전송 오류를 처리하는 최초의 계층|⦁ 흐름 제어, 오류 제어(ARQ)<br/>⦁ 브릿지, PPTP, L2TP, HDLC<br/>⦁ Frame Relay|
+|**1. Physical**<br/>**(Repeater)**|⦁ 전기적, 기계적 연결 정의, 실제 Data Bit 전송<br/>⦁ Bit 단위, 전기적 신호, 전압구성, 케이블, 인터페이스 등을 구성<br/>⦁ Data Rates, line noise control, 동기화 기능 수행|매체: 동축케이블, 광섬유, Twisted Pair Cable|
     
     - 다중화(Multiplexing) : 여러 개의 소캣으로부터 데이터를 수집하여 헤더를 붙여 전송
     - End-to-End : 7~4 계층, 송수신자 간의 에러 Control

@@ -280,17 +280,17 @@ toc: true
 ## 2. IPSEC Header 구조
 + **IPSEC 인증 및 암호화를 위한 헤더**
 
-|종류|설명|
-|:---|:---|
-|**AH(Authentication Header**)|⦁ **데이터 무결성과 IP 패킷의 인증을 제공, MAC 기반**<br/>⦁ Replay Attack으로부터 보호 기능(순서번호 사용)을 제공<br/>⦁ 인증 시 MD5, SHA-1 인증 알고리즘을 이용하여 Key 값과 IP 패킷의 데이터를 입력한 인증 값을 계산하여 인증 필드에 기록<br/>⦁ 수신자는 같은 키를 이용하여 인증 값을 검증|
-|**ESP(Encapsulating Security Payload)**|⦁ **전송 자료를 암호화하여 전송하고 수신자가 받으 자료를 복호화하여 수신**<br/>⦁ IP 데이터그램에서 제공하는 기능이며 데이터의 선택적 인증, 무결성, 기밀성, Replay Attack 방지를 위해 사용<br/>⦁ AH와 달리 암호화를 제공(대칭키, DES, 3-DES 알고리즘)<br/>⦁ TCP/UDP 등의 Transport 계층까지 암호화할 경우 Transport 모드<br/>⦁ 전체 IP 패킷에 대해 암호화할 경우 터널 모드를 사용|
+    |종류|설명|
+    |:---|:---|
+    |**AH(Authentication Header**)|⦁ **데이터 무결성과 IP 패킷의 인증을 제공, MAC 기반**<br/>⦁ Replay Attack으로부터 보호 기능(순서번호 사용)을 제공<br/>⦁ 인증 시 MD5, SHA-1 인증 알고리즘을 이용하여 Key 값과 IP 패킷의 데이터를 입력한 인증 값을 계산하여 인증 필드에 기록<br/>⦁ 수신자는 같은 키를 이용하여 인증 값을 검증|
+    |**ESP(Encapsulating Security Payload)**|⦁ **전송 자료를 암호화하여 전송하고 수신자가 받으 자료를 복호화하여 수신**<br/>⦁ IP 데이터그램에서 제공하는 기능이며 데이터의 선택적 인증, 무결성, 기밀성, Replay Attack 방지를 위해 사용<br/>⦁ AH와 달리 암호화를 제공(대칭키, DES, 3-DES 알고리즘)<br/>⦁ TCP/UDP 등의 Transport 계층까지 암호화할 경우 Transport 모드<br/>⦁ 전체 IP 패킷에 대해 암호화할 경우 터널 모드를 사용|
 
 + **IPSEC 키 관리**
 
-|종류|설명|
-|:---|:---|
-|**ISAKMP**|⦁ Internet Security Assiociation and Key Management Protocol<br/>⦁ **Security Association 설정, 협상, 변경, 삭제 등 SA 관리와 키 교환을 정의했으나 키 교환 메커니즘에 대한 언급은 없음**|
-|**IKE**|⦁ IKE(Internet Key Exchange) 메시지는 UDP 프로토콜을 사용해서 전달되면 출발지 및 도착지 주소는 500port를 사용하게 됨<br/>⦁ **키 교환 담당**|
+    |종류|설명|
+    |:---|:---|
+    |**ISAKMP**|⦁ Internet Security Assiociation and Key Management Protocol<br/>⦁ **Security Association 설정, 협상, 변경, 삭제 등 SA 관리와 키 교환을 정의했으나 키 교환 메커니즘에 대한 언급은 없음**|
+    |**IKE**|⦁ IKE(Internet Key Exchange) 메시지는 UDP 프로토콜을 사용해서 전달되면 출발지 및 도착지 주소는 500port를 사용하게 됨<br/>⦁ **키 교환 담당**|
 
 # OTP
 ## 1. OTP(One Time Password) 개요
@@ -358,11 +358,11 @@ toc: true
 
     |구성요소|세부 내용|
     |:---|:---|
-    |**비즈니스 프로세스(Business Process)**|⦁ 비즈니스 거래 절차에 대한 표준화된 방법<br/>⦁ 모델링을 통해서 비즈니스 프로세스를 표현하는 방법을 정의|
-    |**핵심 컴포넌트(Core Components)**|비즈니스에서 교환되는 전자문서를 재사용할 수 있도록 표준화 작업을 수행|
-    |**등록저장소(Registry Repository)**|⦁ 거래 당사자들에 의해 제출된 정보를 저장<br/>⦁ 메타 데이터 저장소|
-    |**거래 당사자(Trading Partners)**|⦁ 비즈니스 거래 당사자에 대한 정보 및 협업을 위한 프로파일<br/>⦁ 협업 규약 프로파일, 협업 규약 약정서|
-    |**전송,교환 및 패키징(Transport,Routing and Packaging)**|ebXML 메시지를 상호운영, 보안, 전달을 위한 표준|
+    |**비즈니스 프로세스**<br/>**(Business Process)**|⦁ 비즈니스 거래 절차에 대한 표준화된 방법<br/>⦁ 모델링을 통해서 비즈니스 프로세스를 표현하는 방법을 정의|
+    |**핵심 컴포넌트**<br/>**(Core Components)**|비즈니스에서 교환되는 전자문서를 재사용할 수 있도록 표준화 작업을 수행|
+    |**등록저장소**<br/>**(Registry Repository)**|⦁ 거래 당사자들에 의해 제출된 정보를 저장<br/>⦁ 메타 데이터 저장소|
+    |**거래 당사자**<br/>**(Trading Partners)**|⦁ 비즈니스 거래 당사자에 대한 정보 및 협업을 위한 프로파일<br/>⦁ 협업 규약 프로파일, 협업 규약 약정서|
+    |**전송,교환 및 패키징**<br/>**(Transport,Routing and Packaging)**|ebXML 메시지를 상호운영, 보안, 전달을 위한 표준|
 
 # Web Service와 XML(eXtensible Markup Language) 보안
 ## 1. 웹 서비스(Web Service) 개요
