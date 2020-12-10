@@ -165,11 +165,11 @@ toc: true
 
 ### 4. 침입탐지 시스템 분류
 
-|구분|**NIDS(Network based IDS)**|**HIDS(Host based IDS)**|
+|구분|NIDS(Network based IDS)|HIDS(Host based IDS)|
 |:---:|:---|:---|
-|동작|⦁ 네트워크에 흐르는 패킷들을 검사, 침입 판단<br/>⦁ 방화벽 외부의 DMZ나 방화벽 내부의 내부 네트워크 모두 배치 가능|⦁ 시스템 상에 설치, 사용자가 시스템에서 행하는 행위, 파일의 체크를 통해 침입 판단<br/>⦁ 주로 웹 서버, DB 서버 등의 중요 서버에 배치|
-|자료원|Promiscuous 모드로 동작하는 네트워크 카드나 스위치|시스템 로그, 시스템 콜, 이벤트 로그|
-|탐지 가능 공격|스캐닝, 서비스 거부 공격(DoS), 해킹|내부자에 의한 공격, 바이러스, 웜, 트로이목마, 백도어|
+|동작|⦁ **네트워크에 흐르는 패킷**들을 검사, 침입 판단<br/>⦁ 방화벽 외부의 DMZ나 방화벽 내부의 내부 네트워크 모두 배치 가능|⦁ **시스템 상에 설치**, 사용자가 시스템에서 행하는 행위, 파일의 체크를 통해 침입 판단<br/>⦁ 주로 웹 서버, DB 서버 등의 중요 서버에 배치|
+|자료원|**Promiscuous 모드로 동작하는 네트워크 카드나 스위치**|**시스템 로그, 시스템 콜, 이벤트 로그**|
+|탐지 가능 공격|**스캐닝, 서비스 거부 공격(DoS), 해킹**|**내부자에 의한 공격, 바이러스, 웜, 트로이목마, 백도어**|
 |장점|⦁ 네트워크 자원의 손실 및 패킷의 변조가 없음(캡처만 하기 때문)<br/>⦁ 거의 실시간으로 탐지가 가능함<br/>⦁ 감시 영역이 하나의 네트워크 서브넷으로서 HIDS에 비해 큼|⦁ 침입의 성공 여부 식별이 가능함<br/>⦁ 실제 해킹 및 해킹시도 판단이 용이<br/>⦁ 주로 S/W적으로 서버와 같은 시스템에 인스톨되며, 설치 및 관리가 간단함|
 |동작|⦁ 부가 장비가 필요함(스위치 등)<br/>⦁ 암호화된 패킷은 분석 불가<br/>⦁ False Positive가 높음<br/>⦁ 오탐으로 인해 정상적인 세션이 종료<br/>⦁ DoS의 경우 대응이 불가능(탐지만 가능)<br/>⦁ 능동적인 대응 기능 미비|⦁ 감시 영역이 하나의 시스템으로 한정됨<br/>⦁ 탐지 가능한 공격에 한계가 있음(주로 이벤트 로그로만 탐지)<br/>⦁ 오탐으로 인해 정상적인 사용자가 자신의 계정을 사용할 수 없는 문제|
 
@@ -306,11 +306,11 @@ toc: true
 
 ### 4. Snort 탐지
 * TCP SYN Flag 탐지
-    - `alert tcp any any -> any any (msg:"SYN Attack"; flags:S; threshold:type both, track by_src, count 10, secnods 20; sid:10000495;)`
+    - `alert tcp any any -> any any (msg:"SYN Attack"; flags:S; threshold:type both, track by_src, count 10, seconds 20; sid:10000495;)`
 * TCP ACK Flag 탐지
-    - `alert tcp any any -> any any (msg:"ACK Attack"; flags:A; threshold:type both, track by_src, count 10, secnods 20; sid:100000495;)`
+    - `alert tcp any any -> any any (msg:"ACK Attack"; flags:A; threshold:type both, track by_src, count 10, seconds 20; sid:100000495;)`
 * TCP NULL Flag 탐지
-    - `alert tcp any any -> any any (msg:"NULL Attack";flags:0; threshold:type both, track by_src, count 10, seconds 20.; sid:10000495;)`
+    - `alert tcp any any -> any any (msg:"NULL Attack";flags:0; threshold:type both, track by_src, count 10, seconds 20; sid:10000495;)`
 * Ping of Death
     - `alert icmp any any -> any any (msg:"Ping of Death"; fragbits:M; threshold:type both, track by_src, count 10, seconds 20;sid:10000495;)`
 * 특정 문자열 탐지

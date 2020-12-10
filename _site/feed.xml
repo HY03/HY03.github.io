@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-11-30T13:58:18+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Bluesplatter</title><subtitle>전문적이지 않은 정보들, 감상, 즉흥적인 내용들</subtitle><author><name>HY03</name><email>hyunik03@gmail.com</email></author><entry><title type="html">05.정보보호 관리 - 02.정보보호 관련 윤리 및 법규</title><link href="http://localhost:4000/is_certification/ISCert-05ISM-02IS_Law/" rel="alternate" type="text/html" title="05.정보보호 관리 - 02.정보보호 관련 윤리 및 법규" /><published>2020-10-28T12:00:00+09:00</published><updated>2020-10-28T12:00:00+09:00</updated><id>http://localhost:4000/is_certification/ISCert-05ISM-02IS_Law</id><content type="html" xml:base="http://localhost:4000/is_certification/ISCert-05ISM-02IS_Law/">&lt;h1 id=&quot;정보보호-및-개인정보보호법-체계&quot;&gt;정보보호 및 개인정보보호법 체계&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-12-10T11:28:28+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Bluesplatter</title><subtitle>전문적이지 않은 정보들, 감상, 즉흥적인 내용들</subtitle><author><name>HY03</name><email>hyunik03@gmail.com</email></author><entry><title type="html">05.정보보호 관리 - 02.정보보호 관련 윤리 및 법규</title><link href="http://localhost:4000/is_certification/ISCert-05ISM-02IS_Law/" rel="alternate" type="text/html" title="05.정보보호 관리 - 02.정보보호 관련 윤리 및 법규" /><published>2020-10-28T12:00:00+09:00</published><updated>2020-10-28T12:00:00+09:00</updated><id>http://localhost:4000/is_certification/ISCert-05ISM-02IS_Law</id><content type="html" xml:base="http://localhost:4000/is_certification/ISCert-05ISM-02IS_Law/">&lt;h1 id=&quot;정보보호-및-개인정보보호법-체계&quot;&gt;정보보호 및 개인정보보호법 체계&lt;/h1&gt;
 &lt;h2 id=&quot;1-개인정보보호원칙&quot;&gt;1. 개인정보보호원칙&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;
@@ -610,7 +610,7 @@
             &lt;tr&gt;
               &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
               &lt;td style=&quot;text-align: left&quot;&gt;(고유식별정보)여권번호, 외국인등록번호, 운전면허정보&lt;/td&gt;
-              &lt;td style=&quot;text-align: left&quot;&gt;{::nomarkdown}&amp;lt;ul&amp;gt;암호화 적용여부,적용범위를 정하여 시행&amp;lt;li&amp;gt;개인정보 영향평가 대상이 되는 공공 기관의 경우, 그 개인정보 영향평가의 결과&lt;br /&gt;⦁ 암호화 미적용 시 위험도 분석에 따른 결과&lt;/td&gt;
+              &lt;td style=&quot;text-align: left&quot;&gt;암호화 적용여부,적용범위를 정하여 시행&lt;br /&gt;⦁ 개인정보 영향평가 대상이 되는 공공 기관의 경우, 그 개인정보 영향평가의 결과&lt;br /&gt;⦁ 암호화 미적용 시 위험도 분석에 따른 결과&lt;/td&gt;
             &lt;/tr&gt;
             &lt;tr&gt;
               &lt;td style=&quot;text-align: left&quot;&gt;업무용 컴퓨터, 모바일기기에 저장 시&lt;/td&gt;
@@ -1020,7 +1020,7 @@
     &lt;ul&gt;
       &lt;li&gt;과학기술정보통신부장관은 제2항에 따라 인증을 받아야 하는 자가 과학기술정보통신부령으로 정하는 바에 따라 국제표준 정보보호 인증을 받거나 정보보호 조치를 취한 경우에는 제1항에 따른 인증 심사의 일부를 생략할 수 있다. 이 경우 인증 심사의 세부 생략 범위에 대해서는 과학기술정보통신부장관이 정하여 고시한다.&lt;/li&gt;
       &lt;li&gt;제1항에 따른 정보보호관리체계 인증의 유효기간은 3년으로 한다.&lt;/li&gt;
-      &lt;li&gt;정보보호 관리체계 인증기관 및 저보보호 관리체계 심사기관 지정의 기준,절차,유효기간 등에 필요한 사항은 대통령령으로 정한다.&lt;/li&gt;
+      &lt;li&gt;정보보호 관리체계 인증기관 및 정보보호 관리체계 심사기관 지정의 기준,절차,유효기간 등에 필요한 사항은 대통령령으로 정한다.&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;미인증 시 &lt;strong&gt;3,000만 원 이하 과태료&lt;/strong&gt;&lt;/li&gt;
@@ -1607,7 +1607,7 @@
   &lt;li&gt;&lt;strong&gt;읽어보기&lt;/strong&gt;&lt;/li&gt;
   &lt;li&gt;개인정보의 파기 : 개인정보의 보유기간 및 파기 관련 내부 정책을 수립하고 개인정보의 보유기간 경과, 처리목적 달성 등 파기 시점이 도달한 때에는 파기의 안전성 및 완전성이 보장될 수 있는 방법으로 지체 없이 파기하여야 한다.&lt;/li&gt;
   &lt;li&gt;처리목적 달성 후 보유 시 조치 : 개인정보의 보유기간 경과 또는 처리목적 달성 후에도 관련 법령 등에 따라 파기하지 아니하고 보존하는 경우에는 해당 목적에 필요한 최소한의 항목으로 제한하고 다른 개인정보와 분리하여 저장,관리하여야 한다.&lt;/li&gt;
-  &lt;li&gt;휴면 이용자 관리 : 서비스를 일정기간 동안 이용하지 안흔 휴면 이용자의 개인정보를 보호하기 위하여 관련 사항의 통지, 개인정보의 파기 또는 분리보관 등 적절한 보호조치를 이행하여야 한다.&lt;/li&gt;
+  &lt;li&gt;휴면 이용자 관리 : 서비스를 일정기간 동안 이용하지 않은 휴면 이용자의 개인정보를 보호하기 위하여 관련 사항의 통지, 개인정보의 파기 또는 분리보관 등 적절한 보호조치를 이행하여야 한다.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;5-정보주체-권리보호&quot;&gt;5. 정보주체 권리보호&lt;/h3&gt;
@@ -4308,37 +4308,7 @@
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;지식기반-인증&quot;&gt;지식기반 인증&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;패스워드&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;로그인 횟수 제한&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;마지막 로그인 시간 제공&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;무차별 공격 및 사전공격과 사회공학 공격에 취약&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;소유기반-인증&quot;&gt;소유기반 인증&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;OTP&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;동기식(시간,이벤트)&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;비동기식(질의응답)&lt;/strong&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;존재생체기반-인증&quot;&gt;존재(생체)기반 인증&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;생체인증&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;보편성, 유일성, 지속성, 성능, 수용성, 저항성&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;FRR(False Reject Rate) : 정상적인 사람을 거부함&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;FAR(False Acceptance Rate) : 비인가자를 정상적인 인가로 받아들임&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;CER(Cross over Error Rate)&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;접근-통제-기술-정책의-특징-및-적용-범위&quot;&gt;&lt;strong&gt;접근 통제 기술 정책의 특징 및 적용 범위&lt;/strong&gt;&lt;/h1&gt;
+&lt;h1 id=&quot;접근-통제-기술-정책의-특징-및-적용-범위&quot;&gt;접근 통제 기술 정책의 특징 및 적용 범위&lt;/h1&gt;
 &lt;h2 id=&quot;1-접근-통제-기술-개요&quot;&gt;1. 접근 통제 기술 개요&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;미국 국방성에서 기밀 분류 방법으로부터 유래하는 접근 통제 정책
@@ -4766,7 +4736,7 @@
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;이중 커널 구조&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;강제적 보안 기능을 갖는 데이터베이스 시스템으 구현하고, 이를 보안 운영체제와 함께 시스템의 TCB로 간주하여 보안 시스템을 평가&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;강제적 보안 기능을 갖는 데이터베이스 시스템을 구현하고, 이를 보안 운영체제와 함께 시스템의 TCB로 간주하여 보안 시스템을 평가&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;중복 구조&lt;/td&gt;
@@ -5600,7 +5570,7 @@
   &lt;li&gt;개요
     &lt;ul&gt;
       &lt;li&gt;잘못된 설정, 오래된 XML프로세서는 XML 문서 내에서 외부 개체를 참조함&lt;/li&gt;
-      &lt;li&gt;내부 시스템 스캔, 포트 스캔, 원격코드 실행, 서비스 거부 공격 데이터 추출 등의 작업 가능&lt;/li&gt;
+      &lt;li&gt;내부 시스템 스캔, 포트 스캔, 원격코드 실행, 서비스 거부 공격, 데이터 추출 등의 작업 가능&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;대응방안
@@ -5928,7 +5898,7 @@
   &lt;li&gt;&lt;strong&gt;크로스사이트스크립트&lt;/strong&gt; : 검증되지 않은 외부 입력 값에 의해 브라우저에서 악의적인 코드가 실행되는 보안 약점&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;운영체제 명령어 삽입&lt;/strong&gt; : 운영체제 명령어를 구성하는 외부 입력 값이 적잘한 필터링을 거치지 않고 쓰여서 공격자가 운영체제 명령어를 조작할 수 있는 보안 약점&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;위험한 형식 파일 업로드&lt;/strong&gt; : 파일의 확장자 등 파일 형식에 대한 검증 없이 업로드를 허용하여 발생하는 보안 약점&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;신뢰되지 않는 URL 주소로 자동 접속 연결&lt;/strong&gt; : 사용자의 입력 값 등 외부 입력 값이 링크 표현에 사용되고, 이 링크를 이용하여 악의적인 사이트로 리다이렉트(Redirect)되는 보안 약점&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;신뢰되지 않은 URL 주소로 자동 접속 연결&lt;/strong&gt; : 사용자의 입력 값 등 외부 입력 값이 링크 표현에 사용되고, 이 링크를 이용하여 악의적인 사이트로 리다이렉트(Redirect)되는 보안 약점&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;XQuery 삽입&lt;/strong&gt; : 사용자의 입력 값 등 외부 입력 값이 XQuery 표현에 삽입되어 악의적인 쿼리가 실행되는 보안 약점&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;XPath 삽입&lt;/strong&gt; : 사용자의 입력 값 등 외부 입력 값이 XPath 표현에 삽입되어 악의적인 쿼리가 실행되는 보안 약점&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;LDAP 삽입&lt;/strong&gt; : 검증되지 않은 입력 값을 사용해서 동적으로 생성된 LDAP문에 의해 악의적인 LDAP 명령이 실행되는 보안 약점&lt;/li&gt;
@@ -6013,7 +5983,7 @@
   &lt;li&gt;개요
     &lt;ul&gt;
       &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;WHERE ID = '1' ...&lt;/code&gt; : 1을 파라미터 입력한 정상 구문&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;WHERE ID = '' OR 1=1 #&lt;/code&gt;&lt;/strong&gt; : &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;' OR 1=1 #&lt;/code&gt;&lt;/strong&gt; 을 입력하여 공격&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;WHERE ID = '' OR 1=1 #&lt;/code&gt; : &lt;strong&gt;’ OR 1=1 #&lt;/strong&gt; 을 입력하여 공격&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;SQL Injection의 특징&lt;/strong&gt;
@@ -6371,50 +6341,6 @@
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;h1 id=&quot;ssosingle-sign-on&quot;&gt;SSO(Single Sign On)&lt;/h1&gt;
-&lt;h2 id=&quot;1-sso-개요&quot;&gt;1. SSO 개요&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;다수의 서비스를 한 번의 Login으로 기업의 업무 시스템이나 인터넷 서비스에 접속할 수 있게 해 주는 보안시스템&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;중앙집중형 접근 관리, 보안 기능 PKI(Public key Infrastructure), 암호화 기능&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;장점 : 보안성 우수, 사용자 편의성 증가, 패스워드 분실에 따른 관리자의 부담 감소&lt;/li&gt;
-  &lt;li&gt;단점 : SPOF(Single Point Of Failure)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;2-sso-통합인증&quot;&gt;2. SSO 통합인증&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/posts/sso-diagram.png&quot; alt=&quot;SSO&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://twiki.org/cgi-bin/view/Blog/BlogEntry201206x1&quot;&gt;이미지 출처&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;3-sso-종류&quot;&gt;3. SSO 종류&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;종류&lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;상세 내용&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;Delegation 방식&lt;/strong&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;대상 애플리케이션의 인증 방식을 변경하기 어려울 때 많이 사용. 대상 애플리케이션의 인증 방식을 전혀 변경하지 않고, 사용자의 대상 애플리케이션 인증 정보를 에이전트가 관리해 사용자 대신 로그온해 주는 방식&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;Propagation 방식&lt;/strong&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;통합인증을 수행하는 곳에서 인증을 받아 대상 애플리케이션으로 전달할 토큰을 발급받음. 대상 애플리케이션에 사용자가 접근할 때 토큰을 자동으로 전달해 대상 애플리케이션이 사용자를 확인할 수 있도록 하는 방식. 웹 환경에서 쿠키라는 기술을 이용해 토큰을 자동으로 대상 애플리케이션에 전달할 수도 있음. 이러한 웹 환경의 이점으로 웹 환경에서의 SSO는 대부분 이 모델을 채택함.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;Delegation &amp;amp; Propagation 방식&lt;/strong&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;웹 애플리케이션의 변경이 불가능하고 사용자 통합이 어려운 경우 Delegation 방식을 활용. 또한 대상 애플리케이션이 많고 특성들이 다양한 경우 각 애플리케이션에 Delegation 방식과 Propagtaion 방식을 혼용해서 전체 시스템의 SSO를 구성함.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;Web 기반 One Cookie Domain SSO&lt;/strong&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;SSO 대상 서비스와 애플리케이션들이 하나의 Cookie Domain 안에 존재할 때 사용. 일반적인 기업 내부의 컴퓨팅 환경. 통합인증을 받은 사용자는 토큰을 발급받고, 이 토큰은 Cookie Domain에 Cookie로 설정되어 Cookie Domain 내의 다른 서비스로 접근할 때 자동으로 토큰을 서비스에 제공함. 서비스에서 동작하는 SSO 에이전트는 토큰으로부터 사용자 신원을 확인하고 요청된 자원에 대한 접근을 허가함.&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
 
 &lt;h1 id=&quot;drm-기술-개념-및-활용&quot;&gt;DRM 기술 개념 및 활용&lt;/h1&gt;
 &lt;h2 id=&quot;1-drmdigital-rights-management-개요&quot;&gt;1. DRM(Digital Rights Management) 개요&lt;/h2&gt;
@@ -7288,7 +7214,7 @@
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;ESP(Encapsulating Security Payload)&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&quot;text-align: left&quot;&gt;⦁ &lt;strong&gt;전송 자료를 암호화하여 전송하고 수신자가 받으 자료를 복호화하여 수신&lt;/strong&gt;&lt;br /&gt;⦁ IP 데이터그램에서 제공하는 기능이며 데이터의 선택적 인증, 무결성, 기밀성, Replay Attack 방지를 위해 사용&lt;br /&gt;⦁ AH와 달리 암호화를 제공(대칭키, DES, 3-DES 알고리즘)&lt;br /&gt;⦁ TCP/UDP 등의 Transport 계층까지 암호화할 경우 Transport 모드&lt;br /&gt;⦁ 전체 IP 패킷에 대해 암호화할 경우 터널 모드를 사용&lt;/td&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;⦁ &lt;strong&gt;전송 자료를 암호화하여 전송하고 수신자가 받은 자료를 복호화하여 수신&lt;/strong&gt;&lt;br /&gt;⦁ IP 데이터그램에서 제공하는 기능이며 데이터의 선택적 인증, 무결성, 기밀성, Replay Attack 방지를 위해 사용&lt;br /&gt;⦁ AH와 달리 암호화를 제공(대칭키, DES, 3-DES 알고리즘)&lt;br /&gt;⦁ TCP/UDP 등의 Transport 계층까지 암호화할 경우 Transport 모드&lt;br /&gt;⦁ 전체 IP 패킷에 대해 암호화할 경우 터널 모드를 사용&lt;/td&gt;
         &lt;/tr&gt;
       &lt;/tbody&gt;
     &lt;/table&gt;
@@ -8444,7 +8370,7 @@
       &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;attacker.com    DISCARD&lt;/code&gt; : 수신 및 발신 모두를 폐기 (발신자에게 폐기통보 X)&lt;/li&gt;
       &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;useful.org      OK&lt;/code&gt; : 메일을 수신&lt;/li&gt;
       &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;201.1.1         RELAY&lt;/code&gt; : 201.1.1.0/24에서 발송되는 모든 메일의 수신 및 발신을 허용 (중계역할)&lt;/li&gt;
-      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;211.1.1         RELAY&lt;/code&gt; : 2101.1.1.0/24에서 발송되는 모든 메일의 수신 및 발신을 허용 (중계역할)&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;211.1.1         RELAY&lt;/code&gt; : 211.1.1.0/24에서 발송되는 모든 메일의 수신 및 발신을 허용 (중계역할)&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -8609,7 +8535,7 @@
   &lt;tbody&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;주요 디렉터리 및 파일 접근 권한&lt;/strong&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Root에 의해 실행 가능한 모든 명령어는 다른 사용자가 수정하지 못하도록 설정⦁ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;# chown 0. bin conf logs&lt;/code&gt;&lt;br /&gt;⦁ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;# chgrp 0. bin conf logs&lt;/code&gt;&lt;br /&gt;⦁ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#chmod 755 . bin conf logs&lt;/code&gt;&lt;br /&gt;⦁ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#chmod 511 /user/loca/httpd/bin/httpd&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Root에 의해 실행 가능한 모든 명령어는 다른 사용자가 수정하지 못하도록 설정⦁ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;# chown 0. bin conf logs&lt;/code&gt;&lt;br /&gt;⦁ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;# chgrp 0. bin conf logs&lt;/code&gt;&lt;br /&gt;⦁ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#chmod 755 . bin conf logs&lt;/code&gt;&lt;br /&gt;⦁ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#chmod 511 /user/local/httpd/bin/httpd&lt;/code&gt;&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;불필요한 파일 삭제&lt;/strong&gt;&lt;/td&gt;
@@ -8715,8 +8641,8 @@
       Options Indexes FollowSynLinks
       AllowOverride All
       Order Allow, Deny
-      Deny from all
-      Allow from 210.1.1.1
+      Deny from 210.1.1.1
+      Allow from all
   &amp;lt;/Directory&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;

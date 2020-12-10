@@ -283,7 +283,7 @@ toc: true
     |종류|설명|
     |:---|:---|
     |**AH(Authentication Header**)|⦁ **데이터 무결성과 IP 패킷의 인증을 제공, MAC 기반**<br/>⦁ Replay Attack으로부터 보호 기능(순서번호 사용)을 제공<br/>⦁ 인증 시 MD5, SHA-1 인증 알고리즘을 이용하여 Key 값과 IP 패킷의 데이터를 입력한 인증 값을 계산하여 인증 필드에 기록<br/>⦁ 수신자는 같은 키를 이용하여 인증 값을 검증|
-    |**ESP(Encapsulating Security Payload)**|⦁ **전송 자료를 암호화하여 전송하고 수신자가 받으 자료를 복호화하여 수신**<br/>⦁ IP 데이터그램에서 제공하는 기능이며 데이터의 선택적 인증, 무결성, 기밀성, Replay Attack 방지를 위해 사용<br/>⦁ AH와 달리 암호화를 제공(대칭키, DES, 3-DES 알고리즘)<br/>⦁ TCP/UDP 등의 Transport 계층까지 암호화할 경우 Transport 모드<br/>⦁ 전체 IP 패킷에 대해 암호화할 경우 터널 모드를 사용|
+    |**ESP(Encapsulating Security Payload)**|⦁ **전송 자료를 암호화하여 전송하고 수신자가 받은 자료를 복호화하여 수신**<br/>⦁ IP 데이터그램에서 제공하는 기능이며 데이터의 선택적 인증, 무결성, 기밀성, Replay Attack 방지를 위해 사용<br/>⦁ AH와 달리 암호화를 제공(대칭키, DES, 3-DES 알고리즘)<br/>⦁ TCP/UDP 등의 Transport 계층까지 암호화할 경우 Transport 모드<br/>⦁ 전체 IP 패킷에 대해 암호화할 경우 터널 모드를 사용|
 
 + **IPSEC 키 관리**
 

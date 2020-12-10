@@ -215,7 +215,7 @@ toc: true
 
 |대응 방안|내용|
 |:---|:---|
-|접속 임계치 설정을 통한 차단|발신 IP에서 연결할 수 있는 동시 접속 수에 대한 최댓값을 설정하여 한 개의 IP에서 대량의 연결 시도를 차단<br/>`iptables -A INPUT -p tcp -dport 80 -m connlimit-aboce 30 -j DROP`<br/># 30개 이상의 Concurrent Connection에 대한 차단|
+|접속 임계치 설정을 통한 차단|발신 IP에서 연결할 수 있는 동시 접속 수에 대한 최댓값을 설정하여 한 개의 IP에서 대량의 연결 시도를 차단<br/>`iptables -A INPUT -p tcp -dport 80 -m connlimit-above 30 -j DROP`<br/># 30개 이상의 Concurrent Connection에 대한 차단|
 |HTTP Request HOST 필드 값에<br/>대한 임계치 설정을 통한 차단|Hulk DoS는 URL을 계속 변경하기 때문에 URL이 아닌 HTTP Request에 포함된<br/>HOST 필드 값을 카운트하여 임계치 이상인 경우 차단함|
 |302-Redirect를 이용한 차단|⦁ 대부분의 DDoS 공격 툴은 302-Redirect 요청에 대해 반응하지 않는 것이 특징임<br/>⦁ URL 중에서 공격 당하기 쉬운 웹 사이트에 대한 Redirect 처리를 통해서 자동화된 DDoS 공격 툴을 이용한 공격을 사전에 차단|
 
@@ -281,6 +281,9 @@ toc: true
         + FIN Scan
         + Xmas Scan
         + Null Scan
+    - 로그가 남지 않음
+        + Port Open : 응답 X
+        + Port Close : RST
 * TCP Half Open Scan
     - TCP 연결 시에 SYN 패킷만 전송하고 응답 정보로 포트 오픈을 확인
     - 완전한 세션을 성립하지 않고 포트의 활성화를 확인, 로그가 남지 않음
@@ -298,6 +301,10 @@ toc: true
     - 공격자는 TCP NULL 패킷을 전송하여 포트 오픈을 확인
         + Port Open : NULL -> 응답 X
         + Port Close : NULL -> RST
+* ACK Scan
+    - 공격자는 TCP ACK 패킷을 전송하여 방화벽 필터링 여부를 알 수 있음 (unfiltered)
+        + Port Open : ACK -> RST
+        + Port Close : ACK -> RST
 * **TCP Fragmentation**
     - 20Byte의 헤더를 2개로 분할하여 보안장비의 탐지를 우회하는 방법
     - 첫 번째 패킷은 IP 주소 정보가 있고 두 번째 패킷은 Port 정보만 있음

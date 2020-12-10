@@ -112,7 +112,7 @@ toc: true
 + HTTP 프로토콜 개요
     * WWW(World Wide Web)로 시작되는 인터넷에서 웹 서버와 사용자의 인터넷 브라우저 사이에 문서를 전송하기 위해 사용되는 통신 프로토콜
     * **TCP 기반 프로토콜의 80번 Port 를 사용하고 Request 및 Response 구조를 가짐**
-    * **State-less 로 프로토콜을 구성함 (요청 / 응답 후 연결종료)w**
+    * **State-less 로 프로토콜을 구성함 (요청 / 응답 후 연결종료)**
 + **HTTP Version 1.0**
     * 연결을 수행할 때마다 3-Way handshaking 기법을 사용
     * HTML 페이지를 수신 받고 완전히 연결을 종료시킴
@@ -272,17 +272,17 @@ toc: true
 
 + **흐름 제어 (Flow Control)**
     * 송수신측 사이의 전송 패킷의 양, 속도를 조절하여 네트워크를 효율적으로 사용
-    * 수신자가 메시지를 제대로 받지 못하면 송신자가 전송 속도를 낮춤
-    * 수신자의 Buffer Overflow 를 방지
-    * 슬라이딩 윈도우(Sliding Window) (TCP)
-        - TCP 호스트 간 효율적 데이터전송을 위해 송수신 할 수 있는 Size 정보를 제공, Size를 맞춤 / Ack 를 묶어서 처리
-        - Stop-and-Wait의 단점을 보완한 방식으로 수신측의 확인 신호를 받지 않더라도 미리 정해진 프레임의 수만큼 연속적으로 전송
+    * **수신자가 메시지를 제대로 받지 못하면 송신자가 전송 속도를 낮춤**
+    * **수신자의 Buffer Overflow 를 방지**
+    * **슬라이딩 윈도우(Sliding Window) (TCP)**
+        - TCP 호스트 간 효율적 데이터전송을 위해 **송수신 할 수 있는 Size 정보를 제공**, Size를 맞춤 / Ack 를 묶어서 처리
+        - Stop-and-Wait의 단점을 보완한 방식으로 **수신측의 확인 신호를 받지 않더라도 미리 정해진 프레임의 수만큼 연속적으로 전송**
 + **혼잡제어 (Congestion Control)** 
-    * Router 가 처리할 수 있는 packet 양보다 더 많은 packet 전송 시 비효율
-    * TCP Slow Start
-        - TCP가 시작될 때 전송속도를 초기값부터 지속적으로 올리는 방법
-        - Receive Windows : 수신자의 윈도우 크기 (메모리 버퍼). 수신자의 버퍼 상태를 보고 전송속도를 조절
-        - Sender 에서 packet을 전송하는 비율과 Receiver 에서 수신된 ACK를 통해 congestion window(cwnd) 를 지수의 크기로 증가시키는 방법
+    * **Router** 가 처리할 수 있는 packet 양보다 더 많은 packet 전송 시 비효율
+    * **TCP Slow Start**
+        - TCP가 시작될 때 **전송속도를 초기값부터 지속적으로 올리는 방법**
+        - **Receive Windows** : **수신자의 윈도우 크기 (메모리 버퍼). 수신자의 버퍼 상태를 보고 전송속도를 조절**
+        - **Sender 에서 packet을 전송하는 비율**과 **Receiver 에서 수신된 ACK**를 통해 **congestion window(cwnd) 를 지수의 크기로 증가**시키는 방법
 + TCP 상태전이
     ![TCP Status Diagram](/assets/images/posts/tcp_status_diagram.gif)
 

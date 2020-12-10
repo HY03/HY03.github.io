@@ -75,11 +75,11 @@ toc: true
 
     | 종류 | 세부 내용 | 특징 |
     |:---|:---|:---|
-    | **Random | 교체될 page 를 임의 선정 | overhead 적음 |
+    | **Random** | 교체될 page 를 임의 선정 | overhead 적음 |
     | **FIFO <br/>(First in First Out)** | 캐시 내에 오래 있었던 page 교체 | 자주 사용되는 page가 교체될 우려 |
     | **LFU <br/>(Least Frequently Used)** | 사용 횟수가 가장 적은 page 교체 | 최근 적재된 page가 교체될 우려 |
     | **LRU <br/>(Least Recently Used)** | 가장 오랫동안 사용되지 않은 page 교체 | time stamping overhead 존재 |
-    | **Optimal | 향후 가장 참조되지 않을 page 교체 | 실현 불가능 |
+    | **Optimal** | 향후 가장 참조되지 않을 page 교체 | 실현 불가능 |
     | **NUR <br/>(Not Used Recently)** | 참조비트, 수정비트로 미사용 page 교체 | 최근 사용되지 않은 page 교체 |
     | **SCR <br/>(Second Chance Replacement)** | 최초 참조비트 1로 셋, 1인 경우 0으로 셋, 0인 경우 교체 | 기회를 한번 더 줌 |
 

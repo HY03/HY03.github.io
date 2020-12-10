@@ -221,7 +221,7 @@ toc: true
     * `attacker.com    DISCARD` : 수신 및 발신 모두를 폐기 (발신자에게 폐기통보 X)
     * `useful.org      OK` : 메일을 수신
     * `201.1.1         RELAY` : 201.1.1.0/24에서 발송되는 모든 메일의 수신 및 발신을 허용 (중계역할)
-    * `211.1.1         RELAY` : 2101.1.1.0/24에서 발송되는 모든 메일의 수신 및 발신을 허용 (중계역할)
+    * `211.1.1         RELAY` : 211.1.1.0/24에서 발송되는 모든 메일의 수신 및 발신을 허용 (중계역할)
 
 # 스팸메일(Spam Mail) 차단 방법
 ## 1. Spam Mail 차단 방법
@@ -303,7 +303,7 @@ toc: true
 
 |보안 설정|내용|
 |:---|:---|
-|**주요 디렉터리 및 파일 접근 권한**|Root에 의해 실행 가능한 모든 명령어는 다른 사용자가 수정하지 못하도록 설정⦁ `# chown 0. bin conf logs`<br/>⦁ `# chgrp 0. bin conf logs`<br/>⦁ `#chmod 755 . bin conf logs`<br/>⦁ `#chmod 511 /user/loca/httpd/bin/httpd`|
+|**주요 디렉터리 및 파일 접근 권한**|Root에 의해 실행 가능한 모든 명령어는 다른 사용자가 수정하지 못하도록 설정⦁ `# chown 0. bin conf logs`<br/>⦁ `# chgrp 0. bin conf logs`<br/>⦁ `#chmod 755 . bin conf logs`<br/>⦁ `#chmod 511 /user/local/httpd/bin/httpd`|
 |**불필요한 파일 삭제**|⦁ 아파치 설치 시 기본적으로 설치되는 cgi-bin은 공격에 이용될 수 있으므로 삭제<br/>⦁ 매뉴얼 파일은 시스템에 대한 정보를 제공할 수 있어서 공격에 도움이 될 수 있으므로 삭제<br/>⦁ /var/www/manual 및 /var/www/cgi_bin 삭제|
 |**Directory Listing**|index.html이 없거나 Listing을 보여주는 옵션이 indexes에 설정되어 있는 경우 웹 페이지의 디렉터리가 보임|
 |**FollowSynLinks**|심볼릭 링크를 이용해서 파일 시스템에 접근하여 Root 권한을 획득할 수 있으므로 FollowSymLink를 제거|
@@ -348,8 +348,8 @@ toc: true
         Options Indexes FollowSynLinks
         AllowOverride All
         Order Allow, Deny
-        Deny from all
-        Allow from 210.1.1.1
+        Deny from 210.1.1.1
+        Allow from all
     </Directory>
     ```
 + `ServerTokens [OS|Prod]`
