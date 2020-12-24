@@ -1,4 +1,10 @@
 var store = [{
+        "title": "Villa M 3(Some) 빌라엠 썸",
+        "excerpt":"1. 구매정보     빈티지 :   가격 : 13900 원   구매처 : 영등포 이마트   2. 비비노      링크없음   2. 감상     1일차            약발포성 스윗 레드 와인       향이 강하지 않음       단 맛, 단순한 맛       도수 낮음           3. 총점     2.5/5  ","categories": ["Wine"],
+        "tags": ["와인"],
+        "url": "https://bluesplatter.com/wine/Wine_villa_M_some/",
+        "teaser": null
+      },{
         "title": "캔달잭슨 빈트너스 리저브 샤도네이 (2018)",
         "excerpt":"1. 구매정보     빈티지 : 2018   가격 : 38000 원   구매처 : 롯데백화점 본점   2. 비비노      링크   2. 감상     1일차            달콤 새콤한 향,  빵 냄새       약한 단 향으로 시작해서 산도, 스파이시 한 뒷맛           2일차            포도냄새, 꿀향       배 맛, 신 맛           3일차            신 맛이 조금 사라짐       백포도 맛           3. 총점     3.8/5  ","categories": ["Wine"],
         "tags": ["와인"],
@@ -9,6 +15,12 @@ var store = [{
         "excerpt":"1. 구매정보     빈티지 : 2018   가격 : 17000 원   구매처 : 롯데마트 서울역   2. 비비노      링크   2. 감상     1일차            가죽냄새,  알콜향, 오크향       매운 향신료, 떫은 맛           2일차            레드베리, 블랙베리       부드러움           3일차            빵 냄새           3. 총점     3.7/5  ","categories": ["Wine"],
         "tags": ["와인"],
         "url": "https://bluesplatter.com/wine/Wine_Camomi_di_rosso/",
+        "teaser": null
+      },{
+        "title": "Porto tawny valdouro 포르투 발도우로, 토니 포트",
+        "excerpt":"1. 구매정보     빈티지 :   가격 : 17000 원   구매처 : 영등포 이마트   2. 비비노      링크   2. 감상     1일차            강한 알콜향, 래드베리 향       레드베리 맛, 스모키한 향           2일차            달콤한 꿀 향, 바닐라 향       잼           3일차            딸기잼 맛, 바닐라 향           3. 총점     3.5/5  ","categories": ["Wine"],
+        "tags": ["와인"],
+        "url": "https://bluesplatter.com/wine/Wine_krohn-porto-tawny-valdouro/",
         "teaser": null
       },{
         "title": "Mud House Sauvignon Blanc 머드하우스 소비뇽 블랑 (2019)",
