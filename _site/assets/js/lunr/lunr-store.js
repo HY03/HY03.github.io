@@ -154,4 +154,16 @@ var store = [{
         "tags": ["정보보안기사","정보보호 관리","정보보호 관련 윤리 및 법규"],
         "url": "https://bluesplatter.com/is_certification/ISCert-05ISM-02IS_Law/",
         "teaser": null
+      },{
+        "title": "Carlo Sani Susumaniello 카를로 사니 수수마니엘로 (2018)",
+        "excerpt":"1. 구매정보     빈티지 : 2018   가격 : 20300 원   구매처 : 롯데마트 서울역   2. 비비노      링크   2. 감상     1일차            붉은 베리향       단 맛이 약간 느껴짐           2일차            무게감이 줄고 산뜻함       향긋하고 깔끔           3. 총점     3.6/5  ","categories": ["Wine"],
+        "tags": ["와인"],
+        "url": "https://bluesplatter.com/wine/Wine_carlo-sani-susumaniello/",
+        "teaser": null
+      },{
+        "title": "M Chapoutier La Ciboise Costieres De Nimes 엠 샤푸티에 라 시부아즈 꼬스띠에 드 님 (2018)",
+        "excerpt":"1. 구매정보     빈티지 : 2018   가격 : 15000 원   구매처 : 이마트 영등포   2. 비비노      링크   2. 감상     1일차            이스트, 포도, 레몬, 붉은과일 향       부드러움, 딸기잼 맛, 미네랄 느낌       가성비 좋고, 입맛에 맞는 와인임           3. 총점     3.8/5  ","categories": ["Wine"],
+        "tags": ["와인"],
+        "url": "https://bluesplatter.com/wine/Wine_m_chapoutier_la_ciboise_nimes/",
+        "teaser": null
       }]
