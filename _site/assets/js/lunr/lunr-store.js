@@ -166,4 +166,16 @@ var store = [{
         "tags": ["와인"],
         "url": "https://bluesplatter.com/wine/Wine_m_chapoutier_la_ciboise_nimes/",
         "teaser": null
+      },{
+        "title": "Yalumba Y Shyraz 얄룸바 Y 쉬라즈",
+        "excerpt":"1. 구매정보     빈티지 :   가격 : 15000 원   구매처 : 롯데마트 서울역   2. 비비노      링크   2. 감상     1일차            괜찮은 산미       약간 단 향       약간 스파이시           3. 총점     3.3/5  ","categories": ["Wine"],
+        "tags": ["와인"],
+        "url": "https://bluesplatter.com/wine/Wine_yalumba-the-y-series-shiraz/",
+        "teaser": null
+      },{
+        "title": "Marques De Casa Concha Carmenère 마르께스 데 까사 콘차 까르미네르 (2018)",
+        "excerpt":"1. 구매정보     빈티지 : 2018   가격 : 28000 원   구매처 : 롯데마트 서울역   2. 비비노      링크   2. 감상     1일차            적갈색       토마토 체리 가죽 검은과일       텁텁하면서 새콤 시큼 부드러움       밸런스 좋음           3. 총점     3.8/5  ","categories": ["Wine"],
+        "tags": ["와인"],
+        "url": "https://bluesplatter.com/wine/Wine_marques-de-casa-concha-carmenere/",
+        "teaser": null
       }]
