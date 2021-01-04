@@ -178,4 +178,16 @@ var store = [{
         "tags": ["와인"],
         "url": "https://bluesplatter.com/wine/Wine_marques-de-casa-concha-carmenere/",
         "teaser": null
+      },{
+        "title": "Banfi Chianti Classico 반피 끼안티 클라시코 (2017)",
+        "excerpt":"1. 구매정보     빈티지 : 2017   가격 : 29000 원   구매처 : 롯데마트 서울역   2. 비비노      링크   2. 감상     1일차            연한 갈색, 연한 벽돌색       딸기향       시큼, 상큼, 스파이시           3. 총점     3.7/5  ","categories": ["Wine"],
+        "tags": ["와인"],
+        "url": "https://bluesplatter.com/wine/Wine_banfi-chianti-classico/",
+        "teaser": null
+      },{
+        "title": "Gran Passione Rosso Veneto 그랑 파시오네 로쏘 베네토",
+        "excerpt":"1. 구매정보     빈티지 :   가격 : 29000 원   구매처 : 롯데마트 서울역   2. 비비노      링크   2. 감상     1일차            진한 자주색, 벽돌색       체리, 향신료, 빵냄새       풀, 토마토, 텁텁함, 밸런스       달달?           3. 총점     3.9/5  ","categories": ["Wine"],
+        "tags": ["와인"],
+        "url": "https://bluesplatter.com/wine/Wine_gran-passione-rosso-veneto/",
+        "teaser": null
       }]
