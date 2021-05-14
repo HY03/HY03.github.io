@@ -1,0 +1,1004 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.20.2 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>정보보안 - FTP | Bluesplatter</title>
+<meta name="description" content="FTP(File Transfer Protocol) FTP 개요    FTP 는 2개의 연결이 필요            제어 연결 (Control Connection)                    21 번 포트 사용           명령을 전송할 때 사용 / 계속 연결 지속                       데이터 연결 (Data Connection)                    20 번 포트 사용 or 1024 번 이후 포트 사용           파일이 전송될 때 사용">
+
+
+  <meta name="author" content="HY03">
+  
+  <meta property="article:author" content="HY03">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Bluesplatter">
+<meta property="og:title" content="정보보안 - FTP">
+<meta property="og:url" content="https://bluesplatter.com/is_certification/IS-Application-FTP/">
+
+
+  <meta property="og:description" content="FTP(File Transfer Protocol) FTP 개요    FTP 는 2개의 연결이 필요            제어 연결 (Control Connection)                    21 번 포트 사용           명령을 전송할 때 사용 / 계속 연결 지속                       데이터 연결 (Data Connection)                    20 번 포트 사용 or 1024 번 이후 포트 사용           파일이 전송될 때 사용">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2021-04-27T18:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://bluesplatter.com/is_certification/IS-Application-FTP/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "HY03",
+      "url": "https://bluesplatter.com/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Bluesplatter Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo/logo.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          세상에 남기는 작은 흔적
+          <span class="site-subtitle">Bluesplatter</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/">연도별 포스트</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="https://bluesplatter.com/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#is_certification" itemprop="item"><span itemprop="name">Is_certification</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">정보보안 - FTP</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/profile/photo.jpg" alt="HY03" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">HY03</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>저는 전문가가 아니고 이것 저것 알아보는 비전문가 입니다. <br /> 틀린 내용이 기술되어도 너그러이 봐주시고 댓글을 남겨주셨으면 좋겠습니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="http://bluesplatter.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:hyunik03@gmail.com">
+            <meta itemprop="email" content="hyunik03@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">이메일</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="정보보안 - FTP">
+    <meta itemprop="description" content="FTP(File Transfer Protocol)FTP 개요  FTP 는 2개의 연결이 필요          제어 연결 (Control Connection)                  21 번 포트 사용          명령을 전송할 때 사용 / 계속 연결 지속                    데이터 연결 (Data Connection)                  20 번 포트 사용 or 1024 번 이후 포트 사용          파일이 전송될 때 사용                    ">
+    <meta itemprop="datePublished" content="2021-04-27T18:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">정보보안 - FTP
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-04-27T18:00:00+09:00">April 27, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#ftpfile-transfer-protocol">FTP(File Transfer Protocol)</a>
+    <ul>
+      <li><a href="#ftp-개요">FTP 개요</a></li>
+      <li><a href="#ftp-서비스의-취약점">FTP 서비스의 취약점</a></li>
+      <li><a href="#ftp-모드">FTP 모드</a></li>
+      <li><a href="#ftp공격">FTP공격</a></li>
+      <li><a href="#ftpd-종류">ftpd 종류</a></li>
+    </ul>
+  </li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <h1 id="ftpfile-transfer-protocol">FTP(File Transfer Protocol)</h1>
+<h2 id="ftp-개요">FTP 개요</h2>
+<ul>
+  <li>FTP 는 2개의 연결이 필요
+    <ul>
+      <li>제어 연결 (Control Connection)
+        <ul>
+          <li>21 번 포트 사용</li>
+          <li>명령을 전송할 때 사용 / 계속 연결 지속</li>
+        </ul>
+      </li>
+      <li>데이터 연결 (Data Connection)
+        <ul>
+          <li>20 번 포트 사용 or 1024 번 이후 포트 사용</li>
+          <li>파일이 전송될 때 사용</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="ftp-서비스의-취약점">FTP 서비스의 취약점</h2>
+<ul>
+  <li>아이디 및 패스워드가 암호화 되지 않은 채로 전송됨
+    <ul>
+      <li>root 로 FTP를 사용할 수 없게 차단</li>
+    </ul>
+  </li>
+  <li>암호화된 FTP 서비스
+    <ul>
+      <li>SFTP(SSH File Transfer Protocol) : 보안 파일전송 프로토콜
+        <ul>
+          <li>Secure Shell 이용. SSH 의 일부</li>
+          <li>SSH Client 와 SSH Server 간 보안연결 성립해야 함</li>
+          <li>22/tcp 포트 사용</li>
+        </ul>
+      </li>
+      <li>FTPS(SSL/TLS)
+        <ul>
+          <li>990/tcp 포트 사용</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="ftp-모드">FTP 모드</h2>
+<ul>
+  <li>Client 가 모드를 결정함.</li>
+  <li>능동모드 (Active)
+    <ul>
+      <li>FTP 의 기본 값</li>
+      <li>클라이언트에서 서버 쪽 21번 포트 (제어포트) 접속</li>
+      <li>클라이언트에서 자신의 데이터 포트, 명령어를 서버에 알려줌</li>
+      <li>서버에서 클라이언트에 접속해 명령어 처리 데이터를 전송
+        <ul>
+          <li>클라이언트에 방화벽 (외부접속 X) 설정된 경우
+            <ul>
+              <li>제어 포트는 연결 O</li>
+              <li>데이터 송수신 연결 X</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>수동모드 (Passive)
+    <ul>
+      <li>클라이언트에서 서버 쪽 21번 포트 (제어포트) 접속</li>
+      <li>클라이언트에서 명령어와 자신의 데이터모드가 PASV 모드임을 서버에 알려줌</li>
+      <li>서버에서 클라이언트에 자신의 임시 데이터포트를 전송</li>
+      <li>클라이언트에서 서버의 임시 데이터포트로 접속</li>
+      <li>서버에서 클라이언트에 명령어 처리 데이터를 전송</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="ftp공격">FTP공격</h2>
+<ul>
+  <li>FTP는 보안 이슈가 부각되기 전에 설계된 프로토콜 (취약점이 존재)
+    <ul>
+      <li>전송 내용이 평문으로 전송됨 - 비밀번호 노출
+        <ul>
+          <li>SSL/TLS 레이어 (FTPS) 이용</li>
+          <li>SSH (SFTP) 이용</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>FTP bounce attack
+    <ul>
+      <li>데이터 채널을 생성할 때 목적지를 확인하지 않는 FTP 설계 구조의 취약점 이용</li>
+      <li>active 모드에서 FTP 서버 파일 요청을 할 때 파일을 받을 포트와 IP를 전송
+        <ul>
+          <li>get aa.txt PORT 192.168.172.10, 200</li>
+        </ul>
+      </li>
+      <li>IP와 포트를 임의의 주소로 지정
+        <ul>
+          <li>네트워크 스캔 공격
+            <ul>
+              <li>공격할 대상 서버 구간의 FTP 서버를 이용, 네트워크 구조 파악</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>TFTP (Trivial FTP) attack
+    <ul>
+      <li>TFTP 는 보안이 고려되지 않음
+        <ul>
+          <li>사용자 확인 절차 X</li>
+        </ul>
+      </li>
+      <li>일긱 전용 메모리나 디스크가 없는 워크스테이션에 설치될 수 있을 정도의 단순한 파일 송수신을 위한 프로토콜</li>
+      <li>69/udp 포트를 이용, 별도의 인증과정 없이 지정된 디렉토리에 접근 가능 (취약점)</li>
+      <li>자체 디스크가 없는 워크스테이션에 부팅이미지를 전달하기 위한 목적으로 주로 사용</li>
+      <li>사용해야 할 경우 secure mode 를 사용해야 함
+        <ul>
+          <li>chroot 기능 이용 (지정디렉토리를 최상위 디렉토리로 설정)
+            <ul>
+              <li>xinetd.conf or inetd.conf
+                <ul>
+                  <li>server_args=-s [디렉터리명]</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Anonymous FTP attack
+    <ul>
+      <li>익명 FTP 서비스 : 익명계정으로 FTP 접속이 가능한 서비스
+        <ul>
+          <li>anonymous 란 ID 를 사용, 비밀번호가 없음</li>
+        </ul>
+      </li>
+      <li>익명계정은 원격에서 인증받지 않은 어떤 사용자라도 서버의 파일에 접근 가능
+        <ul>
+          <li>보안이슈 야기</li>
+          <li>쓰기 권한 부여 시 큰 취약점이 됨</li>
+        </ul>
+      </li>
+      <li>Anonymous FTP 서비스 제거
+        <ul>
+          <li>redhat : vsftpd (very secure ftp daemon)
+            <ul>
+              <li>vsftpd.conf 에서 anonymous_enable=no 로 설정
+                <ul>
+                  <li>서비스 사용 시도시 login incorrect 출력됨
+                    <ul>
+                      <li>ftp 192.168.172.10</li>
+                      <li>user anonymous</li>
+                      <li>password</li>
+                      <li>-&gt; login incorrect</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>디렉토리 퍼미션 관리
+        <ul>
+          <li>Anonymous 사용자 루트 디렉토리 퍼미션 관리</li>
+          <li>bin, etc, pub 디렉터리 소유자, 퍼미션 관리</li>
+        </ul>
+      </li>
+      <li>ftp 접근제어 설정
+        <ul>
+          <li>ftpusers 파일 이용한 접근제어 설정
+            <ul>
+              <li>시스템관리자 (root 등) 계정의 접속 제한</li>
+              <li>ftpuser : 접속을 제한할 계정정보를 포함</li>
+            </ul>
+          </li>
+          <li>tcp wrapper 를 이용한 접근제어
+            <ul>
+              <li>hosts.allow / hosts.deny 파일 : IP 기반 접근제어</li>
+              <li>ftp 프로그램별 tcp wrapper 와 연동설정
+                <ul>
+                  <li>vsftpd.conf 파일에서 tcp_wrappers=yes 설정</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="ftpd-종류">ftpd 종류</h2>
+<ul>
+  <li>proftpd : unix에서 사용, wuftp 의 대안
+    <ul>
+      <li>접속시 확인 설정
+        <ul>
+          <li>/etc/passwd, /etc/shadow 사용자 계정 검사 (사용자 유무)</li>
+          <li>/etc/ftpusers id 존재여부 검사 (있으면 접속 거부)</li>
+          <li>/etc/shell 에 등록되지 않은 shell 사용자 접속 거부</li>
+        </ul>
+      </li>
+      <li>proftpd 설정 (proftpd.conf)
+        <ul>
+          <li>
+            <table>
+              <tbody>
+                <tr>
+                  <td>ServerType [standalone</td>
+                  <td>inetd</td>
+                  <td>xinetd]</td>
+                </tr>
+              </tbody>
+            </table>
+          </li>
+          <li>RootLogin [off] : 루트계정 로그인 허용 X</li>
+          <li>ServerIde [On] <보여줄메시지> : 버전정보 숨기기</보여줄메시지></li>
+          <li>MaxClients [10] <보여줄메시지> : anonymous user로 접속시 클라이언트 최대 접속 수</보여줄메시지></li>
+          <li>TimeoutIdleftp [시간] : 유휴 제한시간 지난 후 Timeout</li>
+          <li>TimeoutSession [시간] : 접속 제한시간 지난 후 Timeout</li>
+          <li>Limit Command : [MKD, CWD, RNFR, RNTD, DELE, RMD, RETR] : 명령어 제한</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>vsftpd : 레드햇리눅스에서 사용, PAM 지원
+    <ul>
+      <li>주요파일
+        <ul>
+          <li>/etc/vsftpd : 메인디렉토리</li>
+          <li>/etc/vsftpd/vsftpd.conf : 설정파일</li>
+          <li>/etc/vsftpd/ftpusers</li>
+          <li>/etc/rc.d/init.d/vsftpd : 시작, 종료 관련 스크립트 지정</li>
+        </ul>
+      </li>
+      <li>vsftpd 설정 (vsftpd.conf)
+        <ul>
+          <li>anonymous_enable=NO</li>
+          <li>idle_session_timeout=600 (초)</li>
+          <li>listen=YES (standalone 설정여부)</li>
+          <li>max_clients=10</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#%EC%96%B4%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98" class="page__taxonomy-item" rel="tag">어플리케이션</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88%EA%B8%B0%EC%82%AC" class="page__taxonomy-item" rel="tag">정보보안기사</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#is-certification" class="page__taxonomy-item" rel="tag">IS_Certification</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2021-04-27T18:00:00+09:00">April 27, 2021</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+FTP%20https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Application-FTP%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Application-FTP%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Application-FTP%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/is_certification/IS-Network-VPN/" class="pagination--pager" title="정보보안 - 가상 사설망
+">이전</a>
+    
+    
+      <a href="/is_certification/IS-Application-Email/" class="pagination--pager" title="정보보안 - 이메일
+">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Application-HTTP/" rel="permalink">정보보안 - HTTP
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-05-13T18:00:00+09:00">May 13, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Web 보안
+
+  웹프로토콜인 HTTP, TCP/IP 가 데이터에 대한 보안서비스를 제공하지 않음
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Application-Email/" rel="permalink">정보보안 - 이메일
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-04-30T18:00:00+09:00">April 30, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">이메일 보안
+이메일 구조
+
+  UA (User Agent)
+    
+      메시지 구성, 메시지 읽기 / 보내기 용도의 S/W
+    
+  
+  MTA (Message Transfer Agent)
+    
+      SMTP
+      MTA Client (User)
+     ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Network-VPN/" rel="permalink">정보보안 - 가상 사설망
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-03-23T18:00:00+09:00">March 23, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">가상사설망(Virtual Private Network)
+
+  개요
+    
+      공중 네트워크를 이용하여 전용선처럼 자신만의 고유 네트워크 효과를 누릴 수 있도록 하는 기술
+      데이터 전송 중 전송망에서의 침입자에 의한 데이터 왜곡, 노출을 터널링 기술(프로토콜의 한 ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Network-IPSec/" rel="permalink">정보보안 - IPSEC
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-03-23T18:00:00+09:00">March 23, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">IPSEC(Internet Protocol Security)
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+<!--
+<script>
+	(function(d, h, m){
+    var js, fjs = d.getElementsByTagName(h)[0];
+    if (d.getElementById(m)){return;}
+    js = d.createElement(h); js.id = m;
+    js.onload = function(){
+        window.makerWidgetComInit({
+        position: "left",          
+        widget: "eqypoqmawbcz3azh-usiy9q7ma4ong1w1-juelcm3zfgcuwjds"                
+    })};
+    js.src = "https://makerwidget.com/js/embed.js";
+    fjs.parentNode.insertBefore(js, fjs)
+	}(document, "script", "dhm"))
+</script>
+-->
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:hyunik03@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 HY03. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://bluesplatter.com/is_certification/IS-Application-FTP/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/is_certification/IS-Application-FTP"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://bluesplatter.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

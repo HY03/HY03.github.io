@@ -1,0 +1,34 @@
+I"�<h1 id="유닉스-발전">유닉스 발전</h1>
+
+<p><img src="/assets/images/posts/unix_tree.jpg" alt="Unix_tree" /></p>
+
+<p><a href="https://slidesplayer.org/slide/11036403/">이미지 출처</a></p>
+
+<p>유닉스는 크게 두 계통으로 나뉨</p>
+<ul>
+  <li>시스템5 : 상업용</li>
+  <li>BSD : 연구개발용</li>
+</ul>
+
+<p>유닉스의 발전</p>
+<ul>
+  <li>유닉스 : AT&amp;T, 벨 연구소</li>
+  <li>버전 3 : 데니스리치 (C언어)</li>
+  <li>버전 6 : 외부 공개</li>
+  <li>1.x BSD : 버클리 대학에서 네트워크 기능을 추가</li>
+  <li>버전 7 : 본쉘 등장, 유닉스의 원조</li>
+  <li>SunOS 1.x : Sun 사에서 BSD 를 토대로 개발</li>
+  <li>시스템3 : AT&amp;T 사에서 개발</li>
+  <li>SunOS 2.x : BSD + 시스템5</li>
+</ul>
+
+<p>유닉스 종류</p>
+<ul>
+  <li>IBM AIX (시스템5)</li>
+  <li>HP-UX (시스템5)</li>
+  <li>Solaris (시스템5)</li>
+  <li>SunOS (BSD)</li>
+  <li>FreeBSD (BSD)</li>
+  <li>리눅스</li>
+</ul>
+:ET

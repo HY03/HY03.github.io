@@ -1,0 +1,1132 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.20.2 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>정보보안 - 네트워크 DDoS | Bluesplatter</title>
+<meta name="description" content="DDoS (Distributed Denial of Service) 공격    개요            분산서비스공격                    네트워크 자원 소진 : BandWidth 소진           시스템 자원 소진 : 서비스/서버 자원 소진                       분산된 다수의 좀비 PC에 의해 공격대상 시스템의 서비스를 마비시키는 공격           공격 구조            Attacker(공격자) : C&amp;C 서버에 공격 명령을 전달하는 해커 (Bot Master)       Botnet(봇넷) : 악의적 의도를 갖는 불법 네트워크                    C&amp;C (명령제어) 서버 : 공격 명령을 전달받고 좀비 PC에 명령을 전달하는 시스템 (Master)                            중앙집중형 (C&amp;C 서버만 발견되면 전체 무효화)                                    IRC 봇넷 (Rbot) (초창기)                                            IRC (Internet Replay Chat) : 인터넷에서 채팅을 할 수 있는 프로토콜                       IRC 서버간에 연결 (전 세계 모든 서버)                       IRC 서버를 C&amp;C 서버로 주로 활용                                                           HTTP 봇넷 (Robax) (탐지, 대응이 어려움)                                               분산형 (탐지, 차단 어려움)                                    P2P 봇넷 (Storm, Peacomm)                                            공격자 (Bot Master) 가 P2P 중 하나에 명령 전송                       봇넷 내 Host 끼리 명령을 전파시킴l                                                                                                           좀비 PC (악성 봇) : C&amp;C 서버로부터 전달받은 명령을 수행(실제 공격) 하는 시스템 (Bot, Slave, Agent)                            봇 프로그램에 감염된 PC               봇(Bot)                                    웜/바이러스, 백도어, 스파이웨어, 루트킷                   원격에서 해당 System을 제어하는 프로그램                   정보유출, 스팸메일발송, DDoS 공격                   타 PC 감염                                                                               공격대상 : 피해 시스템 (Target, Victim)">
+
+
+  <meta name="author" content="HY03">
+  
+  <meta property="article:author" content="HY03">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Bluesplatter">
+<meta property="og:title" content="정보보안 - 네트워크 DDoS">
+<meta property="og:url" content="https://bluesplatter.com/is_certification/IS-Network-DDoS/">
+
+
+  <meta property="og:description" content="DDoS (Distributed Denial of Service) 공격    개요            분산서비스공격                    네트워크 자원 소진 : BandWidth 소진           시스템 자원 소진 : 서비스/서버 자원 소진                       분산된 다수의 좀비 PC에 의해 공격대상 시스템의 서비스를 마비시키는 공격           공격 구조            Attacker(공격자) : C&amp;C 서버에 공격 명령을 전달하는 해커 (Bot Master)       Botnet(봇넷) : 악의적 의도를 갖는 불법 네트워크                    C&amp;C (명령제어) 서버 : 공격 명령을 전달받고 좀비 PC에 명령을 전달하는 시스템 (Master)                            중앙집중형 (C&amp;C 서버만 발견되면 전체 무효화)                                    IRC 봇넷 (Rbot) (초창기)                                            IRC (Internet Replay Chat) : 인터넷에서 채팅을 할 수 있는 프로토콜                       IRC 서버간에 연결 (전 세계 모든 서버)                       IRC 서버를 C&amp;C 서버로 주로 활용                                                           HTTP 봇넷 (Robax) (탐지, 대응이 어려움)                                               분산형 (탐지, 차단 어려움)                                    P2P 봇넷 (Storm, Peacomm)                                            공격자 (Bot Master) 가 P2P 중 하나에 명령 전송                       봇넷 내 Host 끼리 명령을 전파시킴l                                                                                                           좀비 PC (악성 봇) : C&amp;C 서버로부터 전달받은 명령을 수행(실제 공격) 하는 시스템 (Bot, Slave, Agent)                            봇 프로그램에 감염된 PC               봇(Bot)                                    웜/바이러스, 백도어, 스파이웨어, 루트킷                   원격에서 해당 System을 제어하는 프로그램                   정보유출, 스팸메일발송, DDoS 공격                   타 PC 감염                                                                               공격대상 : 피해 시스템 (Target, Victim)">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2021-02-23T19:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://bluesplatter.com/is_certification/IS-Network-DDoS/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "HY03",
+      "url": "https://bluesplatter.com/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Bluesplatter Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo/logo.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          세상에 남기는 작은 흔적
+          <span class="site-subtitle">Bluesplatter</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/">연도별 포스트</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="https://bluesplatter.com/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#is_certification" itemprop="item"><span itemprop="name">Is_certification</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">정보보안 - 네트워크 DDoS</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/profile/photo.jpg" alt="HY03" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">HY03</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>저는 전문가가 아니고 이것 저것 알아보는 비전문가 입니다. <br /> 틀린 내용이 기술되어도 너그러이 봐주시고 댓글을 남겨주셨으면 좋겠습니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="http://bluesplatter.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:hyunik03@gmail.com">
+            <meta itemprop="email" content="hyunik03@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">이메일</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="정보보안 - 네트워크 DDoS">
+    <meta itemprop="description" content="DDoS (Distributed Denial of Service) 공격  개요          분산서비스공격                  네트워크 자원 소진 : BandWidth 소진          시스템 자원 소진 : 서비스/서버 자원 소진                    분산된 다수의 좀비 PC에 의해 공격대상 시스템의 서비스를 마비시키는 공격        공격 구조          Attacker(공격자) : C&amp;C 서버에 공격 명령을 전달하는 해커 (Bot Master)      Botnet(봇넷) : 악의적 의도를 갖는 불법 네트워크                  C&amp;C (명령제어) 서버 : 공격 명령을 전달받고 좀비 PC에 명령을 전달하는 시스템 (Master)                          중앙집중형 (C&amp;C 서버만 발견되면 전체 무효화)                                  IRC 봇넷 (Rbot) (초창기)                                          IRC (Internet Replay Chat) : 인터넷에서 채팅을 할 수 있는 프로토콜                      IRC 서버간에 연결 (전 세계 모든 서버)                      IRC 서버를 C&amp;C 서버로 주로 활용                                                        HTTP 봇넷 (Robax) (탐지, 대응이 어려움)                                            분산형 (탐지, 차단 어려움)                                  P2P 봇넷 (Storm, Peacomm)                                          공격자 (Bot Master) 가 P2P 중 하나에 명령 전송                      봇넷 내 Host 끼리 명령을 전파시킴l                                                                                                    좀비 PC (악성 봇) : C&amp;C 서버로부터 전달받은 명령을 수행(실제 공격) 하는 시스템 (Bot, Slave, Agent)                          봇 프로그램에 감염된 PC              봇(Bot)                                  웜/바이러스, 백도어, 스파이웨어, 루트킷                  원격에서 해당 System을 제어하는 프로그램                  정보유출, 스팸메일발송, DDoS 공격                  타 PC 감염                                                                        공격대상 : 피해 시스템 (Target, Victim)      ">
+    <meta itemprop="datePublished" content="2021-02-23T19:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">정보보안 - 네트워크 DDoS
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-02-23T19:00:00+09:00">February 23, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#ddos-distributed-denial-of-service-공격">DDoS (Distributed Denial of Service) 공격</a></li>
+  <li><a href="#dns-싱크홀-서비스">DNS 싱크홀 서비스</a></li>
+  <li><a href="#ddos-공격-유형">DDoS 공격 유형</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <h1 id="ddos-distributed-denial-of-service-공격">DDoS (Distributed Denial of Service) 공격</h1>
+<ul>
+  <li>개요
+    <ul>
+      <li>분산서비스공격
+        <ul>
+          <li>네트워크 자원 소진 : BandWidth 소진</li>
+          <li>시스템 자원 소진 : 서비스/서버 자원 소진</li>
+        </ul>
+      </li>
+      <li>분산된 다수의 좀비 PC에 의해 공격대상 시스템의 서비스를 마비시키는 공격</li>
+    </ul>
+  </li>
+  <li>공격 구조
+    <ul>
+      <li>Attacker(공격자) : C&amp;C 서버에 공격 명령을 전달하는 해커 (Bot Master)</li>
+      <li>Botnet(봇넷) : 악의적 의도를 갖는 불법 네트워크
+        <ul>
+          <li>C&amp;C (명령제어) 서버 : 공격 명령을 전달받고 좀비 PC에 명령을 전달하는 시스템 (Master)
+            <ul>
+              <li>중앙집중형 (C&amp;C 서버만 발견되면 전체 무효화)
+                <ul>
+                  <li>IRC 봇넷 (Rbot) (초창기)
+                    <ul>
+                      <li>IRC (Internet Replay Chat) : 인터넷에서 채팅을 할 수 있는 프로토콜</li>
+                      <li>IRC 서버간에 연결 (전 세계 모든 서버)</li>
+                      <li>IRC 서버를 C&amp;C 서버로 주로 활용</li>
+                    </ul>
+                  </li>
+                  <li>HTTP 봇넷 (Robax) (탐지, 대응이 어려움)</li>
+                </ul>
+              </li>
+              <li>분산형 (탐지, 차단 어려움)
+                <ul>
+                  <li>P2P 봇넷 (Storm, Peacomm)
+                    <ul>
+                      <li>공격자 (Bot Master) 가 P2P 중 하나에 명령 전송</li>
+                      <li>봇넷 내 Host 끼리 명령을 전파시킴l</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>좀비 PC (악성 봇) : C&amp;C 서버로부터 전달받은 명령을 수행(실제 공격) 하는 시스템 (Bot, Slave, Agent)
+            <ul>
+              <li>봇 프로그램에 감염된 PC</li>
+              <li>봇(Bot)
+                <ul>
+                  <li>웜/바이러스, 백도어, 스파이웨어, 루트킷</li>
+                  <li>원격에서 해당 System을 제어하는 프로그램</li>
+                  <li>정보유출, 스팸메일발송, DDoS 공격</li>
+                  <li>타 PC 감염</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>공격대상 : 피해 시스템 (Target, Victim)</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="dns-싱크홀-서비스">DNS 싱크홀 서비스</h1>
+<ul>
+  <li>개요
+    <ul>
+      <li>한국인터넷진흥원 (KISA) 에서 싱크홀 서비스 운영</li>
+      <li>DDoS 공격 구조
+        <ul>
+          <li>Zombie PC : C&amp;C 서버 도메인으로 DNS 서버에 질의 (C&amp;C 서버 IP 필요)</li>
+          <li>DNS 서버 : C&amp;C 서버 IP 주소 전송</li>
+          <li>Zombie PC : C&amp;C 서버 접속</li>
+          <li>C&amp;C 서버 : 명령</li>
+        </ul>
+      </li>
+      <li>DNS 싱크홀 (Sinkhole) 서비스
+        <ul>
+          <li>C&amp;C 서버 도메인 목록 제공 서버 : DNS 서버에 목록 제공</li>
+          <li>Zombie PC : C&amp;C 서버 도메인으로 DNS 서버에 질의 (C&amp;C 서버 IP 필요)</li>
+          <li>DNS 서버 : 싱크홀 서버 IP 주소 전송</li>
+          <li>Zombie PC : 싱크홀 서버 접속</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="ddos-공격-유형">DDoS 공격 유형</h1>
+<ul>
+  <li>유형별 분류
+    <ul>
+      <li>네트워크 대역폭 소진 공격 (네트워크 계층, 전송 계층) -&gt; 네트워크 인프라 장애, 다른 정상 Client 접속 X
+        <ul>
+          <li>UDP Flooding : SRC IP 위조, 전송 계층</li>
+          <li>ICMP Flooding : SRC IP 위조, 네트워크 계층, Echo Request (Ping)</li>
+          <li>DNS Query Flooding : DNS Query Data 를 서버에 대량전송, DNS 서버에서 서비스를 받는 호스트에 타격</li>
+          <li>IP Flooding</li>
+          <li>TCP SYN Flooding : 3-Way Handshake 의 취약점 이용, 대량의 SYN 패킷을 서버에 전송, 대기큐 (Backlog Queue) 를 소진
+            <ul>
+              <li>출발지 주소를 위조하여 SYN 전송, SYN + ACK 를 서버에서 보내도 ACK 가 오지 않기 때문에 Incomplete Connection Queue 가 소진됨</li>
+              <li>Listen : Backlog Queue 에 메세지를 받는 상태
+                <ul>
+                  <li>Backlog Queue ( Incomplete Connection Queue + Complete Connection Queue )
+                    <ul>
+                      <li>Incomplete Connection Queue : 서버에 SYN 요청이 들어오면 쌓이게 됨 (SYN-RECV)</li>
+                      <li>Complete Connection Queue : 연결요청이 완료 (3Way Handshake) 되면 또 다른 Queue 에 쌓임</li>
+                      <li>Complete Connection Queue 의 대기 Queue를 System Call (accept()) 하여 Connected Socket이 되고, Queue 에서 삭제</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>현재 소켓 상태를 파악하기 위한 명령어
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">netstat -antp | grep SYN RECV</code> : InComplete Connection Queue 의 리스트를 확인</li>
+                </ul>
+              </li>
+              <li>해결책
+                <ul>
+                  <li>Syn Cookie 설정
+                    <ul>
+                      <li>리눅스 # <code class="language-plaintext highlighter-rouge">sysctl -w net.ipv4.tcp_syncookies=1</code> : 1=true</li>
+                      <li>Backlog Queue (Incomplete Connection Queue) 가 소진되지 않도록 설정</li>
+                      <li>유효한 클라이언트인지 판단</li>
+                      <li>연결 설정 과정에서 서버가 특정값 (쿠키값) 을 설정 - ISN
+                        <ul>
+                          <li>SYN+ACK 에 설정</li>
+                        </ul>
+                      </li>
+                      <li>ACK 에 ISN 이 실리지 않으면 Backlog Queue 에서 제거</li>
+                    </ul>
+                  </li>
+                  <li>방화벽 이용
+                    <ul>
+                      <li>연결 요청 (동일 Client IP에서 발생) 에 대한 임계치 값 (SYN 요청 Threshold) 설정</li>
+                      <li><code class="language-plaintext highlighter-rouge">iptables –A INPUT –p tcp —syn —dport 80 –m connlimit —connlimit –above 5 –j DROP</code></li>
+                    </ul>
+                  </li>
+                  <li>첫번째 SYN DROP
+                    <ul>
+                      <li>첫번째 SYN 패킷을 보낸 SRC IP가 존재하는지 확인
+                        <ul>
+                          <li>DROP 을 시켜 확인 : 재요청 패킷이 도착하는지 확인(실제 IP 존재)</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>Backlog Queue 크기 늘리기 (임시적 조치)
+                    <ul>
+                      <li>리눅스 # <code class="language-plaintext highlighter-rouge">sysctl -w net.ipv4.tcp_max_syn_backlog=1024</code></li>
+                      <li>솔라리스 # <code class="language-plaintext highlighter-rouge">ndd -set /dev/tcp tcp_conn_req_max_q0 1024;</code></li>
+                    </ul>
+                  </li>
+                  <li>SYN + ACK 에 대한 대기시간 줄이기</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>TCP Flag Flooding : Flag값 (UAPRSF) 을 재멋대로 설정하여 전송, 서버에서 검증에 자원을 소모</li>
+          <li>TCP SYN + ACK Flooding</li>
+        </ul>
+      </li>
+      <li>서비스(어플리케이션) 마비 공격 -&gt; 공격대상 시스템만 피해
+        <ul>
+          <li>HTTP Traffic Flooding
+            <ul>
+              <li>HTTP Get Flooding
+                <ul>
+                  <li>동일한 HTTP Get 요청을 다량으로 발생시킴 &gt; 웹서버 자원 소모</li>
+                  <li>Botnet의 ZombiePC 들이 동일 URL 로 GET 요청을 전송</li>
+                </ul>
+              </li>
+              <li>HTTP Get Flooding with CC Attack : 캐싱 서버 무력화, 웹서버에 부하</li>
+              <li>Hulk DoS
+                <ul>
+                  <li>URL 을 변경해가며 (차단-임계치기반 을 피해가며) 공격
+                    <ul>
+                      <li>임계치 우회 : 동일 URL에 대한 접근횟수 제한</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>HTTP Header/Option Spoofing
+            <ul>
+              <li>HTTP Continuation : HTTP Header 없이 Data 만 채워 웹서버에 전송 &gt; 웹서버는 데이터가 더 있다고 생각하고 지속적으로 TCP 자원을 사용</li>
+              <li>Slow HTTP POST DoS : HTTP POST 메소드 이용, 대량의 데이터를 장시간에 걸쳐 분할 전송 &gt; 서버는 수신이 다 될때까지 세션을 유지, 자원소모
+                <ul>
+                  <li>RUDY 공격</li>
+                  <li>Content-Length 헤더 필드의 값을 비정상적으로 크게 설정</li>
+                  <li>소량의 데이터를 지속적으로 천처히 보냄</li>
+                  <li>웹서버는 정해진 크기만큼 데이터를 모두 수신하기 위해 연결상태 유지</li>
+                  <li>웹 서버의 연결자원을 모두 소진</li>
+                  <li>대응책
+                    <ul>
+                      <li>동시연결 임계치 설정 (Concurrent Connection Threshold)
+                        <ul>
+                          <li><code class="language-plaintext highlighter-rouge">iptables</code></li>
+                        </ul>
+                      </li>
+                      <li>Connection timeout 설정
+                        <ul>
+                          <li>Apache httpd.conf =&gt; timeout=120초 (기본값) -&gt; 5초</li>
+                        </ul>
+                      </li>
+                      <li>Read Timeout 설정 (Apache 2.2 이상)
+                        <ul>
+                          <li>Apache httpd.conf =&gt; RequestReadTimeout body=10
+                            <ul>
+                              <li>body 부가 10초 이내에 수신되지 않으면 오류</li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>Slow HTTP Header DoS : 헤더와 데이터부의 구분 라인을 모호하게 함. &gt; 서버는 아직 헤더정보가 남아있다고 판단, Header 의 나머지 부분 전송 대기, 연결 유지
+                <ul>
+                  <li>Slowloris 공격</li>
+                  <li>헤더의 마지막을 알리는 Empty line을 보내지 않아 웹서버를 대기시킴</li>
+                  <li>웹서버와의 연결상태를 지속, 저대역폭 공격 (소량의 트래픽을 이용)</li>
+                  <li>HTTP 헤더의 구조
+                    <ul>
+                      <li>Request Line : 요청라인
+                        <ul>
+                          <li>Method (GET, POST …) 지정</li>
+                          <li>URL (/home/aa.php)</li>
+                          <li>HTTP Version (HTTP/1.1)</li>
+                          <li>개행값 (CRLF - Carriage Return ( 행 맨 앞으로 커서 이동) Line Feed (다음 행으로 이동) : 0x0d0a &lt; 0d0a)</li>
+                        </ul>
+                      </li>
+                      <li>Request Header : 요청헤더
+                        <ul>
+                          <li>Host : 호스트명</li>
+                          <li>개행값 (CRLF)</li>
+                          <li>User-Agent : 사용 브라우저 정보</li>
+                          <li>개행값 (CRLF)</li>
+                          <li>…</li>
+                          <li>개행값 (CRLF)</li>
+                          <li>헤더 필드</li>
+                          <li>개행값 (CRLF)</li>
+                        </ul>
+                      </li>
+                      <li>Empty Line : 공백라인
+                        <ul>
+                          <li>헤더를 구분하기 위해 빈 라인 추가</li>
+                          <li>개행값 (CRLF)</li>
+                        </ul>
+                      </li>
+                      <li>Body (Data) : 데이터</li>
+                    </ul>
+                  </li>
+                  <li>대응책
+                    <ul>
+                      <li>동시연결 임계치 설정 (Concurrent Connection Threshold)
+                        <ul>
+                          <li><code class="language-plaintext highlighter-rouge">iptables</code></li>
+                        </ul>
+                      </li>
+                      <li>Connection timeout 설정
+                        <ul>
+                          <li>Apache httpd.conf =&gt; timeout=120초 (기본값) -&gt; 5초</li>
+                        </ul>
+                      </li>
+                      <li>Read Timeout 설정 (Apache 2.2 이상)
+                        <ul>
+                          <li>Apache httpd.conf =&gt; RequestReadTimeout header=5
+                            <ul>
+                              <li>header 부가 5초 이내에 수신되지 않으면 오류</li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>Slow HTTP Read DoS : 서버와 연결할 때 TCP 윈도우 크기, 데이터 처리율을 감소 시킨 후 HTTP 송신
+                <ul>
+                  <li>TCP 흐름제어 (Flow Control) 특성을 이용</li>
+                  <li>HTTP 요청을 보냔 후 Windows 크기를 조작하여 Zero Window Packet을 지속적으로 서버에 전달</li>
+                  <li>연결 상태를 지속적으로 유지시키는 공격</li>
+                  <li>TCP Flow Control (흐름제어)
+                    <ul>
+                      <li>3 Way-handshake 완료 후</li>
+                      <li>Client : ESTABLISHED</li>
+                      <li>Server : ESTABLISHED</li>
+                      <li>Data 전송</li>
+                      <li>Client 수신버퍼 / Server 송신버퍼</li>
+                      <li>Flow Control : 수신 측이 받을 수 있는 용량만큼 크기 조절</li>
+                      <li>Client 수신버퍼가 Full : 필드 window=0 설정, Zero Window Packet 송신</li>
+                      <li>일정시간 경과 ( Server : Slow Read )</li>
+                      <li>Server 에서 ACK, Zero Window Probe Packet 전송 (상태확인용)</li>
+                      <li>Free 상태일 경우
+                        <ul>
+                          <li>Client : 필드 window=200 설정, Window Update Packet 송신</li>
+                          <li>Server : 송신버퍼에 있는 데이터를 수신 window size에 맞춰 전송</li>
+                        </ul>
+                      </li>
+                      <li>Full 상태일 경우
+                        <ul>
+                          <li>Client : 필드 window=0 설정, Zero Window Packet 송신</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>공격자는 window 크기를 조작, Zero Window Packet 을 지속적으로 전송</li>
+                </ul>
+              </li>
+              <li>Hash DoS : 웹서버는 파라미터 관리를 위해 해시테이블 사용. 조작된 파라미터 정보를 포함한 다량의 정보를 전송해 해시값의 충돌을 유도 &gt; 웹서버는 해시값 검색에 CPU 자원을 소모하게 됨
+                <ul>
+                  <li>Hash Table (Key:Value 자료구조) &gt; 속도에 유리
+                    <ul>
+                      <li>Hash Function : 평문 =&gt; Function =&gt; 짧은 Msg</li>
+                      <li>Hashing : Hash Table + Hash Function</li>
+                      <li>Key (예:aaabbb) 를 Hash Function 으로 짧은 값으로 만든 뒤 (예:00) &gt; 00에 해당하는 Bucket 공간에 값을 저장</li>
+                      <li>문제점 : 입력 값은 무한한데, Hash 값은 유한함 &gt; 충돌 발생
+                        <ul>
+                          <li>Hash 충돌을 최소화 시키는 Hash 함수를 이용해야 함</li>
+                        </ul>
+                      </li>
+                      <li>Bucket 에는 주소값이 들어가 있음 (Linked List)
+                        <ul>
+                          <li>해당 주소에 변수명과 값이 저장되며 충돌이 발생했을 경우 또 다른 Linked List 에 연결됨 &gt; 체이닝 기법</li>
+                          <li>CPU 자원소모</li>
+                        </ul>
+                      </li>
+                      <li>파라미터 (매개변수): <code class="language-plaintext highlighter-rouge">GET index.php?aaa=123&amp;bbb=100</code> &gt; aaa, bbb…
+                        <ul>
+                          <li>GET 방식은 길이 제한이 있기 때문에 HashDos 공격 어려움</li>
+                          <li>POST 방식은 많은 매개변수를 한꺼번에 전달 가능
+                            <ul>
+                              <li>Hash 충돌 발생</li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>대응책
+                    <ul>
+                      <li>최신 패치</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>TCP Traffic Flooding (TCP Session, SYN Flooding, TCP Slow Read)
+            <ul>
+              <li>TCP Session Flooding : 3Way-Handshake 과정을 지나치게 많이 발생시킴</li>
+            </ul>
+          </li>
+          <li>L7 Service Flooding (Hash DoS, Hulk DoS, FTP/SMTP Attack)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>UDP Flooding 공격
+    <ul>
+      <li>다량의 UDP 패킷을 서버로 전송</li>
+      <li>서버가 보유한 네트워크 대역폭을 소진</li>
+      <li>정상적인 클라이언트의 접속을 하지 못하도록 함</li>
+    </ul>
+  </li>
+  <li>ICMP Flooding 공격
+    <ul>
+      <li>다량의 ICMP 패킷을 서버로 전송</li>
+      <li>서버가 보유한 네트워크 대역폭을 소진</li>
+      <li>정상적인 클라이언트의 접속을 하지 못하도록 함</li>
+    </ul>
+  </li>
+</ul>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC" class="page__taxonomy-item" rel="tag">네트워크</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88%EA%B8%B0%EC%82%AC" class="page__taxonomy-item" rel="tag">정보보안기사</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#is-certification" class="page__taxonomy-item" rel="tag">IS_Certification</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2021-02-23T19:00:00+09:00">February 23, 2021</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC+DDoS%20https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Network-DDoS%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Network-DDoS%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Network-DDoS%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/is_certification/IS-Network-DoS/" class="pagination--pager" title="정보보안 - 네트워크 DoS
+">이전</a>
+    
+    
+      <a href="/is_certification/UDP-Flooding/" class="pagination--pager" title="정보보안 - UDP Flooding
+">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Application-HTTP/" rel="permalink">정보보안 - HTTP
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-05-13T18:00:00+09:00">May 13, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Web 보안
+
+  웹프로토콜인 HTTP, TCP/IP 가 데이터에 대한 보안서비스를 제공하지 않음
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Application-Email/" rel="permalink">정보보안 - 이메일
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-04-30T18:00:00+09:00">April 30, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">이메일 보안
+이메일 구조
+
+  UA (User Agent)
+    
+      메시지 구성, 메시지 읽기 / 보내기 용도의 S/W
+    
+  
+  MTA (Message Transfer Agent)
+    
+      SMTP
+      MTA Client (User)
+     ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Application-FTP/" rel="permalink">정보보안 - FTP
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-04-27T18:00:00+09:00">April 27, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">FTP(File Transfer Protocol)
+FTP 개요
+
+  FTP 는 2개의 연결이 필요
+    
+      제어 연결 (Control Connection)
+        
+          21 번 포트 사용
+          명령을 전송할 때 사용 / 계속 연결 지속
+...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Network-VPN/" rel="permalink">정보보안 - 가상 사설망
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-03-23T18:00:00+09:00">March 23, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">가상사설망(Virtual Private Network)
+
+  개요
+    
+      공중 네트워크를 이용하여 전용선처럼 자신만의 고유 네트워크 효과를 누릴 수 있도록 하는 기술
+      데이터 전송 중 전송망에서의 침입자에 의한 데이터 왜곡, 노출을 터널링 기술(프로토콜의 한 ...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+<!--
+<script>
+	(function(d, h, m){
+    var js, fjs = d.getElementsByTagName(h)[0];
+    if (d.getElementById(m)){return;}
+    js = d.createElement(h); js.id = m;
+    js.onload = function(){
+        window.makerWidgetComInit({
+        position: "left",          
+        widget: "eqypoqmawbcz3azh-usiy9q7ma4ong1w1-juelcm3zfgcuwjds"                
+    })};
+    js.src = "https://makerwidget.com/js/embed.js";
+    fjs.parentNode.insertBefore(js, fjs)
+	}(document, "script", "dhm"))
+</script>
+-->
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:hyunik03@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 HY03. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://bluesplatter.com/is_certification/IS-Network-DDoS/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/is_certification/IS-Network-DDoS"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://bluesplatter.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

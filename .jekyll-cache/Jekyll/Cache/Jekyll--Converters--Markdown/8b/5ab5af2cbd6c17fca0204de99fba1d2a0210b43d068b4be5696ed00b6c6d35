@@ -1,0 +1,170 @@
+I"<ul>
+  <li>ICMP 프로토콜
+    <ul>
+      <li>개요
+        <ul>
+          <li>3계층 프로토콜
+            <ul>
+              <li>IP : 신뢰할 수 없는 프로토콜</li>
+              <li>ICMP : 에러발생 원인, 네트워크 상태 등 리포트</li>
+            </ul>
+          </li>
+          <li>기능
+            <ul>
+              <li>Error Message 기능</li>
+              <li>Query Message (네트워크 상태 조회)</li>
+            </ul>
+          </li>
+          <li>Type 필드 (Meesage 종류)</li>
+          <li>Code 필드 (Type 에 속하는 세부 내용)</li>
+        </ul>
+      </li>
+      <li>헤더 구조
+        <ul>
+          <li>Type : 8bit : ICMP 메시지 유형/용도
+            <ul>
+              <li>Type 3 : Destination Unreachable</li>
+            </ul>
+          </li>
+          <li>Code : 8bit : ICMP 메시지의 세부 내용
+            <ul>
+              <li>Code 3 : Port Unreachable (상대방 UDP 포트가 열려있지 않음 등)</li>
+            </ul>
+          </li>
+          <li>checksum : 16bit : ICMP 메시지 자체 오류에 대한 검사를 위함</li>
+          <li>Rest of header : 타입, 코드에 따라 추가되는 헤더가 있을 경우</li>
+          <li>Data Section : 데이터 영역</li>
+        </ul>
+      </li>
+      <li>메시지 유형
+        <ul>
+          <li>Error Message
+            <ul>
+              <li>Type 3 : Destination Unreachable
+                <ul>
+                  <li>Code 1 (Host Unreachable) : 목적지 호스트로 패킷 전송 실패</li>
+                  <li>Code 2 (Protocol Unreachable) : 목적지에서 특정 프로토콜을 사용할 수 없을 때</li>
+                  <li>Code 3 (Port Unreachable) : UDP 포트가 열려있지 않을 때</li>
+                  <li>Code 4 (Fragmentation needed) : DF Flag bit 이 1로 설정되어 있을 때 단편화를 해야만 하는 경우 리턴 메시지</li>
+                </ul>
+              </li>
+              <li>Type 5 : Redirection : 라우팅 경로가 잘못되어 새 경로로 보내야 할 경우
+                <ul>
+                  <li>ICMP Redirect 공격 시 이용할 수 있는 Msg</li>
+                </ul>
+              </li>
+              <li>Type 11 : Time exceeded : 시간초과
+                <ul>
+                  <li>시간 초과 시 패킷 전부 폐기</li>
+                  <li>Code 0 : TTL = 0</li>
+                  <li>Code 1 : Fragment Reassembly time exceeded</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Query Message
+            <ul>
+              <li>Type 8 : Echo (ping) Request
+                <ul>
+                  <li>Identifier : 식별자</li>
+                  <li>Sequence number : 메시지 순번</li>
+                </ul>
+              </li>
+              <li>Type 0 : Echo (ping) Reply
+                <ul>
+                  <li>Identifier : 식별자</li>
+                  <li>Sequence number : 메시지 순번</li>
+                  <li>Request 와 쌍이 맞아야 함</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>ICMP Redirect 공격
+    <ul>
+      <li>개요
+        <ul>
+          <li>ICMP Redirection Message (Type5)를 이용</li>
+          <li>패킷의 경로를 재설정</li>
+          <li>해당 메시지를 수신한 호스트는 자신의 라우팅 테이블을 변경</li>
+          <li>이러한 특성을 이용하여 ICMP Redirect 메시지를 공격자가 만듦</li>
+          <li>패킷이 자신에게 오도록 유도하여 스니핑을 함</li>
+        </ul>
+      </li>
+      <li>ARP Redirect 공격과의 비교
+        <ul>
+          <li>ARP Cache Table을 변경, 스니핑</li>
+        </ul>
+      </li>
+      <li>예시
+        <ul>
+          <li>공격자 IP : 192.168.120.110</li>
+          <li>수신자
+            <ul>
+              <li>IP : 192.168.120.100</li>
+              <li>Default Gateway : 192.168.120.1</li>
+            </ul>
+          </li>
+          <li>ICMP Redirection Message : 라우팅 경로가 잘못 되었을 때 Host 에게 알려주는 메시지</li>
+          <li>IP Packet을 Router / Gateway 가 전달 받고 경로가 잘못되었을 때 ICMP Redirection Message 를 송신</li>
+          <li>공격자는 Src IP를 게이트웨이 IP (192.168.120.1) 로 위조하고 수신자 (192.168.120.100) 에게 ICMP Redirection 메시지를 전송
+            <ul>
+              <li>메시지의 목적지 주소 (예: 10.10.10.10) 의 Gateway 주소를 자신의 주소 (192.168.120.110) 으로 설정하여 전송</li>
+            </ul>
+          </li>
+          <li>수신자는 공격을 받은 이후 Routing table 에 잘못된 정보를 생성
+            <ul>
+              <li>Dest: 10.10.10.10</li>
+              <li>Netmask : 255.255.255.255</li>
+              <li>Gateway : 192.168.120.110</li>
+              <li>Interface : 192.168.120.100</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>대처방법
+        <ul>
+          <li>ICMP Redirect (Type 5) 메시지 자체에 취약점을 가지고 있음</li>
+          <li>ICMP Redirect Message 에 라우팅 테이블이 변경되지 않도록 설정 (옵션해제)
+            <ul>
+              <li>리눅스
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">sysctl</code> (커널 매개변수 변경 등) (런타임 적용)</li>
+                  <li>vi 편집기로 <code class="language-plaintext highlighter-rouge">/etc/sysctl.conf</code> 변경 후 <code class="language-plaintext highlighter-rouge">sysctl -p</code> 로 적용</li>
+                  <li><code class="language-plaintext highlighter-rouge">#echo "net.ipv4.conf.[all|eth0|lo].accept_redirects=0" &gt;&gt; /etc/sysctl.conf</code>
+                    <ul>
+                      <li>송신 차단 : <code class="language-plaintext highlighter-rouge">send_redirects</code></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>sysctl
+            <ul>
+              <li>커널의 매개변수 변경 등에 사용</li>
+              <li><code class="language-plaintext highlighter-rouge">sysctl [옵션] [커널매개변수]</code>
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">-a</code> : 모든 변수 표시</li>
+                  <li><code class="language-plaintext highlighter-rouge">-w</code> : write -&gt; 변수값 설정</li>
+                  <li><code class="language-plaintext highlighter-rouge">-p</code> : 수정된 파일의 적용</li>
+                </ul>
+              </li>
+              <li>예 : ping 신호 차단
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">sysctl -w net.ipv4.icmp_echo_ignore_all=1</code></li>
+                  <li>vi 편집기로 <code class="language-plaintext highlighter-rouge">/etc/sysctl.conf</code> 의 <code class="language-plaintext highlighter-rouge">net.ipv4.icmp_echo_ignore_all=1</code> 설정</li>
+                  <li><code class="language-plaintext highlighter-rouge">#echo "net.ipv4.icmp_echo_ignore_all=1" &gt;&gt; /etc/sysctl.conf</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+:ET

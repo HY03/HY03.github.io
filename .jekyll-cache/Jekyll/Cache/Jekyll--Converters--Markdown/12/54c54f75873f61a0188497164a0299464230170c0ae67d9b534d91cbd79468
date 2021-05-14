@@ -1,0 +1,148 @@
+I"<h1 id="윈도우-인증">윈도우 인증</h1>
+
+<p><img src="/assets/images/posts/Security-Architecture-of-Windows.jpg" alt="Security-Architecture-of-Windows" />
+<a href="https://networkencyclopedia.com/security-reference-monitor/">이미지 출처</a></p>
+
+<p>윈도우 인증 구성 요소</p>
+
+<ul>
+  <li>Winlogon : 로그인 프로세스 (ID/PW 입력 윈도우 창)
+    <ul>
+      <li>GINA(msgina.dll) : 계정정보와 암호화 된 패스워드를 LSA에 전달</li>
+    </ul>
+  </li>
+  <li>LSA (Local Security Authority) - 보안 서브시스템 수행 (lsas.exe)
+    <ul>
+      <li>NTLM (윈도우 기본 인증 프로토콜), SAM 포함</li>
+      <li>모든 계정의 로그인(로컬, 원격 모두 포함)에 대한 검증</li>
+      <li>시스템 자원 및 파일 등에 대한 접근 권한 검사</li>
+      <li>계정명과 SID (Security ID) 매칭</li>
+      <li>SRM이 생성한 감사 로그 기록</li>
+      <li>전달받은 계정과 비밀번호를 검증하기 위해 NTLM 모듈을 로드하고 이를 통해 SAM에 접근</li>
+    </ul>
+  </li>
+  <li>SAM (Security Account Manager) 수행
+    <ul>
+      <li>사용자/그룹 계정, 암호화된 패스워드 정보(해시값) 에 대한 DB를 관리</li>
+      <li>SAM 파일 위치는 대게 %SystemRoot%\System32\config\sam 임</li>
+      <li>사용자 로그인 정보와 SAM 데이터베이스를 비교해서 일치여부를 SRM에 알림</li>
+    </ul>
+  </li>
+  <li>SRM (Security Reference Monitor) 수행
+    <ul>
+      <li>사용자에게 SID를 부여</li>
+      <li>SID에 기반하여 자원(파일, 디렉터리)에 대한 접근 허용 여부를 결정함</li>
+    </ul>
+  </li>
+</ul>
+
+<p>SID : Security ID</p>
+<ul>
+  <li>사용자 로그인 후 Access token 생성 : SID (보안 식별자) 포함</li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>S - 1 - 5 - 21 - xxxxxxxxx - 500</td>
+          <td>501</td>
+          <td>1000</td>
+          <td>…</td>
+        </tr>
+      </tbody>
+    </table>
+    <ul>
+      <li>S - 1 : 윈도우시스템</li>
+      <li>5 - 21 : 도메인컨트롤러 (AD에 대한 데이터베이스 소유) or 단독시스템</li>
+      <li>xxxxxxxxx : 컴퓨터 고유식별번호 (리부팅 시 변동)</li>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>500</td>
+              <td>501</td>
+              <td>1000 : 사용자 식별자</td>
+            </tr>
+          </tbody>
+        </table>
+        <ul>
+          <li>500 : 관리자</li>
+          <li>501 : 게스트</li>
+          <li>1000 이상 : 일반사용자</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>확인법 : WMIC 실행 후 useraccount list brief</li>
+</ul>
+
+<p>로컬인증의 흐름</p>
+<ul>
+  <li>로그인 프로세스 시작</li>
+  <li>Winlogon 에 ID / PW 입력</li>
+  <li>GINA 를 통해 계정정보와 암호화 된 패스워드를 LSA에 전달</li>
+  <li>LSA 는 NTLM 을 통해 SAM과 대조하여 계정을 검증</li>
+  <li>Access Token을 생성, 전달</li>
+  <li>로그인 프로세스 종료, 새로운 프로세스를 시작</li>
+</ul>
+
+<p>원격인증 (Domain 인증) 의 흐름</p>
+<ul>
+  <li>로그인 프로세스 시작</li>
+  <li>Winlogon 에 ID / PW 입력</li>
+  <li>GINA 를 통해 계정정보와 암호화 된 패스워드를 LSA에 전달</li>
+  <li>LSA 는 도메인  인증인지 판단 후 도메인컨트롤러에 커버로스 프로토콜로 인증 시도</li>
+  <li>도메인컨트롤러 의 LSA (커버로스, Active Directory) 를 통해 인증</li>
+  <li>Access Token을 생성, 전달</li>
+  <li>로그인 프로세스 종료, 새로운 프로세스를 시작</li>
+</ul>
+
+<p>SAM 취약점</p>
+<ul>
+  <li>SAM 은 사용자, 그룹 계정의 패스워드, SID 관리하는 중요파일 -&gt; 접근통제 필요</li>
+  <li>%SystemRoot%\System32\config\sam -&gt; 속성 -&gt; 보안 탭
+    <ul>
+      <li>그룹 또는 사용자 이름 : Everyone, System, Administrator</li>
+      <li>Everyone 을 제거해야 함.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>윈도우 인증 개요</p>
+<ul>
+  <li>ID, PW 인증방식은 PW 노출 및 패스워드 재사용 공격에 취약</li>
+  <li>윈도우는 Challenge &amp; Response 방식의 인증 구조를 사용
+    <ul>
+      <li>인증 요청 : 클라이언트가 서버에 인증 요청</li>
+      <li>Challenge 값 생성 / 전송 : 서버는 Challenge 값을 생성, 클라이언트에 전달</li>
+      <li>Response 값 생성 / 전송 : 전달받은 Challenge 값과 패스워드를 이용, Response 전송</li>
+      <li>Response 값 확인 및 인증성공</li>
+    </ul>
+  </li>
+</ul>
+
+<p>인증 암호 알고리즘</p>
+<ul>
+  <li>LM (Lan Manager) 해시 : 윈도우 2000, XP 기본 알고리즘, 취약</li>
+  <li>NTLM 해시 : LM 해시에 MD4 해시(취약) 가 추가, 취약</li>
+  <li>NTLMv2 해시 : Vista 이후 기본 인증 프로토콜.</li>
+  <li>Lan Manager
+    <ul>
+      <li>네트워크를 통한 파일/프린터 공유 작업시 인증을 담당하는 서비스</li>
+      <li>인증 수준 설정을 통해 네트워크 로그온에 사용할 Challenge/Response 인증 프로토콜을 결정하면 클라이언트가 사용하는 인증 프로토콜 수준, 협상된 세션 보안 수준, 서버가 사용하는 인증 수준에 영향을 줌. -&gt; NTLMv2 사용을 권장</li>
+    </ul>
+  </li>
+  <li>로컬 보안 정책 -&gt; 로컬 정책 -&gt; 보안 옵션 -&gt; 네트워크 보안: LAN Manager 인증 수준</li>
+</ul>
+
+<p>패스워드 크래킹</p>
+<ul>
+  <li>사전공격 (Dictionary Attack)</li>
+  <li>무차별/무작위 대입공격 (Brute Force Attack)</li>
+  <li>혼합공격 (Hybrid Attack) : 사전공격 + 무차별 공격 (문구 + 숫자나 특문)</li>
+  <li>레인보우 테이블 (Rainbow Table) 을 이용한 공격
+    <ul>
+      <li>해시 테이블과 R(Reduction) 함수를 이용</li>
+    </ul>
+  </li>
+</ul>
+:ET

@@ -1,0 +1,62 @@
+I"+	<h1 id="tcp-프로토콜">TCP 프로토콜</h1>
+<ul>
+  <li>개요
+    <ul>
+      <li>연결지향적 프로토콜 (Connection Oriented Protocol)
+        <ul>
+          <li>논리적 연결 통로를 먼저 생성 후 통신</li>
+          <li>순서 제어 : 데이터 전송순서 보장</li>
+        </ul>
+      </li>
+      <li>Stream 기반 전송방식
+        <ul>
+          <li>정해진 크기로 전송하지 않고 임의의 크기로 나눔</li>
+          <li>연속적으로 데이터 전송</li>
+        </ul>
+      </li>
+      <li>신뢰할 수 있는 프로토콜 (Reliable Protocol)
+        <ul>
+          <li>흐름 제어 (Flow Control)
+            <ul>
+              <li>송신측 버퍼가 500 Byte, 수신측 버퍼가 100 Byte 일 때 수신측 버퍼가 받을 수 있는 데이터만큼 전송</li>
+              <li>슬라이딩 윈도우 (Sliding Window)
+                <ul>
+                  <li>기본
+                    <ul>
+                      <li>송신 측에서 수신 측에 Segment 를 전송</li>
+                      <li>수신 측은 송신 측에 Ack (데이터 받았음) 을 전송</li>
+                      <li>반복 -&gt; RTT (Round Trip Time : 왕복시간) 가 증가함</li>
+                    </ul>
+                  </li>
+                  <li>수신측 Window Size 에 기반한 전송
+                    <ul>
+                      <li>수신 측 Window Size 에 기반해 Ack 확인 없이 연속적으로 데이터를 전송</li>
+                      <li>Throughtput 증가</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>오류 제어 (Error Control)
+            <ul>
+              <li>오류, 누락(손실) 이 발생할 경우 재전송 (Retransmission) 수행</li>
+            </ul>
+          </li>
+          <li>혼잡 제어 (Congestion Control)
+            <ul>
+              <li>네트워크가 혼잡하여 효율이 떨어질 경우</li>
+              <li>네트워크 혼잡도에 따라 Data 의 양을 조절</li>
+              <li>네트워크 혼잡도 판단 기준
+                <ul>
+                  <li>Data 의 손실 유무로 판단</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+:ET

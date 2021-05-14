@@ -1,0 +1,45 @@
+I"�<h1 id="udp-프로토콜">UDP 프로토콜</h1>
+<ul>
+  <li>개요
+    <ul>
+      <li>전송계층, TCP 와 함께 대표되는 프로토콜</li>
+      <li>비연결형 프로토콜 : 연결이 수립되지 않음 (Connectionless Protocol)
+        <ul>
+          <li>연결설정 과정 (예: 3 Way Handshake) 이 없음</li>
+          <li>Datagram 전송시마다 주소정보를 설정해서 전송</li>
+          <li>데이터 순서를 보장하지 않음</li>
+        </ul>
+      </li>
+      <li>비신뢰형 프로토콜 : 전송을 신뢰할 수 없음 (Unreliable Protocol)
+        <ul>
+          <li>TCP의 제어기능 등이 없음
+            <ul>
+              <li>Flow control</li>
+              <li>Error control</li>
+              <li>Congestion control</li>
+            </ul>
+          </li>
+          <li>상위 어플리케이션에 대한 식별기능 (IP, Port)</li>
+        </ul>
+      </li>
+      <li>Datagram 전송기반
+        <ul>
+          <li>데이터를 정해진 크기로 전송</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>장점
+    <ul>
+      <li>전송속도가 빠름 (단순, 가벼움)</li>
+      <li>대용량 송수신 부적절하나 한번의 패킷전송으로 송수신 완료되는 서비스에 적합
+        <ul>
+          <li>DNS (53/UDP)</li>
+          <li>DHCP (67,68/UDP)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>헤더 구조</li>
+</ul>
+:ET

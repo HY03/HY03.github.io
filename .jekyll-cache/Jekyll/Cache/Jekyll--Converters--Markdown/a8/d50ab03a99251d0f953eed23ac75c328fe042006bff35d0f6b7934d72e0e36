@@ -1,0 +1,71 @@
+I"+<ul>
+  <li>ARP / RARP 프로토콜
+    <ul>
+      <li>ARP
+        <ul>
+          <li>IP (논리주소) -&gt; MAC (물리주소) 로 변환</li>
+          <li>과정
+            <ul>
+              <li>질의자가 IP 를 브로드캐스트 하여 MAC 주소를 질의</li>
+              <li>해당하는 IP를 가진 응답자가 자신의 MAC 주소를 유니캐스트</li>
+              <li>해당하지 않는 Host 는 해당 프레임 폐기</li>
+            </ul>
+          </li>
+          <li>각 Host 는 ARP Cache 를 가지고 있음
+            <ul>
+              <li>일시적으로 보관</li>
+            </ul>
+          </li>
+          <li>ARP Cache 테이블
+            <ul>
+              <li>각각의 MAC/IP 정보를 일시적으로 보관</li>
+              <li>IP에 대한 MAC 질의 결과를 보관</li>
+              <li>윈도우
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">arp -a</code> 로 확인</li>
+                  <li>Type
+                    <ul>
+                      <li>dynamic : 동적 생성 (1~2분 유지)</li>
+                      <li>static : 관리자 할당 (재부팅시 삭제)</li>
+                    </ul>
+                  </li>
+                  <li><code class="language-plaintext highlighter-rouge">arp -d [ip]</code> 로 삭제
+                    <ul>
+                      <li>incomplete : 삭제된 직후 MAC 주소란에 표기됨</li>
+                    </ul>
+                  </li>
+                  <li><code class="language-plaintext highlighter-rouge">arp -s [ip] [mac]</code> 로 static 할당</li>
+                </ul>
+              </li>
+              <li>리눅스
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">arp -a</code> 로 확인
+                    <ul>
+                      <li>PERM : 관리자 할당 (static)</li>
+                    </ul>
+                  </li>
+                  <li><code class="language-plaintext highlighter-rouge">arp -d [ip]</code> 로 삭제</li>
+                  <li><code class="language-plaintext highlighter-rouge">arp -s [ip] [mac]</code> 로 static 할당</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>RARP
+        <ul>
+          <li>MAC (물리주소) -&gt; IP (논리주소) 로 변환</li>
+          <li>과정
+            <ul>
+              <li>Host 는 본인의 MAC 주소만 알고 IP를 모름 (하드디스크 없음)</li>
+              <li>질의자가 MAC 주소를 브로드캐스트 하여 IP를 질의</li>
+              <li>MAC / IP 정보를 가진 RARP 서버가 IP 주소를 유니캐스트</li>
+              <li>해당하지 않는 Host 는 해당 프레임 폐기</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+:ET

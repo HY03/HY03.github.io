@@ -1,0 +1,919 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.20.2 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>정보보안 - 네트워크 ICMP 프로토콜 | Bluesplatter</title>
+<meta name="description" content="ICMP 프로토콜            개요                    3계층 프로토콜                            IP : 신뢰할 수 없는 프로토콜               ICMP : 에러발생 원인, 네트워크 상태 등 리포트                                   기능                            Error Message 기능               Query Message (네트워크 상태 조회)                                   Type 필드 (Meesage 종류)           Code 필드 (Type 에 속하는 세부 내용)                       헤더 구조                    Type : 8bit : ICMP 메시지 유형/용도                            Type 3 : Destination Unreachable                                   Code : 8bit : ICMP 메시지의 세부 내용                            Code 3 : Port Unreachable (상대방 UDP 포트가 열려있지 않음 등)                                   checksum : 16bit : ICMP 메시지 자체 오류에 대한 검사를 위함           Rest of header : 타입, 코드에 따라 추가되는 헤더가 있을 경우           Data Section : 데이터 영역                       메시지 유형                    Error Message                            Type 3 : Destination Unreachable                                    Code 1 (Host Unreachable) : 목적지 호스트로 패킷 전송 실패                   Code 2 (Protocol Unreachable) : 목적지에서 특정 프로토콜을 사용할 수 없을 때                   Code 3 (Port Unreachable) : UDP 포트가 열려있지 않을 때                   Code 4 (Fragmentation needed) : DF Flag bit 이 1로 설정되어 있을 때 단편화를 해야만 하는 경우 리턴 메시지                                               Type 5 : Redirection : 라우팅 경로가 잘못되어 새 경로로 보내야 할 경우                                    ICMP Redirect 공격 시 이용할 수 있는 Msg                                               Type 11 : Time exceeded : 시간초과                                    시간 초과 시 패킷 전부 폐기                   Code 0 : TTL = 0                   Code 1 : Fragment Reassembly time exceeded                                                                   Query Message                            Type 8 : Echo (ping) Request                                    Identifier : 식별자                   Sequence number : 메시지 순번                                               Type 0 : Echo (ping) Reply                                    Identifier : 식별자                   Sequence number : 메시지 순번                   Request 와 쌍이 맞아야 함">
+
+
+  <meta name="author" content="HY03">
+  
+  <meta property="article:author" content="HY03">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Bluesplatter">
+<meta property="og:title" content="정보보안 - 네트워크 ICMP 프로토콜">
+<meta property="og:url" content="https://bluesplatter.com/is_certification/IS-Network-ICMP_Protocol/">
+
+
+  <meta property="og:description" content="ICMP 프로토콜            개요                    3계층 프로토콜                            IP : 신뢰할 수 없는 프로토콜               ICMP : 에러발생 원인, 네트워크 상태 등 리포트                                   기능                            Error Message 기능               Query Message (네트워크 상태 조회)                                   Type 필드 (Meesage 종류)           Code 필드 (Type 에 속하는 세부 내용)                       헤더 구조                    Type : 8bit : ICMP 메시지 유형/용도                            Type 3 : Destination Unreachable                                   Code : 8bit : ICMP 메시지의 세부 내용                            Code 3 : Port Unreachable (상대방 UDP 포트가 열려있지 않음 등)                                   checksum : 16bit : ICMP 메시지 자체 오류에 대한 검사를 위함           Rest of header : 타입, 코드에 따라 추가되는 헤더가 있을 경우           Data Section : 데이터 영역                       메시지 유형                    Error Message                            Type 3 : Destination Unreachable                                    Code 1 (Host Unreachable) : 목적지 호스트로 패킷 전송 실패                   Code 2 (Protocol Unreachable) : 목적지에서 특정 프로토콜을 사용할 수 없을 때                   Code 3 (Port Unreachable) : UDP 포트가 열려있지 않을 때                   Code 4 (Fragmentation needed) : DF Flag bit 이 1로 설정되어 있을 때 단편화를 해야만 하는 경우 리턴 메시지                                               Type 5 : Redirection : 라우팅 경로가 잘못되어 새 경로로 보내야 할 경우                                    ICMP Redirect 공격 시 이용할 수 있는 Msg                                               Type 11 : Time exceeded : 시간초과                                    시간 초과 시 패킷 전부 폐기                   Code 0 : TTL = 0                   Code 1 : Fragment Reassembly time exceeded                                                                   Query Message                            Type 8 : Echo (ping) Request                                    Identifier : 식별자                   Sequence number : 메시지 순번                                               Type 0 : Echo (ping) Reply                                    Identifier : 식별자                   Sequence number : 메시지 순번                   Request 와 쌍이 맞아야 함">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2021-02-01T16:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://bluesplatter.com/is_certification/IS-Network-ICMP_Protocol/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "HY03",
+      "url": "https://bluesplatter.com/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Bluesplatter Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo/logo.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          세상에 남기는 작은 흔적
+          <span class="site-subtitle">Bluesplatter</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/">연도별 포스트</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="https://bluesplatter.com/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#is_certification" itemprop="item"><span itemprop="name">Is_certification</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">정보보안 - 네트워크 ICMP 프로토콜</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/profile/photo.jpg" alt="HY03" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">HY03</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>저는 전문가가 아니고 이것 저것 알아보는 비전문가 입니다. <br /> 틀린 내용이 기술되어도 너그러이 봐주시고 댓글을 남겨주셨으면 좋겠습니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="http://bluesplatter.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:hyunik03@gmail.com">
+            <meta itemprop="email" content="hyunik03@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">이메일</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="정보보안 - 네트워크 ICMP 프로토콜">
+    <meta itemprop="description" content="  ICMP 프로토콜          개요                  3계층 프로토콜                          IP : 신뢰할 수 없는 프로토콜              ICMP : 에러발생 원인, 네트워크 상태 등 리포트                                기능                          Error Message 기능              Query Message (네트워크 상태 조회)                                Type 필드 (Meesage 종류)          Code 필드 (Type 에 속하는 세부 내용)                    헤더 구조                  Type : 8bit : ICMP 메시지 유형/용도                          Type 3 : Destination Unreachable                                Code : 8bit : ICMP 메시지의 세부 내용                          Code 3 : Port Unreachable (상대방 UDP 포트가 열려있지 않음 등)                                checksum : 16bit : ICMP 메시지 자체 오류에 대한 검사를 위함          Rest of header : 타입, 코드에 따라 추가되는 헤더가 있을 경우          Data Section : 데이터 영역                    메시지 유형                  Error Message                          Type 3 : Destination Unreachable                                  Code 1 (Host Unreachable) : 목적지 호스트로 패킷 전송 실패                  Code 2 (Protocol Unreachable) : 목적지에서 특정 프로토콜을 사용할 수 없을 때                  Code 3 (Port Unreachable) : UDP 포트가 열려있지 않을 때                  Code 4 (Fragmentation needed) : DF Flag bit 이 1로 설정되어 있을 때 단편화를 해야만 하는 경우 리턴 메시지                                            Type 5 : Redirection : 라우팅 경로가 잘못되어 새 경로로 보내야 할 경우                                  ICMP Redirect 공격 시 이용할 수 있는 Msg                                            Type 11 : Time exceeded : 시간초과                                  시간 초과 시 패킷 전부 폐기                  Code 0 : TTL = 0                  Code 1 : Fragment Reassembly time exceeded                                                              Query Message                          Type 8 : Echo (ping) Request                                  Identifier : 식별자                  Sequence number : 메시지 순번                                            Type 0 : Echo (ping) Reply                                  Identifier : 식별자                  Sequence number : 메시지 순번                  Request 와 쌍이 맞아야 함                                                                        ">
+    <meta itemprop="datePublished" content="2021-02-01T16:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">정보보안 - 네트워크 ICMP 프로토콜
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-02-01T16:00:00+09:00">February 1, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              
+
+            </nav>
+          </aside>
+        
+        <ul>
+  <li>ICMP 프로토콜
+    <ul>
+      <li>개요
+        <ul>
+          <li>3계층 프로토콜
+            <ul>
+              <li>IP : 신뢰할 수 없는 프로토콜</li>
+              <li>ICMP : 에러발생 원인, 네트워크 상태 등 리포트</li>
+            </ul>
+          </li>
+          <li>기능
+            <ul>
+              <li>Error Message 기능</li>
+              <li>Query Message (네트워크 상태 조회)</li>
+            </ul>
+          </li>
+          <li>Type 필드 (Meesage 종류)</li>
+          <li>Code 필드 (Type 에 속하는 세부 내용)</li>
+        </ul>
+      </li>
+      <li>헤더 구조
+        <ul>
+          <li>Type : 8bit : ICMP 메시지 유형/용도
+            <ul>
+              <li>Type 3 : Destination Unreachable</li>
+            </ul>
+          </li>
+          <li>Code : 8bit : ICMP 메시지의 세부 내용
+            <ul>
+              <li>Code 3 : Port Unreachable (상대방 UDP 포트가 열려있지 않음 등)</li>
+            </ul>
+          </li>
+          <li>checksum : 16bit : ICMP 메시지 자체 오류에 대한 검사를 위함</li>
+          <li>Rest of header : 타입, 코드에 따라 추가되는 헤더가 있을 경우</li>
+          <li>Data Section : 데이터 영역</li>
+        </ul>
+      </li>
+      <li>메시지 유형
+        <ul>
+          <li>Error Message
+            <ul>
+              <li>Type 3 : Destination Unreachable
+                <ul>
+                  <li>Code 1 (Host Unreachable) : 목적지 호스트로 패킷 전송 실패</li>
+                  <li>Code 2 (Protocol Unreachable) : 목적지에서 특정 프로토콜을 사용할 수 없을 때</li>
+                  <li>Code 3 (Port Unreachable) : UDP 포트가 열려있지 않을 때</li>
+                  <li>Code 4 (Fragmentation needed) : DF Flag bit 이 1로 설정되어 있을 때 단편화를 해야만 하는 경우 리턴 메시지</li>
+                </ul>
+              </li>
+              <li>Type 5 : Redirection : 라우팅 경로가 잘못되어 새 경로로 보내야 할 경우
+                <ul>
+                  <li>ICMP Redirect 공격 시 이용할 수 있는 Msg</li>
+                </ul>
+              </li>
+              <li>Type 11 : Time exceeded : 시간초과
+                <ul>
+                  <li>시간 초과 시 패킷 전부 폐기</li>
+                  <li>Code 0 : TTL = 0</li>
+                  <li>Code 1 : Fragment Reassembly time exceeded</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Query Message
+            <ul>
+              <li>Type 8 : Echo (ping) Request
+                <ul>
+                  <li>Identifier : 식별자</li>
+                  <li>Sequence number : 메시지 순번</li>
+                </ul>
+              </li>
+              <li>Type 0 : Echo (ping) Reply
+                <ul>
+                  <li>Identifier : 식별자</li>
+                  <li>Sequence number : 메시지 순번</li>
+                  <li>Request 와 쌍이 맞아야 함</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>ICMP Redirect 공격
+    <ul>
+      <li>개요
+        <ul>
+          <li>ICMP Redirection Message (Type5)를 이용</li>
+          <li>패킷의 경로를 재설정</li>
+          <li>해당 메시지를 수신한 호스트는 자신의 라우팅 테이블을 변경</li>
+          <li>이러한 특성을 이용하여 ICMP Redirect 메시지를 공격자가 만듦</li>
+          <li>패킷이 자신에게 오도록 유도하여 스니핑을 함</li>
+        </ul>
+      </li>
+      <li>ARP Redirect 공격과의 비교
+        <ul>
+          <li>ARP Cache Table을 변경, 스니핑</li>
+        </ul>
+      </li>
+      <li>예시
+        <ul>
+          <li>공격자 IP : 192.168.120.110</li>
+          <li>수신자
+            <ul>
+              <li>IP : 192.168.120.100</li>
+              <li>Default Gateway : 192.168.120.1</li>
+            </ul>
+          </li>
+          <li>ICMP Redirection Message : 라우팅 경로가 잘못 되었을 때 Host 에게 알려주는 메시지</li>
+          <li>IP Packet을 Router / Gateway 가 전달 받고 경로가 잘못되었을 때 ICMP Redirection Message 를 송신</li>
+          <li>공격자는 Src IP를 게이트웨이 IP (192.168.120.1) 로 위조하고 수신자 (192.168.120.100) 에게 ICMP Redirection 메시지를 전송
+            <ul>
+              <li>메시지의 목적지 주소 (예: 10.10.10.10) 의 Gateway 주소를 자신의 주소 (192.168.120.110) 으로 설정하여 전송</li>
+            </ul>
+          </li>
+          <li>수신자는 공격을 받은 이후 Routing table 에 잘못된 정보를 생성
+            <ul>
+              <li>Dest: 10.10.10.10</li>
+              <li>Netmask : 255.255.255.255</li>
+              <li>Gateway : 192.168.120.110</li>
+              <li>Interface : 192.168.120.100</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>대처방법
+        <ul>
+          <li>ICMP Redirect (Type 5) 메시지 자체에 취약점을 가지고 있음</li>
+          <li>ICMP Redirect Message 에 라우팅 테이블이 변경되지 않도록 설정 (옵션해제)
+            <ul>
+              <li>리눅스
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">sysctl</code> (커널 매개변수 변경 등) (런타임 적용)</li>
+                  <li>vi 편집기로 <code class="language-plaintext highlighter-rouge">/etc/sysctl.conf</code> 변경 후 <code class="language-plaintext highlighter-rouge">sysctl -p</code> 로 적용</li>
+                  <li><code class="language-plaintext highlighter-rouge">#echo "net.ipv4.conf.[all|eth0|lo].accept_redirects=0" &gt;&gt; /etc/sysctl.conf</code>
+                    <ul>
+                      <li>송신 차단 : <code class="language-plaintext highlighter-rouge">send_redirects</code></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>sysctl
+            <ul>
+              <li>커널의 매개변수 변경 등에 사용</li>
+              <li><code class="language-plaintext highlighter-rouge">sysctl [옵션] [커널매개변수]</code>
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">-a</code> : 모든 변수 표시</li>
+                  <li><code class="language-plaintext highlighter-rouge">-w</code> : write -&gt; 변수값 설정</li>
+                  <li><code class="language-plaintext highlighter-rouge">-p</code> : 수정된 파일의 적용</li>
+                </ul>
+              </li>
+              <li>예 : ping 신호 차단
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">sysctl -w net.ipv4.icmp_echo_ignore_all=1</code></li>
+                  <li>vi 편집기로 <code class="language-plaintext highlighter-rouge">/etc/sysctl.conf</code> 의 <code class="language-plaintext highlighter-rouge">net.ipv4.icmp_echo_ignore_all=1</code> 설정</li>
+                  <li><code class="language-plaintext highlighter-rouge">#echo "net.ipv4.icmp_echo_ignore_all=1" &gt;&gt; /etc/sysctl.conf</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC" class="page__taxonomy-item" rel="tag">네트워크</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88%EA%B8%B0%EC%82%AC" class="page__taxonomy-item" rel="tag">정보보안기사</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#is-certification" class="page__taxonomy-item" rel="tag">IS_Certification</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2021-02-01T16:00:00+09:00">February 1, 2021</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC+ICMP+%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C%20https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Network-ICMP_Protocol%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Network-ICMP_Protocol%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Network-ICMP_Protocol%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/is_certification/IS-Network-IP_Protocol/" class="pagination--pager" title="정보보안 - 네트워크 IP 프로토콜
+">이전</a>
+    
+    
+      <a href="/is_certification/IS-Network-TCP_Protocol/" class="pagination--pager" title="정보보안 - 네트워크 TCP 프로토콜
+">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Application-HTTP/" rel="permalink">정보보안 - HTTP
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-05-13T18:00:00+09:00">May 13, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Web 보안
+
+  웹프로토콜인 HTTP, TCP/IP 가 데이터에 대한 보안서비스를 제공하지 않음
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Application-Email/" rel="permalink">정보보안 - 이메일
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-04-30T18:00:00+09:00">April 30, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">이메일 보안
+이메일 구조
+
+  UA (User Agent)
+    
+      메시지 구성, 메시지 읽기 / 보내기 용도의 S/W
+    
+  
+  MTA (Message Transfer Agent)
+    
+      SMTP
+      MTA Client (User)
+     ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Application-FTP/" rel="permalink">정보보안 - FTP
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-04-27T18:00:00+09:00">April 27, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">FTP(File Transfer Protocol)
+FTP 개요
+
+  FTP 는 2개의 연결이 필요
+    
+      제어 연결 (Control Connection)
+        
+          21 번 포트 사용
+          명령을 전송할 때 사용 / 계속 연결 지속
+...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Network-VPN/" rel="permalink">정보보안 - 가상 사설망
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-03-23T18:00:00+09:00">March 23, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">가상사설망(Virtual Private Network)
+
+  개요
+    
+      공중 네트워크를 이용하여 전용선처럼 자신만의 고유 네트워크 효과를 누릴 수 있도록 하는 기술
+      데이터 전송 중 전송망에서의 침입자에 의한 데이터 왜곡, 노출을 터널링 기술(프로토콜의 한 ...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+<!--
+<script>
+	(function(d, h, m){
+    var js, fjs = d.getElementsByTagName(h)[0];
+    if (d.getElementById(m)){return;}
+    js = d.createElement(h); js.id = m;
+    js.onload = function(){
+        window.makerWidgetComInit({
+        position: "left",          
+        widget: "eqypoqmawbcz3azh-usiy9q7ma4ong1w1-juelcm3zfgcuwjds"                
+    })};
+    js.src = "https://makerwidget.com/js/embed.js";
+    fjs.parentNode.insertBefore(js, fjs)
+	}(document, "script", "dhm"))
+</script>
+-->
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:hyunik03@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 HY03. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://bluesplatter.com/is_certification/IS-Network-ICMP_Protocol/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/is_certification/IS-Network-ICMP_Protocol"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://bluesplatter.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

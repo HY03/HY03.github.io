@@ -1,0 +1,862 @@
+I"v<h1 id="무선-네트워크-유형">무선 네트워크 유형</h1>
+<ul>
+  <li>WPAN : Wireless Personal Area Network
+    <ul>
+      <li>별도의 무선장비가 필요없음
+        <ul>
+          <li>Bluetooth</li>
+          <li>USN (Ubiquotous Sensor Network)</li>
+        </ul>
+      </li>
+      <li>소규모 무선 네트워크</li>
+      <li>단거리 네트워크</li>
+    </ul>
+  </li>
+  <li>WLAN : Wireless Local Area Network
+    <ul>
+      <li>근거리 네트워크
+        <ul>
+          <li>학교, 회사</li>
+        </ul>
+      </li>
+      <li>안전 관리가 중요</li>
+    </ul>
+  </li>
+  <li>WMAN : Wireless Metropolitan Area Network
+    <ul>
+      <li>도시규모 네트워크</li>
+      <li>IEEE 802.16 표준 사용
+        <ul>
+          <li>WiMAX &gt; Mobile WiMAX = Wibro</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="무선랜-표준">무선랜 표준</h1>
+<ul>
+  <li><strong>802.11 (1997)</strong> : 주파수 대역 2.4GHz, 속도 20~100MBps
+    <ul>
+      <li>전송방법 &gt; ISM : Industrial Scientific Medical 3 종류</li>
+      <li>암호화방식
+        <ul>
+          <li>WEP
+            <ul>
+              <li>무선 AP 와 단말기 간 송수신</li>
+              <li>공유 비밀키와 IV (초기벡터) 를 이용, 64 or 128 Bit 암호화</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>802.11a (1999) : 주파수 대역 5GHz, 속도 35~120MBps
+    <ul>
+      <li>주파수가 다르므로 타 방식과 호환 X
+        <ul>
+          <li>Bluetooth 등의 간섭을 받지 않음 &gt; 통신위성 등이 사용</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>802.11b (1999) : 주파수 대역 2.4GHz, 속도 38~140MBps</li>
+  <li>802.11g (2003) : 주파수 대역 2.4GHz, 속도 38~140MBps
+    <ul>
+      <li>가장 많이 사용</li>
+    </ul>
+  </li>
+  <li><strong>802.11i (2004)</strong> : 가장 보안상 안전한 방식으로 알려짐
+    <ul>
+      <li>무선장비와 단말기 간의 가상인증기능 (EAP) 을 제공
+        <ul>
+          <li>Extensible Authentication Protocol</li>
+        </ul>
+      </li>
+      <li>인증과 데이터 암호화 강화</li>
+      <li>WPA
+        <ul>
+          <li>WPA 개인 &gt; PSK 모드
+            <ul>
+              <li>PSK : 인증서버 설치 X &gt; 소규모</li>
+              <li>CCMP 암호화 (WPA-2)
+                <ul>
+                  <li>128Bit AES 블록 암호화</li>
+                  <li>Counter Mode, CBC MAC Mode 이용</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>WPA 기업(엔터프라이즈) &gt; Radius 인증
+            <ul>
+              <li>EAP / Radius : Radius 인증서버</li>
+              <li>TKIP 암호화 (WPA-1) : WEP(802.11) 의 문제점 보완</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>802.11n (2009) : 주파수 대역 2.4 ~ 5GHz, 속도 70~250MBps
+    <ul>
+      <li>MIMO 안테나, 수신장비를 통한 성능 향상 목적</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="무선랜-환경">무선랜 환경</h1>
+<ul>
+  <li>상용 무선랜 환경
+    <ul>
+      <li>이동통신사가 고객 서비스용으로 구축</li>
+      <li>USIM 이나 MAC, ID/PW 로 사용</li>
+    </ul>
+  </li>
+  <li>공중 무선랜 환경
+    <ul>
+      <li>공공기관, 호텔, 까페 등에서 불특정 다수에게 서비스</li>
+      <li>보안상 취약</li>
+    </ul>
+  </li>
+  <li>사설 무선랜 환경
+    <ul>
+      <li>일반공유기를 통해 사용</li>
+    </ul>
+  </li>
+  <li>기업 무선랜 환경
+    <ul>
+      <li>기업 내부 업무용으로 구축</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="무선랜-네트워크-wlan-유형-80211">무선랜 네트워크 (WLAN) 유형 (802.11)</h1>
+<ul>
+  <li>장비 설명
+    <ul>
+      <li>단말기</li>
+      <li>무선 AP
+        <ul>
+          <li>유선랜 말단에 연결</li>
+          <li>무선 네트워크 관련 여러 설정값을 가지고 있음</li>
+          <li>무선표준에 따라 서비스 범위가 다름</li>
+        </ul>
+      </li>
+      <li>무선 브릿지
+        <ul>
+          <li>2개 이상의 무선 랜을 연결하는 장비</li>
+        </ul>
+      </li>
+      <li>무선랜카드
+        <ul>
+          <li>무선통신을 위해 전파를 송수신하는 장비</li>
+          <li>단말기, AP 장비에 장착</li>
+        </ul>
+      </li>
+      <li>무선랜안테나
+        <ul>
+          <li>무선전파를 멀리 송수신하기 위한 장비</li>
+          <li>지향성 / 무지향성 : 방향의 유무</li>
+        </ul>
+      </li>
+      <li>사용자 인증서버
+        <ul>
+          <li>무선랜 사용자의 인증을 위한 장비</li>
+          <li>인증키 관리</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>infrastructure 모드 (Client / Server)
+    <ul>
+      <li>무선 AP와 단말기 간 통신
+        <ul>
+          <li>단말기간 직접 통신이 불가, 무선 AP 를 경유 통신</li>
+        </ul>
+      </li>
+      <li>1개 이상의 무선 AP로 구성
+        <ul>
+          <li>무선 AP 는 기업용 백본이나 초고속 인터넷 라인에 연결</li>
+          <li>BSS(Base Service Sets) : 무선 AP 와 무선단말기의 최소 규모 무선랜</li>
+          <li>DS(Distribution System) : 여러 개의 BSS를 포함</li>
+          <li>ESS(Extended Service Set) : 802.11 표준에서는 다수의 BSS 를 갖는 네트워크를 일컬음</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Ad-hoc 모드 (Peer to Peer)
+    <ul>
+      <li>AP 없이 단말기 간 통신</li>
+      <li>보안 취약
+        <ul>
+          <li>암호화의 신뢰성 구축 필요
+            <ul>
+              <li>많은 단말기들을 그룹화</li>
+              <li>그룹 별 대표 노드 설정 (서버노드 역할)
+                <ul>
+                  <li>그룹의 대표로 공개키를 교환</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>성능 제한, 전원 제한</li>
+      <li>라우팅 문제
+        <ul>
+          <li>단말의 이동, 성능과 전원 제한 : Reactive Route (반응경로) 사용</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="무선랜-보안-취약점">무선랜 보안 취약점</h1>
+<ul>
+  <li>무선인터넷 서비스의 취약점
+    <ul>
+      <li>WEP (Wired Equivalent Privacy) : 802.11 에서 없었고, 802.11b 에서 추가
+        <ul>
+          <li>인증과정</li>
+          <li>무선전송데이터의 암호화</li>
+          <li>최근에는 사용하지 않음</li>
+        </ul>
+      </li>
+      <li>공격방법
+        <ul>
+          <li>AP DoS</li>
+          <li>불법 AP (정보유출)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>물리적 보안 취약점 (무선장비)
+    <ul>
+      <li>무선 AP : 외부에 노출되어 있음
+        <ul>
+          <li>문제점
+            <ul>
+              <li>도난, 파손</li>
+              <li>리셋에 의한 구성 설정 초기화</li>
+              <li>전원차단</li>
+              <li>LAN 차단 (내부네트워크 케이블 절체)</li>
+            </ul>
+          </li>
+          <li>해결책
+            <ul>
+              <li>비인가자 접근금지</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>무선단말기 : 노트북, 스마트폰 등
+        <ul>
+          <li>해결책
+            <ul>
+              <li>로그인 등의 락, 비인가자 접근금지</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>기술적인 취약점
+    <ul>
+      <li>도청 가능성이 높음
+        <ul>
+          <li>문제점
+            <ul>
+              <li>전파 이용 : 공기를 전송매체로 사용 (브로드캐스트)</li>
+              <li>AP 에서 전송하는 전파를 도청</li>
+              <li>무선랜 분석 S/W 를 이용해 정보 획득 (Net Stumbler)</li>
+              <li>SSID : Service Set Identifier &gt; 무선랜 구분 식별자
+                <ul>
+                  <li>무선랜 목록에 뜨는 이름과 비슷</li>
+                </ul>
+              </li>
+              <li>암호화 방식</li>
+              <li>속도</li>
+            </ul>
+          </li>
+          <li>해결책
+            <ul>
+              <li>전송시 암호화</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>서비스거부 (DoS)
+        <ul>
+          <li>문제점
+            <ul>
+              <li>무선 AP에 대량의 무선 패킷을 전송
+                <ul>
+                  <li>강한 방해전파를 송신에 통신에 문제를 일으킴</li>
+                  <li>클라이언트는 SSID 를 이용 Probe Request 를 무선 AP에 전송</li>
+                  <li>무선 AP는 클라이언트에 Probe Response 전송</li>
+                  <li>Attacker 는 대량으로 Probe Request 를 전송</li>
+                  <li>무선 AP는 Attacker 에게 Probe Response를 전송 (부하)</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>해결책
+            <ul>
+              <li>별도의 유선 LAN 을 마련</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>불법 AP (Rogue AP)
+        <ul>
+          <li>문제점
+            <ul>
+              <li>설치 유무를 탐지하는 것은 어렵지 않으나, 장소를 특정하기 어려움</li>
+            </ul>
+          </li>
+          <li>해결책
+            <ul>
+              <li>설치가 되지 않도록 함</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>무선암호화
+        <ul>
+          <li>WEP
+            <ul>
+              <li>64 bit key 이용
+                <ul>
+                  <li>MAC Frame (비밀 공유키) 40 bit</li>
+                  <li>IV (Initialization Vector) 24bit</li>
+                </ul>
+              </li>
+              <li>RC4 알고리즘 (64 bit key)
+                <ul>
+                  <li>취약점이 많은 알고리즘 : 거의 사용하지 않음</li>
+                </ul>
+              </li>
+              <li>동일한 패스워드 문장으로 4개의 공유키를 생성하여 그중 1개를 택</li>
+              <li>선택된 공유키, 키 ID, Value 값을 평문으로 상대에게 알려줌</li>
+              <li>IV 길이 24 비트의 길이가 너무 짧기 때문에 재사용이 될 수 있음</li>
+              <li>키 길이 (64 bit) 가 너무 짧음ㄱ</li>
+            </ul>
+          </li>
+          <li>WPA/WPA2 (WEP 보다 안전)
+            <ul>
+              <li>Preshared Key : PSK
+                <ul>
+                  <li>인증서버가 설치되어 있지 않은 소규모 망에서 사용</li>
+                  <li>인증단계에서 사용 (4Way-Handshaking)</li>
+                  <li>PSK 값을 전송패킷의 수집을 통해 추측가능 취약점</li>
+                  <li>알아내기 어려움</li>
+                  <li>해결책
+                    <ul>
+                      <li>긴 길이의 비밀키 설정</li>
+                      <li>추가적으로 인증서버 사용 권장</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>802.1x / EAP</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>비인가 접근 (SSID 노출)
+        <ul>
+          <li>무선랜은 기본적으로 개방형 인증방식을 사용 &gt; 별도 인증절차 없음</li>
+          <li>브로드캐스팅 된 SSID 의 노출로 비인가 접근이 가능</li>
+          <li>공격자는 공격에 사용되는 기본적 정보를 획득 가능</li>
+        </ul>
+      </li>
+      <li>비인가 접근 (MAC 주소 노출)
+        <ul>
+          <li>무선랜 환경에서는 접근제어를 위해 MAC 주소를 필터링함
+            <ul>
+              <li>무선랜카드의 MAC 주소를 이용해 무선랜 서비스 접속을 제한</li>
+            </ul>
+          </li>
+          <li>공격자는 정상사용자의 MAC 주소를 도용 &gt; MAC 주소 필터링 무력화</li>
+          <li>예:
+            <ul>
+              <li>Attacker : AA-BB-CC-01-02-03</li>
+              <li>AP : MAC 정보를 DB와 하여 관리</li>
+              <li>정상건 :
+                <ul>
+                  <li>
+                    <ol>
+                      <li>Attacker : 접속 요청</li>
+                    </ol>
+                  </li>
+                  <li>
+                    <ol>
+                      <li>AP : MAC 확인</li>
+                    </ol>
+                  </li>
+                  <li>
+                    <ol>
+                      <li>AP : 접속제한</li>
+                    </ol>
+                  </li>
+                </ul>
+              </li>
+              <li>비인가 접근 : &gt; 내부 네트워크까지 접속할 수 있는 보안상 문제 발생
+                <ul>
+                  <li>
+                    <ol>
+                      <li>Attacker : 정상사용자의 MAC 정보 수집</li>
+                    </ol>
+                  </li>
+                  <li>
+                    <ol>
+                      <li>Attacker : 정상사용자 MAC 도용</li>
+                    </ol>
+                  </li>
+                  <li>
+                    <ol>
+                      <li>Attacker : 접속 요청</li>
+                    </ol>
+                  </li>
+                  <li>
+                    <ol>
+                      <li>AP : MAC 확인</li>
+                    </ol>
+                  </li>
+                  <li>
+                    <ol>
+                      <li>AP : 접속허용</li>
+                    </ol>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>관리적인 취약점
+    <ul>
+      <li>무선랜 장비에 대한 관리 미흡
+        <ul>
+          <li>문제점
+            <ul>
+              <li>대부분 기관에서는 AP 의 개수정도만 파악하고 있음</li>
+            </ul>
+          </li>
+          <li>해결책
+            <ul>
+              <li>AP, 무선랜카드 장비 운영 현황, 사용자 현황 등을 파악해야 함</li>
+              <li>기본값, 초기값 재설정 필요</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>사용자 보안 의식 결여
+        <ul>
+          <li>문제점
+            <ul>
+              <li>사용자 보안 정책을 따르지 않음
+                <ul>
+                  <li>보안기능 설정을 하지 않는 것</li>
+                  <li>협력업체, 외부 관계자에게 보안설정값, 암호키값 유출</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>해결책
+            <ul>
+              <li>무선랜 관리자, 사용자의 보안 의식 고취</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>전파 출력에 대한 관리 부족
+        <ul>
+          <li>문제점
+            <ul>
+              <li>유선 네트워크 관리자가 무선 네트워크 관리를 겸하는 경우 전파 자원 관리의 미흡</li>
+              <li>무선랜 채널 설정 미흡 (주파수 간섭이 일어나지 않도록 채널 설정 필요)
+                <ul>
+                  <li>주변 AP 와 3 채널 이상 떨어져야 전파 간섭이 일어나지 않음</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>해결책
+            <ul>
+              <li>전파 출력 조정이 필요 (외부로 전파가 유출되지 않도록 함)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="무선랜-사용자-인증-취약성과-대응-기술">무선랜 사용자 인증 취약성과 대응 기술</h1>
+
+<ul>
+  <li>SSID 설정과 폐쇄시스템 운영
+    <ul>
+      <li>SSID 설정
+        <ul>
+          <li>SSID : AP가 제공하는 무선랜망 구별을 위한 식별자</li>
+          <li>SSID 신호는 기본설정값 : 브로드캐스트로 제공
+            <ul>
+              <li>무선랜 관리자가 SSID를 브로드캐스트 하지 않음 (숨김모드)
+                <ul>
+                  <li>SSID 를 아는 사람만 접속 가능 (인가된 사용자)</li>
+                  <li>공격자는 SSID를 알아낼 수 있으나 시간/자원 소모 (분석도구 활용)</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>읽고 기억하기 쉬운 값(기관이름 등)으로 설정</li>
+        </ul>
+      </li>
+      <li>폐쇄시스템 운영
+        <ul>
+          <li>폐쇄시스템 : 네트워크에 개방된 자원이 없도록 관리
+            <ul>
+              <li>공유폴더를 네트워크에 개방 X</li>
+              <li>공유폴더를 반드시 사용해야 하는 경우 암호 설정, 사용자 설정</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>SSID 숨김 모드 + 접근제한 규칙 적용
+        <ul>
+          <li>USER : AP 에 연결 요청 (SSID 값을 미리 알아야 함/채널 값 바꿔가며 전송)</li>
+          <li>AP : USER 에 연결요청 응답</li>
+          <li>USER : AP 에 인증 정보 전송</li>
+          <li>AP : USER 접속 허용</li>
+          <li>(USER는 단말기 IP, 서브넷 MASK, GATEWAY, DNS 설정이 되어야 함)</li>
+          <li>(USER : AP 의 DHCP 활용)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>MAC 주소 인증
+    <ul>
+      <li>MAC 주소 필터링
+        <ul>
+          <li>무선 LAN 카드에도 MAC 주소가 존재</li>
+          <li>
+            <ol>
+              <li>AP 에 무선 LAN 카드의 MAC 주소를 사전에 등록
+                <ul>
+                  <li>무선단말기의 MAC 주소를 일괄 등록해주는 작업이 필요</li>
+                </ul>
+              </li>
+            </ol>
+          </li>
+          <li>
+            <ol>
+              <li>스위치 / 라우터에 MAC 주소 등록
+                <ul>
+                  <li>스위치 / 라우터에 부하가 걸리는 문제가 발생</li>
+                </ul>
+                <ul>
+                  <li>경로 설정, 데이터 전송 설정에 부하</li>
+                </ul>
+              </li>
+            </ol>
+          </li>
+          <li>
+            <ol>
+              <li>인증 서버에 MAC 주소 등록
+                <ul>
+                  <li>AP 에 저장하는 경우 AP의 메모리 소모</li>
+                  <li>인증서버 사용 시 MAC 주소 정보 저장 한계 극복</li>
+                  <li>각 AP마다 관리하던 MAC 주소를 한 곳에서 관리</li>
+                  <li>동적 WEP 적용 가능</li>
+                  <li>IEEE 802.1X EAP 인증기능 사용 가능</li>
+                </ul>
+              </li>
+            </ol>
+          </li>
+        </ul>
+      </li>
+      <li>장점
+        <ul>
+          <li>인가된 사용자만 접근</li>
+          <li>간단한 보안설정</li>
+          <li>여러 접근제어 수행 가능</li>
+        </ul>
+      </li>
+      <li>단점
+        <ul>
+          <li>장비 관리에 노력 필요 (MAC 주소 노출 등 문제)</li>
+          <li>MAC 주소 관리 리소스 필요 (관리 어려움)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>WEP 인증 메커니즘
+    <ul>
+      <li>개요
+        <ul>
+          <li>유선에서 제공하는 수준의 보안을 제공하기 위한 목적
+            <ul>
+              <li>Data 암호화</li>
+              <li>사용자 인증</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>절차
+        <ul>
+          <li>같은 공유키를 갖는 사용자를 정상적인 사용자로 인식</li>
+          <li>사용자 : AP 연결 요청 (SSID)</li>
+          <li>AP : 임의의 문장 생성 후 원본 저장</li>
+          <li>AP : 연결 요청 응답 ( + 문장 전송)</li>
+          <li>사용자 : 암호문 전송 (자신이 가진 공유키로 문장 암호화(WEP))</li>
+          <li>AP : 자신의 키로 복호화, 원본과 비교 후 연결 허용</li>
+        </ul>
+      </li>
+      <li>인증 메커니즘의 취약점
+        <ul>
+          <li>단방향 인증방식에 대한 취약성
+            <ul>
+              <li>Clone AP (복제 AP) 로 인한 피해
+                <ul>
+                  <li>복제 AP 는 강력한 신호로 사용자를 속이고, 거짓 인증을 요구해 사용자 인증정보를 취득</li>
+                  <li>인증 결과에 관계없이 통신을 사용할 수 있게 해주고, 데이터를 스니핑</li>
+                  <li>AP는 사용자를 검증하나, 사용자는 AP를 검증하지 않음</li>
+                </ul>
+              </li>
+              <li>업체나 기관에서 AP 가 정상 AP 인지 확인해야 함</li>
+            </ul>
+          </li>
+          <li>고정된 공유키 취약점
+            <ul>
+              <li>무선 랜을 사용하는 모든 장비가 동일 고정 키를 사용
+                <ul>
+                  <li>키가 외부로 유출될 확률이 높음</li>
+                </ul>
+              </li>
+              <li>협력업체 직원, 방문객, 퇴사자 등을 통해 WEP 값이 외부로 노출 될 수 있음
+                <ul>
+                  <li>WEP 값 주기적으로 변경 필요
+                    <ul>
+                      <li>사용자 / 무선랜 장비가 많을 경우 주기적 변경에 어려움</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>동적 WEP
+                <ul>
+                  <li>무선 랜 환경에서 인증서버 적용
+                    <ul>
+                      <li>인증서버가 서로 다른 WEP 값을 배분</li>
+                      <li>시간이 지나면 사용자에게 WEP 키 값을 갱신 요청</li>
+                    </ul>
+                  </li>
+                  <li>AP 가 동적 WEP (802.1X) 를 지원해야 함</li>
+                  <li>관리 패킷의 증가로 성능 저하가 있을 수 있음</li>
+                  <li>여전히 단방향 인증방식임</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>EAP 인증 메커니즘 (확장 인증 프로토콜)
+    <ul>
+      <li>개요
+        <ul>
+          <li>Extensible Authentication Protocol</li>
+          <li>초기 PPP (Point to Point Protocol) 에서 사용될 수 있도록 개발</li>
+          <li>현재 IEEE 802.1X (무선랜) 에서 사용</li>
+          <li>다양한 인증방식 에서 사용할 수 있음
+            <ul>
+              <li>MD5, TLS, TTLS (터널 방식 TLS), PEAP …</li>
+              <li>PPP, 802.3, 802.11 …</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>동작방식
+        <ul>
+          <li>USER : AP에 802.11 연결 요청
+            <ul>
+              <li>EAPOL 프로토콜 : EAP over LAN - 랜을 통해 요청</li>
+            </ul>
+          </li>
+          <li>AP : USER 에 연결 응답</li>
+          <li>USER : AP에 EAPOL-시작 메시지 전송 « 사용자 인증 방법 시작 부분</li>
+          <li>AP : USER에 EAPOL 요청메시지 + AP 식별자</li>
+          <li>USER : AP에 EAPOL 응답메시지 (사용자 명, 암호) + 식별자</li>
+          <li>AP : 인증서버에 RADIUS 접속 요청</li>
+          <li>인증서버 : AP에 RADIUS 접속 Challenge 전송</li>
+          <li>AP : USER에 EAPOL 요청메시지 + Challenge</li>
+          <li>USER : AP에 EAPOL 응답 (Hash 메시지 전송)</li>
+          <li>AP : 인증서버에 RAIDUS 접속 요청</li>
+          <li>인증서버 : USER 의 응답메시지 비교 후 AP에 접속 허용 전달</li>
+          <li>AP : USER에 EAPOL 인증 성공</li>
+        </ul>
+      </li>
+      <li>EAP 인증 방법
+        <ul>
+          <li>EAP-MD5
+            <ul>
+              <li>단방향 인증방식 이용</li>
+              <li>PW 기반</li>
+              <li>MD5 Challenge (MD5는 동적 WEP X)</li>
+              <li>인증 소요시간이 짧음</li>
+            </ul>
+          </li>
+          <li>EAP-TLS (인증서 기반, 양방향 인증, 인증서 관리, PW 방식보다 보안 강력)
+            <ul>
+              <li>AP : USER 에 연결 응답</li>
+              <li>USER : AP에 EAPOL-시작 메시지 전송 « 사용자 인증 방법 시작 부분</li>
+              <li>AP : USER에 EAPOL 요청메시지 + AP 식별자</li>
+              <li>USER : AP에 EAPOL 응답메시지 (사용자 명, 암호) + 식별자</li>
+              <li>AP : 인증서버에 RADIUS 접속 요청</li>
+              <li>(AP 는 중간에서 중계)</li>
+              <li>인증서버 : USER에 EAP 요청/TLS Start 전송</li>
+              <li>USER : 인증서버에 TLS Client Hello 전송</li>
+              <li>인증서버 : 서버 인증서정보, Server Hello 전송</li>
+              <li>USER : 서버 인증서를 토대로 서버인증, 클라이언트 인증서정보 전송</li>
+              <li>인증서버 : Challenge Cipher Spec 전송</li>
+              <li>USER : 응답메시지 전송</li>
+              <li>인증서버 : 인증성공 메시지 전송</li>
+            </ul>
+          </li>
+          <li>EAP-TTLS (CHAP, OTP)
+            <ul>
+              <li>인증서 개수가 줄어듬</li>
+              <li>관리 용이</li>
+              <li>사용자는 TTLS 서버로부터 부여된 인증서를 인증</li>
+              <li>최종 사용자 익명성 보장</li>
+              <li>RADIUS DATABASE 재사용</li>
+              <li>구성이 복잡
+                <ul>
+                  <li>USER, AP, TTLS 서버, 인증서버</li>
+                </ul>
+              </li>
+              <li>(앞 부분 생략)</li>
+              <li>TTLS서버 : USER 에 TTLS START 전송</li>
+              <li>USER : TTLS서버에 Client Hello 전송</li>
+              <li>(서버 인증정보 전송)</li>
+              <li>TTLS서버 : USER 에 암호에 관한 정보 전송</li>
+              <li>(TLS 터널에 관한 프로세스)
+                <ul>
+                  <li>TTLS서버 : 인증서버에 Challenge 에 관한 정보 전송 (USER 가 요청함)</li>
+                  <li>인증서버 : TTLS 서버에 접속 허용 응답메시지 전송</li>
+                  <li>TTLS서버 : USER 에 접속 성공 메시지 전송</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>PEAP
+            <ul>
+              <li>터널링방식</li>
+              <li>구성
+                <ul>
+                  <li>USER, AP, PEAP서버, 인증서버</li>
+                </ul>
+              </li>
+              <li>PEAP 서버를 이용하여 터널링을 구성하고 인증서버로 인증 (TTLS 와 유사)</li>
+              <li>구현이 어려움 (접속 지연시간 발생 가능)</li>
+              <li>관리 용이</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="wep-암호와-원리와-동작방식">WEP 암호와 원리와 동작방식</h1>
+<ul>
+  <li>개요
+    <ul>
+      <li>동일한 공유키를 가진 사용자끼리 메시지 전송 가능</li>
+      <li>공유키를 이용한 사용자인증 기능 제공</li>
+    </ul>
+  </li>
+  <li>기본원리
+    <ul>
+      <li>AP와 무선단말기 간 공유키 사용
+        <ul>
+          <li>송신 : 평문과 Key Stream(동일) 간 XOR 연산을 통해 암호문을 만들고 전송</li>
+          <li>수신 : 암호문과 Key Stream(동일) 을 XOR 연산을 통해 평문으로 복호화</li>
+        </ul>
+      </li>
+      <li>동일 공유키의 반복사용에 따른 보안 취약점
+        <ul>
+          <li>PNRG(Pseudo Random Number Generator) : 키 값에 따라 발생하는 난수를 키스트림으로 이용함</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>WEP (위의 방법보다 개선)
+    <ul>
+      <li>암호화과정
+        <ul>
+          <li>공유키 대신 초기백터(IV) + WEP키를 결합</li>
+          <li>WEP PRNG(RC4) 이용하여 KEY 스트림 생성</li>
+          <li>평문 + ICV(Integrity Check Value) 과 XOR 연산
+            <ul>
+              <li>ICV : CRC32 알고리즘으로 구성, 전송 도중 데이터 무결성 보장을 위함</li>
+            </ul>
+          </li>
+          <li>암호문 생성</li>
+          <li>IV + 암호문 결합 -&gt; 802.11 패킷으로 구성
+            <ul>
+              <li>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>802.11 프레임 헤더</td>
+                      <td>IV</td>
+                      <td>암호문</td>
+                      <td>FCS (Frame Check Seq)</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <ul>
+                  <li>패킷 프레임</li>
+                </ul>
+              </li>
+              <li>무선랜으로 전송</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>복호화과정
+        <ul>
+          <li>
+            <table>
+              <tbody>
+                <tr>
+                  <td>수신한 패킷 중 IV</td>
+                  <td>암호문 부분 추출</td>
+                </tr>
+              </tbody>
+            </table>
+          </li>
+          <li>IV (추출) 와 공유키 결합</li>
+          <li>WEP PRNG(RC4) 이용하여 KEY 스트림 생성</li>
+          <li>
+            <table>
+              <tbody>
+                <tr>
+                  <td>암호문과 XOR 연산을 통해 평문</td>
+                  <td>ICV 값 복호화</td>
+                </tr>
+              </tbody>
+            </table>
+          </li>
+          <li>평문을 뽑아내고, 평문을 CRC32 알고리즘을 통해 나온 값을 ICV 와 비교</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+:ET

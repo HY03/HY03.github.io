@@ -1,0 +1,70 @@
+I"<h1 id="drdos-distributed-reflection-denial-of-service-공격">DRDoS (Distributed Reflection Denial of Service) 공격</h1>
+<ul>
+  <li>개요
+    <ul>
+      <li>공격자는 출발지 IP를 공격대상의 IP 로 위조 (IP Spoofing) 함.</li>
+      <li>다수의 반사서버(Reflector) 로 요청정보를 전송
+        <ul>
+          <li>DDoS 의 Zombie PC 이용이 아닌 정상적인 서버를 이용</li>
+        </ul>
+      </li>
+      <li>공격대상은 반사서버로부터 다수의 응답을 받아 서비스 거부 상태가 됨.</li>
+    </ul>
+  </li>
+  <li>DoS 공격과의 차이점
+    <ul>
+      <li>공격 근원지 파악이 어려움</li>
+      <li>좀비 PC 이용에 비해 공격 효율성이 좋음
+        <ul>
+          <li>Victim으로부터 SYN+ACK 에 대한 응답이 없을 경우 일정 횟수 재전송을 함.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>DRDoS 의 공격 형태
+    <ul>
+      <li>3 way-handshake 의 취약점 이용
+        <ul>
+          <li>정상적인 TCP서버들 또는 라우터를 활용</li>
+          <li>소스 IP를 Victim IP 로 위조하여 SYN 패킷 전송</li>
+          <li>정상적인 TCP 서버에서 SYN+ACK 을 Victim 에게 전송</li>
+        </ul>
+      </li>
+      <li>ICMP 프로토콜의 Echo Request 와 Echo Reply 를 이용
+        <ul>
+          <li>정상적인 반사 서버를 이용</li>
+          <li>소스 IP를 Victim IP 로 위조하여 Echo Request 패킷 전송</li>
+          <li>정상적인 서버에서 Echo Reply 을 Victim 에게 전송</li>
+        </ul>
+      </li>
+      <li>UDP 프로토콜 서비스를 제공하는 서버를 반사서버로 이용하는 방법
+        <ul>
+          <li>대표적인 방법, 응답메시지 증폭 (대량의 트래픽 생성)</li>
+          <li>유형
+            <ul>
+              <li>DNS : DNS 질의 시 타입:ANY,TXT 등과 같이 많은 양의 레코드 정보 제공을 요구하여 공격대상자에게 대형 트랙픽 유발</li>
+              <li>NTP : NTP (Network Time Protocol) 서버에 최근 접속한 클라이언트 목록을 요청 (monlist) 하여 공격대상자에게 대량 트래픽 유발</li>
+              <li>SNMP : SNMP Agent 에 MIB와 같은 정보를 대량 요청(GetBulkRequest) 하여 공격대상자에게 대량 트래픽 유발</li>
+              <li>CHARGEN : CHARGEN (Character Generate) 서버에 접속시 대량의 문자열(abcd…) 전송을 유도하여 공격대상자에게 대량 트래픽 유발</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>대응책
+    <ul>
+      <li>Ingress Filtering : IP 가 위조된 패킷 차단</li>
+      <li>반사서버에서 ICMP 프로토콜 차단</li>
+      <li>DNS (Resolving)
+        <ul>
+          <li>내부사용자 주소만 쿼리</li>
+          <li>동일 IP에 대한 초당 요청개수 제한</li>
+          <li>응답 정보량을 제한 (방화벽 또는 네트워크 보안장비)</li>
+        </ul>
+      </li>
+      <li>NTP 서버의 경우 monlist 명령 해제</li>
+    </ul>
+  </li>
+</ul>
+:ET

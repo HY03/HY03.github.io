@@ -1,0 +1,586 @@
+I"��<h1 id="로그관리">로그관리</h1>
+
+<ul>
+  <li>윈도우 : 중앙에서 집중적으로 로그 수집, 저장
+    <ul>
+      <li>관리 쉬움</li>
+      <li>공격에 치명적</li>
+    </ul>
+  </li>
+  <li>유닉스 : syslogd (중앙 관리 데몬) 가 있으나, 서비스 데몬들이 산발적으로 저장
+    <ul>
+      <li>관리 어려움
+        <ul>
+          <li>syslogd</li>
+          <li>maild</li>
+          <li>httpd</li>
+          <li>xinetd</li>
+        </ul>
+      </li>
+      <li>공격에 강함</li>
+    </ul>
+  </li>
+  <li>OS에 따른 차이
+    <ul>
+      <li>초기 유닉스 BSD 계열 : /usr/adm
+        <ul>
+          <li>HP-UX 9.X</li>
+          <li>SunOS 4.X</li>
+        </ul>
+      </li>
+      <li>최근 유닉스 SVR 계열 : <strong>/var/adm</strong>
+        <ul>
+          <li>솔라리스</li>
+          <li>HP-UX 10.X 이후</li>
+          <li>AIX</li>
+        </ul>
+      </li>
+      <li>일부 BSD 계열 : <strong>/var/log</strong>
+        <ul>
+          <li>BSD</li>
+          <li>FreeBSD</li>
+          <li>오라클 솔라리스</li>
+          <li>리눅스</li>
+        </ul>
+      </li>
+      <li>일부 리눅스 : /var/run</li>
+    </ul>
+  </li>
+  <li>로그관리
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">/var/log</code> 디렉토리에서 시스템의 로그를 기록/관리</li>
+      <li><code class="language-plaintext highlighter-rouge">/etc/syslog.conf</code> 파일에서 로그파일 위치 지정</li>
+      <li>로그 시스템 흐름
+        <ul>
+          <li>init 데몬 -&gt; syslogd 실행 -&gt; /var/log 디렉토리 지정된 파일에 로그 기록 -&gt; crond에 의한 주기적인 logrotated 데몬 실행</li>
+        </ul>
+      </li>
+      <li>로그파일
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">/var/log/dmesg</code> : 부팅될 당시에 각종 메시지들을 저장
+            <ul>
+              <li>텍스트 형식</li>
+              <li><code class="language-plaintext highlighter-rouge">dmesg -c</code> : 모든 메시지 삭제, 새로운 로그 기록</li>
+              <li><code class="language-plaintext highlighter-rouge">dmesg -k</code> : 커널 메시지 출력</li>
+              <li><code class="language-plaintext highlighter-rouge">dmesg | grep [hda|sda]</code> : 하드디스크 관련 정보 출력</li>
+              <li><code class="language-plaintext highlighter-rouge">dmesg | grep eth</code> : NIC 정보</li>
+              <li><code class="language-plaintext highlighter-rouge">dmesg | grep usb</code></li>
+            </ul>
+          </li>
+          <li><code class="language-plaintext highlighter-rouge">/var/log/cron</code> : crond 데몬 로그파일
+            <ul>
+              <li>crond 가 동작하면서 실행한 프로세스, 응용프로그램에 대한 정보</li>
+              <li><code class="language-plaintext highlighter-rouge">/var/run/crond.pid</code> 에 실행중인 crond 의 pid 저장</li>
+              <li><code class="language-plaintext highlighter-rouge">/etc/cron.[hourly|daily|weekly|monthly]/*</code>
+                <ul>
+                  <li>주기별로 실행할 스크립트 파일이 존재</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><code class="language-plaintext highlighter-rouge">/var/log/message</code> : 모든 데몬의 시스템 로그
+            <ul>
+              <li>텍스트 형식</li>
+              <li>시스템의 가장 기본적인 시스템 로그 파일</li>
+              <li>시스템관리자가 중요하게 다루는 파일
+                <ul>
+                  <li>TCP Wrapper의 접근 제어 정보 - xinetd : …</li>
+                  <li>사용자 접속 정보</li>
+                  <li>시스템 데몬 실행 내역</li>
+                </ul>
+              </li>
+              <li>형태 : timestamp / 호스트명 / 데몬명 / 메시지 내용</li>
+            </ul>
+          </li>
+          <li><code class="language-plaintext highlighter-rouge">/var/log/secure</code> : 보안인증 관련 메시지
+            <ul>
+              <li>사용자/그룹 생성, 삭제</li>
+              <li>사용자 인증, PW 변경</li>
+              <li>원격접속 내역</li>
+              <li>su (switch user) 명령 수행 내역</li>
+            </ul>
+          </li>
+          <li><code class="language-plaintext highlighter-rouge">/var/log/xferlog</code> : ftp(proftpd, vsftpd) 로그
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">Fri Nov 8 12:33:43 2013 1 61.75.198.144 36 /Q00/mac.txt b _ o a chrome@example.com ftp 0 * c</code>
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">Fri Nov 8 12:33:43 2013</code> : current_time</li>
+                  <li><code class="language-plaintext highlighter-rouge">1</code> : transfer_time (초단위) - 전송시간</li>
+                  <li><code class="language-plaintext highlighter-rouge">61.75.198.144</code> : remote host</li>
+                  <li><code class="language-plaintext highlighter-rouge">36</code> : file_size (kb)</li>
+                  <li><code class="language-plaintext highlighter-rouge">/Q00/mac.txt</code> : file_name</li>
+                  <li><code class="language-plaintext highlighter-rouge">b</code> : transfer_type (전송파일 종류)
+                    <ul>
+                      <li>a : ascii</li>
+                      <li>b : binary</li>
+                    </ul>
+                  </li>
+                  <li><code class="language-plaintext highlighter-rouge">_</code> : special action_flag (FTP 서비스 내 행동)
+                    <ul>
+                      <li>_ : no action</li>
+                      <li>c : 압축</li>
+                      <li>u : 압축하지 않음</li>
+                      <li>t : tar (묶여있는 파일)</li>
+                    </ul>
+                  </li>
+                  <li><code class="language-plaintext highlighter-rouge">o</code> : direction (전송방향)
+                    <ul>
+                      <li>i : incoming (서버로 들어오는 것 - 업로드)</li>
+                      <li>o : outgoing (서버에서 나가는 것 - 다운로드)</li>
+                      <li>d : delete</li>
+                    </ul>
+                  </li>
+                  <li><code class="language-plaintext highlighter-rouge">a</code> : access mode (사용자 접근 방식)
+                    <ul>
+                      <li>a : anonymous (익명성)</li>
+                      <li>r : real (인증)</li>
+                    </ul>
+                  </li>
+                  <li><code class="language-plaintext highlighter-rouge">chrome@example.com</code> : user_name (로그인한 사용자명)</li>
+                  <li><code class="language-plaintext highlighter-rouge">ftp</code> : service name (서비스명)</li>
+                  <li><code class="language-plaintext highlighter-rouge">0</code> : 사용자 인증 방법
+                    <ul>
+                      <li>0 : none (인증방법 없음)</li>
+                      <li>1 : RFC931 (인증있음)</li>
+                    </ul>
+                  </li>
+                  <li><code class="language-plaintext highlighter-rouge">*</code> : 인증을 통해 리턴된 사용자 ID
+                    <ul>
+                      <li>
+                        <ul>
+                          <li>: 인증 성공</li>
+                        </ul>
+                      </li>
+                      <li>: 인증 실패</li>
+                    </ul>
+                  </li>
+                  <li><code class="language-plaintext highlighter-rouge">c</code> : 파일 전송 상태
+                    <ul>
+                      <li>c : Complete</li>
+                      <li>i : Incomplete</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><code class="language-plaintext highlighter-rouge">/var/log/maillog</code> : sendmail, pop 등의 메일관련 데몬 로그</li>
+          <li><code class="language-plaintext highlighter-rouge">/var/spool/mail</code> : 디렉터리, ID 와 동일한 파일이 저장됨
+            <ul>
+              <li>mail 명령어로 확인, <code class="language-plaintext highlighter-rouge">&amp;[숫자]</code> 로 메일에 접근</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>기타 로그파일
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">/var/log/wtmp</code> : 시스템 전체 로그인 기록을 저장
+            <ul>
+              <li>사용자의 성공한 로그인/로그아웃 정보</li>
+              <li>시스템의 Boot, Shutdown 정보</li>
+              <li>binary 파일, <code class="language-plaintext highlighter-rouge">last</code> 명령어로 확인 : 모든 계정 로그인/로그아웃 정보</li>
+              <li>유닉스(SunOS) : <code class="language-plaintext highlighter-rouge">/var/adm/wtmpx</code></li>
+              <li>리눅스 : <code class="language-plaintext highlighter-rouge">/var/log/wtmp</code></li>
+              <li>확인 시 <code class="language-plaintext highlighter-rouge">last [계정명]</code></li>
+            </ul>
+          </li>
+          <li><code class="language-plaintext highlighter-rouge">/var/log/utmp</code> : 현재 로그인 사용자에 대한 기록, 사용자 IP 저장
+            <ul>
+              <li>binary 파일 형태</li>
+              <li>확인 시 <code class="language-plaintext highlighter-rouge">w</code>, <code class="language-plaintext highlighter-rouge">who</code>, <code class="language-plaintext highlighter-rouge">finger</code> 명령어 사용
+                <ul>
+                  <li>
+                    <p><code class="language-plaintext highlighter-rouge">w [유저명]</code></p>
+
+                    <table>
+                      <thead>
+                        <tr>
+                          <th style="text-align: left">USER</th>
+                          <th style="text-align: left">TTY</th>
+                          <th style="text-align: left">FROM</th>
+                          <th style="text-align: left">LOGIN@</th>
+                          <th style="text-align: left">IDLE</th>
+                          <th style="text-align: left">JCPU</th>
+                          <th style="text-align: left">PCPU</th>
+                          <th style="text-align: left">WHAT</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td style="text-align: left">root</td>
+                          <td style="text-align: left">tty1</td>
+                          <td style="text-align: left">-</td>
+                          <td style="text-align: left">23:24</td>
+                          <td style="text-align: left">0.00s</td>
+                          <td style="text-align: left">0.31s</td>
+                          <td style="text-align: left">0.02s</td>
+                          <td style="text-align: left">w</td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <ul>
+                      <li>USER : 유저 계정</li>
+                      <li>TTY : 터미널 (TTY-콘솔, PTS- xwindows 가상 콘솔, PTY - 외부연결 가상 콘솔)</li>
+                      <li>FROM : 접속위치</li>
+                      <li>LOGIN@ : 로그인한 시간</li>
+                      <li>IDLE : 유휴시간 (입력 X)</li>
+                      <li>JCPU</li>
+                      <li>PCPU</li>
+                      <li>WHAT : 수행하고 있는 작업명령어</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <p><code class="language-plaintext highlighter-rouge">who [유저명]</code> : USER, TTY, LOGIN@</p>
+                  </li>
+                </ul>
+              </li>
+              <li>유닉스(SunOS) : <code class="language-plaintext highlighter-rouge">/var/adm/utmpx</code></li>
+              <li>일부 리눅스 : <code class="language-plaintext highlighter-rouge">/var/run/utmp</code></li>
+            </ul>
+          </li>
+          <li><code class="language-plaintext highlighter-rouge">/var/log/lastlog</code> : 가장 최근에 로그인 성공한 기록
+            <ul>
+              <li>binary 파일</li>
+              <li>확인 시 <code class="language-plaintext highlighter-rouge">lastlog</code> (리눅스), <code class="language-plaintext highlighter-rouge">finger</code> (리눅스, 유닉스)
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">lastlog -u 계정명</code></li>
+                  <li><code class="language-plaintext highlighter-rouge">lastlog -t 일수</code></li>
+                  <li><code class="language-plaintext highlighter-rouge">finger 계정명</code> : 해당 계정의 마지막 로그인 정보</li>
+                </ul>
+              </li>
+              <li>유닉스(SunOS) : <code class="language-plaintext highlighter-rouge">/var/adm/lastlog</code></li>
+              <li>리눅스 : <code class="language-plaintext highlighter-rouge">/var/log/lastlog</code></li>
+            </ul>
+          </li>
+          <li><code class="language-plaintext highlighter-rouge">/var/log/btmp</code> : 실패한 로그인 시도 기록
+            <ul>
+              <li>리눅스 : btmp - <code class="language-plaintext highlighter-rouge">/var/log/btmp</code> (binary)
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">lastb</code> 명령으로 확인</li>
+                </ul>
+              </li>
+              <li>유닉스 : loginlog - <code class="language-plaintext highlighter-rouge">/var/adm/loginlog</code> (text)
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">vi</code> 또는 <code class="language-plaintext highlighter-rouge">cat</code> 으로 확인</li>
+                  <li>5회 이상 실패시 기록을 남김</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><code class="language-plaintext highlighter-rouge">/etc/init.d/acct -&gt; /var/adm/pacct</code> : accounting (통계)
+            <ul>
+              <li>사용자가 로그인~로그아웃 동안 입력한 명령어 내역</li>
+              <li>binary 형태 파일</li>
+              <li><code class="language-plaintext highlighter-rouge">lastcomm</code>, <code class="language-plaintext highlighter-rouge">acctcom</code> 으로 확인
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">lastcomm [계정명]</code></li>
+                  <li>내용 : 명령어, 플래그, 사용자명, 터미널, 프로세스 시작시간
+                    <ul>
+                      <li>플래그
+                        <ul>
+                          <li>F (fork 에 의해 수행)</li>
+                          <li>S (superuser)</li>
+                          <li>X (SIGTERM 종료)</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>명령어로 초기 로그파일 생성 (자동생성 X)
+                <ul>
+                  <li>리눅스 : <code class="language-plaintext highlighter-rouge">accton /var/account/pacct</code></li>
+                  <li>유닉스 : <code class="language-plaintext highlighter-rouge">accton /var/adm/pacct</code></li>
+                  <li>free BSD
+                    <ul>
+                      <li>생성 : <code class="language-plaintext highlighter-rouge">touch /var/account/acct</code></li>
+                      <li>실행 : <code class="language-plaintext highlighter-rouge">/usr/sbin/accton /var/account/acct</code></li>
+                    </ul>
+                  </li>
+                  <li>명령어 경로
+                    <ul>
+                      <li>유닉스, SunOS, HP : <code class="language-plaintext highlighter-rouge">/usr/lib/acct/accton</code></li>
+                      <li>리눅스 : <code class="language-plaintext highlighter-rouge">/sbin/accton</code></li>
+                      <li>SunOS : <code class="language-plaintext highlighter-rouge">/sbin/acct.sh</code></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>파일경로
+                <ul>
+                  <li>유닉스 : <code class="language-plaintext highlighter-rouge">/var/adm/pacct</code></li>
+                  <li>리눅스 : <code class="language-plaintext highlighter-rouge">/var/account/pacct</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><code class="language-plaintext highlighter-rouge">/$HOME/.bash_history</code> : .쉘이름_history, 계정별 실행 명령
+            <ul>
+              <li>텍스트 형태 파일</li>
+              <li><code class="language-plaintext highlighter-rouge">history</code> 명령어로 확인 가능</li>
+            </ul>
+          </li>
+          <li><code class="language-plaintext highlighter-rouge">/var/adm/sulog</code> : 유닉스 로그파일, 리눅스는 secure 파일에 저장
+            <ul>
+              <li>텍스트 형태 파일</li>
+              <li>형태 : su 시간 + pts/5 test-root
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">+</code> : 성공 (+) / 실패 (-)</li>
+                  <li><code class="language-plaintext highlighter-rouge">test-root</code> : test 계정에서 root 계정으로 시도</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><code class="language-plaintext highlighter-rouge">/var/log/boot.log</code> : 리눅스에서 부팅될 때 성공/실패 여부 표시
+            <ul>
+              <li>파일시스템 체크</li>
+              <li>서비스데몬 실행상태</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">/etc/syslog.conf</code> 파일 분석
+    <ul>
+      <li>syslogd : syslog 표준 api에 의해서 로그 생성, 관리</li>
+      <li>syslogd 는 운영체제에 의해 자동 시작되며 syslog.conf 파일을 참조</li>
+      <li>syslog 표준 api를 준용해 구현한 Application 은 syslogd 에 의해 로그 기록</li>
+      <li>syslog 는 기밀성, 무결성, 가용성을 고려하지 않고 개발됨
+        <ul>
+          <li>UDP 프로토콜로 원격지 전송 시 스니핑 가능성</li>
+          <li>보완책 (RFC3195) : rsyslog
+            <ul>
+              <li>TCP 이용 : 로그 전송의 신뢰성 보장</li>
+              <li>syslog msg 의 기밀성 보장을 위해 syslog 서버와 로그수집 대상 서버의 IP를 제외한 payload 보호를 위해 BEEF 사용 권고
+                <ul>
+                  <li>the Blocks Extensible Exchange Protocol</li>
+                  <li>연결지향적, 신뢰성 보장 프로토콜 (내부인증, 재전송)</li>
+                  <li>응용프로그램 프로토콜 Framework</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>기본 구성 형식
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">facility.priority; facility.priority; ... action(logfile location)</code>
+            <ul>
+              <li>서비스데몬(facility) 에 대해서 로그레벨(priority) 로 기록</li>
+            </ul>
+          </li>
+          <li>selector field(선택자 필드) : 어떤 것을 기록할 것인지를 설정
+            <ul>
+              <li>메시지 종류(facility)
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">*</code> : 모든 서비스를 의미</li>
+                  <li>auth : login과 같이 인증프로그램 유형이 발생한 메시지</li>
+                  <li>authpriv : 개인 인증을 요하는 프로그램 유형이 발생한 메시지</li>
+                  <li>cron : cron, at 과 같은 프로그램이 발생한 메시지</li>
+                  <li>daemon : telnetd, ftpd와 같이 daemon이 발생한 메시지</li>
+                  <li>kern : 커널이 발생한 메시지</li>
+                  <li>lpr : 프린터 유형의 프로그램이 발생한 메시지</li>
+                  <li>mail : mail 시스템이 발생한 메시지</li>
+                  <li>mark : syslogd 에 의해 만들어지는 날짜 유형 메시지</li>
+                  <li>news : 유즈넷 뉴스 프로그램 유형이 발생한 메시지</li>
+                  <li>syslog : syslogd 에서 발생한 메시지</li>
+                  <li>user : 사용자 프로세스</li>
+                  <li>uucp : UUCP 시스템이 발생한 메시지
+                    <ul>
+                      <li>unix-to-unix copy protocol</li>
+                      <li>유닉스 시스템을 연결하는 광역 연결망</li>
+                    </ul>
+                  </li>
+                  <li>local0 ~ loacl7 : 여분으로 남겨둔 유형(시스템부팅 메시지 기록)</li>
+                </ul>
+              </li>
+              <li>메시지 우선 순위(priority)
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">*</code> : 발생하는 모든 상황에 대한 메시지</li>
+                  <li>debug : 프로그램을 디버깅할 때 발생하는 메시지</li>
+                  <li>info : 통계, 기본정보 메시지</li>
+                  <li>notice : 특별한 주의를 요하나 에러는 아닌 메시지 (관리자조치필요)</li>
+                  <li>warning : 주의를 요하는 경고 메시지</li>
+                  <li>err : 에러가 발생하는 경우의 메시지</li>
+                  <li>crit : 크게 급하지는 않지만 시스템에 문제가 생기는 단계의 메시지</li>
+                  <li>alert: 즉각적인 조정을 해야 하는 상황 (예:DB 오류)</li>
+                  <li>emerg : 모든 사용자에게 전달되어야 할 위험한 상황 (예:시스템중지)</li>
+                  <li>none : 어떠한 경우라도 메시지를 저장하지 않음</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>action field(액션 필드) : 어느파일에 로그를 기록할 것인지를 설정
+            <ul>
+              <li>콘솔, 파일명, 사용자 또는 원격시스템</li>
+              <li>file : 해당 file 에 내용을 추가
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">/var/log/secure</code></li>
+                  <li>콘솔 : <code class="language-plaintext highlighter-rouge">/dev/console</code></li>
+                </ul>
+              </li>
+              <li>@host : 지정된 호스트로 메시지를 보냄
+                <ul>
+                  <li>원격로그서버. <code class="language-plaintext highlighter-rouge">@호스트주소</code> (예:<code class="language-plaintext highlighter-rouge">@192.168.190.10</code>)</li>
+                </ul>
+              </li>
+              <li>user : 지정된 사용자의 스크린으로 메시지를 보냄 (예:<code class="language-plaintext highlighter-rouge">root</code>)</li>
+              <li><code class="language-plaintext highlighter-rouge">*</code> : 현재 로그인되어 있는 모든 사용자의 스크린으로 메시지를 보냄</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>syslog.conf(rsyslog.conf) 설정
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">*.alert; kern.err; daemon.err; operator</code>
+        <ul>
+          <li>모든 서비스의 alert 이상 로그는 operator 계정으로 출력</li>
+          <li>커널의 error 이상 로그는 operator 계정으로 출력</li>
+          <li>데몬의 error 이상 로그는 operator 계정으로 출력</li>
+        </ul>
+      </li>
+      <li><code class="language-plaintext highlighter-rouge">kern.* /dev/console</code>
+        <ul>
+          <li>커널의 모든 로그는 콘솔에 출력</li>
+        </ul>
+      </li>
+      <li><code class="language-plaintext highlighter-rouge">*.info; mail.none; authpriv.none; cron.none /var/log/messages</code>
+        <ul>
+          <li>모든 서비스의 info 이상 로그는 <code class="language-plaintext highlighter-rouge">/var/log/messages</code> 에 로그 기록</li>
+          <li>mail, authpriv, cron 서비스의 로그는 기록하지 않음</li>
+          <li><code class="language-plaintext highlighter-rouge">/var/log/messages</code> 파일이 존재하지 않는 경우 새로 생성하지 않음</li>
+        </ul>
+      </li>
+      <li><code class="language-plaintext highlighter-rouge">authpriv.* /var/log/secure</code>
+        <ul>
+          <li>xinetd, tcp_wrapper, ftp, telnet, finger … 등의 서비스의 모든 수준 로그는 <code class="language-plaintext highlighter-rouge">/var/log/secure</code> 에 로그 기록</li>
+        </ul>
+      </li>
+      <li><code class="language-plaintext highlighter-rouge">mail.* /var/log/maillog</code>
+        <ul>
+          <li>메일서비스(sendmail, ipop, imap, qmail) 서비스의 모든 수준 로그는 <code class="language-plaintext highlighter-rouge">/var/log/maillog</code> 에 로그 기록</li>
+        </ul>
+      </li>
+      <li><code class="language-plaintext highlighter-rouge">cron.* /var/log/cron</code>
+        <ul>
+          <li>crond, atd 의 모든 수준 로그는 <code class="language-plaintext highlighter-rouge">/var/log/cron</code> 에 로그 기록</li>
+        </ul>
+      </li>
+      <li><code class="language-plaintext highlighter-rouge">*.emerg *</code>
+        <ul>
+          <li>모든 서비스의 emerg 수준의 로그는 모든 사용자에게 전송</li>
+        </ul>
+      </li>
+      <li><code class="language-plaintext highlighter-rouge">uucp,news.crit /var/log/spooler</code>
+        <ul>
+          <li>uucp, news 서비스의 crit 수준 이상의 로그는 <code class="language-plaintext highlighter-rouge">/var/log/spooler</code> 에 기록</li>
+        </ul>
+      </li>
+      <li><code class="language-plaintext highlighter-rouge">local7.* /var/log/boot.log</code>
+        <ul>
+          <li>시스템 부팅 시 모든 로그는 <code class="language-plaintext highlighter-rouge">/var/log/boot.log</code> 에 기록</li>
+        </ul>
+      </li>
+      <li>적용 시 rsyslogd 데몬 재시작 필요</li>
+    </ul>
+  </li>
+  <li>실시간으로 로그 보기
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">tail [option] ... [file] ...</code> : 텍스트 파일 형식의 로그파일 확인</li>
+      <li><code class="language-plaintext highlighter-rouge">tail -f /var/log/secure</code> : 파일의 마지막 10라인을 실시간으로 계속 출력</li>
+    </ul>
+  </li>
+  <li>Logrotate 리눅스 로그 순환 관리
+    <ul>
+      <li>syslog 나 데몬프로세스가 출력하는 로그파일을 그대로 방치하면 사이즈가 커지면서 관리하기 어려워지고 디스크 사용률이 100% 가 되어 시스템 장애가 발생할 수 있음</li>
+      <li>logrotate 는 리눅스 설치시 패키지형태로 기본적으로 설치되는 시스템 로그파일 관리도구, 로그파일 순환, 압축 등의 기능을 가지고 있음</li>
+      <li>경로 : <code class="language-plaintext highlighter-rouge">/usr/sbin/logrotate</code></li>
+      <li>설정파일 : <code class="language-plaintext highlighter-rouge">/etc/logrotate.conf</code>
+        <ul>
+          <li>순환주기 : daily, weekly, monthly</li>
+          <li>로그파일의 순환 개수 : rotate n</li>
+          <li>압축여부 : compress, uncompress</li>
+          <li>로그파일의 순환 사이즈 지정 : size n</li>
+          <li>확장자에 날짜를 붙여 저장 : dateext</li>
+        </ul>
+      </li>
+      <li>설정디렉토리 : <code class="language-plaintext highlighter-rouge">/etc/logrotate.d</code> logrotate 를 적용하기 위한 프로세스, 데몬에 관련된 설정파일</li>
+      <li>상황파일 : <code class="language-plaintext highlighter-rouge">/var/lib/logrotate.status</code> logrotate 의 작업내역이 보관됨</li>
+      <li>cron : <code class="language-plaintext highlighter-rouge">/etc/cron.daily/logrotate</code> 주기적으로 실행되어야 할 내용</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="아파치-웹서버-로그">아파치 웹서버 로그</h1>
+<ul>
+  <li>액세스 로그 (접속 로그)
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">/var/log/httpd/access_log</code></li>
+    </ul>
+  </li>
+  <li>에러 로그
+    <ul>
+      <li>CentOS : <code class="language-plaintext highlighter-rouge">/var/log/httpd/error_log</code></li>
+      <li>우분투 : <code class="language-plaintext highlighter-rouge">/var/log/apache2/error.log</code></li>
+    </ul>
+  </li>
+  <li>로그 포맷
+    <ul>
+      <li>httpd.conf 파일에 기록</li>
+      <li>CLF(Common Log Format)
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">LogFormat " %h %l %u %t \ " %r\ " %&gt;s %b " common</code>
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">%h</code> : Host (클라이언트 호스트명, IP Address)</li>
+              <li><code class="language-plaintext highlighter-rouge">%H</code> : 요청 프로토콜의 종류</li>
+              <li><code class="language-plaintext highlighter-rouge">%I</code> : Ident (아이덴티티 체크), 클라이언트 로그인명
+                <ul>
+                  <li>대부분 <code class="language-plaintext highlighter-rouge">-</code> 로 표기 (신뢰할 수 없는 item)</li>
+                </ul>
+              </li>
+              <li><code class="language-plaintext highlighter-rouge">%u</code> : Auth user (클라이언트 사용자명)
+                <ul>
+                  <li>대부분 <code class="language-plaintext highlighter-rouge">-</code> 로 표기 (신뢰할 수 없는 item)</li>
+                </ul>
+              </li>
+              <li><code class="language-plaintext highlighter-rouge">%U</code> : 요청된 경로 (자료의 경우 r을 사용)</li>
+              <li><code class="language-plaintext highlighter-rouge">%t</code> : time (접속시간, 날짜)</li>
+              <li><code class="language-plaintext highlighter-rouge">%T</code> : 웹서버가 요청을 처리하는데 걸린 시간</li>
+              <li><code class="language-plaintext highlighter-rouge">%r</code> : request (HTTP 접근 방식, Client가 요청한 자료, HTTP 버전)</li>
+              <li><code class="language-plaintext highlighter-rouge">%c</code> : 응답이 완료 되었을 때 연결상태
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">x</code> : 응답완료 전 연결 끊김</li>
+                  <li><code class="language-plaintext highlighter-rouge">+</code> : 응답완료 후 연결 지속</li>
+                  <li><code class="language-plaintext highlighter-rouge">-</code> : 응답완료 후 연결 끊김</li>
+                </ul>
+              </li>
+              <li><code class="language-plaintext highlighter-rouge">%s</code> : status (요청에 대한 서버처리 상태코드)</li>
+              <li><code class="language-plaintext highlighter-rouge">%b</code> : bytes (서버에서 클라이언트로 전송한 데이터크기)</li>
+              <li><code class="language-plaintext highlighter-rouge">%i</code> : 클라이언트의 웹브라우저 정보
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">LogFormat "{user-agent}i" agent</code></li>
+                  <li><code class="language-plaintext highlighter-rouge">LogFormat "{Referer}i-&gt;%U" referer</code> : 현재 아파치서버에 접속하기 전에 있었던 URL 을 기록</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>웹 서버 로그 예
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">203.251.189.47 - - [03/Aug/2000:21:56:55 +0900] "GET /doc/images/sub.gif HTTP/1.1" 200 6083</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>CustomLog
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">LogFormat " %h %l %u %t \"%r\" %&gt;s %b \"%{Referer}i\" \"%{user-agent}i\"" combined</code></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+:ET

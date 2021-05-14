@@ -1,0 +1,77 @@
+I"8<h1 id="파일-시스템-관리">파일 시스템 관리</h1>
+
+<ul>
+  <li>파일 시스템 연결
+    <ul>
+      <li>장치들은 UNIX 시스템이 의해 인식되어야 사용할 수 있음</li>
+      <li>mount 명령은 보조기억장치에 설치된 파일 시스템을 UNIX 시스템이 인식하도록 특정 디렉토리에 논리적으로 연결시켜 줌</li>
+      <li>명령 형식 : <code class="language-plaintext highlighter-rouge">mount [-option] [device] [mount_point]</code> ;</li>
+      <li>옵션
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">-a</code> : <code class="language-plaintext highlighter-rouge">/etc/fstab</code> 파일에 정의된 모든 파일 시스템을 마운트</li>
+          <li><code class="language-plaintext highlighter-rouge">-t</code> : 파일 시스템의 형식을 지정
+            <ul>
+              <li>윈도우 계열
+                <ul>
+                  <li>vfat : fat, fat32, fat16</li>
+                  <li>ntfs</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><code class="language-plaintext highlighter-rouge">-n</code> :<code class="language-plaintext highlighter-rouge">/etc/mtab</code> 파일에 정보를 남기지 않고 마운트</li>
+        </ul>
+      </li>
+      <li>디바이스
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">/dev/hda1</code>, <code class="language-plaintext highlighter-rouge">/dev/hda2</code>, …</li>
+        </ul>
+      </li>
+      <li><code class="language-plaintext highlighter-rouge">mount -t vfat /dev/hda1 /mnt/win98</code> ;</li>
+    </ul>
+  </li>
+  <li>자동 마운트 설정 : <code class="language-plaintext highlighter-rouge">fstab</code>
+    <ul>
+      <li>파일 경로 : <code class="language-plaintext highlighter-rouge">/etc/fstab</code></li>
+      <li>UNIX 시스템이 부팅시 이 파일을 참조하여 마운트 작업을 자동으로 수행</li>
+      <li><code class="language-plaintext highlighter-rouge">mount -a</code> : <code class="language-plaintext highlighter-rouge">/etc/fstab</code> 에 저장된 정보를 기반으로 명시적 실행</li>
+      <li><code class="language-plaintext highlighter-rouge">/etc/mtab</code> : 파일 시스템이 mount 되거나 해제 될 때마다 mount 프로그램에 의해 업데이트 되는 일반 파일</li>
+    </ul>
+  </li>
+  <li>파일 시스템 연결 해제 : <code class="language-plaintext highlighter-rouge">umount</code>
+    <ul>
+      <li>명령 형식 : <code class="language-plaintext highlighter-rouge">umount [-option] [device| mount_point]</code> ;</li>
+      <li>사용중이거나 사용자가 해당 디렉터리에 있다면 unmount 명령은 “device is busy” 메시지와 함께 실패한다.</li>
+      <li>옵션
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">-a</code> : 마운트된 모든 파일 시스템을 언마운트</li>
+          <li><code class="language-plaintext highlighter-rouge">-f</code> : 해당 파일 시스템을 사용하는 프로세스를 강제로 종료하고 파일 시스템을 언마운트</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>파일 시스템 관리 : <code class="language-plaintext highlighter-rouge">du</code>, <code class="language-plaintext highlighter-rouge">df</code>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">du</code> : 디렉터리의 하드디스크 사용량을 확인</li>
+      <li>명령 형식 : <code class="language-plaintext highlighter-rouge">du [-option] [directory_name]</code> ;</li>
+      <li>옵션
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">-a</code> : 디렉터리 및 하위 파일정보까지 출력 (All)</li>
+          <li><code class="language-plaintext highlighter-rouge">-s</code> : 현재 디렉터리가 사용중인 용량만 출력 (Summary)</li>
+          <li><code class="language-plaintext highlighter-rouge">-k</code> : 사용량을 KB 단위로 출력</li>
+        </ul>
+      </li>
+      <li>디렉터리를 명시하지 않을 경우 현재 디렉터리를 기준으로 한다.</li>
+      <li><code class="language-plaintext highlighter-rouge">df</code> : 파일 시스템의 전체 공간 및ㅊ 사용 가능 공간에 대한 정보</li>
+      <li>명령 형식 : <code class="language-plaintext highlighter-rouge">df [-option] [file_system | file]</code> ;</li>
+      <li>옵션
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">-k</code> : 통계 데이터를 KB 단위로 출력</li>
+          <li><code class="language-plaintext highlighter-rouge">-i</code> : 파일 시스템의 사용가능 또는 사용중인 i-node 정보를 출력</li>
+        </ul>
+      </li>
+      <li>file_system 인수는 파일 시스템 장치명 또는 마운트 디렉터리를 의미</li>
+    </ul>
+  </li>
+</ul>
+:ET

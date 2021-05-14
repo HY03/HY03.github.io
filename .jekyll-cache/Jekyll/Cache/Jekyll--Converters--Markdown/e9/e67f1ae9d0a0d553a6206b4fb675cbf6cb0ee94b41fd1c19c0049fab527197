@@ -1,0 +1,578 @@
+I"�Q<h1 id="ping-명령어">ping 명령어</h1>
+<ul>
+  <li>개요
+    <ul>
+      <li>ICMP 프로토콜 사용
+        <ul>
+          <li>Echo Request (Type:8)</li>
+          <li>Echo Reply (Type:0)</li>
+        </ul>
+      </li>
+      <li>반응이 있을 경우 통신연결이 된다 (포트가 열려있다) 는 의미</li>
+      <li>보안상의 이유로 destination 에서 서비스를 하지 않을 수 있음</li>
+    </ul>
+  </li>
+  <li>윈도우
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">ping -n 5 -l 128 www.korea.com</code>
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">-n</code> : 패킷 전송 횟수 (Default : 4)</li>
+          <li><code class="language-plaintext highlighter-rouge">-l</code> : 패킷 크기 설정 (Default : 32Bytes)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>리눅스 / 유닉스
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">ping -c 5 -s 128 www.korea.com</code>
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">-c</code> : 패킷 전송 횟수 (Default : 무한대)</li>
+          <li><code class="language-plaintext highlighter-rouge">-s</code> : 패킷 크기 설정 (Default : 56Bytes)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="traceroute-명령어">traceroute 명령어</h1>
+<ul>
+  <li>개요
+    <ul>
+      <li>경로를 추적하고, 상태 및 흐름을 파악하기 위함 (라우터의 문제점을 찾아내기 위함)</li>
+      <li>ICMP 프로토콜을 사용</li>
+      <li>네트워크 계층 (L3/Router) 를 거치면서 패킷을 전송</li>
+      <li>각 구간별 중계속도, 연결 상태 등을 알 수 있음</li>
+      <li>TTL 값을 1씩 증가시켜 진단함</li>
+      <li>라우터는 TTL 값을 감소시키고, TTL 값이 0이 되면 패킷을 폐기
+        <ul>
+          <li>Type 11 : ICMP Time Exceeded 응답값 ()
+            <ul>
+              <li>Code 0 : TTL exceeded</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>최종목적지 도달
+        <ul>
+          <li>Type 0 : ICMP Echo Reply</li>
+        </ul>
+      </li>
+      <li>포트가 닫혀있을 경우
+        <ul>
+          <li>Type 3 : ICMP Destination Unreachable
+            <ul>
+              <li>Code 3 : Port Unreachable</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>응답시간 * 로 표기
+        <ul>
+          <li>보안상의 이유로 패킷을 무시할 수 있음</li>
+          <li>실제로 구간에 문제가 발생한 경우</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>윈도우
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">tracert</code></li>
+      <li>ICMP Request 패킷 이용
+        <ul>
+          <li>ICMP Echo Request (Type 8)</li>
+        </ul>
+      </li>
+      <li>TTL 값을 1씩 증가시켜 진단함</li>
+    </ul>
+  </li>
+  <li>리눅스
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">traceroute</code></li>
+      <li>UDP 패킷 (33434/UDP) 이용</li>
+      <li>TTL 값을 1씩 증가시켜 진단함</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="netstat-명령어">netstat 명령어</h1>
+<ul>
+  <li>개요
+    <ul>
+      <li>확인 정보
+        <ul>
+          <li>열려져 있는 포트</li>
+          <li>서비스 중인 프로세스들의 상태정보</li>
+          <li>네트워크 연결 상태</li>
+        </ul>
+      </li>
+      <li>옵션
+        <ul>
+          <li>No Option : ESTABLISHED(연결상태) 소켓 정보</li>
+          <li><code class="language-plaintext highlighter-rouge">-a</code> : 모든 소켓의 상태 정보</li>
+          <li><code class="language-plaintext highlighter-rouge">-i</code> : 네트워크 인터페이스 정보</li>
+          <li><code class="language-plaintext highlighter-rouge">-r</code> : 시스템 라우팅 테이블 정보</li>
+          <li><code class="language-plaintext highlighter-rouge">-s</code> : 각 프로토콜별 (TCP, UDP, ICMP …) 통계정보</li>
+          <li><code class="language-plaintext highlighter-rouge">-n</code> : 네트워크 주소를 숫자로 표현</li>
+          <li><code class="language-plaintext highlighter-rouge">-u</code> : UDP</li>
+          <li><code class="language-plaintext highlighter-rouge">-t</code> : TCP</li>
+        </ul>
+      </li>
+      <li>결과값
+        <ul>
+          <li>Recv-Q : 수신버퍼에 저장된 데이터 크기</li>
+          <li>Send-Q : 송신버퍼에 저장된 데이터 크기</li>
+          <li>Local Address : 로컬호스트의 소캣 주소</li>
+          <li>Foreign Address : 원격호스트의 IP:포트</li>
+          <li>Status : 소켓 상태</li>
+          <li>i 옵션 결과값
+            <ul>
+              <li>RX : Received (수신받음)</li>
+              <li>TX : Transmitted (전송)</li>
+              <li>OK : 오류없는 패킷</li>
+              <li>ERR : 에러 패킷</li>
+              <li>DRP : 폐기 패킷</li>
+              <li>OVR : 오버플로우로 폐기된 패킷</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="ifconfig-명령어">ifconfig 명령어</h1>
+<ul>
+  <li>개요
+    <ul>
+      <li>ifconfig : interface config (리눅스/유닉스)
+        <ul>
+          <li>인터페이스 설정 정보</li>
+          <li>ip 정보</li>
+          <li>서브넷 마스크</li>
+        </ul>
+      </li>
+      <li>ipconfig (윈도우)</li>
+    </ul>
+  </li>
+  <li>내용
+    <ul>
+      <li>Link encap : Ethernet</li>
+      <li>HWaddr 00:0c:29:3c:73:32 -&gt; MAC Address</li>
+      <li>inet : IP주소</li>
+      <li>UP : 현재 인터페이스 활성화</li>
+      <li>Metric : 라우팅 경로의 효율성/우선순위, 클수록 비용이 큼</li>
+      <li>RX : Received (수신받음)</li>
+      <li>TX : Transmitted (전송)</li>
+    </ul>
+  </li>
+  <li>Promiscuous 모드
+    <ul>
+      <li>설정 시 : <code class="language-plaintext highlighter-rouge">ifconfig eth0 promisc</code>
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">UP BROADCAST RUNNING PROMISC MULTICAST</code></li>
+        </ul>
+      </li>
+      <li>로그파일
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">/var/log/message</code>
+            <ul>
+              <li>시간 localhost kernel : device eth0 entered promiscuous mode</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>해제 시 : <code class="language-plaintext highlighter-rouge">ifconfig eth0 -promisc</code>
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">UP BROADCAST RUNNING MULTICAST</code></li>
+        </ul>
+      </li>
+      <li>로그파일
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">/var/log/message</code>
+            <ul>
+              <li>시간 localhost kernel : device eth0 left promiscuous mode</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="nmap">nmap</h1>
+<ul>
+  <li>개요
+    <ul>
+      <li>포트스캐닝 툴, 호스트나 네트워크를 스캐닝</li>
+      <li>시스템 보안 툴인 동시에 해킹 툴로 사용될 수 있음</li>
+    </ul>
+  </li>
+  <li>예시
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">nmap -sP xxx.xxx.xxx.xxx</code> : Ping Scan (ICMP)
+        <ul>
+          <li>활성화 되어있으면 응답 받음</li>
+        </ul>
+      </li>
+      <li><code class="language-plaintext highlighter-rouge">nmap -sP -p 80 xxx.xxx.xxx.xxx</code> : Port 옵션
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">-pT:21,23,110,U:53</code> : TCP 21,23,110, UDP 53번 포트 스캔</li>
+        </ul>
+      </li>
+      <li><code class="language-plaintext highlighter-rouge">nmap -sT xxx.xxx.xxx.xxx</code> : TCP Connection Open</li>
+    </ul>
+  </li>
+  <li>옵션
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">-sT</code> : <strong>일반적 TCP 포트 스캐닝 (connect(open))</strong></li>
+      <li><code class="language-plaintext highlighter-rouge">-sS</code> : <strong>half open 스캔 (추적 어려움)</strong></li>
+      <li><code class="language-plaintext highlighter-rouge">-sP</code> : <strong>ping을 이용한 일반적인 스캔</strong></li>
+      <li><code class="language-plaintext highlighter-rouge">-sU</code> : <strong>UDP 포트 스캐닝</strong></li>
+      <li><code class="language-plaintext highlighter-rouge">-sA</code> : <strong>TCP ACK Scan</strong></li>
+      <li><code class="language-plaintext highlighter-rouge">-sN</code> : <strong>TCP Null Scan</strong></li>
+      <li><code class="language-plaintext highlighter-rouge">-sF</code> : <strong>TCP FIN Scan</strong></li>
+      <li><code class="language-plaintext highlighter-rouge">-sX</code> : <strong>TCP XMAS Scan</strong></li>
+      <li><code class="language-plaintext highlighter-rouge">-PO</code> : 대상 호스트에 대한 ping 응답을 요청하지 않음 (log 기록, filtering 회피)</li>
+      <li><code class="language-plaintext highlighter-rouge">-PT</code> : 일반적인 ICMP ping이 아닌 ACK 패킷으로 ping을 보내고 RST 패킷으로 응답을 받음</li>
+      <li><code class="language-plaintext highlighter-rouge">-PI</code> : 일반적인 ICMP ping 으로 방화벽이나 필터링에 의해 걸러짐</li>
+      <li><code class="language-plaintext highlighter-rouge">-PB</code> : ping을 할 때 ICMP ping 과 TCP ping 을 동시에 이용</li>
+      <li><code class="language-plaintext highlighter-rouge">-PS</code> : ping을 할 때 ACK 패킷 대신 SYN 패킷을 보내 스캔</li>
+      <li><code class="language-plaintext highlighter-rouge">-O</code> : <strong>대상 호스트의 OS 판별</strong></li>
+      <li><code class="language-plaintext highlighter-rouge">-p</code> : <strong>대상 호스트의 특정 포트를 스캔하거나 스캔할 포트의 범위 지정 (1-1024)</strong></li>
+      <li><code class="language-plaintext highlighter-rouge">-D</code> : <strong>Decoy 기능으로 대상 호스트에게 스캔을 실행한 호스트의 주소를 속임</strong></li>
+      <li><code class="language-plaintext highlighter-rouge">-F</code> : /etc/services 파일 내에 기술된 포트만 스캔</li>
+      <li><code class="language-plaintext highlighter-rouge">-I</code> : TCP 프로세서의 identd 정보를 가져옴</li>
+      <li><code class="language-plaintext highlighter-rouge">-n</code> : IP 주소를 DNS 호스트명으로 바꾸지 않는다. 속도가 빠르다.</li>
+      <li><code class="language-plaintext highlighter-rouge">-R</code> : IP 주소를 DNS 호스트명으로 바꿔서 스캔. 속도가 느리다.</li>
+      <li><code class="language-plaintext highlighter-rouge">-o</code> : 스캔 결과를 텍스트 파일로 저장
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">-oN</code> : 스캔결과 파일로 출력</li>
+          <li><code class="language-plaintext highlighter-rouge">-oX</code> : 스캔결과 XML로 출력</li>
+          <li><code class="language-plaintext highlighter-rouge">-oG</code> : Grepable (grep, awk) 파일 형식으로 출력</li>
+        </ul>
+      </li>
+      <li><code class="language-plaintext highlighter-rouge">-i</code> : 스캔 대상 호스트의 정보를 지정한 파일에서 읽어서 스캔</li>
+      <li><code class="language-plaintext highlighter-rouge">-h</code> : 도움말 보기</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="tcp-connectopen-스캔">TCP Connect(Open) 스캔</h1>
+<ul>
+  <li>개요
+    <ul>
+      <li>connect() 함수를 이용하여 각 포트별로 접속, 스캔하는 방식</li>
+      <li>포트가 열린 상태이면 연결완료 후 종료</li>
+      <li>포트가 닫혀있으면 RST+ACT 패킷이 옴</li>
+      <li>시스템 로그가 남게 됨</li>
+    </ul>
+  </li>
+  <li>과정
+    <ul>
+      <li>열려있는 경우
+        <ul>
+          <li>Attacker : SYN 전송</li>
+          <li>Target : SYN+ACK 전송</li>
+          <li>Attacker : ACK 전송</li>
+          <li>Attacker : RST+ACK 전송</li>
+        </ul>
+      </li>
+      <li>닫혀있는 경우
+        <ul>
+          <li>Attacker : SYN 전송</li>
+          <li>Target : RST+ACK 전송</li>
+        </ul>
+      </li>
+      <li>방화벽에 의한 차단
+        <ul>
+          <li>Attacker : SYN 전송</li>
+          <li>Target
+            <ul>
+              <li>무응답</li>
+              <li>ICMP 메시지 (Destination Unreachable)</li>
+              <li>filtered 메시지</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>nmap
+    <ul>
+      <li>telnet, http 포트 확인 : <code class="language-plaintext highlighter-rouge">nmap -sT -p 23,80 xxx.xxx.xxx.xxx</code></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="tcp-synhalf-open-스캔">TCP SYN(Half-Open) 스캔</h1>
+<ul>
+  <li>개요
+    <ul>
+      <li>관리자 권한을 가지고 있어야 수행 가능</li>
+      <li>완전 연결 설정과정을 수행하지 않기에 Half-Open(반 열림) 스캔이라 함</li>
+      <li>시스템 로그가 남지 않기 때문에 Stealth Scan 이라 함</li>
+    </ul>
+  </li>
+  <li>과정
+    <ul>
+      <li>열려있는 경우
+        <ul>
+          <li>Attacker : SYN 전송</li>
+          <li>Target : SYN+ACK 전송</li>
+          <li>Attacker : RST 전송
+            <ul>
+              <li>원칙은 ACK 전송, 강제로 Control Flag 를 변경-관리자권한</li>
+              <li>UAPRSF (000100)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>닫혀있는 경우와 방화벽 차단은 위와 동일</li>
+    </ul>
+  </li>
+  <li>nmap
+    <ul>
+      <li>telnet, http 포트 확인 : <code class="language-plaintext highlighter-rouge">nmap -sS -p 23,80 xxx.xxx.xxx.xxx</code></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="tcp-fin-스캔">TCP FIN 스캔</h1>
+<ul>
+  <li>개요
+    <ul>
+      <li>스텔스 스캔 방식의 하나</li>
+      <li>TCP 헤더의 flag 비트를 비정상적으로 설정해서 스캔하는 방식 (관리자권한)</li>
+      <li>TCP 표준의 허점을 이용
+        <ul>
+          <li>포트 상태가 CLOSED 이면 요청 세그먼트에 대한 응답으로 RST 를 보낸다.</li>
+          <li>OPEN 상태이면 RST 가 오지 않음</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>과정
+    <ul>
+      <li>열려있는 경우
+        <ul>
+          <li>Attacker : FIN 전송</li>
+          <li>Target : 응답없음</li>
+        </ul>
+      </li>
+      <li>닫혀있는 경우
+        <ul>
+          <li>Attacker : FIN 전송</li>
+          <li>Target : RST+ACK 전송</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>nmap
+    <ul>
+      <li>telnet, http 포트 확인 : <code class="language-plaintext highlighter-rouge">nmap -sF -p 23,80 xxx.xxx.xxx.xxx</code></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="tcp-null-스캔">TCP NULL 스캔</h1>
+<ul>
+  <li>개요
+    <ul>
+      <li>스텔스 스캔 방식의 하나</li>
+      <li>연결되어 있지 않은 포트에 아무 플래그 비트를 설정하지 않은 탐지패킷 전송</li>
+      <li>열린 포트 : 응답이 없음</li>
+      <li>닫힌 포트 : RST+ACK 전송</li>
+    </ul>
+  </li>
+  <li>과정
+    <ul>
+      <li>열려있는 경우
+        <ul>
+          <li>Attacker : 패킷 전송 (No Flag) - UAPRSF (000000)</li>
+          <li>Target : 응답 없음</li>
+        </ul>
+      </li>
+      <li>닫혀있는 경우
+        <ul>
+          <li>Attacker : 패킷 전송 (No Flag) - UAPRSF (000000)</li>
+          <li>Target : RST+ACK 전송</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>nmap
+    <ul>
+      <li>telnet, http 포트 확인 : <code class="language-plaintext highlighter-rouge">nmap -sN -p 23,80 xxx.xxx.xxx.xxx</code></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="tcp-xmas-스캔">TCP Xmas 스캔</h1>
+<ul>
+  <li>개요
+    <ul>
+      <li>스텔스 스캔방식의 하나</li>
+      <li>여러가지 플래그를 활성화 해 전송</li>
+      <li>연결되어 있지 않은 포트에 FIN, URG, PSH 플래그 비트를 설정하여 탐지패킷 전송
+        <ul>
+          <li>UAPRSF : 101001</li>
+        </ul>
+      </li>
+      <li>열린 포트 : 응답이 없음</li>
+      <li>닫힌 포트 : RST+ACK 전송</li>
+    </ul>
+  </li>
+  <li>과정
+    <ul>
+      <li>열려있는 경우
+        <ul>
+          <li>Attacker : FIN+URG+PSH 플래그 전송 (UAPRSF - 101001)</li>
+          <li>Target : 응답 없음</li>
+        </ul>
+      </li>
+      <li>닫혀있는 경우
+        <ul>
+          <li>Attacker : FIN+URG+PSH 플래그 전송 (UAPRSF - 101001)</li>
+          <li>Target : RST+ACK 전송</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>nmap
+    <ul>
+      <li>telnet, http 포트 확인 : <code class="language-plaintext highlighter-rouge">nmap -sX -p 23,80 xxx.xxx.xxx.xxx</code></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="tcp-ack-스캔">TCP ACK 스캔</h1>
+<ul>
+  <li>개요
+    <ul>
+      <li>포트의 Open 여부보다는 방화벽의 필터링 방식을 확인하기 위함</li>
+    </ul>
+  </li>
+  <li>방화벽 필터링 방식
+    <ul>
+      <li>Packet Filtering (패킷 필터링) 방화벽
+        <ul>
+          <li>deny, allow
+            <ul>
+              <li>IP 주소 (소스, 목적지)</li>
+              <li>포트번호 (소스, 목적지)</li>
+              <li>트래픽 방향</li>
+              <li>프로토콜의 형태</li>
+            </ul>
+          </li>
+          <li>전송 / 네트워크 계층 차단 방식
+            <ul>
+              <li>TCP/IP 헤더 부분을 이용한 침입차단</li>
+              <li>수동적 방화벽</li>
+            </ul>
+          </li>
+          <li>응용 계층 차단 (응용 게이트웨이) 방식
+            <ul>
+              <li>프록시 (소프트웨어) 기능을 이용
+                <ul>
+                  <li>패킷의 IP 주소와 서비스 종류에 따라 내부 네트워크 보호</li>
+                </ul>
+              </li>
+              <li>능동적 방화벽</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Stateful Inspection (상태기반) 방화벽
+        <ul>
+          <li>패킷 필터링 방화벽과 마찬가지로 동일한 패킷정보 검토
+            <ul>
+              <li>SYN 패킷인 경우</li>
+            </ul>
+          </li>
+          <li>상태 테이블 관리
+            <ul>
+              <li>TCP 연결에 관한 정보를 기록</li>
+              <li>TCP 번호 추적</li>
+            </ul>
+          </li>
+          <li>DataLink 계층에서 상태 테이블을 확인하고, 허용된 패킷만 통과시킴
+            <ul>
+              <li>SYN 패킷이 아닌 경우</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>NAT (Network Address Translation) 를 이용한 방화벽</li>
+    </ul>
+  </li>
+  <li>과정
+    <ul>
+      <li>필터링 하는 경우
+        <ul>
+          <li>응답 없음 (Stateful Inspection 방화벽 가능성이 높음)</li>
+          <li>ICMP 메시지</li>
+        </ul>
+      </li>
+      <li>필터링 하지 않는 경우
+        <ul>
+          <li>RST + ACK 패킷</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="udp-스캔">UDP 스캔</h1>
+<ul>
+  <li>개요
+    <ul>
+      <li>ICMP Unreachable 메시지를 이용하여 UDP 포트 오픈 여부 확인</li>
+      <li>열린 포트 : UDP 응답 or 응답 없음</li>
+      <li>닫힌 포트 : ICMP 메시지 응답</li>
+    </ul>
+  </li>
+  <li>과정
+    <ul>
+      <li>열려있는 경우
+        <ul>
+          <li>Attacker : UDP</li>
+          <li>Target : UDP 응답 or 응답 없음</li>
+        </ul>
+      </li>
+      <li>닫혀있는 경우
+        <ul>
+          <li>Attacker : UDP</li>
+          <li>Target : ICMP Unreachable (Type : 3, Code : 3)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>nmap
+    <ul>
+      <li>DNS 서비스 UDP 스캔 : <code class="language-plaintext highlighter-rouge">nmap -sU -p 53 xxx.xxx.xxx.xxx</code></li>
+      <li>NTP 서비스 UDP 스캔 : <code class="language-plaintext highlighter-rouge">nmap -sU -p 123 xxx.xxx.xxx.xxx</code></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="decoy-스캔">Decoy 스캔</h1>
+<ul>
+  <li>개요
+    <ul>
+      <li>위조된 주소로 스캔하는 방식</li>
+      <li>다양한 IP로 스캐너 주소를 위조, 관리자가 누가 스캔하는지 알아채기 어려움</li>
+    </ul>
+  </li>
+  <li>nmap
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">nmap -sS -p 23,80 192.168.120.100 -D 192.168.150.1, 192.168.150.2</code>
+        <ul>
+          <li>src – SYN –&gt; 192.168.120.100:23/80</li>
+          <li>192.168.150.1 – SYN –&gt; 192.168.120.100:23/80 (Decoy)</li>
+          <li>192.168.150.2 – SYN –&gt; 192.168.120.100:23/80 (Decoy)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+:ET

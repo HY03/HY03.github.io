@@ -1,0 +1,79 @@
+I"�<h1 id="가상사설망virtual-private-network">가상사설망(Virtual Private Network)</h1>
+<ul>
+  <li>개요
+    <ul>
+      <li>공중 네트워크를 이용하여 전용선처럼 자신만의 고유 네트워크 효과를 누릴 수 있도록 하는 기술</li>
+      <li>데이터 전송 중 전송망에서의 침입자에 의한 데이터 왜곡, 노출을 터널링 기술(프로토콜의 한 종류)을 이용하여 방지함</li>
+      <li>터널링 : 보안성을 위함, 터널링을 통해 암호화되는 부분 : Payload</li>
+    </ul>
+  </li>
+  <li>터널링
+    <ul>
+      <li>PPTP (Point to Point Tunnel Protocol)
+        <ul>
+          <li>개발사 : MS</li>
+          <li>형성층 : Link (2계층)</li>
+          <li>최적 적용방식 : 독자적 망구성가능</li>
+          <li>PPP (Point to Point Protocol) 패킷 (2계층) 을 IP Packet 으로 캡슐화 -&gt; 3계층에서 전송</li>
+          <li>1:1 통신만 가능</li>
+        </ul>
+      </li>
+      <li>L2F (Layer 2 Forwarding)
+        <ul>
+          <li>개발사 : 시스코</li>
+          <li>형성층 : Link (2계층)</li>
+          <li>최적 적용방식 : ISP</li>
+          <li>원격지 ISP 장비에서 접근서버로 L2F 터널을 생성</li>
+          <li>위 가상터널을 통해 세션을 생성 (PPP, RAS)</li>
+          <li>위 세션을 이용해서 원격지의 사용자가 홈사이트에서 주소를 할당하면 홈사이트 게이트웨이에서 사용자 인증을 거침</li>
+          <li>하나의 터널에 여러개 연결을 할 수 있음 : 다자간 통신이 가능</li>
+          <li>PPP 사용</li>
+          <li>Radius 와 같은 인증서버를 사용</li>
+        </ul>
+      </li>
+      <li>L2TP (Layer2 Tunneling Protocol)
+        <ul>
+          <li>개발사 : MS 와 시스코가 함께 제안</li>
+          <li>형성층 : Link (2계층)</li>
+          <li>최적 적용방식 : ISP</li>
+          <li>L2F 에 기반, PPTP와 호환가능</li>
+          <li>지원 프로토콜 : IP, IPX, AppleTalk</li>
+          <li>WAN 기술에 지원됨</li>
+        </ul>
+      </li>
+      <li><strong>IPSec</strong> (IP Security)
+        <ul>
+          <li>개발사 : IETF (국제인터넷기술위원회)</li>
+          <li>형성층 : Network (3계층)</li>
+          <li>최적 적용방식 : 독자적 망구성가능</li>
+          <li>3계층 터널링 프로토콜</li>
+          <li>VPN 구현에 가장 널리 사용되는 터널링 프로토콜
+            <ul>
+              <li>네트워크 전송 간 보안을 강화시킴</li>
+              <li>TCP/IP 통신보다 더 안전하게 IP Datagram의 보호를 수행</li>
+              <li>상위 계층에 대한 프로그램의 변경이 필요없음 (IP 계층 그대로 서비스)</li>
+              <li>암호화된 패킷이 일반 패킷과 동일한 구조 &gt; 네트워크 장비의 변경이 필요없음</li>
+              <li>라우팅을 쉽게 할 수 있음</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="ipsec-internet-protocol-security">IPSEC (Internet Protocol Security)</h1>
+<ul>
+  <li>개요
+    <ul>
+      <li>network layer에서의 보안을 위한 표준</li>
+      <li>인터넷 상에서 VPN을 구현하는데 사용될 수 있도록 IETF 에서 개발된 프로토콜셋</li>
+      <li>IPv6 에서 기본적으로 IPSec 을 지원
+        <ul>
+          <li>IPSec 지원 방화벽, 라우터, VPN : 보안/터널 게이트웨이</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+:ET

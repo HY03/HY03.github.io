@@ -1,0 +1,1210 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.20.2 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>정보보안 - 이메일 | Bluesplatter</title>
+<meta name="description" content="이메일 보안 이메일 구조    UA (User Agent)            메시지 구성, 메시지 읽기 / 보내기 용도의 S/W           MTA (Message Transfer Agent)            SMTP       MTA Client (User)                    UA 와 동시 호출됨           Mail Server 의 MTA Server 에 메일 저장 (SMTP)                       MTA Server                    1) MTA Client 로부터 전송받은 메일을 저장                            spool                                   2) Mail Server 내 MTA Client 에게 메일 송신                       MTA Client (Mail Server)                    연결된 상대방 MTA Server 에 메일 송신 (SMTP)                            PUSH : Client -&gt; Server                                                   MAA (Message Access Agent)            POP3, IMAP3       MAA Client                    UA 가 MAA Client 에 메일 가져올 것을 요청           Mail Server 내 MAA Server 에 메일 요청 (POP3/IMAP)           PULL : Server -&gt; Client                       MAA Server                    수신된 Mail 서버 내 Mail Box 내용 검색 (MTA 가 보관중인 메일)">
+
+
+  <meta name="author" content="HY03">
+  
+  <meta property="article:author" content="HY03">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Bluesplatter">
+<meta property="og:title" content="정보보안 - 이메일">
+<meta property="og:url" content="https://bluesplatter.com/is_certification/IS-Application-Email/">
+
+
+  <meta property="og:description" content="이메일 보안 이메일 구조    UA (User Agent)            메시지 구성, 메시지 읽기 / 보내기 용도의 S/W           MTA (Message Transfer Agent)            SMTP       MTA Client (User)                    UA 와 동시 호출됨           Mail Server 의 MTA Server 에 메일 저장 (SMTP)                       MTA Server                    1) MTA Client 로부터 전송받은 메일을 저장                            spool                                   2) Mail Server 내 MTA Client 에게 메일 송신                       MTA Client (Mail Server)                    연결된 상대방 MTA Server 에 메일 송신 (SMTP)                            PUSH : Client -&gt; Server                                                   MAA (Message Access Agent)            POP3, IMAP3       MAA Client                    UA 가 MAA Client 에 메일 가져올 것을 요청           Mail Server 내 MAA Server 에 메일 요청 (POP3/IMAP)           PULL : Server -&gt; Client                       MAA Server                    수신된 Mail 서버 내 Mail Box 내용 검색 (MTA 가 보관중인 메일)">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2021-04-30T18:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://bluesplatter.com/is_certification/IS-Application-Email/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "HY03",
+      "url": "https://bluesplatter.com/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Bluesplatter Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo/logo.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          세상에 남기는 작은 흔적
+          <span class="site-subtitle">Bluesplatter</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/">연도별 포스트</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="https://bluesplatter.com/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#is_certification" itemprop="item"><span itemprop="name">Is_certification</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">정보보안 - 이메일</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/profile/photo.jpg" alt="HY03" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">HY03</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>저는 전문가가 아니고 이것 저것 알아보는 비전문가 입니다. <br /> 틀린 내용이 기술되어도 너그러이 봐주시고 댓글을 남겨주셨으면 좋겠습니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="http://bluesplatter.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:hyunik03@gmail.com">
+            <meta itemprop="email" content="hyunik03@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">이메일</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="정보보안 - 이메일">
+    <meta itemprop="description" content="이메일 보안이메일 구조  UA (User Agent)          메시지 구성, 메시지 읽기 / 보내기 용도의 S/W        MTA (Message Transfer Agent)          SMTP      MTA Client (User)                  UA 와 동시 호출됨          Mail Server 의 MTA Server 에 메일 저장 (SMTP)                    MTA Server                  1) MTA Client 로부터 전송받은 메일을 저장                          spool                                2) Mail Server 내 MTA Client 에게 메일 송신                    MTA Client (Mail Server)                  연결된 상대방 MTA Server 에 메일 송신 (SMTP)                          PUSH : Client -&gt; Server                                            MAA (Message Access Agent)          POP3, IMAP3      MAA Client                  UA 가 MAA Client 에 메일 가져올 것을 요청          Mail Server 내 MAA Server 에 메일 요청 (POP3/IMAP)          PULL : Server -&gt; Client                    MAA Server                  수신된 Mail 서버 내 Mail Box 내용 검색 (MTA 가 보관중인 메일)                    ">
+    <meta itemprop="datePublished" content="2021-04-30T18:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">정보보안 - 이메일
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-04-30T18:00:00+09:00">April 30, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#이메일-보안">이메일 보안</a>
+    <ul>
+      <li><a href="#이메일-구조">이메일 구조</a></li>
+      <li><a href="#이메일-송수신-프로토콜">이메일 송수신 프로토콜</a></li>
+      <li><a href="#이메일-보안기술">이메일 보안기술</a></li>
+      <li><a href="#pgp-보안기술">PGP 보안기술</a></li>
+      <li><a href="#smime-보안기술">S/MIME 보안기술</a></li>
+      <li><a href="#스팸메일의-기술적-대응-방안">스팸메일의 기술적 대응 방안</a></li>
+    </ul>
+  </li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <h1 id="이메일-보안">이메일 보안</h1>
+<h2 id="이메일-구조">이메일 구조</h2>
+<ul>
+  <li>UA (User Agent)
+    <ul>
+      <li>메시지 구성, 메시지 읽기 / 보내기 용도의 S/W</li>
+    </ul>
+  </li>
+  <li>MTA (Message Transfer Agent)
+    <ul>
+      <li>SMTP</li>
+      <li>MTA Client (User)
+        <ul>
+          <li>UA 와 동시 호출됨</li>
+          <li>Mail Server 의 MTA Server 에 메일 저장 (SMTP)</li>
+        </ul>
+      </li>
+      <li>MTA Server
+        <ul>
+          <li>1) MTA Client 로부터 전송받은 메일을 저장
+            <ul>
+              <li>spool</li>
+            </ul>
+          </li>
+          <li>2) Mail Server 내 MTA Client 에게 메일 송신</li>
+        </ul>
+      </li>
+      <li>MTA Client (Mail Server)
+        <ul>
+          <li>연결된 상대방 MTA Server 에 메일 송신 (SMTP)
+            <ul>
+              <li>PUSH : Client -&gt; Server</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>MAA (Message Access Agent)
+    <ul>
+      <li>POP3, IMAP3</li>
+      <li>MAA Client
+        <ul>
+          <li>UA 가 MAA Client 에 메일 가져올 것을 요청</li>
+          <li>Mail Server 내 MAA Server 에 메일 요청 (POP3/IMAP)</li>
+          <li>PULL : Server -&gt; Client</li>
+        </ul>
+      </li>
+      <li>MAA Server
+        <ul>
+          <li>수신된 Mail 서버 내 Mail Box 내용 검색 (MTA 가 보관중인 메일)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="이메일-송수신-프로토콜">이메일 송수신 프로토콜</h2>
+<ul>
+  <li>SMTP
+    <ul>
+      <li>MTA (Message Transfer Agent) Protocol</li>
+      <li>암호화 기능이 없음</li>
+      <li>과거 : 여러 메일서버를 거쳐서 (중계) 최종 목적지 도달</li>
+      <li>현재 : DNS 서버를 통해 메일 서버를 한 번만 거침</li>
+      <li>ESMTP (확장 SMTP) : 기존 SMTP 의 단점을 보완
+        <ul>
+          <li>텍스트 외 영상 등 첨부</li>
+          <li>수신확인 기능</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>POP3 (Post Office Protocol Ver.3)
+    <ul>
+      <li>MAA (Message Access Agent) Protocol</li>
+      <li>메일서버 MAA (POP3 / 110 TCP)</li>
+      <li>클라이언트 MAA (POP3) 에서 user/pw 정보로 메일서버에 PULL 요청
+        <ul>
+          <li>Mail BOX 에서 해당하는 메일 PULL</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>IMAP4 (Internet Mail Access Protocol Ver.4)
+    <ul>
+      <li>MAA (Message Access Agent) Protocol</li>
+      <li>메일서버 MAA (IMAP4 / 143 TCP)</li>
+      <li>POP3 보다 많은 기능을 포함
+        <ul>
+          <li>데이터 신뢰성 보장</li>
+          <li>순서대로 송수신</li>
+          <li>이메일 수신 전에 헤더 검사</li>
+          <li>이메일 수신 전에 내용 검사</li>
+          <li>부분적으로 이메일을 수신</li>
+          <li>메일서버에서 편지함(Mail Box) 을 생성, 삭제, 이름변경</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="이메일-보안기술">이메일 보안기술</h2>
+<ul>
+  <li>PEM (IETF 에서 개발) - Privacy Enhanced Mail
+    <ul>
+      <li>중앙집중화된 키 인증 방법</li>
+      <li>인터넷 표준</li>
+      <li>구현 어려움 (많이 사용되지 않음)</li>
+      <li>높은 보안성 (군사용, 금융계)</li>
+      <li>이론중심적</li>
+    </ul>
+  </li>
+  <li>PGP (Phill Zimmermann 개발) - Pretty Good Privacy
+    <ul>
+      <li>분산화된 키 인증</li>
+      <li>구현 용이</li>
+      <li>현실적 (현재 많이 사용)</li>
+      <li>전자서명 제공</li>
+      <li>기밀성 : 대칭블록암호</li>
+      <li>ZIP 압축 기능</li>
+      <li>전자우편 호환성, 단편화</li>
+    </ul>
+  </li>
+  <li>S/MIME (RSA Data Security 개발)
+    <ul>
+      <li>(Secure) / MIME 기반 (Multipurpose Internet Mail Extention)
+        <ul>
+          <li>이메일은 ASCII 기반으로 전송</li>
+          <li>첨부파일 등 바이너리 데이터를 ASCII (텍스트) 전환, 전송하는 프로토콜</li>
+        </ul>
+      </li>
+      <li>다양한 상용 툴킷</li>
+      <li>X.509 인증서 지원</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="pgp-보안기술">PGP 보안기술</h2>
+<ul>
+  <li>기밀성 (메시지 암호화)
+    <ul>
+      <li>메시지 암호화 : 3DES, IDEA, CAST-128 - 대칭키 알고리즘</li>
+      <li>세션키 암호화 : RSA - 공개키(서명, 메시지암호화) 알고리즘</li>
+    </ul>
+  </li>
+  <li>인증 (전자서명)
+    <ul>
+      <li>암호화 : RSA, DSS - 공개키(서명, 메시지암호화) 알고리즘</li>
+      <li>해시함수 메시지 다이제스트 : SHA-1, MD5, RIPE-MD/160 - 해시 알고리즘</li>
+    </ul>
+  </li>
+  <li>압축 (ZIP)
+    <ul>
+      <li>ZIP 메시지 압축 - 압축 알고리즘</li>
+      <li>서명 후 암호화 전에 압축
+        <ul>
+          <li>암호화된 결과를 이용해서 평문 추측을 어렵게 하기 위함</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>전자우편 호환성
+    <ul>
+      <li>Radix-64 를 이용해 ASCII 부호로 변환</li>
+      <li>PGP 결과로 나오는 메시지블록은 8bit 스트림</li>
+      <li>기존의 이메일에서 ASCII 문장으로 이루어진 블록만을 사용</li>
+      <li>Base-64 + 오류검출 (Radix-64) 변환을 이용해서 3개의 8Bit 를 4개의 ASCII 문자로 변환</li>
+    </ul>
+  </li>
+  <li>단편화/재조합
+    <ul>
+      <li>fragmentation / reassembly</li>
+      <li>전자메일의 최대 길이 : 보통 50,000 Byte</li>
+      <li>50,000 Byte 이상 메시지는 단편화 전송</li>
+      <li>단편화 과정 : Radix-64, Base-64</li>
+      <li>수신 측에서는 모든 전자메일 헤더 제거 후 블록 재조립</li>
+    </ul>
+  </li>
+  <li>PGP 에서 사용하는 키
+    <ul>
+      <li>세션키
+        <ul>
+          <li>하나의 메시지에 대해서 암호화/복호화할 때 사용</li>
+          <li>예측할 수 없는 키값</li>
+        </ul>
+      </li>
+      <li>공개키
+        <ul>
+          <li>사용자는 공개/개인키 쌍을 여러 개 보관 가능</li>
+        </ul>
+      </li>
+      <li>개인키
+        <ul>
+          <li>사용자는 공개/개인키 쌍을 여러 개 보관 가능</li>
+        </ul>
+      </li>
+      <li>패스워드 기반의 대칭키
+        <ul>
+          <li>저장한 개인키를 암호화</li>
+        </ul>
+      </li>
+      <li>키 식별자
+        <ul>
+          <li>누구의 공개키인지 확인 필요</li>
+        </ul>
+      </li>
+      <li>키 링
+        <ul>
+          <li>각 사용자들은 개인키링, 공개키링을 갖는다</li>
+          <li>개인키 링 : 자신의 개인키/공개키 쌍들을 저장</li>
+          <li>공개키 링 : 자신이 알고 있는 다른 사용자들의 공개키 저장</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>과정
+    <ul>
+      <li>
+        <ol>
+          <li>세션키 생성 (의사난수생성기)</li>
+        </ol>
+      </li>
+      <li>
+        <ol>
+          <li>수신자의 공개키로 세션키 암호화 (비대칭키 알고리즘) -&gt; 암호화된 세션키</li>
+        </ol>
+      </li>
+      <li>
+        <ol>
+          <li>메시지 압축</li>
+        </ol>
+      </li>
+      <li>
+        <ol>
+          <li>메시지 암호화 (세션키 이용 : 대칭키 알고리즘) -&gt; 암호화된 메시지</li>
+        </ol>
+      </li>
+      <li>
+        <ol>
+          <li>암호화된 세션키, 암호화된 메시지 결합 (2진데이터)</li>
+        </ol>
+      </li>
+      <li>
+        <ol>
+          <li>Radix-64(Base-64 + Data 오류검출) 변환 (ASCII 데이터) -&gt; 송신 데이터</li>
+        </ol>
+      </li>
+    </ul>
+  </li>
+  <li>Open PGP 인증서 사용</li>
+</ul>
+
+<h2 id="smime-보안기술">S/MIME 보안기술</h2>
+<ul>
+  <li>전송할 수 있는 데이터 형식
+    <ul>
+      <li>SMTP 형식 (RFC 822) 기반
+        <ul>
+          <li>Date, From, Subject, To, CC, …</li>
+        </ul>
+      </li>
+      <li>실행파일 (전송불가) -&gt; MIME 타입으로 변환</li>
+    </ul>
+  </li>
+  <li>MIME 타입
+    <ul>
+      <li>RFC 822 헤더
+        <ul>
+          <li>Date, From, Subject, To, CC, …</li>
+        </ul>
+      </li>
+      <li>MIME 헤더
+        <ul>
+          <li>MIME Version : 전자메일 메시지가 MIME 표준</li>
+          <li>Content-Type : 메시지 유형이 Text, audio, image …
+            <ul>
+              <li>text/plaintext, img/jpeg(sub-type) …</li>
+            </ul>
+          </li>
+          <li>Content-Transfer-Encoding : 인코딩 방식
+            <ul>
+              <li>base 64, radix 64 …</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Body</li>
+    </ul>
+  </li>
+  <li>보안기술 (S/MIME Application 이용하여 MIME 타입을 S/MIME 변환)
+    <ul>
+      <li>디지털 서명 : RSA / SHA-256</li>
+      <li>메시지 암호화 : AES</li>
+      <li>압축기능 : 제한 없음</li>
+      <li>이메일 호환성 : Radix-64</li>
+    </ul>
+  </li>
+  <li>S/MIME 데이터를 SMTP 로 송/수신</li>
+  <li>메시지 구성
+    <ul>
+      <li>Enveloped Data (동봉된 데이터) - 메시지 비밀성을 위함
+        <ul>
+          <li>임의의 타입의 데이터의 암호화된 내용</li>
+          <li>하나 이상의 다수 수신자를 포함한 암호화 키</li>
+        </ul>
+      </li>
+      <li>Signed Data (서명된 데이터)
+        <ul>
+          <li>내용, 서명을 서명자의 개인키로 암호화</li>
+          <li>Radix-64 변환한 내용
+            <ul>
+              <li>S/MIME 기능을 가진 수신자만 내용을 볼 수 있음</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Clear-Signed Data
+        <ul>
+          <li>디지털 서명만을 Base-64 변환
+            <ul>
+              <li>S/MIME 기능이 없더라도 메시지 내용을 볼 수 있음</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Signed and Enveloped Data
+        <ul>
+          <li>암호화 메시지는 서명, 서명된 메시지는 암호화</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>X.509 V3 인증서 사용</li>
+</ul>
+
+<h2 id="스팸메일의-기술적-대응-방안">스팸메일의 기술적 대응 방안</h2>
+<ul>
+  <li>메일서버 수신 차단
+    <ul>
+      <li>콘텐츠 필터링
+        <ul>
+          <li>헤더 정보 확인</li>
+          <li>제목 확인</li>
+          <li>메시지 내용 확인</li>
+        </ul>
+      </li>
+      <li>송신자 필터링 - 지속적 관리 (스팸 블랙리스트 관리) 필요
+        <ul>
+          <li>IP</li>
+          <li>메일주소</li>
+          <li>URL 정보</li>
+        </ul>
+      </li>
+      <li>네트워크 레벨 필터링
+        <ul>
+          <li>패킷필터링</li>
+          <li>DNS 변경</li>
+        </ul>
+      </li>
+      <li>발송량 기준 차단
+        <ul>
+          <li>최대 수신용량 관리 / 차단</li>
+        </ul>
+      </li>
+      <li>시간대별 차단
+        <ul>
+          <li>송신자 정보 기준 업무시간 외 메일 차단</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>메일 서버 보안
+    <ul>
+      <li>릴레이 스팸 방지
+        <ul>
+          <li>외부에서 전송된, 자신의 메일서버를 통해 다른 메일서버로 전송하려는 메일들 차단</li>
+          <li>송신자별 릴레이 허용 - DB 설정</li>
+          <li>Domain 리스트 설정</li>
+        </ul>
+      </li>
+      <li>Anti-SPAM 솔루션 도입</li>
+    </ul>
+  </li>
+  <li>메일 클라이언트 보안
+    <ul>
+      <li>콘텐츠 필터링</li>
+      <li>송신자 필터링</li>
+    </ul>
+  </li>
+  <li>스팸 필터 솔루션
+    <ul>
+      <li>메일 서버 앞단 (F/W와 IPS 장비 뒤) 에서 필터링</li>
+      <li>프락시 메일서버로 동작</li>
+      <li>필터링 종류
+        <ul>
+          <li>메일헤더</li>
+          <li>제목</li>
+          <li>본문</li>
+          <li>첨부파일</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>스팸 블랙리스트 기법 (Tool)
+    <ul>
+      <li>RBL (Real-time Black List) : 실시간 차단
+        <ul>
+          <li>IP 관련 Black List DB</li>
+        </ul>
+      </li>
+      <li>SPF (Sender Policy Framework) : 메일서버 등록제, 메일 검증 기술
+        <ul>
+          <li>메일해더의 발송지 IP 가 실제 서버인지 확인 (Spoofing 확인)</li>
+          <li>메일서버를 DNS 에 미리 등록</li>
+          <li>등록된 서버로부터 발송이 되었는지 확인 / 차단</li>
+          <li>포털업체에서 송신측 메일서버를 DNS 에 넣고 관리 -&gt; 확인 / 차단</li>
+        </ul>
+      </li>
+      <li>procmail
+        <ul>
+          <li>sendmail (unix SMTP 프로토콜 프로그램 - MTA) 과 연동하여 사용 (.cf 파일 - config)</li>
+          <li>받은 메일 제목 / 내용의 특정 키워드로 필터링</li>
+          <li>메일 사이즈, 첨부 파일명에 따라 메일 반송</li>
+          <li>메일 반송/차단 로그분석</li>
+        </ul>
+      </li>
+      <li>sanitizer
+        <ul>
+          <li>procmail 의 룰셋</li>
+          <li>파일 확장자 필터링</li>
+          <li>메일 내 매크로 검사 기능</li>
+        </ul>
+      </li>
+      <li>spamAssassin
+        <ul>
+          <li>Apache 오픈소스 프로젝트</li>
+          <li>Perl 언어 사용</li>
+          <li>헤더 / 본문의 정해진 규칙으로 검색</li>
+          <li>여러가지 기술의 이용이 가능 (RBL - 스팸 데이터베이스 와 협동적 연계)</li>
+          <li>베이지안 필터링 이용</li>
+          <li>스코어링을 통해 특정 점수를 넘으면 스팸으로 판단</li>
+        </ul>
+      </li>
+      <li>inflex
+        <ul>
+          <li>로컬이나 외부로 나가는 이메일 검사</li>
+          <li>첨부파일에 대한 필터링 (inbound / outbound)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>유닉스 환경의 메일 프로그램
+    <ul>
+      <li>sendmail - SMTP (MTA)</li>
+      <li>Dovecot - POP3, IMAP (MAA)</li>
+    </ul>
+  </li>
+</ul>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#%EC%96%B4%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98" class="page__taxonomy-item" rel="tag">어플리케이션</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88%EA%B8%B0%EC%82%AC" class="page__taxonomy-item" rel="tag">정보보안기사</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#is-certification" class="page__taxonomy-item" rel="tag">IS_Certification</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2021-04-30T18:00:00+09:00">April 30, 2021</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+%EC%9D%B4%EB%A9%94%EC%9D%BC%20https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Application-Email%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Application-Email%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Application-Email%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/is_certification/IS-Application-FTP/" class="pagination--pager" title="정보보안 - FTP
+">이전</a>
+    
+    
+      <a href="/is_certification/IS-Application-HTTP/" class="pagination--pager" title="정보보안 - HTTP
+">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Application-HTTP/" rel="permalink">정보보안 - HTTP
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-05-13T18:00:00+09:00">May 13, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Web 보안
+
+  웹프로토콜인 HTTP, TCP/IP 가 데이터에 대한 보안서비스를 제공하지 않음
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Application-FTP/" rel="permalink">정보보안 - FTP
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-04-27T18:00:00+09:00">April 27, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">FTP(File Transfer Protocol)
+FTP 개요
+
+  FTP 는 2개의 연결이 필요
+    
+      제어 연결 (Control Connection)
+        
+          21 번 포트 사용
+          명령을 전송할 때 사용 / 계속 연결 지속
+...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Network-VPN/" rel="permalink">정보보안 - 가상 사설망
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-03-23T18:00:00+09:00">March 23, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">가상사설망(Virtual Private Network)
+
+  개요
+    
+      공중 네트워크를 이용하여 전용선처럼 자신만의 고유 네트워크 효과를 누릴 수 있도록 하는 기술
+      데이터 전송 중 전송망에서의 침입자에 의한 데이터 왜곡, 노출을 터널링 기술(프로토콜의 한 ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Network-IPSec/" rel="permalink">정보보안 - IPSEC
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-03-23T18:00:00+09:00">March 23, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">IPSEC(Internet Protocol Security)
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+<!--
+<script>
+	(function(d, h, m){
+    var js, fjs = d.getElementsByTagName(h)[0];
+    if (d.getElementById(m)){return;}
+    js = d.createElement(h); js.id = m;
+    js.onload = function(){
+        window.makerWidgetComInit({
+        position: "left",          
+        widget: "eqypoqmawbcz3azh-usiy9q7ma4ong1w1-juelcm3zfgcuwjds"                
+    })};
+    js.src = "https://makerwidget.com/js/embed.js";
+    fjs.parentNode.insertBefore(js, fjs)
+	}(document, "script", "dhm"))
+</script>
+-->
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:hyunik03@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 HY03. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://bluesplatter.com/is_certification/IS-Application-Email/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/is_certification/IS-Application-Email"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://bluesplatter.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

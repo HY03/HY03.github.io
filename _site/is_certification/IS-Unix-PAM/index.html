@@ -1,0 +1,1089 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.20.2 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>정보보안 - 유닉스 PAM | Bluesplatter</title>
+<meta name="description" content="PAM">
+
+
+  <meta name="author" content="HY03">
+  
+  <meta property="article:author" content="HY03">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Bluesplatter">
+<meta property="og:title" content="정보보안 - 유닉스 PAM">
+<meta property="og:url" content="https://bluesplatter.com/is_certification/IS-Unix-PAM/">
+
+
+  <meta property="og:description" content="PAM">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2021-01-19T15:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://bluesplatter.com/is_certification/IS-Unix-PAM/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "HY03",
+      "url": "https://bluesplatter.com/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Bluesplatter Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo/logo.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          세상에 남기는 작은 흔적
+          <span class="site-subtitle">Bluesplatter</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/">연도별 포스트</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="https://bluesplatter.com/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#is_certification" itemprop="item"><span itemprop="name">Is_certification</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">정보보안 - 유닉스 PAM</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/profile/photo.jpg" alt="HY03" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">HY03</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>저는 전문가가 아니고 이것 저것 알아보는 비전문가 입니다. <br /> 틀린 내용이 기술되어도 너그러이 봐주시고 댓글을 남겨주셨으면 좋겠습니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="http://bluesplatter.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:hyunik03@gmail.com">
+            <meta itemprop="email" content="hyunik03@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">이메일</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="정보보안 - 유닉스 PAM">
+    <meta itemprop="description" content="PAM">
+    <meta itemprop="datePublished" content="2021-01-19T15:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">정보보안 - 유닉스 PAM
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-01-19T15:00:00+09:00">January 19, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#pam">PAM</a></li>
+  <li><a href="#pty10--가상터미널-원격접속---telnet-ssh-등-주석처리---불가">pty/10 : 가상터미널 (원격접속) - telnet, ssh 등. 주석처리 - 불가</a></li>
+  <li><a href="#pty11--주석처리---불가">pty/11 : 주석처리 - 불가</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <h1 id="pam">PAM</h1>
+
+<ul>
+  <li>PAM(Pluggable Authentication Module : 탈착형 인증 모듈)
+    <ul>
+      <li>개요
+        <ul>
+          <li>사용자를 인증</li>
+          <li>서비스에 대한 액세스를 제어하는 라이브러리</li>
+          <li>권한을 부여하는 소프트웨어의 개발과 안전하고 적정한 인증의 개발을 분리</li>
+          <li>로그인, telnet, ftp 등의 프로그램 사용시 PAM 을 이용</li>
+        </ul>
+      </li>
+      <li>절차
+        <ul>
+          <li>각종 프로그램 (로그인, telnet, ftp 등) 에서 PAM 라이브러리 호출</li>
+          <li>PAM 라이브러리에서 사용자 인증, 결과값 전송</li>
+        </ul>
+      </li>
+      <li>구성파일
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">/etc/pam.d</code> 디렉터리 내에 있는 서비스에서 PAM을 사용</li>
+          <li><code class="language-plaintext highlighter-rouge">/etc/pam.d/other</code> : <code class="language-plaintext highlighter-rouge">/etc/pam.d</code> 디렉터리 외부에서 PAM을 사용할 경우</li>
+        </ul>
+      </li>
+      <li>기본 구조
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">cat /etc/pam.d/login</code> : remote 서비스</li>
+        </ul>
+
+        <table>
+          <thead>
+            <tr>
+              <th style="text-align: left">type</th>
+              <th style="text-align: left">control</th>
+              <th style="text-align: left">module-path</th>
+              <th style="text-align: left">module-arguments</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="text-align: left">auth</td>
+              <td style="text-align: left">required</td>
+              <td style="text-align: left">/lib/security/pam_securetty.so</td>
+              <td style="text-align: left"> </td>
+            </tr>
+            <tr>
+              <td style="text-align: left">account</td>
+              <td style="text-align: left">required</td>
+              <td style="text-align: left">/lib/security/pam_stack.so</td>
+              <td style="text-align: left">service=system-auth</td>
+            </tr>
+            <tr>
+              <td style="text-align: left">password</td>
+              <td style="text-align: left">required</td>
+              <td style="text-align: left">/lib/security/pam_stack.so</td>
+              <td style="text-align: left">service=system-auth</td>
+            </tr>
+            <tr>
+              <td style="text-align: left">session</td>
+              <td style="text-align: left">required</td>
+              <td style="text-align: left">/lib/security/pam_stack.so</td>
+              <td style="text-align: left">service=system-auth</td>
+            </tr>
+            <tr>
+              <td style="text-align: left">session</td>
+              <td style="text-align: left">optional</td>
+              <td style="text-align: left">/lib/security/pam_console.so</td>
+              <td style="text-align: left"> </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <ul>
+          <li>type : PAM 모듈의 종류
+            <ul>
+              <li>account : 사용자의 시스템 사용 권한을 확인하는 모듈</li>
+              <li>auth : 패스워드 확인 등 실질적인 인증기능을 하는 모듈</li>
+              <li>password : 패스워드 설정, 패스워드 확인 모듈</li>
+              <li>session : 인증 성공시 세션을 연결시켜 주는 모듈</li>
+            </ul>
+          </li>
+          <li>control : 모듈 성공/실패에 따른 라이브러리 동작 결정
+            <ul>
+              <li>requisite : 실패했을 경우 즉시 인증 거부</li>
+              <li>required : 인증이 실패하더라도 다음 라인 수행, 최종적으론 인증 실패</li>
+              <li>sufficient
+                <ul>
+                  <li>이전 요청 모듈이 실패하더라도 현재 성공시 PAM 인증승인</li>
+                  <li>실패할 경우 다음 라인 수행</li>
+                </ul>
+              </li>
+              <li>optional : 거의 사용하지 않음 (모듈의 성공/실패와 연관없음)</li>
+              <li>include : 모듈이 아닌 PAM 파일의 결과를 사용</li>
+            </ul>
+          </li>
+          <li>module-path : 실제 모듈 파일 경로
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">/lib/security/*.so</code></li>
+            </ul>
+          </li>
+          <li>module-arguments : 모듈 전달 인수값</li>
+        </ul>
+      </li>
+      <li>지원 모듈 목록
+        <ul>
+          <li>pam_securetty.so
+            <ul>
+              <li>/etc/securetty 터미널을 사용하는 경우 root 원격 접속 허용</li>
+              <li>허용할 터미널만을 기재</li>
+              <li>원칙 : root 계정은 콘솔로 연결해야 함</li>
+            </ul>
+          </li>
+          <li>pam_listfile.so
+            <ul>
+              <li>/etc/pam.d/vsftpd ftp 허용/거부 관련</li>
+            </ul>
+          </li>
+          <li>pam_nologin.so
+            <ul>
+              <li>/etc/nologin 파일이 있으면 root 로만 로그인 가능</li>
+            </ul>
+          </li>
+          <li>pam_deny.so</li>
+          <li>pam_cracklib.so
+            <ul>
+              <li>사전에 등록된 단어를 이용한 공격(사전공격) 차단을 방지</li>
+            </ul>
+          </li>
+          <li>pam_wheel.so
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">/etc/pam.d/su</code> 와 연계하여 사용</li>
+              <li>root 권한을 얻을 수 있는 그룹</li>
+            </ul>
+          </li>
+          <li>pam_rootok.so
+            <ul>
+              <li>UID : 0 인 사용자를 인증하는 모듈</li>
+              <li>root 가 암호입력 없이 서비스를 사용하는 것을 지원</li>
+            </ul>
+          </li>
+          <li>pam_tally.so
+            <ul>
+              <li>로그인 시도횟수를 세는 모듈</li>
+            </ul>
+          </li>
+          <li>pam_limits.so
+            <ul>
+              <li>시스템 자원에 대한 사용자 제한을 설정하는 모듈</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>PAM 사용 예
+    <ul>
+      <li>/etc/pam.d/login(remote) 파일 열기
+        <ul>
+          <li>한단계 씩 진행</li>
+          <li>#PAM-1.0 : 주석절</li>
+          <li>auth required pam_securetty.so
+            <ul>
+              <li>auth : 인증기능 모듈</li>
+              <li>pam_securetty.so : <code class="language-plaintext highlighter-rouge">/etc/securetty</code> 에 리스팅되어 있는 터미널을 제외한 나머지는 root 접속 실패</li>
+            </ul>
+          </li>
+          <li>auth required pam_unix.so nullok
+            <ul>
+              <li>pam_unix.so : <code class="language-plaintext highlighter-rouge">/etc/passwd</code>, <code class="language-plaintext highlighter-rouge">/etc/shadow</code> 를 이용한 인증</li>
+              <li>nullok : null password 허용</li>
+            </ul>
+          </li>
+          <li>auth required pam_nologin.so
+            <ul>
+              <li>pam_nologin.so : <code class="language-plaintext highlighter-rouge">/etc/nologin</code> 파일 여부 체크, 있으면 root 제외한 모든 사용자 접속 차단</li>
+            </ul>
+          </li>
+          <li>account required pam_unix.so
+            <ul>
+              <li>account : 사용자의 시스템 자원 권한 확인</li>
+              <li>pam_unix.so : account 인터페이스를 사용할 경우 유저 계정 활성화여부, 비밀번호 만료여부 등을 확인</li>
+            </ul>
+          </li>
+          <li>password required pam_cracklib.so retry=3
+            <ul>
+              <li>pam-cracklib.so : 패스워드 변경 시 취약한 패스워드인지 확인 / 차단</li>
+            </ul>
+          </li>
+          <li>password required pam_unix.so shadow nullok
+            <ul>
+              <li>PAM 사용 서비스에서 패스워드 변경 시 shadow, null ok</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>/etc/securetty
+    <ul>
+      <li>pam_securetty.so 모듈이 사용하는 파일</li>
+      <li>원격 root 접속을 허용할 터미널을 기록
+        <ul>
+          <li>tty10 : 서버와 연결된 키보드를 통해서 콘솔로 직접 로그인한 터미널</li>
+          <li>tty11</li>
+          <li>tty9</li>
+          <li>
+            <h1 id="pty10--가상터미널-원격접속---telnet-ssh-등-주석처리---불가">pty/10 : 가상터미널 (원격접속) - telnet, ssh 등. 주석처리 - 불가</h1>
+          </li>
+          <li>
+            <h1 id="pty11--주석처리---불가">pty/11 : 주석처리 - 불가</h1>
+          </li>
+        </ul>
+      </li>
+      <li>/etc/pam.d/remote (혹은 login)
+        <ul>
+          <li>auth required pam_securetty.so</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>OS 기종별 root 원격접속 제어
+    <ul>
+      <li>SunOS
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">/etc/default/login</code> : root에 대한 원격접속 등
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">console = /dev/console</code> : 콘솔에서만 root 접속 가능</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>HP-UX
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">/etc/securetty</code>
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">console</code> : 콘솔에서만 root 접속 가능</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>AIX
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">/etc/security/user</code>
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">rlogin=false</code> : 콘솔에서만 root 접속 가능</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Linux
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">/etc/securetty</code> 에서 설정</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>pam_tally.so -&gt; pam_tally2.so
+    <ul>
+      <li>계정 잠금 임게값 설정
+        <ul>
+          <li>5회 초과 시 Password Lock</li>
+        </ul>
+      </li>
+      <li>패스워드 공격에 대한 방어
+        <ul>
+          <li>무작위/무차별 공격 (Brute force)</li>
+          <li>사전 공격 (Dictionary Attack)</li>
+        </ul>
+      </li>
+      <li><code class="language-plaintext highlighter-rouge">/etc/pam.d/system_auth</code> 파일에 추가
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">auth required pam_tally2.so deny=5 unlock_time=120</code>;
+            <ul>
+              <li>deny=5 : 5번 실패시 잠금</li>
+              <li>unlock_time=120 : 2분간 잠금</li>
+            </ul>
+          </li>
+          <li><code class="language-plaintext highlighter-rouge">/var/log/secure</code> : 실패로그 저장위치</li>
+          <li>user1 이 로그인 횟수 5회 초과시 확인 방법
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">#pam_tally2 -u [계정명]</code> : 결과값 확인
+                <ul>
+                  <li>결과값 : <code class="language-plaintext highlighter-rouge">user1 6 시간값 IP주소값</code></li>
+                </ul>
+              </li>
+              <li><code class="language-plaintext highlighter-rouge">#pam_tally -u [계정명] -r</code> : 횟수 리셋</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>OS 별 계정 잠금 임계값 설정
+    <ul>
+      <li>SunOS
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">/etc/security/policy.conf</code> : LOCK_AFTER_RETRIES=YES &gt; 잠금설정</li>
+          <li><code class="language-plaintext highlighter-rouge">/etc/default/login</code> : RETRIES=5 &gt; 횟수설정</li>
+        </ul>
+      </li>
+      <li>HP-UX
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">/tcb/files/auth/system/default</code> : u_maxtries#5</li>
+        </ul>
+      </li>
+      <li>AIX
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">/etc/security/user</code> : logintries=5</li>
+        </ul>
+      </li>
+      <li>LINUX
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">/etc/pam.d/system_auth</code>
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">auth required /lib/security/pam_tally.so deny=5 unlock_time=120 no_magic_root</code> : no_magic_root &gt; root 패스워드 잠금 X</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>su 명령
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">/etc/pam.d/su</code>
+        <ul>
+          <li>auth sufficient pam_rootok.so</li>
+          <li>auth include system_auth : 다른 PAM 파일에 대한 결과 사용</li>
+        </ul>
+      </li>
+      <li>root 가 타 사용자로 변환할 경우 -&gt; 패스워드 확인 X</li>
+      <li>일반사용자가 타 일반사용자 혹은 root 로 변환 -&gt; 패스워드 확인 O</li>
+    </ul>
+  </li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#unix" class="page__taxonomy-item" rel="tag">UNIX</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88%EA%B8%B0%EC%82%AC" class="page__taxonomy-item" rel="tag">정보보안기사</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#is-certification" class="page__taxonomy-item" rel="tag">IS_Certification</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2021-01-19T15:00:00+09:00">January 19, 2021</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+%EC%9C%A0%EB%8B%89%EC%8A%A4+PAM%20https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Unix-PAM%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Unix-PAM%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Unix-PAM%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/is_certification/IS-Unix-superdaemon/" class="pagination--pager" title="정보보안 - 유닉스 슈퍼데몬
+">이전</a>
+    
+    
+      <a href="/is_certification/IS-Unix-log/" class="pagination--pager" title="정보보안 - 유닉스 로그
+">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Application-HTTP/" rel="permalink">정보보안 - HTTP
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-05-13T18:00:00+09:00">May 13, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Web 보안
+
+  웹프로토콜인 HTTP, TCP/IP 가 데이터에 대한 보안서비스를 제공하지 않음
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Application-Email/" rel="permalink">정보보안 - 이메일
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-04-30T18:00:00+09:00">April 30, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">이메일 보안
+이메일 구조
+
+  UA (User Agent)
+    
+      메시지 구성, 메시지 읽기 / 보내기 용도의 S/W
+    
+  
+  MTA (Message Transfer Agent)
+    
+      SMTP
+      MTA Client (User)
+     ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Application-FTP/" rel="permalink">정보보안 - FTP
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-04-27T18:00:00+09:00">April 27, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">FTP(File Transfer Protocol)
+FTP 개요
+
+  FTP 는 2개의 연결이 필요
+    
+      제어 연결 (Control Connection)
+        
+          21 번 포트 사용
+          명령을 전송할 때 사용 / 계속 연결 지속
+...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Network-VPN/" rel="permalink">정보보안 - 가상 사설망
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-03-23T18:00:00+09:00">March 23, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">가상사설망(Virtual Private Network)
+
+  개요
+    
+      공중 네트워크를 이용하여 전용선처럼 자신만의 고유 네트워크 효과를 누릴 수 있도록 하는 기술
+      데이터 전송 중 전송망에서의 침입자에 의한 데이터 왜곡, 노출을 터널링 기술(프로토콜의 한 ...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+<!--
+<script>
+	(function(d, h, m){
+    var js, fjs = d.getElementsByTagName(h)[0];
+    if (d.getElementById(m)){return;}
+    js = d.createElement(h); js.id = m;
+    js.onload = function(){
+        window.makerWidgetComInit({
+        position: "left",          
+        widget: "eqypoqmawbcz3azh-usiy9q7ma4ong1w1-juelcm3zfgcuwjds"                
+    })};
+    js.src = "https://makerwidget.com/js/embed.js";
+    fjs.parentNode.insertBefore(js, fjs)
+	}(document, "script", "dhm"))
+</script>
+-->
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:hyunik03@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 HY03. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://bluesplatter.com/is_certification/IS-Unix-PAM/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/is_certification/IS-Unix-PAM"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://bluesplatter.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

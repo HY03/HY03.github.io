@@ -1,0 +1,1131 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.20.2 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>정보보안 - IPSEC | Bluesplatter</title>
+<meta name="description" content="IPSEC(Internet Protocol Security)">
+
+
+  <meta name="author" content="HY03">
+  
+  <meta property="article:author" content="HY03">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Bluesplatter">
+<meta property="og:title" content="정보보안 - IPSEC">
+<meta property="og:url" content="https://bluesplatter.com/is_certification/IS-Network-IPSec/">
+
+
+  <meta property="og:description" content="IPSEC(Internet Protocol Security)">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2021-03-23T18:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://bluesplatter.com/is_certification/IS-Network-IPSec/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "HY03",
+      "url": "https://bluesplatter.com/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Bluesplatter Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo/logo.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          세상에 남기는 작은 흔적
+          <span class="site-subtitle">Bluesplatter</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/">연도별 포스트</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="https://bluesplatter.com/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#is_certification" itemprop="item"><span itemprop="name">Is_certification</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">정보보안 - IPSEC</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/profile/photo.jpg" alt="HY03" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">HY03</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>저는 전문가가 아니고 이것 저것 알아보는 비전문가 입니다. <br /> 틀린 내용이 기술되어도 너그러이 봐주시고 댓글을 남겨주셨으면 좋겠습니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="http://bluesplatter.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:hyunik03@gmail.com">
+            <meta itemprop="email" content="hyunik03@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">이메일</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="정보보안 - IPSEC">
+    <meta itemprop="description" content="IPSEC(Internet Protocol Security)">
+    <meta itemprop="datePublished" content="2021-03-23T18:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">정보보안 - IPSEC
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-03-23T18:00:00+09:00">March 23, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#ipsecinternet-protocol-security">IPSEC(Internet Protocol Security)</a>
+    <ul>
+      <li><a href="#보안서비스-rfc2401-표준">보안서비스 (RFC2401 표준)</a></li>
+      <li><a href="#ipsec-architecture">IPSEC Architecture</a></li>
+      <li><a href="#ipsec-의-동작-모드">IPSEC 의 동작 모드</a></li>
+      <li><a href="#ipsec-프로토콜">IPSEC 프로토콜</a>
+        <ul>
+          <li><a href="#인증-헤더authentication-header">인증 헤더(Authentication Header)</a></li>
+          <li><a href="#esp">ESP</a></li>
+        </ul>
+      </li>
+      <li><a href="#용어정리">용어정리</a></li>
+      <li><a href="#ike-internet-key-exchange">IKE (Internet Key Exchange)</a></li>
+    </ul>
+  </li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <h1 id="ipsecinternet-protocol-security">IPSEC(Internet Protocol Security)</h1>
+
+<h2 id="보안서비스-rfc2401-표준">보안서비스 (RFC2401 표준)</h2>
+<ul>
+  <li>기밀성 : 대칭 암호화를 통해 기밀성 제공
+    <ul>
+      <li>AH : 암호화 X</li>
+      <li>ESP : 암호화 O</li>
+    </ul>
+  </li>
+  <li>데이터 근원 인증 : 올바른 송신처로 온 것임을 보장
+    <ul>
+      <li>MAC (Message Authentication Code) 이용</li>
+    </ul>
+  </li>
+  <li>비연결형 무결성 : 위조, 변조 되지 않음을 보장</li>
+  <li>재전송 공격 방지 : 일련번호(Sequence Number)를 유지하여 재전송 여부를 판단
+    <ul>
+      <li>SA (Security Assosication, 보안연관) 순서번호 유지, 검증</li>
+    </ul>
+  </li>
+  <li>제한된 트래픽 흐름 기밀성 : 최초 출발지, 최종 수신지 정보에 대한 기밀성 보장 (터널모드)
+    <ul>
+      <li>터널 / 보안 게이트웨이란?
+        <ul>
+          <li>IPSEC을 지원하는 라우터, 방화벽, VPN 장비</li>
+        </ul>
+      </li>
+      <li>종단과 보안 게이트웨이 사이 원본 IP Header 의 기밀성을 보장</li>
+      <li>보안 게이트 사이의 New IP Header 구간은 트래픽 흐름이 노출됨</li>
+    </ul>
+  </li>
+  <li>접근 제어 : 중요한 정보 시스템에 대한 접근을 제어
+    <ul>
+      <li>SP (Security Policy, 보안정책)</li>
+      <li>IP 패킷의 허용(Bypass) / 폐기(Discard) / 보호(Protect)</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="ipsec-architecture">IPSEC Architecture</h2>
+<ul>
+  <li>개요
+    <ul>
+      <li>양 종단 간의 안전한 통신을 지원하기 위함</li>
+      <li>IP 계층을 기반</li>
+      <li>개방 구조의 프레임워크</li>
+      <li>IP의 취약점을 보완하기 위한 보안 기능을 제공</li>
+    </ul>
+  </li>
+  <li>주요 구성 요소
+    <ul>
+      <li>프로토콜
+        <ul>
+          <li>인증 프로토콜(AH - Authentication Header)</li>
+          <li>암호화 프로토콜(ESP - Encapsulation Security Payload)</li>
+        </ul>
+      </li>
+      <li>데이터베이스
+        <ul>
+          <li>보안 연계 데이터베이스 (SAD)</li>
+          <li>보안 정책 데이터베이스 (SPD)</li>
+        </ul>
+      </li>
+      <li>키 관리 매커니즘 (IKE : Internet Key Exchange Protocol)</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="ipsec-의-동작-모드">IPSEC 의 동작 모드</h2>
+<ul>
+  <li>전송모드
+    <ul>
+      <li>원본 IP Header + IPSEC Header + 원본 IP Payload + IPSEC Tailor
+        <ul>
+          <li>보호대상 : IP Payload (캡슐화)</li>
+          <li>보호구간 (Secure Channel) : End to End</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>터널모드
+    <ul>
+      <li>New IP Header + IPSEC Hader + 원본 IP Header + 원본 IP Payload + IPSEC Tailor
+        <ul>
+          <li>보호대상 : IP Hader + IP Payload (캡슐화)</li>
+          <li>IP 패킷 전체를 보호 &gt; 네트워크상에서 전송을 위한 New IP Header 필요</li>
+          <li>원본 출발지와 목적지의 트래픽 기밀성을 보장</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>4 가지 형태의 보안성을 제공
+    <ul>
+      <li>터널 모드 AH</li>
+      <li>전송 모드 AH</li>
+      <li>터널 모드 ESP</li>
+      <li>전송 모드 ESP</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="ipsec-프로토콜">IPSEC 프로토콜</h2>
+<h3 id="인증-헤더authentication-header">인증 헤더(Authentication Header)</h3>
+<ul>
+  <li>개요
+    <ul>
+      <li>인증 헤더는 IP 데이터그램을 인증하기 위해 필요한 정보를 포함</li>
+      <li>데이터의 인증과 무결성을 보장
+        <ul>
+          <li>데이터의 무결성
+            <ul>
+              <li>MAC(Message Authentication Code) 에 의해 계산된 각 필드의 합산 값을 수신자가 확인</li>
+            </ul>
+          </li>
+          <li>데이터의 인증
+            <ul>
+              <li>인증시 필요한 키와 인증 알고리즘을 SA 와 연계하여 지정하고 지정된 알고리즘을 수행</li>
+            </ul>
+          </li>
+          <li>리플레이 방지
+            <ul>
+              <li>인증 헤더에 있는 Sequence Number 필드의 값을 일련 번호화 함으로써 보장</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>프로토콜
+    <ul>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>IP Header</td>
+              <td>AH</td>
+              <td>IP Payload</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>AH 프로토콜 =&gt; 인증 (MAC 무결성, 송신처 인증)
+        <ul>
+          <li>Security Parameter Index(32) : SA 식별자 (보안과 연관)</li>
+          <li>Sequence Number(32) : 재전송 공격 방지</li>
+          <li>Authentication Data : Mutable 필드를 제외한 IP Packet 전체에 대한 MAC값 (Integrity Check Value)
+            <ul>
+              <li>Mutable 필드 : TTL, Header Checksum, NAT 의 SrcIP</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>AH 프로토콜 동작모드
+    <ul>
+      <li>전송모드 (Transport) : Mutable 필드 제외한 IP Packet 전체 인증
+        <ul>
+          <li>
+            <table>
+              <tbody>
+                <tr>
+                  <td>IP Header</td>
+                  <td>Authentication Header</td>
+                  <td>IP Payload</td>
+                </tr>
+              </tbody>
+            </table>
+          </li>
+        </ul>
+      </li>
+      <li>터널모드 (Tunnel) : Mutable 필드 제외한 New IP 패킷 전체를 인증
+        <ul>
+          <li>
+            <table>
+              <tbody>
+                <tr>
+                  <td>New IP Header</td>
+                  <td>Authentication Header</td>
+                  <td>IP Header</td>
+                  <td>IP Payload</td>
+                </tr>
+              </tbody>
+            </table>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="esp">ESP</h3>
+<ul>
+  <li>개요
+    <ul>
+      <li>암호화 기법을 사용
+        <ul>
+          <li>데이터의 무결성</li>
+          <li>리플레이 방지</li>
+          <li>비밀성</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>프로토콜
+    <ul>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>IP Header</td>
+              <td>ESP Header</td>
+              <td>IP Payload</td>
+              <td>ESP Tailor</td>
+              <td>ESP Auth</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>ESP 프로토콜 =&gt; 인증 (무결성, 송신처 인증), 기밀성
+        <ul>
+          <li>IP Header 는 인증하지 않는다.</li>
+          <li>ESP Header
+            <ul>
+              <li>Security Parameter Index(32)</li>
+              <li>Sequence Number(32)</li>
+            </ul>
+          </li>
+          <li>ESP Tailor
+            <ul>
+              <li>Padding : 블록암호를 위한 패딩정보</li>
+              <li>Pad Length(8)</li>
+              <li>Next Header(8) : Payload 프로토콜 타입</li>
+            </ul>
+          </li>
+          <li>ESP Auth : 인증데이터</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>ESP 프로토콜 동작모드
+    <ul>
+      <li>전송모드 (Transport)
+        <ul>
+          <li>
+            <table>
+              <tbody>
+                <tr>
+                  <td>IP Header</td>
+                  <td>ESP Header</td>
+                  <td>IP Payload</td>
+                  <td>ESP Tailor</td>
+                  <td>ESP Auth</td>
+                </tr>
+              </tbody>
+            </table>
+          </li>
+          <li>IP Payload ~ ESP Tailor 암호화</li>
+          <li>ESP Header ~ ESP Tailor 인증</li>
+        </ul>
+      </li>
+      <li>터널모드 (Tunnel)
+        <ul>
+          <li>
+            <table>
+              <tbody>
+                <tr>
+                  <td>New IP Header</td>
+                  <td>ESP Header</td>
+                  <td>IP Header</td>
+                  <td>IP Payload</td>
+                  <td>ESP Tailor</td>
+                  <td>ESP Auth</td>
+                </tr>
+              </tbody>
+            </table>
+          </li>
+          <li>IP Header ~ ESP Tailor 암호화</li>
+          <li>ESP Header ~ ESP Tailor 인증</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="용어정리">용어정리</h2>
+<ul>
+  <li>보안연관 (SA, Security Association)
+    <ul>
+      <li>한 장비와 다른 장비 사이 논리적 연결을 유지하기 위한 보안설정값</li>
+      <li>단방향성 특징 (A-&gt;B SA, B-&gt;A SA)</li>
+      <li>주요항목
+        <ul>
+          <li>SPI : 보안 연관 식별자</li>
+          <li>Sequence Number Counter : 패킷의 순서번호 카운터</li>
+          <li>Anti Replay Window : 재전송 공격 방어 window 값</li>
+          <li>AH / ESP 정보</li>
+          <li>Life time : 세션 만료 시간</li>
+          <li>Mode : IPSec 동작모드 (전송, 터널)</li>
+          <li>Path MTU : 경로의 MTU 값</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>SAD
+    <ul>
+      <li>보안 연관을 모은 데이터베이스</li>
+      <li>일치 항목이 없을 경우 인터넷 키교환 (IKE)</li>
+    </ul>
+  </li>
+  <li>보안정책 (SP, Security Policy)
+    <ul>
+      <li>패킷을 송/수신시 적용할 보안의 종류</li>
+      <li>Bypass, Discard, Protect (IPSec 적용) 정책</li>
+    </ul>
+  </li>
+  <li>SPD
+    <ul>
+      <li>보안 정책을 모은 데이터베이스</li>
+    </ul>
+  </li>
+  <li>IPSec 송신/수신 과정
+    <ul>
+      <li>Outbound 패킷(송신) -&gt; SPD 검색 -&gt; 정책 결정 -&gt; SAD 검색 -&gt; 보안설정 적용</li>
+      <li>Inbound 패킷(수신) -&gt; 패킷유형(IP, IPSec) 탐지 -&gt; 상위계층 패킷 전달
+        <ul>
+          <li>IP 일 경우 SPD 검색하여 ByPass, Discard, Protect(패킷삭제) 룰 검색/결정</li>
+          <li>IPSec 일 경우 SAD 검색 -&gt; 일치하면 IPSec 처리 / 일치하지 않으면 패킷삭제</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="ike-internet-key-exchange">IKE (Internet Key Exchange)</h2>
+<ul>
+  <li>과정
+    <ul>
+      <li>IKE-SA 설정/생성 (1단계)</li>
+      <li>IPSec-SA 설정/생성 (2단계)</li>
+    </ul>
+  </li>
+  <li>IKE 1단계 과정 - Mode 중 하나를 사용해 IKE-SA 생성
+    <ul>
+      <li>IKE-SA : IPSec-SA 생성을 위한 데이터 보호를 위함</li>
+      <li>Main Mode : 3쌍의 Message 를 교환하는 방식
+        <ul>
+          <li>Session ID 암호화 O</li>
+        </ul>
+      </li>
+      <li>Aggressive Mode : 3개의 Message 를 교환하는 방식
+        <ul>
+          <li>Session ID 암호화 X</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>IKE 2단계 과정 - IPSec-SA 생성
+    <ul>
+      <li>IPSec-SA : 데이터 교환 시 데이터 보호를 위함</li>
+    </ul>
+  </li>
+  <li>IPSec 절차 : (링크설정 -&gt; VPN 생성)(1,2단계) -&gt; Data 교환</li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC" class="page__taxonomy-item" rel="tag">네트워크</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88%EA%B8%B0%EC%82%AC" class="page__taxonomy-item" rel="tag">정보보안기사</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#is-certification" class="page__taxonomy-item" rel="tag">IS_Certification</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2021-03-23T18:00:00+09:00">March 23, 2021</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+IPSEC%20https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Network-IPSec%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Network-IPSec%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Network-IPSec%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/is_certification/IS-Network-Wireless_LAN/" class="pagination--pager" title="정보보안 - 무선랜(Wireless LAN) 보안
+">이전</a>
+    
+    
+      <a href="/is_certification/IS-Network-VPN/" class="pagination--pager" title="정보보안 - 가상 사설망
+">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Application-HTTP/" rel="permalink">정보보안 - HTTP
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-05-13T18:00:00+09:00">May 13, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Web 보안
+
+  웹프로토콜인 HTTP, TCP/IP 가 데이터에 대한 보안서비스를 제공하지 않음
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Application-Email/" rel="permalink">정보보안 - 이메일
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-04-30T18:00:00+09:00">April 30, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">이메일 보안
+이메일 구조
+
+  UA (User Agent)
+    
+      메시지 구성, 메시지 읽기 / 보내기 용도의 S/W
+    
+  
+  MTA (Message Transfer Agent)
+    
+      SMTP
+      MTA Client (User)
+     ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Application-FTP/" rel="permalink">정보보안 - FTP
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-04-27T18:00:00+09:00">April 27, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">FTP(File Transfer Protocol)
+FTP 개요
+
+  FTP 는 2개의 연결이 필요
+    
+      제어 연결 (Control Connection)
+        
+          21 번 포트 사용
+          명령을 전송할 때 사용 / 계속 연결 지속
+...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Network-VPN/" rel="permalink">정보보안 - 가상 사설망
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-03-23T18:00:00+09:00">March 23, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">가상사설망(Virtual Private Network)
+
+  개요
+    
+      공중 네트워크를 이용하여 전용선처럼 자신만의 고유 네트워크 효과를 누릴 수 있도록 하는 기술
+      데이터 전송 중 전송망에서의 침입자에 의한 데이터 왜곡, 노출을 터널링 기술(프로토콜의 한 ...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+<!--
+<script>
+	(function(d, h, m){
+    var js, fjs = d.getElementsByTagName(h)[0];
+    if (d.getElementById(m)){return;}
+    js = d.createElement(h); js.id = m;
+    js.onload = function(){
+        window.makerWidgetComInit({
+        position: "left",          
+        widget: "eqypoqmawbcz3azh-usiy9q7ma4ong1w1-juelcm3zfgcuwjds"                
+    })};
+    js.src = "https://makerwidget.com/js/embed.js";
+    fjs.parentNode.insertBefore(js, fjs)
+	}(document, "script", "dhm"))
+</script>
+-->
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:hyunik03@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 HY03. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://bluesplatter.com/is_certification/IS-Network-IPSec/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/is_certification/IS-Network-IPSec"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://bluesplatter.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

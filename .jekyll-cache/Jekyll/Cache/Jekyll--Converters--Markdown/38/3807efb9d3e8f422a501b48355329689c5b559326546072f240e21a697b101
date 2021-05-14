@@ -1,0 +1,57 @@
+I"�<h1 id="이메일-보안">이메일 보안</h1>
+<h2 id="이메일-구조">이메일 구조</h2>
+<ul>
+  <li>UA (User Agent)
+    <ul>
+      <li>메시지 구성, 메시지 읽기 / 보내기 용도의 S/W</li>
+    </ul>
+  </li>
+  <li>MTA (Message Transfer Agent)
+    <ul>
+      <li>SMTP</li>
+      <li>MTA Client (User)
+        <ul>
+          <li>UA 와 동시 호출됨</li>
+          <li>Mail Server 의 MTA Server 에 메일 저장 (SMTP)</li>
+        </ul>
+      </li>
+      <li>MTA Server
+        <ul>
+          <li>1) MTA Client 로부터 전송받은 메일을 저장
+            <ul>
+              <li>spool</li>
+            </ul>
+          </li>
+          <li>2) Mail Server 내 MTA Client 에게 메일 송신</li>
+        </ul>
+      </li>
+      <li>MTA Client (Mail Server)
+        <ul>
+          <li>연결된 상대방 MTA Server 에 메일 송신 (SMTP)
+            <ul>
+              <li>PUSH : Client -&gt; Server</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>MAA (Message Access Agent)
+    <ul>
+      <li>POP3, IMAP3</li>
+      <li>MAA Client
+        <ul>
+          <li>UA 가 MAA Client 에 메일 가져올 것을 요청</li>
+          <li>Mail Server 내 MAA Server 에 메일 요청 (POP3/IMAP)</li>
+          <li>PULL : Server -&gt; Client</li>
+        </ul>
+      </li>
+      <li>MAA Server
+        <ul>
+          <li>수신된 Mail 서버 내 Mail Box 내용 검색 (MTA 가 보관중인 메일)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+:ET

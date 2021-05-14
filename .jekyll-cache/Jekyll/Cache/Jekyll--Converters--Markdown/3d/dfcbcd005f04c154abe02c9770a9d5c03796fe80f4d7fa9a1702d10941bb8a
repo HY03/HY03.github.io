@@ -1,0 +1,36 @@
+I"X<h1 id="무선-네트워크-유형">무선 네트워크 유형</h1>
+<ul>
+  <li>WPAN : Wireless Personal Area Network
+    <ul>
+      <li>별도의 무선장비가 필요없음
+        <ul>
+          <li>Bluetooth</li>
+          <li>USN (Ubiquotous Sensor Network)</li>
+        </ul>
+      </li>
+      <li>소규모 무선 네트워크</li>
+      <li>단거리 네트워크</li>
+    </ul>
+  </li>
+  <li>WLAN : Wireless Local Area Network
+    <ul>
+      <li>근거리 네트워크
+        <ul>
+          <li>학교, 회사</li>
+        </ul>
+      </li>
+      <li>안전 관리가 중요</li>
+    </ul>
+  </li>
+  <li>WMAN : Wireless Metropolitan Area Network
+    <ul>
+      <li>도시규모 네트워크</li>
+      <li>IEEE 802.16 표준 사용
+        <ul>
+          <li>WiMAX &gt; Mobile WiMAX = Wibro</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+:ET

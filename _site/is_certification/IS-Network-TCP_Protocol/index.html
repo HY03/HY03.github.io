@@ -1,0 +1,1120 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.20.2 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>정보보안 - 네트워크 TCP 프로토콜 | Bluesplatter</title>
+<meta name="description" content="TCP 프로토콜    개요            연결지향적 프로토콜 (Connection Oriented Protocol)                    논리적 연결 통로를 먼저 생성 후 통신           순서 제어 : 데이터 전송순서 보장                       Stream 기반 전송방식                    정해진 크기로 전송하지 않고 임의의 크기로 나눔           연속적으로 데이터 전송                       신뢰할 수 있는 프로토콜 (Reliable Protocol)                    흐름 제어 (Flow Control)                            송신측 버퍼가 500 Byte, 수신측 버퍼가 100 Byte 일 때 수신측 버퍼가 받을 수 있는 데이터만큼 전송               슬라이딩 윈도우 (Sliding Window)                                    기본                                            송신 측에서 수신 측에 Segment 를 전송                       수신 측은 송신 측에 Ack (데이터 받았음) 을 전송                       반복 -&gt; RTT (Round Trip Time : 왕복시간) 가 증가함                                                           수신측 Window Size 에 기반한 전송                                            수신 측 Window Size 에 기반해 Ack 확인 없이 연속적으로 데이터를 전송                       Throughtput 증가                                                                                                           오류 제어 (Error Control)                            오류, 누락(손실) 이 발생할 경우 재전송 (Retransmission) 수행                                   혼잡 제어 (Congestion Control)                            네트워크가 혼잡하여 효율이 떨어질 경우               네트워크 혼잡도에 따라 Data 의 양을 조절               네트워크 혼잡도 판단 기준                                    Data 의 손실 유무로 판단">
+
+
+  <meta name="author" content="HY03">
+  
+  <meta property="article:author" content="HY03">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Bluesplatter">
+<meta property="og:title" content="정보보안 - 네트워크 TCP 프로토콜">
+<meta property="og:url" content="https://bluesplatter.com/is_certification/IS-Network-TCP_Protocol/">
+
+
+  <meta property="og:description" content="TCP 프로토콜    개요            연결지향적 프로토콜 (Connection Oriented Protocol)                    논리적 연결 통로를 먼저 생성 후 통신           순서 제어 : 데이터 전송순서 보장                       Stream 기반 전송방식                    정해진 크기로 전송하지 않고 임의의 크기로 나눔           연속적으로 데이터 전송                       신뢰할 수 있는 프로토콜 (Reliable Protocol)                    흐름 제어 (Flow Control)                            송신측 버퍼가 500 Byte, 수신측 버퍼가 100 Byte 일 때 수신측 버퍼가 받을 수 있는 데이터만큼 전송               슬라이딩 윈도우 (Sliding Window)                                    기본                                            송신 측에서 수신 측에 Segment 를 전송                       수신 측은 송신 측에 Ack (데이터 받았음) 을 전송                       반복 -&gt; RTT (Round Trip Time : 왕복시간) 가 증가함                                                           수신측 Window Size 에 기반한 전송                                            수신 측 Window Size 에 기반해 Ack 확인 없이 연속적으로 데이터를 전송                       Throughtput 증가                                                                                                           오류 제어 (Error Control)                            오류, 누락(손실) 이 발생할 경우 재전송 (Retransmission) 수행                                   혼잡 제어 (Congestion Control)                            네트워크가 혼잡하여 효율이 떨어질 경우               네트워크 혼잡도에 따라 Data 의 양을 조절               네트워크 혼잡도 판단 기준                                    Data 의 손실 유무로 판단">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2021-02-02T13:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://bluesplatter.com/is_certification/IS-Network-TCP_Protocol/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "HY03",
+      "url": "https://bluesplatter.com/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Bluesplatter Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo/logo.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          세상에 남기는 작은 흔적
+          <span class="site-subtitle">Bluesplatter</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/">연도별 포스트</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="https://bluesplatter.com/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#is_certification" itemprop="item"><span itemprop="name">Is_certification</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">정보보안 - 네트워크 TCP 프로토콜</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/profile/photo.jpg" alt="HY03" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">HY03</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>저는 전문가가 아니고 이것 저것 알아보는 비전문가 입니다. <br /> 틀린 내용이 기술되어도 너그러이 봐주시고 댓글을 남겨주셨으면 좋겠습니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="http://bluesplatter.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:hyunik03@gmail.com">
+            <meta itemprop="email" content="hyunik03@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">이메일</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="정보보안 - 네트워크 TCP 프로토콜">
+    <meta itemprop="description" content="TCP 프로토콜  개요          연결지향적 프로토콜 (Connection Oriented Protocol)                  논리적 연결 통로를 먼저 생성 후 통신          순서 제어 : 데이터 전송순서 보장                    Stream 기반 전송방식                  정해진 크기로 전송하지 않고 임의의 크기로 나눔          연속적으로 데이터 전송                    신뢰할 수 있는 프로토콜 (Reliable Protocol)                  흐름 제어 (Flow Control)                          송신측 버퍼가 500 Byte, 수신측 버퍼가 100 Byte 일 때 수신측 버퍼가 받을 수 있는 데이터만큼 전송              슬라이딩 윈도우 (Sliding Window)                                  기본                                          송신 측에서 수신 측에 Segment 를 전송                      수신 측은 송신 측에 Ack (데이터 받았음) 을 전송                      반복 -&gt; RTT (Round Trip Time : 왕복시간) 가 증가함                                                        수신측 Window Size 에 기반한 전송                                          수신 측 Window Size 에 기반해 Ack 확인 없이 연속적으로 데이터를 전송                      Throughtput 증가                                                                                                    오류 제어 (Error Control)                          오류, 누락(손실) 이 발생할 경우 재전송 (Retransmission) 수행                                혼잡 제어 (Congestion Control)                          네트워크가 혼잡하여 효율이 떨어질 경우              네트워크 혼잡도에 따라 Data 의 양을 조절              네트워크 혼잡도 판단 기준                                  Data 의 손실 유무로 판단                                                                        ">
+    <meta itemprop="datePublished" content="2021-02-02T13:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">정보보안 - 네트워크 TCP 프로토콜
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-02-02T13:00:00+09:00">February 2, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#tcp-프로토콜">TCP 프로토콜</a></li>
+  <li><a href="#tcp-session-hijacking">TCP Session Hijacking</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <h1 id="tcp-프로토콜">TCP 프로토콜</h1>
+<ul>
+  <li>개요
+    <ul>
+      <li>연결지향적 프로토콜 (Connection Oriented Protocol)
+        <ul>
+          <li>논리적 연결 통로를 먼저 생성 후 통신</li>
+          <li>순서 제어 : 데이터 전송순서 보장</li>
+        </ul>
+      </li>
+      <li>Stream 기반 전송방식
+        <ul>
+          <li>정해진 크기로 전송하지 않고 임의의 크기로 나눔</li>
+          <li>연속적으로 데이터 전송</li>
+        </ul>
+      </li>
+      <li>신뢰할 수 있는 프로토콜 (Reliable Protocol)
+        <ul>
+          <li>흐름 제어 (Flow Control)
+            <ul>
+              <li>송신측 버퍼가 500 Byte, 수신측 버퍼가 100 Byte 일 때 수신측 버퍼가 받을 수 있는 데이터만큼 전송</li>
+              <li>슬라이딩 윈도우 (Sliding Window)
+                <ul>
+                  <li>기본
+                    <ul>
+                      <li>송신 측에서 수신 측에 Segment 를 전송</li>
+                      <li>수신 측은 송신 측에 Ack (데이터 받았음) 을 전송</li>
+                      <li>반복 -&gt; RTT (Round Trip Time : 왕복시간) 가 증가함</li>
+                    </ul>
+                  </li>
+                  <li>수신측 Window Size 에 기반한 전송
+                    <ul>
+                      <li>수신 측 Window Size 에 기반해 Ack 확인 없이 연속적으로 데이터를 전송</li>
+                      <li>Throughtput 증가</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>오류 제어 (Error Control)
+            <ul>
+              <li>오류, 누락(손실) 이 발생할 경우 재전송 (Retransmission) 수행</li>
+            </ul>
+          </li>
+          <li>혼잡 제어 (Congestion Control)
+            <ul>
+              <li>네트워크가 혼잡하여 효율이 떨어질 경우</li>
+              <li>네트워크 혼잡도에 따라 Data 의 양을 조절</li>
+              <li>네트워크 혼잡도 판단 기준
+                <ul>
+                  <li>Data 의 손실 유무로 판단</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>TCP 헤더 (20~60Bytes)
+    <ul>
+      <li>Source Port (16Bit) : 출발지 포트</li>
+      <li>Destination Port (16Bit) : 목적지 포트</li>
+      <li>Sequence Number (32Bit) : 시작 바이트 순번
+        <ul>
+          <li>ISN (Initial Sequence Number) : 초기순서번호, 송/수신 측에서 연결할 때 미리 주고받음</li>
+          <li>ISN + 전송한 데이터의 바이트</li>
+          <li>전송한 데이터가 없을 경우 1씩 증가</li>
+        </ul>
+      </li>
+      <li>Acknowledgement Number (32Bit) : 상대방이 다음에 전달할 순서번호, ACK 와 함께 보냄</li>
+      <li>Data Offset(HLEN) : 20~60Byte 에 해당하는 값</li>
+      <li>Reserved : 예약, 사용안함</li>
+      <li>Control Flags (6Bit)
+        <ul>
+          <li>UAPRSF
+            <ul>
+              <li>SYN + ACK : 010010</li>
+            </ul>
+          </li>
+          <li>URG : 긴급데이터</li>
+          <li>ACK : 수신확인응답</li>
+          <li>PSH : 송수신 버퍼에 있는 Data 를 즉시 처리</li>
+          <li>RST : Reset the connection - 연결 강제종료</li>
+          <li>SYN : Synchronize Sequence Number - 시퀀스 넘버 동기화 / 연결설정</li>
+          <li>FIN : 연결 정상종료</li>
+        </ul>
+      </li>
+      <li>Window : Window Size - 수신받을 수 있는 버퍼 공간
+        <ul>
+          <li>수신측에서 송신측이 알 수 있도록 보내는 리시버 윈도우 사이즈</li>
+          <li>Window Sliding 제어방식에 쓰임</li>
+        </ul>
+      </li>
+      <li>Checksum : 헤더를 포함한 전체 Segment 에 대한 오류검사에 활용</li>
+      <li>Urgent Pointer : Segment 가 긴급 데이터를 포함하는 경우 긴급 데이터의 위치값
+        <ul>
+          <li>사용하기 위해서 URG Flag 가 설정되어야 함.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>TCP 의 MSS
+    <ul>
+      <li>IP 의 경우 Fragment 의 단편화 기준 MTU (Maximum Transmission Unit)
+        <ul>
+          <li>IP Header + IP Payload</li>
+        </ul>
+      </li>
+      <li>TCP 의 경우 Segment 의 분할 (Segmentation) -&gt; 재조합 (Reassembly)
+        <ul>
+          <li>MSS : Maximum Segment Size</li>
+          <li>TCP 헤더를 제외한 TCP Payload 부</li>
+          <li>크기값은 MTU 환경에 영향을 받게 됨</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>TCP 연결
+    <ul>
+      <li>논리적 연결 설정 -&gt; 데이터 전송 (송수신) (재전송 포함) -&gt; 연결 종료</li>
+      <li>ACK 의 의미 : 다음에 받을 SYN No</li>
+      <li>연결 설정 : 3-Way Handshake (논리적 연결설정 과정)
+        <ul>
+          <li>Client : Active Open 상태</li>
+          <li>Server : Passive Open 상태</li>
+          <li>Client : SYN 패킷 전송
+            <ul>
+              <li>ISN 포함 = Seq No:100</li>
+              <li>Window = Receiver Window Size (RWND) : 65535</li>
+            </ul>
+          </li>
+          <li>Client : SYN_SENT</li>
+          <li>Server : SYN_RCVD (SYN_RECEIVED, SYN_RECV)</li>
+          <li>Server : SYN + ACK 패킷 전송 (010010)
+            <ul>
+              <li>ISN 포함 = Seq No:200</li>
+              <li>ACK : 101</li>
+              <li>Window = Receiver Window Size (RWND) : 65535</li>
+            </ul>
+          </li>
+          <li>Client : ESTABLISHED (연결설정완료)</li>
+          <li>Client : ACK 패킷 전송
+            <ul>
+              <li>Seq : 101</li>
+              <li>ACK : 201</li>
+              <li>RWND : 65535</li>
+            </ul>
+          </li>
+          <li>SERVER : ESTABLISHED (연결설정완료)</li>
+        </ul>
+      </li>
+      <li>TCP 데이터 송수신
+        <ul>
+          <li>Client : ESTABLISHED 상태</li>
+          <li>Server : ESTABLISHED 상태</li>
+          <li>Client : ACK + PSH (011000)
+            <ul>
+              <li>Seq : 102 (3-Way Handshake 에 이어서)</li>
+              <li>ACK : 201</li>
+              <li>Data : 102~300 (Byte 순번) 에 해당하는 내용</li>
+            </ul>
+          </li>
+          <li>Client : ACK + PSH (011000)
+            <ul>
+              <li>Seq : 301 (3-Way Handshake 에 이어서)</li>
+              <li>ACK : 201</li>
+              <li>Data : 301~400 (Byte 순번) 에 해당하는 내용</li>
+            </ul>
+          </li>
+          <li>Server : ACK
+            <ul>
+              <li>Seq : 201</li>
+              <li>ACK : 401</li>
+              <li>Data : 201~300</li>
+            </ul>
+          </li>
+          <li>Client : ACK
+            <ul>
+              <li>Seq : 401</li>
+              <li>ACK : 301</li>
+              <li>RWND : 2000</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>TCP 재전송 (Retransmission) 과정
+        <ul>
+          <li>Client : A Data 전송
+            <ul>
+              <li>RTO : Retransmission Time Out - A Data 재전송 Timer 동작</li>
+            </ul>
+          </li>
+          <li>Client : B Data 전송 (Window Sliding)
+            <ul>
+              <li>RTO : Retransmission Time Out - B Data 재전송 Timer 동작</li>
+            </ul>
+          </li>
+          <li>(B Data 전송 실패)</li>
+          <li>Server : A Data ACK 전송</li>
+          <li>(Client : B Data RTO 초과)</li>
+          <li>Client : B Data 재전송
+            <ul>
+              <li>RTO 가 지나 재전송하는 경우 네트워크가 매우 혼잡한 상태로 판단</li>
+              <li>혼잡 제어 (Congestion Control) 와 연관</li>
+            </ul>
+          </li>
+          <li>Server : B Data ACK 전송</li>
+        </ul>
+      </li>
+      <li>빠른 재전송 (Fast Retransmission) 과정
+        <ul>
+          <li>Client : A Data 전송</li>
+          <li>Client : B Data 전송 (Window Sliding)</li>
+          <li>(B Data 전송 실패)</li>
+          <li>Server : A Data ACK 전송</li>
+          <li>Client : C Data 전송 (Window Sliding)</li>
+          <li>Server : B Data 요청 ACK 전송
+            <ul>
+              <li>C Data 는 Seq no 가 맞지 않음.</li>
+            </ul>
+          </li>
+          <li>Client : D Data 전송 (Window Sliding)</li>
+          <li>Server : B Data 요청 ACK 전송</li>
+          <li>Client : E Data 전송 (Window Sliding)</li>
+          <li>Server : B Data 요청 ACK 전송</li>
+          <li>(B Data 요청 ACK 3번 중복)</li>
+          <li>Client : B Data 재전송
+            <ul>
+              <li>재전송보다 덜 혼잡한 상태로 판단\</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>연결종료
+        <ul>
+          <li>3 Way Handshake
+            <ul>
+              <li>대게는 클라이언트 요청에 의해서 연결 종료</li>
+              <li>Client : Active Close 상태</li>
+              <li>Server : Passive Close 상태</li>
+              <li>Client : FIN 패킷 전송 (000001)
+                <ul>
+                  <li>Seq : xx</li>
+                  <li>ACK : yy</li>
+                </ul>
+              </li>
+              <li>Server : FIN + ACK 패킷 전송 (010001)
+                <ul>
+                  <li>Seq : yy</li>
+                  <li>ACK : xx+1</li>
+                </ul>
+              </li>
+              <li>Client : CLOSE 상태</li>
+              <li>Client : ACK 패킷 전송
+                <ul>
+                  <li>Seq : xx+1</li>
+                  <li>ACK : yy+1</li>
+                </ul>
+              </li>
+              <li>Server : CLOSE 상태</li>
+            </ul>
+          </li>
+          <li>4 Way Handshake (절반폐쇄/절반종료 방식)
+            <ul>
+              <li>Client : Active Close 상태</li>
+              <li>Server : Passive Close 상태</li>
+              <li>Client : FIN + ACK 패킷 전송 (010001)
+                <ul>
+                  <li>Seq : xx</li>
+                  <li>ACK : yy</li>
+                </ul>
+              </li>
+              <li>Client : FIN_WAIT_1 상태</li>
+              <li>Server : ACK 패킷 전송 (010001)</li>
+              <li>Server : CLOSE_WAIT 상태</li>
+              <li>Client : FIN_WAIT_2 상태</li>
+              <li>Server : 서버 APP 이 TCP 연결 종료</li>
+              <li>Server : FIN + ACK 패킷 전송 (010001)
+                <ul>
+                  <li>Seq : yy</li>
+                  <li>ACK : xx+1</li>
+                </ul>
+              </li>
+              <li>Server : LAST_ACT 상태</li>
+              <li>Client : TIME_WAIT 상태</li>
+              <li>Client : (일정시간 경과-2MSL 후) CLOSE 상태</li>
+              <li>Client : ACK 패킷 전송
+                <ul>
+                  <li>Seq : xx+1</li>
+                  <li>ACK : yy+1</li>
+                </ul>
+              </li>
+              <li>Server : CLOSE 상태</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>연결 요청 거부
+        <ul>
+          <li>Client : Active Open 상태</li>
+          <li>Client : SYN 패킷 전송</li>
+          <li>Client : SYN_SENT 상태</li>
+          <li>Server 가 Listen (포트 대기상태) 상태가 아님</li>
+          <li>Server : RST+ACK (010100) 패킷 전송</li>
+          <li>Client : CLOSED 상태</li>
+        </ul>
+      </li>
+      <li>연결중단 (Abort)
+        <ul>
+          <li>Client : ESTABLISHED 상태</li>
+          <li>Server : ESTABLISHED 상태</li>
+          <li>Client : RST+ACK (010100) 패킷 혹은 RST(000100) (상대방에게 받은 패킷에 Ack Number 필드가 설정됨) 전송</li>
+          <li>Server : CLOSED 상태</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Port
+    <ul>
+      <li>전송계층 (TCP, UDP)
+        <ul>
+          <li>Process to Process 통신</li>
+          <li>프로세스를 식별하기 위해 포트 사용</li>
+        </ul>
+      </li>
+      <li>분류방식
+        <ul>
+          <li>사용목적에 따른 포트범위
+            <ul>
+              <li>Well-Known Port : 예약된 포트 (0~1023)
+                <ul>
+                  <li>FTP (21,22)</li>
+                  <li>Telnet (23)</li>
+                  <li>HTTP (80)</li>
+                </ul>
+              </li>
+              <li>Registered Port : 제조사에서 IANA(Internet Assigned Number Authority) 에 용도를 등록 (1024~49151)
+                <ul>
+                  <li>MySQL (3306)</li>
+                  <li>Oracle (1521)</li>
+                  <li>MSSQL (1433)</li>
+                </ul>
+              </li>
+              <li>Dynamic Port : 동적으로 사용, Client (49152~65535)</li>
+            </ul>
+          </li>
+          <li>사용권한에 따른 포트범위
+            <ul>
+              <li>관리자 포트 (Privileged Port) (0~1023)</li>
+              <li>Unprivileged Port (2014~65535)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="tcp-session-hijacking">TCP Session Hijacking</h1>
+
+<ul>
+  <li>연결설정을 위해 주고 받는 정보를 스니핑</li>
+  <li>중간에서 값을 스푸핑 하여 전송</li>
+</ul>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC" class="page__taxonomy-item" rel="tag">네트워크</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88%EA%B8%B0%EC%82%AC" class="page__taxonomy-item" rel="tag">정보보안기사</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#is-certification" class="page__taxonomy-item" rel="tag">IS_Certification</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2021-02-02T13:00:00+09:00">February 2, 2021</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC+TCP+%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C%20https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Network-TCP_Protocol%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Network-TCP_Protocol%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Network-TCP_Protocol%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/is_certification/IS-Network-ICMP_Protocol/" class="pagination--pager" title="정보보안 - 네트워크 ICMP 프로토콜
+">이전</a>
+    
+    
+      <a href="/is_certification/IS-Network-UDP_Protocol/" class="pagination--pager" title="정보보안 - 네트워크 UDP 프로토콜
+">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Application-HTTP/" rel="permalink">정보보안 - HTTP
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-05-13T18:00:00+09:00">May 13, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Web 보안
+
+  웹프로토콜인 HTTP, TCP/IP 가 데이터에 대한 보안서비스를 제공하지 않음
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Application-Email/" rel="permalink">정보보안 - 이메일
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-04-30T18:00:00+09:00">April 30, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">이메일 보안
+이메일 구조
+
+  UA (User Agent)
+    
+      메시지 구성, 메시지 읽기 / 보내기 용도의 S/W
+    
+  
+  MTA (Message Transfer Agent)
+    
+      SMTP
+      MTA Client (User)
+     ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Application-FTP/" rel="permalink">정보보안 - FTP
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-04-27T18:00:00+09:00">April 27, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">FTP(File Transfer Protocol)
+FTP 개요
+
+  FTP 는 2개의 연결이 필요
+    
+      제어 연결 (Control Connection)
+        
+          21 번 포트 사용
+          명령을 전송할 때 사용 / 계속 연결 지속
+...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Network-VPN/" rel="permalink">정보보안 - 가상 사설망
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-03-23T18:00:00+09:00">March 23, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">가상사설망(Virtual Private Network)
+
+  개요
+    
+      공중 네트워크를 이용하여 전용선처럼 자신만의 고유 네트워크 효과를 누릴 수 있도록 하는 기술
+      데이터 전송 중 전송망에서의 침입자에 의한 데이터 왜곡, 노출을 터널링 기술(프로토콜의 한 ...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+<!--
+<script>
+	(function(d, h, m){
+    var js, fjs = d.getElementsByTagName(h)[0];
+    if (d.getElementById(m)){return;}
+    js = d.createElement(h); js.id = m;
+    js.onload = function(){
+        window.makerWidgetComInit({
+        position: "left",          
+        widget: "eqypoqmawbcz3azh-usiy9q7ma4ong1w1-juelcm3zfgcuwjds"                
+    })};
+    js.src = "https://makerwidget.com/js/embed.js";
+    fjs.parentNode.insertBefore(js, fjs)
+	}(document, "script", "dhm"))
+</script>
+-->
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:hyunik03@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 HY03. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://bluesplatter.com/is_certification/IS-Network-TCP_Protocol/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/is_certification/IS-Network-TCP_Protocol"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://bluesplatter.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

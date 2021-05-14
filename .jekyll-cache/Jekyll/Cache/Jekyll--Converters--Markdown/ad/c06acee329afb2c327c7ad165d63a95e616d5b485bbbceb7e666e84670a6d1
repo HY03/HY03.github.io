@@ -1,0 +1,37 @@
+I"S<h1 id="유닉스-사용자-관리">유닉스 사용자 관리</h1>
+
+<ul>
+  <li>사용자 계정 관리
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">useradd</code>, <code class="language-plaintext highlighter-rouge">adduser</code> : 사용자 계정 추가
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">useradd [계정명]</code> : root 권한 수행</li>
+          <li><code class="language-plaintext highlighter-rouge">passwd</code> : 비밀번호 설정</li>
+          <li>홈 디렉터리 생성</li>
+          <li>접근권한 추가</li>
+          <li>사용자 로그인 시 필요한 시작파일을 홈디렉토리에 생성</li>
+        </ul>
+      </li>
+      <li><code class="language-plaintext highlighter-rouge">usermod</code> : 사용자 계정 변경</li>
+      <li><code class="language-plaintext highlighter-rouge">userdel</code> : 사용자 계정 삭제
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">userdel -r [유저명]</code> : 사용자 계정 삭제 + 홈디렉터리 삭제</li>
+        </ul>
+      </li>
+      <li><code class="language-plaintext highlighter-rouge">/etc/passwd</code> : 사용자 계정정보</li>
+      <li><code class="language-plaintext highlighter-rouge">/etc/shadow</code> : 암호화된 비밀번호</li>
+    </ul>
+  </li>
+  <li>그룹 관리
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">groupadd</code> : 그룹 추가
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">groupadd -g 520 test</code> : gid 520인 test 그룹 생성</li>
+        </ul>
+      </li>
+      <li><code class="language-plaintext highlighter-rouge">groupdel</code> : 그룹 삭제</li>
+      <li><code class="language-plaintext highlighter-rouge">/etc/group</code> : 그룹 정보</li>
+    </ul>
+  </li>
+</ul>
+:ET

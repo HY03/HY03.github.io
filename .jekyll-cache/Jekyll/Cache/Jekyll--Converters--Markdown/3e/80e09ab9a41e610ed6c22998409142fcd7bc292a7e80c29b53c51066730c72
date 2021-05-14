@@ -1,0 +1,21 @@
+I"I<h1 id="ftpfile-transfer-protocol">FTP(File Transfer Protocol)</h1>
+<h2 id="ftp-개요">FTP 개요</h2>
+<ul>
+  <li>FTP 는 2개의 연결이 필요
+    <ul>
+      <li>제어 연결 (Control Connection)
+        <ul>
+          <li>21 번 포트 사용</li>
+          <li>명령을 전송할 때 사용 / 계속 연결 지속</li>
+        </ul>
+      </li>
+      <li>데이터 연결 (Data Connection)
+        <ul>
+          <li>20 번 포트 사용 or 1024 번 이후 포트 사용</li>
+          <li>파일이 전송될 때 사용</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+:ET

@@ -1,0 +1,1109 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.20.2 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>정보보안 - 유닉스 슈퍼데몬 | Bluesplatter</title>
+<meta name="description" content="보안 쉘">
+
+
+  <meta name="author" content="HY03">
+  
+  <meta property="article:author" content="HY03">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Bluesplatter">
+<meta property="og:title" content="정보보안 - 유닉스 슈퍼데몬">
+<meta property="og:url" content="https://bluesplatter.com/is_certification/IS-Unix-superdaemon/">
+
+
+  <meta property="og:description" content="보안 쉘">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2021-01-19T10:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://bluesplatter.com/is_certification/IS-Unix-superdaemon/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "HY03",
+      "url": "https://bluesplatter.com/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Bluesplatter Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo/logo.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          세상에 남기는 작은 흔적
+          <span class="site-subtitle">Bluesplatter</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/">연도별 포스트</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="https://bluesplatter.com/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#is_certification" itemprop="item"><span itemprop="name">Is_certification</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">정보보안 - 유닉스 슈퍼데몬</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/profile/photo.jpg" alt="HY03" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">HY03</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>저는 전문가가 아니고 이것 저것 알아보는 비전문가 입니다. <br /> 틀린 내용이 기술되어도 너그러이 봐주시고 댓글을 남겨주셨으면 좋겠습니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="http://bluesplatter.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:hyunik03@gmail.com">
+            <meta itemprop="email" content="hyunik03@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">이메일</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="정보보안 - 유닉스 슈퍼데몬">
+    <meta itemprop="description" content="보안 쉘">
+    <meta itemprop="datePublished" content="2021-01-19T10:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">정보보안 - 유닉스 슈퍼데몬
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-01-19T10:00:00+09:00">January 19, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#보안-쉘">보안 쉘</a></li>
+  <li><a href="#수퍼데몬-xinetd">수퍼데몬 xinetd</a></li>
+  <li><a href="#tcp-wrapper-접근통제">TCP Wrapper (접근통제)</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <h1 id="보안-쉘">보안 쉘</h1>
+
+<ul>
+  <li>원격접속의 종류
+    <ul>
+      <li>평문 송수신 (스니퍼에 노출)
+        <ul>
+          <li>rlogin</li>
+          <li>telnet</li>
+          <li>rsh</li>
+          <li>FTP</li>
+        </ul>
+      </li>
+      <li>암호화된 송수신 (터미널)
+        <ul>
+          <li>SSH</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="수퍼데몬-xinetd">수퍼데몬 xinetd</h1>
+
+<ul>
+  <li>리눅스 일반 데몬은 자기자신 스스로가 직접 서비스를 함
+    <ul>
+      <li>HTTP, FTP …</li>
+      <li>백그라운드 대기하고 있다가 요청이 들어오면 자식 프로세스를 생성하여 서비스</li>
+    </ul>
+  </li>
+  <li>xinetd 는 여러 서비스들을 통합관리하기 위한 것
+    <ul>
+      <li>데몬의 공통적인 기능을 제공 (요청이 들어오면 호출…)</li>
+    </ul>
+  </li>
+  <li>데몬의 종류
+    <ul>
+      <li>standalone
+        <ul>
+          <li>속도가 빠름</li>
+          <li>공통된 기능을 포함하여 중복 생성, 리소스를 많이 사용</li>
+        </ul>
+      </li>
+      <li>xinetd
+        <ul>
+          <li>속도가 느림</li>
+          <li>공통된 기능은 xinetd 에 통합됨</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>xinetd 서비스 특징
+    <ul>
+      <li>여러 서비스 (telnet, ftp) 을 통합관리하는 일종의 서비스(데몬)</li>
+      <li>각각의 서비스별로 별도의 파일에 설정 가능 (<code class="language-plaintext highlighter-rouge">/etc/xinetd.d/*</code>)</li>
+      <li><code class="language-plaintext highlighter-rouge">/etc/xinetd.conf</code> 파일을 읽어 정보를 얻어옴. 미리 정의 필요</li>
+      <li>접근제어 요소
+        <ul>
+          <li>timeout 설정</li>
+          <li>접속시도 횟수로 접근제어 (DoS 방지 - IP별 동시접속수 제어)</li>
+          <li>tcp_wrapper (tcpd) 을 내장 (<code class="language-plaintext highlighter-rouge">/etc/hosts.allow, /etc/hosts.deny</code>)</li>
+        </ul>
+      </li>
+      <li>로깅 요소
+        <ul>
+          <li>로그파일 크기를 제한할 수 있음</li>
+          <li>xinetd 에서 제어되는 각 서비스들에 대한 syslog 로깅 레벨 설정 가능</li>
+          <li>접속하는 클라이언트들의 서비스 이용시간 기록 가능</li>
+          <li>서비스를 거부하거나 서비스 접근제어가 되었을 경우 상세로그를 기록</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>etc/xinetd.conf
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">/etc/xinetd.d/</code> 디렉터리 내에 존재</li>
+      <li>xinetd 서비스파일들에 공통적으로 적용하는 설정 내용이 저장되어 있음</li>
+      <li>
+        <p>xinetd.conf 파일 구조</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th style="text-align: left">service</th>
+              <th style="text-align: left">socket_type</th>
+              <th style="text-align: left">protocol</th>
+              <th style="text-align: left">wait_flag</th>
+              <th style="text-align: left">login_name</th>
+              <th style="text-align: left">server</th>
+              <th style="text-align: left">argument</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="text-align: left">ftp</td>
+              <td style="text-align: left">stream</td>
+              <td style="text-align: left">tcp</td>
+              <td style="text-align: left">nowait</td>
+              <td style="text-align: left">root</td>
+              <td style="text-align: left">/usr/sbin/tcpd</td>
+              <td style="text-align: left">in.ftpd -l -a</td>
+            </tr>
+            <tr>
+              <td style="text-align: left">telnet</td>
+              <td style="text-align: left">stream</td>
+              <td style="text-align: left">tcp</td>
+              <td style="text-align: left">nowait</td>
+              <td style="text-align: left">root</td>
+              <td style="text-align: left">/usr/sbin/tcpd</td>
+              <td style="text-align: left">in.telnetd</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <ul>
+          <li>service : 서비스명, 포트 번호 결정 (<code class="language-plaintext highlighter-rouge">/etc/services</code> 에서 서비스명 참조)</li>
+          <li>socket_type : tcp 기반 - stream, udp 기반 - datagram</li>
+          <li>protocol</li>
+          <li>wait_flag
+            <ul>
+              <li>nowait : 서비스 요청을 받은 뒤 바로 서비스 처리</li>
+              <li>wait : 기존에 받은 요청을 모두 처리한 뒤 서비스 요청을 받음</li>
+            </ul>
+          </li>
+          <li>login_name : 해당 프로그램을 실행하는 사용자 계정 설정</li>
+          <li>server : 실행경로
+            <ul>
+              <li>/usr/sbin/tcpd : TCP Wrapper 사용</li>
+              <li>/usr/sbin/in.telnetd (tcpd X): TCP Wrapper 미사용</li>
+            </ul>
+          </li>
+          <li>argument : 프로그램을 실행할 때 인수 설정</li>
+        </ul>
+      </li>
+      <li>설정 내용 변경 후 데몬 재시작 필요</li>
+      <li>보안상 취약한 서비스는 비활성화 필요
+        <ul>
+          <li>Simple TCP 서비스 - Dos 공격에 취약
+            <ul>
+              <li>echo</li>
+              <li>daytime</li>
+              <li>discard</li>
+              <li>chargen</li>
+            </ul>
+          </li>
+          <li>r 계열 서비스 - 인증 없이 원격접속이 가능
+            <ul>
+              <li>rsh</li>
+              <li>rexec</li>
+              <li>rlogin</li>
+            </ul>
+          </li>
+          <li>rpc (remote procedure call) 서비스 - 버퍼 오버플로우 공격에 취약
+            <ul>
+              <li>rpc.csmd</li>
+              <li>rsuersd</li>
+            </ul>
+          </li>
+          <li>finger, tftp 등 취약한 서비스</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="tcp-wrapper-접근통제">TCP Wrapper (접근통제)</h1>
+
+<ul>
+  <li>inetd 데몬에 의해 구동되는 네트워크 서비스 (ftp, telnet, rlogin, rsh, exec, tftp, talk, systat, finger 등) 들에 대한 접근 통제와 사용된 서비스별 로그를 기록할 수 있는 보안강화 도구</li>
+  <li>시스템에 존재하는 소프트웨어나 설정 파일을 바꿀 필요가 없음</li>
+  <li>클라이언트와 서버 응용 프로그램 사이의 실질적인 통신에 부하를 주지 않음</li>
+  <li>
+    <p>TCP Wrapper 는 /etc/inetd.conf 에 정의되고 inetd 데몬에 의해 통제되는 네트워크 서비스를 통제하기 위하여 inetd 데몬과 네트워크 서비스데몬(in.telnetd, in.ftpd, in.rlogind 등) 사이에 tcpd 데몬을 구동하여 네트워크 서비스의 사용에 대한 접근제어와 로그 기록 기능을 함</p>
+  </li>
+  <li>hosts.allow / deny 파일
+    <ul>
+      <li>접근허용 / 접근차단</li>
+      <li><code class="language-plaintext highlighter-rouge">service_list : client_list [: shell_command]</code> 형식
+        <ul>
+          <li>telnet : 192.168.16.10</li>
+          <li>ALL : 192.168.16.10</li>
+          <li>ALL : ALL</li>
+        </ul>
+      </li>
+      <li>접근순서
+        <ul>
+          <li>예시 1
+            <ul>
+              <li>hosts.allow
+                <ul>
+                  <li>ALL : 192.168.16.10</li>
+                </ul>
+              </li>
+              <li>hosts.deny
+                <ul>
+                  <li>ALL : ALL</li>
+                </ul>
+              </li>
+              <li>192.168.16.10 은 모든 서비스를 허용하고 나머지는 모두 차단</li>
+            </ul>
+          </li>
+          <li>예시 2
+            <ul>
+              <li>hosts.allow
+                <ul>
+                  <li>in.telnetd : 192.168.1.1, 192.168.1.0/255.255.255.0</li>
+                  <li>in.ftpd : test.co.kr, 192.168.1.</li>
+                  <li>ALL : LOCAL</li>
+                </ul>
+              </li>
+              <li>hosts.deny
+                <ul>
+                  <li>ALL : ALL</li>
+                </ul>
+              </li>
+              <li>지정된 서비스, IP 는 허용, 나머지는 모두 차단</li>
+              <li>test.co.kr 도메인에 해당하는 모든 IP</li>
+              <li>서브넷 마스크 사용 가능 (192.168.1.0/255.255.255.0) = 192.168.1.</li>
+              <li>LOCAL : 같은 네트워크에 있는 모든 호스트</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><code class="language-plaintext highlighter-rouge">: shell_command</code> : 주로 hosts.deny 와 연계하여 사용, 즉시통보, 경고메시지
+        <ul>
+          <li>twist : shell_command 명령의 결과를 클라이언트에게 전송</li>
+          <li>spawn : 메일을 보낼 때 사용</li>
+          <li>banners : 특정 디렉터리 내의 문서(데몬명과 동일제목)를 클라이언트에게 출력</li>
+          <li>예시
+            <ul>
+              <li>hosts.deny
+                <ul>
+                  <li>in.telnetd : 203.241.200.97 : twist /bin/echo “not allowed”</li>
+                </ul>
+              </li>
+              <li>hosts.deny
+                <ul>
+                  <li>in.telnetd : 203.205.205.91 : spawn /bin/mail -s “%a is denied”
+                    <ul>
+                      <li>%a : TCP Wrapper 환경변수 (client IP 주소)
+                        <ul>
+                          <li><code class="language-plaintext highlighter-rouge">%a</code> : 클라이언트 IP 주소</li>
+                          <li><code class="language-plaintext highlighter-rouge">%c</code> : 클라이언트 정보 (user@호스트명 or IP주소)</li>
+                          <li><code class="language-plaintext highlighter-rouge">%d</code> : 데몬 프로세스명</li>
+                          <li><code class="language-plaintext highlighter-rouge">%h</code> : 클라이언트 호스트명 or IP 주소</li>
+                          <li><code class="language-plaintext highlighter-rouge">%n</code> : 클라이언트 호스트명 or unknown</li>
+                          <li><code class="language-plaintext highlighter-rouge">%p</code> : 데몬의 PID</li>
+                          <li><code class="language-plaintext highlighter-rouge">%s</code> : 서버정보 (데몬명@호스트명)</li>
+                          <li><code class="language-plaintext highlighter-rouge">%u</code> : 클라이언트 사용자 이름</li>
+                        </ul>
+                      </li>
+                      <li>설정한 제목으로 메일을 보냄</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>로그 기록
+    <ul>
+      <li>syslogd 사용</li>
+      <li>telnet, ftp, rexec, rsh, rlogin, tftp, talk 등에 대한 접근로그 기록</li>
+      <li><code class="language-plaintext highlighter-rouge">/var/log/syslog</code> 파일에 저장 - 변경하려면 <code class="language-plaintext highlighter-rouge">/etc/syslog.conf</code> 파일 수정</li>
+    </ul>
+  </li>
+  <li>xinetd 접속 설정
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">/etc/xinetd.conf</code> : 글로벌 (Default) 설정
+        <ul>
+          <li>cps : (connection per second) - 초당 연결 수
+            <ul>
+              <li>cps = 30 10
+                <ul>
+                  <li>30 : 초당 연결 제한 수</li>
+                  <li>10 : 초당 연결 수 초과 시 대기(중지) 시간</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>instances : 동시에 서비스할 수 있는 서버의 최대 개수
+            <ul>
+              <li>instances = 100
+                <ul>
+                  <li>동시에 서비스할 수 있는 최대 서버 수 100 개</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>per_source : 출발지 IP 주소 기준 서비스 최대 연결 수
+            <ul>
+              <li>per_source = 10
+                <ul>
+                  <li>동일 IP에서 최대 연결 수를 10개로 제한</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>설정 변경 후 서비스 재가동
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">service xinetd restart</code></li>
+              <li><code class="language-plaintext highlighter-rouge">service network restart</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><code class="language-plaintext highlighter-rouge">/etc/xinetd.d/서비스설정파일</code> : 각각의 서비스별 설정</li>
+    </ul>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  service telnet
+  {
+      flags       = REUSE
+      socket_type = stream
+      wait        = no
+      user        = root
+      server      = /usr/sbin/in.telnetd
+      log_on_failure += USERID
+      disable     = no
+      only_from   = 192.168.0.0/16
+      no_access   = 192.168.1.137/32 192.168.1.130
+      access_times = 09:00-22:00 23:00-01:00
+  }
+</code></pre></div>    </div>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  * flags : 더이상 사용하지 않음 (inetd 에서는 사용) - 호환성을 위함
+  * socket_type : TCP 인 경우 stream, UDP 인 경우 datagram
+  * wait : 요청에 대해 즉시 처리 / 이전요청 처리후 처리 여부
+  * user : 서비스를 어떤 사용자로 실행할 것인지
+  * server : 서비스 실행파일 경로
+  * log_on_failure : 서버에 접속 실패했을 경우 로그 파일에 기록할 내용
+      - USERID : 원격접속 사용자 ID
+      - PID : xinetd 프로세스 ID
+      - HOST : 원격 HOST IP
+      - EXIT : 프로세스 종료 상태
+      - DURATION : 서버 세션 지속시간
+  * log_on_success : 서버에 접속 성공했을 경우 로그 파일에 기록할 내용
+  * disable : 해당 서비스 실행여부
+      - no : 실행
+      - yes : 실행안함
+  * only_from : 특정 주소(대역) 만 접근 허용
+  * no_access : 특정 주소(대역) 의 접근 차단
+  * access-times : 접근허용 시간
+</code></pre></div>    </div>
+  </li>
+  <li>접근 차단 로그
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">/var/log/message</code> 확인</li>
+      <li><code class="language-plaintext highlighter-rouge">cat /var/log/message | grep xinetd | grep FAIL</code></li>
+    </ul>
+  </li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#unix" class="page__taxonomy-item" rel="tag">UNIX</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88%EA%B8%B0%EC%82%AC" class="page__taxonomy-item" rel="tag">정보보안기사</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#is-certification" class="page__taxonomy-item" rel="tag">IS_Certification</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2021-01-19T10:00:00+09:00">January 19, 2021</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+%EC%9C%A0%EB%8B%89%EC%8A%A4+%EC%8A%88%ED%8D%BC%EB%8D%B0%EB%AA%AC%20https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Unix-superdaemon%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Unix-superdaemon%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Unix-superdaemon%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/is_certification/IS-Unix-special_auth/" class="pagination--pager" title="정보보안 - 유닉스 특수권한
+">이전</a>
+    
+    
+      <a href="/is_certification/IS-Unix-PAM/" class="pagination--pager" title="정보보안 - 유닉스 PAM
+">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Application-HTTP/" rel="permalink">정보보안 - HTTP
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-05-13T18:00:00+09:00">May 13, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Web 보안
+
+  웹프로토콜인 HTTP, TCP/IP 가 데이터에 대한 보안서비스를 제공하지 않음
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Application-Email/" rel="permalink">정보보안 - 이메일
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-04-30T18:00:00+09:00">April 30, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">이메일 보안
+이메일 구조
+
+  UA (User Agent)
+    
+      메시지 구성, 메시지 읽기 / 보내기 용도의 S/W
+    
+  
+  MTA (Message Transfer Agent)
+    
+      SMTP
+      MTA Client (User)
+     ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Application-FTP/" rel="permalink">정보보안 - FTP
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-04-27T18:00:00+09:00">April 27, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">FTP(File Transfer Protocol)
+FTP 개요
+
+  FTP 는 2개의 연결이 필요
+    
+      제어 연결 (Control Connection)
+        
+          21 번 포트 사용
+          명령을 전송할 때 사용 / 계속 연결 지속
+...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Network-VPN/" rel="permalink">정보보안 - 가상 사설망
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-03-23T18:00:00+09:00">March 23, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">가상사설망(Virtual Private Network)
+
+  개요
+    
+      공중 네트워크를 이용하여 전용선처럼 자신만의 고유 네트워크 효과를 누릴 수 있도록 하는 기술
+      데이터 전송 중 전송망에서의 침입자에 의한 데이터 왜곡, 노출을 터널링 기술(프로토콜의 한 ...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+<!--
+<script>
+	(function(d, h, m){
+    var js, fjs = d.getElementsByTagName(h)[0];
+    if (d.getElementById(m)){return;}
+    js = d.createElement(h); js.id = m;
+    js.onload = function(){
+        window.makerWidgetComInit({
+        position: "left",          
+        widget: "eqypoqmawbcz3azh-usiy9q7ma4ong1w1-juelcm3zfgcuwjds"                
+    })};
+    js.src = "https://makerwidget.com/js/embed.js";
+    fjs.parentNode.insertBefore(js, fjs)
+	}(document, "script", "dhm"))
+</script>
+-->
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:hyunik03@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 HY03. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://bluesplatter.com/is_certification/IS-Unix-superdaemon/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/is_certification/IS-Unix-superdaemon"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://bluesplatter.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

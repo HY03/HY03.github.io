@@ -1,0 +1,126 @@
+I"<h1 id="유닉스-프로세스-실행권한">유닉스 프로세스 실행권한</h1>
+
+<ul>
+  <li>프로세스에 부여되는 번호
+    <ul>
+      <li>프로세스 식별자(PID)</li>
+      <li>실제 사용자 ID(RUID)</li>
+      <li>유효 사용자 ID(EUID)</li>
+      <li>실제 사용자 그룹(RGID)</li>
+      <li>유효 사용자 그룹(EGID)</li>
+    </ul>
+  </li>
+  <li>사용 용도
+    <ul>
+      <li>계정 관리에 사용 : RUID, RGID</li>
+      <li>접근 권한 결정에 사용 : EUID, EGID (보안상 주의를 요함)</li>
+      <li>일반적으로 실제 번호와 유효 번호는 동일함</li>
+      <li>동일하지 않은 경우 : setUID, setGID</li>
+    </ul>
+  </li>
+  <li>시스템에서 사용자가 명령 실행 시 명령어를 찾는 경로와 절차
+    <ul>
+      <li>현재 디렉터리 확인</li>
+      <li>명령어 없으면 <code class="language-plaintext highlighter-rouge">$PATH</code> 에서 명령어 찾기</li>
+      <li>명령어가 있으면 실행권한 확인
+        <ul>
+          <li>실행권한 있으면 명령어를 실행시킨 사용자 ID로 명령어 실행</li>
+          <li>실행권한이 없으면 명령파일에 setUID 가 설정되어 있는지 확인
+            <ul>
+              <li>소유주 권한으로 명령어 실행</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>UNIX 시스템 파일 접근권한
+    <ul>
+      <li>UNIX 시스템은 파일에 대한 접근 권한, 파일 종류를 나타내기 위해 16bit 사용</li>
+      <li>4bit 는 파일의 종류 표현에 사용</li>
+      <li>3bit 는 특수권한에 사용</li>
+      <li>user, group, other 에 9bit 사용</li>
+    </ul>
+  </li>
+  <li>특수권한
+    <ul>
+      <li>setuid : 4, setgid : 2, sticky bit : 1</li>
+      <li>설정 예
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">aaa rwxr-xr-x</code> : 755
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">chmod 4755 aaa</code>, <code class="language-plaintext highlighter-rouge">chmod u+s aaa</code> : setUID</li>
+              <li><code class="language-plaintext highlighter-rouge">chmod 2755 aaa</code>, <code class="language-plaintext highlighter-rouge">chmod g+s aaa</code> : setGID</li>
+              <li><code class="language-plaintext highlighter-rouge">chmod 6755 aaa</code>, <code class="language-plaintext highlighter-rouge">chmod ug+s aaa</code> : setUID + setGID</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>실행 예
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">ls -al aaa</code> : <code class="language-plaintext highlighter-rouge">rwxr-xr-x</code></li>
+          <li><code class="language-plaintext highlighter-rouge">id</code> 의 결과가 uid : 502, gid : 506
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">$aaa</code>
+                <ul>
+                  <li>RUID:502, EUID:502, RGID:506, EGID:506</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><code class="language-plaintext highlighter-rouge">#chmod ug+s aaa</code></li>
+          <li><code class="language-plaintext highlighter-rouge">ls -al aaa</code> : <code class="language-plaintext highlighter-rouge">rwsr-sr-x</code></li>
+          <li>aaa 의 소유자가 root 라고 가정
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">$aaa</code>
+                <ul>
+                  <li>RUID:502, EUID:0, RGID:506, EGID:0</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>setUID 의 보안상 문제점
+    <ul>
+      <li>root 권한이 필요없는 프로그램의 소유주가 root 이고 setUID 가 설정된 경우 취약</li>
+      <li><code class="language-plaintext highlighter-rouge">find . -user root -perm -4000</code></li>
+      <li><code class="language-plaintext highlighter-rouge">chmod -s aaa</code> : setUID, setGID 모두 제거</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">passwd</code> 명령어
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">ls -l /etc/passwd</code> : -rw-r–r– root root
+        <ul>
+          <li>644 권한, 패스워드 보관 파일</li>
+        </ul>
+      </li>
+      <li><code class="language-plaintext highlighter-rouge">ls -l /usr/bin/passwd</code> : -r-s–x–x root root
+        <ul>
+          <li>4511 권한, 패스워드 변경 명령어 (root권한 이용)</li>
+          <li><code class="language-plaintext highlighter-rouge">/etc/shadow</code> 파일 변경</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Sticky-bit
+    <ul>
+      <li>대부분 /tmp 디렉터리에 설정 (공유디렉터리 : <code class="language-plaintext highlighter-rouge">tmp</code>, <code class="language-plaintext highlighter-rouge">/var/tmp</code>)</li>
+      <li><code class="language-plaintext highlighter-rouge">rwxrwxrwx</code> : 모든 사용자들이 모든 권한을 가지게 됨
+        <ul>
+          <li>다른 사람이 생성한 파일을 수정하거나 삭제할 수 있음</li>
+          <li>파일을 자유롭게 생성하되, 수정, 삭제는 소유자만 가능하게 하고 싶음</li>
+        </ul>
+      </li>
+      <li>모든 사용자가 write 가능, 생성된 파일은 write 한 사용자의 소유</li>
+      <li><code class="language-plaintext highlighter-rouge">chmod 1777 /tmp</code>, <code class="language-plaintext highlighter-rouge">chmod o+t /tmp</code> (리눅스) / <code class="language-plaintext highlighter-rouge">chmod u+t /tmp</code> (SunOS)
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">rwxrwxrwt</code></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+:ET
