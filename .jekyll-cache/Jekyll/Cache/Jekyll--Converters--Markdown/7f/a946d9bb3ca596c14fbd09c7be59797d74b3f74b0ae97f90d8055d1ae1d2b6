@@ -1,0 +1,181 @@
+I"�<h1 id="web-보안">Web 보안</h1>
+
+<h2 id="웹-서비스-공격">웹 서비스 공격</h2>
+<ul>
+  <li>웹서비스 공격
+    <ul>
+      <li>최신 해킹 경향 (새로운 공격 기법 발견)</li>
+      <li>OWASP 10 : 3년마다 10 개의 주요 취약점 발표</li>
+    </ul>
+  </li>
+  <li>사용자 PC(컴퓨터) 공격
+    <ul>
+      <li>Client 취약점</li>
+    </ul>
+  </li>
+  <li>웹서버 공격
+    <ul>
+      <li>웹 서버 취약점</li>
+      <li>F/W 필터링을 통과하여 내부 네트워크 공격</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="owasp-10-open-web-application-security-project-2017">OWASP 10 (Open Web Application Security Project) (2017)</h2>
+<ul>
+  <li>A1. Injection
+    <ul>
+      <li>종류
+        <ul>
+          <li>SQL Injection</li>
+          <li>OS Injection</li>
+          <li>LDAP Injection</li>
+          <li>XPath Injection</li>
+          <li>NoSQL Injection</li>
+        </ul>
+      </li>
+      <li>보호
+        <ul>
+          <li>Injection 탐지
+            <ul>
+              <li>SQL Injection 탐지</li>
+              <li>명령어 Injection 탐지</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>A2. 취약한 인증 (Broken Authentication)
+    <ul>
+      <li>개요
+        <ul>
+          <li>해커가 암호나 키 (PW키, 세션토큰, 쿠키) 를 악용하여 사용자 신원을 가장</li>
+        </ul>
+      </li>
+      <li>보호
+        <ul>
+          <li>쿠키 탐지 : 쿠키 위조여부</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>A3. 민감한 정보 노출
+    <ul>
+      <li>개요
+        <ul>
+          <li>중요한 데이터 (개인식별정보, 신용카드정보, 개인신원정보 등) 의 보호나 암호화가 부족</li>
+        </ul>
+      </li>
+      <li>보호
+        <ul>
+          <li>SSL : Https</li>
+          <li>개인정보 유출 탐지, 차단, 마스킹</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>A4. XML 외부 개체
+    <ul>
+      <li>개요
+        <ul>
+          <li>XML 프로세서가 오래된 경우 혹은 잘못된 설정이 되어있는 경우</li>
+          <li>XML 문서 내에서 외부개체를 사용할 경우 발생하는 취약점
+            <ul>
+              <li>파일URI핸들러</li>
+              <li>내부파일 공유</li>
+              <li>포트스캔</li>
+              <li>원격코드실행</li>
+            </ul>
+          </li>
+          <li>DoS 공격이나 내부정보 유출 가능성이 있음</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>A5. 취약한 접근 통제
+    <ul>
+      <li>개요
+        <ul>
+          <li>인증된 사용자의 접근권한 (작업에 대한 제한) 이 잘못 설정되어 있는 경우</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>A6. 잘못된 보안설정
+    <ul>
+      <li>개요
+        <ul>
+          <li>애플리케이션 서버, 프레임워크, 웹서버, DB서버, S/W 보안설정 정의필요</li>
+          <li>소프트웨어 최신상태 유지</li>
+        </ul>
+      </li>
+      <li>보호
+        <ul>
+          <li>디렉토리 목록 숨김</li>
+          <li>오류페이지 숨김</li>
+          <li>악성파일 업로드 탐지</li>
+          <li>기본페이지 접근 탐지 : HTTP 요청 Data 검사</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>A7. 크로스 사이트 스크립팅 (XSS)
+    <ul>
+      <li>개요
+        <ul>
+          <li>어플리케이션이 신뢰할 수 없는 데이터를 가져와서 제대로 된 승인 없이 웹브라우저에 전송</li>
+          <li>Stored XSS</li>
+          <li>DOM XSS</li>
+          <li>Reflect XSS</li>
+          <li>브라우저에서 스크립트를 실행해 세션 탈취</li>
+          <li>악의적인 내용을 실행해 웹 사이트 훼손</li>
+        </ul>
+      </li>
+      <li>보호
+        <ul>
+          <li>XSS 탐지 : HTTP 요청 데이터 검사</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>A8. 불안전한 역직렬화
+    <ul>
+      <li>개요
+        <ul>
+          <li>원격 코드 실행</li>
+          <li>공격 재생</li>
+          <li>Injection</li>
+          <li>권한상승 공격</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>A9. 취약점이 있는 컴포넌트 사용
+    <ul>
+      <li>개요
+        <ul>
+          <li>컴포넌트 라이브러리, 소프트웨어 모듈 등에 의한 취약점의 증가</li>
+        </ul>
+      </li>
+      <li>보호
+        <ul>
+          <li>애플리케이션 취약점 탐지 : HTTP 요청 데이터 검사</li>
+          <li>취약점이 잘 알려진 컴포넌트를 사용하지 않음</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>A10. 불충분한 로깅 &amp; 모니터링
+    <ul>
+      <li>개요
+        <ul>
+          <li>사고 대응에 대한 대응책 미비</li>
+          <li>불충분한 환경이 지속될 경우 내부 탐지 불가, 침해 탐지도 오래 걸림</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+:ET

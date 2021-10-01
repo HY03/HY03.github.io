@@ -494,7 +494,7 @@
         <ul>
           <li><code class="language-plaintext highlighter-rouge">2&gt;/dev/null</code> : 에러, /dev/null 에 버리기 (1은 표준출력)</li>
           <li><code class="language-plaintext highlighter-rouge">-</code> : 해당 권한을 포함한 모든 권한</li>
-          <li><code class="language-plaintext highlighter-rouge"> </code> : 정확히 일치하는 권한</li>
+          <li>` ` : 정확히 일치하는 권한</li>
         </ul>
       </li>
     </ul>
@@ -629,7 +629,7 @@
       <li><code class="language-plaintext highlighter-rouge">/etc/crontab</code> 에 설정된 것을 읽어서 작업을 수행</li>
       <li>분 시 일 월 요일(0~6/일~토) 사용자 실행명령
         <ul>
-          <li><code class="language-plaintext highlighter-rouge">30 3 * * 2 root /home/clean.sh</code> : 매주 화요일 3시 30분에 /home/clean/sh 명령을 실행</li>
+          <li><code class="language-plaintext highlighter-rouge">30 3 * * 2 root /home/clean.sh</code> : 매주 화요일 3시 30분에 /home/clean.sh 명령을 실행</li>
           <li><code class="language-plaintext highlighter-rouge">*/10 2-5 * * * root /home/user/abc</code> : 매일 2-5시 까지 10분마다 실행</li>
           <li><code class="language-plaintext highlighter-rouge">0 7 1 1-10/2 * /bin/vipcheck.sh</code> : 1-10월 두 달 주기로 1일 7시에 실행</li>
         </ul>
@@ -676,7 +676,7 @@
   <li>find
     <ul>
       <li><code class="language-plaintext highlighter-rouge">find /var/www -name "[a-z][a-z][0-9]*</code> : var/www 의 웹디렉터리에서 첫 번째 글자와 두 번째 글자는 영문자 소문자이고 세 번째 글자는 숫자로 되어있는 파일 찾기</li>
-      <li><code class="language-plaintext highlighter-rouge">find . -name "* *" -exec rm -f { }\;</code> : 현재 디렉터리에서 파일 이름에 공백이 들어간 모든 문자를 삭제</li>
+      <li><code class="language-plaintext highlighter-rouge">find . -name "* *" -exec rm -f { }\;</code> : 현재 디렉터리에서 파일 이름에 공백이 들어간 모든 파일을 삭제</li>
       <li><code class="language-plaintext highlighter-rouge">find / -perm +6000 2&gt;/dev/null</code> : setuid, setgid 중 하나라도 부여된 것을 찾음</li>
       <li><code class="language-plaintext highlighter-rouge">find / - mtime -1</code> : 24시간 동안 변경된 파일 찾기
         <ul>
@@ -1505,7 +1505,7 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/is_certification/IS-Application-HTTP/" rel="permalink">정보보안 - HTTP
+        <a href="/is_certification/IS-Management-AsymmetricKeyAlgorithm/" rel="permalink">정보보안 - 비대칭키 암호
 </a>
       
     </h2>
@@ -1516,7 +1516,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        <time datetime="2021-05-13T18:00:00+09:00">May 13, 2021</time>
+        <time datetime="2021-08-25T09:00:00+09:00">August 25, 2021</time>
       </span>
     
 
@@ -1526,9 +1526,96 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Web 보안
+    <p class="archive__item-excerpt" itemprop="description">비대칭키 암호
 
-  웹프로토콜인 HTTP, TCP/IP 가 데이터에 대한 보안서비스를 제공하지 않음
+  키 배송 문제
+    
+      개요
+        
+          대칭키 암호를 사용하려면 키 배송 문제(key distribution problem) 발생
+            
+              암호화 키와 복호화 키가 동일
+          ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Management-SymmetricKeyAlgorithm/" rel="permalink">정보보안 - 대칭키 암호
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-07-26T09:00:00+09:00">July 26, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">대칭키 암호의 종류
+
+  DES (Data Encryption Standard)
+    
+      개요
+        
+          NIST(미국 국립기술표준원) 에서 1973년 국가적으로 사용할 대칭키 암호시스템 제안요청서를 발표
+          IBM의 제안으로 DES...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Management-Cryptography/" rel="permalink">정보보안 - 블록 암호 / 스트림 암호
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-07-19T09:00:00+09:00">July 19, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">대칭키 암호
+
+  대칭키 암호 = 공통키 암호
+  비대칭키 암호 = 공개키 암호
 
 </p>
   </article>
@@ -1544,7 +1631,7 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/is_certification/IS-Application-Email/" rel="permalink">정보보안 - 이메일
+        <a href="/is_certification/IS-Management-Outline/" rel="permalink">정보보안 - 정보보호관리
 </a>
       
     </h2>
@@ -1555,7 +1642,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        <time datetime="2021-04-30T18:00:00+09:00">April 30, 2021</time>
+        <time datetime="2021-07-13T09:00:00+09:00">July 13, 2021</time>
       </span>
     
 
@@ -1565,103 +1652,18 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">이메일 보안
-이메일 구조
+    <p class="archive__item-excerpt" itemprop="description">정보보호 개요
 
-  UA (User Agent)
+  정보화 사회
     
-      메시지 구성, 메시지 읽기 / 보내기 용도의 S/W
-    
-  
-  MTA (Message Transfer Agent)
-    
-      SMTP
-      MTA Client (User)
-     ...</p>
-  </article>
-</div>
-
+      정보화 사회 : 단일 생활권
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/is_certification/IS-Application-FTP/" rel="permalink">정보보안 - FTP
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        <time datetime="2021-04-27T18:00:00+09:00">April 27, 2021</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">FTP(File Transfer Protocol)
-FTP 개요
-
-  FTP 는 2개의 연결이 필요
-    
-      제어 연결 (Control Connection)
+          사회 모습 변화
+          전자 메일, 인터넷으로 정보 교환, 재택근무, 홈뱅킹
+          미래 사이버 전쟁
         
-          21 번 포트 사용
-          명령을 전송할 때 사용 / 계속 연결 지속
-...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/is_certification/IS-Network-VPN/" rel="permalink">정보보안 - 가상 사설망
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        <time datetime="2021-03-23T18:00:00+09:00">March 23, 2021</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">가상사설망(Virtual Private Network)
-
-  개요
-    
-      공중 네트워크를 이용하여 전용선처럼 자신만의 고유 네트워크 효과를 누릴 수 있도록 하는 기술
-      데이터 전송 중 전송망에서의 침입자에 의한 데이터 왜곡, 노출을 터널링 기술(프로토콜의 한 ...</p>
+      정보...</p>
   </article>
 </div>
 

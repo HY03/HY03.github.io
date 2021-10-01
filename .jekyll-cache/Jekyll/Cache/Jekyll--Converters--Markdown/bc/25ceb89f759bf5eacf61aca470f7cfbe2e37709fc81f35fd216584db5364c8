@@ -1,0 +1,10 @@
+I"h<ul class="toc__menu">
+  <li><a href="#dns-domain-name-system">DNS (Domain Name System)</a></li>
+  <li><a href="#리눅스-네임서버-설정파일">리눅스 네임서버 설정파일</a></li>
+  <li><a href="#dns-패킷-분석">DNS 패킷 분석</a></li>
+  <li><a href="#dns-관련-명령어">DNS 관련 명령어</a></li>
+  <li><a href="#dns-스푸핑">DNS 스푸핑</a></li>
+  <li><a href="#primarymaster--secondaryslave-네임-서버의-이해">Primary(Master) / Secondary(Slave) 네임 서버의 이해</a></li>
+  <li><a href="#recursive-query의-제한-방법">Recursive Query의 제한 방법</a></li>
+</ul>
+:ET

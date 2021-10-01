@@ -140,7 +140,7 @@ toc: true
     * 일정한 날짜와 시간에 지정된 작업을 실행하는 프로세스
     * `/etc/crontab` 에 설정된 것을 읽어서 작업을 수행
     * 분 시 일 월 요일(0\~6/일\~토) 사용자 실행명령
-        - `30 3 * * 2 root /home/clean.sh` : 매주 화요일 3시 30분에 /home/clean/sh 명령을 실행
+        - `30 3 * * 2 root /home/clean.sh` : 매주 화요일 3시 30분에 /home/clean.sh 명령을 실행
         - `*/10 2-5 * * * root /home/user/abc` : 매일 2-5시 까지 10분마다 실행
         - `0 7 1 1-10/2 * /bin/vipcheck.sh` : 1-10월 두 달 주기로 1일 7시에 실행
     * **crontab 옵션**
@@ -164,7 +164,7 @@ toc: true
     * `명령어1 | 명령어2` : 명령어 1의 결과를 명령어 2의 입력으로 전달
 + find
     * `find /var/www -name "[a-z][a-z][0-9]*` : var/www 의 웹디렉터리에서 첫 번째 글자와 두 번째 글자는 영문자 소문자이고 세 번째 글자는 숫자로 되어있는 파일 찾기
-    * `find . -name "* *" -exec rm -f { }\;` : 현재 디렉터리에서 파일 이름에 공백이 들어간 모든 문자를 삭제
+    * `find . -name "* *" -exec rm -f { }\;` : 현재 디렉터리에서 파일 이름에 공백이 들어간 모든 파일을 삭제
     * `find / -perm +6000 2>/dev/null` : setuid, setgid 중 하나라도 부여된 것을 찾음
     * `find / - mtime -1` : 24시간 동안 변경된 파일 찾기
         - `-atime` : access time 으로 파일을 열거나 접근한 시간을 기준

@@ -1,0 +1,358 @@
+I"-<h1 id="snmp-simple-network-manage-protocol">SNMP (Simple Network Manage Protocol)</h1>
+<ul>
+  <li>개요
+    <ul>
+      <li>간이 망 관리 프로토콜
+        <ul>
+          <li>TCP/IP 초창기에는 ICMP 프로토콜의 ping 을 이용해 장비간 연결 상태 파악
+            <ul>
+              <li>Host 수의 증가로 네트워크 시스템이 복잡해짐 -&gt; 관리의 어려움</li>
+            </ul>
+          </li>
+          <li>1988년 IAB (인터넷 표준제안 위원회) 에서 표준 작업을 시작
+            <ul>
+              <li>SGMP -&gt; SNMP</li>
+            </ul>
+          </li>
+          <li>네트워크 장비를 관리, 감시하기 위한 프로토콜</li>
+          <li>UDP, 응용계층 표준 프로토콜</li>
+          <li>모니터링 / 컨트롤</li>
+          <li>네트워크 관리 시스템 (NMS - Network Management System) 에서 사용
+            <ul>
+              <li>정기적으로 관리정보 수집 (SNMP Protocol)</li>
+              <li>실시간으로 네트워크 상태 모니터링, 설정 (SNMP Protocol)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>대부분의 OS 에 탑재</li>
+      <li>네트워크 관리 정보를 얻기 위해서 관리 프로그램이 필요
+        <ul>
+          <li>SNMP 는 Protocol</li>
+          <li>관리 프로그램 필요</li>
+          <li>관리시스템, 관리대상 필요</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>SNMP 구조
+    <ul>
+      <li>관리시스템 Manager 모듈 (162/UDP)
+        <ul>
+          <li>Manager 모듈이 Agent 모듈을 조회</li>
+          <li>Agent 는 Manager 에 응답</li>
+        </ul>
+      </li>
+      <li>관리대상 Agent 모듈 (161/UDP)
+        <ul>
+          <li>Agent 는 Manager 에 Trap 전송</li>
+        </ul>
+      </li>
+      <li>MRTG (Multiple Router Traffic Grapher)
+        <ul>
+          <li>SNMP 기반의 장비 모니터링 프로그램</li>
+          <li>네트워크 상에 발생하는 트래픽 사용량 모니터링</li>
+          <li>MIB 를 이용해 정보 수집 가능</li>
+        </ul>
+      </li>
+      <li>MIB (Management Information Base)
+        <ul>
+          <li>관리장치에 대한 정보가 모인 데이터베이스</li>
+          <li>Agent 각각이 MIB를 가지고 있음</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>SNMP 동작 (PDU)
+    <ul>
+      <li>Manager -&gt; Agent
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">Get Request</code> : MIB 정보 요청</li>
+        </ul>
+      </li>
+      <li>Manager &lt;- Agent
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">Get Response</code></li>
+        </ul>
+      </li>
+      <li>Manager -&gt; Agent
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">Get Next Request</code> : 이미 요청한 정보의 다음 정보 요청</li>
+        </ul>
+      </li>
+      <li>Manager &lt;- Agent
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">Get Response</code></li>
+        </ul>
+      </li>
+      <li>Manager -&gt; Agent
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">Set Request</code> : MIB 설정 요청</li>
+        </ul>
+      </li>
+      <li>Manager &lt;- Agent
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">Get Response</code></li>
+        </ul>
+      </li>
+      <li>Manager &lt;- Agent
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">Trap</code> : Agent 가 Manager 에게 비동기적으로 알림 (Notify)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>SNMP 통신을 위한 3가지 조건
+    <ul>
+      <li>SNMP 버전이 일치해야 함
+        <ul>
+          <li>v1
+            <ul>
+              <li>SGMP (Simple Gateway Management Protocol) 를 발전시킴</li>
+              <li>보안기능(암호, 인증) 없음</li>
+              <li>community string 만 일치하면 모든 정보 획득가능</li>
+              <li>평문 전송 (Snipping 노출)</li>
+            </ul>
+          </li>
+          <li>v2
+            <ul>
+              <li>보안기능 추가
+                <ul>
+                  <li>대칭키 암호화 알고리즘 (DES)</li>
+                  <li>해시 알고리즘 (MD5)</li>
+                </ul>
+              </li>
+              <li>송신처 인증 기능이 없음</li>
+              <li>SNMP v2c
+                <ul>
+                  <li>복잡한 보안기능 제거, 보안상 취약</li>
+                  <li>평문 전송 (Snipping 노출)</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>v3
+            <ul>
+              <li>Data 인증</li>
+              <li>암호화</li>
+              <li>재사용방지</li>
+              <li>접근통제</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Community String
+        <ul>
+          <li>송수신 하기 전 미리 인증을 하기 위해 사용하는 P/W</li>
+        </ul>
+      </li>
+      <li>PDU (Protocol Data Unit) 이 일치해야 함
+        <ul>
+          <li>통신하기 위한 메시지 유형
+            <ul>
+              <li>Get Request &lt;–&gt; Get Response</li>
+            </ul>
+          </li>
+          <li>Read 형
+            <ul>
+              <li>SNMPv1
+                <ul>
+                  <li>Get Request</li>
+                  <li>Get Next Request</li>
+                </ul>
+              </li>
+              <li>SNMPv2 / v3
+                <ul>
+                  <li>Get Request</li>
+                  <li>Get Bulk Request : 요청 객체의 범위를 지정</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Write 형
+            <ul>
+              <li>SNMPv1
+                <ul>
+                  <li>Set Request</li>
+                </ul>
+              </li>
+              <li>SNMPv2 / v3
+                <ul>
+                  <li>Set Request</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Response 형
+            <ul>
+              <li>SNMPv1
+                <ul>
+                  <li>Get Response</li>
+                </ul>
+              </li>
+              <li>SNMPv2 / v3
+                <ul>
+                  <li>Response</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Trap
+            <ul>
+              <li>SNMPv1
+                <ul>
+                  <li>Trap</li>
+                </ul>
+              </li>
+              <li>SNMPv2 / v3
+                <ul>
+                  <li>TrapV2</li>
+                  <li>InformRequest : Manager 가 다른 Manager 에 정보를 요청할 때 사용</li>
+                  <li>Report : 다른 Manager 에 보고할 때 사용</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>(SNMPv3 기준) Message 구조
+    <ul>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>버전</td>
+              <td>공통 Header</td>
+              <td>보안 매개변수</td>
+              <td>PDU 데이터</td>
+            </tr>
+          </tbody>
+        </table>
+        <ul>
+          <li>공통 Header 부
+            <ul>
+              <li>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>메시지 ID</td>
+                      <td>메시지 최대크기</td>
+                      <td>메시지 Flag</td>
+                      <td>메시지 보안모델</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <ul>
+                  <li>메시지 보안모델
+                    <ul>
+                      <li>USM (User Security Model)</li>
+                      <li>VACM (View-based Access Control Model) 모델</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>보안 매개변수 부
+            <ul>
+              <li>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>재전송</td>
+                      <td>공격</td>
+                      <td>방지</td>
+                      <td>메시지위변조</td>
+                      <td>방지</td>
+                      <td>암호 매개변수</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <ul>
+                  <li>재전송 공격방지
+                    <ul>
+                      <li>SNMP 엔진 IP (Authoritative 엔진 ID)</li>
+                      <li>부트횟수 (Authoritative 엔진부트 횟수)</li>
+                      <li>엔진 시간정보 (Authoritative 엔진 time)</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td>메시지위변조 방지 (HMAC) - MD5</td>
+                          <td>SHA</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <ul>
+                      <li>사용자 인증 매개변수</li>
+                    </ul>
+                  </li>
+                  <li>암호 매개변수 (DES-CBC)</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>SNMP 데이터 수집 방식
+    <ul>
+      <li>Polling : Manager 가 Agent 에 요청하면 응답</li>
+      <li>Event Report : Agent 가 Manager 에 Trap Message 전송 (Notify)</li>
+    </ul>
+  </li>
+  <li>SNMP 취약점
+    <ul>
+      <li>DoS 공격 취약점</li>
+      <li>버퍼오버플로우 취약점</li>
+      <li>비인가접속 취약점</li>
+    </ul>
+  </li>
+  <li>SNMP 보안
+    <ul>
+      <li>SNMP는 관리자 입장에서 매우 중요한 정보를 제공</li>
+      <li>SNMP에 읽기, 쓰기 권한이 있는데 쓰기 권한은 사용 자제
+        <ul>
+          <li>Set Request 제한</li>
+        </ul>
+      </li>
+      <li>SNMP v3 에서 보안 서비스를 제공</li>
+      <li>community string
+        <ul>
+          <li>SNMP 데몬 (manager) 와 클라이언트 (Agent) 간 데이터 송수신 전 인증 필요</li>
+          <li>인증을 위해 사용하는 패스워드</li>
+        </ul>
+      </li>
+      <li>읽기모드 RO (Read Only) / 쓰기모드 RW (Read Write)</li>
+      <li>MIB : 관리장치에 대한 정보가 모인 데이터베이스
+        <ul>
+          <li>관리되어야 할 정보, 자원 =&gt; 객체의 집합체</li>
+          <li>객체별 트리형식 구조</li>
+          <li>SMI (Structure Management Information)
+            <ul>
+              <li>객체의 구조, 형식</li>
+              <li>ASN.1 (Abstract Syntax Notation) 언어 사용
+                <ul>
+                  <li>Data 와 Data 속성을 설명하기 위한 공식 언어</li>
+                  <li>name (OID:Object Identifier)</li>
+                  <li>syntax (객체의 Data 유형)</li>
+                  <li>encoding (Message 전송 시 비트변환 규칙)
+                    <ul>
+                      <li>BER : encoding rule 중 하나</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+:ET

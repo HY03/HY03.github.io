@@ -1,0 +1,1474 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.20.2 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>정보보안 - 대칭키 암호 | Bluesplatter</title>
+<meta name="description" content="대칭키 암호의 종류    DES (Data Encryption Standard)            개요                    NIST(미국 국립기술표준원) 에서 1973년 국가적으로 사용할 대칭키 암호시스템 제안요청서를 발표           IBM의 제안으로 DES가 채택됨           FIPS(연방정보처리기준) 의 초안으로 공표           DES 발표 후 가장 널리 사용된 대칭키 블록 암호           이후 삼충 DES 사용을 권고한 FIPS 46-3 발표           최신 AES 는 DES 를 대체한 알고리즘                       개관                    평문의 길이는 64비트, 키의 길이는 56비트, 이보다 길면 64비트 블록으로 나눔           DES 구조는 Feistel 네트워크의 변형, 라운드 회수는 16           원래 키로부터 16개의 서브키를 생성하고 서브키를 각 라운드에서 사용           DES 복호화 과정은 암호화 과정과 동일                       DES의 구조                    개요                            두 개의 전치(P-박스)와 16개의 Feistel 라운드 함수로 구성               P-박스는 초기 전치(initial Permutation) 과 최종 전치(Final Permutation) 임               암호화                                                                                                                                    Plain Text                           Plain Text (평문을 절반으로 자름)                                                                                                           P-Box                   1 Round                                            R2 = L1 XOR F1(R1)&lt;-K1                       L2 = R2                                                           …                   16 Round (교차 없음)                                            R16 = R15                       L16 = L15 XOR F15(R15)&lt;-K15                                                           P-Box                   64Bit 암호문(Cipher Text)                                               복호화도 동일하게 마지막 라운드에 교차 없음                                   라운드 함수                            개요                                    DES 는 16번의 라운드 함수를 사용                   각 라운드 함수는 Fiestal 암호로 되어있음                   라운드 함수는 이전 라운드 함수의 출력 값 L-1 과 R-1 을 입력으로 받고 다음 라운드에 입력으로 전송될 L 과 R을 생성                   각 라운드에는 2개의 암호 요소 혼합기(mixer) 와 교환기 (swapper) 가 있음, 이런 요소들은 역연산이 가능함                                               DES 함수                                    DES 의 핵심은 함수                   라운드 함수에서 사용된 함수를 가리킴                   DES 함수는 32비트 출력값을 산출하기 위해 가장 오른쪽의 32비트에 48비트 키를 적용                   DES 함수는 확장 P-박스, 키 XOR, 8개의 S-박스 그리고 단순 P-박스의 4개 부분으로 구성                                            예시                                                    32Bit 입력                           확장 P-박스 (48Bit)                           48Bit XOR Key (48Bit)                           S-Box (8개)                           32Bit 출력                           단순 P-박스                           32Bit 결과                                                                                                                                                           암호화 알고리즘과 복호화 알고리즘                            라운드 키들이 역순으로 적용되어야 한다는 사실이 중요               암호화 과정에서 1라운드는 K1, 복호화 과정에서 1라운드는 K16                                               DES 분석                    설계 기준                            S-박스                                    각 라운드에서 그 다음 라운드까지 혼돈과 확산 성질을 만족하도록 설계                   비선형 함수                   입력 값의 한 비트를 바꾸면 출력 값에서 두 비트 이상 바뀜                                               P-박스                                    32비트에서 32비트로 가는 하나의 단순 P-박스                   32비트에서 48비트로 가는 하나의 확장 P-박스                   2개의 P-박스는 비트들을 동시에 확산(diffusion) 시킴                                                                   DES의 취약점                            키의 크기(56비트)               키에 대한 전수 조사를 위해 2의 56승 키를 조사               전사공격 가능                                    다중 DES 사용                                                                               다중 DES                    삼중 DES                            개요                                    두 개의 키를 갖는 삼중 DES 와 세 개의 키를 갖는 삼중 DES가 있음                                               두 개의 키를 갖는 삼중 DES (DES-EDE2)                                    두 개의 키를 갖는 삼중 DES 에서는 k1과 k2 두 개의 키를 사용                   첫 번째와 세번째 단계에서는 k1, 두 번째 단계에서는 k2를 사용                   하나의 DES로 삼중 DES를 만들기 위하여 암호화 과정의 중간 단게에서는 복호화 알고리즘을 사용하고, 복호화 과정에서는 DES 암호화 알고리즘을 사용                   기지평문 공격에 취약                                               세 개의 키를 갖는 삼중 DES (Triple-DES)                                    세 개의 키 k1, k2, k3 를 사용                   P -&gt; 암호화(k1) -&gt; 복호화(k2) -&gt; 암호화(k3) -&gt; 암호문                   PGP (이메일 보안, Pretty Good Privacy) 에서 사용                   기지평문 공격 보완                   복호화 : 암호화의 역                   트리플 DES에서 모든 키를 동일하게 하면 3DES는 보통 DES와 같아짐                   과거에 DES로 암호화된 암호문을 3DES를 사용하여 복호화 가능                                                                                   AES            개요                    역사                            1997년 미국 국립기술표준원(NIST)은 DES를 대체하기 위해 Advanced Encryption Standard(AES) 암호 알고리즘을 공모               NIST의 제안 요청서                                    128비트 블록크기                   128, 192, 256 비트의 세 가지 키 크기                   공개 알고리즘으로 누구나 이용 가능해야 함                                               레인달(Rijndael) AES 알고리즘 선택                                   선정기준                            안정성               비용               구현 효율성                                   라운드(Rounds)                            AES는 128비트 평문을 128비트 암호문으로 출력하는 알고리즘               Non-feistel 알고리즘               10 (128bit key), 12 (192bit key), 14 (256bit key) 라운드 사용               AES-128, AES-192, AES-256 으로 불림                                               암호(Ciphers)                    개요                            DES : Feistel 네트워크를 기본 구조로 사용               Rijndael : SPN (Substitution-Permutation Network) 구조 사용               연산은 바이트 단위의 연산을 사용               S-Box 를 이용한 치환, 행이동, 행연산 열변환, 키연산 열변환의 4가지 기본연산을 수행               알려진 공격방법들로부터 안전하도록 설계               하드웨어, 소프트웨어 구현 시 속도나 코드 압축성 면에서 효율적                                   SPN 구조                            라운드 함수가 역변환이 되어야 한다는 등의 제약이 있음               더 많은 병렬성을 제공               입력을 여러 개의 소블록으로 나누고 각 소블록을 S-box에 입력하여 치환, S-box의 출력을 P-box로 전치하는 과정 반복                                   Feistel 과 SPN 구조 알고리즘                            Feistel : DES, Blowfish, MISTY, RC5               SPN : IDEA, Rijndael (AES), Square                                   DES 와 AES 의 비교">
+
+
+  <meta name="author" content="HY03">
+  
+  <meta property="article:author" content="HY03">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Bluesplatter">
+<meta property="og:title" content="정보보안 - 대칭키 암호">
+<meta property="og:url" content="https://bluesplatter.com/is_certification/IS-Management-SymmetricKeyAlgorithm/">
+
+
+  <meta property="og:description" content="대칭키 암호의 종류    DES (Data Encryption Standard)            개요                    NIST(미국 국립기술표준원) 에서 1973년 국가적으로 사용할 대칭키 암호시스템 제안요청서를 발표           IBM의 제안으로 DES가 채택됨           FIPS(연방정보처리기준) 의 초안으로 공표           DES 발표 후 가장 널리 사용된 대칭키 블록 암호           이후 삼충 DES 사용을 권고한 FIPS 46-3 발표           최신 AES 는 DES 를 대체한 알고리즘                       개관                    평문의 길이는 64비트, 키의 길이는 56비트, 이보다 길면 64비트 블록으로 나눔           DES 구조는 Feistel 네트워크의 변형, 라운드 회수는 16           원래 키로부터 16개의 서브키를 생성하고 서브키를 각 라운드에서 사용           DES 복호화 과정은 암호화 과정과 동일                       DES의 구조                    개요                            두 개의 전치(P-박스)와 16개의 Feistel 라운드 함수로 구성               P-박스는 초기 전치(initial Permutation) 과 최종 전치(Final Permutation) 임               암호화                                                                                                                                    Plain Text                           Plain Text (평문을 절반으로 자름)                                                                                                           P-Box                   1 Round                                            R2 = L1 XOR F1(R1)&lt;-K1                       L2 = R2                                                           …                   16 Round (교차 없음)                                            R16 = R15                       L16 = L15 XOR F15(R15)&lt;-K15                                                           P-Box                   64Bit 암호문(Cipher Text)                                               복호화도 동일하게 마지막 라운드에 교차 없음                                   라운드 함수                            개요                                    DES 는 16번의 라운드 함수를 사용                   각 라운드 함수는 Fiestal 암호로 되어있음                   라운드 함수는 이전 라운드 함수의 출력 값 L-1 과 R-1 을 입력으로 받고 다음 라운드에 입력으로 전송될 L 과 R을 생성                   각 라운드에는 2개의 암호 요소 혼합기(mixer) 와 교환기 (swapper) 가 있음, 이런 요소들은 역연산이 가능함                                               DES 함수                                    DES 의 핵심은 함수                   라운드 함수에서 사용된 함수를 가리킴                   DES 함수는 32비트 출력값을 산출하기 위해 가장 오른쪽의 32비트에 48비트 키를 적용                   DES 함수는 확장 P-박스, 키 XOR, 8개의 S-박스 그리고 단순 P-박스의 4개 부분으로 구성                                            예시                                                    32Bit 입력                           확장 P-박스 (48Bit)                           48Bit XOR Key (48Bit)                           S-Box (8개)                           32Bit 출력                           단순 P-박스                           32Bit 결과                                                                                                                                                           암호화 알고리즘과 복호화 알고리즘                            라운드 키들이 역순으로 적용되어야 한다는 사실이 중요               암호화 과정에서 1라운드는 K1, 복호화 과정에서 1라운드는 K16                                               DES 분석                    설계 기준                            S-박스                                    각 라운드에서 그 다음 라운드까지 혼돈과 확산 성질을 만족하도록 설계                   비선형 함수                   입력 값의 한 비트를 바꾸면 출력 값에서 두 비트 이상 바뀜                                               P-박스                                    32비트에서 32비트로 가는 하나의 단순 P-박스                   32비트에서 48비트로 가는 하나의 확장 P-박스                   2개의 P-박스는 비트들을 동시에 확산(diffusion) 시킴                                                                   DES의 취약점                            키의 크기(56비트)               키에 대한 전수 조사를 위해 2의 56승 키를 조사               전사공격 가능                                    다중 DES 사용                                                                               다중 DES                    삼중 DES                            개요                                    두 개의 키를 갖는 삼중 DES 와 세 개의 키를 갖는 삼중 DES가 있음                                               두 개의 키를 갖는 삼중 DES (DES-EDE2)                                    두 개의 키를 갖는 삼중 DES 에서는 k1과 k2 두 개의 키를 사용                   첫 번째와 세번째 단계에서는 k1, 두 번째 단계에서는 k2를 사용                   하나의 DES로 삼중 DES를 만들기 위하여 암호화 과정의 중간 단게에서는 복호화 알고리즘을 사용하고, 복호화 과정에서는 DES 암호화 알고리즘을 사용                   기지평문 공격에 취약                                               세 개의 키를 갖는 삼중 DES (Triple-DES)                                    세 개의 키 k1, k2, k3 를 사용                   P -&gt; 암호화(k1) -&gt; 복호화(k2) -&gt; 암호화(k3) -&gt; 암호문                   PGP (이메일 보안, Pretty Good Privacy) 에서 사용                   기지평문 공격 보완                   복호화 : 암호화의 역                   트리플 DES에서 모든 키를 동일하게 하면 3DES는 보통 DES와 같아짐                   과거에 DES로 암호화된 암호문을 3DES를 사용하여 복호화 가능                                                                                   AES            개요                    역사                            1997년 미국 국립기술표준원(NIST)은 DES를 대체하기 위해 Advanced Encryption Standard(AES) 암호 알고리즘을 공모               NIST의 제안 요청서                                    128비트 블록크기                   128, 192, 256 비트의 세 가지 키 크기                   공개 알고리즘으로 누구나 이용 가능해야 함                                               레인달(Rijndael) AES 알고리즘 선택                                   선정기준                            안정성               비용               구현 효율성                                   라운드(Rounds)                            AES는 128비트 평문을 128비트 암호문으로 출력하는 알고리즘               Non-feistel 알고리즘               10 (128bit key), 12 (192bit key), 14 (256bit key) 라운드 사용               AES-128, AES-192, AES-256 으로 불림                                               암호(Ciphers)                    개요                            DES : Feistel 네트워크를 기본 구조로 사용               Rijndael : SPN (Substitution-Permutation Network) 구조 사용               연산은 바이트 단위의 연산을 사용               S-Box 를 이용한 치환, 행이동, 행연산 열변환, 키연산 열변환의 4가지 기본연산을 수행               알려진 공격방법들로부터 안전하도록 설계               하드웨어, 소프트웨어 구현 시 속도나 코드 압축성 면에서 효율적                                   SPN 구조                            라운드 함수가 역변환이 되어야 한다는 등의 제약이 있음               더 많은 병렬성을 제공               입력을 여러 개의 소블록으로 나누고 각 소블록을 S-box에 입력하여 치환, S-box의 출력을 P-box로 전치하는 과정 반복                                   Feistel 과 SPN 구조 알고리즘                            Feistel : DES, Blowfish, MISTY, RC5               SPN : IDEA, Rijndael (AES), Square                                   DES 와 AES 의 비교">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2021-07-26T09:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://bluesplatter.com/is_certification/IS-Management-SymmetricKeyAlgorithm/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "HY03",
+      "url": "https://bluesplatter.com/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Bluesplatter Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo/logo.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          세상에 남기는 작은 흔적
+          <span class="site-subtitle">Bluesplatter</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/">연도별 포스트</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="https://bluesplatter.com/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#is_certification" itemprop="item"><span itemprop="name">Is_certification</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">정보보안 - 대칭키 암호</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/profile/photo.jpg" alt="HY03" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">HY03</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>저는 전문가가 아니고 이것 저것 알아보는 비전문가 입니다. <br /> 틀린 내용이 기술되어도 너그러이 봐주시고 댓글을 남겨주셨으면 좋겠습니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="http://bluesplatter.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:hyunik03@gmail.com">
+            <meta itemprop="email" content="hyunik03@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">이메일</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="정보보안 - 대칭키 암호">
+    <meta itemprop="description" content="대칭키 암호의 종류  DES (Data Encryption Standard)          개요                  NIST(미국 국립기술표준원) 에서 1973년 국가적으로 사용할 대칭키 암호시스템 제안요청서를 발표          IBM의 제안으로 DES가 채택됨          FIPS(연방정보처리기준) 의 초안으로 공표          DES 발표 후 가장 널리 사용된 대칭키 블록 암호          이후 삼충 DES 사용을 권고한 FIPS 46-3 발표          최신 AES 는 DES 를 대체한 알고리즘                    개관                  평문의 길이는 64비트, 키의 길이는 56비트, 이보다 길면 64비트 블록으로 나눔          DES 구조는 Feistel 네트워크의 변형, 라운드 회수는 16          원래 키로부터 16개의 서브키를 생성하고 서브키를 각 라운드에서 사용          DES 복호화 과정은 암호화 과정과 동일                    DES의 구조                  개요                          두 개의 전치(P-박스)와 16개의 Feistel 라운드 함수로 구성              P-박스는 초기 전치(initial Permutation) 과 최종 전치(Final Permutation) 임              암호화                                                                                                                              Plain Text                          Plain Text (평문을 절반으로 자름)                                                                                                      P-Box                  1 Round                                          R2 = L1 XOR F1(R1)&lt;-K1                      L2 = R2                                                        …                  16 Round (교차 없음)                                          R16 = R15                      L16 = L15 XOR F15(R15)&lt;-K15                                                        P-Box                  64Bit 암호문(Cipher Text)                                            복호화도 동일하게 마지막 라운드에 교차 없음                                라운드 함수                          개요                                  DES 는 16번의 라운드 함수를 사용                  각 라운드 함수는 Fiestal 암호로 되어있음                  라운드 함수는 이전 라운드 함수의 출력 값 L-1 과 R-1 을 입력으로 받고 다음 라운드에 입력으로 전송될 L 과 R을 생성                  각 라운드에는 2개의 암호 요소 혼합기(mixer) 와 교환기 (swapper) 가 있음, 이런 요소들은 역연산이 가능함                                            DES 함수                                  DES 의 핵심은 함수                  라운드 함수에서 사용된 함수를 가리킴                  DES 함수는 32비트 출력값을 산출하기 위해 가장 오른쪽의 32비트에 48비트 키를 적용                  DES 함수는 확장 P-박스, 키 XOR, 8개의 S-박스 그리고 단순 P-박스의 4개 부분으로 구성                                          예시                                                  32Bit 입력                          확장 P-박스 (48Bit)                          48Bit XOR Key (48Bit)                          S-Box (8개)                          32Bit 출력                          단순 P-박스                          32Bit 결과                                                                                                                                                  암호화 알고리즘과 복호화 알고리즘                          라운드 키들이 역순으로 적용되어야 한다는 사실이 중요              암호화 과정에서 1라운드는 K1, 복호화 과정에서 1라운드는 K16                                          DES 분석                  설계 기준                          S-박스                                  각 라운드에서 그 다음 라운드까지 혼돈과 확산 성질을 만족하도록 설계                  비선형 함수                  입력 값의 한 비트를 바꾸면 출력 값에서 두 비트 이상 바뀜                                            P-박스                                  32비트에서 32비트로 가는 하나의 단순 P-박스                  32비트에서 48비트로 가는 하나의 확장 P-박스                  2개의 P-박스는 비트들을 동시에 확산(diffusion) 시킴                                                              DES의 취약점                          키의 크기(56비트)              키에 대한 전수 조사를 위해 2의 56승 키를 조사              전사공격 가능                                  다중 DES 사용                                                                        다중 DES                  삼중 DES                          개요                                  두 개의 키를 갖는 삼중 DES 와 세 개의 키를 갖는 삼중 DES가 있음                                            두 개의 키를 갖는 삼중 DES (DES-EDE2)                                  두 개의 키를 갖는 삼중 DES 에서는 k1과 k2 두 개의 키를 사용                  첫 번째와 세번째 단계에서는 k1, 두 번째 단계에서는 k2를 사용                  하나의 DES로 삼중 DES를 만들기 위하여 암호화 과정의 중간 단게에서는 복호화 알고리즘을 사용하고, 복호화 과정에서는 DES 암호화 알고리즘을 사용                  기지평문 공격에 취약                                            세 개의 키를 갖는 삼중 DES (Triple-DES)                                  세 개의 키 k1, k2, k3 를 사용                  P -&gt; 암호화(k1) -&gt; 복호화(k2) -&gt; 암호화(k3) -&gt; 암호문                  PGP (이메일 보안, Pretty Good Privacy) 에서 사용                  기지평문 공격 보완                  복호화 : 암호화의 역                  트리플 DES에서 모든 키를 동일하게 하면 3DES는 보통 DES와 같아짐                  과거에 DES로 암호화된 암호문을 3DES를 사용하여 복호화 가능                                                                          AES          개요                  역사                          1997년 미국 국립기술표준원(NIST)은 DES를 대체하기 위해 Advanced Encryption Standard(AES) 암호 알고리즘을 공모              NIST의 제안 요청서                                  128비트 블록크기                  128, 192, 256 비트의 세 가지 키 크기                  공개 알고리즘으로 누구나 이용 가능해야 함                                            레인달(Rijndael) AES 알고리즘 선택                                선정기준                          안정성              비용              구현 효율성                                라운드(Rounds)                          AES는 128비트 평문을 128비트 암호문으로 출력하는 알고리즘              Non-feistel 알고리즘              10 (128bit key), 12 (192bit key), 14 (256bit key) 라운드 사용              AES-128, AES-192, AES-256 으로 불림                                          암호(Ciphers)                  개요                          DES : Feistel 네트워크를 기본 구조로 사용              Rijndael : SPN (Substitution-Permutation Network) 구조 사용              연산은 바이트 단위의 연산을 사용              S-Box 를 이용한 치환, 행이동, 행연산 열변환, 키연산 열변환의 4가지 기본연산을 수행              알려진 공격방법들로부터 안전하도록 설계              하드웨어, 소프트웨어 구현 시 속도나 코드 압축성 면에서 효율적                                SPN 구조                          라운드 함수가 역변환이 되어야 한다는 등의 제약이 있음              더 많은 병렬성을 제공              입력을 여러 개의 소블록으로 나누고 각 소블록을 S-box에 입력하여 치환, S-box의 출력을 P-box로 전치하는 과정 반복                                Feistel 과 SPN 구조 알고리즘                          Feistel : DES, Blowfish, MISTY, RC5              SPN : IDEA, Rijndael (AES), Square                                DES 와 AES 의 비교                    ">
+    <meta itemprop="datePublished" content="2021-07-26T09:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">정보보안 - 대칭키 암호
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-07-26T09:00:00+09:00">July 26, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#대칭키-암호의-종류">대칭키 암호의 종류</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <h1 id="대칭키-암호의-종류">대칭키 암호의 종류</h1>
+<ul>
+  <li>DES (Data Encryption Standard)
+    <ul>
+      <li>개요
+        <ul>
+          <li>NIST(미국 국립기술표준원) 에서 1973년 국가적으로 사용할 대칭키 암호시스템 제안요청서를 발표</li>
+          <li>IBM의 제안으로 DES가 채택됨</li>
+          <li>FIPS(연방정보처리기준) 의 초안으로 공표</li>
+          <li>DES 발표 후 가장 널리 사용된 대칭키 블록 암호</li>
+          <li>이후 삼충 DES 사용을 권고한 FIPS 46-3 발표</li>
+          <li>최신 AES 는 DES 를 대체한 알고리즘</li>
+        </ul>
+      </li>
+      <li>개관
+        <ul>
+          <li>평문의 길이는 64비트, 키의 길이는 56비트, 이보다 길면 64비트 블록으로 나눔</li>
+          <li>DES 구조는 Feistel 네트워크의 변형, 라운드 회수는 16</li>
+          <li>원래 키로부터 16개의 서브키를 생성하고 서브키를 각 라운드에서 사용</li>
+          <li>DES 복호화 과정은 암호화 과정과 동일</li>
+        </ul>
+      </li>
+      <li>DES의 구조
+        <ul>
+          <li>개요
+            <ul>
+              <li>두 개의 전치(P-박스)와 16개의 Feistel 라운드 함수로 구성</li>
+              <li>P-박스는 초기 전치(initial Permutation) 과 최종 전치(Final Permutation) 임</li>
+              <li>암호화
+                <ul>
+                  <li>
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td>Plain Text</td>
+                          <td>Plain Text (평문을 절반으로 자름)</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </li>
+                  <li>P-Box</li>
+                  <li>1 Round
+                    <ul>
+                      <li>R2 = L1 XOR F1(R1)&lt;-K1</li>
+                      <li>L2 = R2</li>
+                    </ul>
+                  </li>
+                  <li>…</li>
+                  <li>16 Round (교차 없음)
+                    <ul>
+                      <li>R16 = R15</li>
+                      <li>L16 = L15 XOR F15(R15)&lt;-K15</li>
+                    </ul>
+                  </li>
+                  <li>P-Box</li>
+                  <li>64Bit 암호문(Cipher Text)</li>
+                </ul>
+              </li>
+              <li>복호화도 동일하게 마지막 라운드에 교차 없음</li>
+            </ul>
+          </li>
+          <li>라운드 함수
+            <ul>
+              <li>개요
+                <ul>
+                  <li>DES 는 16번의 라운드 함수를 사용</li>
+                  <li>각 라운드 함수는 Fiestal 암호로 되어있음</li>
+                  <li>라운드 함수는 이전 라운드 함수의 출력 값 L-1 과 R-1 을 입력으로 받고 다음 라운드에 입력으로 전송될 L 과 R을 생성</li>
+                  <li>각 라운드에는 2개의 암호 요소 혼합기(mixer) 와 교환기 (swapper) 가 있음, 이런 요소들은 역연산이 가능함</li>
+                </ul>
+              </li>
+              <li>DES 함수
+                <ul>
+                  <li>DES 의 핵심은 함수</li>
+                  <li>라운드 함수에서 사용된 함수를 가리킴</li>
+                  <li>DES 함수는 32비트 출력값을 산출하기 위해 가장 오른쪽의 32비트에 48비트 키를 적용</li>
+                  <li>DES 함수는 확장 P-박스, 키 XOR, 8개의 S-박스 그리고 단순 P-박스의 4개 부분으로 구성
+                    <ul>
+                      <li>예시
+                        <ul>
+                          <li>32Bit 입력</li>
+                          <li>확장 P-박스 (48Bit)</li>
+                          <li>48Bit XOR Key (48Bit)</li>
+                          <li>S-Box (8개)</li>
+                          <li>32Bit 출력</li>
+                          <li>단순 P-박스</li>
+                          <li>32Bit 결과</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>암호화 알고리즘과 복호화 알고리즘
+            <ul>
+              <li>라운드 키들이 역순으로 적용되어야 한다는 사실이 중요</li>
+              <li>암호화 과정에서 1라운드는 K1, 복호화 과정에서 1라운드는 K16</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>DES 분석
+        <ul>
+          <li>설계 기준
+            <ul>
+              <li>S-박스
+                <ul>
+                  <li>각 라운드에서 그 다음 라운드까지 혼돈과 확산 성질을 만족하도록 설계</li>
+                  <li>비선형 함수</li>
+                  <li>입력 값의 한 비트를 바꾸면 출력 값에서 두 비트 이상 바뀜</li>
+                </ul>
+              </li>
+              <li>P-박스
+                <ul>
+                  <li>32비트에서 32비트로 가는 하나의 단순 P-박스</li>
+                  <li>32비트에서 48비트로 가는 하나의 확장 P-박스</li>
+                  <li>2개의 P-박스는 비트들을 동시에 확산(diffusion) 시킴</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>DES의 취약점
+            <ul>
+              <li>키의 크기(56비트)</li>
+              <li>키에 대한 전수 조사를 위해 2의 56승 키를 조사</li>
+              <li>전사공격 가능
+                <ul>
+                  <li>다중 DES 사용</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>다중 DES
+        <ul>
+          <li>삼중 DES
+            <ul>
+              <li>개요
+                <ul>
+                  <li>두 개의 키를 갖는 삼중 DES 와 세 개의 키를 갖는 삼중 DES가 있음</li>
+                </ul>
+              </li>
+              <li>두 개의 키를 갖는 삼중 DES (DES-EDE2)
+                <ul>
+                  <li>두 개의 키를 갖는 삼중 DES 에서는 k1과 k2 두 개의 키를 사용</li>
+                  <li>첫 번째와 세번째 단계에서는 k1, 두 번째 단계에서는 k2를 사용</li>
+                  <li>하나의 DES로 삼중 DES를 만들기 위하여 암호화 과정의 중간 단게에서는 복호화 알고리즘을 사용하고, 복호화 과정에서는 DES 암호화 알고리즘을 사용</li>
+                  <li>기지평문 공격에 취약</li>
+                </ul>
+              </li>
+              <li>세 개의 키를 갖는 삼중 DES (Triple-DES)
+                <ul>
+                  <li>세 개의 키 k1, k2, k3 를 사용</li>
+                  <li>P -&gt; 암호화(k1) -&gt; 복호화(k2) -&gt; 암호화(k3) -&gt; 암호문</li>
+                  <li>PGP (이메일 보안, Pretty Good Privacy) 에서 사용</li>
+                  <li>기지평문 공격 보완</li>
+                  <li>복호화 : 암호화의 역</li>
+                  <li>트리플 DES에서 모든 키를 동일하게 하면 3DES는 보통 DES와 같아짐</li>
+                  <li>과거에 DES로 암호화된 암호문을 3DES를 사용하여 복호화 가능</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>AES
+    <ul>
+      <li>개요
+        <ul>
+          <li>역사
+            <ul>
+              <li>1997년 미국 국립기술표준원(NIST)은 DES를 대체하기 위해 Advanced Encryption Standard(AES) 암호 알고리즘을 공모</li>
+              <li>NIST의 제안 요청서
+                <ul>
+                  <li>128비트 블록크기</li>
+                  <li>128, 192, 256 비트의 세 가지 키 크기</li>
+                  <li>공개 알고리즘으로 누구나 이용 가능해야 함</li>
+                </ul>
+              </li>
+              <li>레인달(Rijndael) AES 알고리즘 선택</li>
+            </ul>
+          </li>
+          <li>선정기준
+            <ul>
+              <li>안정성</li>
+              <li>비용</li>
+              <li>구현 효율성</li>
+            </ul>
+          </li>
+          <li>라운드(Rounds)
+            <ul>
+              <li>AES는 128비트 평문을 128비트 암호문으로 출력하는 알고리즘</li>
+              <li>Non-feistel 알고리즘</li>
+              <li>10 (128bit key), 12 (192bit key), 14 (256bit key) 라운드 사용</li>
+              <li>AES-128, AES-192, AES-256 으로 불림</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>암호(Ciphers)
+        <ul>
+          <li>개요
+            <ul>
+              <li>DES : Feistel 네트워크를 기본 구조로 사용</li>
+              <li>Rijndael : SPN (Substitution-Permutation Network) 구조 사용</li>
+              <li>연산은 바이트 단위의 연산을 사용</li>
+              <li>S-Box 를 이용한 치환, 행이동, 행연산 열변환, 키연산 열변환의 4가지 기본연산을 수행</li>
+              <li>알려진 공격방법들로부터 안전하도록 설계</li>
+              <li>하드웨어, 소프트웨어 구현 시 속도나 코드 압축성 면에서 효율적</li>
+            </ul>
+          </li>
+          <li>SPN 구조
+            <ul>
+              <li>라운드 함수가 역변환이 되어야 한다는 등의 제약이 있음</li>
+              <li>더 많은 병렬성을 제공</li>
+              <li>입력을 여러 개의 소블록으로 나누고 각 소블록을 S-box에 입력하여 치환, S-box의 출력을 P-box로 전치하는 과정 반복</li>
+            </ul>
+          </li>
+          <li>Feistel 과 SPN 구조 알고리즘
+            <ul>
+              <li>Feistel : DES, Blowfish, MISTY, RC5</li>
+              <li>SPN : IDEA, Rijndael (AES), Square</li>
+            </ul>
+          </li>
+          <li>
+            <p>DES 와 AES 의 비교</p>
+
+            <table>
+              <thead>
+                <tr>
+                  <th style="text-align: center">구분</th>
+                  <th style="text-align: center">DES</th>
+                  <th style="text-align: center">AES</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="text-align: center">년도</td>
+                  <td style="text-align: center">1976</td>
+                  <td style="text-align: center">1999</td>
+                </tr>
+                <tr>
+                  <td style="text-align: center">블록크기</td>
+                  <td style="text-align: center">64bits</td>
+                  <td style="text-align: center">128bits</td>
+                </tr>
+                <tr>
+                  <td style="text-align: center">키 길이</td>
+                  <td style="text-align: center">56bits</td>
+                  <td style="text-align: center">128,192,256bits</td>
+                </tr>
+                <tr>
+                  <td style="text-align: center">암호화 프리미티브</td>
+                  <td style="text-align: center">치환,전치</td>
+                  <td style="text-align: center">치환,시프트,비트 혼합</td>
+                </tr>
+                <tr>
+                  <td style="text-align: center">암호학적 프리미티브</td>
+                  <td style="text-align: center">혼돈,확산</td>
+                  <td style="text-align: center">혼돈,확산</td>
+                </tr>
+                <tr>
+                  <td style="text-align: center">설계</td>
+                  <td style="text-align: center">공개</td>
+                  <td style="text-align: center">공개</td>
+                </tr>
+                <tr>
+                  <td style="text-align: center">설계 원칙</td>
+                  <td style="text-align: center">비공개</td>
+                  <td style="text-align: center">공개</td>
+                </tr>
+                <tr>
+                  <td style="text-align: center">선택 과정</td>
+                  <td style="text-align: center">비밀</td>
+                  <td style="text-align: center">비밀,공모</td>
+                </tr>
+                <tr>
+                  <td style="text-align: center">출처</td>
+                  <td style="text-align: center">IBM,NSA</td>
+                  <td style="text-align: center">벨기에 암호학자</td>
+                </tr>
+              </tbody>
+            </table>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>기타 대칭키 암호 알고리즘
+    <ul>
+      <li>IDEA(International Data Encryption Algorithm)
+        <ul>
+          <li>DES를 대체하기 위해 스위스 연방 기술 기관에서 개발</li>
+          <li>128비트의 키를 사용해 64비트의 평문을 8라운드를 거쳐 64비트 암호문으로 변경</li>
+          <li>Feistel 구조</li>
+          <li>DES 보다 2배 빠름</li>
+          <li>무차별 공격에 더욱 효율적으로 대응</li>
+          <li>PGP 암호화 소프트웨어에서 사용</li>
+        </ul>
+      </li>
+      <li>SEED
+        <ul>
+          <li>KISA 에서 개발한 알고리즘</li>
+          <li>인터넷, 전자상거래, 무선 통신 등에서 공개될 경우 민감한 영향을 끼칠 수 있는 중요 정보 및 개인 정보를 보호하기 위해 개발된 대칭 알고리즘</li>
+          <li>1999년 9월 정보통신단체표준(TTA) 로 제정</li>
+          <li>2005년 국제 표준화 기구인 ISO/IEC 및 IETF에서 국제 블록암호 알고리즘 표준으로 제정
+            <ul>
+              <li>IEC(International Electro-technical Commission) : 국제전기기술위원회</li>
+              <li>IETF(Internet Engineering Task Force) : 국제 인터넷 표준화기구</li>
+            </ul>
+          </li>
+          <li>128비트 비밀키에서 생성된 16개의 64비트 라운드키를 사용하여 16라운드
+            <ul>
+              <li>2009년에는 256비트 비밀키 사용 (SEED256)</li>
+            </ul>
+          </li>
+          <li>128비트의 평문 블록을 128비트 암호문 블록으로 출력</li>
+          <li>DES 와 유사한 변형된 Feistel 구조</li>
+          <li>f 함수의 비선형성 안전도에 의존</li>
+        </ul>
+      </li>
+      <li>ARIA (Academy Research Institute Agency)
+        <ul>
+          <li>국가보안기술연구소(NSRI) 주도로 학계, 국가정보원 등의 암호기술전문가들이 개발한 국가 암호화 알고리즘</li>
+          <li>ARIA : 개발팀이 학계, 연구소, 정부기관으로 구성됨</li>
+          <li>ISPN(Involutional SPN) 구조</li>
+          <li>128비트 블록 암호</li>
+          <li>128비트, 192비트, 256비트의 3종류의 키 사용을 제공</li>
+          <li>길이에 따라 ARIA-128, ARIA-192, ARIA-256</li>
+          <li>입출력 크기와 사용가능한 키 크기는 미국 표준 블록 암호인 AES와 동일</li>
+        </ul>
+      </li>
+      <li>HIGHT (HIGh security and light weigHT)
+        <ul>
+          <li>KISA, ETRI, 고려대에서 2005년도에 개발</li>
+          <li>2006년에 TTA (정보통신단체) 표준으로 제정됨</li>
+          <li>2010년 ISO/IES 국제표준 암호로 제정</li>
+          <li>64bit 블록암호</li>
+          <li>저전력, 경량화</li>
+        </ul>
+      </li>
+      <li>LEA (Lightweight Encryption Algorithm)
+        <ul>
+          <li>2012년 국가보안기술연구소(NSRI) 가 개발한 경량 고속 암호화 알고리즘</li>
+          <li>128bit 블록암호</li>
+          <li>AES에 비해 1.5~2배 빠름</li>
+          <li>스마트폰, 사물인터넷 등에 사용</li>
+        </ul>
+      </li>
+      <li>RC5
+        <ul>
+          <li>1994년 RSA 연구소에서 개발</li>
+          <li>입출력, 키, 라운드 수가 가변적임</li>
+          <li>32bit, 64bit, 128bit 블록암호</li>
+          <li>DES의 10배의 속도</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>대칭키 암호 정리</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: center">구분</th>
+          <th style="text-align: center">국가</th>
+          <th style="text-align: center">개발년도</th>
+          <th style="text-align: center">특징</th>
+          <th style="text-align: center">블록크기</th>
+          <th style="text-align: center">키의길이</th>
+          <th style="text-align: center">라운드수</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: center">DES</td>
+          <td style="text-align: center">미국</td>
+          <td style="text-align: center">1927년</td>
+          <td style="text-align: center">NIST에서 표준으로 공표(1997년)</td>
+          <td style="text-align: center">64</td>
+          <td style="text-align: center">56</td>
+          <td style="text-align: center">16</td>
+        </tr>
+        <tr>
+          <td style="text-align: center">IDEA</td>
+          <td style="text-align: center">유럽</td>
+          <td style="text-align: center">1990년</td>
+          <td style="text-align: center">PGP 채택</td>
+          <td style="text-align: center">64</td>
+          <td style="text-align: center">128</td>
+          <td style="text-align: center">8</td>
+        </tr>
+        <tr>
+          <td style="text-align: center">Rijndael</td>
+          <td style="text-align: center">벨기에</td>
+          <td style="text-align: center"> </td>
+          <td style="text-align: center">2000년 AES알고리즘으로 선정</td>
+          <td style="text-align: center">128</td>
+          <td style="text-align: center">128,192,256</td>
+          <td style="text-align: center">10,12,14</td>
+        </tr>
+        <tr>
+          <td style="text-align: center">SEED</td>
+          <td style="text-align: center">한국</td>
+          <td style="text-align: center">1999년</td>
+          <td style="text-align: center">한국표준 블록암호 알고리즘</td>
+          <td style="text-align: center">128</td>
+          <td style="text-align: center">128</td>
+          <td style="text-align: center">16</td>
+        </tr>
+        <tr>
+          <td style="text-align: center">CRYPTON</td>
+          <td style="text-align: center">한국</td>
+          <td style="text-align: center">1998년</td>
+          <td style="text-align: center"> </td>
+          <td style="text-align: center">128</td>
+          <td style="text-align: center">0-256</td>
+          <td style="text-align: center">12</td>
+        </tr>
+        <tr>
+          <td style="text-align: center">RC5</td>
+          <td style="text-align: center">미국</td>
+          <td style="text-align: center">1994년</td>
+          <td style="text-align: center">알고리즘이 간단, 속도가 빠름</td>
+          <td style="text-align: center">64</td>
+          <td style="text-align: center">0-256</td>
+          <td style="text-align: center">16</td>
+        </tr>
+        <tr>
+          <td style="text-align: center">FEAL</td>
+          <td style="text-align: center">일본</td>
+          <td style="text-align: center">1987년</td>
+          <td style="text-align: center">S/W구현에 적합</td>
+          <td style="text-align: center">64</td>
+          <td style="text-align: center">64</td>
+          <td style="text-align: center">4</td>
+        </tr>
+        <tr>
+          <td style="text-align: center">MISTY</td>
+          <td style="text-align: center">일본</td>
+          <td style="text-align: center">1996년</td>
+          <td style="text-align: center">차분/선형공격에 안정성증명구조</td>
+          <td style="text-align: center">64</td>
+          <td style="text-align: center">128</td>
+          <td style="text-align: center">8</td>
+        </tr>
+        <tr>
+          <td style="text-align: center">SKIPJACK</td>
+          <td style="text-align: center">미국</td>
+          <td style="text-align: center">1990년</td>
+          <td style="text-align: center">Fortezza카드에 사용</td>
+          <td style="text-align: center">64</td>
+          <td style="text-align: center">80</td>
+          <td style="text-align: center">32</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>현대 대칭키 암호를 이용한 암호화 기법
+    <ul>
+      <li>현대 블록 암호의 사용
+        <ul>
+          <li>개요
+            <ul>
+              <li>기본개념
+                <ul>
+                  <li>블록 암호를 다양한 응용에 사용하기 위해 NIST에서 5가지 운영모드를 정의</li>
+                  <li>DES, AES를 포함한 어떤 대칭 블록 암호에도 적용 가능</li>
+                  <li>ECB모드 : Electric CodeBook mode (전자 부호표 모드)</li>
+                  <li>CBC모드 : Cipher Block Chaining mode (암호 블록 연쇄모드)</li>
+                  <li>CFB 모드 : Cipher-FeedBack mode (암호 피드백 모드)</li>
+                  <li>OFB 모드 : Output-FeedBack mode (출력 피드백 모드)</li>
+                  <li>CTR 모드 : CounTeR mode (카운터 모드)
+                    <ul>
+                      <li>CFB, OFB, CTR 모드 : 스트림 암호화 방식</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Electric CodeBook(ECB) 모드
+            <ul>
+              <li>개요
+                <ul>
+                  <li>가장 간단한 모드. 평문은 N개의 n비트 블록으로 분할</li>
+                  <li>평문 크기가 블록 크기의 배수가 아니라면, 평문의 마지막 블록은 다른 블록들과 동일한 크기로 만들기 위하여 padding이 필요</li>
+                  <li>각 블록에 키는 동일</li>
+                </ul>
+              </li>
+              <li>응용
+                <ul>
+                  <li>매우 많은 데이터베이스를 암호화할 때 병렬적으로 처리 가능</li>
+                  <li>암호화된 레코드를 저장하거나 복호화 해야하는 분야에서 독립성이 유용</li>
+                  <li>다른 레코드에 영향을 주지 않음</li>
+                </ul>
+              </li>
+              <li>암호화 예시
+                <ul>
+                  <li>P1 -&gt; Enc(K1) = C1</li>
+                  <li>P2 -&gt; Enc(K1) = C2</li>
+                  <li>P3 -&gt; Enc(K1) = C3</li>
+                  <li>P4 -&gt; Enc(K1) = C4</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Cipher Block Chaining(CBC) 모드
+            <ul>
+              <li>개요
+                <ul>
+                  <li>각각의 평문 블록은 암호화되기 전에 이전 암호화 블록과 XOR 됨</li>
+                  <li>블록이 암호화될 때 암호화블록은 전송되지만, 다음 블록 암호화를 위해 메모리에 저장됨</li>
+                  <li>첫 번째 블록은 이전 암호화 블록이 없으므로 초기벡터라고 불리는 허구의 블록이 사용됨</li>
+                </ul>
+              </li>
+              <li>암호화와 복호화
+                <ul>
+                  <li>1단계 전에 수행되어 결과로 출력된 암호문 블록에 평문 블록을 XOR 하고 나서 암호화를 수행함</li>
+                  <li>복호화할 때 암호문 블록 1개가 파손된 경우, 평문 블록에 미치는 영향은 2개 블록에 머문다. 반면 평문 블록 한 비트 오류는 모든 암호문에 영향을 미친다.</li>
+                </ul>
+              </li>
+              <li>CBC 모드 활용
+                <ul>
+                  <li>인터넷에서 보안을 제공하는 프로토콜 중 하나인 IPSec 에서 통신의 기밀성을 지키기 위해 CBC 모드를 사용</li>
+                  <li>3DES 를 CBC 모드로 사용한 3DES-CBC, AES를 CBC로 사용한 AES-CBC</li>
+                  <li>CBC 모드 인증으로 수행하는 대칭키 암호 시스템의 하나인 Kerberos version 5에서도 사용</li>
+                </ul>
+              </li>
+              <li>암호화 예시
+                <ul>
+                  <li>P1 -&gt; IV Xor -&gt; Enc(K1) = C1</li>
+                  <li>P2 -&gt; C1 Xor -&gt; Enc(K2) = C2</li>
+                  <li>P3 -&gt; C2 Xor -&gt; Enc(K3) = C3</li>
+                  <li>P4 -&gt; C3 Xor -&gt; Enc(K4) = C4</li>
+                  <li>IV 가 바뀌면 암호문 블록 모두가 바뀌게 됨</li>
+                  <li>P1 가 바뀌면 암호문 블록 모두가 바뀌게 됨</li>
+                </ul>
+              </li>
+              <li>복호화 예시
+                <ul>
+                  <li>C1 -&gt; Dec(K1) -&gt; IV Xor = P1</li>
+                  <li>C2 -&gt; Dec(K2) -&gt; C1 Xor = P2</li>
+                  <li>C3 -&gt; Dec(K3) -&gt; C2 Xor = P3</li>
+                  <li>C4 -&gt; Dec(K4) -&gt; C3 Xor = P4</li>
+                  <li>C2 가 손상되면 P2, P3가 영향을 받음
+                    <ul>
+                      <li>암호문 길이에는 변화가 없어야 함</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Cipher-FeedBack(CFB) 모드 / 스트림암호 방식 블록암호 모드
+            <ul>
+              <li>개요
+                <ul>
+                  <li>어떤 블록 암호도 스트림 암호로 바꿀 수 있다.</li>
+                  <li>스트림 암호의 경우 메시지의 길이가 블록의 정수배가 되도록 패딩 할 필요가 없으며 실시간으로 사용 가능</li>
+                  <li>한 문자를 전송하는 경우 문자 중심 스트림 암호를 이용하여 각 문자가 암호화되는 즉시 전송 가능</li>
+                </ul>
+              </li>
+              <li>암호화와 복호화
+                <ul>
+                  <li>복호화 과정은 평문 블록과 암호문 블록의 역할만 바뀌었을 뿐 동일
+                    <ul>
+                      <li>CBC에서는 복호화 함수를 사용</li>
+                      <li>CFB에서는 암호화 함수를 복호화에 사용</li>
+                    </ul>
+                  </li>
+                  <li>DES 나 AES 와 같은 블록 암호를 이용한 운용 모드</li>
+                  <li>그 결과는 스트림암호와 같다.
+                    <ul>
+                      <li>키 스트림이 암호문에 의존하는 비동기식 스트림암호와 비슷</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>암호화 예시
+                <ul>
+                  <li>IV -&gt; Enc(K1) -&gt; P1 Xor = C1</li>
+                  <li>C1 -&gt; Enc(K2) -&gt; P2 Xor = C2</li>
+                  <li>C2 -&gt; Enc(K3) -&gt; P3 Xor = C3</li>
+                  <li>C3 -&gt; Enc(K4) -&gt; P4 Xor = C4</li>
+                </ul>
+              </li>
+              <li>복호화 예시
+                <ul>
+                  <li>IV -&gt; Enc(K1) -&gt; C1 Xor = P1</li>
+                  <li>C1 -&gt; Enc(K2) -&gt; C2 Xor = P2</li>
+                  <li>C2 -&gt; Enc(K3) -&gt; C3 Xor = P3</li>
+                  <li>C3 -&gt; Enc(K4) -&gt; C4 Xor = P4</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Output-FeedBack(OFB) 모드 / 스트림암호 방식 블록암호 모드
+            <ul>
+              <li>개요
+                <ul>
+                  <li>CFB 모드와 유사하지만 모든 암호문 블록의 각 비트는 이전 암호문 블록의 비트들과 독립적
+                    <ul>
+                      <li>오류 파급의 영향을 피할 수 있음</li>
+                      <li>오류 발생 시 다른 비트에 영향 안줌</li>
+                      <li>CFB와 마찬가지로 초기화 벡터 사용</li>
+                    </ul>
+                  </li>
+                  <li>스트림 암호로서의 OFB 모드
+                    <ul>
+                      <li>블록 암호를 기반으로 한 스트림 암호</li>
+                      <li>키 스트림은 평문이나 암호문과는 독립적이므로 동기식 스트림암호</li>
+                      <li>IV 암호화 -&gt; 평문 블록과 XOR -&gt; 암호화 블록 생성</li>
+                      <li>IV 암호화 결과를 암호화 -&gt; 평문 블록과 XOR -&gt; 암호화 블록 생성</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>암호화 예시
+                <ul>
+                  <li>IV -&gt; Enc(K1) = I1 -&gt; P1 Xor = C1</li>
+                  <li>I1 -&gt; Enc(K2) = I2 -&gt; P2 Xor = C2</li>
+                  <li>I2 -&gt; Enc(K3) = I3 -&gt; P3 Xor = C3</li>
+                  <li>I3 -&gt; Enc(K4) = I4 -&gt; P4 Xor = C4</li>
+                </ul>
+              </li>
+              <li>복호화 예시
+                <ul>
+                  <li>IV -&gt; Enc(K1) = I1 -&gt; C1 Xor = P1</li>
+                  <li>I1 -&gt; Enc(K2) = I2 -&gt; C2 Xor = P2</li>
+                  <li>I2 -&gt; Enc(K3) = I3 -&gt; C3 Xor = P3</li>
+                  <li>I3 -&gt; Enc(K4) = I4 -&gt; C4 Xor = P4</li>
+                </ul>
+              </li>
+              <li>초기치가 바뀌면 모든 암호문이 바뀜</li>
+              <li>암호화 알고리즘의 결과는 평문과는 무관하다</li>
+            </ul>
+          </li>
+          <li>CounTeR(CTR) 모드 / 스트림암호 방식 블록암호 모드
+            <ul>
+              <li>개요
+                <ul>
+                  <li>ATM(asynchronous transfer mod) 네트워크 보안과 IPSec 에 응용되면서 관심이 늘어남.</li>
+                  <li>암호화 시 피드백이 존재하지 않음. -&gt; 암/복호화 병렬처리가 가능</li>
+                  <li>키 스트림의 의사난수성은 카운터를 사용함으로써 성취될 수 있음</li>
+                  <li>CTR 값은 암호화 할 때마다 새로운 비표값으로 생성</li>
+                  <li>CTR 모드는 OFB 모드와 마찬가지로 이전 암호문 블록과 독립적인 키 스트림을 생성하지만 (동기식) 피드백을 사용하지 않음</li>
+                  <li>ECB 모드처럼 CTR 모드는 서로 독립적인 n비트 암호문 블록을 생성함
+                    <ul>
+                      <li>ECB와 CTR은 암복호화 병렬처리가 가능</li>
+                      <li>OFB : 병렬처리 불가</li>
+                      <li>CBC/CFB : 복호화만 병렬처리 가능</li>
+                    </ul>
+                  </li>
+                  <li>CTR 암호화 -&gt; 평문블록과 XOR -&gt; 암호화 블록 생성</li>
+                </ul>
+              </li>
+              <li>암호화 예시
+                <ul>
+                  <li>CTR+0 -&gt; Enc(K1) -&gt; P1 Xor = C1</li>
+                  <li>CTR+1 -&gt; Enc(K2) -&gt; P2 Xor = C2</li>
+                  <li>CTR+2 -&gt; Enc(K3) -&gt; P3 Xor = C3</li>
+                  <li>CTR+3 -&gt; Enc(K4) -&gt; P4 Xor = C4</li>
+                </ul>
+              </li>
+              <li>복호화 예시
+                <ul>
+                  <li>CTR+0 -&gt; Enc(K1) -&gt; C1 Xor = P1</li>
+                  <li>CTR+1 -&gt; Enc(K2) -&gt; C2 Xor = P2</li>
+                  <li>CTR+2 -&gt; Enc(K3) -&gt; C3 Xor = P3</li>
+                  <li>CTR+3 -&gt; Enc(K4) -&gt; C4 Xor = P4</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>블록 암호 공격
+    <ul>
+      <li>차분공격에 대한 기본 개념 (Differential Cryptanalysis)
+        <ul>
+          <li>선택 평문 공격</li>
+          <li>두 개의 평문 블록들의 비트의 차이에 대응되는 암호문 블록들의 비트의 차이를 이용하여 사용된 암호키를 찾는 방법</li>
+        </ul>
+      </li>
+      <li>선형공격에 대한 기본 개념 (Linear Cryptanalysis)
+        <ul>
+          <li>기지 평문 공격</li>
+          <li>알고리즘 내부의 비선형 구조를 적당히 선형화시켜 암호키를 찾는 방법</li>
+          <li>평문과 암호문 비트를 XOR 하여 0이 되는 확률</li>
+        </ul>
+      </li>
+      <li>전수공격법 (Exhaustive key search)
+        <ul>
+          <li>암호화할 때 일어날 수 있는 모든 경우에 대해 조사</li>
+          <li>경우의 수가 적을 때 좋음</li>
+        </ul>
+      </li>
+      <li>통계적 분석 (Statistical analysis)
+        <ul>
+          <li>암호문에 대한 평문의 각 단어의 빈도에 관한 자료와 더불어 지금까지 알려진 모든 통계적인 자료를 이용하여 해독</li>
+        </ul>
+      </li>
+      <li>수학적 분석 (Mathematical analysis)
+        <ul>
+          <li>통계적인 방법과 수학적 이론을 이용</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#%EB%8C%80%EC%B9%AD%ED%82%A4-%EC%95%94%ED%98%B8" class="page__taxonomy-item" rel="tag">대칭키 암호</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88%EA%B8%B0%EC%82%AC" class="page__taxonomy-item" rel="tag">정보보안기사</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#is-certification" class="page__taxonomy-item" rel="tag">IS_Certification</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2021-07-26T09:00:00+09:00">July 26, 2021</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+%EB%8C%80%EC%B9%AD%ED%82%A4+%EC%95%94%ED%98%B8%20https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Management-SymmetricKeyAlgorithm%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Management-SymmetricKeyAlgorithm%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Management-SymmetricKeyAlgorithm%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/is_certification/IS-Management-Cryptography/" class="pagination--pager" title="정보보안 - 블록 암호 / 스트림 암호
+">이전</a>
+    
+    
+      <a href="/is_certification/IS-Management-AsymmetricKeyAlgorithm/" class="pagination--pager" title="정보보안 - 비대칭키 암호
+">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Management-AsymmetricKeyAlgorithm/" rel="permalink">정보보안 - 비대칭키 암호
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-08-25T09:00:00+09:00">August 25, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">비대칭키 암호
+
+  키 배송 문제
+    
+      개요
+        
+          대칭키 암호를 사용하려면 키 배송 문제(key distribution problem) 발생
+            
+              암호화 키와 복호화 키가 동일
+          ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Management-Cryptography/" rel="permalink">정보보안 - 블록 암호 / 스트림 암호
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-07-19T09:00:00+09:00">July 19, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">대칭키 암호
+
+  대칭키 암호 = 공통키 암호
+  비대칭키 암호 = 공개키 암호
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Management-Outline/" rel="permalink">정보보안 - 정보보호관리
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-07-13T09:00:00+09:00">July 13, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">정보보호 개요
+
+  정보화 사회
+    
+      정보화 사회 : 단일 생활권
+        
+          사회 모습 변화
+          전자 메일, 인터넷으로 정보 교환, 재택근무, 홈뱅킹
+          미래 사이버 전쟁
+        
+      
+      정보...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Application-SNMP/" rel="permalink">정보보안 - SNMP(Simple Network Management Protocol)
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-07-12T09:00:00+09:00">July 12, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">SNMP (Simple Network Manage Protocol)
+
+  개요
+    
+      간이 망 관리 프로토콜
+        
+          TCP/IP 초창기에는 ICMP 프로토콜의 ping 을 이용해 장비간 연결 상태 파악
+            
+         ...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+<!--
+<script>
+	(function(d, h, m){
+    var js, fjs = d.getElementsByTagName(h)[0];
+    if (d.getElementById(m)){return;}
+    js = d.createElement(h); js.id = m;
+    js.onload = function(){
+        window.makerWidgetComInit({
+        position: "left",          
+        widget: "eqypoqmawbcz3azh-usiy9q7ma4ong1w1-juelcm3zfgcuwjds"                
+    })};
+    js.src = "https://makerwidget.com/js/embed.js";
+    fjs.parentNode.insertBefore(js, fjs)
+	}(document, "script", "dhm"))
+</script>
+-->
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:hyunik03@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 HY03. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://bluesplatter.com/is_certification/IS-Management-SymmetricKeyAlgorithm/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/is_certification/IS-Management-SymmetricKeyAlgorithm"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://bluesplatter.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

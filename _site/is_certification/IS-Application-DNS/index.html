@@ -1,0 +1,1743 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.20.2 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>정보보안 - DNS(Domain Name System) | Bluesplatter</title>
+<meta name="description" content="DNS (Domain Name System)    개요            DNS 는 프로토콜이라기 보다는 인터넷 네임체계를 규정하는 거대한 시스템                    www.google.com : 사람은 문자형태로 입력           192.168.0.1 : 컴퓨터가 알아볼 수 있는 형태           DNS : 사람과 컴퓨터가 알아볼 수 있는 형태로 변환해주는 체계                           과정            User -&gt; DNS    Client PC    WebServer                    User : 네임 입력                       User    DNS -&gt; Client PC    WebServer                    DNS 역할           DNS : 네임 요청처리           DNS : 주소 변환                       User    DNS    Client PC -&gt; WebServer                    Client PC : 자원요청           WebServer : 요청처리                       User    DNS    Client PC &lt;- WebServer                    WebServer : 응답생성           Client PC : 응답처리           User : 자원접근                           기능            네임 공간 정의 (네임구조)                    계층구조 예시 : www.google.com (계층구조)                            com : 최상위 도메인 (TLDs) 공간                                    google : 2단계 도메인                                                                   루트서버 (전 세계 13개정도가 있음)                            도메인에 대한 정보를 가지고 있지 않음               자신의 권한을 다른 서버들에게 위임, 서버만 참조               .com : TLDs                                    .google : 2단계 도메인                   .naver : 2단계 도메인                                            blog : 하위도메인                       cafe : 하위도메인                       mail : 하위도메인                                                                                       .edu : TLDs                                    .skku : 2단계 도메인                                               .net : TLDs                                    .daum : 2단계 도메인                                                                   DNS 서버                            도메인을 담당하는 호스트               저장되는 데이터                                    자원 레코드 (Resource Record, RR)                                            www.google.com = 192.168.xx.xx                                                           마스터 파일 (Zone 파일)                                            도메인에 대한 정보를 가지고 있음                       RR(복수개) 들을 관리                       RR의 추가, 변경, 삭제                                                    music.google.com = 192.168.xx.xx                                                                                                                                                           Zone : 도메인을 관리하는 단위 (영역)                            DNS 서버(네임서버) 하나가 책임이나 권한을 가지는 영역               도메인은 위임을 통해 관리가 가능한 단위로 분할 가능                                   자원 레코드 (Resource Record, RR)                            DNS 서버는 모든 데이터를 RR로 정의해서 저장                                    네임 (0~32)                                            도메인 혹은 Zone Name                                                                                                                                                           유형(Type) (0~16)                           클래스 (16~32)                                                                                                                 유형(Type)                                                                                                                                                                                    유형값                                   문자코드                                   RR유형                                                                                                                                                                                                                                                                                   1                                   A                                   주소 (IPv4)                                                                                                                                                                                                                                                                                   28                                   AAAA                                   주소 (IPv6)                                                                                                                                                                                                                                                                                   2                                   NS                                   네임서버 (이름)                                                                                                                                                                                                                                                                                   5                                   CNAME                                   정규네임 (Canonical)                                                                                                                                                                                                                                                                                   6                                   SoA                                   권한개시정보 (DNS Zone 정보)                                                                                                                                                         모든 Zone 은 하나의 SoA 레코드를 가지고 있음                                                                                                                                                                                                                   12                                   PTR                                   포인터 (다른 위치를 가리킴, 역방향 변환 이용)                                                                                                                                                                                                                                                                                   15                                   MX                                   메일 교환 (도메인으로 들어오는 이메일 처리를 위한 장비 이름 명시)                                                                                                                                                                                                                                                                                   16                                   TXT                                   문자열                                                                                                                                                                                               클래스                                                                                                                                                                                    1                                   IN (Internet, 가장많이 사용)                                                                                                                                                                                                                                                                                   2                                   Unassigned (할당되지 않음)                                                                                                                                                                                                                                                                                   3                                   CH (Chaos)                                                                                                                                                                                                                                                                                   4                                   HS (Hesiod)                                                                                                                                                                                                                                   유지시간 (0~32)                                            레코드를 읽은 장비가 캐시에 얼마동안 정보를 유지해야 하는지 명시                                                           데이터 길이 (0~32)                                            자원에 대한 데이터 크기                                                           데이터 (0~32)                                            실제 데이터                           이름 : www.google.com   유형 : 1   TTL (Time To Live) :   Size :   호스트 : 192.168.170.10   ...                                                                                                                                                           DNS 서버                            Master               Slave                                   DNS 메시지 구조                            사용자가 DNS 서버에 질의했을 때 받는 메시지                                    Header (12 Bytes)                                            메시지 유형 설명                                                           Question (가변)                                            질의 정보                                                           Answer (가변)                                            질문에 대한 답변 RR                                                           Authority (가변)                                            권한 네임서버를 가리키는 하나 이상의 RR 포함                                                           Additional (가변)                                            질의와 관련된 부가정보를 나타내는 하나 이상의 RR                                                                                                                       네임 등록                    IP 주소 (예:192.168.0.10) 에 웹서버를 구축한 경우                            이름 www.abc.com 으로 접근시키기 위해서 네임 등록               abc.com 도메인 공간 안에서는 마음대로 등록 가능                                    cafe.abc.com                   blog.abc.com                   …                                                                               네임 변환                    사용자가 www.abc.com 으로 접근했을 경우                            IP 주소 192.168.0.10 으로 변환시켜줌                                   DNS 네임 변환 과정                            DNS =&gt; Client / Server 가 존재                                    주소 =&gt; 이름                   이름 =&gt; 주소                   Resolver (변환기) : 네임서버에 질의를 수행하는 SW / 모듈                                               반복적 해석 (변환) : Iterative Query                                    Authoritative 서버에 질의할 경우                   User -&gt; 루트 NS    .Com 담당 NS    google 담당 NS                                            google.com 변환 요청                                                           User &lt;- 루트 NS    .Com 담당 NS    google 담당 NS                                            com 담당 네임서버 주소                                                           User        -&gt;     .Com 담당 NS    google 담당 NS                                            google.com 변환 요청                                                           User        &lt;-     .Com 담당 NS    google 담당 NS                                            google.com 담당 NS 주소                                                           User                     -&gt;         google 담당 NS                                            google.com 변환 요청                                                           User                     &lt;-         google 담당 NS                                            google.com IP 주소                                                                                       재귀적 해석 (변환) : Recursive Query                                    Recursive 서버에 질의할 경우                   중간 과정의 네임서버들이 모두 재귀적 변환을 허용해야 함                                            실제로는 그렇지 않음.                                                           User -&gt; 루트 NS    .Com 담당 NS    google 담당 NS                                            google.com 변환 요청                                                           User    루트 NS -&gt; .Com 담당 NS    google 담당 NS                                            google.com 변환 요청                                                           User    루트 NS    .Com 담당 NS -&gt; google 담당 NS                                            google.com 변환 요청                                                           User    루트 NS    .Com 담당 NS &lt;- google 담당 NS                                            google.com IP 주소                                                           User    루트 NS &lt;- .Com 담당 NS    google 담당 NS                                            google.com IP 주소                                                           User &lt;- 루트 NS    .Com 담당 NS    google 담당 NS                                            google.com IP 주소                                                                                       일반적인 DNS 네임 변환 과정                                    반복적(Iterative) 변환과 재귀적(Recursive) 변환을 함께 사용함                   DNS 서버의 종류                                            Recursive DNS Server : 조건이 만족될 때까지 반복적으로 처리                       Authoritative DNS Server (권한서버)                                                    Root Server, .Com NS, google NS 등 특정 도메인 영역 (Zone) 과 권한을 가지고 있는 서버                                                                       Cache : 캐시에 저장된 정보를 제공                       ISP 업체 (KT, SKT … ) 가 제공하는 서버                                                           Recursive Query 순서                                                                                                DNS Cache 검색                                                            자신에게 도메인 정보가 없을 시 DB를 검색하거나 타 서버에 요청해야 하나 시간이 오래 걸림                                                                                         캐시로 저장                                                                    속도는 빠르나 잘못된 정보를 매핑할 수 있음                                                                                               양성 캐싱(positive caching) : 한 번 질의 된 도메인 네임과 해당 IP 주소를 캐시에 유지하여 같은 질의가 올 때 캐시에서 응답해 주는 것                               음성 캐싱(negative caching) : 잘못된 도메인에 관한 요청을 캐싱하여 불필요한 트래픽과 지연을 줄이는 역할                                                                                                                                                                                   hosts 파일 검색                                                            host 명 : IP 주소 정보를 담고 있는 파일                               /etc/hosts (리눅스) / hosts.ics (Internet Connection Sharing 기능 - 윈도우)                                                                                         파밍사이트 접속유도를 위해 공격자가 목표로 하는 파일                               변조 위험성이 큼                                                                                                                                                                                   DNS 서버 질의                                                            Recursive DNS Server                               Authoritative DNS Server                                                                                                                                                                   일반적인 과정                                            재귀적 질의                                                    사용자가 브라우저에 URL 입력 : comps.googleex.edu                                                            Resolver : 사용자 DNS 클라이언트 소프트웨어                                                                                   PC 내 Resolver 가 PC 내 Cache 확인                           Resolver 가 로컬네임서버에 (Recursive DNS Server) 재귀적 질의                           로컬네임서버가 Cache 확인                                                                       반복적 질의                                                    로컬네임서버가 루트서버에 질의                           루트서버가 .edu 네임서버 주소를 전달                           로컬네임서버가 .edu 네임서버에 질의                           .edu 네임서버가 .googleex 네임서버 주소를 전달                           로컬네임서버가 .googleex 네임서버에 질의                           .googleex 네임서버가 comps.googleex.edu 네임서버 주소를 전달                           로컬네임서버가 comps.googleex.edu 네임서버에 질의                           comps.googleex.edu IP 주소를 전달                                                                       재귀적 질의                                                    로컬네임서버가 Cache 갱신                           로컬네임서버가 Resolver 에게 IP 전달                           Resolver 가 Cache 갱신                           Resolver 가 사용자에게 IP 주소를 전달                           사용자 브라우저가 IP 주소로 HTTP 요청">
+
+
+  <meta name="author" content="HY03">
+  
+  <meta property="article:author" content="HY03">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Bluesplatter">
+<meta property="og:title" content="정보보안 - DNS(Domain Name System)">
+<meta property="og:url" content="https://bluesplatter.com/is_certification/IS-Application-DNS/">
+
+
+  <meta property="og:description" content="DNS (Domain Name System)    개요            DNS 는 프로토콜이라기 보다는 인터넷 네임체계를 규정하는 거대한 시스템                    www.google.com : 사람은 문자형태로 입력           192.168.0.1 : 컴퓨터가 알아볼 수 있는 형태           DNS : 사람과 컴퓨터가 알아볼 수 있는 형태로 변환해주는 체계                           과정            User -&gt; DNS    Client PC    WebServer                    User : 네임 입력                       User    DNS -&gt; Client PC    WebServer                    DNS 역할           DNS : 네임 요청처리           DNS : 주소 변환                       User    DNS    Client PC -&gt; WebServer                    Client PC : 자원요청           WebServer : 요청처리                       User    DNS    Client PC &lt;- WebServer                    WebServer : 응답생성           Client PC : 응답처리           User : 자원접근                           기능            네임 공간 정의 (네임구조)                    계층구조 예시 : www.google.com (계층구조)                            com : 최상위 도메인 (TLDs) 공간                                    google : 2단계 도메인                                                                   루트서버 (전 세계 13개정도가 있음)                            도메인에 대한 정보를 가지고 있지 않음               자신의 권한을 다른 서버들에게 위임, 서버만 참조               .com : TLDs                                    .google : 2단계 도메인                   .naver : 2단계 도메인                                            blog : 하위도메인                       cafe : 하위도메인                       mail : 하위도메인                                                                                       .edu : TLDs                                    .skku : 2단계 도메인                                               .net : TLDs                                    .daum : 2단계 도메인                                                                   DNS 서버                            도메인을 담당하는 호스트               저장되는 데이터                                    자원 레코드 (Resource Record, RR)                                            www.google.com = 192.168.xx.xx                                                           마스터 파일 (Zone 파일)                                            도메인에 대한 정보를 가지고 있음                       RR(복수개) 들을 관리                       RR의 추가, 변경, 삭제                                                    music.google.com = 192.168.xx.xx                                                                                                                                                           Zone : 도메인을 관리하는 단위 (영역)                            DNS 서버(네임서버) 하나가 책임이나 권한을 가지는 영역               도메인은 위임을 통해 관리가 가능한 단위로 분할 가능                                   자원 레코드 (Resource Record, RR)                            DNS 서버는 모든 데이터를 RR로 정의해서 저장                                    네임 (0~32)                                            도메인 혹은 Zone Name                                                                                                                                                           유형(Type) (0~16)                           클래스 (16~32)                                                                                                                 유형(Type)                                                                                                                                                                                    유형값                                   문자코드                                   RR유형                                                                                                                                                                                                                                                                                   1                                   A                                   주소 (IPv4)                                                                                                                                                                                                                                                                                   28                                   AAAA                                   주소 (IPv6)                                                                                                                                                                                                                                                                                   2                                   NS                                   네임서버 (이름)                                                                                                                                                                                                                                                                                   5                                   CNAME                                   정규네임 (Canonical)                                                                                                                                                                                                                                                                                   6                                   SoA                                   권한개시정보 (DNS Zone 정보)                                                                                                                                                         모든 Zone 은 하나의 SoA 레코드를 가지고 있음                                                                                                                                                                                                                   12                                   PTR                                   포인터 (다른 위치를 가리킴, 역방향 변환 이용)                                                                                                                                                                                                                                                                                   15                                   MX                                   메일 교환 (도메인으로 들어오는 이메일 처리를 위한 장비 이름 명시)                                                                                                                                                                                                                                                                                   16                                   TXT                                   문자열                                                                                                                                                                                               클래스                                                                                                                                                                                    1                                   IN (Internet, 가장많이 사용)                                                                                                                                                                                                                                                                                   2                                   Unassigned (할당되지 않음)                                                                                                                                                                                                                                                                                   3                                   CH (Chaos)                                                                                                                                                                                                                                                                                   4                                   HS (Hesiod)                                                                                                                                                                                                                                   유지시간 (0~32)                                            레코드를 읽은 장비가 캐시에 얼마동안 정보를 유지해야 하는지 명시                                                           데이터 길이 (0~32)                                            자원에 대한 데이터 크기                                                           데이터 (0~32)                                            실제 데이터                           이름 : www.google.com   유형 : 1   TTL (Time To Live) :   Size :   호스트 : 192.168.170.10   ...                                                                                                                                                           DNS 서버                            Master               Slave                                   DNS 메시지 구조                            사용자가 DNS 서버에 질의했을 때 받는 메시지                                    Header (12 Bytes)                                            메시지 유형 설명                                                           Question (가변)                                            질의 정보                                                           Answer (가변)                                            질문에 대한 답변 RR                                                           Authority (가변)                                            권한 네임서버를 가리키는 하나 이상의 RR 포함                                                           Additional (가변)                                            질의와 관련된 부가정보를 나타내는 하나 이상의 RR                                                                                                                       네임 등록                    IP 주소 (예:192.168.0.10) 에 웹서버를 구축한 경우                            이름 www.abc.com 으로 접근시키기 위해서 네임 등록               abc.com 도메인 공간 안에서는 마음대로 등록 가능                                    cafe.abc.com                   blog.abc.com                   …                                                                               네임 변환                    사용자가 www.abc.com 으로 접근했을 경우                            IP 주소 192.168.0.10 으로 변환시켜줌                                   DNS 네임 변환 과정                            DNS =&gt; Client / Server 가 존재                                    주소 =&gt; 이름                   이름 =&gt; 주소                   Resolver (변환기) : 네임서버에 질의를 수행하는 SW / 모듈                                               반복적 해석 (변환) : Iterative Query                                    Authoritative 서버에 질의할 경우                   User -&gt; 루트 NS    .Com 담당 NS    google 담당 NS                                            google.com 변환 요청                                                           User &lt;- 루트 NS    .Com 담당 NS    google 담당 NS                                            com 담당 네임서버 주소                                                           User        -&gt;     .Com 담당 NS    google 담당 NS                                            google.com 변환 요청                                                           User        &lt;-     .Com 담당 NS    google 담당 NS                                            google.com 담당 NS 주소                                                           User                     -&gt;         google 담당 NS                                            google.com 변환 요청                                                           User                     &lt;-         google 담당 NS                                            google.com IP 주소                                                                                       재귀적 해석 (변환) : Recursive Query                                    Recursive 서버에 질의할 경우                   중간 과정의 네임서버들이 모두 재귀적 변환을 허용해야 함                                            실제로는 그렇지 않음.                                                           User -&gt; 루트 NS    .Com 담당 NS    google 담당 NS                                            google.com 변환 요청                                                           User    루트 NS -&gt; .Com 담당 NS    google 담당 NS                                            google.com 변환 요청                                                           User    루트 NS    .Com 담당 NS -&gt; google 담당 NS                                            google.com 변환 요청                                                           User    루트 NS    .Com 담당 NS &lt;- google 담당 NS                                            google.com IP 주소                                                           User    루트 NS &lt;- .Com 담당 NS    google 담당 NS                                            google.com IP 주소                                                           User &lt;- 루트 NS    .Com 담당 NS    google 담당 NS                                            google.com IP 주소                                                                                       일반적인 DNS 네임 변환 과정                                    반복적(Iterative) 변환과 재귀적(Recursive) 변환을 함께 사용함                   DNS 서버의 종류                                            Recursive DNS Server : 조건이 만족될 때까지 반복적으로 처리                       Authoritative DNS Server (권한서버)                                                    Root Server, .Com NS, google NS 등 특정 도메인 영역 (Zone) 과 권한을 가지고 있는 서버                                                                       Cache : 캐시에 저장된 정보를 제공                       ISP 업체 (KT, SKT … ) 가 제공하는 서버                                                           Recursive Query 순서                                                                                                DNS Cache 검색                                                            자신에게 도메인 정보가 없을 시 DB를 검색하거나 타 서버에 요청해야 하나 시간이 오래 걸림                                                                                         캐시로 저장                                                                    속도는 빠르나 잘못된 정보를 매핑할 수 있음                                                                                               양성 캐싱(positive caching) : 한 번 질의 된 도메인 네임과 해당 IP 주소를 캐시에 유지하여 같은 질의가 올 때 캐시에서 응답해 주는 것                               음성 캐싱(negative caching) : 잘못된 도메인에 관한 요청을 캐싱하여 불필요한 트래픽과 지연을 줄이는 역할                                                                                                                                                                                   hosts 파일 검색                                                            host 명 : IP 주소 정보를 담고 있는 파일                               /etc/hosts (리눅스) / hosts.ics (Internet Connection Sharing 기능 - 윈도우)                                                                                         파밍사이트 접속유도를 위해 공격자가 목표로 하는 파일                               변조 위험성이 큼                                                                                                                                                                                   DNS 서버 질의                                                            Recursive DNS Server                               Authoritative DNS Server                                                                                                                                                                   일반적인 과정                                            재귀적 질의                                                    사용자가 브라우저에 URL 입력 : comps.googleex.edu                                                            Resolver : 사용자 DNS 클라이언트 소프트웨어                                                                                   PC 내 Resolver 가 PC 내 Cache 확인                           Resolver 가 로컬네임서버에 (Recursive DNS Server) 재귀적 질의                           로컬네임서버가 Cache 확인                                                                       반복적 질의                                                    로컬네임서버가 루트서버에 질의                           루트서버가 .edu 네임서버 주소를 전달                           로컬네임서버가 .edu 네임서버에 질의                           .edu 네임서버가 .googleex 네임서버 주소를 전달                           로컬네임서버가 .googleex 네임서버에 질의                           .googleex 네임서버가 comps.googleex.edu 네임서버 주소를 전달                           로컬네임서버가 comps.googleex.edu 네임서버에 질의                           comps.googleex.edu IP 주소를 전달                                                                       재귀적 질의                                                    로컬네임서버가 Cache 갱신                           로컬네임서버가 Resolver 에게 IP 전달                           Resolver 가 Cache 갱신                           Resolver 가 사용자에게 IP 주소를 전달                           사용자 브라우저가 IP 주소로 HTTP 요청">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2021-07-08T23:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://bluesplatter.com/is_certification/IS-Application-DNS/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "HY03",
+      "url": "https://bluesplatter.com/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Bluesplatter Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo/logo.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          세상에 남기는 작은 흔적
+          <span class="site-subtitle">Bluesplatter</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/">연도별 포스트</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="https://bluesplatter.com/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#is_certification" itemprop="item"><span itemprop="name">Is_certification</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">정보보안 - DNS(Domain Name System)</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/profile/photo.jpg" alt="HY03" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">HY03</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>저는 전문가가 아니고 이것 저것 알아보는 비전문가 입니다. <br /> 틀린 내용이 기술되어도 너그러이 봐주시고 댓글을 남겨주셨으면 좋겠습니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="http://bluesplatter.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:hyunik03@gmail.com">
+            <meta itemprop="email" content="hyunik03@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">이메일</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="정보보안 - DNS(Domain Name System)">
+    <meta itemprop="description" content="DNS (Domain Name System)  개요          DNS 는 프로토콜이라기 보다는 인터넷 네임체계를 규정하는 거대한 시스템                  www.google.com : 사람은 문자형태로 입력          192.168.0.1 : 컴퓨터가 알아볼 수 있는 형태          DNS : 사람과 컴퓨터가 알아볼 수 있는 형태로 변환해주는 체계                      과정          User -&gt; DNS    Client PC    WebServer                  User : 네임 입력                    User    DNS -&gt; Client PC    WebServer                  DNS 역할          DNS : 네임 요청처리          DNS : 주소 변환                    User    DNS    Client PC -&gt; WebServer                  Client PC : 자원요청          WebServer : 요청처리                    User    DNS    Client PC &lt;- WebServer                  WebServer : 응답생성          Client PC : 응답처리          User : 자원접근                      기능          네임 공간 정의 (네임구조)                  계층구조 예시 : www.google.com (계층구조)                          com : 최상위 도메인 (TLDs) 공간                                  google : 2단계 도메인                                                              루트서버 (전 세계 13개정도가 있음)                          도메인에 대한 정보를 가지고 있지 않음              자신의 권한을 다른 서버들에게 위임, 서버만 참조              .com : TLDs                                  .google : 2단계 도메인                  .naver : 2단계 도메인                                          blog : 하위도메인                      cafe : 하위도메인                      mail : 하위도메인                                                                                  .edu : TLDs                                  .skku : 2단계 도메인                                            .net : TLDs                                  .daum : 2단계 도메인                                                              DNS 서버                          도메인을 담당하는 호스트              저장되는 데이터                                  자원 레코드 (Resource Record, RR)                                          www.google.com = 192.168.xx.xx                                                        마스터 파일 (Zone 파일)                                          도메인에 대한 정보를 가지고 있음                      RR(복수개) 들을 관리                      RR의 추가, 변경, 삭제                                                  music.google.com = 192.168.xx.xx                                                                                                                                                  Zone : 도메인을 관리하는 단위 (영역)                          DNS 서버(네임서버) 하나가 책임이나 권한을 가지는 영역              도메인은 위임을 통해 관리가 가능한 단위로 분할 가능                                자원 레코드 (Resource Record, RR)                          DNS 서버는 모든 데이터를 RR로 정의해서 저장                                  네임 (0~32)                                          도메인 혹은 Zone Name                                                                                                                                                    유형(Type) (0~16)                          클래스 (16~32)                                                                                                            유형(Type)                                                                                                                                                                              유형값                                  문자코드                                  RR유형                                                                                                                                                                                                                                                                          1                                  A                                  주소 (IPv4)                                                                                                                                                                                                                                                                          28                                  AAAA                                  주소 (IPv6)                                                                                                                                                                                                                                                                          2                                  NS                                  네임서버 (이름)                                                                                                                                                                                                                                                                          5                                  CNAME                                  정규네임 (Canonical)                                                                                                                                                                                                                                                                          6                                  SoA                                  권한개시정보 (DNS Zone 정보)                                                                                                                                                    모든 Zone 은 하나의 SoA 레코드를 가지고 있음                                                                                                                                                                                                            12                                  PTR                                  포인터 (다른 위치를 가리킴, 역방향 변환 이용)                                                                                                                                                                                                                                                                          15                                  MX                                  메일 교환 (도메인으로 들어오는 이메일 처리를 위한 장비 이름 명시)                                                                                                                                                                                                                                                                          16                                  TXT                                  문자열                                                                                                                                                                                        클래스                                                                                                                                                                              1                                  IN (Internet, 가장많이 사용)                                                                                                                                                                                                                                                                          2                                  Unassigned (할당되지 않음)                                                                                                                                                                                                                                                                          3                                  CH (Chaos)                                                                                                                                                                                                                                                                          4                                  HS (Hesiod)                                                                                                                                                                                                                          유지시간 (0~32)                                          레코드를 읽은 장비가 캐시에 얼마동안 정보를 유지해야 하는지 명시                                                        데이터 길이 (0~32)                                          자원에 대한 데이터 크기                                                        데이터 (0~32)                                          실제 데이터                          이름 : www.google.com  유형 : 1  TTL (Time To Live) :  Size :  호스트 : 192.168.170.10  ...                                                                                                                                                  DNS 서버                          Master              Slave                                DNS 메시지 구조                          사용자가 DNS 서버에 질의했을 때 받는 메시지                                  Header (12 Bytes)                                          메시지 유형 설명                                                        Question (가변)                                          질의 정보                                                        Answer (가변)                                          질문에 대한 답변 RR                                                        Authority (가변)                                          권한 네임서버를 가리키는 하나 이상의 RR 포함                                                        Additional (가변)                                          질의와 관련된 부가정보를 나타내는 하나 이상의 RR                                                                                                              네임 등록                  IP 주소 (예:192.168.0.10) 에 웹서버를 구축한 경우                          이름 www.abc.com 으로 접근시키기 위해서 네임 등록              abc.com 도메인 공간 안에서는 마음대로 등록 가능                                  cafe.abc.com                  blog.abc.com                  …                                                                        네임 변환                  사용자가 www.abc.com 으로 접근했을 경우                          IP 주소 192.168.0.10 으로 변환시켜줌                                DNS 네임 변환 과정                          DNS =&gt; Client / Server 가 존재                                  주소 =&gt; 이름                  이름 =&gt; 주소                  Resolver (변환기) : 네임서버에 질의를 수행하는 SW / 모듈                                            반복적 해석 (변환) : Iterative Query                                  Authoritative 서버에 질의할 경우                  User -&gt; 루트 NS    .Com 담당 NS    google 담당 NS                                          google.com 변환 요청                                                        User &lt;- 루트 NS    .Com 담당 NS    google 담당 NS                                          com 담당 네임서버 주소                                                        User        -&gt;     .Com 담당 NS    google 담당 NS                                          google.com 변환 요청                                                        User        &lt;-     .Com 담당 NS    google 담당 NS                                          google.com 담당 NS 주소                                                        User                     -&gt;         google 담당 NS                                          google.com 변환 요청                                                        User                     &lt;-         google 담당 NS                                          google.com IP 주소                                                                                  재귀적 해석 (변환) : Recursive Query                                  Recursive 서버에 질의할 경우                  중간 과정의 네임서버들이 모두 재귀적 변환을 허용해야 함                                          실제로는 그렇지 않음.                                                        User -&gt; 루트 NS    .Com 담당 NS    google 담당 NS                                          google.com 변환 요청                                                        User    루트 NS -&gt; .Com 담당 NS    google 담당 NS                                          google.com 변환 요청                                                        User    루트 NS    .Com 담당 NS -&gt; google 담당 NS                                          google.com 변환 요청                                                        User    루트 NS    .Com 담당 NS &lt;- google 담당 NS                                          google.com IP 주소                                                        User    루트 NS &lt;- .Com 담당 NS    google 담당 NS                                          google.com IP 주소                                                        User &lt;- 루트 NS    .Com 담당 NS    google 담당 NS                                          google.com IP 주소                                                                                  일반적인 DNS 네임 변환 과정                                  반복적(Iterative) 변환과 재귀적(Recursive) 변환을 함께 사용함                  DNS 서버의 종류                                          Recursive DNS Server : 조건이 만족될 때까지 반복적으로 처리                      Authoritative DNS Server (권한서버)                                                  Root Server, .Com NS, google NS 등 특정 도메인 영역 (Zone) 과 권한을 가지고 있는 서버                                                                    Cache : 캐시에 저장된 정보를 제공                      ISP 업체 (KT, SKT … ) 가 제공하는 서버                                                        Recursive Query 순서                                                                                            DNS Cache 검색                                                          자신에게 도메인 정보가 없을 시 DB를 검색하거나 타 서버에 요청해야 하나 시간이 오래 걸림                                                                                      캐시로 저장                                                                  속도는 빠르나 잘못된 정보를 매핑할 수 있음                                                                                            양성 캐싱(positive caching) : 한 번 질의 된 도메인 네임과 해당 IP 주소를 캐시에 유지하여 같은 질의가 올 때 캐시에서 응답해 주는 것                              음성 캐싱(negative caching) : 잘못된 도메인에 관한 요청을 캐싱하여 불필요한 트래픽과 지연을 줄이는 역할                                                                                                                                                                            hosts 파일 검색                                                          host 명 : IP 주소 정보를 담고 있는 파일                              /etc/hosts (리눅스) / hosts.ics (Internet Connection Sharing 기능 - 윈도우)                                                                                      파밍사이트 접속유도를 위해 공격자가 목표로 하는 파일                              변조 위험성이 큼                                                                                                                                                                            DNS 서버 질의                                                          Recursive DNS Server                              Authoritative DNS Server                                                                                                                                                            일반적인 과정                                          재귀적 질의                                                  사용자가 브라우저에 URL 입력 : comps.googleex.edu                                                          Resolver : 사용자 DNS 클라이언트 소프트웨어                                                                                PC 내 Resolver 가 PC 내 Cache 확인                          Resolver 가 로컬네임서버에 (Recursive DNS Server) 재귀적 질의                          로컬네임서버가 Cache 확인                                                                    반복적 질의                                                  로컬네임서버가 루트서버에 질의                          루트서버가 .edu 네임서버 주소를 전달                          로컬네임서버가 .edu 네임서버에 질의                          .edu 네임서버가 .googleex 네임서버 주소를 전달                          로컬네임서버가 .googleex 네임서버에 질의                          .googleex 네임서버가 comps.googleex.edu 네임서버 주소를 전달                          로컬네임서버가 comps.googleex.edu 네임서버에 질의                          comps.googleex.edu IP 주소를 전달                                                                    재귀적 질의                                                  로컬네임서버가 Cache 갱신                          로컬네임서버가 Resolver 에게 IP 전달                          Resolver 가 Cache 갱신                          Resolver 가 사용자에게 IP 주소를 전달                          사용자 브라우저가 IP 주소로 HTTP 요청                                                                                                                                                            ">
+    <meta itemprop="datePublished" content="2021-07-08T23:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">정보보안 - DNS(Domain Name System)
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-07-08T23:00:00+09:00">July 8, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#dns-domain-name-system">DNS (Domain Name System)</a></li>
+  <li><a href="#리눅스-네임서버-설정파일">리눅스 네임서버 설정파일</a></li>
+  <li><a href="#dns-패킷-분석">DNS 패킷 분석</a></li>
+  <li><a href="#dns-관련-명령어">DNS 관련 명령어</a></li>
+  <li><a href="#dns-스푸핑">DNS 스푸핑</a></li>
+  <li><a href="#primarymaster--secondaryslave-네임-서버의-이해">Primary(Master) / Secondary(Slave) 네임 서버의 이해</a></li>
+  <li><a href="#recursive-query의-제한-방법">Recursive Query의 제한 방법</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <h1 id="dns-domain-name-system">DNS (Domain Name System)</h1>
+<ul>
+  <li>개요
+    <ul>
+      <li>DNS 는 프로토콜이라기 보다는 인터넷 네임체계를 규정하는 거대한 시스템
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">www.google.com</code> : 사람은 문자형태로 입력</li>
+          <li><code class="language-plaintext highlighter-rouge">192.168.0.1</code> : 컴퓨터가 알아볼 수 있는 형태</li>
+          <li>DNS : 사람과 컴퓨터가 알아볼 수 있는 형태로 변환해주는 체계</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>과정
+    <ul>
+      <li>User -&gt; DNS    Client PC    WebServer
+        <ul>
+          <li>User : 네임 입력</li>
+        </ul>
+      </li>
+      <li>User    DNS -&gt; Client PC    WebServer
+        <ul>
+          <li>DNS 역할</li>
+          <li>DNS : 네임 요청처리</li>
+          <li>DNS : 주소 변환</li>
+        </ul>
+      </li>
+      <li>User    DNS    Client PC -&gt; WebServer
+        <ul>
+          <li>Client PC : 자원요청</li>
+          <li>WebServer : 요청처리</li>
+        </ul>
+      </li>
+      <li>User    DNS    Client PC &lt;- WebServer
+        <ul>
+          <li>WebServer : 응답생성</li>
+          <li>Client PC : 응답처리</li>
+          <li>User : 자원접근</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>기능
+    <ul>
+      <li>네임 공간 정의 (네임구조)
+        <ul>
+          <li>계층구조 예시 : <code class="language-plaintext highlighter-rouge">www.google.com</code> (계층구조)
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">com</code> : 최상위 도메인 (TLDs) 공간
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">google</code> : 2단계 도메인</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>루트서버 (전 세계 13개정도가 있음)
+            <ul>
+              <li>도메인에 대한 정보를 가지고 있지 않음</li>
+              <li>자신의 권한을 다른 서버들에게 위임, 서버만 참조</li>
+              <li><code class="language-plaintext highlighter-rouge">.com</code> : TLDs
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">.google</code> : 2단계 도메인</li>
+                  <li><code class="language-plaintext highlighter-rouge">.naver</code> : 2단계 도메인
+                    <ul>
+                      <li><code class="language-plaintext highlighter-rouge">blog</code> : 하위도메인</li>
+                      <li><code class="language-plaintext highlighter-rouge">cafe</code> : 하위도메인</li>
+                      <li><code class="language-plaintext highlighter-rouge">mail</code> : 하위도메인</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li><code class="language-plaintext highlighter-rouge">.edu</code> : TLDs
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">.skku</code> : 2단계 도메인</li>
+                </ul>
+              </li>
+              <li><code class="language-plaintext highlighter-rouge">.net</code> : TLDs
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">.daum</code> : 2단계 도메인</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>DNS 서버
+            <ul>
+              <li>도메인을 담당하는 호스트</li>
+              <li>저장되는 데이터
+                <ul>
+                  <li>자원 레코드 (Resource Record, RR)
+                    <ul>
+                      <li><code class="language-plaintext highlighter-rouge">www.google.com = 192.168.xx.xx</code></li>
+                    </ul>
+                  </li>
+                  <li>마스터 파일 (Zone 파일)
+                    <ul>
+                      <li>도메인에 대한 정보를 가지고 있음</li>
+                      <li>RR(복수개) 들을 관리</li>
+                      <li>RR의 추가, 변경, 삭제
+                        <ul>
+                          <li><code class="language-plaintext highlighter-rouge">music.google.com = 192.168.xx.xx</code></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Zone : 도메인을 관리하는 단위 (영역)
+            <ul>
+              <li>DNS 서버(네임서버) 하나가 책임이나 권한을 가지는 영역</li>
+              <li>도메인은 위임을 통해 관리가 가능한 단위로 분할 가능</li>
+            </ul>
+          </li>
+          <li>자원 레코드 (Resource Record, RR)
+            <ul>
+              <li>DNS 서버는 모든 데이터를 RR로 정의해서 저장
+                <ul>
+                  <li>네임 (0~32)
+                    <ul>
+                      <li>도메인 혹은 Zone Name</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td>유형(Type) (0~16)</td>
+                          <td>클래스 (16~32)</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <ul>
+                      <li>유형(Type)
+                        <ul>
+                          <li>
+                            <table>
+                              <tbody>
+                                <tr>
+                                  <td>유형값</td>
+                                  <td>문자코드</td>
+                                  <td>RR유형</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </li>
+                          <li>
+                            <table>
+                              <tbody>
+                                <tr>
+                                  <td>1</td>
+                                  <td>A</td>
+                                  <td>주소 (IPv4)</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </li>
+                          <li>
+                            <table>
+                              <tbody>
+                                <tr>
+                                  <td>28</td>
+                                  <td>AAAA</td>
+                                  <td>주소 (IPv6)</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </li>
+                          <li>
+                            <table>
+                              <tbody>
+                                <tr>
+                                  <td>2</td>
+                                  <td>NS</td>
+                                  <td>네임서버 (이름)</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </li>
+                          <li>
+                            <table>
+                              <tbody>
+                                <tr>
+                                  <td>5</td>
+                                  <td>CNAME</td>
+                                  <td>정규네임 (Canonical)</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </li>
+                          <li>
+                            <table>
+                              <tbody>
+                                <tr>
+                                  <td>6</td>
+                                  <td>SoA</td>
+                                  <td>권한개시정보 (DNS Zone 정보)</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            <ul>
+                              <li>모든 Zone 은 하나의 SoA 레코드를 가지고 있음</li>
+                            </ul>
+                          </li>
+                          <li>
+                            <table>
+                              <tbody>
+                                <tr>
+                                  <td>12</td>
+                                  <td>PTR</td>
+                                  <td>포인터 (다른 위치를 가리킴, 역방향 변환 이용)</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </li>
+                          <li>
+                            <table>
+                              <tbody>
+                                <tr>
+                                  <td>15</td>
+                                  <td>MX</td>
+                                  <td>메일 교환 (도메인으로 들어오는 이메일 처리를 위한 장비 이름 명시)</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </li>
+                          <li>
+                            <table>
+                              <tbody>
+                                <tr>
+                                  <td>16</td>
+                                  <td>TXT</td>
+                                  <td>문자열</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </li>
+                        </ul>
+                      </li>
+                      <li>클래스
+                        <ul>
+                          <li>
+                            <table>
+                              <tbody>
+                                <tr>
+                                  <td>1</td>
+                                  <td>IN (Internet, 가장많이 사용)</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </li>
+                          <li>
+                            <table>
+                              <tbody>
+                                <tr>
+                                  <td>2</td>
+                                  <td>Unassigned (할당되지 않음)</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </li>
+                          <li>
+                            <table>
+                              <tbody>
+                                <tr>
+                                  <td>3</td>
+                                  <td>CH (Chaos)</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </li>
+                          <li>
+                            <table>
+                              <tbody>
+                                <tr>
+                                  <td>4</td>
+                                  <td>HS (Hesiod)</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>유지시간 (0~32)
+                    <ul>
+                      <li>레코드를 읽은 장비가 캐시에 얼마동안 정보를 유지해야 하는지 명시</li>
+                    </ul>
+                  </li>
+                  <li>데이터 길이 (0~32)
+                    <ul>
+                      <li>자원에 대한 데이터 크기</li>
+                    </ul>
+                  </li>
+                  <li>데이터 (0~32)
+                    <ul>
+                      <li>실제 데이터
+                        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  이름 : www.google.com
+  유형 : 1
+  TTL (Time To Live) :
+  Size :
+  호스트 : 192.168.170.10
+  ...
+</code></pre></div>                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>DNS 서버
+            <ul>
+              <li>Master</li>
+              <li>Slave</li>
+            </ul>
+          </li>
+          <li>DNS 메시지 구조
+            <ul>
+              <li>사용자가 DNS 서버에 질의했을 때 받는 메시지
+                <ul>
+                  <li>Header (12 Bytes)
+                    <ul>
+                      <li>메시지 유형 설명</li>
+                    </ul>
+                  </li>
+                  <li>Question (가변)
+                    <ul>
+                      <li>질의 정보</li>
+                    </ul>
+                  </li>
+                  <li>Answer (가변)
+                    <ul>
+                      <li>질문에 대한 답변 RR</li>
+                    </ul>
+                  </li>
+                  <li>Authority (가변)
+                    <ul>
+                      <li>권한 네임서버를 가리키는 하나 이상의 RR 포함</li>
+                    </ul>
+                  </li>
+                  <li>Additional (가변)
+                    <ul>
+                      <li>질의와 관련된 부가정보를 나타내는 하나 이상의 RR</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>네임 등록
+        <ul>
+          <li>IP 주소 (예:192.168.0.10) 에 웹서버를 구축한 경우
+            <ul>
+              <li>이름 <code class="language-plaintext highlighter-rouge">www.abc.com</code> 으로 접근시키기 위해서 네임 등록</li>
+              <li><code class="language-plaintext highlighter-rouge">abc.com</code> 도메인 공간 안에서는 마음대로 등록 가능
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">cafe.abc.com</code></li>
+                  <li><code class="language-plaintext highlighter-rouge">blog.abc.com</code></li>
+                  <li>…</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>네임 변환
+        <ul>
+          <li>사용자가 <code class="language-plaintext highlighter-rouge">www.abc.com</code> 으로 접근했을 경우
+            <ul>
+              <li>IP 주소 192.168.0.10 으로 변환시켜줌</li>
+            </ul>
+          </li>
+          <li>DNS 네임 변환 과정
+            <ul>
+              <li>DNS =&gt; Client / Server 가 존재
+                <ul>
+                  <li>주소 =&gt; 이름</li>
+                  <li>이름 =&gt; 주소</li>
+                  <li>Resolver (변환기) : 네임서버에 질의를 수행하는 SW / 모듈</li>
+                </ul>
+              </li>
+              <li>반복적 해석 (변환) : Iterative Query
+                <ul>
+                  <li>Authoritative 서버에 질의할 경우</li>
+                  <li>User -&gt; 루트 NS    .Com 담당 NS    google 담당 NS
+                    <ul>
+                      <li>google.com 변환 요청</li>
+                    </ul>
+                  </li>
+                  <li>User &lt;- 루트 NS    .Com 담당 NS    google 담당 NS
+                    <ul>
+                      <li>com 담당 네임서버 주소</li>
+                    </ul>
+                  </li>
+                  <li>User        -&gt;     .Com 담당 NS    google 담당 NS
+                    <ul>
+                      <li>google.com 변환 요청</li>
+                    </ul>
+                  </li>
+                  <li>User        &lt;-     .Com 담당 NS    google 담당 NS
+                    <ul>
+                      <li>google.com 담당 NS 주소</li>
+                    </ul>
+                  </li>
+                  <li>User                     -&gt;         google 담당 NS
+                    <ul>
+                      <li>google.com 변환 요청</li>
+                    </ul>
+                  </li>
+                  <li>User                     &lt;-         google 담당 NS
+                    <ul>
+                      <li>google.com IP 주소</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>재귀적 해석 (변환) : Recursive Query
+                <ul>
+                  <li>Recursive 서버에 질의할 경우</li>
+                  <li>중간 과정의 네임서버들이 모두 재귀적 변환을 허용해야 함
+                    <ul>
+                      <li>실제로는 그렇지 않음.</li>
+                    </ul>
+                  </li>
+                  <li>User -&gt; 루트 NS    .Com 담당 NS    google 담당 NS
+                    <ul>
+                      <li>google.com 변환 요청</li>
+                    </ul>
+                  </li>
+                  <li>User    루트 NS -&gt; .Com 담당 NS    google 담당 NS
+                    <ul>
+                      <li>google.com 변환 요청</li>
+                    </ul>
+                  </li>
+                  <li>User    루트 NS    .Com 담당 NS -&gt; google 담당 NS
+                    <ul>
+                      <li>google.com 변환 요청</li>
+                    </ul>
+                  </li>
+                  <li>User    루트 NS    .Com 담당 NS &lt;- google 담당 NS
+                    <ul>
+                      <li>google.com IP 주소</li>
+                    </ul>
+                  </li>
+                  <li>User    루트 NS &lt;- .Com 담당 NS    google 담당 NS
+                    <ul>
+                      <li>google.com IP 주소</li>
+                    </ul>
+                  </li>
+                  <li>User &lt;- 루트 NS    .Com 담당 NS    google 담당 NS
+                    <ul>
+                      <li>google.com IP 주소</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>일반적인 DNS 네임 변환 과정
+                <ul>
+                  <li>반복적(Iterative) 변환과 재귀적(Recursive) 변환을 함께 사용함</li>
+                  <li>DNS 서버의 종류
+                    <ul>
+                      <li>Recursive DNS Server : 조건이 만족될 때까지 반복적으로 처리</li>
+                      <li>Authoritative DNS Server (권한서버)
+                        <ul>
+                          <li>Root Server, .Com NS, google NS 등 특정 도메인 영역 (Zone) 과 권한을 가지고 있는 서버</li>
+                        </ul>
+                      </li>
+                      <li>Cache : 캐시에 저장된 정보를 제공</li>
+                      <li>ISP 업체 (KT, SKT … ) 가 제공하는 서버</li>
+                    </ul>
+                  </li>
+                  <li>Recursive Query 순서
+                    <ul>
+                      <li>
+                        <ol>
+                          <li>DNS Cache 검색
+                            <ul>
+                              <li>자신에게 도메인 정보가 없을 시 DB를 검색하거나 타 서버에 요청해야 하나 시간이 오래 걸림</li>
+                            </ul>
+                            <ul>
+                              <li>캐시로 저장
+                                <ul>
+                                  <li>속도는 빠르나 잘못된 정보를 매핑할 수 있음</li>
+                                </ul>
+                              </li>
+                              <li>양성 캐싱(positive caching) : 한 번 질의 된 도메인 네임과 해당 IP 주소를 캐시에 유지하여 같은 질의가 올 때 캐시에서 응답해 주는 것</li>
+                              <li>음성 캐싱(negative caching) : 잘못된 도메인에 관한 요청을 캐싱하여 불필요한 트래픽과 지연을 줄이는 역할</li>
+                            </ul>
+                          </li>
+                        </ol>
+                      </li>
+                      <li>
+                        <ol>
+                          <li>hosts 파일 검색
+                            <ul>
+                              <li>host 명 : IP 주소 정보를 담고 있는 파일</li>
+                              <li><code class="language-plaintext highlighter-rouge">/etc/hosts</code> (리눅스) / <code class="language-plaintext highlighter-rouge">hosts.ics</code> (Internet Connection Sharing 기능 - 윈도우)</li>
+                            </ul>
+                            <ul>
+                              <li>파밍사이트 접속유도를 위해 공격자가 목표로 하는 파일</li>
+                              <li>변조 위험성이 큼</li>
+                            </ul>
+                          </li>
+                        </ol>
+                      </li>
+                      <li>
+                        <ol>
+                          <li>DNS 서버 질의
+                            <ul>
+                              <li>Recursive DNS Server</li>
+                              <li>Authoritative DNS Server</li>
+                            </ul>
+                          </li>
+                        </ol>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>일반적인 과정
+                    <ul>
+                      <li>재귀적 질의
+                        <ul>
+                          <li>사용자가 브라우저에 URL 입력 : <code class="language-plaintext highlighter-rouge">comps.googleex.edu</code>
+                            <ul>
+                              <li>Resolver : 사용자 DNS 클라이언트 소프트웨어</li>
+                            </ul>
+                          </li>
+                          <li>PC 내 Resolver 가 PC 내 Cache 확인</li>
+                          <li>Resolver 가 로컬네임서버에 (Recursive DNS Server) 재귀적 질의</li>
+                          <li>로컬네임서버가 Cache 확인</li>
+                        </ul>
+                      </li>
+                      <li>반복적 질의
+                        <ul>
+                          <li>로컬네임서버가 루트서버에 질의</li>
+                          <li>루트서버가 .edu 네임서버 주소를 전달</li>
+                          <li>로컬네임서버가 .edu 네임서버에 질의</li>
+                          <li>.edu 네임서버가 .googleex 네임서버 주소를 전달</li>
+                          <li>로컬네임서버가 .googleex 네임서버에 질의</li>
+                          <li>.googleex 네임서버가 comps.googleex.edu 네임서버 주소를 전달</li>
+                          <li>로컬네임서버가 comps.googleex.edu 네임서버에 질의</li>
+                          <li>comps.googleex.edu IP 주소를 전달</li>
+                        </ul>
+                      </li>
+                      <li>재귀적 질의
+                        <ul>
+                          <li>로컬네임서버가 Cache 갱신</li>
+                          <li>로컬네임서버가 Resolver 에게 IP 전달</li>
+                          <li>Resolver 가 Cache 갱신</li>
+                          <li>Resolver 가 사용자에게 IP 주소를 전달</li>
+                          <li>사용자 브라우저가 IP 주소로 HTTP 요청</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="리눅스-네임서버-설정파일">리눅스 네임서버 설정파일</h1>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">/etc/resolv.conf</code> : 기본 네임 서버 설정정보
+    <ul>
+      <li>resolver : 질의 변환기, 재귀적 질의</li>
+      <li><code class="language-plaintext highlighter-rouge">cat /etc/resolv.conf</code>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      domain localdomain
+      search localdomain
+      nameserver 192.168.172.1 // 기본 네임서버 주소
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">/etc/hosts</code> : 도메인/호스트명과 IP주소 매핑 정보
+    <ul>
+      <li>hosts 파일은 대부분의 운영체제에 존재한다.</li>
+      <li><code class="language-plaintext highlighter-rouge">cat /etc/hosts</code>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      192.168.10.100 www.abc.com
+      ...
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">/etc/host.conf</code> : DNS 질의 순서를 지정
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">cat /etc/host.conf</code>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      order hosts, bind // hosts 파일에 먼저 질의하고, bind(nameserver) 에 질의
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="dns-패킷-분석">DNS 패킷 분석</h1>
+<ul>
+  <li>개요
+    <ul>
+      <li>DNS Message 는 Query 패킷, Response 패킷이 있다.</li>
+      <li>DNS Message 구조는 아래와 같다.
+        <ul>
+          <li>Header
+            <ul>
+              <li>ID : 패킷 식별자 (요청-응답 쌍)</li>
+              <li>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>QR</td>
+                      <td>OPcode</td>
+                      <td>AA</td>
+                      <td>TC</td>
+                      <td>RD</td>
+                      <td>RA</td>
+                      <td>Z</td>
+                      <td>RCODE : Flag</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <ul>
+                  <li>QR (Query/Response)
+                    <ul>
+                      <li>DNS 메세지가 <code class="language-plaintext highlighter-rouge">DNS 질의(0)</code>,<code class="language-plaintext highlighter-rouge">DNS 응답(1)</code> 인지를 구분</li>
+                    </ul>
+                  </li>
+                  <li>Op code (Operation code) : 4 비트
+                    <ul>
+                      <li>0  :  <code class="language-plaintext highlighter-rouge">표준 질의</code> 또는 <code class="language-plaintext highlighter-rouge">표준 질의에 대한 응답</code></li>
+                      <li>1  :  역 질의 (Inverse Query)</li>
+                      <li>2  :  서버의 상태 요구</li>
+                      <li>4  :  통지</li>
+                      <li>5  :  갱신</li>
+                    </ul>
+                  </li>
+                  <li>AA (Authoritative Answer, 책임 플래그)
+                    <ul>
+                      <li>DNS 응답 메세지에 만 사용됨</li>
+                      <li>1  :  네임서버 권한이 인정된 서버일 때</li>
+                    </ul>
+                  </li>
+                  <li>TC (Truncated)
+                    <ul>
+                      <li>512 바이트 초과 여부</li>
+                      <li>1  :  응답메세지가 512 바이트 이상이라서  512로 짤리어짐
+                        <ul>
+                          <li>이 경우에 클라이언트는 TCP 포트를 통해 질의를 재전송하게 됨</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>RD (Recursion Desired, 재귀 요구 플래그)
+                    <ul>
+                      <li>1  :  클라이언트가 재귀 질의를 원함
+                        <ul>
+                          <li>질의메세지에서 지정되며, 응답메세지에서 이를 반복함</li>
+                          <li>재귀질의가 요청되지 않으면, 반복질의로 간주하게됨</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>RA (Recursion Available, 재귀 유효 플래그)
+                    <ul>
+                      <li>네임서버가 재귀 질의가 이용 가능한지를 나타냄</li>
+                    </ul>
+                  </li>
+                  <li>예약 (Reserved) : 통상 000 으로 셋팅</li>
+                  <li>rCode (response code, 응답/오류 코드)
+                    <ul>
+                      <li>0 =&gt; No Error, 1 =&gt; Format Error(질의를 이해할 수 없음), 2 =&gt; ServFail(Server Failure), 3 =&gt; 도메인네임 존재 않음 등</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>QDCOUNT (질의 카운트)
+                <ul>
+                  <li>질의의 수</li>
+                </ul>
+              </li>
+              <li>ANCOUNT (응답 카운트)
+                <ul>
+                  <li>응답 RR(Resource Record)의 수</li>
+                </ul>
+              </li>
+              <li>NSCOUNT (네임서버 카운트)
+                <ul>
+                  <li>책임 RR(Resource Record)의 수</li>
+                </ul>
+              </li>
+              <li>ARCOUNT (추가정보 카운트)
+                <ul>
+                  <li>추가 RR(Resource Reocrd)의 수</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Question</li>
+          <li>Answer</li>
+          <li>Authority</li>
+          <li>Additional</li>
+        </ul>
+      </li>
+      <li>DNS 는 일반적으로 UDP 53번 포트를 사용 (512 Bytes 미만 패킷)</li>
+      <li>DNS 는 TCP 53번 포트로도 사용 가능 (512 Bytes 이상 패킷)
+        <ul>
+          <li>Zone Transfer (Zone 전달)
+            <ul>
+              <li>Master 서버에서 Slave 서버에 Zonefile(Masterfile) 전달
+                <ul>
+                  <li>주기적 전달</li>
+                </ul>
+              </li>
+              <li>신뢰할 수 있는 연결 필요</li>
+            </ul>
+          </li>
+          <li>큰 DNS 쿼리를 보낼 때 이용</li>
+          <li>UDP 패킷으로 질의 (query) 했으나 응답패킷 (Response) 이 512Bytes 를 초과할 경우 Response 가 Truncated 되고 TCP 로 요청하라는 메시지 전송</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="dns-관련-명령어">DNS 관련 명령어</h1>
+<ul>
+  <li>DNS Cache 조회
+    <ul>
+      <li>윈도우
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">ipconfig /displaydns</code> : DNS 캐시 정보 조회
+            <ul>
+              <li>DNS 스푸핑 등 확인</li>
+            </ul>
+          </li>
+          <li><code class="language-plaintext highlighter-rouge">ipconfig /flushdns</code> : DNS 캐시 정보 초기화
+            <ul>
+              <li>결과메시지 : <code class="language-plaintext highlighter-rouge">successfully flushed the DNS Resolver Cache</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>DNS 조회
+    <ul>
+      <li>윈도우
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">nslookup</code> : DNS 진단 유틸리티, 네임서버 검색, 대화형모드
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">nslookup [호스트(도메인 이름/IP주소)] ([네임서버])</code> : 질의형
+                <ul>
+                  <li>정방향조회 (Forward DNS Lookup) : 도메인 -&gt; IP</li>
+                  <li>역방향조회 (Reverse DNS Lookup) : IP -&gt; 도메인</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>리눅스 / 유닉스
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">dig</code> : Domain Information Groper : nslookup 과 기능 유사하나 더 다양한 정보를 획득
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">dig ([@네임서버]) [도메인] ([쿼리유형]) ([쿼리옵션])</code>
+                <ul>
+                  <li>쿼리유형
+                    <ul>
+                      <li><code class="language-plaintext highlighter-rouge">A</code> : 도메인 IP 주소 질의</li>
+                    </ul>
+                  </li>
+                  <li>쿼리옵션
+                    <ul>
+                      <li><code class="language-plaintext highlighter-rouge">+norecurse</code> : Authoritative NS 에 반복적 질의 수행, 정상 응답이 되는지 여부를 체크
+                        <ul>
+                          <li><code class="language-plaintext highlighter-rouge">dig @ns.test.com www.daum.net +norecurse</code></li>
+                        </ul>
+                      </li>
+                      <li><code class="language-plaintext highlighter-rouge">+tcp</code> : 53/tcp 포트를 허용하는지 체크</li>
+                      <li><code class="language-plaintext highlighter-rouge">+trace</code> : 계층 구조의 쿼리 (Root -&gt; .com -&gt; …) 위임의 상태를 추적
+                        <ul>
+                          <li><code class="language-plaintext highlighter-rouge">dig @ns.test.com www.daum.net +trace</code></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><code class="language-plaintext highlighter-rouge">whois</code> : whois 서버를 활용, 도메인 등록정보(소유정보) 확인
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">whois www.test.com</code>
+                <ul>
+                  <li>등록인, 주소, 변경일, IP 주소 (ISP 주소), 네트워크 할당정보 등…</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><code class="language-plaintext highlighter-rouge">host 호스트 [서버]</code> : nslookup 과 유사</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="dns-스푸핑">DNS 스푸핑</h1>
+<ul>
+  <li>개요
+    <ul>
+      <li>공격대상자에게 전달되는 DNS 응답을 위조</li>
+      <li>DNS서버에 위조된 IP 주소를 지정</li>
+      <li>피해자가 의도하지 않은 주소로 접속하게 하는 공격 기법</li>
+      <li>DNS 프로토콜은 Query/Response 를 UDP 프로토콜을 사용하여 주고받음
+        <ul>
+          <li>UDP : 비연결성에서 생기는 취약점 이용
+            <ul>
+              <li>Transaction ID 값이 일치하면 응답을 신뢰하게 됨</li>
+              <li>나중에 도착한 값은 폐기됨</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>방식
+    <ul>
+      <li>스니핑을 이용한 스푸핑 공격
+        <ul>
+          <li>희생자에게 전달되는 DNS 응답 위조</li>
+        </ul>
+      </li>
+      <li>DNS 캐시 포이즈닝
+        <ul>
+          <li>DNS 서버의 캐시정보 조작</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>DNS 스푸핑 과정
+    <ul>
+      <li>Client -&gt; (Attacker) -&gt; Name Server : Attacker 는 중간에서 Snipping
+        <ul>
+          <li>Transaction ID : 1000</li>
+          <li>Src Port : 4500</li>
+          <li>Q : www.test.com</li>
+          <li>A :</li>
+        </ul>
+      </li>
+      <li>Client &lt;-  Attacker     Name Server : Attacker 가 Spoofing 응답값 전달
+        <ul>
+          <li>먼저 수신된 DNS 응답을 신뢰</li>
+          <li>Transaction ID : 1000</li>
+          <li>Dst Port : 4500</li>
+          <li>Q : www.test.com</li>
+          <li>A : 위조된 IP</li>
+        </ul>
+      </li>
+      <li>Client &lt;- (Attacker) &lt;- Name Server : 정상응답은 폐기됨
+        <ul>
+          <li>Transaction ID : 1000</li>
+          <li>Dst Port : 4500</li>
+          <li>Q : www.test.com</li>
+          <li>A : xxx.xxx.xxx.xxx</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>DNS 스푸핑 대응책
+    <ul>
+      <li>스니핑을 탐지, 차단</li>
+      <li>DNS 서버 질의 전 우선순위가 높은 hosts 에 중요한 IP 주소를 등록관리</li>
+    </ul>
+  </li>
+  <li>DNS 캐시 포이즈닝 과정
+    <ul>
+      <li>Attacker -&gt; Recursive Server
+        <ul>
+          <li>여러 개의 질의를 한꺼번에 보냄
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">www.test.com</code> 질의</li>
+              <li>Recursive Server 는 Authoritative 서버에 여러 번 질의 (반복적 질의에 시간 소요됨)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Attacker -&gt; Recursive Server
+        <ul>
+          <li>여러 개의 응답을 한꺼번에 보냄
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">www.test.com</code> 응답
+                <ul>
+                  <li>Transaction ID 무작위 입력</li>
+                  <li>Dst Port 무작위 입력</li>
+                  <li>IP 주소 조작</li>
+                </ul>
+              </li>
+              <li>Recursive Server 가 Authoritative 서버에 응답을 받기 전에 Transaction ID 와 Dst Port 가 일치하는 응답값을 전송
+                <ul>
+                  <li>뒤에 도착하는 실제 응답은 폐기됨</li>
+                </ul>
+              </li>
+              <li>TTL 지속 시간동안 조작된 IP 로 응답하게 됨</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="primarymaster--secondaryslave-네임-서버의-이해">Primary(Master) / Secondary(Slave) 네임 서버의 이해</h1>
+<ul>
+  <li>주서버(Master) : 1차 네임서버
+    <ul>
+      <li>원본 존 데이터를 관리하는 서버</li>
+    </ul>
+  </li>
+  <li>보조서버(Slave) : 2차 네임서버
+    <ul>
+      <li>마스터서버에 있는 존 데이터를 복사하여 가지고 있음</li>
+      <li>Master 와 동일한 기능을 함
+        <ul>
+          <li>부하 분산을 통해 안정성을 높임</li>
+          <li>마스터 장애시 대신 역할을 수행</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>구조
+    <ul>
+      <li>Master NS &lt;-&gt; Slave NS
+        <ul>
+          <li>Zone transfer : TCP 53
+            <ul>
+              <li>Master 서버와 Slave 서버 간 ZoneData 동기화
+                <ul>
+                  <li>Zone File(MasterFile)</li>
+                  <li>Reverse Zone File</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="recursive-query의-제한-방법">Recursive Query의 제한 방법</h1>
+<ul>
+  <li>필요성
+    <ul>
+      <li>대량의 재귀적 질의 요청이 발생하면 DoS 형태의 공격으로 악용될 수 있음</li>
+      <li>DNS Cache Poisoning 공격</li>
+      <li>사내 DNS 서버의 경우 재귀적 질의 접근제어 설정이 필요
+        <ul>
+          <li>설정파일 : <code class="language-plaintext highlighter-rouge">/etc/named.conf</code></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">/etc/named.conf</code>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      acl "mynetwork" { 192.168.0.0/24;};
+      options {
+          listen-on port 53 {127.0.0.1; 192.168.0.254;};
+          directory "/var/named";
+          allow-query {mynetwork;};
+          allow-recursion {none;}; // 재귀적 질의 제한 설정
+          allow-recursion {127.0.0.1; 192.168.170.10/30;}; // 재귀적 질의 제한 설정
+          recursion no; // // 재귀적 질의 제한 설정
+          // allow-transfer {any;}; // 존전송 제한 설정
+          allow-transfer {none;}; // 존전송 제한 설정
+          //forwarders {0.0.0.0;};
+      };
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#%EC%96%B4%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98" class="page__taxonomy-item" rel="tag">어플리케이션</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88%EA%B8%B0%EC%82%AC" class="page__taxonomy-item" rel="tag">정보보안기사</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#is-certification" class="page__taxonomy-item" rel="tag">IS_Certification</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2021-07-08T23:00:00+09:00">July 8, 2021</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+DNS%28Domain+Name+System%29%20https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Application-DNS%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Application-DNS%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Application-DNS%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/is_certification/IS-Application-DHCP/" class="pagination--pager" title="정보보안 - DHCP(Dynamic Host Configuration Protocol)
+">이전</a>
+    
+    
+      <a href="/is_certification/IS-Application-SNMP/" class="pagination--pager" title="정보보안 - SNMP(Simple Network Management Protocol)
+">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Management-AsymmetricKeyAlgorithm/" rel="permalink">정보보안 - 비대칭키 암호
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-08-25T09:00:00+09:00">August 25, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">비대칭키 암호
+
+  키 배송 문제
+    
+      개요
+        
+          대칭키 암호를 사용하려면 키 배송 문제(key distribution problem) 발생
+            
+              암호화 키와 복호화 키가 동일
+          ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Management-SymmetricKeyAlgorithm/" rel="permalink">정보보안 - 대칭키 암호
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-07-26T09:00:00+09:00">July 26, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">대칭키 암호의 종류
+
+  DES (Data Encryption Standard)
+    
+      개요
+        
+          NIST(미국 국립기술표준원) 에서 1973년 국가적으로 사용할 대칭키 암호시스템 제안요청서를 발표
+          IBM의 제안으로 DES...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Management-Cryptography/" rel="permalink">정보보안 - 블록 암호 / 스트림 암호
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-07-19T09:00:00+09:00">July 19, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">대칭키 암호
+
+  대칭키 암호 = 공통키 암호
+  비대칭키 암호 = 공개키 암호
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Management-Outline/" rel="permalink">정보보안 - 정보보호관리
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-07-13T09:00:00+09:00">July 13, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">정보보호 개요
+
+  정보화 사회
+    
+      정보화 사회 : 단일 생활권
+        
+          사회 모습 변화
+          전자 메일, 인터넷으로 정보 교환, 재택근무, 홈뱅킹
+          미래 사이버 전쟁
+        
+      
+      정보...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+<!--
+<script>
+	(function(d, h, m){
+    var js, fjs = d.getElementsByTagName(h)[0];
+    if (d.getElementById(m)){return;}
+    js = d.createElement(h); js.id = m;
+    js.onload = function(){
+        window.makerWidgetComInit({
+        position: "left",          
+        widget: "eqypoqmawbcz3azh-usiy9q7ma4ong1w1-juelcm3zfgcuwjds"                
+    })};
+    js.src = "https://makerwidget.com/js/embed.js";
+    fjs.parentNode.insertBefore(js, fjs)
+	}(document, "script", "dhm"))
+</script>
+-->
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:hyunik03@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 HY03. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://bluesplatter.com/is_certification/IS-Application-DNS/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/is_certification/IS-Application-DNS"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://bluesplatter.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

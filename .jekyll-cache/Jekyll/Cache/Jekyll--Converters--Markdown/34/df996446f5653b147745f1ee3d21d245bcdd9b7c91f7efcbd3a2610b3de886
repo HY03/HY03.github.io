@@ -1,0 +1,69 @@
+I"<h1 id="csrf-cross-site-request-forgery">CSRF (Cross Site Request Forgery)</h1>
+<ul>
+  <li>개요
+    <ul>
+      <li>사용자의 브라우저에서 해당 사용자의 권한으로 어떤 기능을 수행하도록 만드는것</li>
+      <li>XSS의 취약점이 존재할 시 CSRF의 취약점이 존재할 수 있는 확률이 90% 이상임</li>
+      <li>공격자가 의도한대로 수정, 삭제, 등록하도록 하는 방법</li>
+      <li>XSS 는 사용자의 PC에서 공격이 이루어지나 CSRF는 정상적인 사용자가 서버에 공격자가 의도한 요청을 하도록 만드는 것</li>
+    </ul>
+  </li>
+  <li>과정
+    <ul>
+      <li>공격자가 웹서버 (CSRF 취약점 존재 - 정상/비정상 요청을 구분하지 못함) 에 조작된 요청 (비밀번호 수정 등) 을 담은 게시물을 등록</li>
+      <li>웹서버는 게시물을 등록</li>
+      <li>희생자는 조작된 게시물을 열람</li>
+      <li>웹서버는 희생자의 권한으로 조작된 요청 (비밀번호 수정 등) 을 처리
+        <ul>
+          <li>희생자의 비밀번호가 공격자가 입력한 비밀번호로 수정됨</li>
+        </ul>
+      </li>
+      <li>웹서버가 희생자에게 응답메시지(페이지) 전송</li>
+      <li>(사용자가 로그인한 상태에서 접속가능한 웹페이지나 동작가능한 스크립트를 공격대상으로 함 - modify.asp, modify.php … )</li>
+      <li>(IMG, EMBED 태그, javascript 등이 공격대상이 됨)</li>
+    </ul>
+  </li>
+  <li>CSRF 의 공격 예
+    <ul>
+      <li>자동으로 게시판 글 추가/삭제</li>
+      <li>자동으로 댓글 달기</li>
+      <li>자동으로 친구 등록</li>
+      <li>강제로 회원 탈퇴</li>
+      <li>자동으로 게시판 조회수 조작</li>
+      <li>자동으로 회원정보 변경</li>
+      <li>강제 Browsing 을 유도하는 공격
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">&lt;iframe width=0 height=0 src=http://광고페이지&gt;</code></li>
+          <li><code class="language-plaintext highlighter-rouge">&lt;img src=http://광고페이지&gt;</code></li>
+        </ul>
+      </li>
+      <li>인증된 사용자 공격
+        <ul>
+          <li>희생자의 계좌에서 공격자의 계좌로 입금</li>
+          <li>ID/PW 필요없이 가능한 공격
+            <ul>
+              <li>대다수의 사이트는 한번 로그인을 하면 세션쿠키로 인증관리를 한다.</li>
+              <li>XSS : 세션쿠키를 가로채서 공격자가 정상적인 사용자로 위장가능</li>
+              <li>CSRF : 세션쿠키를 가로챌 필요 없이 CSRF 요청페이지를 수행하기만 하면 됨</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>대응책
+    <ul>
+      <li>정상적인 요청과 비정상적인 요청을 판별할 수 있게 함 (토큰 사용)
+        <ul>
+          <li>예측이 어려운 토큰을 사용</li>
+          <li>사용자가 요청한 내용이 위조되었는지 여부를 판별하기 위함</li>
+          <li>세션정보의 토큰 값과 요청내용 내 토큰 값이 같은지 비교</li>
+        </ul>
+      </li>
+      <li>XSS, CSRF 의 취약점 제거</li>
+      <li>입력화면 폼 작성시 GET 보다 POST 사용</li>
+    </ul>
+  </li>
+</ul>
+
+:ET

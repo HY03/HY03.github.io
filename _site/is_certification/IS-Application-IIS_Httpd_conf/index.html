@@ -1,0 +1,900 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.20.2 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>정보보안 - HTTP | Bluesplatter</title>
+<meta name="description" content="Web 보안">
+
+
+  <meta name="author" content="HY03">
+  
+  <meta property="article:author" content="HY03">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Bluesplatter">
+<meta property="og:title" content="정보보안 - HTTP">
+<meta property="og:url" content="https://bluesplatter.com/is_certification/IS-Application-IIS_Httpd_conf/">
+
+
+  <meta property="og:description" content="Web 보안">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2021-06-25T18:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://bluesplatter.com/is_certification/IS-Application-IIS_Httpd_conf/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "HY03",
+      "url": "https://bluesplatter.com/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Bluesplatter Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo/logo.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          세상에 남기는 작은 흔적
+          <span class="site-subtitle">Bluesplatter</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/">연도별 포스트</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="https://bluesplatter.com/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#is_certification" itemprop="item"><span itemprop="name">Is_certification</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">정보보안 - HTTP</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/profile/photo.jpg" alt="HY03" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">HY03</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>저는 전문가가 아니고 이것 저것 알아보는 비전문가 입니다. <br /> 틀린 내용이 기술되어도 너그러이 봐주시고 댓글을 남겨주셨으면 좋겠습니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="http://bluesplatter.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:hyunik03@gmail.com">
+            <meta itemprop="email" content="hyunik03@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">이메일</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="정보보안 - HTTP">
+    <meta itemprop="description" content="Web 보안">
+    <meta itemprop="datePublished" content="2021-06-25T18:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">정보보안 - HTTP
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-06-25T18:00:00+09:00">June 25, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#web-보안">Web 보안</a>
+    <ul>
+      <li><a href="#https">HTTPS</a></li>
+      <li><a href="#s-http">S-HTTP</a></li>
+      <li><a href="#iis">IIS</a></li>
+      <li><a href="#httpdconf-apache-보안-설정-파일">httpd.conf (Apache 보안 설정 파일)</a></li>
+    </ul>
+  </li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <h1 id="web-보안">Web 보안</h1>
+
+<h2 id="https">HTTPS</h2>
+<ul>
+  <li>개요
+    <ul>
+      <li>SSL을 이용한 HTTP (<code class="language-plaintext highlighter-rouge">https://...</code>)</li>
+      <li>http 는 80 포트, https 는 443 포트</li>
+      <li>기밀성, 클라이언트와 서버간 인증, 무결성 기능 제공</li>
+      <li>암호화
+        <ul>
+          <li>요청문서 URL</li>
+          <li>문서내용</li>
+          <li>브라우저 입력 양식 내용</li>
+          <li>쿠키</li>
+          <li>HTTP 헤더 내용</li>
+        </ul>
+      </li>
+      <li>스니핑이 어렵지만, 사용자 입력 값에 대한 검증이 어렵다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="s-http">S-HTTP</h2>
+<ul>
+  <li>개요
+    <ul>
+      <li>Secure-HTTP : EIT 에 의해 1994년 정의된 프로토콜</li>
+      <li>SSL과 다르게 HTTP 메시지가 암호화되어 TCP/IP 망을 통해 전송 (<code class="language-plaintext highlighter-rouge">shttp://</code>)</li>
+      <li>HTTP 메시지 캡슐화 (암호화), 헤더 추가 (메시지형식, 부호화 방식)</li>
+    </ul>
+  </li>
+  <li>과정
+    <ul>
+      <li>웹 클라이언트에서 HTTP 메시지를 암호화하여 SHTTP 메시지로 변환</li>
+      <li>웹 클라이언트에서 서버로 전송</li>
+      <li>웹 서버에서 SHTTP 메시지를 복호화 하여 HTTP 메시지로 변환</li>
+    </ul>
+  </li>
+  <li>특징
+    <ul>
+      <li>HTTP 트랜잭션의 특징 (요청-응답) 을 유지</li>
+      <li>협상을 통해 암호화 방식 등을 결정 가능</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="iis">IIS</h2>
+<ul>
+  <li>자원 권한설정 (파일, 폴더)
+    <ul>
+      <li>읽기, 쓰기, 실행 기능 부여 / 회수
+        <ul>
+          <li>예 : Upload 폴더에 실행권한을 부여 -&gt; Webshell 실행 위험</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>관리자 페이지 접근통제
+    <ul>
+      <li>무작위 공격 (Brute Force) 에 노출될 수 있음</li>
+      <li>관리자 권한 획득 관련 취약점 노출될 가능성이 있음</li>
+      <li>관리자 페이지 접근 IP 설정 필요</li>
+    </ul>
+  </li>
+  <li>메소드 제한 (GET, POST) 설정
+    <ul>
+      <li>DELETE, HEAD, PUT 등등의 메소드는 제한하는 것이 좋음</li>
+      <li>확장 매핑 메뉴 -&gt; 제한 입력창에 기록</li>
+    </ul>
+  </li>
+  <li>헤더정보 숨김
+    <ul>
+      <li>서버의 헤더정보를 이용해 취약점 공격이 가능</li>
+      <li>어드민 등록정보에 http 헤더를 입력하여 설정</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="httpdconf-apache-보안-설정-파일">httpd.conf (Apache 보안 설정 파일)</h2>
+<ul>
+  <li>자원 권한설정 (파일, 폴더)</li>
+  <li>관리자 페이지 접근통제
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">&lt;Directory "/var/www/html/admin"&gt;</code></li>
+    </ul>
+  </li>
+  <li>메소드 제한 (GET, POST) 설정
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">&lt;LimitExcept GET POST&gt;</code>
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">order allow, deny</code></li>
+          <li><code class="language-plaintext highlighter-rouge">Deny from all</code></li>
+        </ul>
+      </li>
+      <li><code class="language-plaintext highlighter-rouge">&lt;/LimitExcept&gt;</code></li>
+    </ul>
+  </li>
+  <li>헤더정보 숨김</li>
+  <li>옵션 설명
+    <ul>
+      <li>ServerType : (standalone, inetd)
+        <ul>
+          <li>standalone : 사용자 요청을 웹데몬이 받음</li>
+          <li>inetd, xinetd : 사용자 요청을 수퍼데몬이 받음</li>
+        </ul>
+      </li>
+      <li>User nobody, Group nobody
+        <ul>
+          <li>User, Group 설정 지시자는 홈페이지 서비스를 직접 담당하는 Apache 의 자식 프로세스들의 실행소유자, 소유그룹을 어떤 게정에 부여할 것인지를 결정</li>
+          <li>보안을 위해 nobody 로 설정</li>
+        </ul>
+      </li>
+      <li>Options : 지정한 디렉토리 이하에 모든 파일, 디렉토리에 적용할 접근제어 설정
+        <ul>
+          <li>디렉토리 목록을 보여줄지, CGI를 허용할 것인지 등등의 것들을 설정</li>
+          <li><code class="language-plaintext highlighter-rouge">-index</code> : 디렉토리 목록을 보여주지 않음</li>
+          <li><code class="language-plaintext highlighter-rouge">-FollowSymlinks</code> : 심볼릭링크를 허용하지 않음 : 링크파일의 경로까지 확인할 가능성이 있음</li>
+        </ul>
+      </li>
+      <li>ServerSignature : (On, Off)
+        <ul>
+          <li>서버 배너 정보의 노출 여부</li>
+          <li>Off 로 설정하여 서버 정보를 숨김</li>
+        </ul>
+      </li>
+      <li>ServerTokens : (Prod, Min, OS, Full)
+        <ul>
+          <li>서버 정보표시 제한</li>
+          <li>Prod : ProductOnly -&gt; 웹서버의 종류만을 표시</li>
+          <li>Min : Minimal -&gt; 웹서버 종류와 버전정보 표시</li>
+          <li>OS : 웹서버 종류, 버전, OS 정보 표시</li>
+          <li>Full : 웹서버 종류, 버전, OS 정보, 설치 모듈 표시</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#%EC%96%B4%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98" class="page__taxonomy-item" rel="tag">어플리케이션</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88%EA%B8%B0%EC%82%AC" class="page__taxonomy-item" rel="tag">정보보안기사</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#is-certification" class="page__taxonomy-item" rel="tag">IS_Certification</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2021-06-25T18:00:00+09:00">June 25, 2021</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+HTTP%20https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Application-IIS_Httpd_conf%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Application-IIS_Httpd_conf%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Application-IIS_Httpd_conf%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/is_certification/IS-Application-SSL_TLS/" class="pagination--pager" title="정보보안 - HTTP
+">이전</a>
+    
+    
+      <a href="/is_certification/IS-Application-OWASP10/" class="pagination--pager" title="정보보안 - OWASP10 (2019)
+">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Management-AsymmetricKeyAlgorithm/" rel="permalink">정보보안 - 비대칭키 암호
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-08-25T09:00:00+09:00">August 25, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">비대칭키 암호
+
+  키 배송 문제
+    
+      개요
+        
+          대칭키 암호를 사용하려면 키 배송 문제(key distribution problem) 발생
+            
+              암호화 키와 복호화 키가 동일
+          ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Management-SymmetricKeyAlgorithm/" rel="permalink">정보보안 - 대칭키 암호
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-07-26T09:00:00+09:00">July 26, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">대칭키 암호의 종류
+
+  DES (Data Encryption Standard)
+    
+      개요
+        
+          NIST(미국 국립기술표준원) 에서 1973년 국가적으로 사용할 대칭키 암호시스템 제안요청서를 발표
+          IBM의 제안으로 DES...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Management-Cryptography/" rel="permalink">정보보안 - 블록 암호 / 스트림 암호
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-07-19T09:00:00+09:00">July 19, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">대칭키 암호
+
+  대칭키 암호 = 공통키 암호
+  비대칭키 암호 = 공개키 암호
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Management-Outline/" rel="permalink">정보보안 - 정보보호관리
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-07-13T09:00:00+09:00">July 13, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">정보보호 개요
+
+  정보화 사회
+    
+      정보화 사회 : 단일 생활권
+        
+          사회 모습 변화
+          전자 메일, 인터넷으로 정보 교환, 재택근무, 홈뱅킹
+          미래 사이버 전쟁
+        
+      
+      정보...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+<!--
+<script>
+	(function(d, h, m){
+    var js, fjs = d.getElementsByTagName(h)[0];
+    if (d.getElementById(m)){return;}
+    js = d.createElement(h); js.id = m;
+    js.onload = function(){
+        window.makerWidgetComInit({
+        position: "left",          
+        widget: "eqypoqmawbcz3azh-usiy9q7ma4ong1w1-juelcm3zfgcuwjds"                
+    })};
+    js.src = "https://makerwidget.com/js/embed.js";
+    fjs.parentNode.insertBefore(js, fjs)
+	}(document, "script", "dhm"))
+</script>
+-->
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:hyunik03@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 HY03. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://bluesplatter.com/is_certification/IS-Application-IIS_Httpd_conf/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/is_certification/IS-Application-IIS_Httpd_conf"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://bluesplatter.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>
