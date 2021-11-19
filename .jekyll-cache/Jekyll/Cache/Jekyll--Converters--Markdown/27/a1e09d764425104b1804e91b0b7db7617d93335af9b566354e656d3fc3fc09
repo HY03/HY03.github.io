@@ -1,4 +1,4 @@
-I"$#<h1 id="비대칭키-암호">비대칭키 암호</h1>
+I"*=<h1 id="비대칭키-암호">비대칭키 암호</h1>
 <ul>
   <li>키 배송 문제
     <ul>
@@ -125,7 +125,7 @@
       <li>개요
         <ul>
           <li>대칭키 암호는 평문을 복잡한 형태로 변환해서 기밀성을 유지</li>
-          <li>공개키 암호는 수학적으로 해결하기 곤란한 문제를 토대로 해서 기밀성을 유지</li>
+          <li>공개키 암호는 수학적으로 해결하기 곤란한 문제 (소인수분해, 이산대수…) 를 토대로 해서 기밀성을 유지</li>
           <li>전자문서의 무결성, 전자서명(부인방지) 구현에 활용</li>
           <li>다양한 암호 프로토콜에 사용</li>
           <li>공개키 암호에서는 암호화키와 복호화키가 분리되어 있음.</li>
@@ -143,7 +143,12 @@
             <ul>
               <li>ElGamal</li>
               <li>DSA (DSS)</li>
-              <li>ECC</li>
+              <li>ECC (타원곡선)
+                <ul>
+                  <li>ECDSA</li>
+                  <li>KCDSA</li>
+                </ul>
+              </li>
             </ul>
           </li>
         </ul>
@@ -180,16 +185,159 @@
             <ul>
               <li>RSA는 e와 d 두 지수를 사용
                 <ul>
-                  <li>e : 공개하는 값</li>
-                  <li>d : 비밀로 유지하는 값</li>
-                  <li>P : 평문</li>
-                  <li>C : 암호문</li>
+                  <li>A (송신자) : C = P^e mod n</li>
+                  <li>B (수신자) : P = C^d mod n
+                    <ul>
+                      <li>e : 공개하는 값</li>
+                      <li>d : 비밀로 유지하는 값</li>
+                      <li>P : 평문</li>
+                      <li>C : 암호문</li>
+                      <li>n : 매우 큰 수</li>
+                    </ul>
+                  </li>
                 </ul>
               </li>
-              <li></li>
+            </ul>
+          </li>
+          <li>RSA 에 대한 공격
+            <ul>
+              <li>소인수분해 공격
+                <ul>
+                  <li>RSA 는 모듈러 값이 매우 커서 이 값을 적절한 시간 내에 소인수분해 하는 것이 불가능</li>
+                  <li>B (수신자) 은 p와 q 를 선택하고 n = p * q 를 계산
+                    <ul>
+                      <li>n은 공개되지만 p와 q 는 비밀임</li>
+                      <li>Eve가 n을 소인수분해하여 p와 q를 구할 수 있다면 Pi(N) 을 구할 수 있음</li>
+                    </ul>
+                  </li>
+                  <li>소인수분해 알고리즘 (Factoring Attack) 이 개발되지 않는다면 RSA는 안전하다고 할 수 있음</li>
+                </ul>
+              </li>
+              <li>중간자 공격
+                <ul>
+                  <li>중간자 공격은 기밀성에 매우 유효한 공격 방법</li>
+                  <li>적극적 공격자 멜로리가 송신자와 수신자 사이에 들어가서 송신자에 대해서는 수신자처럼, 수신자에 대해서는 송신자처럼 행세하는 공격</li>
+                  <li>중간자 공격을 막기 위해서는 입수한 공개키가 밥의 것이라는 것을 확인할 수단인 인증이 필요하다.</li>
+                </ul>
+              </li>
             </ul>
           </li>
         </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Rabin 암호시스템
+    <ul>
+      <li>개요
+        <ul>
+          <li>M.Rabin 이 고안, RSA 암호시스템의 변형</li>
+          <li>RSA는 지수 합동, Rabin은 2차 합동에 근거</li>
+        </ul>
+      </li>
+      <li>암호화와 복호화
+        <ul>
+          <li>Rabin 암호시스템에서 암호화는 매우 간단, 한 번의 곱셈으로 이루어짐</li>
+          <li>성능이 낮은 플랫폼에서 잘 활용됨 (스마트 카드 등)</li>
+        </ul>
+      </li>
+      <li>Rabin 시스템의 보안
+        <ul>
+          <li>p와 q 가 충분히 크기만 하면 안전 (mod N을 구하는 것이 어려움)</li>
+          <li>RSA 만큼 안전</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>ElGamal 방식
+    <ul>
+      <li>개요
+        <ul>
+          <li>Taher ElGamal 이 발명</li>
+          <li>이산대수 문제에 근거해서 만든 시스템 (오픈 소스를 기초, 키 분배 방식 및 공개키 암호 방식 실현)</li>
+          <li>디지털 서명, 암호화, 키교환</li>
+          <li>Diffie-Hellman 암호화 기능의 확장, 속도가 느림</li>
+        </ul>
+      </li>
+      <li>암호화와 복호화
+        <ul>
+          <li>Bob의 공개키를 이용해 누구든 Bob에게 메시지를 보낼 수 있음</li>
+          <li>고속 지수 알고리즘을 사용하면 다항식 정도의 복잡도를 가지는 시간 내에 수행 가능</li>
+          <li>암호화에서는 암호문의 길이가 평문의 2배가 되어 버린다는 결점</li>
+        </ul>
+      </li>
+      <li>응용
+        <ul>
+          <li>RSA 를 활용할 수 있는 곳에는 어디에서나 사용 가능</li>
+          <li>키 교환, 인증, 짧은 메시지의 암호화와 복호화에 사용</li>
+          <li>암호 소프트웨어 GnuPG에 구현되어 있음</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>타원곡선 암호 (ECC, elliptic curve cryptosystem)
+    <ul>
+      <li>등장배경
+        <ul>
+          <li>RSA 와 ElGamal 이 안전한 비대칭키 암호시스템이기는 하지만 보안을 위해서 키의 길이가 매우 커야한다는 단점이 있음</li>
+          <li>따라서 키의 길이가 짧아도 되는 암호시스템을 연구 -&gt; ECC</li>
+          <li>타원곡선 이론에 근거</li>
+        </ul>
+      </li>
+      <li>특징
+        <ul>
+          <li>유한체 위에서 정의된 타원곡선 군에서의 이산대수 문제에 기초한 공개키 알고리즘</li>
+          <li>RSA 암호방식에 이어 전자상거래의 핵심 기술로 주목</li>
+          <li>1985년 코블리치(N.Koblitz) 와 밀러(V.S.Miller)가 RSA 암호방식의 대안으로 처음 제안</li>
+          <li>RSA보다 키의 비트 수를 적게 하면서도 동일한 성능을 제공하는 것이 특징
+            <ul>
+              <li>160비트 ECC는 1024비트 RSA 키와 동일한 보안수준</li>
+            </ul>
+          </li>
+          <li>다양한 암호방식 설계가 용이
+            <ul>
+              <li>H/W 와 S/W 로 구현하기 용이</li>
+              <li>스마트카드나 무선통신단말기 등과 같이 메모리 처리능력이 제한된 응용 분야에 특히 효율적</li>
+              <li>전자상거래의 핵심</li>
+            </ul>
+          </li>
+          <li>ECC 는 RSA 보다 상대적으로 지명도가 부족, 배경이론이 복잡하며 해당 분야의 전문가가 적다는 단점이 있음</li>
+          <li>빠른 속도로 구현이 가능</li>
+        </ul>
+      </li>
+      <li>
+        <p>ECC 와 RSA 방식 비교</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th style="text-align: left">항목</th>
+              <th style="text-align: left">ECC 방식</th>
+              <th style="text-align: left">RSA 방식</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="text-align: left">기반구조</td>
+              <td style="text-align: left">WPKI(무선)</td>
+              <td style="text-align: left">PKI(유선)</td>
+            </tr>
+            <tr>
+              <td style="text-align: left">속도</td>
+              <td style="text-align: left">우수</td>
+              <td style="text-align: left">느림</td>
+            </tr>
+            <tr>
+              <td style="text-align: left">키 크기</td>
+              <td style="text-align: left">상대적으로 작은 키</td>
+              <td style="text-align: left">ECC에 비해 큰 키</td>
+            </tr>
+            <tr>
+              <td style="text-align: left">적용</td>
+              <td style="text-align: left">소형 Mobile환경</td>
+              <td style="text-align: left">인프라가 다소 구현된 환경</td>
+            </tr>
+          </tbody>
+        </table>
       </li>
     </ul>
   </li>
