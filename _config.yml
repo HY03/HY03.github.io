@@ -285,7 +285,9 @@ defaults:
       comments: true
       share: true
       related: true
-      toc: true
+      #toc: false
+      classes: wide
+
 
   # _pages
   - scope:

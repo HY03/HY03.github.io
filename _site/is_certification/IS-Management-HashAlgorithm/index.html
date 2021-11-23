@@ -1,0 +1,1255 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.20.2 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>정보보안 - 해시함수 | Bluesplatter</title>
+<meta name="description" content="해시함수    해시함수            일방향 해시함수                    일방향 해시함수의 개요                            기본개념                                    일방향 해시함수(one-way hash function) 에는 입력과 출력이 각각 1개씩 있음                   입력은 메시지(message) - 임의의 길이, 출력은 해시값(hash value) - 고정된 길이                                                                   일방향 해시함수의 성질                            임의 길이의 메시지로부터 고정 길이의 해시값을 계산               해시값을 고속으로 계산               일방향성을 가짐. (해시값으로부터 메시지를 역산할 수 없음)               메시지가 다르면 해시값도 다름. (무결성 확인용)                                    메시지가 1비트라도 변하면 해시값은 매우 높은 확률로 다른 값이 되야 함.                   2개의 다른 메시지가 같은 해시값을 갖는 것을 충돌(collision) 이라고 함.                                               충돌이 발생하는 것이 어려운 성질 =&gt; 충돌 내성 (collision resistance)               해시 함수 = 메시지 다이제스트 함수 = 메시지 요약함수               무결성 = 완전성 = 보전성                                               메시지 무결성                    무결성 점검                            무결성 점검을 위해 암호학적 해시함수 사용               생성된 메시지 다이제스트와 이전 메시지 다이제스트를 비교               두 개가 동일하면 원래 메시지가 변경되지 않음                                   암호학적 해시함수 기준                            개요 (암호학적 해시함수는 다음을 충족해야 함)                                    프리이미지 저항성 (preimage resistance) : 역상 저항성                                            해시함수 h 와 y=h(M) 에 대하여 Eve 가 이를 만족하는 M 값을 찾아내는게 힘들어야 함                       y = h(x) 를 만족하는 x 를 찾는 것이 불가능해야 함.                                                           제2프리이미지 저항성 (second preimage resistance) : 두 번째 역상 저항성, 약한 충돌 내성                                            메시지를 쉽게 위조할 수 없도록 하는 성질                       Eve가 메시지와 다이제스트를 가로채고 또 다른 다이제스트를 생성                       입력값 x에 대해서 h(x) = h(x’), x != x’ 을 만족하는 x’ 을 찾는 것이 불가능해야 함.                                                           충돌 저항성 (collision resistance) : 강한 충돌 내성                                            약한 충돌 내성보다 확률이 높음                       Eve 로 하여금 동일한 다이제스트를 가지는 2개의 메시지를 구하지 못하도록 하는 것                       h(x) = h(x’) 을 만족하는 입력값 x, x’ 을 찾는다는 것은 계산적으로 불가능해야 함.                                                                                                                       일방향 해시함수의 응용                    소프트웨어 변경 검출           무결성 검증           패스워드를 기초로 한 암호화                            패스워드와 솔트(의사난수 랜덤 값)를 섞은 결과의 해시값을 구해 그것을 암호화키로 사용 =&gt; 사전 공격 차단                                   메시지 인증코드                            송신자와 수신자만의 키와 메시지를 혼합하여 해시값을 계산 한 것               SSL/TLS 에서도 사용                                   전자서명           전자입찰 시스템                       랜덤 오라클 모델과 해시함수에 대한 공격                    랜덤 오라클 모델                            개요                                    해시함수에 대한 이상적인 수학적 모델                                               비둘기집 원리                                    n+1 비들기가 n개의 집에 들어가 있을 때 한 비둘기 집에는 두마리가 있다는 원리 (충돌을 의미)                                               생일 문제 (생일 공격)                                    같은 해시값을 생성하는 2개의 메시지를 구하는 것                   강한 충돌 내성을 깨고자 하는 공격                   생일 패러독스 (birthday paradox) -&gt; 일치할 확률이 상상 이상으로 높아지는 것                   랜덤으로 선택한 N명의 그룹, N 명 중 적어도 2명의 생일이 일치할 확률이 1/2 이상이 되도록 하기 위한 N은 최저 몇 명? -&gt; 23명                                            N명 전원 생일이 일치하지 않을 확률을 1에서 빼면 됨.                                                                                                                       일방향 해시함수에 대한 공격                    무차별 공격                            약한 충돌 내성을 깨고자 하는 공격               SHA-1 은 160 비트라서 2의 160승 회를 시행하면 됨                                   기타 해시함수 공격의 종류 및 특성                            일치블록 연쇄공격 : 새로운 메시지 M’ 을 사전에 다양하게 만들어 놓았다가 공격하고자 하는 메시지의 해시함수값 h(M) 과 같은 해시함수값을 갖는 것을 골라 사용하는 공격               중간자 연쇄공격 : 전체 해시 값이 아니라 해시 중간의 결과에 대한 충돌쌍을 찾는다.               고정점 연쇄공격 : 메시지 블록과 연쇄변수 쌍을 얻게 되면 임의의 수의 동등한 블록들 xi 를 메시지의 중간에 삽입해도 전체 해시값이 변하지 않는다.               차분 연쇄공격                                    다중 라운드 블록암호의 공격 = 다중 라운드 블록암호를 사용하는 해시 함수에서 입력값과 그에 대응하는 출력값 차이의 통계적 특성을 조사하는 기법                   해시함수의 공격 : 압축함수의 입출력 차이를 조사하여 0의 충돌쌍을 주로 찾아내는 방법을 사용                                                                               일방향 해시함수로 해결할 수 없는 문제                    조작과 변경을 검출할 수 있지만 거짓행세를 검출하지는 못함           무결성 외에 인증이라는 절차도 필요 (파일의 무결성 뿐만 아니라 파일의 송신처 검증도 필요)                            인증을 하기 위한 기술 : 메시지 인증코드와 전자서명과 같은 기술                                                   암호학적 해시함수의 예            개요                    압축함수의 두 가지 유형                            기본 개념                                    해시 함수를 설계하는 데에는 크게 서로 다른 2가지 경향이 있음.                   압축함수를 아무런 기초 없이 처음부터 새로 만드는 것, 목적에 맞추어 특별하게 설계.                   압축함수 자리에 대칭키 블록 암호를 사용하는 것.                                                                   새로 만드는 해시함수                            메시지 다이제스트 (Message Digest) (MD2 -&gt; MD4 -&gt; MD5)                                    MD 알고리즘에는 MD2, MD4, MD5 세 가지가 있음. RSA를 개발한 MIT의 Rivest 교수가 공개키 기반 구조를 만들기 위해 RSA 와 함께 개발                   1989년에 만들어진 MD2는 8비트 컴퓨터에 최적화, MD4(90년 개발), MD5(91년 개발) 은 32비트 컴퓨터에 최적화                   MD5 는 MD4의 확장판으로, MD4 보다 속도는 빠르지 않지만 데이터 보안성이 더 좋음.                   최종 버전인 MD5 : 메시지를 512비트로 된 블록들로 나누고, 128비트 다이제스트를 출력. 충돌 공격 내성을 갖기에는 길이가 짧음.                                               SHA (Secure Hash Algorithm)                                    안전 해시 알고리즘(SHA), 최근에 널리 사용                   NIST가 개발, 1993년에 FIPS PUB 180 으로 출판. SHA의 약점이 발견되었을 때 1995년 FIPS PUB 180-1로 나옴, 이를 SHA-1 이라고 함.                   SHA 는 MD4 해시함수에 기초, 설계도 MD4 를 모델로 함. MD5 보다 느리지만 안전함. SHA-1 해시값으로 160비트를 출력.                   2002년 NIST는 새 표준인 FIPS-180-2를 내놓음. 해시 값이 각각 256, 384와 512비트인 3개의 새로운 SHA 버전을 정의함. SHA-256, SHA-384, SHA-512. 이들 알고리즘을 SHA-2 라고 함.                   새로운 버전은 SHA-1과 하부구조가 동일. 동일한 유형의 모듈러 연산과 논리적 2진 연산을 이용. 2008년 FIP PUB 180-3 에는 224-비트 버전이 추가.                   2005년에 SHA-1의 강한 충돌 내성이 깨졌다는 것을 접수하고 SHA-3을 제정하기로 함. SHA-3 은 AES와 같은 방식으로 표준화                                                                               SHA-512                    개요                            기본개념                                    SHA-2에 포함 (SHA-224, SHA-256, SHA-384, SHA-512)                   SHA-512는 다중-블록 메시지로부터 512비트 다이제스트를 생성함. 각 블록은 1024비트 길이를 가짐.                                               길이 필드와 패딩                                    메시지 다이제스트를 생성하기 전에 메시지에 추가적으로 덧붙이는 128비트의 부호 없는 정수 길이 필드가 필요. (512의 경우)                                                                                                                                                            Original MSG Field (&lt;2^128)                               Padding Field (가변길이)                               Length Field (Original MSG 길이필드 - Hash 값 수정에 대한 방어체계)                                                                                                                                                                   메시지의 길이가 비트수로 표현된 값이 저장됨. 이 길이는 패딩을 하기 전의 원래 메시지 길이를 나타냄.                   부호 없는 128비트 정수 필드로 정의할 수 있는 수는 0부터 2^128-1 이다. 이 길이가 바로 SHA-512에서 감당할 수 있는 최대 메시지 길이.                                            2^128 비트 이하의 길이를 갖는 메시지를 1024비트의 블록으로 쪼갬.                       IV 512 bit 와 블록을 Compression 함수를 이용해 512 bit 생성                       위의 512bit 데이터를 다음 블록과 Compression 함수를 이용해 512 bit 생성…                                                                                                                       메시지 인증코드(MAC)                    MAC의 개요                            기본개념                                    메시지 인증을 위해 필요 (MAC, Message Authentication Code)                   해시함수 기반, 블록암호 = 전자서명보다 속도가 빠름                   무결성을 확인하고, 메시지에 대한 인증을 하는 기술 (변경과 거짓행세 검출 가능)                   임의 길이의 메시지와 송신자 및 수신자가 공유하는 키라는 2개의 입력값을 기초로 해서 고정 비트길이의 출력을 계산하는 함수, 이 출력을 MAC 값이라고 부름.                                            Msg 와 키(송신자,수신자 공유)를 MAC 함수에 입력하여 MAC 값(고정길이 비트)을 추출                                                                                       메시지 인증                                    암호를 사용하면 소극적 공격(도청)을, 인증을 사용하면 적극적 공격(데이터나 거래의 위조)를 방어할 수 있음.                                                                   변경 감지 코드 (MDC, Modification Detection Code)                            메시지의 무결성을 보장하는 메시지 다이제스트               Bob은 수신한 메시지로부터 새로운 MDC 를 생성하여 Alice 에게 받은 MDC 와 비교, 값이 동일하다면 해당 메시지는 변경되지 않음.               키가 없는 해시함수를 사용                                   메시지 인증 코드 (MAC)                            메시지의 무결성은 물론 Alice 가 메시지의 원 전송자이며 다른 사람이 Alice 인 척 하는 것이 아니라는 것을 말해주는 데이터 출원지 인증을 보장하기 위해, 변경 감지 코드를 메시지 인증코드(MAC) 로 바꿀 필요가 있음.               MDC와 MAC의 차이는 MAC 에는 Alice 와 Bob 사이의 비밀값이 포함. Eve 는 가지고 있지 않은 비밀키가 두 사람 사이의 비밀 값이 될 수 있다.                                    Eve 가 변조를 하더라도, 메시지와 키 값의 Hash 값인 MAC 값을 생성할 수 없음.                                                                   MAC 의 키 배송 문제                            MAC에서는 송신자와 수신자가 키를 공유할 필요가 있다.               대칭키 암호 때의 키 배송 문제와 같은 문제가 메시지 인증코드에서도 일어남.                                   MAC의 구현 사례                            축소 MAC                                    MAC의 안정성을 높이기 위해 축소 MAC(nested MAC) 이 설계됨. 두 단계의 해싱이 있음                   첫 번째 단계 : 키는 메시지와 이어 붙이고 해시하여 중간 단계의 다이제스트를 생성함.                   두 번째 단계 : 키는 중간단계 다이제스트에 이어 붙이고 최종적인 다이제스트를 생성                                               HMAC                                    축소 MAC 보다 더 복잡. 패딩 같은 추가적인 조치가 더 들어 있음.                   HMAC 은 일방향 해시함수를 이용하여 메시지 인증코드를 구성하는 방법.                   HMAC 의 H 는 Hash                                            블록길이                                                    SHA-1 : 512                           SHA-2 (SHA-224 : 512, SHA-256 : 512, SHA-384 : 1024, SHA-512 : 1024)                                                                       MD 길이                                                    SHA-1 : 160                           SHA-2 (SHA-224 : 224, SHA-256 : 256, SHA-384 : 384, SHA-512 : 512)                                                                       HMAC 과정                                                                                                                                                                                    키값 : 키                                   Key Padding (000..) 으로 블록길이만큼 늘임                                                                                                                                                   XOR 연산                           I Pad : 00110110 00110110 00110110 … 으로 블록길이만큼 늘임                           결과값 Si 와 메시지블록 M1, M2, … , Mn 을 결합하여 해시함수(H) 적용 (결과값 h)                           위 키값과 O Pad : 01011100 01011100 01011100 … 으로 블록길이만큼 늘린 값을 XOR 연산                                                                                                                                                           결과값 So 와 h 를 결합 (So                                   h) 하여 해시함수(H) 적용, 최종 MAC 값 추출                                                                                                                                                   H : SHA-1, MD5 등등…                                                                                                                                       CMAC (Cipher-based Message Authentication Code)                                    NIST 는 데이터 인증 알고리즘 혹은 CMAC 또는 CBCMAC 이라 부르는 표준 FIPS 113을 정의                   대칭키 암호시스템에 대한 암호 블록체인 (CBC) 모드와 유사한 방법                                            그러나 N개의 평문 블록으로부터 N개의 암호문 블록을 만드는 것은 아님. (1개의 암호문 블록 생성)                                                           CMAC 이 CBCMAC 보다 안전 (수학적 보완)                   과정                                            메시지 블록 M1, M2, …, Mn                       M1 과 k (키값) 을 E (Encrypt) 한 결과 R1                       M2 와 R1 을 Xor 연산 하여 k (키값) 을 E (Encrypt) …                       Mn 와 Rn-1 와 새로 생성한 k (키값) 을 E (Encrypt) =&gt; CMAC                                                                                                           MAC 의 이용 예                            IPSec (HMAC)                                    인터넷 기반 통신프로토콜 IP(Internet Protocol) 에 보안기능을 추가한 것                   통신 내용의 인증과 무결성을 확인하기 위해 MAC 을 이용                                               SSL/TLS (HMAC)                                    웹에서 온라인 쇼핑을 할 때 사용되는 통신 프로토콜                   통신 내용의 인증과 무결성 확인을 위해 메시지 인증코드를 이용                                               SET 프로토콜 (HMAC)                                   MAC 에 대한 공격                            재전송 공격                                    개요                                            적극적 공격자 멜로리는 자신이 보존해 둔 MAC 값을 반복해서 송신하는 공격을 감행.                       이를 재전송 공격(replay attack) 이라고 부름                                                    A 에서 B로 전송되는 Msg + MAC 을 Mellory 가 확보                           Msg + MAC 을 재전송                                                                       재전송 공격을 막을 수 있는 방법에는 아래 4가지가 있음.                                                           순서 번호 (sequence number)                                            송신 메시지에 매회 1회씩 증가하는 번호를 붙이기로 약속.                       MAC 값의 계산에 순서번호도 메시지에 포함시키도록 함.                       마지막 순서 번호를 기록해야 함.                                                           타임스탬프 (timestamp)                                            송신 메시지에 현재 시각을 넣기로 약속해두고 그 이전의 메시지가 왔을 경우에는 MAC 값이 바르더라도 오류라고 판단.                       시계 동기화 필요                                                           비표 (nonce)                                            메시지를 수신하기에 앞서 수신자는 송신자에게 일회용의 랜덤한 값 (비표) 를 줌.                       송신자는 비표를 포함해서 MAC 값을 계산, 비표의 값은 통신 때마다 바뀜.                       통신 데이터 양이 약간 증가                                                           시도/응답 (challenge/response)                                            비표와 유사 개념                       상대방에게 난수값을 보내면 상대방은 난수값을 포함한 응답값을 보내야 함.                                                                                                           MAC으로 해결할 수 없는 문제                            제 3자에 대한 증명                                    MAC 은 공유키를 사용하기에 MAC 값을 계산할 수 있는 것은 Alice 와 Bob 이다.                   두 사람이 서로 통신하고 있는 동안 그 MAC 값을 계산한 것은 상대방이라고 말할 수 있다.                   하지만 제3자 Victor 에게 이 MAC 값을 계산한 것은 자신이 아닌 상대방이라고 증명할 방법은 없다.                                            전자서명을 사용하면 제3자에 대한 증명이 가능해짐                                                                                       부인 방지                                    송신자 Alice 는 Bob 에게 그러한 메시지를 보내지 않았다고 Victor 에게 주장할 수 있고 이를 부인이라고 한다.                   MAC 에서는 Alice 와 Bob 중 어느 쪽 주장이 맞는지를 판단할 수 없다.                                            전자서명을 사용하면 부인방지가 가능함                                                                                                                       메시지 인증                    개요                            기본 개념                                    수신자가 받은 메시지가 송신자가 보낸 메시지와 동일한 것인지 확인하는 것                   메시지 내용 변경, 순서 변경, 삭제 및 훼손 등 불법 행위에 대하여 확인하는 기술                   관용 암호화 방식, 공개키 암호화 방식, 해시 함수, MAC 을 이용하는 방식 등                                               메시지 인증 방법                                    관용(대칭키) 암호방식을 이용한 메시지 인증 방식                                            평문을 사전에 분배해서 갖고 있던 비밀키로 암호화하여 암호문을 수신자에게 전송하면 수신자는 암호문을 비밀키로 복호화하여 확인                       이 때, 평문이 문장으로 되어 있으면 복호화 후 전송 중의 메시지 변경 여부를 확인할 수 있음                                                           공개키 암호화 방식을 이용한 메시지 인증 방식                                            송신자는 자신의 개인키로 평문을 암호화하여 암호문을 수신자에게 전송, 수신자는 송신자의 공개키로 암호문을 복호화하여 인증을 확인                       누구나 메시지 인증을 검증할 수 있음. 개인키를 알고 있는 송신자만 인증을 생성할 수 있기 때문에 제 3자가 송신자를 가장하여 메시지를 전송할 수 없음.                                                           해시 함수를 이용한 메시지 인증 방식                                            메시지로부터 해시 함수 결과 값을 계산한 후 수신한 해시 값과 비교하여 메시지의 무결성을 검증하는 방식                       해시 함수가 공개되어 있기 때문에 제 3자가 인증자인 것처럼 가장하여 임의의 메시지를 정당한 메시지인 것처럼 인증하면 수신자는 제 3자의 위조 인증임을 알 수 없음                       비밀정보를 해시 함수에 추가하여 계산하여 단점을 해결. 송수신자는 사전에 비밀정보를 가지고 있다가 인증하려는 메시지와 비밀정보를 연계하여 해시 함수에 인증하고 계산한 값을 메시지에 덧붙여 전송함.                       수신자는 사용자로부터 수신한 메시지와 자신이 보관하고 있는 비밀 정보로 해시함수를 계산한 후 수신한 해시 함수 결과 값과 비교하여 메시지 인증을 수행. 제3자는 비밀정보를 모름.                                                           MAC 을 이용한 메시지 인증 방식                                            MAC (Message Authentication Code) 은 관용 암호방식을 이용하여 간단한 무결성 검증 코드를 만들어 메시지에 부가시키는 방법                       MAC 을 이용해 메시지 인증 및 무결성 검사를 수행하는 절차로는 우선 송신자가 인증할 메시지를 비밀키로 암호화시킨 MAC 값을 계산한 후 메시지와 함께 수신자에게 전송.">
+
+
+  <meta name="author" content="HY03">
+  
+  <meta property="article:author" content="HY03">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Bluesplatter">
+<meta property="og:title" content="정보보안 - 해시함수">
+<meta property="og:url" content="https://bluesplatter.com/is_certification/IS-Management-HashAlgorithm/">
+
+
+  <meta property="og:description" content="해시함수    해시함수            일방향 해시함수                    일방향 해시함수의 개요                            기본개념                                    일방향 해시함수(one-way hash function) 에는 입력과 출력이 각각 1개씩 있음                   입력은 메시지(message) - 임의의 길이, 출력은 해시값(hash value) - 고정된 길이                                                                   일방향 해시함수의 성질                            임의 길이의 메시지로부터 고정 길이의 해시값을 계산               해시값을 고속으로 계산               일방향성을 가짐. (해시값으로부터 메시지를 역산할 수 없음)               메시지가 다르면 해시값도 다름. (무결성 확인용)                                    메시지가 1비트라도 변하면 해시값은 매우 높은 확률로 다른 값이 되야 함.                   2개의 다른 메시지가 같은 해시값을 갖는 것을 충돌(collision) 이라고 함.                                               충돌이 발생하는 것이 어려운 성질 =&gt; 충돌 내성 (collision resistance)               해시 함수 = 메시지 다이제스트 함수 = 메시지 요약함수               무결성 = 완전성 = 보전성                                               메시지 무결성                    무결성 점검                            무결성 점검을 위해 암호학적 해시함수 사용               생성된 메시지 다이제스트와 이전 메시지 다이제스트를 비교               두 개가 동일하면 원래 메시지가 변경되지 않음                                   암호학적 해시함수 기준                            개요 (암호학적 해시함수는 다음을 충족해야 함)                                    프리이미지 저항성 (preimage resistance) : 역상 저항성                                            해시함수 h 와 y=h(M) 에 대하여 Eve 가 이를 만족하는 M 값을 찾아내는게 힘들어야 함                       y = h(x) 를 만족하는 x 를 찾는 것이 불가능해야 함.                                                           제2프리이미지 저항성 (second preimage resistance) : 두 번째 역상 저항성, 약한 충돌 내성                                            메시지를 쉽게 위조할 수 없도록 하는 성질                       Eve가 메시지와 다이제스트를 가로채고 또 다른 다이제스트를 생성                       입력값 x에 대해서 h(x) = h(x’), x != x’ 을 만족하는 x’ 을 찾는 것이 불가능해야 함.                                                           충돌 저항성 (collision resistance) : 강한 충돌 내성                                            약한 충돌 내성보다 확률이 높음                       Eve 로 하여금 동일한 다이제스트를 가지는 2개의 메시지를 구하지 못하도록 하는 것                       h(x) = h(x’) 을 만족하는 입력값 x, x’ 을 찾는다는 것은 계산적으로 불가능해야 함.                                                                                                                       일방향 해시함수의 응용                    소프트웨어 변경 검출           무결성 검증           패스워드를 기초로 한 암호화                            패스워드와 솔트(의사난수 랜덤 값)를 섞은 결과의 해시값을 구해 그것을 암호화키로 사용 =&gt; 사전 공격 차단                                   메시지 인증코드                            송신자와 수신자만의 키와 메시지를 혼합하여 해시값을 계산 한 것               SSL/TLS 에서도 사용                                   전자서명           전자입찰 시스템                       랜덤 오라클 모델과 해시함수에 대한 공격                    랜덤 오라클 모델                            개요                                    해시함수에 대한 이상적인 수학적 모델                                               비둘기집 원리                                    n+1 비들기가 n개의 집에 들어가 있을 때 한 비둘기 집에는 두마리가 있다는 원리 (충돌을 의미)                                               생일 문제 (생일 공격)                                    같은 해시값을 생성하는 2개의 메시지를 구하는 것                   강한 충돌 내성을 깨고자 하는 공격                   생일 패러독스 (birthday paradox) -&gt; 일치할 확률이 상상 이상으로 높아지는 것                   랜덤으로 선택한 N명의 그룹, N 명 중 적어도 2명의 생일이 일치할 확률이 1/2 이상이 되도록 하기 위한 N은 최저 몇 명? -&gt; 23명                                            N명 전원 생일이 일치하지 않을 확률을 1에서 빼면 됨.                                                                                                                       일방향 해시함수에 대한 공격                    무차별 공격                            약한 충돌 내성을 깨고자 하는 공격               SHA-1 은 160 비트라서 2의 160승 회를 시행하면 됨                                   기타 해시함수 공격의 종류 및 특성                            일치블록 연쇄공격 : 새로운 메시지 M’ 을 사전에 다양하게 만들어 놓았다가 공격하고자 하는 메시지의 해시함수값 h(M) 과 같은 해시함수값을 갖는 것을 골라 사용하는 공격               중간자 연쇄공격 : 전체 해시 값이 아니라 해시 중간의 결과에 대한 충돌쌍을 찾는다.               고정점 연쇄공격 : 메시지 블록과 연쇄변수 쌍을 얻게 되면 임의의 수의 동등한 블록들 xi 를 메시지의 중간에 삽입해도 전체 해시값이 변하지 않는다.               차분 연쇄공격                                    다중 라운드 블록암호의 공격 = 다중 라운드 블록암호를 사용하는 해시 함수에서 입력값과 그에 대응하는 출력값 차이의 통계적 특성을 조사하는 기법                   해시함수의 공격 : 압축함수의 입출력 차이를 조사하여 0의 충돌쌍을 주로 찾아내는 방법을 사용                                                                               일방향 해시함수로 해결할 수 없는 문제                    조작과 변경을 검출할 수 있지만 거짓행세를 검출하지는 못함           무결성 외에 인증이라는 절차도 필요 (파일의 무결성 뿐만 아니라 파일의 송신처 검증도 필요)                            인증을 하기 위한 기술 : 메시지 인증코드와 전자서명과 같은 기술                                                   암호학적 해시함수의 예            개요                    압축함수의 두 가지 유형                            기본 개념                                    해시 함수를 설계하는 데에는 크게 서로 다른 2가지 경향이 있음.                   압축함수를 아무런 기초 없이 처음부터 새로 만드는 것, 목적에 맞추어 특별하게 설계.                   압축함수 자리에 대칭키 블록 암호를 사용하는 것.                                                                   새로 만드는 해시함수                            메시지 다이제스트 (Message Digest) (MD2 -&gt; MD4 -&gt; MD5)                                    MD 알고리즘에는 MD2, MD4, MD5 세 가지가 있음. RSA를 개발한 MIT의 Rivest 교수가 공개키 기반 구조를 만들기 위해 RSA 와 함께 개발                   1989년에 만들어진 MD2는 8비트 컴퓨터에 최적화, MD4(90년 개발), MD5(91년 개발) 은 32비트 컴퓨터에 최적화                   MD5 는 MD4의 확장판으로, MD4 보다 속도는 빠르지 않지만 데이터 보안성이 더 좋음.                   최종 버전인 MD5 : 메시지를 512비트로 된 블록들로 나누고, 128비트 다이제스트를 출력. 충돌 공격 내성을 갖기에는 길이가 짧음.                                               SHA (Secure Hash Algorithm)                                    안전 해시 알고리즘(SHA), 최근에 널리 사용                   NIST가 개발, 1993년에 FIPS PUB 180 으로 출판. SHA의 약점이 발견되었을 때 1995년 FIPS PUB 180-1로 나옴, 이를 SHA-1 이라고 함.                   SHA 는 MD4 해시함수에 기초, 설계도 MD4 를 모델로 함. MD5 보다 느리지만 안전함. SHA-1 해시값으로 160비트를 출력.                   2002년 NIST는 새 표준인 FIPS-180-2를 내놓음. 해시 값이 각각 256, 384와 512비트인 3개의 새로운 SHA 버전을 정의함. SHA-256, SHA-384, SHA-512. 이들 알고리즘을 SHA-2 라고 함.                   새로운 버전은 SHA-1과 하부구조가 동일. 동일한 유형의 모듈러 연산과 논리적 2진 연산을 이용. 2008년 FIP PUB 180-3 에는 224-비트 버전이 추가.                   2005년에 SHA-1의 강한 충돌 내성이 깨졌다는 것을 접수하고 SHA-3을 제정하기로 함. SHA-3 은 AES와 같은 방식으로 표준화                                                                               SHA-512                    개요                            기본개념                                    SHA-2에 포함 (SHA-224, SHA-256, SHA-384, SHA-512)                   SHA-512는 다중-블록 메시지로부터 512비트 다이제스트를 생성함. 각 블록은 1024비트 길이를 가짐.                                               길이 필드와 패딩                                    메시지 다이제스트를 생성하기 전에 메시지에 추가적으로 덧붙이는 128비트의 부호 없는 정수 길이 필드가 필요. (512의 경우)                                                                                                                                                            Original MSG Field (&lt;2^128)                               Padding Field (가변길이)                               Length Field (Original MSG 길이필드 - Hash 값 수정에 대한 방어체계)                                                                                                                                                                   메시지의 길이가 비트수로 표현된 값이 저장됨. 이 길이는 패딩을 하기 전의 원래 메시지 길이를 나타냄.                   부호 없는 128비트 정수 필드로 정의할 수 있는 수는 0부터 2^128-1 이다. 이 길이가 바로 SHA-512에서 감당할 수 있는 최대 메시지 길이.                                            2^128 비트 이하의 길이를 갖는 메시지를 1024비트의 블록으로 쪼갬.                       IV 512 bit 와 블록을 Compression 함수를 이용해 512 bit 생성                       위의 512bit 데이터를 다음 블록과 Compression 함수를 이용해 512 bit 생성…                                                                                                                       메시지 인증코드(MAC)                    MAC의 개요                            기본개념                                    메시지 인증을 위해 필요 (MAC, Message Authentication Code)                   해시함수 기반, 블록암호 = 전자서명보다 속도가 빠름                   무결성을 확인하고, 메시지에 대한 인증을 하는 기술 (변경과 거짓행세 검출 가능)                   임의 길이의 메시지와 송신자 및 수신자가 공유하는 키라는 2개의 입력값을 기초로 해서 고정 비트길이의 출력을 계산하는 함수, 이 출력을 MAC 값이라고 부름.                                            Msg 와 키(송신자,수신자 공유)를 MAC 함수에 입력하여 MAC 값(고정길이 비트)을 추출                                                                                       메시지 인증                                    암호를 사용하면 소극적 공격(도청)을, 인증을 사용하면 적극적 공격(데이터나 거래의 위조)를 방어할 수 있음.                                                                   변경 감지 코드 (MDC, Modification Detection Code)                            메시지의 무결성을 보장하는 메시지 다이제스트               Bob은 수신한 메시지로부터 새로운 MDC 를 생성하여 Alice 에게 받은 MDC 와 비교, 값이 동일하다면 해당 메시지는 변경되지 않음.               키가 없는 해시함수를 사용                                   메시지 인증 코드 (MAC)                            메시지의 무결성은 물론 Alice 가 메시지의 원 전송자이며 다른 사람이 Alice 인 척 하는 것이 아니라는 것을 말해주는 데이터 출원지 인증을 보장하기 위해, 변경 감지 코드를 메시지 인증코드(MAC) 로 바꿀 필요가 있음.               MDC와 MAC의 차이는 MAC 에는 Alice 와 Bob 사이의 비밀값이 포함. Eve 는 가지고 있지 않은 비밀키가 두 사람 사이의 비밀 값이 될 수 있다.                                    Eve 가 변조를 하더라도, 메시지와 키 값의 Hash 값인 MAC 값을 생성할 수 없음.                                                                   MAC 의 키 배송 문제                            MAC에서는 송신자와 수신자가 키를 공유할 필요가 있다.               대칭키 암호 때의 키 배송 문제와 같은 문제가 메시지 인증코드에서도 일어남.                                   MAC의 구현 사례                            축소 MAC                                    MAC의 안정성을 높이기 위해 축소 MAC(nested MAC) 이 설계됨. 두 단계의 해싱이 있음                   첫 번째 단계 : 키는 메시지와 이어 붙이고 해시하여 중간 단계의 다이제스트를 생성함.                   두 번째 단계 : 키는 중간단계 다이제스트에 이어 붙이고 최종적인 다이제스트를 생성                                               HMAC                                    축소 MAC 보다 더 복잡. 패딩 같은 추가적인 조치가 더 들어 있음.                   HMAC 은 일방향 해시함수를 이용하여 메시지 인증코드를 구성하는 방법.                   HMAC 의 H 는 Hash                                            블록길이                                                    SHA-1 : 512                           SHA-2 (SHA-224 : 512, SHA-256 : 512, SHA-384 : 1024, SHA-512 : 1024)                                                                       MD 길이                                                    SHA-1 : 160                           SHA-2 (SHA-224 : 224, SHA-256 : 256, SHA-384 : 384, SHA-512 : 512)                                                                       HMAC 과정                                                                                                                                                                                    키값 : 키                                   Key Padding (000..) 으로 블록길이만큼 늘임                                                                                                                                                   XOR 연산                           I Pad : 00110110 00110110 00110110 … 으로 블록길이만큼 늘임                           결과값 Si 와 메시지블록 M1, M2, … , Mn 을 결합하여 해시함수(H) 적용 (결과값 h)                           위 키값과 O Pad : 01011100 01011100 01011100 … 으로 블록길이만큼 늘린 값을 XOR 연산                                                                                                                                                           결과값 So 와 h 를 결합 (So                                   h) 하여 해시함수(H) 적용, 최종 MAC 값 추출                                                                                                                                                   H : SHA-1, MD5 등등…                                                                                                                                       CMAC (Cipher-based Message Authentication Code)                                    NIST 는 데이터 인증 알고리즘 혹은 CMAC 또는 CBCMAC 이라 부르는 표준 FIPS 113을 정의                   대칭키 암호시스템에 대한 암호 블록체인 (CBC) 모드와 유사한 방법                                            그러나 N개의 평문 블록으로부터 N개의 암호문 블록을 만드는 것은 아님. (1개의 암호문 블록 생성)                                                           CMAC 이 CBCMAC 보다 안전 (수학적 보완)                   과정                                            메시지 블록 M1, M2, …, Mn                       M1 과 k (키값) 을 E (Encrypt) 한 결과 R1                       M2 와 R1 을 Xor 연산 하여 k (키값) 을 E (Encrypt) …                       Mn 와 Rn-1 와 새로 생성한 k (키값) 을 E (Encrypt) =&gt; CMAC                                                                                                           MAC 의 이용 예                            IPSec (HMAC)                                    인터넷 기반 통신프로토콜 IP(Internet Protocol) 에 보안기능을 추가한 것                   통신 내용의 인증과 무결성을 확인하기 위해 MAC 을 이용                                               SSL/TLS (HMAC)                                    웹에서 온라인 쇼핑을 할 때 사용되는 통신 프로토콜                   통신 내용의 인증과 무결성 확인을 위해 메시지 인증코드를 이용                                               SET 프로토콜 (HMAC)                                   MAC 에 대한 공격                            재전송 공격                                    개요                                            적극적 공격자 멜로리는 자신이 보존해 둔 MAC 값을 반복해서 송신하는 공격을 감행.                       이를 재전송 공격(replay attack) 이라고 부름                                                    A 에서 B로 전송되는 Msg + MAC 을 Mellory 가 확보                           Msg + MAC 을 재전송                                                                       재전송 공격을 막을 수 있는 방법에는 아래 4가지가 있음.                                                           순서 번호 (sequence number)                                            송신 메시지에 매회 1회씩 증가하는 번호를 붙이기로 약속.                       MAC 값의 계산에 순서번호도 메시지에 포함시키도록 함.                       마지막 순서 번호를 기록해야 함.                                                           타임스탬프 (timestamp)                                            송신 메시지에 현재 시각을 넣기로 약속해두고 그 이전의 메시지가 왔을 경우에는 MAC 값이 바르더라도 오류라고 판단.                       시계 동기화 필요                                                           비표 (nonce)                                            메시지를 수신하기에 앞서 수신자는 송신자에게 일회용의 랜덤한 값 (비표) 를 줌.                       송신자는 비표를 포함해서 MAC 값을 계산, 비표의 값은 통신 때마다 바뀜.                       통신 데이터 양이 약간 증가                                                           시도/응답 (challenge/response)                                            비표와 유사 개념                       상대방에게 난수값을 보내면 상대방은 난수값을 포함한 응답값을 보내야 함.                                                                                                           MAC으로 해결할 수 없는 문제                            제 3자에 대한 증명                                    MAC 은 공유키를 사용하기에 MAC 값을 계산할 수 있는 것은 Alice 와 Bob 이다.                   두 사람이 서로 통신하고 있는 동안 그 MAC 값을 계산한 것은 상대방이라고 말할 수 있다.                   하지만 제3자 Victor 에게 이 MAC 값을 계산한 것은 자신이 아닌 상대방이라고 증명할 방법은 없다.                                            전자서명을 사용하면 제3자에 대한 증명이 가능해짐                                                                                       부인 방지                                    송신자 Alice 는 Bob 에게 그러한 메시지를 보내지 않았다고 Victor 에게 주장할 수 있고 이를 부인이라고 한다.                   MAC 에서는 Alice 와 Bob 중 어느 쪽 주장이 맞는지를 판단할 수 없다.                                            전자서명을 사용하면 부인방지가 가능함                                                                                                                       메시지 인증                    개요                            기본 개념                                    수신자가 받은 메시지가 송신자가 보낸 메시지와 동일한 것인지 확인하는 것                   메시지 내용 변경, 순서 변경, 삭제 및 훼손 등 불법 행위에 대하여 확인하는 기술                   관용 암호화 방식, 공개키 암호화 방식, 해시 함수, MAC 을 이용하는 방식 등                                               메시지 인증 방법                                    관용(대칭키) 암호방식을 이용한 메시지 인증 방식                                            평문을 사전에 분배해서 갖고 있던 비밀키로 암호화하여 암호문을 수신자에게 전송하면 수신자는 암호문을 비밀키로 복호화하여 확인                       이 때, 평문이 문장으로 되어 있으면 복호화 후 전송 중의 메시지 변경 여부를 확인할 수 있음                                                           공개키 암호화 방식을 이용한 메시지 인증 방식                                            송신자는 자신의 개인키로 평문을 암호화하여 암호문을 수신자에게 전송, 수신자는 송신자의 공개키로 암호문을 복호화하여 인증을 확인                       누구나 메시지 인증을 검증할 수 있음. 개인키를 알고 있는 송신자만 인증을 생성할 수 있기 때문에 제 3자가 송신자를 가장하여 메시지를 전송할 수 없음.                                                           해시 함수를 이용한 메시지 인증 방식                                            메시지로부터 해시 함수 결과 값을 계산한 후 수신한 해시 값과 비교하여 메시지의 무결성을 검증하는 방식                       해시 함수가 공개되어 있기 때문에 제 3자가 인증자인 것처럼 가장하여 임의의 메시지를 정당한 메시지인 것처럼 인증하면 수신자는 제 3자의 위조 인증임을 알 수 없음                       비밀정보를 해시 함수에 추가하여 계산하여 단점을 해결. 송수신자는 사전에 비밀정보를 가지고 있다가 인증하려는 메시지와 비밀정보를 연계하여 해시 함수에 인증하고 계산한 값을 메시지에 덧붙여 전송함.                       수신자는 사용자로부터 수신한 메시지와 자신이 보관하고 있는 비밀 정보로 해시함수를 계산한 후 수신한 해시 함수 결과 값과 비교하여 메시지 인증을 수행. 제3자는 비밀정보를 모름.                                                           MAC 을 이용한 메시지 인증 방식                                            MAC (Message Authentication Code) 은 관용 암호방식을 이용하여 간단한 무결성 검증 코드를 만들어 메시지에 부가시키는 방법                       MAC 을 이용해 메시지 인증 및 무결성 검사를 수행하는 절차로는 우선 송신자가 인증할 메시지를 비밀키로 암호화시킨 MAC 값을 계산한 후 메시지와 함께 수신자에게 전송.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2021-11-23T09:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://bluesplatter.com/is_certification/IS-Management-HashAlgorithm/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "HY03",
+      "url": "https://bluesplatter.com/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Bluesplatter Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo/logo.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          세상에 남기는 작은 흔적
+          <span class="site-subtitle">Bluesplatter</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/">연도별 포스트</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="https://bluesplatter.com/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#is_certification" itemprop="item"><span itemprop="name">Is_certification</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">정보보안 - 해시함수</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/profile/photo.jpg" alt="HY03" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">HY03</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>저는 전문가가 아니고 이것 저것 알아보는 비전문가 입니다. <br /> 틀린 내용이 기술되어도 너그러이 봐주시고 댓글을 남겨주셨으면 좋겠습니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="http://bluesplatter.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:hyunik03@gmail.com">
+            <meta itemprop="email" content="hyunik03@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">이메일</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="정보보안 - 해시함수">
+    <meta itemprop="description" content="해시함수  해시함수          일방향 해시함수                  일방향 해시함수의 개요                          기본개념                                  일방향 해시함수(one-way hash function) 에는 입력과 출력이 각각 1개씩 있음                  입력은 메시지(message) - 임의의 길이, 출력은 해시값(hash value) - 고정된 길이                                                              일방향 해시함수의 성질                          임의 길이의 메시지로부터 고정 길이의 해시값을 계산              해시값을 고속으로 계산              일방향성을 가짐. (해시값으로부터 메시지를 역산할 수 없음)              메시지가 다르면 해시값도 다름. (무결성 확인용)                                  메시지가 1비트라도 변하면 해시값은 매우 높은 확률로 다른 값이 되야 함.                  2개의 다른 메시지가 같은 해시값을 갖는 것을 충돌(collision) 이라고 함.                                            충돌이 발생하는 것이 어려운 성질 =&gt; 충돌 내성 (collision resistance)              해시 함수 = 메시지 다이제스트 함수 = 메시지 요약함수              무결성 = 완전성 = 보전성                                          메시지 무결성                  무결성 점검                          무결성 점검을 위해 암호학적 해시함수 사용              생성된 메시지 다이제스트와 이전 메시지 다이제스트를 비교              두 개가 동일하면 원래 메시지가 변경되지 않음                                암호학적 해시함수 기준                          개요 (암호학적 해시함수는 다음을 충족해야 함)                                  프리이미지 저항성 (preimage resistance) : 역상 저항성                                          해시함수 h 와 y=h(M) 에 대하여 Eve 가 이를 만족하는 M 값을 찾아내는게 힘들어야 함                      y = h(x) 를 만족하는 x 를 찾는 것이 불가능해야 함.                                                        제2프리이미지 저항성 (second preimage resistance) : 두 번째 역상 저항성, 약한 충돌 내성                                          메시지를 쉽게 위조할 수 없도록 하는 성질                      Eve가 메시지와 다이제스트를 가로채고 또 다른 다이제스트를 생성                      입력값 x에 대해서 h(x) = h(x’), x != x’ 을 만족하는 x’ 을 찾는 것이 불가능해야 함.                                                        충돌 저항성 (collision resistance) : 강한 충돌 내성                                          약한 충돌 내성보다 확률이 높음                      Eve 로 하여금 동일한 다이제스트를 가지는 2개의 메시지를 구하지 못하도록 하는 것                      h(x) = h(x’) 을 만족하는 입력값 x, x’ 을 찾는다는 것은 계산적으로 불가능해야 함.                                                                                                              일방향 해시함수의 응용                  소프트웨어 변경 검출          무결성 검증          패스워드를 기초로 한 암호화                          패스워드와 솔트(의사난수 랜덤 값)를 섞은 결과의 해시값을 구해 그것을 암호화키로 사용 =&gt; 사전 공격 차단                                메시지 인증코드                          송신자와 수신자만의 키와 메시지를 혼합하여 해시값을 계산 한 것              SSL/TLS 에서도 사용                                전자서명          전자입찰 시스템                    랜덤 오라클 모델과 해시함수에 대한 공격                  랜덤 오라클 모델                          개요                                  해시함수에 대한 이상적인 수학적 모델                                            비둘기집 원리                                  n+1 비들기가 n개의 집에 들어가 있을 때 한 비둘기 집에는 두마리가 있다는 원리 (충돌을 의미)                                            생일 문제 (생일 공격)                                  같은 해시값을 생성하는 2개의 메시지를 구하는 것                  강한 충돌 내성을 깨고자 하는 공격                  생일 패러독스 (birthday paradox) -&gt; 일치할 확률이 상상 이상으로 높아지는 것                  랜덤으로 선택한 N명의 그룹, N 명 중 적어도 2명의 생일이 일치할 확률이 1/2 이상이 되도록 하기 위한 N은 최저 몇 명? -&gt; 23명                                          N명 전원 생일이 일치하지 않을 확률을 1에서 빼면 됨.                                                                                                              일방향 해시함수에 대한 공격                  무차별 공격                          약한 충돌 내성을 깨고자 하는 공격              SHA-1 은 160 비트라서 2의 160승 회를 시행하면 됨                                기타 해시함수 공격의 종류 및 특성                          일치블록 연쇄공격 : 새로운 메시지 M’ 을 사전에 다양하게 만들어 놓았다가 공격하고자 하는 메시지의 해시함수값 h(M) 과 같은 해시함수값을 갖는 것을 골라 사용하는 공격              중간자 연쇄공격 : 전체 해시 값이 아니라 해시 중간의 결과에 대한 충돌쌍을 찾는다.              고정점 연쇄공격 : 메시지 블록과 연쇄변수 쌍을 얻게 되면 임의의 수의 동등한 블록들 xi 를 메시지의 중간에 삽입해도 전체 해시값이 변하지 않는다.              차분 연쇄공격                                  다중 라운드 블록암호의 공격 = 다중 라운드 블록암호를 사용하는 해시 함수에서 입력값과 그에 대응하는 출력값 차이의 통계적 특성을 조사하는 기법                  해시함수의 공격 : 압축함수의 입출력 차이를 조사하여 0의 충돌쌍을 주로 찾아내는 방법을 사용                                                                        일방향 해시함수로 해결할 수 없는 문제                  조작과 변경을 검출할 수 있지만 거짓행세를 검출하지는 못함          무결성 외에 인증이라는 절차도 필요 (파일의 무결성 뿐만 아니라 파일의 송신처 검증도 필요)                          인증을 하기 위한 기술 : 메시지 인증코드와 전자서명과 같은 기술                                            암호학적 해시함수의 예          개요                  압축함수의 두 가지 유형                          기본 개념                                  해시 함수를 설계하는 데에는 크게 서로 다른 2가지 경향이 있음.                  압축함수를 아무런 기초 없이 처음부터 새로 만드는 것, 목적에 맞추어 특별하게 설계.                  압축함수 자리에 대칭키 블록 암호를 사용하는 것.                                                              새로 만드는 해시함수                          메시지 다이제스트 (Message Digest) (MD2 -&gt; MD4 -&gt; MD5)                                  MD 알고리즘에는 MD2, MD4, MD5 세 가지가 있음. RSA를 개발한 MIT의 Rivest 교수가 공개키 기반 구조를 만들기 위해 RSA 와 함께 개발                  1989년에 만들어진 MD2는 8비트 컴퓨터에 최적화, MD4(90년 개발), MD5(91년 개발) 은 32비트 컴퓨터에 최적화                  MD5 는 MD4의 확장판으로, MD4 보다 속도는 빠르지 않지만 데이터 보안성이 더 좋음.                  최종 버전인 MD5 : 메시지를 512비트로 된 블록들로 나누고, 128비트 다이제스트를 출력. 충돌 공격 내성을 갖기에는 길이가 짧음.                                            SHA (Secure Hash Algorithm)                                  안전 해시 알고리즘(SHA), 최근에 널리 사용                  NIST가 개발, 1993년에 FIPS PUB 180 으로 출판. SHA의 약점이 발견되었을 때 1995년 FIPS PUB 180-1로 나옴, 이를 SHA-1 이라고 함.                  SHA 는 MD4 해시함수에 기초, 설계도 MD4 를 모델로 함. MD5 보다 느리지만 안전함. SHA-1 해시값으로 160비트를 출력.                  2002년 NIST는 새 표준인 FIPS-180-2를 내놓음. 해시 값이 각각 256, 384와 512비트인 3개의 새로운 SHA 버전을 정의함. SHA-256, SHA-384, SHA-512. 이들 알고리즘을 SHA-2 라고 함.                  새로운 버전은 SHA-1과 하부구조가 동일. 동일한 유형의 모듈러 연산과 논리적 2진 연산을 이용. 2008년 FIP PUB 180-3 에는 224-비트 버전이 추가.                  2005년에 SHA-1의 강한 충돌 내성이 깨졌다는 것을 접수하고 SHA-3을 제정하기로 함. SHA-3 은 AES와 같은 방식으로 표준화                                                                        SHA-512                  개요                          기본개념                                  SHA-2에 포함 (SHA-224, SHA-256, SHA-384, SHA-512)                  SHA-512는 다중-블록 메시지로부터 512비트 다이제스트를 생성함. 각 블록은 1024비트 길이를 가짐.                                            길이 필드와 패딩                                  메시지 다이제스트를 생성하기 전에 메시지에 추가적으로 덧붙이는 128비트의 부호 없는 정수 길이 필드가 필요. (512의 경우)                                                                                                                                                      Original MSG Field (&lt;2^128)                              Padding Field (가변길이)                              Length Field (Original MSG 길이필드 - Hash 값 수정에 대한 방어체계)                                                                                                                                                            메시지의 길이가 비트수로 표현된 값이 저장됨. 이 길이는 패딩을 하기 전의 원래 메시지 길이를 나타냄.                  부호 없는 128비트 정수 필드로 정의할 수 있는 수는 0부터 2^128-1 이다. 이 길이가 바로 SHA-512에서 감당할 수 있는 최대 메시지 길이.                                          2^128 비트 이하의 길이를 갖는 메시지를 1024비트의 블록으로 쪼갬.                      IV 512 bit 와 블록을 Compression 함수를 이용해 512 bit 생성                      위의 512bit 데이터를 다음 블록과 Compression 함수를 이용해 512 bit 생성…                                                                                                              메시지 인증코드(MAC)                  MAC의 개요                          기본개념                                  메시지 인증을 위해 필요 (MAC, Message Authentication Code)                  해시함수 기반, 블록암호 = 전자서명보다 속도가 빠름                  무결성을 확인하고, 메시지에 대한 인증을 하는 기술 (변경과 거짓행세 검출 가능)                  임의 길이의 메시지와 송신자 및 수신자가 공유하는 키라는 2개의 입력값을 기초로 해서 고정 비트길이의 출력을 계산하는 함수, 이 출력을 MAC 값이라고 부름.                                          Msg 와 키(송신자,수신자 공유)를 MAC 함수에 입력하여 MAC 값(고정길이 비트)을 추출                                                                                  메시지 인증                                  암호를 사용하면 소극적 공격(도청)을, 인증을 사용하면 적극적 공격(데이터나 거래의 위조)를 방어할 수 있음.                                                              변경 감지 코드 (MDC, Modification Detection Code)                          메시지의 무결성을 보장하는 메시지 다이제스트              Bob은 수신한 메시지로부터 새로운 MDC 를 생성하여 Alice 에게 받은 MDC 와 비교, 값이 동일하다면 해당 메시지는 변경되지 않음.              키가 없는 해시함수를 사용                                메시지 인증 코드 (MAC)                          메시지의 무결성은 물론 Alice 가 메시지의 원 전송자이며 다른 사람이 Alice 인 척 하는 것이 아니라는 것을 말해주는 데이터 출원지 인증을 보장하기 위해, 변경 감지 코드를 메시지 인증코드(MAC) 로 바꿀 필요가 있음.              MDC와 MAC의 차이는 MAC 에는 Alice 와 Bob 사이의 비밀값이 포함. Eve 는 가지고 있지 않은 비밀키가 두 사람 사이의 비밀 값이 될 수 있다.                                  Eve 가 변조를 하더라도, 메시지와 키 값의 Hash 값인 MAC 값을 생성할 수 없음.                                                              MAC 의 키 배송 문제                          MAC에서는 송신자와 수신자가 키를 공유할 필요가 있다.              대칭키 암호 때의 키 배송 문제와 같은 문제가 메시지 인증코드에서도 일어남.                                MAC의 구현 사례                          축소 MAC                                  MAC의 안정성을 높이기 위해 축소 MAC(nested MAC) 이 설계됨. 두 단계의 해싱이 있음                  첫 번째 단계 : 키는 메시지와 이어 붙이고 해시하여 중간 단계의 다이제스트를 생성함.                  두 번째 단계 : 키는 중간단계 다이제스트에 이어 붙이고 최종적인 다이제스트를 생성                                            HMAC                                  축소 MAC 보다 더 복잡. 패딩 같은 추가적인 조치가 더 들어 있음.                  HMAC 은 일방향 해시함수를 이용하여 메시지 인증코드를 구성하는 방법.                  HMAC 의 H 는 Hash                                          블록길이                                                  SHA-1 : 512                          SHA-2 (SHA-224 : 512, SHA-256 : 512, SHA-384 : 1024, SHA-512 : 1024)                                                                    MD 길이                                                  SHA-1 : 160                          SHA-2 (SHA-224 : 224, SHA-256 : 256, SHA-384 : 384, SHA-512 : 512)                                                                    HMAC 과정                                                                                                                                                                              키값 : 키                                  Key Padding (000..) 으로 블록길이만큼 늘임                                                                                                                                              XOR 연산                          I Pad : 00110110 00110110 00110110 … 으로 블록길이만큼 늘임                          결과값 Si 와 메시지블록 M1, M2, … , Mn 을 결합하여 해시함수(H) 적용 (결과값 h)                          위 키값과 O Pad : 01011100 01011100 01011100 … 으로 블록길이만큼 늘린 값을 XOR 연산                                                                                                                                                      결과값 So 와 h 를 결합 (So                                  h) 하여 해시함수(H) 적용, 최종 MAC 값 추출                                                                                                                                              H : SHA-1, MD5 등등…                                                                                                                                CMAC (Cipher-based Message Authentication Code)                                  NIST 는 데이터 인증 알고리즘 혹은 CMAC 또는 CBCMAC 이라 부르는 표준 FIPS 113을 정의                  대칭키 암호시스템에 대한 암호 블록체인 (CBC) 모드와 유사한 방법                                          그러나 N개의 평문 블록으로부터 N개의 암호문 블록을 만드는 것은 아님. (1개의 암호문 블록 생성)                                                        CMAC 이 CBCMAC 보다 안전 (수학적 보완)                  과정                                          메시지 블록 M1, M2, …, Mn                      M1 과 k (키값) 을 E (Encrypt) 한 결과 R1                      M2 와 R1 을 Xor 연산 하여 k (키값) 을 E (Encrypt) …                      Mn 와 Rn-1 와 새로 생성한 k (키값) 을 E (Encrypt) =&gt; CMAC                                                                                                    MAC 의 이용 예                          IPSec (HMAC)                                  인터넷 기반 통신프로토콜 IP(Internet Protocol) 에 보안기능을 추가한 것                  통신 내용의 인증과 무결성을 확인하기 위해 MAC 을 이용                                            SSL/TLS (HMAC)                                  웹에서 온라인 쇼핑을 할 때 사용되는 통신 프로토콜                  통신 내용의 인증과 무결성 확인을 위해 메시지 인증코드를 이용                                            SET 프로토콜 (HMAC)                                MAC 에 대한 공격                          재전송 공격                                  개요                                          적극적 공격자 멜로리는 자신이 보존해 둔 MAC 값을 반복해서 송신하는 공격을 감행.                      이를 재전송 공격(replay attack) 이라고 부름                                                  A 에서 B로 전송되는 Msg + MAC 을 Mellory 가 확보                          Msg + MAC 을 재전송                                                                    재전송 공격을 막을 수 있는 방법에는 아래 4가지가 있음.                                                        순서 번호 (sequence number)                                          송신 메시지에 매회 1회씩 증가하는 번호를 붙이기로 약속.                      MAC 값의 계산에 순서번호도 메시지에 포함시키도록 함.                      마지막 순서 번호를 기록해야 함.                                                        타임스탬프 (timestamp)                                          송신 메시지에 현재 시각을 넣기로 약속해두고 그 이전의 메시지가 왔을 경우에는 MAC 값이 바르더라도 오류라고 판단.                      시계 동기화 필요                                                        비표 (nonce)                                          메시지를 수신하기에 앞서 수신자는 송신자에게 일회용의 랜덤한 값 (비표) 를 줌.                      송신자는 비표를 포함해서 MAC 값을 계산, 비표의 값은 통신 때마다 바뀜.                      통신 데이터 양이 약간 증가                                                        시도/응답 (challenge/response)                                          비표와 유사 개념                      상대방에게 난수값을 보내면 상대방은 난수값을 포함한 응답값을 보내야 함.                                                                                                    MAC으로 해결할 수 없는 문제                          제 3자에 대한 증명                                  MAC 은 공유키를 사용하기에 MAC 값을 계산할 수 있는 것은 Alice 와 Bob 이다.                  두 사람이 서로 통신하고 있는 동안 그 MAC 값을 계산한 것은 상대방이라고 말할 수 있다.                  하지만 제3자 Victor 에게 이 MAC 값을 계산한 것은 자신이 아닌 상대방이라고 증명할 방법은 없다.                                          전자서명을 사용하면 제3자에 대한 증명이 가능해짐                                                                                  부인 방지                                  송신자 Alice 는 Bob 에게 그러한 메시지를 보내지 않았다고 Victor 에게 주장할 수 있고 이를 부인이라고 한다.                  MAC 에서는 Alice 와 Bob 중 어느 쪽 주장이 맞는지를 판단할 수 없다.                                          전자서명을 사용하면 부인방지가 가능함                                                                                                              메시지 인증                  개요                          기본 개념                                  수신자가 받은 메시지가 송신자가 보낸 메시지와 동일한 것인지 확인하는 것                  메시지 내용 변경, 순서 변경, 삭제 및 훼손 등 불법 행위에 대하여 확인하는 기술                  관용 암호화 방식, 공개키 암호화 방식, 해시 함수, MAC 을 이용하는 방식 등                                            메시지 인증 방법                                  관용(대칭키) 암호방식을 이용한 메시지 인증 방식                                          평문을 사전에 분배해서 갖고 있던 비밀키로 암호화하여 암호문을 수신자에게 전송하면 수신자는 암호문을 비밀키로 복호화하여 확인                      이 때, 평문이 문장으로 되어 있으면 복호화 후 전송 중의 메시지 변경 여부를 확인할 수 있음                                                        공개키 암호화 방식을 이용한 메시지 인증 방식                                          송신자는 자신의 개인키로 평문을 암호화하여 암호문을 수신자에게 전송, 수신자는 송신자의 공개키로 암호문을 복호화하여 인증을 확인                      누구나 메시지 인증을 검증할 수 있음. 개인키를 알고 있는 송신자만 인증을 생성할 수 있기 때문에 제 3자가 송신자를 가장하여 메시지를 전송할 수 없음.                                                        해시 함수를 이용한 메시지 인증 방식                                          메시지로부터 해시 함수 결과 값을 계산한 후 수신한 해시 값과 비교하여 메시지의 무결성을 검증하는 방식                      해시 함수가 공개되어 있기 때문에 제 3자가 인증자인 것처럼 가장하여 임의의 메시지를 정당한 메시지인 것처럼 인증하면 수신자는 제 3자의 위조 인증임을 알 수 없음                      비밀정보를 해시 함수에 추가하여 계산하여 단점을 해결. 송수신자는 사전에 비밀정보를 가지고 있다가 인증하려는 메시지와 비밀정보를 연계하여 해시 함수에 인증하고 계산한 값을 메시지에 덧붙여 전송함.                      수신자는 사용자로부터 수신한 메시지와 자신이 보관하고 있는 비밀 정보로 해시함수를 계산한 후 수신한 해시 함수 결과 값과 비교하여 메시지 인증을 수행. 제3자는 비밀정보를 모름.                                                        MAC 을 이용한 메시지 인증 방식                                          MAC (Message Authentication Code) 은 관용 암호방식을 이용하여 간단한 무결성 검증 코드를 만들어 메시지에 부가시키는 방법                      MAC 을 이용해 메시지 인증 및 무결성 검사를 수행하는 절차로는 우선 송신자가 인증할 메시지를 비밀키로 암호화시킨 MAC 값을 계산한 후 메시지와 함께 수신자에게 전송.                                                                                                              ">
+    <meta itemprop="datePublished" content="2021-11-23T09:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">정보보안 - 해시함수
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-11-23T09:00:00+09:00">November 23, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#해시함수">해시함수</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <h1 id="해시함수">해시함수</h1>
+<ul>
+  <li>해시함수
+    <ul>
+      <li>일방향 해시함수
+        <ul>
+          <li>일방향 해시함수의 개요
+            <ul>
+              <li>기본개념
+                <ul>
+                  <li>일방향 해시함수(one-way hash function) 에는 입력과 출력이 각각 1개씩 있음</li>
+                  <li>입력은 메시지(message) - 임의의 길이, 출력은 해시값(hash value) - 고정된 길이</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>일방향 해시함수의 성질
+            <ul>
+              <li>임의 길이의 메시지로부터 고정 길이의 해시값을 계산</li>
+              <li>해시값을 고속으로 계산</li>
+              <li>일방향성을 가짐. (해시값으로부터 메시지를 역산할 수 없음)</li>
+              <li>메시지가 다르면 해시값도 다름. (무결성 확인용)
+                <ul>
+                  <li>메시지가 1비트라도 변하면 해시값은 매우 높은 확률로 다른 값이 되야 함.</li>
+                  <li>2개의 다른 메시지가 같은 해시값을 갖는 것을 충돌(collision) 이라고 함.</li>
+                </ul>
+              </li>
+              <li>충돌이 발생하는 것이 어려운 성질 =&gt; 충돌 내성 (collision resistance)</li>
+              <li>해시 함수 = 메시지 다이제스트 함수 = 메시지 요약함수</li>
+              <li>무결성 = 완전성 = 보전성</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>메시지 무결성
+        <ul>
+          <li>무결성 점검
+            <ul>
+              <li>무결성 점검을 위해 암호학적 해시함수 사용</li>
+              <li>생성된 메시지 다이제스트와 이전 메시지 다이제스트를 비교</li>
+              <li>두 개가 동일하면 원래 메시지가 변경되지 않음</li>
+            </ul>
+          </li>
+          <li>암호학적 해시함수 기준
+            <ul>
+              <li>개요 (암호학적 해시함수는 다음을 충족해야 함)
+                <ul>
+                  <li>프리이미지 저항성 (preimage resistance) : <strong>역상 저항성</strong>
+                    <ul>
+                      <li>해시함수 h 와 y=h(M) 에 대하여 Eve 가 이를 만족하는 M 값을 찾아내는게 힘들어야 함</li>
+                      <li><strong>y = h(x) 를 만족하는 x 를 찾는 것이 불가능해야 함.</strong></li>
+                    </ul>
+                  </li>
+                  <li>제2프리이미지 저항성 (second preimage resistance) : 두 번째 역상 저항성, <strong>약한 충돌 내성</strong>
+                    <ul>
+                      <li>메시지를 쉽게 위조할 수 없도록 하는 성질</li>
+                      <li>Eve가 메시지와 다이제스트를 가로채고 또 다른 다이제스트를 생성</li>
+                      <li><strong>입력값 x에 대해서 h(x) = h(x’), x != x’ 을 만족하는 x’ 을 찾는 것이 불가능해야 함.</strong></li>
+                    </ul>
+                  </li>
+                  <li>충돌 저항성 (collision resistance) : <strong>강한 충돌 내성</strong>
+                    <ul>
+                      <li>약한 충돌 내성보다 확률이 높음</li>
+                      <li>Eve 로 하여금 동일한 다이제스트를 가지는 2개의 메시지를 구하지 못하도록 하는 것</li>
+                      <li><strong>h(x) = h(x’) 을 만족하는 입력값 x, x’ 을 찾는다는 것은 계산적으로 불가능해야 함.</strong></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>일방향 해시함수의 응용
+        <ul>
+          <li>소프트웨어 변경 검출</li>
+          <li>무결성 검증</li>
+          <li>패스워드를 기초로 한 암호화
+            <ul>
+              <li>패스워드와 솔트(의사난수 랜덤 값)를 섞은 결과의 해시값을 구해 그것을 암호화키로 사용 =&gt; 사전 공격 차단</li>
+            </ul>
+          </li>
+          <li>메시지 인증코드
+            <ul>
+              <li>송신자와 수신자만의 키와 메시지를 혼합하여 해시값을 계산 한 것</li>
+              <li>SSL/TLS 에서도 사용</li>
+            </ul>
+          </li>
+          <li>전자서명</li>
+          <li>전자입찰 시스템</li>
+        </ul>
+      </li>
+      <li>랜덤 오라클 모델과 해시함수에 대한 공격
+        <ul>
+          <li>랜덤 오라클 모델
+            <ul>
+              <li>개요
+                <ul>
+                  <li>해시함수에 대한 이상적인 수학적 모델</li>
+                </ul>
+              </li>
+              <li>비둘기집 원리
+                <ul>
+                  <li>n+1 비들기가 n개의 집에 들어가 있을 때 한 비둘기 집에는 두마리가 있다는 원리 (충돌을 의미)</li>
+                </ul>
+              </li>
+              <li>생일 문제 (생일 공격)
+                <ul>
+                  <li>같은 해시값을 생성하는 2개의 메시지를 구하는 것</li>
+                  <li>강한 충돌 내성을 깨고자 하는 공격</li>
+                  <li>생일 패러독스 (birthday paradox) -&gt; 일치할 확률이 상상 이상으로 높아지는 것</li>
+                  <li>랜덤으로 선택한 N명의 그룹, N 명 중 적어도 2명의 생일이 일치할 확률이 1/2 이상이 되도록 하기 위한 N은 최저 몇 명? -&gt; 23명
+                    <ul>
+                      <li>N명 전원 생일이 일치하지 않을 확률을 1에서 빼면 됨.</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>일방향 해시함수에 대한 공격
+        <ul>
+          <li>무차별 공격
+            <ul>
+              <li>약한 충돌 내성을 깨고자 하는 공격</li>
+              <li>SHA-1 은 160 비트라서 2의 160승 회를 시행하면 됨</li>
+            </ul>
+          </li>
+          <li>기타 해시함수 공격의 종류 및 특성
+            <ul>
+              <li>일치블록 연쇄공격 : 새로운 메시지 M’ 을 사전에 다양하게 만들어 놓았다가 공격하고자 하는 메시지의 해시함수값 h(M) 과 같은 해시함수값을 갖는 것을 골라 사용하는 공격</li>
+              <li>중간자 연쇄공격 : 전체 해시 값이 아니라 해시 중간의 결과에 대한 충돌쌍을 찾는다.</li>
+              <li>고정점 연쇄공격 : 메시지 블록과 연쇄변수 쌍을 얻게 되면 임의의 수의 동등한 블록들 xi 를 메시지의 중간에 삽입해도 전체 해시값이 변하지 않는다.</li>
+              <li>차분 연쇄공격
+                <ul>
+                  <li>다중 라운드 블록암호의 공격 = 다중 라운드 블록암호를 사용하는 해시 함수에서 입력값과 그에 대응하는 출력값 차이의 통계적 특성을 조사하는 기법</li>
+                  <li>해시함수의 공격 : 압축함수의 입출력 차이를 조사하여 0의 충돌쌍을 주로 찾아내는 방법을 사용</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>일방향 해시함수로 해결할 수 없는 문제
+        <ul>
+          <li>조작과 변경을 검출할 수 있지만 거짓행세를 검출하지는 못함</li>
+          <li>무결성 외에 인증이라는 절차도 필요 (파일의 무결성 뿐만 아니라 파일의 송신처 검증도 필요)
+            <ul>
+              <li>인증을 하기 위한 기술 : 메시지 인증코드와 전자서명과 같은 기술</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>암호학적 해시함수의 예
+    <ul>
+      <li>개요
+        <ul>
+          <li>압축함수의 두 가지 유형
+            <ul>
+              <li>기본 개념
+                <ul>
+                  <li>해시 함수를 설계하는 데에는 크게 서로 다른 2가지 경향이 있음.</li>
+                  <li>압축함수를 아무런 기초 없이 처음부터 새로 만드는 것, 목적에 맞추어 특별하게 설계.</li>
+                  <li>압축함수 자리에 대칭키 블록 암호를 사용하는 것.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>새로 만드는 해시함수
+            <ul>
+              <li>메시지 다이제스트 (Message Digest) (MD2 -&gt; MD4 -&gt; MD5)
+                <ul>
+                  <li>MD 알고리즘에는 MD2, MD4, MD5 세 가지가 있음. RSA를 개발한 MIT의 Rivest 교수가 공개키 기반 구조를 만들기 위해 RSA 와 함께 개발</li>
+                  <li>1989년에 만들어진 MD2는 8비트 컴퓨터에 최적화, MD4(90년 개발), MD5(91년 개발) 은 32비트 컴퓨터에 최적화</li>
+                  <li>MD5 는 MD4의 확장판으로, MD4 보다 속도는 빠르지 않지만 데이터 보안성이 더 좋음.</li>
+                  <li>최종 버전인 MD5 : 메시지를 512비트로 된 블록들로 나누고, 128비트 다이제스트를 출력. 충돌 공격 내성을 갖기에는 길이가 짧음.</li>
+                </ul>
+              </li>
+              <li>SHA (Secure Hash Algorithm)
+                <ul>
+                  <li>안전 해시 알고리즘(SHA), 최근에 널리 사용</li>
+                  <li>NIST가 개발, 1993년에 FIPS PUB 180 으로 출판. SHA의 약점이 발견되었을 때 1995년 FIPS PUB 180-1로 나옴, 이를 SHA-1 이라고 함.</li>
+                  <li>SHA 는 MD4 해시함수에 기초, 설계도 MD4 를 모델로 함. MD5 보다 느리지만 안전함. SHA-1 해시값으로 160비트를 출력.</li>
+                  <li>2002년 NIST는 새 표준인 FIPS-180-2를 내놓음. 해시 값이 각각 256, 384와 512비트인 3개의 새로운 SHA 버전을 정의함. SHA-256, SHA-384, SHA-512. 이들 알고리즘을 SHA-2 라고 함.</li>
+                  <li>새로운 버전은 SHA-1과 하부구조가 동일. 동일한 유형의 모듈러 연산과 논리적 2진 연산을 이용. 2008년 FIP PUB 180-3 에는 224-비트 버전이 추가.</li>
+                  <li>2005년에 SHA-1의 강한 충돌 내성이 깨졌다는 것을 접수하고 SHA-3을 제정하기로 함. SHA-3 은 AES와 같은 방식으로 표준화</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>SHA-512
+        <ul>
+          <li>개요
+            <ul>
+              <li>기본개념
+                <ul>
+                  <li>SHA-2에 포함 (SHA-224, SHA-256, SHA-384, SHA-512)</li>
+                  <li>SHA-512는 다중-블록 메시지로부터 512비트 다이제스트를 생성함. 각 블록은 1024비트 길이를 가짐.</li>
+                </ul>
+              </li>
+              <li>길이 필드와 패딩
+                <ul>
+                  <li>메시지 다이제스트를 생성하기 전에 메시지에 추가적으로 덧붙이는 128비트의 부호 없는 정수 길이 필드가 필요. (512의 경우)
+                    <ul>
+                      <li>
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td>Original MSG Field (&lt;2^128)</td>
+                              <td>Padding Field (가변길이)</td>
+                              <td>Length Field (Original MSG 길이필드 - Hash 값 수정에 대한 방어체계)</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>메시지의 길이가 비트수로 표현된 값이 저장됨. 이 길이는 패딩을 하기 전의 원래 메시지 길이를 나타냄.</li>
+                  <li>부호 없는 128비트 정수 필드로 정의할 수 있는 수는 0부터 2^128-1 이다. 이 길이가 바로 SHA-512에서 감당할 수 있는 최대 메시지 길이.
+                    <ul>
+                      <li>2^128 비트 이하의 길이를 갖는 메시지를 1024비트의 블록으로 쪼갬.</li>
+                      <li>IV 512 bit 와 블록을 Compression 함수를 이용해 512 bit 생성</li>
+                      <li>위의 512bit 데이터를 다음 블록과 Compression 함수를 이용해 512 bit 생성…</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>메시지 인증코드(MAC)
+        <ul>
+          <li>MAC의 개요
+            <ul>
+              <li>기본개념
+                <ul>
+                  <li>메시지 인증을 위해 필요 (MAC, Message Authentication Code)</li>
+                  <li>해시함수 기반, 블록암호 = 전자서명보다 속도가 빠름</li>
+                  <li>무결성을 확인하고, 메시지에 대한 인증을 하는 기술 (변경과 거짓행세 검출 가능)</li>
+                  <li>임의 길이의 메시지와 송신자 및 수신자가 공유하는 키라는 2개의 입력값을 기초로 해서 고정 비트길이의 출력을 계산하는 함수, 이 출력을 MAC 값이라고 부름.
+                    <ul>
+                      <li>Msg 와 키(송신자,수신자 공유)를 MAC 함수에 입력하여 MAC 값(고정길이 비트)을 추출</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>메시지 인증
+                <ul>
+                  <li>암호를 사용하면 소극적 공격(도청)을, 인증을 사용하면 적극적 공격(데이터나 거래의 위조)를 방어할 수 있음.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>변경 감지 코드 (MDC, Modification Detection Code)
+            <ul>
+              <li>메시지의 무결성을 보장하는 메시지 다이제스트</li>
+              <li>Bob은 수신한 메시지로부터 새로운 MDC 를 생성하여 Alice 에게 받은 MDC 와 비교, 값이 동일하다면 해당 메시지는 변경되지 않음.</li>
+              <li>키가 없는 해시함수를 사용</li>
+            </ul>
+          </li>
+          <li>메시지 인증 코드 (MAC)
+            <ul>
+              <li>메시지의 무결성은 물론 Alice 가 메시지의 원 전송자이며 다른 사람이 Alice 인 척 하는 것이 아니라는 것을 말해주는 데이터 출원지 인증을 보장하기 위해, 변경 감지 코드를 메시지 인증코드(MAC) 로 바꿀 필요가 있음.</li>
+              <li>MDC와 MAC의 차이는 MAC 에는 Alice 와 Bob 사이의 비밀값이 포함. Eve 는 가지고 있지 않은 비밀키가 두 사람 사이의 비밀 값이 될 수 있다.
+                <ul>
+                  <li>Eve 가 변조를 하더라도, 메시지와 키 값의 Hash 값인 MAC 값을 생성할 수 없음.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>MAC 의 키 배송 문제
+            <ul>
+              <li>MAC에서는 송신자와 수신자가 키를 공유할 필요가 있다.</li>
+              <li>대칭키 암호 때의 키 배송 문제와 같은 문제가 메시지 인증코드에서도 일어남.</li>
+            </ul>
+          </li>
+          <li>MAC의 구현 사례
+            <ul>
+              <li>축소 MAC
+                <ul>
+                  <li>MAC의 안정성을 높이기 위해 축소 MAC(nested MAC) 이 설계됨. 두 단계의 해싱이 있음</li>
+                  <li>첫 번째 단계 : 키는 메시지와 이어 붙이고 해시하여 중간 단계의 다이제스트를 생성함.</li>
+                  <li>두 번째 단계 : 키는 중간단계 다이제스트에 이어 붙이고 최종적인 다이제스트를 생성</li>
+                </ul>
+              </li>
+              <li>HMAC
+                <ul>
+                  <li>축소 MAC 보다 더 복잡. 패딩 같은 추가적인 조치가 더 들어 있음.</li>
+                  <li>HMAC 은 일방향 해시함수를 이용하여 메시지 인증코드를 구성하는 방법.</li>
+                  <li>HMAC 의 H 는 Hash
+                    <ul>
+                      <li>블록길이
+                        <ul>
+                          <li>SHA-1 : 512</li>
+                          <li>SHA-2 (SHA-224 : 512, SHA-256 : 512, SHA-384 : 1024, SHA-512 : 1024)</li>
+                        </ul>
+                      </li>
+                      <li>MD 길이
+                        <ul>
+                          <li>SHA-1 : 160</li>
+                          <li>SHA-2 (SHA-224 : 224, SHA-256 : 256, SHA-384 : 384, SHA-512 : 512)</li>
+                        </ul>
+                      </li>
+                      <li>HMAC 과정
+                        <ul>
+                          <li>
+                            <table>
+                              <tbody>
+                                <tr>
+                                  <td>키값 : 키</td>
+                                  <td>Key Padding (000..) 으로 블록길이만큼 늘임</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </li>
+                          <li>XOR 연산</li>
+                          <li>I Pad : 00110110 00110110 00110110 … 으로 블록길이만큼 늘임</li>
+                          <li>결과값 Si 와 메시지블록 M1, M2, … , Mn 을 결합하여 해시함수(H) 적용 (결과값 h)</li>
+                          <li>위 키값과 O Pad : 01011100 01011100 01011100 … 으로 블록길이만큼 늘린 값을 XOR 연산</li>
+                          <li>
+                            <table>
+                              <tbody>
+                                <tr>
+                                  <td>결과값 So 와 h 를 결합 (So</td>
+                                  <td>h) 하여 해시함수(H) 적용, 최종 MAC 값 추출</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </li>
+                          <li>H : SHA-1, MD5 등등…</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>CMAC (Cipher-based Message Authentication Code)
+                <ul>
+                  <li>NIST 는 데이터 인증 알고리즘 혹은 CMAC 또는 CBCMAC 이라 부르는 표준 FIPS 113을 정의</li>
+                  <li>대칭키 암호시스템에 대한 암호 블록체인 (CBC) 모드와 유사한 방법
+                    <ul>
+                      <li>그러나 N개의 평문 블록으로부터 N개의 암호문 블록을 만드는 것은 아님. (1개의 암호문 블록 생성)</li>
+                    </ul>
+                  </li>
+                  <li>CMAC 이 CBCMAC 보다 안전 (수학적 보완)</li>
+                  <li>과정
+                    <ul>
+                      <li>메시지 블록 M1, M2, …, Mn</li>
+                      <li>M1 과 k (키값) 을 E (Encrypt) 한 결과 R1</li>
+                      <li>M2 와 R1 을 Xor 연산 하여 k (키값) 을 E (Encrypt) …</li>
+                      <li>Mn 와 Rn-1 와 새로 생성한 k (키값) 을 E (Encrypt) =&gt; CMAC</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>MAC 의 이용 예
+            <ul>
+              <li>IPSec (HMAC)
+                <ul>
+                  <li>인터넷 기반 통신프로토콜 IP(Internet Protocol) 에 보안기능을 추가한 것</li>
+                  <li>통신 내용의 인증과 무결성을 확인하기 위해 MAC 을 이용</li>
+                </ul>
+              </li>
+              <li>SSL/TLS (HMAC)
+                <ul>
+                  <li>웹에서 온라인 쇼핑을 할 때 사용되는 통신 프로토콜</li>
+                  <li>통신 내용의 인증과 무결성 확인을 위해 메시지 인증코드를 이용</li>
+                </ul>
+              </li>
+              <li>SET 프로토콜 (HMAC)</li>
+            </ul>
+          </li>
+          <li>MAC 에 대한 공격
+            <ul>
+              <li>재전송 공격
+                <ul>
+                  <li>개요
+                    <ul>
+                      <li>적극적 공격자 멜로리는 자신이 보존해 둔 MAC 값을 반복해서 송신하는 공격을 감행.</li>
+                      <li>이를 재전송 공격(replay attack) 이라고 부름
+                        <ul>
+                          <li>A 에서 B로 전송되는 Msg + MAC 을 Mellory 가 확보</li>
+                          <li>Msg + MAC 을 재전송</li>
+                        </ul>
+                      </li>
+                      <li>재전송 공격을 막을 수 있는 방법에는 아래 4가지가 있음.</li>
+                    </ul>
+                  </li>
+                  <li>순서 번호 (sequence number)
+                    <ul>
+                      <li>송신 메시지에 매회 1회씩 증가하는 번호를 붙이기로 약속.</li>
+                      <li>MAC 값의 계산에 순서번호도 메시지에 포함시키도록 함.</li>
+                      <li>마지막 순서 번호를 기록해야 함.</li>
+                    </ul>
+                  </li>
+                  <li>타임스탬프 (timestamp)
+                    <ul>
+                      <li>송신 메시지에 현재 시각을 넣기로 약속해두고 그 이전의 메시지가 왔을 경우에는 MAC 값이 바르더라도 오류라고 판단.</li>
+                      <li>시계 동기화 필요</li>
+                    </ul>
+                  </li>
+                  <li>비표 (nonce)
+                    <ul>
+                      <li>메시지를 수신하기에 앞서 수신자는 송신자에게 일회용의 랜덤한 값 (비표) 를 줌.</li>
+                      <li>송신자는 비표를 포함해서 MAC 값을 계산, 비표의 값은 통신 때마다 바뀜.</li>
+                      <li>통신 데이터 양이 약간 증가</li>
+                    </ul>
+                  </li>
+                  <li>시도/응답 (challenge/response)
+                    <ul>
+                      <li>비표와 유사 개념</li>
+                      <li>상대방에게 난수값을 보내면 상대방은 난수값을 포함한 응답값을 보내야 함.</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>MAC으로 해결할 수 없는 문제
+            <ul>
+              <li>제 3자에 대한 증명
+                <ul>
+                  <li>MAC 은 공유키를 사용하기에 MAC 값을 계산할 수 있는 것은 Alice 와 Bob 이다.</li>
+                  <li>두 사람이 서로 통신하고 있는 동안 그 MAC 값을 계산한 것은 상대방이라고 말할 수 있다.</li>
+                  <li>하지만 제3자 Victor 에게 이 MAC 값을 계산한 것은 자신이 아닌 상대방이라고 증명할 방법은 없다.
+                    <ul>
+                      <li>전자서명을 사용하면 제3자에 대한 증명이 가능해짐</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>부인 방지
+                <ul>
+                  <li>송신자 Alice 는 Bob 에게 그러한 메시지를 보내지 않았다고 Victor 에게 주장할 수 있고 이를 부인이라고 한다.</li>
+                  <li>MAC 에서는 Alice 와 Bob 중 어느 쪽 주장이 맞는지를 판단할 수 없다.
+                    <ul>
+                      <li>전자서명을 사용하면 부인방지가 가능함</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>메시지 인증
+        <ul>
+          <li>개요
+            <ul>
+              <li>기본 개념
+                <ul>
+                  <li>수신자가 받은 메시지가 송신자가 보낸 메시지와 동일한 것인지 확인하는 것</li>
+                  <li>메시지 내용 변경, 순서 변경, 삭제 및 훼손 등 불법 행위에 대하여 확인하는 기술</li>
+                  <li>관용 암호화 방식, 공개키 암호화 방식, 해시 함수, MAC 을 이용하는 방식 등</li>
+                </ul>
+              </li>
+              <li>메시지 인증 방법
+                <ul>
+                  <li>관용(대칭키) 암호방식을 이용한 메시지 인증 방식
+                    <ul>
+                      <li>평문을 사전에 분배해서 갖고 있던 비밀키로 암호화하여 암호문을 수신자에게 전송하면 수신자는 암호문을 비밀키로 복호화하여 확인</li>
+                      <li>이 때, 평문이 문장으로 되어 있으면 복호화 후 전송 중의 메시지 변경 여부를 확인할 수 있음</li>
+                    </ul>
+                  </li>
+                  <li>공개키 암호화 방식을 이용한 메시지 인증 방식
+                    <ul>
+                      <li>송신자는 자신의 개인키로 평문을 암호화하여 암호문을 수신자에게 전송, 수신자는 송신자의 공개키로 암호문을 복호화하여 인증을 확인</li>
+                      <li>누구나 메시지 인증을 검증할 수 있음. 개인키를 알고 있는 송신자만 인증을 생성할 수 있기 때문에 제 3자가 송신자를 가장하여 메시지를 전송할 수 없음.</li>
+                    </ul>
+                  </li>
+                  <li>해시 함수를 이용한 메시지 인증 방식
+                    <ul>
+                      <li>메시지로부터 해시 함수 결과 값을 계산한 후 수신한 해시 값과 비교하여 메시지의 무결성을 검증하는 방식</li>
+                      <li>해시 함수가 공개되어 있기 때문에 제 3자가 인증자인 것처럼 가장하여 임의의 메시지를 정당한 메시지인 것처럼 인증하면 수신자는 제 3자의 위조 인증임을 알 수 없음</li>
+                      <li>비밀정보를 해시 함수에 추가하여 계산하여 단점을 해결. 송수신자는 사전에 비밀정보를 가지고 있다가 인증하려는 메시지와 비밀정보를 연계하여 해시 함수에 인증하고 계산한 값을 메시지에 덧붙여 전송함.</li>
+                      <li>수신자는 사용자로부터 수신한 메시지와 자신이 보관하고 있는 비밀 정보로 해시함수를 계산한 후 수신한 해시 함수 결과 값과 비교하여 메시지 인증을 수행. 제3자는 비밀정보를 모름.</li>
+                    </ul>
+                  </li>
+                  <li>MAC 을 이용한 메시지 인증 방식
+                    <ul>
+                      <li>MAC (Message Authentication Code) 은 관용 암호방식을 이용하여 간단한 무결성 검증 코드를 만들어 메시지에 부가시키는 방법</li>
+                      <li>MAC 을 이용해 메시지 인증 및 무결성 검사를 수행하는 절차로는 우선 송신자가 인증할 메시지를 비밀키로 암호화시킨 MAC 값을 계산한 후 메시지와 함께 수신자에게 전송.</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88%EA%B8%B0%EC%82%AC" class="page__taxonomy-item" rel="tag">정보보안기사</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#%ED%95%B4%EC%8B%9C%ED%95%A8%EC%88%98" class="page__taxonomy-item" rel="tag">해시함수</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#is-certification" class="page__taxonomy-item" rel="tag">IS_Certification</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2021-11-23T09:00:00+09:00">November 23, 2021</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+%ED%95%B4%EC%8B%9C%ED%95%A8%EC%88%98%20https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Management-HashAlgorithm%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Management-HashAlgorithm%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Management-HashAlgorithm%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/is_certification/IS-Management-AsymmetricKeyAlgorithm/" class="pagination--pager" title="정보보안 - 비대칭키 암호
+">이전</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Management-AsymmetricKeyAlgorithm/" rel="permalink">정보보안 - 비대칭키 암호
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-08-25T09:00:00+09:00">August 25, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">비대칭키 암호
+
+  키 배송 문제
+    
+      개요
+        
+          대칭키 암호를 사용하려면 키 배송 문제(key distribution problem) 발생
+            
+              암호화 키와 복호화 키가 동일
+          ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Management-SymmetricKeyAlgorithm/" rel="permalink">정보보안 - 대칭키 암호
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-07-26T09:00:00+09:00">July 26, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">대칭키 암호의 종류
+
+  DES (Data Encryption Standard)
+    
+      개요
+        
+          NIST(미국 국립기술표준원) 에서 1973년 국가적으로 사용할 대칭키 암호시스템 제안요청서를 발표
+          IBM의 제안으로 DES...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Management-Cryptography/" rel="permalink">정보보안 - 블록 암호 / 스트림 암호
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-07-19T09:00:00+09:00">July 19, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">대칭키 암호
+
+  대칭키 암호 = 공통키 암호
+  비대칭키 암호 = 공개키 암호
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Management-Outline/" rel="permalink">정보보안 - 정보보호관리
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-07-13T09:00:00+09:00">July 13, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">정보보호 개요
+
+  정보화 사회
+    
+      정보화 사회 : 단일 생활권
+        
+          사회 모습 변화
+          전자 메일, 인터넷으로 정보 교환, 재택근무, 홈뱅킹
+          미래 사이버 전쟁
+        
+      
+      정보...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+<!--
+<script>
+	(function(d, h, m){
+    var js, fjs = d.getElementsByTagName(h)[0];
+    if (d.getElementById(m)){return;}
+    js = d.createElement(h); js.id = m;
+    js.onload = function(){
+        window.makerWidgetComInit({
+        position: "left",          
+        widget: "eqypoqmawbcz3azh-usiy9q7ma4ong1w1-juelcm3zfgcuwjds"                
+    })};
+    js.src = "https://makerwidget.com/js/embed.js";
+    fjs.parentNode.insertBefore(js, fjs)
+	}(document, "script", "dhm"))
+</script>
+-->
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:hyunik03@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 HY03. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://bluesplatter.com/is_certification/IS-Management-HashAlgorithm/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/is_certification/IS-Management-HashAlgorithm"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://bluesplatter.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

