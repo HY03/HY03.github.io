@@ -1,0 +1,905 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.20.2 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>정보보안 - 접근통제와 사용자 인증 | Bluesplatter</title>
+<meta name="description" content="접근통제    접근통제 개요            접근통제(접근제어, Access Control) 기본 개념                    컴퓨터 보안의 주된 목적                            허가되지 않은 사용자 (비인가자)에 의한 정보자원 접근 제한               정당한 사용자 (인가자)가 허가되지 않은 방법으로(비인가된 방식) 정보자원에 접근하는 것을 제한               정당한 사용자가 허가된 방식으로만 자원에 접근하도록 하는 것                                   주체(외부에서 접근하는 사람)가 객체(시스템 등 접근 대상)에 접근(Access) 할 때 보안상의 위협, 변조 등과 같은 위험으로부터 객체와 제반 환경을 보호하기 위한 보안 대책                           접근통제 절차            식별(Identification) : 인증 시스템에 본인이 누구인지 스스로를 밝히기 위해 정보를 제공 (ID, 계정번호 등) 하는 주체활동       인증(Authentication) : 주체의 신원을 검증하기 위한 사용 증명 활동 (패스워드, PIN, 토큰 등)       인가(Authorization) : 인증된 주체에게 권한을 부여하는 것       책임추적성(Accountability) : 시스템에 접근한 주체가 시스템에 어떤 행위를 하고 있는지 기록                    해명책임성으로도 해석됨           사용자의 이용을 추적하고 그의 행동에 대해 기록하고 추적하는 활동           사전 침입 의도를 감소시킴           관여하지 않은 사람에게 책임을 물어 불이익을 당하지 않도록 함           식별, 인증, 권한부여, 접근통제, 감사 개념을 기반으로 수립됨           책임추적이 가장 어려운 경우 : 하나의 계정을 여러 명이 공유할 경우                           접근통제 기본 원칙            직무 분리                    한 개인이 전체 업무에 접근 -&gt; 전체 업무를 파괴할 가능성이 있음           시스템 단계별로 나누어서 직무를 부여 -&gt; 전체 업무를 파괴하는 사고를 방지                       최소 권한 부여                    사용자가 작업을 하는데 있어서 필요한 최소한의 접근권한 / 자원을 부여           사용자의 실수나 의도적인 방법으로 인한 손상을 최소화                       입력의 신뢰성                    충분한 사용자 인증 기능이 요구됨                       개방적 정책과 폐쇄적 정책       정책 결합과 충돌해결       관리정책           사용자 인증과 메시지 인증            사용자 인증                    사용자 A가 C에 접속을 시도할 때 C와 협조하여 자신이 A임을 증명할 수 있어야 하나, B가 A를 가장할 수 없어야 함           실시간 처리                       메시지 인증 (MAC)                    실시간 처리 안됨                           사용자 인증 유형            지식 (Something you know) - 패스워드, PIN       소유 (Something you have) - 토큰, 스마트카드       존재 (Something you are) - 지문       행위 (Something you do) - 서명, 움직임       Two Factor - 위 타입 중 2가지 매커니즘을 결합한 것 (예:토큰 + PIN)                    ATM : PIN + 카드           신용카드 : 카드 + 서명                       Multi Factor - 위 타입 중 3가지 이상을 결합한 것 (예:토큰 + PIN + 지문)           인증 기법            지식에 기반을 둔 인증 (What you know)                    장점                            다양한 분야에서 사용 가능               검증 방법이 확실 (모호성이 없음)               관리비용 저렴                                   단점                            소유자가 지식을 망각했을 경우               공격자에 의해서 추측이 가능               사회공학적 공격에 매우 취약                                               소유에 기반을 둔 인증 (What you have)                    장점                            다양한 매체를 통해 인증 가능 (학생증, 신분증, 열쇠, OTP)               경제적                                   단점                            소유물이 반드시 있어야 함               복제가 가능               손실이나 도난 시 관리기능이 필요               타인이 쉽게 도용 가능 : 단독으로 사용하지 않음                                               개체 특성에 기반을 둔 인증 (What you are)                    장점                            지문, 홍채, 음성, 얼굴인식 등 무언가를 소유할 필요가 없음               도난의 염려가 없음               위조가 어려움                                   단점                            판단에 대한 모호성이 존재               관리의 어려움               관리비용 발생">
+
+
+  <meta name="author" content="HY03">
+  
+  <meta property="article:author" content="HY03">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Bluesplatter">
+<meta property="og:title" content="정보보안 - 접근통제와 사용자 인증">
+<meta property="og:url" content="https://bluesplatter.com/is_certification/IS-Management-AccessControl/">
+
+
+  <meta property="og:description" content="접근통제    접근통제 개요            접근통제(접근제어, Access Control) 기본 개념                    컴퓨터 보안의 주된 목적                            허가되지 않은 사용자 (비인가자)에 의한 정보자원 접근 제한               정당한 사용자 (인가자)가 허가되지 않은 방법으로(비인가된 방식) 정보자원에 접근하는 것을 제한               정당한 사용자가 허가된 방식으로만 자원에 접근하도록 하는 것                                   주체(외부에서 접근하는 사람)가 객체(시스템 등 접근 대상)에 접근(Access) 할 때 보안상의 위협, 변조 등과 같은 위험으로부터 객체와 제반 환경을 보호하기 위한 보안 대책                           접근통제 절차            식별(Identification) : 인증 시스템에 본인이 누구인지 스스로를 밝히기 위해 정보를 제공 (ID, 계정번호 등) 하는 주체활동       인증(Authentication) : 주체의 신원을 검증하기 위한 사용 증명 활동 (패스워드, PIN, 토큰 등)       인가(Authorization) : 인증된 주체에게 권한을 부여하는 것       책임추적성(Accountability) : 시스템에 접근한 주체가 시스템에 어떤 행위를 하고 있는지 기록                    해명책임성으로도 해석됨           사용자의 이용을 추적하고 그의 행동에 대해 기록하고 추적하는 활동           사전 침입 의도를 감소시킴           관여하지 않은 사람에게 책임을 물어 불이익을 당하지 않도록 함           식별, 인증, 권한부여, 접근통제, 감사 개념을 기반으로 수립됨           책임추적이 가장 어려운 경우 : 하나의 계정을 여러 명이 공유할 경우                           접근통제 기본 원칙            직무 분리                    한 개인이 전체 업무에 접근 -&gt; 전체 업무를 파괴할 가능성이 있음           시스템 단계별로 나누어서 직무를 부여 -&gt; 전체 업무를 파괴하는 사고를 방지                       최소 권한 부여                    사용자가 작업을 하는데 있어서 필요한 최소한의 접근권한 / 자원을 부여           사용자의 실수나 의도적인 방법으로 인한 손상을 최소화                       입력의 신뢰성                    충분한 사용자 인증 기능이 요구됨                       개방적 정책과 폐쇄적 정책       정책 결합과 충돌해결       관리정책           사용자 인증과 메시지 인증            사용자 인증                    사용자 A가 C에 접속을 시도할 때 C와 협조하여 자신이 A임을 증명할 수 있어야 하나, B가 A를 가장할 수 없어야 함           실시간 처리                       메시지 인증 (MAC)                    실시간 처리 안됨                           사용자 인증 유형            지식 (Something you know) - 패스워드, PIN       소유 (Something you have) - 토큰, 스마트카드       존재 (Something you are) - 지문       행위 (Something you do) - 서명, 움직임       Two Factor - 위 타입 중 2가지 매커니즘을 결합한 것 (예:토큰 + PIN)                    ATM : PIN + 카드           신용카드 : 카드 + 서명                       Multi Factor - 위 타입 중 3가지 이상을 결합한 것 (예:토큰 + PIN + 지문)           인증 기법            지식에 기반을 둔 인증 (What you know)                    장점                            다양한 분야에서 사용 가능               검증 방법이 확실 (모호성이 없음)               관리비용 저렴                                   단점                            소유자가 지식을 망각했을 경우               공격자에 의해서 추측이 가능               사회공학적 공격에 매우 취약                                               소유에 기반을 둔 인증 (What you have)                    장점                            다양한 매체를 통해 인증 가능 (학생증, 신분증, 열쇠, OTP)               경제적                                   단점                            소유물이 반드시 있어야 함               복제가 가능               손실이나 도난 시 관리기능이 필요               타인이 쉽게 도용 가능 : 단독으로 사용하지 않음                                               개체 특성에 기반을 둔 인증 (What you are)                    장점                            지문, 홍채, 음성, 얼굴인식 등 무언가를 소유할 필요가 없음               도난의 염려가 없음               위조가 어려움                                   단점                            판단에 대한 모호성이 존재               관리의 어려움               관리비용 발생">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2021-12-01T09:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://bluesplatter.com/is_certification/IS-Management-AccessControl/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "HY03",
+      "url": "https://bluesplatter.com/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Bluesplatter Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo/logo.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          세상에 남기는 작은 흔적
+          <span class="site-subtitle">Bluesplatter</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/">연도별 포스트</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="https://bluesplatter.com/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#is_certification" itemprop="item"><span itemprop="name">Is_certification</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">정보보안 - 접근통제와 사용자 인증</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/profile/photo.jpg" alt="HY03" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">HY03</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>저는 전문가가 아니고 이것 저것 알아보는 비전문가 입니다. <br /> 틀린 내용이 기술되어도 너그러이 봐주시고 댓글을 남겨주셨으면 좋겠습니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="http://bluesplatter.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:hyunik03@gmail.com">
+            <meta itemprop="email" content="hyunik03@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">이메일</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="정보보안 - 접근통제와 사용자 인증">
+    <meta itemprop="description" content="접근통제  접근통제 개요          접근통제(접근제어, Access Control) 기본 개념                  컴퓨터 보안의 주된 목적                          허가되지 않은 사용자 (비인가자)에 의한 정보자원 접근 제한              정당한 사용자 (인가자)가 허가되지 않은 방법으로(비인가된 방식) 정보자원에 접근하는 것을 제한              정당한 사용자가 허가된 방식으로만 자원에 접근하도록 하는 것                                주체(외부에서 접근하는 사람)가 객체(시스템 등 접근 대상)에 접근(Access) 할 때 보안상의 위협, 변조 등과 같은 위험으로부터 객체와 제반 환경을 보호하기 위한 보안 대책                      접근통제 절차          식별(Identification) : 인증 시스템에 본인이 누구인지 스스로를 밝히기 위해 정보를 제공 (ID, 계정번호 등) 하는 주체활동      인증(Authentication) : 주체의 신원을 검증하기 위한 사용 증명 활동 (패스워드, PIN, 토큰 등)      인가(Authorization) : 인증된 주체에게 권한을 부여하는 것      책임추적성(Accountability) : 시스템에 접근한 주체가 시스템에 어떤 행위를 하고 있는지 기록                  해명책임성으로도 해석됨          사용자의 이용을 추적하고 그의 행동에 대해 기록하고 추적하는 활동          사전 침입 의도를 감소시킴          관여하지 않은 사람에게 책임을 물어 불이익을 당하지 않도록 함          식별, 인증, 권한부여, 접근통제, 감사 개념을 기반으로 수립됨          책임추적이 가장 어려운 경우 : 하나의 계정을 여러 명이 공유할 경우                      접근통제 기본 원칙          직무 분리                  한 개인이 전체 업무에 접근 -&gt; 전체 업무를 파괴할 가능성이 있음          시스템 단계별로 나누어서 직무를 부여 -&gt; 전체 업무를 파괴하는 사고를 방지                    최소 권한 부여                  사용자가 작업을 하는데 있어서 필요한 최소한의 접근권한 / 자원을 부여          사용자의 실수나 의도적인 방법으로 인한 손상을 최소화                    입력의 신뢰성                  충분한 사용자 인증 기능이 요구됨                    개방적 정책과 폐쇄적 정책      정책 결합과 충돌해결      관리정책        사용자 인증과 메시지 인증          사용자 인증                  사용자 A가 C에 접속을 시도할 때 C와 협조하여 자신이 A임을 증명할 수 있어야 하나, B가 A를 가장할 수 없어야 함          실시간 처리                    메시지 인증 (MAC)                  실시간 처리 안됨                      사용자 인증 유형          지식 (Something you know) - 패스워드, PIN      소유 (Something you have) - 토큰, 스마트카드      존재 (Something you are) - 지문      행위 (Something you do) - 서명, 움직임      Two Factor - 위 타입 중 2가지 매커니즘을 결합한 것 (예:토큰 + PIN)                  ATM : PIN + 카드          신용카드 : 카드 + 서명                    Multi Factor - 위 타입 중 3가지 이상을 결합한 것 (예:토큰 + PIN + 지문)        인증 기법          지식에 기반을 둔 인증 (What you know)                  장점                          다양한 분야에서 사용 가능              검증 방법이 확실 (모호성이 없음)              관리비용 저렴                                단점                          소유자가 지식을 망각했을 경우              공격자에 의해서 추측이 가능              사회공학적 공격에 매우 취약                                          소유에 기반을 둔 인증 (What you have)                  장점                          다양한 매체를 통해 인증 가능 (학생증, 신분증, 열쇠, OTP)              경제적                                단점                          소유물이 반드시 있어야 함              복제가 가능              손실이나 도난 시 관리기능이 필요              타인이 쉽게 도용 가능 : 단독으로 사용하지 않음                                          개체 특성에 기반을 둔 인증 (What you are)                  장점                          지문, 홍채, 음성, 얼굴인식 등 무언가를 소유할 필요가 없음              도난의 염려가 없음              위조가 어려움                                단점                          판단에 대한 모호성이 존재              관리의 어려움              관리비용 발생                                          ">
+    <meta itemprop="datePublished" content="2021-12-01T09:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">정보보안 - 접근통제와 사용자 인증
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-12-01T09:00:00+09:00">December 1, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#접근통제">접근통제</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <h1 id="접근통제">접근통제</h1>
+<ul>
+  <li>접근통제 개요
+    <ul>
+      <li>접근통제(접근제어, Access Control) 기본 개념
+        <ul>
+          <li>컴퓨터 보안의 주된 목적
+            <ul>
+              <li>허가되지 않은 사용자 (비인가자)에 의한 정보자원 접근 제한</li>
+              <li>정당한 사용자 (인가자)가 허가되지 않은 방법으로(비인가된 방식) 정보자원에 접근하는 것을 제한</li>
+              <li>정당한 사용자가 허가된 방식으로만 자원에 접근하도록 하는 것</li>
+            </ul>
+          </li>
+          <li>주체(외부에서 접근하는 사람)가 객체(시스템 등 접근 대상)에 접근(Access) 할 때 보안상의 위협, 변조 등과 같은 위험으로부터 객체와 제반 환경을 보호하기 위한 보안 대책</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>접근통제 절차
+    <ul>
+      <li><strong>식별</strong>(Identification) : 인증 시스템에 본인이 누구인지 스스로를 밝히기 위해 정보를 제공 (ID, 계정번호 등) 하는 주체활동</li>
+      <li><strong>인증</strong>(Authentication) : 주체의 신원을 검증하기 위한 사용 증명 활동 (패스워드, PIN, 토큰 등)</li>
+      <li><strong>인가</strong>(Authorization) : 인증된 주체에게 권한을 부여하는 것</li>
+      <li>책임추적성(Accountability) : 시스템에 접근한 주체가 시스템에 어떤 행위를 하고 있는지 기록
+        <ul>
+          <li>해명책임성으로도 해석됨</li>
+          <li>사용자의 이용을 추적하고 그의 행동에 대해 기록하고 추적하는 활동</li>
+          <li>사전 침입 의도를 감소시킴</li>
+          <li>관여하지 않은 사람에게 책임을 물어 불이익을 당하지 않도록 함</li>
+          <li>식별, 인증, 권한부여, 접근통제, 감사 개념을 기반으로 수립됨</li>
+          <li>책임추적이 가장 어려운 경우 : 하나의 계정을 여러 명이 공유할 경우</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>접근통제 기본 원칙
+    <ul>
+      <li><strong>직무 분리</strong>
+        <ul>
+          <li>한 개인이 전체 업무에 접근 -&gt; 전체 업무를 파괴할 가능성이 있음</li>
+          <li>시스템 단계별로 나누어서 직무를 부여 -&gt; 전체 업무를 파괴하는 사고를 방지</li>
+        </ul>
+      </li>
+      <li><strong>최소 권한 부여</strong>
+        <ul>
+          <li>사용자가 작업을 하는데 있어서 필요한 최소한의 접근권한 / 자원을 부여</li>
+          <li>사용자의 실수나 의도적인 방법으로 인한 손상을 최소화</li>
+        </ul>
+      </li>
+      <li>입력의 신뢰성
+        <ul>
+          <li>충분한 사용자 인증 기능이 요구됨</li>
+        </ul>
+      </li>
+      <li>개방적 정책과 폐쇄적 정책</li>
+      <li>정책 결합과 충돌해결</li>
+      <li>관리정책</li>
+    </ul>
+  </li>
+  <li>사용자 인증과 메시지 인증
+    <ul>
+      <li>사용자 인증
+        <ul>
+          <li>사용자 A가 C에 접속을 시도할 때 C와 협조하여 자신이 A임을 증명할 수 있어야 하나, B가 A를 가장할 수 없어야 함</li>
+          <li>실시간 처리</li>
+        </ul>
+      </li>
+      <li>메시지 인증 (MAC)
+        <ul>
+          <li>실시간 처리 안됨</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>사용자 인증 유형
+    <ul>
+      <li>지식 (Something you know) - 패스워드, PIN</li>
+      <li>소유 (Something you have) - 토큰, 스마트카드</li>
+      <li>존재 (Something you are) - 지문</li>
+      <li>행위 (Something you do) - 서명, 움직임</li>
+      <li>Two Factor - 위 타입 중 2가지 매커니즘을 결합한 것 (예:토큰 + PIN)
+        <ul>
+          <li>ATM : PIN + 카드</li>
+          <li>신용카드 : 카드 + 서명</li>
+        </ul>
+      </li>
+      <li>Multi Factor - 위 타입 중 3가지 이상을 결합한 것 (예:토큰 + PIN + 지문)</li>
+    </ul>
+  </li>
+  <li>인증 기법
+    <ul>
+      <li>지식에 기반을 둔 인증 (What you know)
+        <ul>
+          <li>장점
+            <ul>
+              <li>다양한 분야에서 사용 가능</li>
+              <li>검증 방법이 확실 (모호성이 없음)</li>
+              <li>관리비용 저렴</li>
+            </ul>
+          </li>
+          <li>단점
+            <ul>
+              <li>소유자가 지식을 망각했을 경우</li>
+              <li>공격자에 의해서 추측이 가능</li>
+              <li>사회공학적 공격에 매우 취약</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>소유에 기반을 둔 인증 (What you have)
+        <ul>
+          <li>장점
+            <ul>
+              <li>다양한 매체를 통해 인증 가능 (학생증, 신분증, 열쇠, OTP)</li>
+              <li>경제적</li>
+            </ul>
+          </li>
+          <li>단점
+            <ul>
+              <li>소유물이 반드시 있어야 함</li>
+              <li>복제가 가능</li>
+              <li>손실이나 도난 시 관리기능이 필요</li>
+              <li>타인이 쉽게 도용 가능 : 단독으로 사용하지 않음</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>개체 특성에 기반을 둔 인증 (What you are)
+        <ul>
+          <li>장점
+            <ul>
+              <li>지문, 홍채, 음성, 얼굴인식 등 무언가를 소유할 필요가 없음</li>
+              <li>도난의 염려가 없음</li>
+              <li>위조가 어려움</li>
+            </ul>
+          </li>
+          <li>단점
+            <ul>
+              <li>판단에 대한 모호성이 존재</li>
+              <li>관리의 어려움</li>
+              <li>관리비용 발생</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%9D%B8%EC%A6%9D" class="page__taxonomy-item" rel="tag">사용자 인증</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#%EC%A0%91%EA%B7%BC%ED%86%B5%EC%A0%9C" class="page__taxonomy-item" rel="tag">접근통제</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88%EA%B8%B0%EC%82%AC" class="page__taxonomy-item" rel="tag">정보보안기사</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#is-certification" class="page__taxonomy-item" rel="tag">IS_Certification</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2021-12-01T09:00:00+09:00">December 1, 2021</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+%EC%A0%91%EA%B7%BC%ED%86%B5%EC%A0%9C%EC%99%80+%EC%82%AC%EC%9A%A9%EC%9E%90+%EC%9D%B8%EC%A6%9D%20https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Management-AccessControl%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Management-AccessControl%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Management-AccessControl%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/is_certification/IS-Management-X509/" class="pagination--pager" title="정보보안 - PKI / X.509
+">이전</a>
+    
+    
+      <a href="/is_certification/IS-Management-SSO/" class="pagination--pager" title="정보보안 - SSO(통합인증체계) / Kerberos
+">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Management-AccessControlModel/" rel="permalink">정보보안 - 접근통제 보안모델
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-12-02T09:00:00+09:00">December 2, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">접근통제 보안모델
+
+  접근통제의 모델
+    
+      강제적 접근통제 (MAC) - Mandatory Access Control : 규칙기반(Rule Based)
+        
+          자원 - 보안레벨 (Security Level)
+          사용자 - 보...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Management-SSO/" rel="permalink">정보보안 - SSO(통합인증체계) / Kerberos
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-12-02T09:00:00+09:00">December 2, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">통합인증 체계(SSO)
+
+  SSO(Single Sign On) 의 기본개념
+    
+      통합 인증 체계(SSO) 정의
+        
+          한 번의 시스템 인증을 통하여 접근하고자 하는 다양한 정보시스템에 재인증 절차 없이 접근할 수 있도록 하는 통합 로그인 ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Management-X509/" rel="permalink">정보보안 - PKI / X.509
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-11-30T09:00:00+09:00">November 30, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">PKI
+
+  PKI(공개키 기반 구조)
+    
+      PKI(Public-Key Infrastructure) 의 개요
+        
+          기본 개념
+            
+              공개키 알고리즘을 위한 키 관리 구조
+              R...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Management-DigitalSignature/" rel="permalink">정보보안 - 전자서명
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-11-24T09:00:00+09:00">November 24, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">전자서명
+
+  전자서명의 개요
+    
+      암호화 방식에 따라 두 종류로 나뉨
+        
+          공개키 서명 방식 (공개키 암호화 방식)
+            
+              서명자의 검증 정보를 공개하여 누구나 검증할 수 있는 방식 (간편)
+  ...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+<!--
+<script>
+	(function(d, h, m){
+    var js, fjs = d.getElementsByTagName(h)[0];
+    if (d.getElementById(m)){return;}
+    js = d.createElement(h); js.id = m;
+    js.onload = function(){
+        window.makerWidgetComInit({
+        position: "left",          
+        widget: "eqypoqmawbcz3azh-usiy9q7ma4ong1w1-juelcm3zfgcuwjds"                
+    })};
+    js.src = "https://makerwidget.com/js/embed.js";
+    fjs.parentNode.insertBefore(js, fjs)
+	}(document, "script", "dhm"))
+</script>
+-->
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:hyunik03@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 HY03. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://bluesplatter.com/is_certification/IS-Management-AccessControl/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/is_certification/IS-Management-AccessControl"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://bluesplatter.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

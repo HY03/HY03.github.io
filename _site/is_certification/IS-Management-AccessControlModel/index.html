@@ -1,0 +1,1185 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.20.2 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>정보보안 - 접근통제 보안모델 | Bluesplatter</title>
+<meta name="description" content="접근통제 보안모델    접근통제의 모델            강제적 접근통제 (MAC) - Mandatory Access Control : 규칙기반(Rule Based)                    자원 - 보안레벨 (Security Level)           사용자 - 보안 취급인가 (Security Clearance)           보안레벨과 보안 취급인가를 비교하여 접근통제           Linux/Unix 는 객체(파일) 을 소유하고 있는 주체가 다른 사용자에게 권한 부여하나 MAC 에서는 주체가 다른 사용자에게 권한을 줄 수가 없음 (정해진 규칙(보안관리자가 통제) 만을 따름) - 강제적 접근통제                            관리자만이 정보자원을 분류, 설정, 변경               객체에 대한 접근 규칙 : 규칙기반 접근통제 (중앙집중형 보안관리) - 사용자가 통제를 수정할 수 없다.                                    보안전문가에 의해 생성                   운영자에 의해 설정                   운영시스템에 의해서 집행                   다른 보안기술에 의해 지원                                                                   단점                            사용자의 기능이 매우 제한적               관리적 부담이 크다               비용이 많이 소요               성능저하가 발생할 수 있음               사용자 친화적이지 않음 : 상업적인 환경에 부적합               주로 군 시스템에서 사용                                   보안레이블 (민감성레이블 - Sensitivity Label) : 시스템에 있는 자원이 얼마나 민감한 자원인지 수치화 (자원민감도, 중요성)                            모든 객체(자원)에 할당 : 파일, 디렉토리, 장비 등                                   보안허가증 : 주체가 특정 객체(특정자원) 에 접근할 수 있는지 표시           주체 S 는 객체 A 에 대한 보안허가증을 가지고 A에 접근 - 주체 S가 객체 A의 보안레이블 보다 보안허가가 높거나 같은 경우에 접근 가능           MLS (MultiLevel Security) policy : 다중 수준 보안           사용 예                            BLP (벨라파둘라 모델) : 기밀성에 중점               Biba : 무결성에 중점               Clark-Willson Model : 무결성에 중점               Chinese Wall Model (만리장성 모델) : 무결성/기밀성                                   사용 예                            NSA, SELinux, Trusted Solaris               DAC 모델로의 전환이 쉽지 않음 (보안레이블, 취급인가가 호환되지 않음)                                               임의적 접근통제 (DAC) - Discretionary Access Control : 신분에 근거                    TCSEC 표준 중 하나                            1985년 발행된 안전한 컴퓨터 시스템을 위한 평가지침서                                   신원기반 접근통제 / 사용자기반 접근통제 / 혼합방식 접근통제 : 주체가 속한 그룹의 신원에 근거하여 객체에 대한 접근을 제한           소유자의 임의성에 기반하여 접근통제           사용자에게 동적으로 접근권한을 부여 : 분산형 보안관리           유닉스/리눅스, Windows, Mac, DBMS 에서 이용           통제기법                            접근제어행렬 (Access Control Matrix)                                    주체(Row)(터미널/host/프로그램/개별사용자/그룹사용자…)                   객체(Column)                   접근권한(Cell) (소유/읽기/쓰기/실행..)                   관계를 표현 - 접근제어 정책을 관리                   주체와 객체가 많아진다면 행렬이 커지고(관리어려움), 빈 공간이 많아짐(비효율적)                                               자격목록 (CL - Capability List) : 한 주체가 갖는 자격(권한)들의 리스트                                    권한 -&gt; 주체가 객체에 대해 갖는 접근권한                   접근제어 행렬을 행(Row)단위로 관리하는 것                   Linked List 로 표현됨                                                                                                                                                            홍길동 -&gt; 파일A(RWX)                               포인터 -&gt; 파일C(RW)                               포인터 -&gt; 파일D(R)                                                                                                                                                                                               접근제어목록 (ACL - Access Control List)                                    자격목록 : 주체 관점 / 접근제어목록 : 객체 관점                   객체의 관점에서 객체에 어떤 주체가 어떤 접근권한을 갖는지 명시                   접근제어 행렬을 열(Column)단위로 관리하는 것                   Linked List 로 표현됨                                                                                                                                                            파일 A -&gt; 홍길동(RWX)                               포인터 -&gt; 고길동(RW)                               포인터 -&gt; 강길동(R)                                                                                                                                                                                                                   장점                            객체별 세분화된 접근제어가 가능               객체의 소유자가 다른 주체에게 임의적으로 접근권한 부여가 가능 -&gt; 유연한 접근제어 서비스                                   단점                            시스템 전체적으로 접근제어이 일관성이 부족               권한이 높은 주체가 다른 주체에게 임의로 자료에 대한 접근을 허용할 수 있음               주체의 신분에 따라 접근 통제가 이루어지므로 다른 주체의 신분을 사용해 불법적 접근을 할 수 있음               멀웨어 (웜, 루트킷, 트로이목마, 키로거 등 악성코드) 취약점이 존재                                    트로이목마 예시                                            Data File 에 대해 user1 이 rw 권한을 가지고 있다.                       user1 은 프로그램을 이용해 Data File 에 접근한다.                       Attacker 는 프로그램 안에 트로이목마를 심고, 이 프로그램에 대응하는 Back-Pocket 파일을 생성 (Attacker 는 rw, user1 은 w 권한을 가짐)                       Attacker 는 프로그램에 user1의 권한을 부여, user1 은 트로이목마가 심어진 프로그램을 실행                       user1 은 프로그램을 이용해 Data File 을 읽고, 해당 내용을 Back-Pocket 파일에 쓴다.                                                                                                                       역할기반 접근통제 (RBAC) - Role Based Access Control : 역할에 기반                    개요                            역할에 기반 : 접근제어 관리가 단순               MAC과 DAC의 약점을 보완한 방식 - 권한을 역할에 연관시킴               그룹과 역할의 구분                                    그룹 : 사용자들의 집합 (권한의 집합은 아님)                   역할 : 사용자들의 집합 &amp; 권한의 집합                                               중앙에서 관리되는 통제의 모음을 사용                                    관리자에 의해서 중앙집중적인 역할 (사용자집합 &amp; 권한집합) 설정                                                                   장점                            전체 시스템 관점에서 일관성 있는 접근제어가 가능               역할만 사용자에게 부여하면 됨                                    정적이면서 동적인 접근통제                                            중앙에서 역할을 정의 (정적)                                                    Role1 (File1)                           Role2 (File1, File2)                           Role3 (File1, File2, File3)                                                                       사용자와 역할을 할당 (동적)                                                    user1 -&gt; Role1                           User2 -&gt; Role1, Role2 (1:1일 필요 없음)                           user3 -&gt; Role3 -&gt; Role2                                                                                                                                                           단점                            역할수행에 반드시 필요한 접근권한만 부여해야 함 (최소권한부여원칙 준수-&gt;직무분리원칙 충족용이)">
+
+
+  <meta name="author" content="HY03">
+  
+  <meta property="article:author" content="HY03">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Bluesplatter">
+<meta property="og:title" content="정보보안 - 접근통제 보안모델">
+<meta property="og:url" content="https://bluesplatter.com/is_certification/IS-Management-AccessControlModel/">
+
+
+  <meta property="og:description" content="접근통제 보안모델    접근통제의 모델            강제적 접근통제 (MAC) - Mandatory Access Control : 규칙기반(Rule Based)                    자원 - 보안레벨 (Security Level)           사용자 - 보안 취급인가 (Security Clearance)           보안레벨과 보안 취급인가를 비교하여 접근통제           Linux/Unix 는 객체(파일) 을 소유하고 있는 주체가 다른 사용자에게 권한 부여하나 MAC 에서는 주체가 다른 사용자에게 권한을 줄 수가 없음 (정해진 규칙(보안관리자가 통제) 만을 따름) - 강제적 접근통제                            관리자만이 정보자원을 분류, 설정, 변경               객체에 대한 접근 규칙 : 규칙기반 접근통제 (중앙집중형 보안관리) - 사용자가 통제를 수정할 수 없다.                                    보안전문가에 의해 생성                   운영자에 의해 설정                   운영시스템에 의해서 집행                   다른 보안기술에 의해 지원                                                                   단점                            사용자의 기능이 매우 제한적               관리적 부담이 크다               비용이 많이 소요               성능저하가 발생할 수 있음               사용자 친화적이지 않음 : 상업적인 환경에 부적합               주로 군 시스템에서 사용                                   보안레이블 (민감성레이블 - Sensitivity Label) : 시스템에 있는 자원이 얼마나 민감한 자원인지 수치화 (자원민감도, 중요성)                            모든 객체(자원)에 할당 : 파일, 디렉토리, 장비 등                                   보안허가증 : 주체가 특정 객체(특정자원) 에 접근할 수 있는지 표시           주체 S 는 객체 A 에 대한 보안허가증을 가지고 A에 접근 - 주체 S가 객체 A의 보안레이블 보다 보안허가가 높거나 같은 경우에 접근 가능           MLS (MultiLevel Security) policy : 다중 수준 보안           사용 예                            BLP (벨라파둘라 모델) : 기밀성에 중점               Biba : 무결성에 중점               Clark-Willson Model : 무결성에 중점               Chinese Wall Model (만리장성 모델) : 무결성/기밀성                                   사용 예                            NSA, SELinux, Trusted Solaris               DAC 모델로의 전환이 쉽지 않음 (보안레이블, 취급인가가 호환되지 않음)                                               임의적 접근통제 (DAC) - Discretionary Access Control : 신분에 근거                    TCSEC 표준 중 하나                            1985년 발행된 안전한 컴퓨터 시스템을 위한 평가지침서                                   신원기반 접근통제 / 사용자기반 접근통제 / 혼합방식 접근통제 : 주체가 속한 그룹의 신원에 근거하여 객체에 대한 접근을 제한           소유자의 임의성에 기반하여 접근통제           사용자에게 동적으로 접근권한을 부여 : 분산형 보안관리           유닉스/리눅스, Windows, Mac, DBMS 에서 이용           통제기법                            접근제어행렬 (Access Control Matrix)                                    주체(Row)(터미널/host/프로그램/개별사용자/그룹사용자…)                   객체(Column)                   접근권한(Cell) (소유/읽기/쓰기/실행..)                   관계를 표현 - 접근제어 정책을 관리                   주체와 객체가 많아진다면 행렬이 커지고(관리어려움), 빈 공간이 많아짐(비효율적)                                               자격목록 (CL - Capability List) : 한 주체가 갖는 자격(권한)들의 리스트                                    권한 -&gt; 주체가 객체에 대해 갖는 접근권한                   접근제어 행렬을 행(Row)단위로 관리하는 것                   Linked List 로 표현됨                                                                                                                                                            홍길동 -&gt; 파일A(RWX)                               포인터 -&gt; 파일C(RW)                               포인터 -&gt; 파일D(R)                                                                                                                                                                                               접근제어목록 (ACL - Access Control List)                                    자격목록 : 주체 관점 / 접근제어목록 : 객체 관점                   객체의 관점에서 객체에 어떤 주체가 어떤 접근권한을 갖는지 명시                   접근제어 행렬을 열(Column)단위로 관리하는 것                   Linked List 로 표현됨                                                                                                                                                            파일 A -&gt; 홍길동(RWX)                               포인터 -&gt; 고길동(RW)                               포인터 -&gt; 강길동(R)                                                                                                                                                                                                                   장점                            객체별 세분화된 접근제어가 가능               객체의 소유자가 다른 주체에게 임의적으로 접근권한 부여가 가능 -&gt; 유연한 접근제어 서비스                                   단점                            시스템 전체적으로 접근제어이 일관성이 부족               권한이 높은 주체가 다른 주체에게 임의로 자료에 대한 접근을 허용할 수 있음               주체의 신분에 따라 접근 통제가 이루어지므로 다른 주체의 신분을 사용해 불법적 접근을 할 수 있음               멀웨어 (웜, 루트킷, 트로이목마, 키로거 등 악성코드) 취약점이 존재                                    트로이목마 예시                                            Data File 에 대해 user1 이 rw 권한을 가지고 있다.                       user1 은 프로그램을 이용해 Data File 에 접근한다.                       Attacker 는 프로그램 안에 트로이목마를 심고, 이 프로그램에 대응하는 Back-Pocket 파일을 생성 (Attacker 는 rw, user1 은 w 권한을 가짐)                       Attacker 는 프로그램에 user1의 권한을 부여, user1 은 트로이목마가 심어진 프로그램을 실행                       user1 은 프로그램을 이용해 Data File 을 읽고, 해당 내용을 Back-Pocket 파일에 쓴다.                                                                                                                       역할기반 접근통제 (RBAC) - Role Based Access Control : 역할에 기반                    개요                            역할에 기반 : 접근제어 관리가 단순               MAC과 DAC의 약점을 보완한 방식 - 권한을 역할에 연관시킴               그룹과 역할의 구분                                    그룹 : 사용자들의 집합 (권한의 집합은 아님)                   역할 : 사용자들의 집합 &amp; 권한의 집합                                               중앙에서 관리되는 통제의 모음을 사용                                    관리자에 의해서 중앙집중적인 역할 (사용자집합 &amp; 권한집합) 설정                                                                   장점                            전체 시스템 관점에서 일관성 있는 접근제어가 가능               역할만 사용자에게 부여하면 됨                                    정적이면서 동적인 접근통제                                            중앙에서 역할을 정의 (정적)                                                    Role1 (File1)                           Role2 (File1, File2)                           Role3 (File1, File2, File3)                                                                       사용자와 역할을 할당 (동적)                                                    user1 -&gt; Role1                           User2 -&gt; Role1, Role2 (1:1일 필요 없음)                           user3 -&gt; Role3 -&gt; Role2                                                                                                                                                           단점                            역할수행에 반드시 필요한 접근권한만 부여해야 함 (최소권한부여원칙 준수-&gt;직무분리원칙 충족용이)">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2021-12-02T09:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://bluesplatter.com/is_certification/IS-Management-AccessControlModel/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "HY03",
+      "url": "https://bluesplatter.com/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Bluesplatter Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo/logo.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          세상에 남기는 작은 흔적
+          <span class="site-subtitle">Bluesplatter</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/">연도별 포스트</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="https://bluesplatter.com/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#is_certification" itemprop="item"><span itemprop="name">Is_certification</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">정보보안 - 접근통제 보안모델</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/profile/photo.jpg" alt="HY03" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">HY03</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>저는 전문가가 아니고 이것 저것 알아보는 비전문가 입니다. <br /> 틀린 내용이 기술되어도 너그러이 봐주시고 댓글을 남겨주셨으면 좋겠습니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="http://bluesplatter.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:hyunik03@gmail.com">
+            <meta itemprop="email" content="hyunik03@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">이메일</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="정보보안 - 접근통제 보안모델">
+    <meta itemprop="description" content="접근통제 보안모델  접근통제의 모델          강제적 접근통제 (MAC) - Mandatory Access Control : 규칙기반(Rule Based)                  자원 - 보안레벨 (Security Level)          사용자 - 보안 취급인가 (Security Clearance)          보안레벨과 보안 취급인가를 비교하여 접근통제          Linux/Unix 는 객체(파일) 을 소유하고 있는 주체가 다른 사용자에게 권한 부여하나 MAC 에서는 주체가 다른 사용자에게 권한을 줄 수가 없음 (정해진 규칙(보안관리자가 통제) 만을 따름) - 강제적 접근통제                          관리자만이 정보자원을 분류, 설정, 변경              객체에 대한 접근 규칙 : 규칙기반 접근통제 (중앙집중형 보안관리) - 사용자가 통제를 수정할 수 없다.                                  보안전문가에 의해 생성                  운영자에 의해 설정                  운영시스템에 의해서 집행                  다른 보안기술에 의해 지원                                                              단점                          사용자의 기능이 매우 제한적              관리적 부담이 크다              비용이 많이 소요              성능저하가 발생할 수 있음              사용자 친화적이지 않음 : 상업적인 환경에 부적합              주로 군 시스템에서 사용                                보안레이블 (민감성레이블 - Sensitivity Label) : 시스템에 있는 자원이 얼마나 민감한 자원인지 수치화 (자원민감도, 중요성)                          모든 객체(자원)에 할당 : 파일, 디렉토리, 장비 등                                보안허가증 : 주체가 특정 객체(특정자원) 에 접근할 수 있는지 표시          주체 S 는 객체 A 에 대한 보안허가증을 가지고 A에 접근 - 주체 S가 객체 A의 보안레이블 보다 보안허가가 높거나 같은 경우에 접근 가능          MLS (MultiLevel Security) policy : 다중 수준 보안          사용 예                          BLP (벨라파둘라 모델) : 기밀성에 중점              Biba : 무결성에 중점              Clark-Willson Model : 무결성에 중점              Chinese Wall Model (만리장성 모델) : 무결성/기밀성                                사용 예                          NSA, SELinux, Trusted Solaris              DAC 모델로의 전환이 쉽지 않음 (보안레이블, 취급인가가 호환되지 않음)                                          임의적 접근통제 (DAC) - Discretionary Access Control : 신분에 근거                  TCSEC 표준 중 하나                          1985년 발행된 안전한 컴퓨터 시스템을 위한 평가지침서                                신원기반 접근통제 / 사용자기반 접근통제 / 혼합방식 접근통제 : 주체가 속한 그룹의 신원에 근거하여 객체에 대한 접근을 제한          소유자의 임의성에 기반하여 접근통제          사용자에게 동적으로 접근권한을 부여 : 분산형 보안관리          유닉스/리눅스, Windows, Mac, DBMS 에서 이용          통제기법                          접근제어행렬 (Access Control Matrix)                                  주체(Row)(터미널/host/프로그램/개별사용자/그룹사용자…)                  객체(Column)                  접근권한(Cell) (소유/읽기/쓰기/실행..)                  관계를 표현 - 접근제어 정책을 관리                  주체와 객체가 많아진다면 행렬이 커지고(관리어려움), 빈 공간이 많아짐(비효율적)                                            자격목록 (CL - Capability List) : 한 주체가 갖는 자격(권한)들의 리스트                                  권한 -&gt; 주체가 객체에 대해 갖는 접근권한                  접근제어 행렬을 행(Row)단위로 관리하는 것                  Linked List 로 표현됨                                                                                                                                                      홍길동 -&gt; 파일A(RWX)                              포인터 -&gt; 파일C(RW)                              포인터 -&gt; 파일D(R)                                                                                                                                                                                      접근제어목록 (ACL - Access Control List)                                  자격목록 : 주체 관점 / 접근제어목록 : 객체 관점                  객체의 관점에서 객체에 어떤 주체가 어떤 접근권한을 갖는지 명시                  접근제어 행렬을 열(Column)단위로 관리하는 것                  Linked List 로 표현됨                                                                                                                                                      파일 A -&gt; 홍길동(RWX)                              포인터 -&gt; 고길동(RW)                              포인터 -&gt; 강길동(R)                                                                                                                                                                                                        장점                          객체별 세분화된 접근제어가 가능              객체의 소유자가 다른 주체에게 임의적으로 접근권한 부여가 가능 -&gt; 유연한 접근제어 서비스                                단점                          시스템 전체적으로 접근제어이 일관성이 부족              권한이 높은 주체가 다른 주체에게 임의로 자료에 대한 접근을 허용할 수 있음              주체의 신분에 따라 접근 통제가 이루어지므로 다른 주체의 신분을 사용해 불법적 접근을 할 수 있음              멀웨어 (웜, 루트킷, 트로이목마, 키로거 등 악성코드) 취약점이 존재                                  트로이목마 예시                                          Data File 에 대해 user1 이 rw 권한을 가지고 있다.                      user1 은 프로그램을 이용해 Data File 에 접근한다.                      Attacker 는 프로그램 안에 트로이목마를 심고, 이 프로그램에 대응하는 Back-Pocket 파일을 생성 (Attacker 는 rw, user1 은 w 권한을 가짐)                      Attacker 는 프로그램에 user1의 권한을 부여, user1 은 트로이목마가 심어진 프로그램을 실행                      user1 은 프로그램을 이용해 Data File 을 읽고, 해당 내용을 Back-Pocket 파일에 쓴다.                                                                                                              역할기반 접근통제 (RBAC) - Role Based Access Control : 역할에 기반                  개요                          역할에 기반 : 접근제어 관리가 단순              MAC과 DAC의 약점을 보완한 방식 - 권한을 역할에 연관시킴              그룹과 역할의 구분                                  그룹 : 사용자들의 집합 (권한의 집합은 아님)                  역할 : 사용자들의 집합 &amp; 권한의 집합                                            중앙에서 관리되는 통제의 모음을 사용                                  관리자에 의해서 중앙집중적인 역할 (사용자집합 &amp; 권한집합) 설정                                                              장점                          전체 시스템 관점에서 일관성 있는 접근제어가 가능              역할만 사용자에게 부여하면 됨                                  정적이면서 동적인 접근통제                                          중앙에서 역할을 정의 (정적)                                                  Role1 (File1)                          Role2 (File1, File2)                          Role3 (File1, File2, File3)                                                                    사용자와 역할을 할당 (동적)                                                  user1 -&gt; Role1                          User2 -&gt; Role1, Role2 (1:1일 필요 없음)                          user3 -&gt; Role3 -&gt; Role2                                                                                                                                                  단점                          역할수행에 반드시 필요한 접근권한만 부여해야 함 (최소권한부여원칙 준수-&gt;직무분리원칙 충족용이)                                          ">
+    <meta itemprop="datePublished" content="2021-12-02T09:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">정보보안 - 접근통제 보안모델
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-12-02T09:00:00+09:00">December 2, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#접근통제-보안모델">접근통제 보안모델</a></li>
+  <li><a href="#접근통제-보안모델-1">접근통제 보안모델</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <h1 id="접근통제-보안모델">접근통제 보안모델</h1>
+<ul>
+  <li>접근통제의 모델
+    <ul>
+      <li>강제적 접근통제 (MAC) - Mandatory Access Control : 규칙기반(Rule Based)
+        <ul>
+          <li>자원 - 보안레벨 (Security Level)</li>
+          <li>사용자 - 보안 취급인가 (Security Clearance)</li>
+          <li>보안레벨과 보안 취급인가를 비교하여 접근통제</li>
+          <li>Linux/Unix 는 객체(파일) 을 소유하고 있는 주체가 다른 사용자에게 권한 부여하나 MAC 에서는 주체가 다른 사용자에게 권한을 줄 수가 없음 (정해진 규칙(보안관리자가 통제) 만을 따름) - 강제적 접근통제
+            <ul>
+              <li>관리자만이 정보자원을 분류, 설정, 변경</li>
+              <li>객체에 대한 접근 규칙 : <strong>규칙기반 접근통제</strong> (중앙집중형 보안관리) - 사용자가 통제를 수정할 수 없다.
+                <ul>
+                  <li>보안전문가에 의해 생성</li>
+                  <li>운영자에 의해 설정</li>
+                  <li>운영시스템에 의해서 집행</li>
+                  <li>다른 보안기술에 의해 지원</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>단점
+            <ul>
+              <li>사용자의 기능이 매우 제한적</li>
+              <li>관리적 부담이 크다</li>
+              <li>비용이 많이 소요</li>
+              <li>성능저하가 발생할 수 있음</li>
+              <li>사용자 친화적이지 않음 : 상업적인 환경에 부적합</li>
+              <li>주로 군 시스템에서 사용</li>
+            </ul>
+          </li>
+          <li>보안레이블 (민감성레이블 - Sensitivity Label) : 시스템에 있는 자원이 얼마나 민감한 자원인지 수치화 (자원민감도, 중요성)
+            <ul>
+              <li>모든 객체(자원)에 할당 : 파일, 디렉토리, 장비 등</li>
+            </ul>
+          </li>
+          <li>보안허가증 : 주체가 특정 객체(특정자원) 에 접근할 수 있는지 표시</li>
+          <li>주체 S 는 객체 A 에 대한 보안허가증을 가지고 A에 접근 - 주체 S가 객체 A의 보안레이블 보다 보안허가가 높거나 같은 경우에 접근 가능</li>
+          <li>MLS (MultiLevel Security) policy : 다중 수준 보안</li>
+          <li>사용 예
+            <ul>
+              <li>BLP (벨라파둘라 모델) : 기밀성에 중점</li>
+              <li>Biba : 무결성에 중점</li>
+              <li>Clark-Willson Model : 무결성에 중점</li>
+              <li>Chinese Wall Model (만리장성 모델) : 무결성/기밀성</li>
+            </ul>
+          </li>
+          <li>사용 예
+            <ul>
+              <li>NSA, SELinux, Trusted Solaris</li>
+              <li>DAC 모델로의 전환이 쉽지 않음 (보안레이블, 취급인가가 호환되지 않음)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>임의적 접근통제 (DAC) - Discretionary Access Control : 신분에 근거
+        <ul>
+          <li>TCSEC 표준 중 하나
+            <ul>
+              <li>1985년 발행된 안전한 컴퓨터 시스템을 위한 평가지침서</li>
+            </ul>
+          </li>
+          <li>신원기반 접근통제 / 사용자기반 접근통제 / 혼합방식 접근통제 : 주체가 속한 그룹의 신원에 근거하여 객체에 대한 접근을 제한</li>
+          <li>소유자의 임의성에 기반하여 접근통제</li>
+          <li>사용자에게 동적으로 접근권한을 부여 : 분산형 보안관리</li>
+          <li>유닉스/리눅스, Windows, Mac, DBMS 에서 이용</li>
+          <li>통제기법
+            <ul>
+              <li>접근제어행렬 (Access Control Matrix)
+                <ul>
+                  <li>주체(Row)(터미널/host/프로그램/개별사용자/그룹사용자…)</li>
+                  <li>객체(Column)</li>
+                  <li>접근권한(Cell) (소유/읽기/쓰기/실행..)</li>
+                  <li>관계를 표현 - 접근제어 정책을 관리</li>
+                  <li>주체와 객체가 많아진다면 행렬이 커지고(관리어려움), 빈 공간이 많아짐(비효율적)</li>
+                </ul>
+              </li>
+              <li>자격목록 (CL - Capability List) : 한 주체가 갖는 자격(권한)들의 리스트
+                <ul>
+                  <li>권한 -&gt; 주체가 객체에 대해 갖는 접근권한</li>
+                  <li>접근제어 행렬을 행(Row)단위로 관리하는 것</li>
+                  <li>Linked List 로 표현됨
+                    <ul>
+                      <li>
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td>홍길동 -&gt; 파일A(RWX)</td>
+                              <td>포인터 -&gt; 파일C(RW)</td>
+                              <td>포인터 -&gt; 파일D(R)</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>접근제어목록 (ACL - Access Control List)
+                <ul>
+                  <li>자격목록 : 주체 관점 / 접근제어목록 : 객체 관점</li>
+                  <li>객체의 관점에서 객체에 어떤 주체가 어떤 접근권한을 갖는지 명시</li>
+                  <li>접근제어 행렬을 열(Column)단위로 관리하는 것</li>
+                  <li>Linked List 로 표현됨
+                    <ul>
+                      <li>
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td>파일 A -&gt; 홍길동(RWX)</td>
+                              <td>포인터 -&gt; 고길동(RW)</td>
+                              <td>포인터 -&gt; 강길동(R)</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>장점
+            <ul>
+              <li>객체별 세분화된 접근제어가 가능</li>
+              <li>객체의 소유자가 다른 주체에게 임의적으로 접근권한 부여가 가능 -&gt; 유연한 접근제어 서비스</li>
+            </ul>
+          </li>
+          <li>단점
+            <ul>
+              <li>시스템 전체적으로 접근제어이 일관성이 부족</li>
+              <li>권한이 높은 주체가 다른 주체에게 임의로 자료에 대한 접근을 허용할 수 있음</li>
+              <li>주체의 신분에 따라 접근 통제가 이루어지므로 다른 주체의 신분을 사용해 불법적 접근을 할 수 있음</li>
+              <li>멀웨어 (웜, 루트킷, 트로이목마, 키로거 등 악성코드) 취약점이 존재
+                <ul>
+                  <li>트로이목마 예시
+                    <ul>
+                      <li>Data File 에 대해 user1 이 rw 권한을 가지고 있다.</li>
+                      <li>user1 은 프로그램을 이용해 Data File 에 접근한다.</li>
+                      <li>Attacker 는 프로그램 안에 트로이목마를 심고, 이 프로그램에 대응하는 Back-Pocket 파일을 생성 (Attacker 는 rw, user1 은 w 권한을 가짐)</li>
+                      <li>Attacker 는 프로그램에 user1의 권한을 부여, user1 은 트로이목마가 심어진 프로그램을 실행</li>
+                      <li>user1 은 프로그램을 이용해 Data File 을 읽고, 해당 내용을 Back-Pocket 파일에 쓴다.</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>역할기반 접근통제 (RBAC) - Role Based Access Control : 역할에 기반
+        <ul>
+          <li>개요
+            <ul>
+              <li>역할에 기반 : 접근제어 관리가 단순</li>
+              <li>MAC과 DAC의 약점을 보완한 방식 - 권한을 역할에 연관시킴</li>
+              <li>그룹과 역할의 구분
+                <ul>
+                  <li>그룹 : 사용자들의 집합 (권한의 집합은 아님)</li>
+                  <li>역할 : 사용자들의 집합 &amp; 권한의 집합</li>
+                </ul>
+              </li>
+              <li>중앙에서 관리되는 통제의 모음을 사용
+                <ul>
+                  <li>관리자에 의해서 중앙집중적인 역할 (사용자집합 &amp; 권한집합) 설정</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>장점
+            <ul>
+              <li>전체 시스템 관점에서 일관성 있는 접근제어가 가능</li>
+              <li>역할만 사용자에게 부여하면 됨
+                <ul>
+                  <li>정적이면서 동적인 접근통제
+                    <ul>
+                      <li>중앙에서 역할을 정의 (정적)
+                        <ul>
+                          <li>Role1 (File1)</li>
+                          <li>Role2 (File1, File2)</li>
+                          <li>Role3 (File1, File2, File3)</li>
+                        </ul>
+                      </li>
+                      <li>사용자와 역할을 할당 (동적)
+                        <ul>
+                          <li>user1 -&gt; Role1</li>
+                          <li>User2 -&gt; Role1, Role2 (1:1일 필요 없음)</li>
+                          <li>user3 -&gt; Role3 -&gt; Role2</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>단점
+            <ul>
+              <li>역할수행에 반드시 필요한 접근권한만 부여해야 함 (최소권한부여원칙 준수-&gt;직무분리원칙 충족용이)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="접근통제-보안모델-1">접근통제 보안모델</h1>
+<ul>
+  <li>보안모델
+    <ul>
+      <li>BLP (Bell-Lapadula) 기밀성 모델
+        <ul>
+          <li>MAC 에 해당 (군용)</li>
+          <li>기밀성에 초점 (정보유출 차단)</li>
+          <li>정보흐름 모델
+            <ul>
+              <li>보안레벨이 높은 정보가 보안레벨이 낮은 개체로 이동하는 것을 차단</li>
+            </ul>
+          </li>
+          <li>최초의 수학적 모델
+            <ul>
+              <li>MLS Policy (다중등급 보안정책 / 다중수준 보안시스템)
+                <ul>
+                  <li>주체
+                    <ul>
+                      <li>A 각각이 갖는 허가(Clearance) 가 다름</li>
+                      <li>B 각각이 갖는 허가(Clearance) 가 다름</li>
+                      <li>C 각각이 갖는 허가(Clearance) 가 다름</li>
+                    </ul>
+                  </li>
+                  <li>객체
+                    <ul>
+                      <li>가 각각이 갖는 객체레벨-분류(Classification) 이 다름</li>
+                      <li>나 각각이 갖는 객체레벨-분류(Classification) 이 다름</li>
+                      <li>다 각각이 갖는 객체레벨-분류(Classification) 이 다름</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>보안규칙
+            <ul>
+              <li>높은 수준의 주체는 낮은 수준의 주체에 정보전달을 할 수 없어야 함</li>
+              <li>다중수준 보안시스템의 준수사항
+                <ul>
+                  <li><strong>No Read Up (단순보안속성:Simple Security Property) : 주체의 상향읽기금지, 하향읽기허용</strong>
+                    <ul>
+                      <li><strong>주체가 자신보다 높은 보안수준의 객체를 읽을 수 없다.</strong></li>
+                    </ul>
+                  </li>
+                  <li><strong>No Write Down (성형보안속성:Star Property) : 주체의 하향기록금지, 상향기록허용</strong>
+                    <ul>
+                      <li><strong>주체가 자신보다 낮은 보안수준의 객체에 쓸 수 없다.</strong></li>
+                    </ul>
+                  </li>
+                  <li>(특수 성형 속성:Strong Star Property) : 주체는 동일한 레벨에서만 읽기/쓰기 가능</li>
+                  <li>(평정 속성:Tranquility Property) : 객체와 주체의 보안등급은 컴퓨터 수행처리과정에서 변경될수 없다.</li>
+                  <li>(참고) Dominate : 우위에 있다.
+                    <ul>
+                      <li>No Read Up : 주체의 접근클래스가 객체의 접근클래스보다 우위에 있을 때 읽기 수행이 가능하다.</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>트로이 목마(Trojan Horse) 공격 방어 가능
+                <ul>
+                  <li>DAC 와 달리 read 는 가능 (No Read Up-SS Property) 하나 write 가 안됨. (No Write Down-* Property)</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>약점
+            <ul>
+              <li>지나친 기밀성 치중 (무결성, 가용성을 고려하지 않음)</li>
+              <li>은닉채널을 다루지 않음
+                <ul>
+                  <li>보안등급이 낮은 사용자가 보안등급이 높은 사용자의 네트워크 채널에 접근 가능
+                    <ul>
+                      <li>정보흐름모델에서는 은닉채널이 존재하지 않는다는 것을 보장해야 함
+                        <ul>
+                          <li>은닉채널 : 보안매커니즘에 의해 통제되지 않는 정보 흐름</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>파일공유, 서버시스템 이용에 대해서 다루지 않음
+                <ul>
+                  <li>높은 레벨의 주체와 낮은 레벨의 주체가 같은 파일(메모리) 사용시 기밀성 훼손</li>
+                  <li>네트워크에 대한 부분이 고려되지 않음</li>
+                </ul>
+              </li>
+              <li>MLP (다중등급 보안정책) 에 치중 (다른정책은 고려하지 않음)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Biba 무결성 모델
+        <ul>
+          <li>상업용 모델로 개발</li>
+          <li>최초의 수학적 무결성 모델 : 부적절한 변조 방지
+            <ul>
+              <li>무결성의 3가지 목표
+                <ul>
+                  <li>비인가자의 변조 방지 : Biba 모델의 중점적 목표 (1번만 취급)</li>
+                  <li>내/외부 일관성 유지 (정확한 트랜잭션)</li>
+                  <li>인가자에 의한 불법적인 변조를 방지 (직무분리)</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>정보흐름 모델
+            <ul>
+              <li>낮은 무결성 수준에서 높은 무결성 수준으로 정보가 이동하는 것을 차단
+                <ul>
+                  <li>신뢰성이 높은 정보를 신뢰성이 낮은 정보가 훼손하는 것을 차단</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>보안규칙
+            <ul>
+              <li><strong>단순무결성 (Simple Integrity Property)</strong>
+                <ul>
+                  <li>객체(Object)의 무결성 수준이 주체의 무결성(Subject) 수준보다 우세할 때 주체는 객체를 읽을 수 있음</li>
+                  <li><strong>I(S) &lt;= I(O), S는 O를 읽을 수 있다.</strong></li>
+                </ul>
+              </li>
+              <li><strong>무결성제한 (Star Integrity property)</strong>
+                <ul>
+                  <li><strong>I(S) &gt;= I(O), S는 O를 변경할 수 있다.</strong></li>
+                </ul>
+              </li>
+              <li>호출속성 (Invocation Property)
+                <ul>
+                  <li>주체는 자신보다 높은 무결성 수준의 주체를 호출할 수 없다. (서비스를 요청할 수 없다.)</li>
+                  <li>I(S1) &gt;= I(S2), S1은 S2를 호출 가능</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Clark-Wilson 무결성 모델
+        <ul>
+          <li>Biba 모델보다 정교한 실제적 무결성 모델</li>
+          <li>상업용을 목표로 개발
+            <ul>
+              <li>무결성의 3가지 목표 (Clark-Wilson 은 모두 취급)
+                <ul>
+                  <li>비인가자의 변조 방지</li>
+                  <li>내/외부 일관성 유지 (정확한 트랜잭션)
+                    <ul>
+                      <li>예시
+                        <ul>
+                          <li>트랙잭션의 개념
+                            <ul>
+                              <li>A 가 B 에게 100만원을 송금하려고 할때, A 계좌에는 100만원 출금, B 계좌에는 100만원 입금이 되어야 함</li>
+                              <li>중간에 네트워크에서 문제가 발생하면 A 계좌에는 100만원 출금, B 계좌는 변동없음 &gt; 트랙잭션 개념의 필요성</li>
+                            </ul>
+                          </li>
+                          <li>회계상 이중장부 처리시스템
+                            <ul>
+                              <li>중복처리로 자료의 무결성을 입증</li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>인가자에 의한 불법적인 변조를 방지 (직무분리)</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>만리장성(Chinese Wall) 모델
+        <ul>
+          <li>Chinese Wall model = Brewer-Nash Model</li>
+          <li><strong>MAC, DAC</strong>
+            <ul>
+              <li>자유재량과 강제적 접근개념을 모두 이용</li>
+            </ul>
+          </li>
+          <li>이해충돌과 관련이 있는 모델 (개인의 이익과 조직의 이익의 충돌)
+            <ul>
+              <li>예 : 국토개발부 공무원이 부동산을 매입</li>
+              <li>예 : A 지역 부동산을 가지고 있는 국토개발부 담당공무원이 A지역 재개발계획에 참여</li>
+              <li>예 : 기업 컨설팅 업체의 A 직원이 서로 경쟁관계인 C와 D 업체의 컨설팅을 모두 하고 있음</li>
+            </ul>
+          </li>
+          <li>정보흐름 모델
+            <ul>
+              <li><strong>주체와 객체 사이에서 이해충돌을 야기하는 정보의 흐름을 방지하기 위한 모델</strong></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Lattice 모델 (Denning 에 의해서 제안)
+        <ul>
+          <li>BLP 모델을 확장</li>
+          <li>수학적인 구조를 이용</li>
+          <li>정보에 대한 흐름을 제어하기 위한 모델
+            <ul>
+              <li>서로 다른 보안등급 사이에 정보가 흐르는 것을 통제</li>
+              <li>낮은 보안등급의 정보가 같거나 높은 보안등급으로만 정보가 흐르도록 통제</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#dac" class="page__taxonomy-item" rel="tag">DAC</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#mac" class="page__taxonomy-item" rel="tag">MAC</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#rbac" class="page__taxonomy-item" rel="tag">RBAC</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#%EC%A0%91%EA%B7%BC%ED%86%B5%EC%A0%9C-%EB%B3%B4%EC%95%88%EB%AA%A8%EB%8D%B8" class="page__taxonomy-item" rel="tag">접근통제 보안모델</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88%EA%B8%B0%EC%82%AC" class="page__taxonomy-item" rel="tag">정보보안기사</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#is-certification" class="page__taxonomy-item" rel="tag">IS_Certification</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2021-12-02T09:00:00+09:00">December 2, 2021</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+%EC%A0%91%EA%B7%BC%ED%86%B5%EC%A0%9C+%EB%B3%B4%EC%95%88%EB%AA%A8%EB%8D%B8%20https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Management-AccessControlModel%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Management-AccessControlModel%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Management-AccessControlModel%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/is_certification/IS-Management-SSO/" class="pagination--pager" title="정보보안 - SSO(통합인증체계) / Kerberos
+">이전</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Management-SSO/" rel="permalink">정보보안 - SSO(통합인증체계) / Kerberos
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-12-02T09:00:00+09:00">December 2, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">통합인증 체계(SSO)
+
+  SSO(Single Sign On) 의 기본개념
+    
+      통합 인증 체계(SSO) 정의
+        
+          한 번의 시스템 인증을 통하여 접근하고자 하는 다양한 정보시스템에 재인증 절차 없이 접근할 수 있도록 하는 통합 로그인 ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Management-AccessControl/" rel="permalink">정보보안 - 접근통제와 사용자 인증
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-12-01T09:00:00+09:00">December 1, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">접근통제
+
+  접근통제 개요
+    
+      접근통제(접근제어, Access Control) 기본 개념
+        
+          컴퓨터 보안의 주된 목적
+            
+              허가되지 않은 사용자 (비인가자)에 의한 정보자원 접근 제한
+   ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Management-X509/" rel="permalink">정보보안 - PKI / X.509
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-11-30T09:00:00+09:00">November 30, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">PKI
+
+  PKI(공개키 기반 구조)
+    
+      PKI(Public-Key Infrastructure) 의 개요
+        
+          기본 개념
+            
+              공개키 알고리즘을 위한 키 관리 구조
+              R...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Management-DigitalSignature/" rel="permalink">정보보안 - 전자서명
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-11-24T09:00:00+09:00">November 24, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">전자서명
+
+  전자서명의 개요
+    
+      암호화 방식에 따라 두 종류로 나뉨
+        
+          공개키 서명 방식 (공개키 암호화 방식)
+            
+              서명자의 검증 정보를 공개하여 누구나 검증할 수 있는 방식 (간편)
+  ...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+<!--
+<script>
+	(function(d, h, m){
+    var js, fjs = d.getElementsByTagName(h)[0];
+    if (d.getElementById(m)){return;}
+    js = d.createElement(h); js.id = m;
+    js.onload = function(){
+        window.makerWidgetComInit({
+        position: "left",          
+        widget: "eqypoqmawbcz3azh-usiy9q7ma4ong1w1-juelcm3zfgcuwjds"                
+    })};
+    js.src = "https://makerwidget.com/js/embed.js";
+    fjs.parentNode.insertBefore(js, fjs)
+	}(document, "script", "dhm"))
+</script>
+-->
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:hyunik03@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 HY03. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://bluesplatter.com/is_certification/IS-Management-AccessControlModel/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/is_certification/IS-Management-AccessControlModel"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://bluesplatter.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,115 @@
+I"�<h1 id="통합인증-체계sso">통합인증 체계(SSO)</h1>
+<ul>
+  <li>SSO(Single Sign On) 의 기본개념
+    <ul>
+      <li>통합 인증 체계(SSO) 정의
+        <ul>
+          <li>한 번의 시스템 인증을 통하여 접근하고자 하는 다양한 정보시스템에 재인증 절차 없이 접근할 수 있도록 하는 통합 로그인 솔루션
+            <ul>
+              <li>통합 로그인 솔루션 : 대표적인 인증방법으로는 커버로스(Kerberos) 를 이용한 윈도우의 액티브 디렉터리(Active Directory) 가 있다.</li>
+              <li>사용 예
+                <ul>
+                  <li>Kerberos</li>
+                  <li>유럽식 보안 시스템 : SESAME (공개키 암호화 방식 사용, Needham Schroeder Protocol 사용)</li>
+                  <li>크립토나이트</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>통합신원관리 시스템의 중심적 개념은 SSO 를 사용하여 사용자가 한 번만 인증하면 네트워크의 모든 자원에 접속할 수 있게 하는 것</li>
+          <li>장점 : 사용자 편의성, 운영비용 감소, PKI 기반 보안기능 (보안성 강화)</li>
+          <li>단점 : 단일실패지점 (SPoF-SinglePointOfFailure)</li>
+          <li>EAM (Extranet Access Management) (권한관리 시스템) 은 SSO 기술 기반으로 나온 시스템 (SSO + 보안성)
+            <ul>
+              <li>접근권한부여 / 관리 - 통합인증 권한관리 솔루션</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>SSO 구성요소
+        <ul>
+          <li>사용자</li>
+          <li>인증서버</li>
+          <li>LDAP (Lightweight Directory Access Protocol) : X.500 을 근거로 한 디렉토리 DB에 접속하기 위한 프로토콜</li>
+          <li>SSO Agent : 각 정보시스템에 SSO 정보를 송수신</li>
+        </ul>
+      </li>
+      <li>과정
+        <ul>
+          <li>User : User 가 Portal 에 접속</li>
+          <li>User : Portal 로그인 화면 (인증서버) 으로 Redirect</li>
+          <li>User : 인증서버에 사용자의 ID/PW (인증정보) 입력</li>
+          <li>인증서버 : LDAP (사용자 프로파일 DB) 를 이용해 사용자의 인증정보를 검증</li>
+          <li>인증서버 : Portal 에 로그인처리</li>
+          <li>User : Portal 의 각 서비스에 접근이 가능</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="커버로스-kerberos">커버로스 (Kerberos)</h1>
+<ul>
+  <li>개요
+    <ul>
+      <li>커버로스(Kerberos) 는 인증 프로토콜이며 동시에 KDC 이다.</li>
+      <li>이 이름은 문을 지키는 그리스 신화의 머리가 셋 달린 개의 이름에서 따온 것이다.</li>
+      <li>MIT 에서 설계를 했고 여러 버전으로 업데이트 되었다.</li>
+      <li>개방된 컴퓨터 네트워크 내에서 서비스 요구를 인증하기 위해 대칭키 암호기법에 바탕을 둔 티켓 기반 인증 프로토콜이다.</li>
+      <li>수년 동안 유닉스 시스템에서 사용되었고, 현재 윈도우 서버 운영체제에서 기본 인증기법으로 사용되고 있다.</li>
+      <li>분산 환경을 위한 SSO 의 한 예이며, 이종 네트워크를 위한 사실상의 표준</li>
+    </ul>
+  </li>
+  <li>커버로스 구성요소
+    <ul>
+      <li>KDC(키분배센터) : AS(인증서버) + TGS(티켓발행서버)
+        <ul>
+          <li>AS (인증서버)
+            <ul>
+              <li>사용자에 대한 인증을 수행</li>
+              <li>중앙집중식 DB에 패스워드를 모두 저장</li>
+              <li>각 서버와 유일한 비밀키를 서로 공유하고 있음</li>
+            </ul>
+          </li>
+          <li>TGS(티켓발행서버)
+            <ul>
+              <li>AS 에 인증받은 사용자에 티켓을 발행</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Ticket</li>
+    </ul>
+  </li>
+  <li>과정
+    <ul>
+      <li>사용자 로그인 시
+        <ul>
+          <li>클라이언트 : 티켓-승인티켓을 요청 - 인증서버에 인증 시도</li>
+          <li>인증서버 : 티켓 + 세션키를 클라이언트에 전송</li>
+        </ul>
+      </li>
+      <li>서비스 유형마다
+        <ul>
+          <li>클라이언트 : 서비스-승인티켓을 티켓발행서버에 요청</li>
+          <li>티켓발행서버 : 티켓 + 세션키를 클라이언트에 전송</li>
+        </ul>
+      </li>
+      <li>서비스 요청
+        <ul>
+          <li>클라이언트 : 서버에 서비스 요청</li>
+          <li>서버 : 클라이언트에 액세스 권한 부여</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>취약점
+    <ul>
+      <li>KDC 는 SPoF (실패단일지점) 가 될 수 있음.</li>
+      <li>사용자에게 비밀키가 임시로 저장이 됨 -&gt; 공격자가 세션키 획득 가능</li>
+      <li>SSO 공통으로 패스워드 추측 공격에 취약</li>
+      <li>위 취약점을 보완한 것이 SESAME</li>
+    </ul>
+  </li>
+</ul>
+:ET

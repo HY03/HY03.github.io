@@ -1,0 +1,879 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.20.2 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>정보보안 - SSO(통합인증체계) / Kerberos | Bluesplatter</title>
+<meta name="description" content="통합인증 체계(SSO)    SSO(Single Sign On) 의 기본개념            통합 인증 체계(SSO) 정의                    한 번의 시스템 인증을 통하여 접근하고자 하는 다양한 정보시스템에 재인증 절차 없이 접근할 수 있도록 하는 통합 로그인 솔루션                            통합 로그인 솔루션 : 대표적인 인증방법으로는 커버로스(Kerberos) 를 이용한 윈도우의 액티브 디렉터리(Active Directory) 가 있다.               사용 예                                    Kerberos                   유럽식 보안 시스템 : SESAME (공개키 암호화 방식 사용, Needham Schroeder Protocol 사용)                   크립토나이트                                                                   통합신원관리 시스템의 중심적 개념은 SSO 를 사용하여 사용자가 한 번만 인증하면 네트워크의 모든 자원에 접속할 수 있게 하는 것           장점 : 사용자 편의성, 운영비용 감소, PKI 기반 보안기능 (보안성 강화)           단점 : 단일실패지점 (SPoF-SinglePointOfFailure)           EAM (Extranet Access Management) (권한관리 시스템) 은 SSO 기술 기반으로 나온 시스템 (SSO + 보안성)                            접근권한부여 / 관리 - 통합인증 권한관리 솔루션                                               SSO 구성요소                    사용자           인증서버           LDAP (Lightweight Directory Access Protocol) : X.500 을 근거로 한 디렉토리 DB에 접속하기 위한 프로토콜           SSO Agent : 각 정보시스템에 SSO 정보를 송수신                       과정                    User : User 가 Portal 에 접속           User : Portal 로그인 화면 (인증서버) 으로 Redirect           User : 인증서버에 사용자의 ID/PW (인증정보) 입력           인증서버 : LDAP (사용자 프로파일 DB) 를 이용해 사용자의 인증정보를 검증           인증서버 : Portal 에 로그인처리           User : Portal 의 각 서비스에 접근이 가능">
+
+
+  <meta name="author" content="HY03">
+  
+  <meta property="article:author" content="HY03">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Bluesplatter">
+<meta property="og:title" content="정보보안 - SSO(통합인증체계) / Kerberos">
+<meta property="og:url" content="https://bluesplatter.com/is_certification/IS-Management-SSO/">
+
+
+  <meta property="og:description" content="통합인증 체계(SSO)    SSO(Single Sign On) 의 기본개념            통합 인증 체계(SSO) 정의                    한 번의 시스템 인증을 통하여 접근하고자 하는 다양한 정보시스템에 재인증 절차 없이 접근할 수 있도록 하는 통합 로그인 솔루션                            통합 로그인 솔루션 : 대표적인 인증방법으로는 커버로스(Kerberos) 를 이용한 윈도우의 액티브 디렉터리(Active Directory) 가 있다.               사용 예                                    Kerberos                   유럽식 보안 시스템 : SESAME (공개키 암호화 방식 사용, Needham Schroeder Protocol 사용)                   크립토나이트                                                                   통합신원관리 시스템의 중심적 개념은 SSO 를 사용하여 사용자가 한 번만 인증하면 네트워크의 모든 자원에 접속할 수 있게 하는 것           장점 : 사용자 편의성, 운영비용 감소, PKI 기반 보안기능 (보안성 강화)           단점 : 단일실패지점 (SPoF-SinglePointOfFailure)           EAM (Extranet Access Management) (권한관리 시스템) 은 SSO 기술 기반으로 나온 시스템 (SSO + 보안성)                            접근권한부여 / 관리 - 통합인증 권한관리 솔루션                                               SSO 구성요소                    사용자           인증서버           LDAP (Lightweight Directory Access Protocol) : X.500 을 근거로 한 디렉토리 DB에 접속하기 위한 프로토콜           SSO Agent : 각 정보시스템에 SSO 정보를 송수신                       과정                    User : User 가 Portal 에 접속           User : Portal 로그인 화면 (인증서버) 으로 Redirect           User : 인증서버에 사용자의 ID/PW (인증정보) 입력           인증서버 : LDAP (사용자 프로파일 DB) 를 이용해 사용자의 인증정보를 검증           인증서버 : Portal 에 로그인처리           User : Portal 의 각 서비스에 접근이 가능">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2021-12-02T09:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://bluesplatter.com/is_certification/IS-Management-SSO/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "HY03",
+      "url": "https://bluesplatter.com/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Bluesplatter Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo/logo.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          세상에 남기는 작은 흔적
+          <span class="site-subtitle">Bluesplatter</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/">연도별 포스트</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="https://bluesplatter.com/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#is_certification" itemprop="item"><span itemprop="name">Is_certification</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">정보보안 - SSO(통합인증체계) / Kerberos</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/profile/photo.jpg" alt="HY03" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">HY03</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>저는 전문가가 아니고 이것 저것 알아보는 비전문가 입니다. <br /> 틀린 내용이 기술되어도 너그러이 봐주시고 댓글을 남겨주셨으면 좋겠습니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="http://bluesplatter.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:hyunik03@gmail.com">
+            <meta itemprop="email" content="hyunik03@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">이메일</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="정보보안 - SSO(통합인증체계) / Kerberos">
+    <meta itemprop="description" content="통합인증 체계(SSO)  SSO(Single Sign On) 의 기본개념          통합 인증 체계(SSO) 정의                  한 번의 시스템 인증을 통하여 접근하고자 하는 다양한 정보시스템에 재인증 절차 없이 접근할 수 있도록 하는 통합 로그인 솔루션                          통합 로그인 솔루션 : 대표적인 인증방법으로는 커버로스(Kerberos) 를 이용한 윈도우의 액티브 디렉터리(Active Directory) 가 있다.              사용 예                                  Kerberos                  유럽식 보안 시스템 : SESAME (공개키 암호화 방식 사용, Needham Schroeder Protocol 사용)                  크립토나이트                                                              통합신원관리 시스템의 중심적 개념은 SSO 를 사용하여 사용자가 한 번만 인증하면 네트워크의 모든 자원에 접속할 수 있게 하는 것          장점 : 사용자 편의성, 운영비용 감소, PKI 기반 보안기능 (보안성 강화)          단점 : 단일실패지점 (SPoF-SinglePointOfFailure)          EAM (Extranet Access Management) (권한관리 시스템) 은 SSO 기술 기반으로 나온 시스템 (SSO + 보안성)                          접근권한부여 / 관리 - 통합인증 권한관리 솔루션                                          SSO 구성요소                  사용자          인증서버          LDAP (Lightweight Directory Access Protocol) : X.500 을 근거로 한 디렉토리 DB에 접속하기 위한 프로토콜          SSO Agent : 각 정보시스템에 SSO 정보를 송수신                    과정                  User : User 가 Portal 에 접속          User : Portal 로그인 화면 (인증서버) 으로 Redirect          User : 인증서버에 사용자의 ID/PW (인증정보) 입력          인증서버 : LDAP (사용자 프로파일 DB) 를 이용해 사용자의 인증정보를 검증          인증서버 : Portal 에 로그인처리          User : Portal 의 각 서비스에 접근이 가능                    ">
+    <meta itemprop="datePublished" content="2021-12-02T09:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">정보보안 - SSO(통합인증체계) / Kerberos
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-12-02T09:00:00+09:00">December 2, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#통합인증-체계sso">통합인증 체계(SSO)</a></li>
+  <li><a href="#커버로스-kerberos">커버로스 (Kerberos)</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <h1 id="통합인증-체계sso">통합인증 체계(SSO)</h1>
+<ul>
+  <li>SSO(Single Sign On) 의 기본개념
+    <ul>
+      <li>통합 인증 체계(SSO) 정의
+        <ul>
+          <li>한 번의 시스템 인증을 통하여 접근하고자 하는 다양한 정보시스템에 재인증 절차 없이 접근할 수 있도록 하는 통합 로그인 솔루션
+            <ul>
+              <li>통합 로그인 솔루션 : 대표적인 인증방법으로는 커버로스(Kerberos) 를 이용한 윈도우의 액티브 디렉터리(Active Directory) 가 있다.</li>
+              <li>사용 예
+                <ul>
+                  <li>Kerberos</li>
+                  <li>유럽식 보안 시스템 : SESAME (공개키 암호화 방식 사용, Needham Schroeder Protocol 사용)</li>
+                  <li>크립토나이트</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>통합신원관리 시스템의 중심적 개념은 SSO 를 사용하여 사용자가 한 번만 인증하면 네트워크의 모든 자원에 접속할 수 있게 하는 것</li>
+          <li>장점 : 사용자 편의성, 운영비용 감소, PKI 기반 보안기능 (보안성 강화)</li>
+          <li>단점 : 단일실패지점 (SPoF-SinglePointOfFailure)</li>
+          <li>EAM (Extranet Access Management) (권한관리 시스템) 은 SSO 기술 기반으로 나온 시스템 (SSO + 보안성)
+            <ul>
+              <li>접근권한부여 / 관리 - 통합인증 권한관리 솔루션</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>SSO 구성요소
+        <ul>
+          <li>사용자</li>
+          <li>인증서버</li>
+          <li>LDAP (Lightweight Directory Access Protocol) : X.500 을 근거로 한 디렉토리 DB에 접속하기 위한 프로토콜</li>
+          <li>SSO Agent : 각 정보시스템에 SSO 정보를 송수신</li>
+        </ul>
+      </li>
+      <li>과정
+        <ul>
+          <li>User : User 가 Portal 에 접속</li>
+          <li>User : Portal 로그인 화면 (인증서버) 으로 Redirect</li>
+          <li>User : 인증서버에 사용자의 ID/PW (인증정보) 입력</li>
+          <li>인증서버 : LDAP (사용자 프로파일 DB) 를 이용해 사용자의 인증정보를 검증</li>
+          <li>인증서버 : Portal 에 로그인처리</li>
+          <li>User : Portal 의 각 서비스에 접근이 가능</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="커버로스-kerberos">커버로스 (Kerberos)</h1>
+<ul>
+  <li>개요
+    <ul>
+      <li>커버로스(Kerberos) 는 인증 프로토콜이며 동시에 KDC 이다.</li>
+      <li>이 이름은 문을 지키는 그리스 신화의 머리가 셋 달린 개의 이름에서 따온 것이다.</li>
+      <li>MIT 에서 설계를 했고 여러 버전으로 업데이트 되었다.</li>
+      <li>개방된 컴퓨터 네트워크 내에서 서비스 요구를 인증하기 위해 대칭키 암호기법에 바탕을 둔 티켓 기반 인증 프로토콜이다.</li>
+      <li>수년 동안 유닉스 시스템에서 사용되었고, 현재 윈도우 서버 운영체제에서 기본 인증기법으로 사용되고 있다.</li>
+      <li>분산 환경을 위한 SSO 의 한 예이며, 이종 네트워크를 위한 사실상의 표준</li>
+    </ul>
+  </li>
+  <li>커버로스 구성요소
+    <ul>
+      <li>KDC(키분배센터) : AS(인증서버) + TGS(티켓발행서버)
+        <ul>
+          <li>AS (인증서버)
+            <ul>
+              <li>사용자에 대한 인증을 수행</li>
+              <li>중앙집중식 DB에 패스워드를 모두 저장</li>
+              <li>각 서버와 유일한 비밀키를 서로 공유하고 있음</li>
+            </ul>
+          </li>
+          <li>TGS(티켓발행서버)
+            <ul>
+              <li>AS 에 인증받은 사용자에 티켓을 발행</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Ticket</li>
+    </ul>
+  </li>
+  <li>과정
+    <ul>
+      <li>사용자 로그인 시
+        <ul>
+          <li>클라이언트 : 티켓-승인티켓을 요청 - 인증서버에 인증 시도</li>
+          <li>인증서버 : 티켓 + 세션키를 클라이언트에 전송</li>
+        </ul>
+      </li>
+      <li>서비스 유형마다
+        <ul>
+          <li>클라이언트 : 서비스-승인티켓을 티켓발행서버에 요청</li>
+          <li>티켓발행서버 : 티켓 + 세션키를 클라이언트에 전송</li>
+        </ul>
+      </li>
+      <li>서비스 요청
+        <ul>
+          <li>클라이언트 : 서버에 서비스 요청</li>
+          <li>서버 : 클라이언트에 액세스 권한 부여</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>취약점
+    <ul>
+      <li>KDC 는 SPoF (실패단일지점) 가 될 수 있음.</li>
+      <li>사용자에게 비밀키가 임시로 저장이 됨 -&gt; 공격자가 세션키 획득 가능</li>
+      <li>SSO 공통으로 패스워드 추측 공격에 취약</li>
+      <li>위 취약점을 보완한 것이 SESAME</li>
+    </ul>
+  </li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#kerberos" class="page__taxonomy-item" rel="tag">Kerberos</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#single-sign-on" class="page__taxonomy-item" rel="tag">Single Sign On</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#sso" class="page__taxonomy-item" rel="tag">SSO</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88%EA%B8%B0%EC%82%AC" class="page__taxonomy-item" rel="tag">정보보안기사</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#is-certification" class="page__taxonomy-item" rel="tag">IS_Certification</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2021-12-02T09:00:00+09:00">December 2, 2021</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+SSO%28%ED%86%B5%ED%95%A9%EC%9D%B8%EC%A6%9D%EC%B2%B4%EA%B3%84%29+%2F+Kerberos%20https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Management-SSO%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Management-SSO%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Management-SSO%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/is_certification/IS-Management-AccessControl/" class="pagination--pager" title="정보보안 - 접근통제와 사용자 인증
+">이전</a>
+    
+    
+      <a href="/is_certification/IS-Management-AccessControlModel/" class="pagination--pager" title="정보보안 - 접근통제 보안모델
+">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Management-AccessControlModel/" rel="permalink">정보보안 - 접근통제 보안모델
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-12-02T09:00:00+09:00">December 2, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">접근통제 보안모델
+
+  접근통제의 모델
+    
+      강제적 접근통제 (MAC) - Mandatory Access Control : 규칙기반(Rule Based)
+        
+          자원 - 보안레벨 (Security Level)
+          사용자 - 보...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Management-AccessControl/" rel="permalink">정보보안 - 접근통제와 사용자 인증
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-12-01T09:00:00+09:00">December 1, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">접근통제
+
+  접근통제 개요
+    
+      접근통제(접근제어, Access Control) 기본 개념
+        
+          컴퓨터 보안의 주된 목적
+            
+              허가되지 않은 사용자 (비인가자)에 의한 정보자원 접근 제한
+   ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Management-X509/" rel="permalink">정보보안 - PKI / X.509
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-11-30T09:00:00+09:00">November 30, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">PKI
+
+  PKI(공개키 기반 구조)
+    
+      PKI(Public-Key Infrastructure) 의 개요
+        
+          기본 개념
+            
+              공개키 알고리즘을 위한 키 관리 구조
+              R...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Management-DigitalSignature/" rel="permalink">정보보안 - 전자서명
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-11-24T09:00:00+09:00">November 24, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">전자서명
+
+  전자서명의 개요
+    
+      암호화 방식에 따라 두 종류로 나뉨
+        
+          공개키 서명 방식 (공개키 암호화 방식)
+            
+              서명자의 검증 정보를 공개하여 누구나 검증할 수 있는 방식 (간편)
+  ...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+<!--
+<script>
+	(function(d, h, m){
+    var js, fjs = d.getElementsByTagName(h)[0];
+    if (d.getElementById(m)){return;}
+    js = d.createElement(h); js.id = m;
+    js.onload = function(){
+        window.makerWidgetComInit({
+        position: "left",          
+        widget: "eqypoqmawbcz3azh-usiy9q7ma4ong1w1-juelcm3zfgcuwjds"                
+    })};
+    js.src = "https://makerwidget.com/js/embed.js";
+    fjs.parentNode.insertBefore(js, fjs)
+	}(document, "script", "dhm"))
+</script>
+-->
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:hyunik03@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 HY03. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://bluesplatter.com/is_certification/IS-Management-SSO/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/is_certification/IS-Management-SSO"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://bluesplatter.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

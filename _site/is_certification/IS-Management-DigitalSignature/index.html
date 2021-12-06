@@ -1,0 +1,940 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.20.2 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>정보보안 - 전자서명 | Bluesplatter</title>
+<meta name="description" content="전자서명    전자서명의 개요            암호화 방식에 따라 두 종류로 나뉨                    공개키 서명 방식 (공개키 암호화 방식)                            서명자의 검증 정보를 공개하여 누구나 검증할 수 있는 방식 (간편)                                   중재 서명 방식 (관용 암호방식)                            서명 생성과 검증을 제 3자가 중재 (불편)                                               전자서명 과정                    기본 개념                            송신자는 서명 알고리즘(signing algorithm)을 이용해서 메시지에 서명을 함               메시지와 서명은 수신자에게 전송됨               수신자는 메시지와 서명을 받고 이들에 검증 알고리즘(verifying algorithm)을 적용               참이면 메시지가 받아들여짐                                   디지털서명 (digital signature) - 전자서명의 한 종류, 공개키 암호화 방식을 사용                            Alice 가 Bob 에게 메시지를 보낼 때 Bob 은 송신자에 대한 확실성을 점검할 필요가 있음.               Bob 은 이 메시지가 Alice 에게서 온 것인지 Eve 에게서 온 것인지 확인하고 싶음.               Bob 은 Alice 에게 메시지에 전자서명을 해달라고 요청할 수 있고, Alice 는 이에 전자서명을 해줌.               디지털서명에서는 공개키 시스템이 필요. 서명자는 자신의 개인키로 서명, 검증자는 서명자의 공개키로 서명을 검증               암호화 시스템에서는 수신자의 개인키와 공개키가 활용됨. 디지털서명에서는 송신자의 개인키와 공개키가 사용됨.                                               전자서명 서비스                    메시지 인증                            안전한 디지털서명 구조는 메시지 인증 (데이터 근원 인증) 을 보장               Alice 에게서 받은 서명이 정말 Alice 의 서명인지를 보장                                   메시지 무결성                            전체 메시지에 서명을 할 경우에 보장, 메시지 변경 시 서명도 달라지기 때문               해시함수를 사용하여 검증 알고리즘을 만듦. 무결성 보장                                   부인방지 (신뢰받는 센터 활용)                            Alice 가 메시지를 보낸 사실을 부인하면 센터는 저장하고 있는 메시지를 제시할 수 있다.               Bob의 메시지가 센터가 보관하고 있는 메시지의 복사본과 같다면 Alice 는 법정에서 패하게 될 것이다.                                    Alice : 전송할 Msg 를 정해진 서명 알고리즘을 이용해 Alice 의 Private Key 를 이용해 서명한다.                   Alice : 서명된 메시지를 Trusted Center 에 보낸다.                   Trusted Center : Alice 의 Public Key 로 서명된 메시지를 검증 (검증알고리즘) 한다. (Msg)                   Trusted Center : Alice 가 보낸 서명된 알고리즘을 Bob에게 전달한다.                   Bob : Alice 의 Public Key로 검증 알고리즘을 이용해서 메시지를 얻어낸다. (Msg)                   Trusted Center 의 Msg 와 Bob 의 Msg 가 같다면 Alice 는 부인할 수 없게 된다.                                                                   기밀성                            디지털서명을 하더라도 기밀성이 보장되는 통신을 할 수는 없다. (전자서명이 기밀성을 보장하진 않음.)                                    전자서명은 메시지인증과 무결성을 보증함.                                               기밀성을 위해 메시지와 서명에 비밀키를 이용하거나 공개키를 이용해서 암호화를 해야만 한다.                                    Alice : 메시지를 Alice 의 Private Key를 이용, 서명알고리즘을 통해 서명함.                   Alice : 서명을 Bob의 Public Key를 이용, 암호화함.                   Bob : 암호화 메시지를 Bob 의 Private Key 를 이용, 복호화함.                   Bob : Alice 의 서명을 Alice 의 Pubilc Key 를 이용, 검증알고리즘을 통해 검증함. (Msg)                                                                               전자서명의 주요 기능                    위조 불가 (Unforgeable) : 합법적인 서명자만이 전자서명을 생성하는 것이 가능해야 한다.           서명자 인증 (User authentication) : 전자서명의 서명자를 불특정 다수가 검증할 수 있어야 한다.           부인방지 (Non-repudiation) : 서명자는 서명행위 이후에 서명한 사실을 부인할 수 없어야 한다. (신뢰할 수 있는 제3기관 이용)           변경 불가 (Unalterable) : 서명한 문서의 내용을 변경할 수 없어야 한다.           재사용 불가 (Not reusable) : 전자문서의 서명을 다른 전자문서의 서명으로 사용할 수 없어야 한다.                           전자서명의 구조            RSA 디지털 서명 구조                    RSA 아이디어를 이용하면 메시지에 서명을 하고 검증을 할 수 있다.                            암호화, 키교환에도 사용되는 공개키 기술               RSA 암호화 방식과 전자서명 방식이 동일               RSA : 소수를 이용, 소인수분해의 어려움을 기반으로 함.                                    p, q : 두 소수                   d : 개인키                   e : 공개키 (공개)                   n : p * q (공개)                                               Alice : Alice 의 Private key (d,n) 을 이용, M^d mod n 을 통해 서명 S 를 생성               Alice : 서명 S 를 전달               Alice : 메시지 M 을 전달               Bob : Alice 의 Public key (e,n) 을 이용, S^e mod n 을 통해 M’ 을 생성               Bob : M 과 M’ 을 비교, 같으면 M을 받아들임.                                               ElGamal 디지털서명 구조                    개요                            ElGamal 암호시스템과 동일한 키를 사용하지만 알고리즘은 다름.                                    ElGamal 과 동일하게 이산대수 문제 기반                                               서명 과정에서 두 개의 함수는 두 개의 서명을 생성               검증 과정에서 두 함수에서 출력되는 값을 비교하여 확인               한 개의 함수는 서명과 검증 과정에서 동시에 사용되지만 입력되는 것이 다를 뿐               키 생성 : ElGamal 디지털서명 구조에서 (e1, e2, p) 가 Alice 의 공개키이고 d는 개인키이다.               실제로 거의 사용되지 않음. DSA(Digital Signature Algorithm) 를 많이 사용 - ElGamal의 개량형                                               DSA  (Digital Signature Algorithm)                    개요                            DSS (Digital Signature Standard) : 미국의 전자서명 표준 = DSA 와 거의동일. ElGamal 전자서명을 개량한 것                                    ElGamal : 이산대수 문제 기반 알고리즘                   암호화에 사용되지 않음                   키교환에 사용되지 않음                   공개키 기술                                               DSA : NIST 에서 제안                                               ECDSA (Elliptic Curve DSA) = ECC 전자서명 (ECCDSA - 타원곡선 전자서명 구조)                    ECC (타원곡선) : RSA, ElGamal 보다 길이가 짧아 속도가 빠른 알고리즘           짧은 시간에 짧은 서명 생성 가능           ECDSA : 1998년 ANSI 에서 미국표준화                       KCDSA (Korea Certification-based DSA)                    1994년 국내에서 개발 (국가 표준 전자서명 알고리즘)           1997년 국가 표준으로 채택           1998년 TTA 에서 표준으로 채택           ElGamal 전자서명을 개선 (이산대수 문제의 어려움 기반) / DSS 를 변형           스마트카드에서도 편리하게 사용                       Schnorr 전자서명 구조                    ElGamal 전자서명에 기반, 서명의 크기는 작은 형태의 새로운 구조                            ElGamal은 매우 큰 소수를 사용해야 함 (1024bit 이상)                                   IC 카드에 적합">
+
+
+  <meta name="author" content="HY03">
+  
+  <meta property="article:author" content="HY03">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Bluesplatter">
+<meta property="og:title" content="정보보안 - 전자서명">
+<meta property="og:url" content="https://bluesplatter.com/is_certification/IS-Management-DigitalSignature/">
+
+
+  <meta property="og:description" content="전자서명    전자서명의 개요            암호화 방식에 따라 두 종류로 나뉨                    공개키 서명 방식 (공개키 암호화 방식)                            서명자의 검증 정보를 공개하여 누구나 검증할 수 있는 방식 (간편)                                   중재 서명 방식 (관용 암호방식)                            서명 생성과 검증을 제 3자가 중재 (불편)                                               전자서명 과정                    기본 개념                            송신자는 서명 알고리즘(signing algorithm)을 이용해서 메시지에 서명을 함               메시지와 서명은 수신자에게 전송됨               수신자는 메시지와 서명을 받고 이들에 검증 알고리즘(verifying algorithm)을 적용               참이면 메시지가 받아들여짐                                   디지털서명 (digital signature) - 전자서명의 한 종류, 공개키 암호화 방식을 사용                            Alice 가 Bob 에게 메시지를 보낼 때 Bob 은 송신자에 대한 확실성을 점검할 필요가 있음.               Bob 은 이 메시지가 Alice 에게서 온 것인지 Eve 에게서 온 것인지 확인하고 싶음.               Bob 은 Alice 에게 메시지에 전자서명을 해달라고 요청할 수 있고, Alice 는 이에 전자서명을 해줌.               디지털서명에서는 공개키 시스템이 필요. 서명자는 자신의 개인키로 서명, 검증자는 서명자의 공개키로 서명을 검증               암호화 시스템에서는 수신자의 개인키와 공개키가 활용됨. 디지털서명에서는 송신자의 개인키와 공개키가 사용됨.                                               전자서명 서비스                    메시지 인증                            안전한 디지털서명 구조는 메시지 인증 (데이터 근원 인증) 을 보장               Alice 에게서 받은 서명이 정말 Alice 의 서명인지를 보장                                   메시지 무결성                            전체 메시지에 서명을 할 경우에 보장, 메시지 변경 시 서명도 달라지기 때문               해시함수를 사용하여 검증 알고리즘을 만듦. 무결성 보장                                   부인방지 (신뢰받는 센터 활용)                            Alice 가 메시지를 보낸 사실을 부인하면 센터는 저장하고 있는 메시지를 제시할 수 있다.               Bob의 메시지가 센터가 보관하고 있는 메시지의 복사본과 같다면 Alice 는 법정에서 패하게 될 것이다.                                    Alice : 전송할 Msg 를 정해진 서명 알고리즘을 이용해 Alice 의 Private Key 를 이용해 서명한다.                   Alice : 서명된 메시지를 Trusted Center 에 보낸다.                   Trusted Center : Alice 의 Public Key 로 서명된 메시지를 검증 (검증알고리즘) 한다. (Msg)                   Trusted Center : Alice 가 보낸 서명된 알고리즘을 Bob에게 전달한다.                   Bob : Alice 의 Public Key로 검증 알고리즘을 이용해서 메시지를 얻어낸다. (Msg)                   Trusted Center 의 Msg 와 Bob 의 Msg 가 같다면 Alice 는 부인할 수 없게 된다.                                                                   기밀성                            디지털서명을 하더라도 기밀성이 보장되는 통신을 할 수는 없다. (전자서명이 기밀성을 보장하진 않음.)                                    전자서명은 메시지인증과 무결성을 보증함.                                               기밀성을 위해 메시지와 서명에 비밀키를 이용하거나 공개키를 이용해서 암호화를 해야만 한다.                                    Alice : 메시지를 Alice 의 Private Key를 이용, 서명알고리즘을 통해 서명함.                   Alice : 서명을 Bob의 Public Key를 이용, 암호화함.                   Bob : 암호화 메시지를 Bob 의 Private Key 를 이용, 복호화함.                   Bob : Alice 의 서명을 Alice 의 Pubilc Key 를 이용, 검증알고리즘을 통해 검증함. (Msg)                                                                               전자서명의 주요 기능                    위조 불가 (Unforgeable) : 합법적인 서명자만이 전자서명을 생성하는 것이 가능해야 한다.           서명자 인증 (User authentication) : 전자서명의 서명자를 불특정 다수가 검증할 수 있어야 한다.           부인방지 (Non-repudiation) : 서명자는 서명행위 이후에 서명한 사실을 부인할 수 없어야 한다. (신뢰할 수 있는 제3기관 이용)           변경 불가 (Unalterable) : 서명한 문서의 내용을 변경할 수 없어야 한다.           재사용 불가 (Not reusable) : 전자문서의 서명을 다른 전자문서의 서명으로 사용할 수 없어야 한다.                           전자서명의 구조            RSA 디지털 서명 구조                    RSA 아이디어를 이용하면 메시지에 서명을 하고 검증을 할 수 있다.                            암호화, 키교환에도 사용되는 공개키 기술               RSA 암호화 방식과 전자서명 방식이 동일               RSA : 소수를 이용, 소인수분해의 어려움을 기반으로 함.                                    p, q : 두 소수                   d : 개인키                   e : 공개키 (공개)                   n : p * q (공개)                                               Alice : Alice 의 Private key (d,n) 을 이용, M^d mod n 을 통해 서명 S 를 생성               Alice : 서명 S 를 전달               Alice : 메시지 M 을 전달               Bob : Alice 의 Public key (e,n) 을 이용, S^e mod n 을 통해 M’ 을 생성               Bob : M 과 M’ 을 비교, 같으면 M을 받아들임.                                               ElGamal 디지털서명 구조                    개요                            ElGamal 암호시스템과 동일한 키를 사용하지만 알고리즘은 다름.                                    ElGamal 과 동일하게 이산대수 문제 기반                                               서명 과정에서 두 개의 함수는 두 개의 서명을 생성               검증 과정에서 두 함수에서 출력되는 값을 비교하여 확인               한 개의 함수는 서명과 검증 과정에서 동시에 사용되지만 입력되는 것이 다를 뿐               키 생성 : ElGamal 디지털서명 구조에서 (e1, e2, p) 가 Alice 의 공개키이고 d는 개인키이다.               실제로 거의 사용되지 않음. DSA(Digital Signature Algorithm) 를 많이 사용 - ElGamal의 개량형                                               DSA  (Digital Signature Algorithm)                    개요                            DSS (Digital Signature Standard) : 미국의 전자서명 표준 = DSA 와 거의동일. ElGamal 전자서명을 개량한 것                                    ElGamal : 이산대수 문제 기반 알고리즘                   암호화에 사용되지 않음                   키교환에 사용되지 않음                   공개키 기술                                               DSA : NIST 에서 제안                                               ECDSA (Elliptic Curve DSA) = ECC 전자서명 (ECCDSA - 타원곡선 전자서명 구조)                    ECC (타원곡선) : RSA, ElGamal 보다 길이가 짧아 속도가 빠른 알고리즘           짧은 시간에 짧은 서명 생성 가능           ECDSA : 1998년 ANSI 에서 미국표준화                       KCDSA (Korea Certification-based DSA)                    1994년 국내에서 개발 (국가 표준 전자서명 알고리즘)           1997년 국가 표준으로 채택           1998년 TTA 에서 표준으로 채택           ElGamal 전자서명을 개선 (이산대수 문제의 어려움 기반) / DSS 를 변형           스마트카드에서도 편리하게 사용                       Schnorr 전자서명 구조                    ElGamal 전자서명에 기반, 서명의 크기는 작은 형태의 새로운 구조                            ElGamal은 매우 큰 소수를 사용해야 함 (1024bit 이상)                                   IC 카드에 적합">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2021-11-24T09:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://bluesplatter.com/is_certification/IS-Management-DigitalSignature/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "HY03",
+      "url": "https://bluesplatter.com/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Bluesplatter Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo/logo.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          세상에 남기는 작은 흔적
+          <span class="site-subtitle">Bluesplatter</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/">연도별 포스트</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="https://bluesplatter.com/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#is_certification" itemprop="item"><span itemprop="name">Is_certification</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">정보보안 - 전자서명</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/profile/photo.jpg" alt="HY03" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">HY03</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>저는 전문가가 아니고 이것 저것 알아보는 비전문가 입니다. <br /> 틀린 내용이 기술되어도 너그러이 봐주시고 댓글을 남겨주셨으면 좋겠습니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="http://bluesplatter.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:hyunik03@gmail.com">
+            <meta itemprop="email" content="hyunik03@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">이메일</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="정보보안 - 전자서명">
+    <meta itemprop="description" content="전자서명  전자서명의 개요          암호화 방식에 따라 두 종류로 나뉨                  공개키 서명 방식 (공개키 암호화 방식)                          서명자의 검증 정보를 공개하여 누구나 검증할 수 있는 방식 (간편)                                중재 서명 방식 (관용 암호방식)                          서명 생성과 검증을 제 3자가 중재 (불편)                                          전자서명 과정                  기본 개념                          송신자는 서명 알고리즘(signing algorithm)을 이용해서 메시지에 서명을 함              메시지와 서명은 수신자에게 전송됨              수신자는 메시지와 서명을 받고 이들에 검증 알고리즘(verifying algorithm)을 적용              참이면 메시지가 받아들여짐                                디지털서명 (digital signature) - 전자서명의 한 종류, 공개키 암호화 방식을 사용                          Alice 가 Bob 에게 메시지를 보낼 때 Bob 은 송신자에 대한 확실성을 점검할 필요가 있음.              Bob 은 이 메시지가 Alice 에게서 온 것인지 Eve 에게서 온 것인지 확인하고 싶음.              Bob 은 Alice 에게 메시지에 전자서명을 해달라고 요청할 수 있고, Alice 는 이에 전자서명을 해줌.              디지털서명에서는 공개키 시스템이 필요. 서명자는 자신의 개인키로 서명, 검증자는 서명자의 공개키로 서명을 검증              암호화 시스템에서는 수신자의 개인키와 공개키가 활용됨. 디지털서명에서는 송신자의 개인키와 공개키가 사용됨.                                          전자서명 서비스                  메시지 인증                          안전한 디지털서명 구조는 메시지 인증 (데이터 근원 인증) 을 보장              Alice 에게서 받은 서명이 정말 Alice 의 서명인지를 보장                                메시지 무결성                          전체 메시지에 서명을 할 경우에 보장, 메시지 변경 시 서명도 달라지기 때문              해시함수를 사용하여 검증 알고리즘을 만듦. 무결성 보장                                부인방지 (신뢰받는 센터 활용)                          Alice 가 메시지를 보낸 사실을 부인하면 센터는 저장하고 있는 메시지를 제시할 수 있다.              Bob의 메시지가 센터가 보관하고 있는 메시지의 복사본과 같다면 Alice 는 법정에서 패하게 될 것이다.                                  Alice : 전송할 Msg 를 정해진 서명 알고리즘을 이용해 Alice 의 Private Key 를 이용해 서명한다.                  Alice : 서명된 메시지를 Trusted Center 에 보낸다.                  Trusted Center : Alice 의 Public Key 로 서명된 메시지를 검증 (검증알고리즘) 한다. (Msg)                  Trusted Center : Alice 가 보낸 서명된 알고리즘을 Bob에게 전달한다.                  Bob : Alice 의 Public Key로 검증 알고리즘을 이용해서 메시지를 얻어낸다. (Msg)                  Trusted Center 의 Msg 와 Bob 의 Msg 가 같다면 Alice 는 부인할 수 없게 된다.                                                              기밀성                          디지털서명을 하더라도 기밀성이 보장되는 통신을 할 수는 없다. (전자서명이 기밀성을 보장하진 않음.)                                  전자서명은 메시지인증과 무결성을 보증함.                                            기밀성을 위해 메시지와 서명에 비밀키를 이용하거나 공개키를 이용해서 암호화를 해야만 한다.                                  Alice : 메시지를 Alice 의 Private Key를 이용, 서명알고리즘을 통해 서명함.                  Alice : 서명을 Bob의 Public Key를 이용, 암호화함.                  Bob : 암호화 메시지를 Bob 의 Private Key 를 이용, 복호화함.                  Bob : Alice 의 서명을 Alice 의 Pubilc Key 를 이용, 검증알고리즘을 통해 검증함. (Msg)                                                                        전자서명의 주요 기능                  위조 불가 (Unforgeable) : 합법적인 서명자만이 전자서명을 생성하는 것이 가능해야 한다.          서명자 인증 (User authentication) : 전자서명의 서명자를 불특정 다수가 검증할 수 있어야 한다.          부인방지 (Non-repudiation) : 서명자는 서명행위 이후에 서명한 사실을 부인할 수 없어야 한다. (신뢰할 수 있는 제3기관 이용)          변경 불가 (Unalterable) : 서명한 문서의 내용을 변경할 수 없어야 한다.          재사용 불가 (Not reusable) : 전자문서의 서명을 다른 전자문서의 서명으로 사용할 수 없어야 한다.                      전자서명의 구조          RSA 디지털 서명 구조                  RSA 아이디어를 이용하면 메시지에 서명을 하고 검증을 할 수 있다.                          암호화, 키교환에도 사용되는 공개키 기술              RSA 암호화 방식과 전자서명 방식이 동일              RSA : 소수를 이용, 소인수분해의 어려움을 기반으로 함.                                  p, q : 두 소수                  d : 개인키                  e : 공개키 (공개)                  n : p * q (공개)                                            Alice : Alice 의 Private key (d,n) 을 이용, M^d mod n 을 통해 서명 S 를 생성              Alice : 서명 S 를 전달              Alice : 메시지 M 을 전달              Bob : Alice 의 Public key (e,n) 을 이용, S^e mod n 을 통해 M’ 을 생성              Bob : M 과 M’ 을 비교, 같으면 M을 받아들임.                                          ElGamal 디지털서명 구조                  개요                          ElGamal 암호시스템과 동일한 키를 사용하지만 알고리즘은 다름.                                  ElGamal 과 동일하게 이산대수 문제 기반                                            서명 과정에서 두 개의 함수는 두 개의 서명을 생성              검증 과정에서 두 함수에서 출력되는 값을 비교하여 확인              한 개의 함수는 서명과 검증 과정에서 동시에 사용되지만 입력되는 것이 다를 뿐              키 생성 : ElGamal 디지털서명 구조에서 (e1, e2, p) 가 Alice 의 공개키이고 d는 개인키이다.              실제로 거의 사용되지 않음. DSA(Digital Signature Algorithm) 를 많이 사용 - ElGamal의 개량형                                          DSA  (Digital Signature Algorithm)                  개요                          DSS (Digital Signature Standard) : 미국의 전자서명 표준 = DSA 와 거의동일. ElGamal 전자서명을 개량한 것                                  ElGamal : 이산대수 문제 기반 알고리즘                  암호화에 사용되지 않음                  키교환에 사용되지 않음                  공개키 기술                                            DSA : NIST 에서 제안                                          ECDSA (Elliptic Curve DSA) = ECC 전자서명 (ECCDSA - 타원곡선 전자서명 구조)                  ECC (타원곡선) : RSA, ElGamal 보다 길이가 짧아 속도가 빠른 알고리즘          짧은 시간에 짧은 서명 생성 가능          ECDSA : 1998년 ANSI 에서 미국표준화                    KCDSA (Korea Certification-based DSA)                  1994년 국내에서 개발 (국가 표준 전자서명 알고리즘)          1997년 국가 표준으로 채택          1998년 TTA 에서 표준으로 채택          ElGamal 전자서명을 개선 (이산대수 문제의 어려움 기반) / DSS 를 변형          스마트카드에서도 편리하게 사용                    Schnorr 전자서명 구조                  ElGamal 전자서명에 기반, 서명의 크기는 작은 형태의 새로운 구조                          ElGamal은 매우 큰 소수를 사용해야 함 (1024bit 이상)                                IC 카드에 적합                    ">
+    <meta itemprop="datePublished" content="2021-11-24T09:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">정보보안 - 전자서명
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-11-24T09:00:00+09:00">November 24, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#전자서명">전자서명</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <h1 id="전자서명">전자서명</h1>
+<ul>
+  <li>전자서명의 개요
+    <ul>
+      <li>암호화 방식에 따라 두 종류로 나뉨
+        <ul>
+          <li>공개키 서명 방식 (공개키 암호화 방식)
+            <ul>
+              <li>서명자의 검증 정보를 공개하여 누구나 검증할 수 있는 방식 (간편)</li>
+            </ul>
+          </li>
+          <li>중재 서명 방식 (관용 암호방식)
+            <ul>
+              <li>서명 생성과 검증을 제 3자가 중재 (불편)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>전자서명 과정
+        <ul>
+          <li>기본 개념
+            <ul>
+              <li>송신자는 서명 알고리즘(signing algorithm)을 이용해서 메시지에 서명을 함</li>
+              <li>메시지와 서명은 수신자에게 전송됨</li>
+              <li>수신자는 메시지와 서명을 받고 이들에 검증 알고리즘(verifying algorithm)을 적용</li>
+              <li>참이면 메시지가 받아들여짐</li>
+            </ul>
+          </li>
+          <li>디지털서명 (digital signature) - 전자서명의 한 종류, 공개키 암호화 방식을 사용
+            <ul>
+              <li>Alice 가 Bob 에게 메시지를 보낼 때 Bob 은 송신자에 대한 확실성을 점검할 필요가 있음.</li>
+              <li>Bob 은 이 메시지가 Alice 에게서 온 것인지 Eve 에게서 온 것인지 확인하고 싶음.</li>
+              <li>Bob 은 Alice 에게 메시지에 전자서명을 해달라고 요청할 수 있고, Alice 는 이에 전자서명을 해줌.</li>
+              <li>디지털서명에서는 공개키 시스템이 필요. 서명자는 자신의 개인키로 서명, 검증자는 서명자의 공개키로 서명을 검증</li>
+              <li>암호화 시스템에서는 수신자의 개인키와 공개키가 활용됨. 디지털서명에서는 송신자의 개인키와 공개키가 사용됨.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>전자서명 서비스
+        <ul>
+          <li>메시지 인증
+            <ul>
+              <li>안전한 디지털서명 구조는 메시지 인증 (데이터 근원 인증) 을 보장</li>
+              <li>Alice 에게서 받은 서명이 정말 Alice 의 서명인지를 보장</li>
+            </ul>
+          </li>
+          <li>메시지 무결성
+            <ul>
+              <li>전체 메시지에 서명을 할 경우에 보장, 메시지 변경 시 서명도 달라지기 때문</li>
+              <li>해시함수를 사용하여 검증 알고리즘을 만듦. 무결성 보장</li>
+            </ul>
+          </li>
+          <li>부인방지 (신뢰받는 센터 활용)
+            <ul>
+              <li>Alice 가 메시지를 보낸 사실을 부인하면 센터는 저장하고 있는 메시지를 제시할 수 있다.</li>
+              <li>Bob의 메시지가 센터가 보관하고 있는 메시지의 복사본과 같다면 Alice 는 법정에서 패하게 될 것이다.
+                <ul>
+                  <li>Alice : 전송할 Msg 를 정해진 서명 알고리즘을 이용해 Alice 의 Private Key 를 이용해 서명한다.</li>
+                  <li>Alice : 서명된 메시지를 Trusted Center 에 보낸다.</li>
+                  <li>Trusted Center : Alice 의 Public Key 로 서명된 메시지를 검증 (검증알고리즘) 한다. (Msg)</li>
+                  <li>Trusted Center : Alice 가 보낸 서명된 알고리즘을 Bob에게 전달한다.</li>
+                  <li>Bob : Alice 의 Public Key로 검증 알고리즘을 이용해서 메시지를 얻어낸다. (Msg)</li>
+                  <li>Trusted Center 의 Msg 와 Bob 의 Msg 가 같다면 Alice 는 부인할 수 없게 된다.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>기밀성
+            <ul>
+              <li>디지털서명을 하더라도 기밀성이 보장되는 통신을 할 수는 없다. (전자서명이 기밀성을 보장하진 않음.)
+                <ul>
+                  <li>전자서명은 메시지인증과 무결성을 보증함.</li>
+                </ul>
+              </li>
+              <li>기밀성을 위해 메시지와 서명에 비밀키를 이용하거나 공개키를 이용해서 암호화를 해야만 한다.
+                <ul>
+                  <li>Alice : 메시지를 Alice 의 Private Key를 이용, 서명알고리즘을 통해 서명함.</li>
+                  <li>Alice : 서명을 Bob의 Public Key를 이용, 암호화함.</li>
+                  <li>Bob : 암호화 메시지를 Bob 의 Private Key 를 이용, 복호화함.</li>
+                  <li>Bob : Alice 의 서명을 Alice 의 Pubilc Key 를 이용, 검증알고리즘을 통해 검증함. (Msg)</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>전자서명의 주요 기능
+        <ul>
+          <li>위조 불가 (Unforgeable) : 합법적인 서명자만이 전자서명을 생성하는 것이 가능해야 한다.</li>
+          <li>서명자 인증 (User authentication) : 전자서명의 서명자를 불특정 다수가 검증할 수 있어야 한다.</li>
+          <li>부인방지 (Non-repudiation) : 서명자는 서명행위 이후에 서명한 사실을 부인할 수 없어야 한다. (신뢰할 수 있는 제3기관 이용)</li>
+          <li>변경 불가 (Unalterable) : 서명한 문서의 내용을 변경할 수 없어야 한다.</li>
+          <li>재사용 불가 (Not reusable) : 전자문서의 서명을 다른 전자문서의 서명으로 사용할 수 없어야 한다.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>전자서명의 구조
+    <ul>
+      <li>RSA 디지털 서명 구조
+        <ul>
+          <li>RSA 아이디어를 이용하면 메시지에 서명을 하고 검증을 할 수 있다.
+            <ul>
+              <li>암호화, 키교환에도 사용되는 공개키 기술</li>
+              <li>RSA 암호화 방식과 전자서명 방식이 동일</li>
+              <li>RSA : 소수를 이용, 소인수분해의 어려움을 기반으로 함.
+                <ul>
+                  <li>p, q : 두 소수</li>
+                  <li>d : 개인키</li>
+                  <li>e : 공개키 (공개)</li>
+                  <li>n : p * q (공개)</li>
+                </ul>
+              </li>
+              <li>Alice : Alice 의 Private key (d,n) 을 이용, M^d mod n 을 통해 서명 S 를 생성</li>
+              <li>Alice : 서명 S 를 전달</li>
+              <li>Alice : 메시지 M 을 전달</li>
+              <li>Bob : Alice 의 Public key (e,n) 을 이용, S^e mod n 을 통해 M’ 을 생성</li>
+              <li>Bob : M 과 M’ 을 비교, 같으면 M을 받아들임.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>ElGamal 디지털서명 구조
+        <ul>
+          <li>개요
+            <ul>
+              <li>ElGamal 암호시스템과 동일한 키를 사용하지만 알고리즘은 다름.
+                <ul>
+                  <li>ElGamal 과 동일하게 이산대수 문제 기반</li>
+                </ul>
+              </li>
+              <li>서명 과정에서 두 개의 함수는 두 개의 서명을 생성</li>
+              <li>검증 과정에서 두 함수에서 출력되는 값을 비교하여 확인</li>
+              <li>한 개의 함수는 서명과 검증 과정에서 동시에 사용되지만 입력되는 것이 다를 뿐</li>
+              <li>키 생성 : ElGamal 디지털서명 구조에서 (e1, e2, p) 가 Alice 의 공개키이고 d는 개인키이다.</li>
+              <li>실제로 거의 사용되지 않음. DSA(Digital Signature Algorithm) 를 많이 사용 - ElGamal의 개량형</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>DSA  (Digital Signature Algorithm)
+        <ul>
+          <li>개요
+            <ul>
+              <li>DSS (Digital Signature Standard) : 미국의 전자서명 표준 = DSA 와 거의동일. ElGamal 전자서명을 개량한 것
+                <ul>
+                  <li>ElGamal : 이산대수 문제 기반 알고리즘</li>
+                  <li>암호화에 사용되지 않음</li>
+                  <li>키교환에 사용되지 않음</li>
+                  <li>공개키 기술</li>
+                </ul>
+              </li>
+              <li>DSA : NIST 에서 제안</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>ECDSA (Elliptic Curve DSA) = ECC 전자서명 (ECCDSA - 타원곡선 전자서명 구조)
+        <ul>
+          <li>ECC (타원곡선) : RSA, ElGamal 보다 길이가 짧아 속도가 빠른 알고리즘</li>
+          <li>짧은 시간에 짧은 서명 생성 가능</li>
+          <li>ECDSA : 1998년 ANSI 에서 미국표준화</li>
+        </ul>
+      </li>
+      <li>KCDSA (Korea Certification-based DSA)
+        <ul>
+          <li>1994년 국내에서 개발 (국가 표준 전자서명 알고리즘)</li>
+          <li>1997년 국가 표준으로 채택</li>
+          <li>1998년 TTA 에서 표준으로 채택</li>
+          <li>ElGamal 전자서명을 개선 (이산대수 문제의 어려움 기반) / DSS 를 변형</li>
+          <li>스마트카드에서도 편리하게 사용</li>
+        </ul>
+      </li>
+      <li>Schnorr 전자서명 구조
+        <ul>
+          <li>ElGamal 전자서명에 기반, 서명의 크기는 작은 형태의 새로운 구조
+            <ul>
+              <li>ElGamal은 매우 큰 소수를 사용해야 함 (1024bit 이상)</li>
+            </ul>
+          </li>
+          <li>IC 카드에 적합</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#%EC%A0%84%EC%9E%90%EC%84%9C%EB%AA%85" class="page__taxonomy-item" rel="tag">전자서명</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88%EA%B8%B0%EC%82%AC" class="page__taxonomy-item" rel="tag">정보보안기사</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#is-certification" class="page__taxonomy-item" rel="tag">IS_Certification</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2021-11-24T09:00:00+09:00">November 24, 2021</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+%EC%A0%84%EC%9E%90%EC%84%9C%EB%AA%85%20https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Management-DigitalSignature%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Management-DigitalSignature%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Management-DigitalSignature%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/is_certification/IS-Management-HashAlgorithm/" class="pagination--pager" title="정보보안 - 해시함수
+">이전</a>
+    
+    
+      <a href="/is_certification/IS-Management-X509/" class="pagination--pager" title="정보보안 - PKI / X.509
+">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Management-AccessControlModel/" rel="permalink">정보보안 - 접근통제 보안모델
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-12-02T09:00:00+09:00">December 2, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">접근통제 보안모델
+
+  접근통제의 모델
+    
+      강제적 접근통제 (MAC) - Mandatory Access Control : 규칙기반(Rule Based)
+        
+          자원 - 보안레벨 (Security Level)
+          사용자 - 보...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Management-SSO/" rel="permalink">정보보안 - SSO(통합인증체계) / Kerberos
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-12-02T09:00:00+09:00">December 2, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">통합인증 체계(SSO)
+
+  SSO(Single Sign On) 의 기본개념
+    
+      통합 인증 체계(SSO) 정의
+        
+          한 번의 시스템 인증을 통하여 접근하고자 하는 다양한 정보시스템에 재인증 절차 없이 접근할 수 있도록 하는 통합 로그인 ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Management-AccessControl/" rel="permalink">정보보안 - 접근통제와 사용자 인증
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-12-01T09:00:00+09:00">December 1, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">접근통제
+
+  접근통제 개요
+    
+      접근통제(접근제어, Access Control) 기본 개념
+        
+          컴퓨터 보안의 주된 목적
+            
+              허가되지 않은 사용자 (비인가자)에 의한 정보자원 접근 제한
+   ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-Management-X509/" rel="permalink">정보보안 - PKI / X.509
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-11-30T09:00:00+09:00">November 30, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">PKI
+
+  PKI(공개키 기반 구조)
+    
+      PKI(Public-Key Infrastructure) 의 개요
+        
+          기본 개념
+            
+              공개키 알고리즘을 위한 키 관리 구조
+              R...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+<!--
+<script>
+	(function(d, h, m){
+    var js, fjs = d.getElementsByTagName(h)[0];
+    if (d.getElementById(m)){return;}
+    js = d.createElement(h); js.id = m;
+    js.onload = function(){
+        window.makerWidgetComInit({
+        position: "left",          
+        widget: "eqypoqmawbcz3azh-usiy9q7ma4ong1w1-juelcm3zfgcuwjds"                
+    })};
+    js.src = "https://makerwidget.com/js/embed.js";
+    fjs.parentNode.insertBefore(js, fjs)
+	}(document, "script", "dhm"))
+</script>
+-->
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:hyunik03@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 HY03. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://bluesplatter.com/is_certification/IS-Management-DigitalSignature/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/is_certification/IS-Management-DigitalSignature"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://bluesplatter.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>
