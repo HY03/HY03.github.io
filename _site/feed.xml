@@ -1,117 +1,1007 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://bluesplatter.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://bluesplatter.com/" rel="alternate" type="text/html" /><updated>2021-12-06T13:57:04+09:00</updated><id>https://bluesplatter.com/feed.xml</id><title type="html">Bluesplatter</title><subtitle>전문적이지 않은 정보들, 감상, 즉흥적인 내용들</subtitle><author><name>HY03</name><email>hyunik03@gmail.com</email></author><entry><title type="html">정보보안 - SSO(통합인증체계) / Kerberos</title><link href="https://bluesplatter.com/is_certification/IS-Management-SSO/" rel="alternate" type="text/html" title="정보보안 - SSO(통합인증체계) / Kerberos" /><published>2021-12-02T09:00:00+09:00</published><updated>2021-12-02T09:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-Management-SSO</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-Management-SSO/">&lt;h1 id=&quot;통합인증-체계sso&quot;&gt;통합인증 체계(SSO)&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://bluesplatter.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://bluesplatter.com/" rel="alternate" type="text/html" /><updated>2021-12-20T17:56:29+09:00</updated><id>https://bluesplatter.com/feed.xml</id><title type="html">Bluesplatter</title><subtitle>전문적이지 않은 정보들, 감상, 즉흥적인 내용들</subtitle><author><name>HY03</name><email>hyunik03@gmail.com</email></author><entry><title type="html">정보보안 - 위험관리</title><link href="https://bluesplatter.com/is_certification/IS-Management-Risk_Management/" rel="alternate" type="text/html" title="정보보안 - 위험관리" /><published>2021-12-10T09:00:00+09:00</published><updated>2021-12-10T09:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-Management-Risk_Management</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-Management-Risk_Management/">&lt;h1 id=&quot;위험-관리risk-management&quot;&gt;위험 관리(Risk Management)&lt;/h1&gt;
 &lt;ul&gt;
-  &lt;li&gt;SSO(Single Sign On) 의 기본개념
+  &lt;li&gt;위험 관리는 프로젝트 추진 과정에서 예상되는 각종 돌발 상황(위험) 을 미리 예상하고 이에 대한 적절한 대책을 수립하는 일련의 활동이다.
     &lt;ul&gt;
-      &lt;li&gt;통합 인증 체계(SSO) 정의
+      &lt;li&gt;위험은 불확실성과 손실을 내재하고 있는데, 위험 관리는 이러한 위험의 불확실성을 감소시키고 손실에 대비하는 작업이다.&lt;/li&gt;
+      &lt;li&gt;위험을 식별한 후 발생 확률을 산정하고, 그 영향을 추산하여 해당 위험에 대비하는 비상 계획을 마련한다.
         &lt;ul&gt;
-          &lt;li&gt;한 번의 시스템 인증을 통하여 접근하고자 하는 다양한 정보시스템에 재인증 절차 없이 접근할 수 있도록 하는 통합 로그인 솔루션
+          &lt;li&gt;조직의 자산에 대한 식별을 통해 자산가치를 판별하고, 가치에 따라 보안대책을 수립&lt;/li&gt;
+          &lt;li&gt;조직의 자산에 대한 위험감수수준
             &lt;ul&gt;
-              &lt;li&gt;통합 로그인 솔루션 : 대표적인 인증방법으로는 커버로스(Kerberos) 를 이용한 윈도우의 액티브 디렉터리(Active Directory) 가 있다.&lt;/li&gt;
-              &lt;li&gt;사용 예
-                &lt;ul&gt;
-                  &lt;li&gt;Kerberos&lt;/li&gt;
-                  &lt;li&gt;유럽식 보안 시스템 : SESAME (공개키 암호화 방식 사용, Needham Schroeder Protocol 사용)&lt;/li&gt;
-                  &lt;li&gt;크립토나이트&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;통합신원관리 시스템의 중심적 개념은 SSO 를 사용하여 사용자가 한 번만 인증하면 네트워크의 모든 자원에 접속할 수 있게 하는 것&lt;/li&gt;
-          &lt;li&gt;장점 : 사용자 편의성, 운영비용 감소, PKI 기반 보안기능 (보안성 강화)&lt;/li&gt;
-          &lt;li&gt;단점 : 단일실패지점 (SPoF-SinglePointOfFailure)&lt;/li&gt;
-          &lt;li&gt;EAM (Extranet Access Management) (권한관리 시스템) 은 SSO 기술 기반으로 나온 시스템 (SSO + 보안성)
-            &lt;ul&gt;
-              &lt;li&gt;접근권한부여 / 관리 - 통합인증 권한관리 솔루션&lt;/li&gt;
+              &lt;li&gt;예:자산 가치 3억에 5억의 비용을 들여 보호하는 것은 넌센스다.&lt;/li&gt;
             &lt;/ul&gt;
           &lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
-      &lt;li&gt;SSO 구성요소
+      &lt;li&gt;주기적, 반복적으로 위험 관리를 하여야 함.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;세부과정
+    &lt;ul&gt;
+      &lt;li&gt;전략/계획 수립&lt;/li&gt;
+      &lt;li&gt;위험 요소 분석&lt;/li&gt;
+      &lt;li&gt;위험평가 : 위험에 대한 규모를 규정&lt;/li&gt;
+      &lt;li&gt;정보보호대책 선정 : 위험완화&lt;/li&gt;
+      &lt;li&gt;대응책 구현
         &lt;ul&gt;
-          &lt;li&gt;사용자&lt;/li&gt;
-          &lt;li&gt;인증서버&lt;/li&gt;
-          &lt;li&gt;LDAP (Lightweight Directory Access Protocol) : X.500 을 근거로 한 디렉토리 DB에 접속하기 위한 프로토콜&lt;/li&gt;
-          &lt;li&gt;SSO Agent : 각 정보시스템에 SSO 정보를 송수신&lt;/li&gt;
+          &lt;li&gt;위험관리에 위험분석이 80% 비율, 위험관리, 위험분석, 위험평가를 비슷한 의미로 사용하기도 함&lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
-      &lt;li&gt;과정
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;위험 관리는 프로젝트 추진 과정에서 예상되는 각종 돌발 상황(위험) 을 미리 예상하고 이에 대한 적절한 대책(위험 완화)을 수립하는 일련의 활동
+    &lt;ul&gt;
+      &lt;li&gt;위험은 불확실성과 손실을 내재하고 있는데, 위험 관리는 이러한 위험의 불확실성을 감소시키고 손실에 대비하는 작업&lt;/li&gt;
+      &lt;li&gt;위험을 식별(위험 요소 분석)한 후 발생 확률을 산정(위험평가)하고, 그 영향을 추산(위험평가-위험의 규모를 결정)하여 해당 위험에 대비하는 비상 계획을 마련함
         &lt;ul&gt;
-          &lt;li&gt;User : User 가 Portal 에 접속&lt;/li&gt;
-          &lt;li&gt;User : Portal 로그인 화면 (인증서버) 으로 Redirect&lt;/li&gt;
-          &lt;li&gt;User : 인증서버에 사용자의 ID/PW (인증정보) 입력&lt;/li&gt;
-          &lt;li&gt;인증서버 : LDAP (사용자 프로파일 DB) 를 이용해 사용자의 인증정보를 검증&lt;/li&gt;
-          &lt;li&gt;인증서버 : Portal 에 로그인처리&lt;/li&gt;
-          &lt;li&gt;User : Portal 의 각 서비스에 접근이 가능&lt;/li&gt;
+          &lt;li&gt;위험분석 없이 보호대책을 수립하는 경우
+            &lt;ul&gt;
+              &lt;li&gt;취약점이 너무 많아짐&lt;/li&gt;
+              &lt;li&gt;위협에 대한 우선순위가 설정되지 않음 : 과도한 투자가 이루어질 수 있음&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&quot;커버로스-kerberos&quot;&gt;커버로스 (Kerberos)&lt;/h1&gt;
+&lt;h1 id=&quot;위험-분석&quot;&gt;위험 분석&lt;/h1&gt;
 &lt;ul&gt;
-  &lt;li&gt;개요
+  &lt;li&gt;위험 관리의 핵심 (80% 이상)&lt;/li&gt;
+  &lt;li&gt;정보시스템과 조직의 위험을 측정하고 허용여부의 판단근거를 마련하는 과정&lt;/li&gt;
+  &lt;li&gt;위험 분석 방법 : &lt;strong&gt;기준 접근법(베이스라인 접근법), 세부위험분석(상세위험분석), 복합접근법, 비정형접근법&lt;/strong&gt; (ISO/IEC 13335-1)&lt;/li&gt;
+  &lt;li&gt;위험 (Risk) : 원하지 않는 사건이 발생하여 손실이나 부정적 영향을 미칠 가능성
     &lt;ul&gt;
-      &lt;li&gt;커버로스(Kerberos) 는 인증 프로토콜이며 동시에 KDC 이다.&lt;/li&gt;
-      &lt;li&gt;이 이름은 문을 지키는 그리스 신화의 머리가 셋 달린 개의 이름에서 따온 것이다.&lt;/li&gt;
-      &lt;li&gt;MIT 에서 설계를 했고 여러 버전으로 업데이트 되었다.&lt;/li&gt;
-      &lt;li&gt;개방된 컴퓨터 네트워크 내에서 서비스 요구를 인증하기 위해 대칭키 암호기법에 바탕을 둔 티켓 기반 인증 프로토콜이다.&lt;/li&gt;
-      &lt;li&gt;수년 동안 유닉스 시스템에서 사용되었고, 현재 윈도우 서버 운영체제에서 기본 인증기법으로 사용되고 있다.&lt;/li&gt;
-      &lt;li&gt;분산 환경을 위한 SSO 의 한 예이며, 이종 네트워크를 위한 사실상의 표준&lt;/li&gt;
+      &lt;li&gt;위험 : 발생가능성 x 손실&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;커버로스 구성요소
+  &lt;li&gt;위험의 구성요소
     &lt;ul&gt;
-      &lt;li&gt;KDC(키분배센터) : AS(인증서버) + TGS(티켓발행서버)
+      &lt;li&gt;자산 (Assets) : 조직이 보호해야 할 대상 (무형자산도 포함)
         &lt;ul&gt;
-          &lt;li&gt;AS (인증서버)
+          &lt;li&gt;정보, H/W, S/W, 시설, 인력, 기업이미지, 평판, 직원들의 사기&lt;/li&gt;
+          &lt;li&gt;자산 유형에 따라 취약성이 분류됨 (예: 문서는 해킹에 대한 취약점이 없음)
             &lt;ul&gt;
-              &lt;li&gt;사용자에 대한 인증을 수행&lt;/li&gt;
-              &lt;li&gt;중앙집중식 DB에 패스워드를 모두 저장&lt;/li&gt;
-              &lt;li&gt;각 서버와 유일한 비밀키를 서로 공유하고 있음&lt;/li&gt;
+              &lt;li&gt;자산의 분류 및 파악이 위험을 평가하는데 중요함
+                &lt;ul&gt;
+                  &lt;li&gt;보안사고 발생시 손실 (loss) 에 대한 파악이 되어야 함&lt;/li&gt;
+                  &lt;li&gt;양적으로 손실 측정이 가능 -&amp;gt; 보호대책의 비용과 보안사고시 손실간 균형을 맞추는데 활용&lt;/li&gt;
+                  &lt;li&gt;자산평가(가치) 의 필요성 : 구체적인 금액, 자산 손상시 미치는 피해의 정도
+                    &lt;ul&gt;
+                      &lt;li&gt;취약성 파악의 필요성&lt;/li&gt;
+                      &lt;li&gt;자산 관련 비용 (구회비용, 기회비용, 복구비용, 침해시 보상비용 포함)&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
             &lt;/ul&gt;
           &lt;/li&gt;
-          &lt;li&gt;TGS(티켓발행서버)
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;위협 (Threat) :  자산의 손실을 초래할 수 있는 윈치 않는(돌발적인) 사건의 잠재적 원인, 잠재적 행위자
+        &lt;ul&gt;
+          &lt;li&gt;위협의 원천
             &lt;ul&gt;
-              &lt;li&gt;AS 에 인증받은 사용자에 티켓을 발행&lt;/li&gt;
+              &lt;li&gt;환경적 요인
+                &lt;ul&gt;
+                  &lt;li&gt;장비고장, 자연재해&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;인간에 의한 요인
+                &lt;ul&gt;
+                  &lt;li&gt;의도적 위협, 우연한 위협&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;위협 발생이 반드시 피해가 발생함을 의미하는 것은 아님
+            &lt;ul&gt;
+              &lt;li&gt;자산의 취약성을 이용하는 것이 위협 (원치 않는 사건의 원인)
+                &lt;ul&gt;
+                  &lt;li&gt;자산의 취약성에 대한 보호대책이 있으면 위협의 결과(피해) 가 달라짐&lt;/li&gt;
+                  &lt;li&gt;위협 발생 가능성 : 해킹시도&lt;/li&gt;
+                  &lt;li&gt;위협 성공 가능성 : 해킹성공&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
             &lt;/ul&gt;
           &lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
-      &lt;li&gt;Ticket&lt;/li&gt;
+      &lt;li&gt;취약성 (Vulnerability)
+        &lt;ul&gt;
+          &lt;li&gt;자산의 잠재적 속성&lt;/li&gt;
+          &lt;li&gt;자산과 위협 사이의 관계를 맺어주는 특성&lt;/li&gt;
+          &lt;li&gt;위협의 이용 대상&lt;/li&gt;
+          &lt;li&gt;정보보호대책의 미비&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;정보보호대책 (대응책) (Safeguard, Countermeasure)
+        &lt;ul&gt;
+          &lt;li&gt;위협에 대응하여 자산을 보호하기 위한 관리적, 기술적 대책&lt;/li&gt;
+          &lt;li&gt;관리적 대책 : 절차, 정책, 교육&lt;/li&gt;
+          &lt;li&gt;기술적 대책 : IDS, Firewall&lt;/li&gt;
+          &lt;li&gt;보호대책의 효과를 파악하여 보호대책을 선정해야 함
+            &lt;ul&gt;
+              &lt;li&gt;모든 위험을 완전히 제거할 수 없음&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;위험 = f(자산, 위협, 취약점)&lt;/li&gt;
+      &lt;li&gt;전체위험(Total Risk) = 자산 * 위협 * 취약성&lt;/li&gt;
+      &lt;li&gt;잔여위험(Residual Risk) = (위협 * 자산 * 취약점) * 통제격차 (Controls Gap)
+        &lt;ul&gt;
+          &lt;li&gt;통제격차 : 비용효율성, 조직에 대한 안전장치의 가치 (대응책 시행 전에 잔여위험을 파악하기 위함)&lt;/li&gt;
+          &lt;li&gt;잔여위험 : 전체위험 - 대응책&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;과정
+  &lt;li&gt;&lt;strong&gt;위험 분석의 절차&lt;/strong&gt;
     &lt;ul&gt;
-      &lt;li&gt;사용자 로그인 시
+      &lt;li&gt;위험관리
         &lt;ul&gt;
-          &lt;li&gt;클라이언트 : 티켓-승인티켓을 요청 - 인증서버에 인증 시도&lt;/li&gt;
-          &lt;li&gt;인증서버 : 티켓 + 세션키를 클라이언트에 전송&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;서비스 유형마다
-        &lt;ul&gt;
-          &lt;li&gt;클라이언트 : 서비스-승인티켓을 티켓발행서버에 요청&lt;/li&gt;
-          &lt;li&gt;티켓발행서버 : 티켓 + 세션키를 클라이언트에 전송&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;서비스 요청
-        &lt;ul&gt;
-          &lt;li&gt;클라이언트 : 서버에 서비스 요청&lt;/li&gt;
-          &lt;li&gt;서버 : 클라이언트에 액세스 권한 부여&lt;/li&gt;
+          &lt;li&gt;범위결정&lt;/li&gt;
+          &lt;li&gt;위험분석 (80% 이상 차지)
+            &lt;ul&gt;
+              &lt;li&gt;자산식별&lt;/li&gt;
+              &lt;li&gt;자산가치평가 / 위협평가 / 기존 보안대책 평가 / 취약성 평가&lt;/li&gt;
+              &lt;li&gt;위험평가&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;대책선택 (제약조건을 고려)&lt;/li&gt;
+          &lt;li&gt;위험수용여부 결정
+            &lt;ul&gt;
+              &lt;li&gt;Yes : 보안정책 -&amp;gt; 보안계획수립&lt;/li&gt;
+              &lt;li&gt;No : 대책선택으로 회귀 (다른 대책을 선택)&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;IT 시스템 보안정책 수립&lt;/li&gt;
+          &lt;li&gt;IT 보안계획 수립&lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;취약점
+  &lt;li&gt;기준선접근법 (Baseline-approach)
     &lt;ul&gt;
-      &lt;li&gt;KDC 는 SPoF (실패단일지점) 가 될 수 있음.&lt;/li&gt;
-      &lt;li&gt;사용자에게 비밀키가 임시로 저장이 됨 -&amp;gt; 공격자가 세션키 획득 가능&lt;/li&gt;
-      &lt;li&gt;SSO 공통으로 패스워드 추측 공격에 취약&lt;/li&gt;
-      &lt;li&gt;위 취약점을 보완한 것이 SESAME&lt;/li&gt;
+      &lt;li&gt;체크리스트 (모든 시스템에 대한 표준화된 보안대책의 Set) 를 이용&lt;/li&gt;
+      &lt;li&gt;BS7799 ISO-17799 를 사용한 Gap 분석&lt;/li&gt;
+      &lt;li&gt;분석 비용, 시간을 매우 절약할 수 있음&lt;/li&gt;
+      &lt;li&gt;과보호 또는 과부족 보호가 될 가능성이 존재
+        &lt;ul&gt;
+          &lt;li&gt;조직에 적합한 체크리스트여야 함&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;소규모 조직에 사용되도록 권고&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="SSO" /><category term="Single Sign On" /><category term="Kerberos" /><summary type="html">통합인증 체계(SSO) SSO(Single Sign On) 의 기본개념 통합 인증 체계(SSO) 정의 한 번의 시스템 인증을 통하여 접근하고자 하는 다양한 정보시스템에 재인증 절차 없이 접근할 수 있도록 하는 통합 로그인 솔루션 통합 로그인 솔루션 : 대표적인 인증방법으로는 커버로스(Kerberos) 를 이용한 윈도우의 액티브 디렉터리(Active Directory) 가 있다. 사용 예 Kerberos 유럽식 보안 시스템 : SESAME (공개키 암호화 방식 사용, Needham Schroeder Protocol 사용) 크립토나이트 통합신원관리 시스템의 중심적 개념은 SSO 를 사용하여 사용자가 한 번만 인증하면 네트워크의 모든 자원에 접속할 수 있게 하는 것 장점 : 사용자 편의성, 운영비용 감소, PKI 기반 보안기능 (보안성 강화) 단점 : 단일실패지점 (SPoF-SinglePointOfFailure) EAM (Extranet Access Management) (권한관리 시스템) 은 SSO 기술 기반으로 나온 시스템 (SSO + 보안성) 접근권한부여 / 관리 - 통합인증 권한관리 솔루션 SSO 구성요소 사용자 인증서버 LDAP (Lightweight Directory Access Protocol) : X.500 을 근거로 한 디렉토리 DB에 접속하기 위한 프로토콜 SSO Agent : 각 정보시스템에 SSO 정보를 송수신 과정 User : User 가 Portal 에 접속 User : Portal 로그인 화면 (인증서버) 으로 Redirect User : 인증서버에 사용자의 ID/PW (인증정보) 입력 인증서버 : LDAP (사용자 프로파일 DB) 를 이용해 사용자의 인증정보를 검증 인증서버 : Portal 에 로그인처리 User : Portal 의 각 서비스에 접근이 가능</summary></entry><entry><title type="html">정보보안 - 접근통제 보안모델</title><link href="https://bluesplatter.com/is_certification/IS-Management-AccessControlModel/" rel="alternate" type="text/html" title="정보보안 - 접근통제 보안모델" /><published>2021-12-02T09:00:00+09:00</published><updated>2021-12-02T09:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-Management-AccessControlModel</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-Management-AccessControlModel/">&lt;h1 id=&quot;접근통제-보안모델&quot;&gt;접근통제 보안모델&lt;/h1&gt;
+  &lt;li&gt;비정형 접근법 (Informal approach)
+    &lt;ul&gt;
+      &lt;li&gt;구조화된 (정형화된) 방법론 (20:08)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="위험 관리" /><summary type="html">위험 관리(Risk Management) 위험 관리는 프로젝트 추진 과정에서 예상되는 각종 돌발 상황(위험) 을 미리 예상하고 이에 대한 적절한 대책을 수립하는 일련의 활동이다. 위험은 불확실성과 손실을 내재하고 있는데, 위험 관리는 이러한 위험의 불확실성을 감소시키고 손실에 대비하는 작업이다. 위험을 식별한 후 발생 확률을 산정하고, 그 영향을 추산하여 해당 위험에 대비하는 비상 계획을 마련한다. 조직의 자산에 대한 식별을 통해 자산가치를 판별하고, 가치에 따라 보안대책을 수립 조직의 자산에 대한 위험감수수준 예:자산 가치 3억에 5억의 비용을 들여 보호하는 것은 넌센스다. 주기적, 반복적으로 위험 관리를 하여야 함. 세부과정 전략/계획 수립 위험 요소 분석 위험평가 : 위험에 대한 규모를 규정 정보보호대책 선정 : 위험완화 대응책 구현 위험관리에 위험분석이 80% 비율, 위험관리, 위험분석, 위험평가를 비슷한 의미로 사용하기도 함 위험 관리는 프로젝트 추진 과정에서 예상되는 각종 돌발 상황(위험) 을 미리 예상하고 이에 대한 적절한 대책(위험 완화)을 수립하는 일련의 활동 위험은 불확실성과 손실을 내재하고 있는데, 위험 관리는 이러한 위험의 불확실성을 감소시키고 손실에 대비하는 작업 위험을 식별(위험 요소 분석)한 후 발생 확률을 산정(위험평가)하고, 그 영향을 추산(위험평가-위험의 규모를 결정)하여 해당 위험에 대비하는 비상 계획을 마련함 위험분석 없이 보호대책을 수립하는 경우 취약점이 너무 많아짐 위협에 대한 우선순위가 설정되지 않음 : 과도한 투자가 이루어질 수 있음</summary></entry><entry><title type="html">정보보안 - 정보보호 정책 및 조직</title><link href="https://bluesplatter.com/is_certification/IS-Management-Security_Policy_and_Organization/" rel="alternate" type="text/html" title="정보보안 - 정보보호 정책 및 조직" /><published>2021-12-08T09:00:00+09:00</published><updated>2021-12-08T09:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-Management-Security_Policy_and_Organization</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-Management-Security_Policy_and_Organization/">&lt;h1 id=&quot;정보보호-정책-및-조직&quot;&gt;정보보호 정책 및 조직&lt;/h1&gt;
+&lt;h2 id=&quot;정보보호-정책&quot;&gt;정보보호 정책&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;정보보호 정책 수립의 중요성
+    &lt;ul&gt;
+      &lt;li&gt;정보화 사회, 지식기반사회 : 기업의 업무처리 정보 및 경영전략, 재무정보, 기밀자료등이 전자화된 형태로 정보시스템을 통해 처리&lt;/li&gt;
+      &lt;li&gt;핵심 정보의 변조, 누출, 파괴로 인한 주요 업무의 중단, 대외 신뢰성의 훼손, 법적 금전적 손실의 위험&lt;/li&gt;
+      &lt;li&gt;국방, 통신, 금융, 의료, 에너지, 정부행정 등 국가 주요정보통신기반시설에 대한 침해사고 발생 가능성
+        &lt;ul&gt;
+          &lt;li&gt;정보통신기반보호법, 정보통신 기반시설에 대한 취약성 분석을 의무적으로 실시&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;정보보호의 중요성 인식, 정보보호 투자도 증가하였으나 정보보호 수립, 관리하기 위한 방법에 대한 이해는 부족한 실정임
+        &lt;ul&gt;
+          &lt;li&gt;정보보호를 기술적인 측면만으로 이해, 보안시스템 도입만으로 정보보호 문제를 해결할 수 있다고 믿음&lt;/li&gt;
+          &lt;li&gt;정보보호 책임을 전산실의 실무자에게 일임하는 것&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;정보보호는 기술적인 문제 뿌만 아니라 사람과 정보에 관한 경영상의 문제
+        &lt;ul&gt;
+          &lt;li&gt;경영진이 책임을 지고 방향을 제시, 지속적으로 달성목표를 관리&lt;/li&gt;
+          &lt;li&gt;경영진이 정보관리 실무자에게 정보보호에 대한 책임만을 지우고, 어떻게 보호할 것인지 방침을 제시하지 않고 정보보호를 위한 인적, 물적 자원의 지원없이 방침의 실행 여부를 정기적으로 검토하지 않음 &amp;gt; 정보보호 목표 달성 불가&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;경영진이 정보보호 정책의 수립에 참여해야 함
+        &lt;ul&gt;
+          &lt;li&gt;경영진은 전반적인 목표와 방침을 모든 직원들에게 제시해야 함 &amp;gt; 정보보호 정책&lt;/li&gt;
+          &lt;li&gt;정보보호 정책을 달성하기 위해 무엇을 어떻게 해야 할지 계획하고 구현하는 것은 실무자의 책임&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;정보보호 정책이란?
+    &lt;ul&gt;
+      &lt;li&gt;경영진의 정보보호에 관한 목표와 방향을 제시&lt;/li&gt;
+      &lt;li&gt;기업 또는 조직의 정보보호에 대한 방향, 전략 그리고 주요 내용들을 문서화시켜 놓은 것&lt;/li&gt;
+      &lt;li&gt;정보보호관리를 위해 가장 먼저하는 정책수립에 해당하는 결과물&lt;/li&gt;
+      &lt;li&gt;포함되어야 할 사항들
+        &lt;ul&gt;
+          &lt;li&gt;정책의 범위와 목적, 법적/규정적 의무사항과의 관계&lt;/li&gt;
+          &lt;li&gt;자산의 분류&lt;/li&gt;
+          &lt;li&gt;비인가자의 접근 원칙&lt;/li&gt;
+          &lt;li&gt;기밀성, 무결성, 가용성, 책임추적성 보장&lt;/li&gt;
+          &lt;li&gt;법 준거성&lt;/li&gt;
+          &lt;li&gt;개발 및 유지방법&lt;/li&gt;
+          &lt;li&gt;비상대책 계획 수립 : 연속성 및 업무연속성계획(BCP)&lt;/li&gt;
+          &lt;li&gt;교육 및 훈련 / 징계와 처벌&lt;/li&gt;
+          &lt;li&gt;보안사고 보고 및 조사&lt;/li&gt;
+          &lt;li&gt;기타 관련 정책&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;정책의 역할
+        &lt;ul&gt;
+          &lt;li&gt;임직원 책임 할당 / 책임 추적성 제공&lt;/li&gt;
+          &lt;li&gt;임직원 가치판단의 기준&lt;/li&gt;
+          &lt;li&gt;모든 직원에게 경영진의 목표 공유&lt;/li&gt;
+          &lt;li&gt;기업의 비밀, 지적재산권 보호&lt;/li&gt;
+          &lt;li&gt;기업의 컴퓨팅 자원 낭비 방지&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;정보보호 정책의 구분, 정의 및 특성
+        &lt;ul&gt;
+          &lt;li&gt;정책 (Policy)
+            &lt;ul&gt;
+              &lt;li&gt;정보보호에 대한 상위 수준의 목표 및 방향을 제시&lt;/li&gt;
+              &lt;li&gt;조직의 경영목표를 반영하고 정보보호 관련 상위 정책과 일관성을 유지&lt;/li&gt;
+              &lt;li&gt;정보보호를 위해 관련된 모든 사람이 반드시 지켜야 할 요구사항을 전반적이며 개략적으로 규정&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;표준 (Standard)
+            &lt;ul&gt;
+              &lt;li&gt;정보보호 정책과 마찬가지로 반드시 지켜야하는 요구사항에 대한 규정이지만, 정책의 만족을 위해 반드시 준수해야 할 구체적인 사항이나 양식을 규정&lt;/li&gt;
+              &lt;li&gt;조직의 환경 또는 요구사항에 따라 관련된 모든 사용자들이 준수하도록 요구되는 규정&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;지침 (Guidelines)
+            &lt;ul&gt;
+              &lt;li&gt;반드시 지켜야 하는 것이 아니라 선택 가능하거나 권고적인 내용이며 융통성있게 적용할수 있는 사항을 설명&lt;/li&gt;
+              &lt;li&gt;정보보호 정책에 따라 특정 시스템 또는 특정 분야별로 정보보호 활동에 필요하거나 도움이 되는 세부 정보를 설명&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;절차 (Procedures)
+            &lt;ul&gt;
+              &lt;li&gt;정책을 만족하기 위하여 수행하여야 하는 사항을 순서에 따라 단계적으로 설명&lt;/li&gt;
+              &lt;li&gt;정보보호 활동의 구체적 적용을 위해 필요한 적용 절차 등의 구체적이고 세부적인 방법을 기술&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;정보보호 정책 개발의 원칙
+        &lt;ul&gt;
+          &lt;li&gt;개인적 측면 : 개인의 프라이버시가 침해되지 말아야 하며, 정보보호의 목적을 달성하기 위하여 IT부서 또는 정보보호 담당자의 편의 중심으로 개발되어서는 안된다.&lt;/li&gt;
+          &lt;li&gt;사회적 측면 : 도덕적 판단기준, 사회적 측면에서 일반적이고 보편타당하여야 한다.&lt;/li&gt;
+          &lt;li&gt;법률적인 측면 : 다른 사람의 법적인 권리를 보장할 수 있는 바탕에서 개발되어야 하며, 정보보호의 법률 및 규제 등의 요구사항이 반영되어야 한다.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;정보보호 정책 요소
+    &lt;ul&gt;
+      &lt;li&gt;경영진의 참여와 지원&lt;/li&gt;
+      &lt;li&gt;법적 요구사항 처리(관계 법령 고려)&lt;/li&gt;
+      &lt;li&gt;상위 정책과의 일관성 유지&lt;/li&gt;
+      &lt;li&gt;정보보호 구성 체계&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;정보보호 정책 개발 절차
+    &lt;ul&gt;
+      &lt;li&gt;준비
+        &lt;ul&gt;
+          &lt;li&gt;참조문서 수집 및 요구분석 : 관련 참조문서의 수집, 요구사항 수렴, 경영목표 관련 자료, 기존 정책서 등
+            &lt;ul&gt;
+              &lt;li&gt;경영목표정보 / 정보전략계획(ISP)&lt;/li&gt;
+              &lt;li&gt;최근 위험평가자료&lt;/li&gt;
+              &lt;li&gt;전체 조직구성도&lt;/li&gt;
+              &lt;li&gt;정보시스템 아키텍처 문서&lt;/li&gt;
+              &lt;li&gt;정보보안 아키텍처 문서&lt;/li&gt;
+              &lt;li&gt;최근 침해사고 기록 및 장애 대응 정보&lt;/li&gt;
+              &lt;li&gt;내부/외부 감사결과&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;정책의 구조 결정 : 정책의 내용, 서술방식, 우선순위 및 대상의 정의&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;작성 및 검토
+        &lt;ul&gt;
+          &lt;li&gt;정책 초안 작성 : 정보보호 정책서의 초안 작성&lt;/li&gt;
+          &lt;li&gt;검토 및 조정 : 정책의 주요 적용 대상자를 대상으로 적합성 및 실행가능성 검토 및 조정&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;승인
+        &lt;ul&gt;
+          &lt;li&gt;경영진의 검토 및 승인 : 경영진의 검토 및 이행에 대한 지원을 약속
+            &lt;ul&gt;
+              &lt;li&gt;정보보호위원회에서 최종 검토 및 승인이 바람직함&lt;/li&gt;
+              &lt;li&gt;임시적인 정책 개발 검토위원회 (경영진 참여) 를 구성해서 승인할 수도 있음&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;정보보호조직&quot;&gt;정보보호조직&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;정보보호조직 구성 시 고려사항
+    &lt;ul&gt;
+      &lt;li&gt;정보보호에 관련된 역할과 책임을 명확히 정의&lt;/li&gt;
+      &lt;li&gt;정보보호 책임자를 지정
+        &lt;ul&gt;
+          &lt;li&gt;책임을 할당받은 경영진 또는 관리자들은 정보보호 업무를 위임할 수 있으나 최종책임은 여전히 그들에게 남아있음.&lt;/li&gt;
+          &lt;li&gt;위임한 업무가 모두 올바르게 수행되었는지 확인해야함&lt;/li&gt;
+          &lt;li&gt;대부분이 정보보호 관리자 및 실무자를 지정하여 실제 업무를 수행함&lt;/li&gt;
+          &lt;li&gt;각 부서의 정보보호에 대한 책임은 각 부서의 관리자들에게 남아있음
+            &lt;ul&gt;
+              &lt;li&gt;각 자산에 대해 소유자를 지정하고 그 자산의 보호 책임을 지도록 해야 한다.&lt;/li&gt;
+              &lt;li&gt;자산의 소유자는 정보보호 관리자와 협력하여 자산의 보호방법을 결정, 방법을 구현하기 위한 자원 조달을 해야 한다.&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;정보보호 조직체계 구성 시 고려해야 할 사항
+    &lt;ul&gt;
+      &lt;li&gt;조직의 규모(크기 및 인력), 조직 관리구조, 운영사이트의 수와 위치, 사이트간 상호 연결형태, 정보화 및 IT 예산, 시스템 운영환경 등을 고려&lt;/li&gt;
+      &lt;li&gt;보호해야 할 정보자산의 유형, 규모 및 가치 등을 고려 (자산식별) 하여 이에 적합한 수준으로 인원과 예산을 배정해야 함&lt;/li&gt;
+      &lt;li&gt;조직의 모든 부서에서 해당 업무 수행에 필요한 정보보호책임이 할당되어야 함.
+        &lt;ul&gt;
+          &lt;li&gt;정보보호 전담조직은 이를 기획, 조정, 통합하고 이행을 모니터링하며 정보보호 사고 등 위반에 대응하는 역할을 수행&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;정보보호 전담 인력이 아닌 일반 직원이라 하더라도 업무 수행 과정에서 정보를 보호할 책임이 있음&lt;/li&gt;
+      &lt;li&gt;직무분리의 원칙을 적용해야 함.&lt;/li&gt;
+      &lt;li&gt;적정 인력 확보가 어려운 경우 외부 전문업체에 위탁할 수 있으나, 책임을 져야 하는 정보보호책임자, 정보보호관리자는 내부인력으로 임명해야 함. 실무를 수행하는 정보보호담당자는 외부 인력을 활용할 수 있다.&lt;/li&gt;
+      &lt;li&gt;외부 전문업체 인력 활용 시 해당인력의 책임 및 역할, 자격요건 등을 문서화하고 계약인력과 수행인력이 실제 일치하는지에 대해서도 확인 필요&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;정보보호 책임 할당
+    &lt;ul&gt;
+      &lt;li&gt;정보보호위원회 구성 : 전 조직에 걸친 정보보호 의사결정을 위해 모든 부서의 임원진 등 경영층이 참여&lt;/li&gt;
+      &lt;li&gt;보안담당자 지정 : 각 부서별로 정보보호 활동 지원&lt;/li&gt;
+      &lt;li&gt;정보보호 실무협의회 구성 : 정보보호 실무의 구체적인 사항을 협의&lt;/li&gt;
+      &lt;li&gt;조직구성도
+        &lt;ul&gt;
+          &lt;li&gt;CEO - 정보보호책임자 - 정보보호관리자 / 각부서 팀장 - 정보보호담당자
+            &lt;ul&gt;
+              &lt;li&gt;(정보보호책임자 - 정보보호관리자 / 각부서 팀장) : 보안심의위원회&lt;/li&gt;
+              &lt;li&gt;(정보보호관리자 - 정보보호담당자 / 각부서 담당자) : 보안실무위원회&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;정보보호위원회
+    &lt;ul&gt;
+      &lt;li&gt;정보보호관리체계의 효과적인 운영을 위해 정보보호 관련 사안에 대한 심의 책임을 갖는 기구(위원회)를 구성해야 함.&lt;/li&gt;
+      &lt;li&gt;일반적으로 정보보호책임자를 위원장으로 함. 정보보호에 관련된 각 부서의 장을 위원으로 함. 정보보호 관리자가 간사 역할.&lt;/li&gt;
+      &lt;li&gt;주요 정보보호 관련 사안에 대한 검토와 승인이 가능하다고 판단되는 인원을 포함&lt;/li&gt;
+      &lt;li&gt;정보보호위원회 구성 및 정기 운영에 관한 사항을 별도 규정으로 수립하여 적용할 수 있음.&lt;/li&gt;
+      &lt;li&gt;정보보호위원회에서는 아래와 같은 주요 정보보호 활동을 심의/의결할 수 있으며, 의사결정 기록을 남겨야 함.
+        &lt;ul&gt;
+          &lt;li&gt;정보보호정책의 심의 및 승인&lt;/li&gt;
+          &lt;li&gt;정보보호 활동 계획의 심의 및 승인&lt;/li&gt;
+          &lt;li&gt;정보보호 예산 심의 및 승인&lt;/li&gt;
+          &lt;li&gt;보안사고의 심의, 위규자 징계, 우수자 포상 심의 및 승인&lt;/li&gt;
+          &lt;li&gt;위험평가 결과 검토 및 승인&lt;/li&gt;
+          &lt;li&gt;정보통신망 신. 증설에 따른 자체 보안성 검토&lt;/li&gt;
+          &lt;li&gt;정보보호 관련 장비 및 프로그램 도입 검토&lt;/li&gt;
+          &lt;li&gt;정보보호 정책 및 지침의 재/개정에 관한 사항&lt;/li&gt;
+          &lt;li&gt;연간 정보보호계획 수립과 집행에 관한 사항&lt;/li&gt;
+          &lt;li&gt;내부감사 실시 및 결과에 관한 사항&lt;/li&gt;
+          &lt;li&gt;기타 의장 또는 정보보호책임자가 필요하다고 인정하는 사항&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;정보보호실무협의회
+    &lt;ul&gt;
+      &lt;li&gt;정보보호위원회 심의/의결사항에 대한 실무적인 검토, 세부 이행방안 수립, 원할한 정보보호 관리활동의 조정 등의 업무를 수행&lt;/li&gt;
+      &lt;li&gt;정보보호실무협의회는 정보보호관리자가 주관하고, 정보보호담당자가 간사 역할을 수행, 다루는 사안에 따라 관련 부서의 정보보호담당자가 참여&lt;/li&gt;
+      &lt;li&gt;정보보호에 관련하여 부서간 협의가 필요한 사항이 발생하는 경우 수시로 협의회를 소집할 수 있음&lt;/li&gt;
+      &lt;li&gt;정보보호위원회의 의사결정을 지원하기 위하여 아래와 같은 구체적인 사항을 협의함
+        &lt;ul&gt;
+          &lt;li&gt;정보보호 정책 및 지침 안 작성 및 검토&lt;/li&gt;
+          &lt;li&gt;정보보호 활동 계획안 수립&lt;/li&gt;
+          &lt;li&gt;정보보호 예산안 수립&lt;/li&gt;
+          &lt;li&gt;위험평가 수행, 위험평가 결과의 실무 검토 및 해결 방안 협의&lt;/li&gt;
+          &lt;li&gt;정보통신망 신/증설에 따른 자체 보안 방안&lt;/li&gt;
+          &lt;li&gt;분야별 정보보호대책의 수립과 집행에 관한 사항&lt;/li&gt;
+          &lt;li&gt;자산에 대한 위험분석 평가에 관한 사항&lt;/li&gt;
+          &lt;li&gt;내부감사 지원, 그 결과의 실무 검토 및 해결 방안 협의&lt;/li&gt;
+          &lt;li&gt;기타 정보보호 관리자 및 부서별 정보보호 담당자가 요청하는 사항&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;정보보호 전담 조직
+    &lt;ul&gt;
+      &lt;li&gt;정보보호팀
+        &lt;ul&gt;
+          &lt;li&gt;정보보호 관련 업무를 기획하고 시행하기 위한 세부계획을 마련, 각종 보안통제 사항을 관리&lt;/li&gt;
+          &lt;li&gt;자산에 대한 위협 및 위험분석, 주기적인 모니터링을 통해 평시 정보보호 관리를 이행&lt;/li&gt;
+          &lt;li&gt;조직 임직원의 정보보호에 대한 인식 및 기술 수준을 제고하기 위해 교육 계획을 수립하고 시행&lt;/li&gt;
+          &lt;li&gt;주요 시스템에 대한 침해사고 등 긴급 상황에 대처하기 위한 비상계획의 수립과 운영을 지원&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;침해사고대응팀 (CERT : Computer Emergency Response Team)
+        &lt;ul&gt;
+          &lt;li&gt;정보통신망의 침해사고 등 사이버 침해로부터의 예방, 대응, 분석 및 복구 등의 활동 수행&lt;/li&gt;
+          &lt;li&gt;비상시 조직으로서 침해사고를 비롯한 정보보호 사고가 발생할 경우, 신속하고 효과적인 사고처리 및 복구를 위해 주요 정보보호담당자를 중심으로 침해사고 대응팀을 구성하여 운영한다.&lt;/li&gt;
+          &lt;li&gt;정보보호책임자는 침해사고에 즉각적으로 대응하기 위하여 사전 조직 구성, 대응 절차 및 예방책 수립, 사고 대비 교육 및 훈련 등을 실시하여야 한다.&lt;/li&gt;
+          &lt;li&gt;침해사고는 다양한 방식으로 발생할 수 있으므로 일반 직원이 침해사고를 인지하고 신고하기 위한 교육 훈련을 포함해야 한다.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;개인정보보호팀
+        &lt;ul&gt;
+          &lt;li&gt;개인정보를 취급하는 조직에서는 관련 법에 따라 개인정보보호책임자(CPO:Chief Privacy Officer)를 임명해야 함
+            &lt;ul&gt;
+              &lt;li&gt;CPO 는 개인정보의 취급 및 보호에 관한 총괄책임을 진다.&lt;/li&gt;
+              &lt;li&gt;필요한 실무 이행을 위해 개인정보관리자 또는 담당자를 지정하여 업무를 위임한다.&lt;/li&gt;
+              &lt;li&gt;개인정보보호 책임자는 개인정보취급자 및 부서별 개인정보 보유현황 및 업무를 파악하고 개인정보의 전체 수명주기에 걸쳐 법적 요건을 만족하기 위한 취급방침 및 방침의 이행을 위한 프로세스를 수립하고 관리하여야 함.&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;개인정보보호책임자는 임원급 이상의 실무에 능통한 사람을 임명하는 것이 필요함.&lt;/li&gt;
+          &lt;li&gt;실제 개인정보를 관리하는 부서의 장이 개인정보보호책임자를 맡고 전담하는 실무자 또는 전담 부서를 두는 것이 좋음&lt;/li&gt;
+          &lt;li&gt;개인정보보호책임자의 업무
+            &lt;ul&gt;
+              &lt;li&gt;개인정보 보호 계획의 수립 및 시행&lt;/li&gt;
+              &lt;li&gt;개인정보 처리 실태 및 관행의 정기적인 조사 및 개선&lt;/li&gt;
+              &lt;li&gt;개인정보 처리와 관련한 불만의 처리 및 피해 구제&lt;/li&gt;
+              &lt;li&gt;개인정보 유출 및 오/남용 방지를 위한 내부통제시스템의 구축&lt;/li&gt;
+              &lt;li&gt;개인정보 보호 교육 계획의 수립 및 시행&lt;/li&gt;
+              &lt;li&gt;개인정보파일의 보호 및 관리/감독&lt;/li&gt;
+              &lt;li&gt;개인정보취급자에 대한 감독 및 정기적인 보안 교육&lt;/li&gt;
+              &lt;li&gt;위탁업체의 개인정보 관리 상황에 대한 관리 감독&lt;/li&gt;
+              &lt;li&gt;이용자의 불만사항 접수 및 처리&lt;/li&gt;
+              &lt;li&gt;그 밖에 개인정보의 적절한 처리를 위하여 별도로 정한 사항&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;보안감사팀
+        &lt;ul&gt;
+          &lt;li&gt;정보보호방침 혹은 정책에 따라 보안활동이 적절히 이루어지고 있는지를 호가인&lt;/li&gt;
+          &lt;li&gt;보안감사는 감사 주체에 따라 내부감사와 외부감사로 구분&lt;/li&gt;
+          &lt;li&gt;감사시기에 따라 정기 보안감사와 수시 보안감사로 나뉨. 정기 보안감사는 연간 1회 이상 실시&lt;/li&gt;
+          &lt;li&gt;보안감사 수행을 위한 정책과 적용 기준이 명확하게 수립되어야 함 (지나친 감사는 업무에 부담, 자원 낭비)&lt;/li&gt;
+          &lt;li&gt;다음 사항을 포함하는 보안감사계획을 수립
+            &lt;ul&gt;
+              &lt;li&gt;감사대상 및 영역&lt;/li&gt;
+              &lt;li&gt;감사목적&lt;/li&gt;
+              &lt;li&gt;감사범위 및 중점감사항목&lt;/li&gt;
+              &lt;li&gt;감사일정(기간)&lt;/li&gt;
+              &lt;li&gt;참여 감사자&lt;/li&gt;
+              &lt;li&gt;감사기법 및 감시기준&lt;/li&gt;
+              &lt;li&gt;기타 필요사항 등&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;담당자의 역할
+    &lt;ul&gt;
+      &lt;li&gt;정보보호책임자
+        &lt;ul&gt;
+          &lt;li&gt;조직의 정보보호 총괄 책임자로서 정보보호의 필요성과 목표에 대한 명확한 인식을 가져야 함&lt;/li&gt;
+          &lt;li&gt;효과적인 정보보호 업무 이행을 위해서 임원급에서 지정되어야 함&lt;/li&gt;
+          &lt;li&gt;정보보호책임자는 조직의 전반적인 정보보호 관련 업무에 대한 총괄책임을 가지고 의사결정을 내리며 업무이행을 관장하고 준수여부를 감독함&lt;/li&gt;
+          &lt;li&gt;정보보호책임자는 정보보호위원회의 의장 역할을 수행하며 주요 업무는 다음과 같음
+            &lt;ul&gt;
+              &lt;li&gt;정보보호정책의 수립 및 이행&lt;/li&gt;
+              &lt;li&gt;정보보호조직의 구성 및 운영&lt;/li&gt;
+              &lt;li&gt;정보보호 정책 및 지침의 승인/승인 획득&lt;/li&gt;
+              &lt;li&gt;정보보호 활동 및 교육 지휘, 감독&lt;/li&gt;
+              &lt;li&gt;정보보호 예산 편성 및 집행&lt;/li&gt;
+              &lt;li&gt;정보보호 대책의 수립&lt;/li&gt;
+              &lt;li&gt;침해사고대응팀 수립 및 운영&lt;/li&gt;
+              &lt;li&gt;정보보호 관련 법, 규정 검토 준수&lt;/li&gt;
+              &lt;li&gt;정보보호 현황을 최고경영진에게 정기적으로 보고&lt;/li&gt;
+              &lt;li&gt;기타 정보보호 관련 업무 지휘 감독&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;정보보호관리자
+        &lt;ul&gt;
+          &lt;li&gt;정보보호관리자는 정보보호책임자의 임무를 위임받아 정보보호 업무를 수행하는 인력을 말함&lt;/li&gt;
+          &lt;li&gt;정보보호 전담조직의 관리자로서 다음과 같은 업무를 수행함
+            &lt;ul&gt;
+              &lt;li&gt;정보보호 업무 기획 및 정보보호 활동 실무 조정&lt;/li&gt;
+              &lt;li&gt;정보보호 정책 및 지침의 수립, 주기적인 검토 및 개정&lt;/li&gt;
+              &lt;li&gt;정보보호 계획 수립&lt;/li&gt;
+              &lt;li&gt;정보보호 정책 및 지침 준수에 대한 지원 및 관리 감독&lt;/li&gt;
+              &lt;li&gt;조직 구성원에 대한 정보보호 교육 및 홍보&lt;/li&gt;
+              &lt;li&gt;침해사고 대응체계 수립 및 대응&lt;/li&gt;
+              &lt;li&gt;정보보호 감사 계획 수립 및 이행&lt;/li&gt;
+              &lt;li&gt;정보보호시스템의 도입 계획 수립 및 운영관리&lt;/li&gt;
+              &lt;li&gt;비상대책 및 재난대책 등을 포함한 정보보호 대책 수립&lt;/li&gt;
+              &lt;li&gt;정보보호책임자를 보좌&lt;/li&gt;
+              &lt;li&gt;정보보호 현황의 정기적인 모니터링&lt;/li&gt;
+              &lt;li&gt;정보보호 현황을 정보보호책임자에게 정기적 또는 비정기적으로 보고&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;정보보호담당자
+        &lt;ul&gt;
+          &lt;li&gt;조직에서 정보보호 실무 운영을 담당하는 자&lt;/li&gt;
+          &lt;li&gt;정보보호관리자의 지시에 따라 일반적으로 다음과 같은 역할 수행
+            &lt;ul&gt;
+              &lt;li&gt;정보보호시스템의 운용 및 유지관리&lt;/li&gt;
+              &lt;li&gt;인프라, 응용프로그램, 데이터베이스 및 PC 의 보안관리&lt;/li&gt;
+              &lt;li&gt;정보보호 점검 및 감사 수행&lt;/li&gt;
+              &lt;li&gt;보안 모니터링&lt;/li&gt;
+              &lt;li&gt;침해사고 등 비상상황시 대응&lt;/li&gt;
+              &lt;li&gt;기타 정보보호관리자의 업무 보조&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;정보통신 분야별 담당자
+        &lt;ul&gt;
+          &lt;li&gt;서버, 네트워크, 응용시스템, 데이터베이스 등에 관련된 실무를 담당하는 인력&lt;/li&gt;
+          &lt;li&gt;담당 정보자산의 보안을 관리하고 자체점검을 실시하며 보안사고 처리를 지원함&lt;/li&gt;
+          &lt;li&gt;시스템(서버 운영)담당자, 네트워크 담당자, 보안시스템 담당자, 데이터베이스 담당자, 시스템 개발 담당자, 전산실 담당자가 포함되며 다음과 같은 정보보호 역할을 수행
+            &lt;ul&gt;
+              &lt;li&gt;서버 등 주요 시스템에 대한 정보보호 점검 및 통제&lt;/li&gt;
+              &lt;li&gt;네트워크에 대한 정보보호 점검 및 통제&lt;/li&gt;
+              &lt;li&gt;어플리케이션 등 주요 응용시스템에 대한 정보보호 점검 및 통제&lt;/li&gt;
+              &lt;li&gt;데이터베이스관리시스템(DBMS)에 대한 정보보호 점검 및 통제&lt;/li&gt;
+              &lt;li&gt;개인용컴퓨터(PC), 이동형 저장장치 등에 대한 정보보호 점검 및 통제&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;비정보통신 업무부서별 정보보호담당자
+        &lt;ul&gt;
+          &lt;li&gt;업무 부서 별 정보보호 책임은 해당 부서장에게 있음&lt;/li&gt;
+          &lt;li&gt;업무별 정보보호담당자는 부서장의 지휘를 받아 해당 부서의 정보보호 실무를 이행함&lt;/li&gt;
+          &lt;li&gt;조직의 정보보호 정책 준수를 위해 필요한 실무를 이행하며 해당 부서의 정보보호 관련 의견수렴 및 전달을 위한 채널로써 정보보호 전담조직과 협력하여 다음과 같은 업무를 수행함
+            &lt;ul&gt;
+              &lt;li&gt;부서 내 주요 정보보호 활동에 대한 기획 및 이행&lt;/li&gt;
+              &lt;li&gt;부서 내 정보보호에 대한 의견 수렴 및 정보보호부서에 전달, 협의&lt;/li&gt;
+              &lt;li&gt;부서 내 정보보호 현황 점검 및 보고&lt;/li&gt;
+              &lt;li&gt;부서 내 보안사고 발생시 정보보호 전담조직(부서)와 협력하여 이를 처리&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="정보보호 정책" /><category term="정보보호 조직" /><summary type="html">정보보호 정책 및 조직 정보보호 정책 정보보호 정책 수립의 중요성 정보화 사회, 지식기반사회 : 기업의 업무처리 정보 및 경영전략, 재무정보, 기밀자료등이 전자화된 형태로 정보시스템을 통해 처리 핵심 정보의 변조, 누출, 파괴로 인한 주요 업무의 중단, 대외 신뢰성의 훼손, 법적 금전적 손실의 위험 국방, 통신, 금융, 의료, 에너지, 정부행정 등 국가 주요정보통신기반시설에 대한 침해사고 발생 가능성 정보통신기반보호법, 정보통신 기반시설에 대한 취약성 분석을 의무적으로 실시 정보보호의 중요성 인식, 정보보호 투자도 증가하였으나 정보보호 수립, 관리하기 위한 방법에 대한 이해는 부족한 실정임 정보보호를 기술적인 측면만으로 이해, 보안시스템 도입만으로 정보보호 문제를 해결할 수 있다고 믿음 정보보호 책임을 전산실의 실무자에게 일임하는 것 정보보호는 기술적인 문제 뿌만 아니라 사람과 정보에 관한 경영상의 문제 경영진이 책임을 지고 방향을 제시, 지속적으로 달성목표를 관리 경영진이 정보관리 실무자에게 정보보호에 대한 책임만을 지우고, 어떻게 보호할 것인지 방침을 제시하지 않고 정보보호를 위한 인적, 물적 자원의 지원없이 방침의 실행 여부를 정기적으로 검토하지 않음 &amp;gt; 정보보호 목표 달성 불가 경영진이 정보보호 정책의 수립에 참여해야 함 경영진은 전반적인 목표와 방침을 모든 직원들에게 제시해야 함 &amp;gt; 정보보호 정책 정보보호 정책을 달성하기 위해 무엇을 어떻게 해야 할지 계획하고 구현하는 것은 실무자의 책임 정보보호 정책이란? 경영진의 정보보호에 관한 목표와 방향을 제시 기업 또는 조직의 정보보호에 대한 방향, 전략 그리고 주요 내용들을 문서화시켜 놓은 것 정보보호관리를 위해 가장 먼저하는 정책수립에 해당하는 결과물 포함되어야 할 사항들 정책의 범위와 목적, 법적/규정적 의무사항과의 관계 자산의 분류 비인가자의 접근 원칙 기밀성, 무결성, 가용성, 책임추적성 보장 법 준거성 개발 및 유지방법 비상대책 계획 수립 : 연속성 및 업무연속성계획(BCP) 교육 및 훈련 / 징계와 처벌 보안사고 보고 및 조사 기타 관련 정책 정책의 역할 임직원 책임 할당 / 책임 추적성 제공 임직원 가치판단의 기준 모든 직원에게 경영진의 목표 공유 기업의 비밀, 지적재산권 보호 기업의 컴퓨팅 자원 낭비 방지 정보보호 정책의 구분, 정의 및 특성 정책 (Policy) 정보보호에 대한 상위 수준의 목표 및 방향을 제시 조직의 경영목표를 반영하고 정보보호 관련 상위 정책과 일관성을 유지 정보보호를 위해 관련된 모든 사람이 반드시 지켜야 할 요구사항을 전반적이며 개략적으로 규정 표준 (Standard) 정보보호 정책과 마찬가지로 반드시 지켜야하는 요구사항에 대한 규정이지만, 정책의 만족을 위해 반드시 준수해야 할 구체적인 사항이나 양식을 규정 조직의 환경 또는 요구사항에 따라 관련된 모든 사용자들이 준수하도록 요구되는 규정 지침 (Guidelines) 반드시 지켜야 하는 것이 아니라 선택 가능하거나 권고적인 내용이며 융통성있게 적용할수 있는 사항을 설명 정보보호 정책에 따라 특정 시스템 또는 특정 분야별로 정보보호 활동에 필요하거나 도움이 되는 세부 정보를 설명 절차 (Procedures) 정책을 만족하기 위하여 수행하여야 하는 사항을 순서에 따라 단계적으로 설명 정보보호 활동의 구체적 적용을 위해 필요한 적용 절차 등의 구체적이고 세부적인 방법을 기술 정보보호 정책 개발의 원칙 개인적 측면 : 개인의 프라이버시가 침해되지 말아야 하며, 정보보호의 목적을 달성하기 위하여 IT부서 또는 정보보호 담당자의 편의 중심으로 개발되어서는 안된다. 사회적 측면 : 도덕적 판단기준, 사회적 측면에서 일반적이고 보편타당하여야 한다. 법률적인 측면 : 다른 사람의 법적인 권리를 보장할 수 있는 바탕에서 개발되어야 하며, 정보보호의 법률 및 규제 등의 요구사항이 반영되어야 한다. 정보보호 정책 요소 경영진의 참여와 지원 법적 요구사항 처리(관계 법령 고려) 상위 정책과의 일관성 유지 정보보호 구성 체계 정보보호 정책 개발 절차 준비 참조문서 수집 및 요구분석 : 관련 참조문서의 수집, 요구사항 수렴, 경영목표 관련 자료, 기존 정책서 등 경영목표정보 / 정보전략계획(ISP) 최근 위험평가자료 전체 조직구성도 정보시스템 아키텍처 문서 정보보안 아키텍처 문서 최근 침해사고 기록 및 장애 대응 정보 내부/외부 감사결과 정책의 구조 결정 : 정책의 내용, 서술방식, 우선순위 및 대상의 정의 작성 및 검토 정책 초안 작성 : 정보보호 정책서의 초안 작성 검토 및 조정 : 정책의 주요 적용 대상자를 대상으로 적합성 및 실행가능성 검토 및 조정 승인 경영진의 검토 및 승인 : 경영진의 검토 및 이행에 대한 지원을 약속 정보보호위원회에서 최종 검토 및 승인이 바람직함 임시적인 정책 개발 검토위원회 (경영진 참여) 를 구성해서 승인할 수도 있음 정보보호조직 정보보호조직 구성 시 고려사항 정보보호에 관련된 역할과 책임을 명확히 정의 정보보호 책임자를 지정 책임을 할당받은 경영진 또는 관리자들은 정보보호 업무를 위임할 수 있으나 최종책임은 여전히 그들에게 남아있음. 위임한 업무가 모두 올바르게 수행되었는지 확인해야함 대부분이 정보보호 관리자 및 실무자를 지정하여 실제 업무를 수행함 각 부서의 정보보호에 대한 책임은 각 부서의 관리자들에게 남아있음 각 자산에 대해 소유자를 지정하고 그 자산의 보호 책임을 지도록 해야 한다. 자산의 소유자는 정보보호 관리자와 협력하여 자산의 보호방법을 결정, 방법을 구현하기 위한 자원 조달을 해야 한다. 정보보호 조직체계 구성 시 고려해야 할 사항 조직의 규모(크기 및 인력), 조직 관리구조, 운영사이트의 수와 위치, 사이트간 상호 연결형태, 정보화 및 IT 예산, 시스템 운영환경 등을 고려 보호해야 할 정보자산의 유형, 규모 및 가치 등을 고려 (자산식별) 하여 이에 적합한 수준으로 인원과 예산을 배정해야 함 조직의 모든 부서에서 해당 업무 수행에 필요한 정보보호책임이 할당되어야 함. 정보보호 전담조직은 이를 기획, 조정, 통합하고 이행을 모니터링하며 정보보호 사고 등 위반에 대응하는 역할을 수행 정보보호 전담 인력이 아닌 일반 직원이라 하더라도 업무 수행 과정에서 정보를 보호할 책임이 있음 직무분리의 원칙을 적용해야 함. 적정 인력 확보가 어려운 경우 외부 전문업체에 위탁할 수 있으나, 책임을 져야 하는 정보보호책임자, 정보보호관리자는 내부인력으로 임명해야 함. 실무를 수행하는 정보보호담당자는 외부 인력을 활용할 수 있다. 외부 전문업체 인력 활용 시 해당인력의 책임 및 역할, 자격요건 등을 문서화하고 계약인력과 수행인력이 실제 일치하는지에 대해서도 확인 필요 정보보호 책임 할당 정보보호위원회 구성 : 전 조직에 걸친 정보보호 의사결정을 위해 모든 부서의 임원진 등 경영층이 참여 보안담당자 지정 : 각 부서별로 정보보호 활동 지원 정보보호 실무협의회 구성 : 정보보호 실무의 구체적인 사항을 협의 조직구성도 CEO - 정보보호책임자 - 정보보호관리자 / 각부서 팀장 - 정보보호담당자 (정보보호책임자 - 정보보호관리자 / 각부서 팀장) : 보안심의위원회 (정보보호관리자 - 정보보호담당자 / 각부서 담당자) : 보안실무위원회 정보보호위원회 정보보호관리체계의 효과적인 운영을 위해 정보보호 관련 사안에 대한 심의 책임을 갖는 기구(위원회)를 구성해야 함. 일반적으로 정보보호책임자를 위원장으로 함. 정보보호에 관련된 각 부서의 장을 위원으로 함. 정보보호 관리자가 간사 역할. 주요 정보보호 관련 사안에 대한 검토와 승인이 가능하다고 판단되는 인원을 포함 정보보호위원회 구성 및 정기 운영에 관한 사항을 별도 규정으로 수립하여 적용할 수 있음. 정보보호위원회에서는 아래와 같은 주요 정보보호 활동을 심의/의결할 수 있으며, 의사결정 기록을 남겨야 함. 정보보호정책의 심의 및 승인 정보보호 활동 계획의 심의 및 승인 정보보호 예산 심의 및 승인 보안사고의 심의, 위규자 징계, 우수자 포상 심의 및 승인 위험평가 결과 검토 및 승인 정보통신망 신. 증설에 따른 자체 보안성 검토 정보보호 관련 장비 및 프로그램 도입 검토 정보보호 정책 및 지침의 재/개정에 관한 사항 연간 정보보호계획 수립과 집행에 관한 사항 내부감사 실시 및 결과에 관한 사항 기타 의장 또는 정보보호책임자가 필요하다고 인정하는 사항 정보보호실무협의회 정보보호위원회 심의/의결사항에 대한 실무적인 검토, 세부 이행방안 수립, 원할한 정보보호 관리활동의 조정 등의 업무를 수행 정보보호실무협의회는 정보보호관리자가 주관하고, 정보보호담당자가 간사 역할을 수행, 다루는 사안에 따라 관련 부서의 정보보호담당자가 참여 정보보호에 관련하여 부서간 협의가 필요한 사항이 발생하는 경우 수시로 협의회를 소집할 수 있음 정보보호위원회의 의사결정을 지원하기 위하여 아래와 같은 구체적인 사항을 협의함 정보보호 정책 및 지침 안 작성 및 검토 정보보호 활동 계획안 수립 정보보호 예산안 수립 위험평가 수행, 위험평가 결과의 실무 검토 및 해결 방안 협의 정보통신망 신/증설에 따른 자체 보안 방안 분야별 정보보호대책의 수립과 집행에 관한 사항 자산에 대한 위험분석 평가에 관한 사항 내부감사 지원, 그 결과의 실무 검토 및 해결 방안 협의 기타 정보보호 관리자 및 부서별 정보보호 담당자가 요청하는 사항 정보보호 전담 조직 정보보호팀 정보보호 관련 업무를 기획하고 시행하기 위한 세부계획을 마련, 각종 보안통제 사항을 관리 자산에 대한 위협 및 위험분석, 주기적인 모니터링을 통해 평시 정보보호 관리를 이행 조직 임직원의 정보보호에 대한 인식 및 기술 수준을 제고하기 위해 교육 계획을 수립하고 시행 주요 시스템에 대한 침해사고 등 긴급 상황에 대처하기 위한 비상계획의 수립과 운영을 지원 침해사고대응팀 (CERT : Computer Emergency Response Team) 정보통신망의 침해사고 등 사이버 침해로부터의 예방, 대응, 분석 및 복구 등의 활동 수행 비상시 조직으로서 침해사고를 비롯한 정보보호 사고가 발생할 경우, 신속하고 효과적인 사고처리 및 복구를 위해 주요 정보보호담당자를 중심으로 침해사고 대응팀을 구성하여 운영한다. 정보보호책임자는 침해사고에 즉각적으로 대응하기 위하여 사전 조직 구성, 대응 절차 및 예방책 수립, 사고 대비 교육 및 훈련 등을 실시하여야 한다. 침해사고는 다양한 방식으로 발생할 수 있으므로 일반 직원이 침해사고를 인지하고 신고하기 위한 교육 훈련을 포함해야 한다. 개인정보보호팀 개인정보를 취급하는 조직에서는 관련 법에 따라 개인정보보호책임자(CPO:Chief Privacy Officer)를 임명해야 함 CPO 는 개인정보의 취급 및 보호에 관한 총괄책임을 진다. 필요한 실무 이행을 위해 개인정보관리자 또는 담당자를 지정하여 업무를 위임한다. 개인정보보호 책임자는 개인정보취급자 및 부서별 개인정보 보유현황 및 업무를 파악하고 개인정보의 전체 수명주기에 걸쳐 법적 요건을 만족하기 위한 취급방침 및 방침의 이행을 위한 프로세스를 수립하고 관리하여야 함. 개인정보보호책임자는 임원급 이상의 실무에 능통한 사람을 임명하는 것이 필요함. 실제 개인정보를 관리하는 부서의 장이 개인정보보호책임자를 맡고 전담하는 실무자 또는 전담 부서를 두는 것이 좋음 개인정보보호책임자의 업무 개인정보 보호 계획의 수립 및 시행 개인정보 처리 실태 및 관행의 정기적인 조사 및 개선 개인정보 처리와 관련한 불만의 처리 및 피해 구제 개인정보 유출 및 오/남용 방지를 위한 내부통제시스템의 구축 개인정보 보호 교육 계획의 수립 및 시행 개인정보파일의 보호 및 관리/감독 개인정보취급자에 대한 감독 및 정기적인 보안 교육 위탁업체의 개인정보 관리 상황에 대한 관리 감독 이용자의 불만사항 접수 및 처리 그 밖에 개인정보의 적절한 처리를 위하여 별도로 정한 사항 보안감사팀 정보보호방침 혹은 정책에 따라 보안활동이 적절히 이루어지고 있는지를 호가인 보안감사는 감사 주체에 따라 내부감사와 외부감사로 구분 감사시기에 따라 정기 보안감사와 수시 보안감사로 나뉨. 정기 보안감사는 연간 1회 이상 실시 보안감사 수행을 위한 정책과 적용 기준이 명확하게 수립되어야 함 (지나친 감사는 업무에 부담, 자원 낭비) 다음 사항을 포함하는 보안감사계획을 수립 감사대상 및 영역 감사목적 감사범위 및 중점감사항목 감사일정(기간) 참여 감사자 감사기법 및 감시기준 기타 필요사항 등 담당자의 역할 정보보호책임자 조직의 정보보호 총괄 책임자로서 정보보호의 필요성과 목표에 대한 명확한 인식을 가져야 함 효과적인 정보보호 업무 이행을 위해서 임원급에서 지정되어야 함 정보보호책임자는 조직의 전반적인 정보보호 관련 업무에 대한 총괄책임을 가지고 의사결정을 내리며 업무이행을 관장하고 준수여부를 감독함 정보보호책임자는 정보보호위원회의 의장 역할을 수행하며 주요 업무는 다음과 같음 정보보호정책의 수립 및 이행 정보보호조직의 구성 및 운영 정보보호 정책 및 지침의 승인/승인 획득 정보보호 활동 및 교육 지휘, 감독 정보보호 예산 편성 및 집행 정보보호 대책의 수립 침해사고대응팀 수립 및 운영 정보보호 관련 법, 규정 검토 준수 정보보호 현황을 최고경영진에게 정기적으로 보고 기타 정보보호 관련 업무 지휘 감독 정보보호관리자 정보보호관리자는 정보보호책임자의 임무를 위임받아 정보보호 업무를 수행하는 인력을 말함 정보보호 전담조직의 관리자로서 다음과 같은 업무를 수행함 정보보호 업무 기획 및 정보보호 활동 실무 조정 정보보호 정책 및 지침의 수립, 주기적인 검토 및 개정 정보보호 계획 수립 정보보호 정책 및 지침 준수에 대한 지원 및 관리 감독 조직 구성원에 대한 정보보호 교육 및 홍보 침해사고 대응체계 수립 및 대응 정보보호 감사 계획 수립 및 이행 정보보호시스템의 도입 계획 수립 및 운영관리 비상대책 및 재난대책 등을 포함한 정보보호 대책 수립 정보보호책임자를 보좌 정보보호 현황의 정기적인 모니터링 정보보호 현황을 정보보호책임자에게 정기적 또는 비정기적으로 보고 정보보호담당자 조직에서 정보보호 실무 운영을 담당하는 자 정보보호관리자의 지시에 따라 일반적으로 다음과 같은 역할 수행 정보보호시스템의 운용 및 유지관리 인프라, 응용프로그램, 데이터베이스 및 PC 의 보안관리 정보보호 점검 및 감사 수행 보안 모니터링 침해사고 등 비상상황시 대응 기타 정보보호관리자의 업무 보조 정보통신 분야별 담당자 서버, 네트워크, 응용시스템, 데이터베이스 등에 관련된 실무를 담당하는 인력 담당 정보자산의 보안을 관리하고 자체점검을 실시하며 보안사고 처리를 지원함 시스템(서버 운영)담당자, 네트워크 담당자, 보안시스템 담당자, 데이터베이스 담당자, 시스템 개발 담당자, 전산실 담당자가 포함되며 다음과 같은 정보보호 역할을 수행 서버 등 주요 시스템에 대한 정보보호 점검 및 통제 네트워크에 대한 정보보호 점검 및 통제 어플리케이션 등 주요 응용시스템에 대한 정보보호 점검 및 통제 데이터베이스관리시스템(DBMS)에 대한 정보보호 점검 및 통제 개인용컴퓨터(PC), 이동형 저장장치 등에 대한 정보보호 점검 및 통제 비정보통신 업무부서별 정보보호담당자 업무 부서 별 정보보호 책임은 해당 부서장에게 있음 업무별 정보보호담당자는 부서장의 지휘를 받아 해당 부서의 정보보호 실무를 이행함 조직의 정보보호 정책 준수를 위해 필요한 실무를 이행하며 해당 부서의 정보보호 관련 의견수렴 및 전달을 위한 채널로써 정보보호 전담조직과 협력하여 다음과 같은 업무를 수행함 부서 내 주요 정보보호 활동에 대한 기획 및 이행 부서 내 정보보호에 대한 의견 수렴 및 정보보호부서에 전달, 협의 부서 내 정보보호 현황 점검 및 보고 부서 내 보안사고 발생시 정보보호 전담조직(부서)와 협력하여 이를 처리</summary></entry><entry><title type="html">정보보안 - 접근통제 보안위협 및 대응책</title><link href="https://bluesplatter.com/is_certification/IS-Management-AccessControl_Threat/" rel="alternate" type="text/html" title="정보보안 - 접근통제 보안위협 및 대응책" /><published>2021-12-02T09:00:00+09:00</published><updated>2021-12-02T09:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-Management-AccessControl_Threat</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-Management-AccessControl_Threat/">&lt;h1 id=&quot;접근통제-보안위협-및-대응책&quot;&gt;접근통제 보안위협 및 대응책&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;패스워드 크래커
+    &lt;ul&gt;
+      &lt;li&gt;개요
+        &lt;ul&gt;
+          &lt;li&gt;시스템에서는 사용자들의 패스워드를 특정한 방식으로 암호화하여 보관한다.&lt;/li&gt;
+          &lt;li&gt;그 방식은 절대로 풀어낼 수 없는 일방향 함수 구조로 되어 있어 유닉스/리눅스 시스템에서 패스워드를 풀어내는 일은 쉽지 않다.&lt;/li&gt;
+          &lt;li&gt;하지만 무차별 대입이나 사전 등을 이용하여 편법으로 패스워드를 풀어내는 경우가 있다.&lt;/li&gt;
+          &lt;li&gt;이러한 일을 해주는 프로그램을 패스워드 크래커라고 한다.&lt;/li&gt;
+          &lt;li&gt;패스워드를 알아내는 가장 효율적인 방법은 하이브리드 공격으로 사전공격+무차별 공격을 병행하는 것이다.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;유형
+        &lt;ul&gt;
+          &lt;li&gt;사전공격 (Dictionary Attack)
+            &lt;ul&gt;
+              &lt;li&gt;패스워드 사전 파일을 이용하여 접속 계정을 알아내는 해킹 방법&lt;/li&gt;
+              &lt;li&gt;공격자들은 패스워드의 해시된 값 혹은 패스워드 파일을 포착하며, 포착 후 소프트웨어 툴은 자체 내에 이미 포함된 단어와 포착된 패스워드가 일치할 때까지 비교작업을 수행한다.&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;무차별공격 (Brute-force Attack)
+            &lt;ul&gt;
+              &lt;li&gt;성공할 때까지 가능한 모든 조합의 경우의 수를 시도해 원하는 공격을 시도하는 방법&lt;/li&gt;
+              &lt;li&gt;대표적인 예로 크랙 등 소프트웨어를 이용해서 로그인 이름에 대한 패스워드를 추측하는 방법이 있음&lt;/li&gt;
+              &lt;li&gt;무차별 공격방법들은 워다이얼링(wardialing) 에도 사용됨.
+                &lt;ul&gt;
+                  &lt;li&gt;워다이얼링(wardialing) : 수천개의 전화번호에 자동으로 전화를 걸어 모뎀이 장착된 번호를 찾는 컴퓨터 해킹 기술&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;레인보우 테이블 공격
+            &lt;ul&gt;
+              &lt;li&gt;1980년도에 개발된 공격방법. 2000년대에 유명해짐.
+                &lt;ul&gt;
+                  &lt;li&gt;원도우 NT 버전 LM(Lan Manager) Hash 알고리즘이 깨지게 됨. -&amp;gt; Vista 버전 이후 사용하지 않음&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;패스워드 후보군을 만들어 Salt 와 결합하여 Hash 한 결과를 거대한 사전으로 만들어 공격&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;대응책
+        &lt;ul&gt;
+          &lt;li&gt;패스워드를 암호화하기 전에 부가적인 숫자(Salt)를 패스워드에 덧붙인 후 암호화하여 저장하는 방법 : 사전공격에 대한 내성 향상&lt;/li&gt;
+          &lt;li&gt;패스워드가 평문으로 전송되지 않도록 하여 패스워드 패킷 스니핑을 방지&lt;/li&gt;
+          &lt;li&gt;One-Time Password 사용. 패스워드 암호화. IDS/IPS 를 통해 반복적인 트래픽 감시&lt;/li&gt;
+          &lt;li&gt;패스워드 입력횟수를 제한하는 임계치(Clipping Level) 을 적용하는 방법&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;사회공학
+    &lt;ul&gt;
+      &lt;li&gt;정의
+        &lt;ul&gt;
+          &lt;li&gt;일반적 정의 : 신뢰할 수 있는 사람/조직 으로 가장하여 다른 사람들로 하여금 자신의 목적을 위해 행동하게 하는 기술&lt;/li&gt;
+          &lt;li&gt;컴퓨터 기반 정의 : 신뢰할 수 있는 컴퓨터프로그램, 이메일, 웹사이트 등으로 위장하여 공격자 의도대로 희생자의 개인정보, 신용정보를 탈취하기 위해 악성코드를 설치하는 공격방법&lt;/li&gt;
+          &lt;li&gt;이메일 기반 정의 : 관심을 끌만한 이메일 제목, 내용 등을 통해 첨부된 악성코드 파일을 실행하게 하여 희생자의 개인정보, 신용정보를 탈취하는 공격방식&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;사회공학공격 분류
+        &lt;ul&gt;
+          &lt;li&gt;인간 기반의 사회공학 공격 (Human-based Social Engineering Attack)
+            &lt;ul&gt;
+              &lt;li&gt;종류
+                &lt;ul&gt;
+                  &lt;li&gt;어깨 넘어 훔쳐보기 (Shoulder Surfing) - 전통적인 스니핑 방법&lt;/li&gt;
+                  &lt;li&gt;쓰레기통 뒤지기 (Dumpster Diving)&lt;/li&gt;
+                  &lt;li&gt;협박메일 (Blackmail)
+                    &lt;ul&gt;
+                      &lt;li&gt;어떤 정보를 폭로하겠다고 협박하여 재물을 갈취하는 행위&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;따라 들어가기 (Piggybacking, Tailgating)
+                    &lt;ul&gt;
+                      &lt;li&gt;출입증 소지자가 출입 시 함께 뒤따라 출입한다.&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;내부자의 결탁으로 인한 정보유출, 내부자 부주의로 인한 외부에서의 정보 습득&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;절차
+                &lt;ul&gt;
+                  &lt;li&gt;정보수집
+                    &lt;ul&gt;
+                      &lt;li&gt;피해자의 전화번호를 무작위로 수집 (인터넷, 설문조사 등)&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;관계 형성
+                    &lt;ul&gt;
+                      &lt;li&gt;전화를 이용하여 고위 공무원이나 금융담당자로 속여 마치 피해자나 피해자 주위 사람에게 문제가 생긴 것처럼 말하여 관심 유도&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;공격
+                    &lt;ul&gt;
+                      &lt;li&gt;금전적인 문제를 해결하기 위해서라며 피해자가 계좌이체를 하도록 요구&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;실행
+                    &lt;ul&gt;
+                      &lt;li&gt;피해자는 문제를 해결하기 위해 계좌이체를 하게되며 공격자는 목표 달성&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;대응책
+                &lt;ul&gt;
+                  &lt;li&gt;전화통화의 음질 이상, 내용 이상 시 주의&lt;/li&gt;
+                  &lt;li&gt;신원증명 요청시 주의&lt;/li&gt;
+                  &lt;li&gt;이메일이나 팩스로 정보를 전송해달라고 요청하는 경우 주의&lt;/li&gt;
+                  &lt;li&gt;문서세절기 이용하여 중요서류 파쇄&lt;/li&gt;
+                  &lt;li&gt;임직원 보안 인식교육 주기적으로 실시&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;ICT 사회공학 공격 (Information and Communication Technology Social Engineering Attack)
+            &lt;ul&gt;
+              &lt;li&gt;종류
+                &lt;ul&gt;
+                  &lt;li&gt;&lt;strong&gt;피싱 (Phishing)&lt;/strong&gt;
+                    &lt;ul&gt;
+                      &lt;li&gt;개요
+                        &lt;ul&gt;
+                          &lt;li&gt;피싱은 개인정보(private data) 와 낚시(fishing) 의 합성어로 개인정보를 낚는다는 의미&lt;/li&gt;
+                          &lt;li&gt;수신자에게 이메일을 발송하여 Pisher 들이 운영하는 위조된 사이트로 이동시킨 후 이들에게 사이트 개편 등의 이유로 고객정보(신용카드번호, 비밀번호 등) 을 요구한다.&lt;/li&gt;
+                        &lt;/ul&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;공격방법 및 대응방법
+                        &lt;ul&gt;
+                          &lt;li&gt;공격방법 : 유사한 이메일 주소 사용, 유사한 도메인 이름 사용, 이메일 주소 스푸핑, 주소창 위조, 팝업창 이용 등&lt;/li&gt;
+                          &lt;li&gt;대응방법 : 사용자 주의, URL 필터링, 사용자 대상 홍보, 의심사이트에 대한 신고하기 등&lt;/li&gt;
+                        &lt;/ul&gt;
+                      &lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;&lt;strong&gt;파밍 (Pharming)&lt;/strong&gt;
+                    &lt;ul&gt;
+                      &lt;li&gt;개요
+                        &lt;ul&gt;
+                          &lt;li&gt;해커가 도메인 자체를 중간에서 탈취, 진짜 사이트 주소를 입력해도 가짜 사이트로 연결되도록 하는 것으로 피싱에서 더 나아간 형태 (피싱보다 피해가 큼)&lt;/li&gt;
+                        &lt;/ul&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;공격방법 및 대응방법
+                        &lt;ul&gt;
+                          &lt;li&gt;공격방법 : DNS 서버로 IP 요청 갈취 후 위조된 사이트로 Redirection 시킴&lt;/li&gt;
+                        &lt;/ul&gt;
+                      &lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;스미싱 (Smishing)
+                    &lt;ul&gt;
+                      &lt;li&gt;개요
+                        &lt;ul&gt;
+                          &lt;li&gt;SMS 와 Phishing 의 결합어로 휴대폰 문자메시지를 이용하여 피싱하는 방법&lt;/li&gt;
+                        &lt;/ul&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;공격방법 및 대응방법
+                        &lt;ul&gt;
+                          &lt;li&gt;공격방법 :
+                            &lt;ul&gt;
+                              &lt;li&gt;전형적인 유형으로 데이터 서비스 웹사이트로부터 온 휴대폰 메시지가 해당 웹사이트를 방문하여 서비스를 해지하지 않으면 일정금액의 요금이 청구된다고 메시지를 보내서 유인&lt;/li&gt;
+                              &lt;li&gt;이를 통해 휴대폰 사용자로 하여금 특정 웹사이트로 유인한 후 사용자의 PC에 트로이목마 프로그램을 설치하고, 사용자의 금융정보나 비밀번호를 알아냄&lt;/li&gt;
+                            &lt;/ul&gt;
+                          &lt;/li&gt;
+                          &lt;li&gt;대응방법 : URL 확인, 주기적인 교육/훈련&lt;/li&gt;
+                        &lt;/ul&gt;
+                      &lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;스피어 피싱 (Spear Phishing)
+                    &lt;ul&gt;
+                      &lt;li&gt;개요
+                        &lt;ul&gt;
+                          &lt;li&gt;조직 내에 신뢰할만한 사람으로 위장해 메일을 보내 ID/PW 를 탈취한다.&lt;/li&gt;
+                        &lt;/ul&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;공격방법 및 대응방법
+                        &lt;ul&gt;
+                          &lt;li&gt;위조된 사이트에 접속 유도 혹은 첨부파일 등을 이용한 악성코드 설치&lt;/li&gt;
+                        &lt;/ul&gt;
+                      &lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;백도어(back door) / 트랩도어 (Trap door)
+    &lt;ul&gt;
+      &lt;li&gt;개요
+        &lt;ul&gt;
+          &lt;li&gt;시스템의 보안이 제거된 비밀통로, 서비스 기술자나 유지보수 프로그래머들의 접근 편의를 위해 시스템 설게자가 고의적으로 만들어 놓은 통로&lt;/li&gt;
+          &lt;li&gt;현장에서 서비스 기술자나 공급사의 유지보수 프로그래머가 업무 편의성을 향상시키기 위함&lt;/li&gt;
+          &lt;li&gt;악의적인 목적으로 만들어 놓은 통로도 있는데, 백 오리피스 (Back orifice) 가 대표적임
+            &lt;ul&gt;
+              &lt;li&gt;이 프로그램은 해킹 프로그램의 일종으로 PC에 내장되어 사용자 몰래 사용자의 정보를 저장, 유출하기 위한 프로그램임&lt;/li&gt;
+              &lt;li&gt;대표적인 트로이목마&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;웜 홀(Worm Hole), 트랩도어, Maintenance hook, Adminstrative hook 이라고도 함&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;백도어 종류
+        &lt;ul&gt;
+          &lt;li&gt;파일 시스템 백도어
+            &lt;ul&gt;
+              &lt;li&gt;ls, du, fsck 같은 명령어를 수정해서 특정 디렉터리나 파일을 숨김&lt;/li&gt;
+              &lt;li&gt;숨기려는 부분을 배드섹터로 처리&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;프로세스 은닉 백도어
+            &lt;ul&gt;
+              &lt;li&gt;특정 프로세스를 숨겨서 합리적인 서비스를 가장함&lt;/li&gt;
+              &lt;li&gt;라이브러리 루틴 수정으로 프로세스를 숨김&lt;/li&gt;
+              &lt;li&gt;커널 수정으로 특정 프로세스를 숨김&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;네트워크 트래픽 백도어
+            &lt;ul&gt;
+              &lt;li&gt;네트워크 트래픽을 숨김&lt;/li&gt;
+              &lt;li&gt;사용하지 않는 네트워크 포트를 사용하여 침입&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;TCP 셸 백도어
+            &lt;ul&gt;
+              &lt;li&gt;1024번 이상의 TCP 포트에 셸 제공 네트워크 서비스 설치&lt;/li&gt;
+              &lt;li&gt;netstat 등을 통해 확인이 가능&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;UDP 셸 백도어
+            &lt;ul&gt;
+              &lt;li&gt;침입차단 시스템 우회가 가능 (DNS 서비스를 위해서 UDP 패킷을 허락)&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;login 백도어
+            &lt;ul&gt;
+              &lt;li&gt;login.c 프로그램을 수정함&lt;/li&gt;
+              &lt;li&gt;특정 백도어 패스워드 입력 시 인증과정 없이 로그인 허용&lt;/li&gt;
+              &lt;li&gt;utmp 나 wtmp 등과 같은 로그파일에 기록되지 않음
+                &lt;ul&gt;
+                  &lt;li&gt;&lt;strong&gt;utmp&lt;/strong&gt; : 현재시스템에 로그인한 사용자의 상태정보/w,who,finger&lt;/li&gt;
+                  &lt;li&gt;&lt;strong&gt;wtmp&lt;/strong&gt; : 사용자의 성공한 로그인,로그아웃정보,시스템의 부팅/종료정보 히스토리/last&lt;/li&gt;
+                  &lt;li&gt;&lt;strong&gt;lastlog&lt;/strong&gt; : 마지막 성공한 로그인 정보를 가지고 있는 로그파일&lt;/li&gt;
+                  &lt;li&gt;&lt;strong&gt;btmp&lt;/strong&gt; : 실패한 로그인 시도에 대한 기록/lastb&lt;/li&gt;
+                  &lt;li&gt;&lt;strong&gt;loginlog&lt;/strong&gt; : btmp 와 동일하나 text 파일이고, Unix 에서 사용&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;MD5 에 의한 무결성 점검이 권고됨&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;library 백도어
+            &lt;ul&gt;
+              &lt;li&gt;공유 라이브러리를 사용함&lt;/li&gt;
+              &lt;li&gt;crypt.c 등을 수정해서 백도어를 삽입함&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;kernel 백도어
+            &lt;ul&gt;
+              &lt;li&gt;커널 자체를 수정함&lt;/li&gt;
+              &lt;li&gt;가장 찾기 어려운 백도어로 MD5 체크썸으로도 진단이 불가능함.&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;리눅스/유닉스 백도어
+            &lt;ul&gt;
+              &lt;li&gt;httpd 시작프로그램을 이용해서 자동 실행
+                &lt;ul&gt;
+                  &lt;li&gt;root 권한으로 데몬 운영 : 보안상 매우 취약
+                    &lt;ul&gt;
+                      &lt;li&gt;클라이언트가 접속을 하게 되면 httpd 가 root 권한으로 실행됨 = 클라이언트 역시 root 권한&lt;/li&gt;
+                      &lt;li&gt;클라이언트가 접속하면 httpd 를 nobody 로 실행되게 설정해야 함&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;발생원인
+        &lt;ul&gt;
+          &lt;li&gt;제거하는 것을 잊어버린 경우&lt;/li&gt;
+          &lt;li&gt;테스트를 위해 고의적으로 남겨두는 경우&lt;/li&gt;
+          &lt;li&gt;완성된 프로그램의 유지보스를 위해 고의적으로 남겨두는 경우&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;대응책
+        &lt;ul&gt;
+          &lt;li&gt;인터넷 취약점을 이용하는 스니핑과 달리 백도어 프로그램은 사용자들이 조금만 주의를 기울이면 쉽게 예방할 수 있으며 방법 또한 바이러스 예방과 크게 다르지 않음&lt;/li&gt;
+          &lt;li&gt;프로그램이 개발되어 실제의 작업환경에서 사용될 때 트랩도어로써 활용될 수 있는 루틴들의 제거 여부를 확인하여야 하며, 실제 프로그램에 대한 테스트를 하면서 중간에 이상한 출력이 나오는지 검토해 보아야 함&lt;/li&gt;
+          &lt;li&gt;윈도우/유닉스의 정상적인 프로세스를 기억, 현재 실행중인 프로세스 확인
+            &lt;ul&gt;
+              &lt;li&gt;윈도우 : Ctrl+Alt+Del 후 Windows 작업관리자 확인&lt;/li&gt;
+              &lt;li&gt;자주 사용하는 프로세스 (윈도우)
+                &lt;ul&gt;
+                  &lt;li&gt;csrss : Client/Server Runtime SubSystem
+                    &lt;ul&gt;
+                      &lt;li&gt;윈도우 콘솔 관리&lt;/li&gt;
+                      &lt;li&gt;쓰레드의 생성, 삭제&lt;/li&gt;
+                      &lt;li&gt;32비트의 가상 MS/DOS 지원&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;svchost : Service Host - 30:44
+                    &lt;ul&gt;
+                      &lt;li&gt;dll (동적라이브러리) 파일로 실행되는 프로세스의 기본 프로세스&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;백도어 탐지법
+        &lt;ul&gt;
+          &lt;li&gt;소스코드 리뷰&lt;/li&gt;
+          &lt;li&gt;HIDS 설치
+            &lt;ul&gt;
+              &lt;li&gt;Host-based IDS (S/W)&lt;/li&gt;
+              &lt;li&gt;백도어를 탐지하는 최선의 방법&lt;/li&gt;
+              &lt;li&gt;백도어가 임의의 포트에 대기하고 있을 때 해당 포트를 탐지함&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;최초의 권한획득을 최소화 (허가 X)&lt;/li&gt;
+          &lt;li&gt;지속적인 점검이 필요&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;루트킷 (rootkit)
+    &lt;ul&gt;
+      &lt;li&gt;개요
+        &lt;ul&gt;
+          &lt;li&gt;시스템 침입 후 침입 사실을 숨긴 채 차후의 침입을 위한 백도어
+            &lt;ul&gt;
+              &lt;li&gt;트로이목마 설치, 원격접근, 내부 사용 흔적 삭제, 관리자 권한 획득 등 주로 불법적인 해킹에 사용되는 프로그램 모음&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;루트킷이 설치되면 자신이 뚫고 들어온 모든 경로를 바꾸어 놓고, 명령어들을 은폐해 놓음
+            &lt;ul&gt;
+              &lt;li&gt;해커가 시스템을 원격으로 해킹하고 있어도 루트킷이 설치되어 있는지 사실조차 감지하기 어려움&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;침입자는 먼저 암호를 크래킹하거나 시스템 취약점을 찾아내어서 사용자용 접근 권한을 획득한 뒤, 컴퓨터에 루트킷을 설치함&lt;/li&gt;
+          &lt;li&gt;루트의 권한을 쉽게 획득하게 돕는 도구, 자신을 은폐, 삭제할 수 없도록 함
+            &lt;ul&gt;
+              &lt;li&gt;유저모드
+                &lt;ul&gt;
+                  &lt;li&gt;Application (커널모드 함수호출 / 응답받기)&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;커널모드
+                &lt;ul&gt;
+                  &lt;li&gt;원본코드 / 원데이터&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;루트킷은 User 모드의 Application, 커널모드의 원본코드, 원데이터를 공격 (경로 변형-Hooking)&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;은닉채널
+    &lt;ul&gt;
+      &lt;li&gt;개요
+        &lt;ul&gt;
+          &lt;li&gt;은닉채널 (Covert Channel) : 정보 전송이 목적이 아닌 채널&lt;/li&gt;
+          &lt;li&gt;통신 채널은 은닉 채널과 공개 채널(Overt Channel) 로 구분됨.&lt;/li&gt;
+          &lt;li&gt;은닉 채널은 다계층 보안 시스템(Multi-level Security System) 이 존재하는 경우 계층 간의 보안 허점을 이용하여 공개 채널의 사용자에게는 노출되지 않는 통신 채널을 구성함. 이러한 성격 때문에 디지털 워터마크나 디지털 서명 등에 사용되고 있음&lt;/li&gt;
+          &lt;li&gt;악성코드 간의 통신 등에도 사용되기 때문에 은닉 채널의 탐지가 주요 이슈가 되고 있음&lt;/li&gt;
+          &lt;li&gt;유사한 용어로 스테가노그래피(Steganography), 잠재적인 채널(Subliminal Channel) 등이 있음&lt;/li&gt;
+          &lt;li&gt;은닉 채널의 모델은 The Prisoners’ Problem 모델이 사실상의 표준 모델(De-facto Model) 이 되었음&lt;/li&gt;
+          &lt;li&gt;색출이 어려움&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;컴퓨터 네트워크 프로토콜에서의 은닉 채널
+        &lt;ul&gt;
+          &lt;li&gt;개요
+            &lt;ul&gt;
+              &lt;li&gt;네트워크 트래픽에 대한 은닉 채널 형성 기법은 Open Systems Interconnection (OSI) 모델에서 데이터 링크 계층(4), 네트워크 계층과 전송 계층(5), 응용 계층(6)(7) 등 각 계층 별로 다양한 방법이 보고되고 있음. 컴퓨터 네트워크 프로토콜에서의 은닉 채널의 형성 기법을 분류하면 아래와 같음&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;사용하지 않는 헤더 비트
+            &lt;ul&gt;
+              &lt;li&gt;프로토콜 명세 상에서 특정 값을 사용하도록 명시하지 않음&lt;/li&gt;
+              &lt;li&gt;수신자가 값을 확인하지 않음&lt;/li&gt;
+              &lt;li&gt;추후 사용하기 위해 예약해둔(Reserved) 영역을 이용&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;확장 기능 및 패딩
+            &lt;ul&gt;
+              &lt;li&gt;많은 프로토콜들이 확장성을 고려해 헤더에 확장 기능(Extension Header) 을 정의하여 필요한 경우에 선택적으로 사용하고 있음&lt;/li&gt;
+              &lt;li&gt;대부분의 헤더 확장 기능은 앞으로 추가될 기능을 충분히 고려하지 못하였기 때문에 보안에 잠재적인 위협이 될 수 있음&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;프로토콜 필드
+            &lt;ul&gt;
+              &lt;li&gt;프로토콜 명세에 정의된 필드를 임의의 값으로 수정, 패킷의 전송에 직접적으로 관련이 있는 필드인 경우 예상치 못한 에러를 가져올 수 있음&lt;/li&gt;
+              &lt;li&gt;패킷 전송 타이밍 : 전송된 패킷의 시간 간격이나 유실을 이용한 낮은 속도의 은닉 채널을 구성할 수 있음&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;터널링
+            &lt;ul&gt;
+              &lt;li&gt;현 프로토콜(보통 IP프로토콜)을 다른 프로토콜로 전환하는 과정 중에 은닉 채널을 삽입할 수 있음. 이를 통해 방화벽 등의 보안 장비를 우회할 수 있음.&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;대응책
+        &lt;ul&gt;
+          &lt;li&gt;HIDS&lt;/li&gt;
+          &lt;li&gt;통신대역폭에 대한 엄격한 제한&lt;/li&gt;
+          &lt;li&gt;정기적인 감사&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="접근통제 보안위협 및 대응책" /><summary type="html">접근통제 보안위협 및 대응책 패스워드 크래커 개요 시스템에서는 사용자들의 패스워드를 특정한 방식으로 암호화하여 보관한다. 그 방식은 절대로 풀어낼 수 없는 일방향 함수 구조로 되어 있어 유닉스/리눅스 시스템에서 패스워드를 풀어내는 일은 쉽지 않다. 하지만 무차별 대입이나 사전 등을 이용하여 편법으로 패스워드를 풀어내는 경우가 있다. 이러한 일을 해주는 프로그램을 패스워드 크래커라고 한다. 패스워드를 알아내는 가장 효율적인 방법은 하이브리드 공격으로 사전공격+무차별 공격을 병행하는 것이다. 유형 사전공격 (Dictionary Attack) 패스워드 사전 파일을 이용하여 접속 계정을 알아내는 해킹 방법 공격자들은 패스워드의 해시된 값 혹은 패스워드 파일을 포착하며, 포착 후 소프트웨어 툴은 자체 내에 이미 포함된 단어와 포착된 패스워드가 일치할 때까지 비교작업을 수행한다. 무차별공격 (Brute-force Attack) 성공할 때까지 가능한 모든 조합의 경우의 수를 시도해 원하는 공격을 시도하는 방법 대표적인 예로 크랙 등 소프트웨어를 이용해서 로그인 이름에 대한 패스워드를 추측하는 방법이 있음 무차별 공격방법들은 워다이얼링(wardialing) 에도 사용됨. 워다이얼링(wardialing) : 수천개의 전화번호에 자동으로 전화를 걸어 모뎀이 장착된 번호를 찾는 컴퓨터 해킹 기술 레인보우 테이블 공격 1980년도에 개발된 공격방법. 2000년대에 유명해짐. 원도우 NT 버전 LM(Lan Manager) Hash 알고리즘이 깨지게 됨. -&amp;gt; Vista 버전 이후 사용하지 않음 패스워드 후보군을 만들어 Salt 와 결합하여 Hash 한 결과를 거대한 사전으로 만들어 공격 대응책 패스워드를 암호화하기 전에 부가적인 숫자(Salt)를 패스워드에 덧붙인 후 암호화하여 저장하는 방법 : 사전공격에 대한 내성 향상 패스워드가 평문으로 전송되지 않도록 하여 패스워드 패킷 스니핑을 방지 One-Time Password 사용. 패스워드 암호화. IDS/IPS 를 통해 반복적인 트래픽 감시 패스워드 입력횟수를 제한하는 임계치(Clipping Level) 을 적용하는 방법 사회공학 정의 일반적 정의 : 신뢰할 수 있는 사람/조직 으로 가장하여 다른 사람들로 하여금 자신의 목적을 위해 행동하게 하는 기술 컴퓨터 기반 정의 : 신뢰할 수 있는 컴퓨터프로그램, 이메일, 웹사이트 등으로 위장하여 공격자 의도대로 희생자의 개인정보, 신용정보를 탈취하기 위해 악성코드를 설치하는 공격방법 이메일 기반 정의 : 관심을 끌만한 이메일 제목, 내용 등을 통해 첨부된 악성코드 파일을 실행하게 하여 희생자의 개인정보, 신용정보를 탈취하는 공격방식 사회공학공격 분류 인간 기반의 사회공학 공격 (Human-based Social Engineering Attack) 종류 어깨 넘어 훔쳐보기 (Shoulder Surfing) - 전통적인 스니핑 방법 쓰레기통 뒤지기 (Dumpster Diving) 협박메일 (Blackmail) 어떤 정보를 폭로하겠다고 협박하여 재물을 갈취하는 행위 따라 들어가기 (Piggybacking, Tailgating) 출입증 소지자가 출입 시 함께 뒤따라 출입한다. 내부자의 결탁으로 인한 정보유출, 내부자 부주의로 인한 외부에서의 정보 습득 절차 정보수집 피해자의 전화번호를 무작위로 수집 (인터넷, 설문조사 등) 관계 형성 전화를 이용하여 고위 공무원이나 금융담당자로 속여 마치 피해자나 피해자 주위 사람에게 문제가 생긴 것처럼 말하여 관심 유도 공격 금전적인 문제를 해결하기 위해서라며 피해자가 계좌이체를 하도록 요구 실행 피해자는 문제를 해결하기 위해 계좌이체를 하게되며 공격자는 목표 달성 대응책 전화통화의 음질 이상, 내용 이상 시 주의 신원증명 요청시 주의 이메일이나 팩스로 정보를 전송해달라고 요청하는 경우 주의 문서세절기 이용하여 중요서류 파쇄 임직원 보안 인식교육 주기적으로 실시 ICT 사회공학 공격 (Information and Communication Technology Social Engineering Attack) 종류 피싱 (Phishing) 개요 피싱은 개인정보(private data) 와 낚시(fishing) 의 합성어로 개인정보를 낚는다는 의미 수신자에게 이메일을 발송하여 Pisher 들이 운영하는 위조된 사이트로 이동시킨 후 이들에게 사이트 개편 등의 이유로 고객정보(신용카드번호, 비밀번호 등) 을 요구한다. 공격방법 및 대응방법 공격방법 : 유사한 이메일 주소 사용, 유사한 도메인 이름 사용, 이메일 주소 스푸핑, 주소창 위조, 팝업창 이용 등 대응방법 : 사용자 주의, URL 필터링, 사용자 대상 홍보, 의심사이트에 대한 신고하기 등 파밍 (Pharming) 개요 해커가 도메인 자체를 중간에서 탈취, 진짜 사이트 주소를 입력해도 가짜 사이트로 연결되도록 하는 것으로 피싱에서 더 나아간 형태 (피싱보다 피해가 큼) 공격방법 및 대응방법 공격방법 : DNS 서버로 IP 요청 갈취 후 위조된 사이트로 Redirection 시킴 스미싱 (Smishing) 개요 SMS 와 Phishing 의 결합어로 휴대폰 문자메시지를 이용하여 피싱하는 방법 공격방법 및 대응방법 공격방법 : 전형적인 유형으로 데이터 서비스 웹사이트로부터 온 휴대폰 메시지가 해당 웹사이트를 방문하여 서비스를 해지하지 않으면 일정금액의 요금이 청구된다고 메시지를 보내서 유인 이를 통해 휴대폰 사용자로 하여금 특정 웹사이트로 유인한 후 사용자의 PC에 트로이목마 프로그램을 설치하고, 사용자의 금융정보나 비밀번호를 알아냄 대응방법 : URL 확인, 주기적인 교육/훈련 스피어 피싱 (Spear Phishing) 개요 조직 내에 신뢰할만한 사람으로 위장해 메일을 보내 ID/PW 를 탈취한다. 공격방법 및 대응방법 위조된 사이트에 접속 유도 혹은 첨부파일 등을 이용한 악성코드 설치 백도어(back door) / 트랩도어 (Trap door) 개요 시스템의 보안이 제거된 비밀통로, 서비스 기술자나 유지보수 프로그래머들의 접근 편의를 위해 시스템 설게자가 고의적으로 만들어 놓은 통로 현장에서 서비스 기술자나 공급사의 유지보수 프로그래머가 업무 편의성을 향상시키기 위함 악의적인 목적으로 만들어 놓은 통로도 있는데, 백 오리피스 (Back orifice) 가 대표적임 이 프로그램은 해킹 프로그램의 일종으로 PC에 내장되어 사용자 몰래 사용자의 정보를 저장, 유출하기 위한 프로그램임 대표적인 트로이목마 웜 홀(Worm Hole), 트랩도어, Maintenance hook, Adminstrative hook 이라고도 함 백도어 종류 파일 시스템 백도어 ls, du, fsck 같은 명령어를 수정해서 특정 디렉터리나 파일을 숨김 숨기려는 부분을 배드섹터로 처리 프로세스 은닉 백도어 특정 프로세스를 숨겨서 합리적인 서비스를 가장함 라이브러리 루틴 수정으로 프로세스를 숨김 커널 수정으로 특정 프로세스를 숨김 네트워크 트래픽 백도어 네트워크 트래픽을 숨김 사용하지 않는 네트워크 포트를 사용하여 침입 TCP 셸 백도어 1024번 이상의 TCP 포트에 셸 제공 네트워크 서비스 설치 netstat 등을 통해 확인이 가능 UDP 셸 백도어 침입차단 시스템 우회가 가능 (DNS 서비스를 위해서 UDP 패킷을 허락) login 백도어 login.c 프로그램을 수정함 특정 백도어 패스워드 입력 시 인증과정 없이 로그인 허용 utmp 나 wtmp 등과 같은 로그파일에 기록되지 않음 utmp : 현재시스템에 로그인한 사용자의 상태정보/w,who,finger wtmp : 사용자의 성공한 로그인,로그아웃정보,시스템의 부팅/종료정보 히스토리/last lastlog : 마지막 성공한 로그인 정보를 가지고 있는 로그파일 btmp : 실패한 로그인 시도에 대한 기록/lastb loginlog : btmp 와 동일하나 text 파일이고, Unix 에서 사용 MD5 에 의한 무결성 점검이 권고됨 library 백도어 공유 라이브러리를 사용함 crypt.c 등을 수정해서 백도어를 삽입함 kernel 백도어 커널 자체를 수정함 가장 찾기 어려운 백도어로 MD5 체크썸으로도 진단이 불가능함. 리눅스/유닉스 백도어 httpd 시작프로그램을 이용해서 자동 실행 root 권한으로 데몬 운영 : 보안상 매우 취약 클라이언트가 접속을 하게 되면 httpd 가 root 권한으로 실행됨 = 클라이언트 역시 root 권한 클라이언트가 접속하면 httpd 를 nobody 로 실행되게 설정해야 함 발생원인 제거하는 것을 잊어버린 경우 테스트를 위해 고의적으로 남겨두는 경우 완성된 프로그램의 유지보스를 위해 고의적으로 남겨두는 경우 대응책 인터넷 취약점을 이용하는 스니핑과 달리 백도어 프로그램은 사용자들이 조금만 주의를 기울이면 쉽게 예방할 수 있으며 방법 또한 바이러스 예방과 크게 다르지 않음 프로그램이 개발되어 실제의 작업환경에서 사용될 때 트랩도어로써 활용될 수 있는 루틴들의 제거 여부를 확인하여야 하며, 실제 프로그램에 대한 테스트를 하면서 중간에 이상한 출력이 나오는지 검토해 보아야 함 윈도우/유닉스의 정상적인 프로세스를 기억, 현재 실행중인 프로세스 확인 윈도우 : Ctrl+Alt+Del 후 Windows 작업관리자 확인 자주 사용하는 프로세스 (윈도우) csrss : Client/Server Runtime SubSystem 윈도우 콘솔 관리 쓰레드의 생성, 삭제 32비트의 가상 MS/DOS 지원 svchost : Service Host - 30:44 dll (동적라이브러리) 파일로 실행되는 프로세스의 기본 프로세스 백도어 탐지법 소스코드 리뷰 HIDS 설치 Host-based IDS (S/W) 백도어를 탐지하는 최선의 방법 백도어가 임의의 포트에 대기하고 있을 때 해당 포트를 탐지함 최초의 권한획득을 최소화 (허가 X) 지속적인 점검이 필요 루트킷 (rootkit) 개요 시스템 침입 후 침입 사실을 숨긴 채 차후의 침입을 위한 백도어 트로이목마 설치, 원격접근, 내부 사용 흔적 삭제, 관리자 권한 획득 등 주로 불법적인 해킹에 사용되는 프로그램 모음 루트킷이 설치되면 자신이 뚫고 들어온 모든 경로를 바꾸어 놓고, 명령어들을 은폐해 놓음 해커가 시스템을 원격으로 해킹하고 있어도 루트킷이 설치되어 있는지 사실조차 감지하기 어려움 침입자는 먼저 암호를 크래킹하거나 시스템 취약점을 찾아내어서 사용자용 접근 권한을 획득한 뒤, 컴퓨터에 루트킷을 설치함 루트의 권한을 쉽게 획득하게 돕는 도구, 자신을 은폐, 삭제할 수 없도록 함 유저모드 Application (커널모드 함수호출 / 응답받기) 커널모드 원본코드 / 원데이터 루트킷은 User 모드의 Application, 커널모드의 원본코드, 원데이터를 공격 (경로 변형-Hooking) 은닉채널 개요 은닉채널 (Covert Channel) : 정보 전송이 목적이 아닌 채널 통신 채널은 은닉 채널과 공개 채널(Overt Channel) 로 구분됨. 은닉 채널은 다계층 보안 시스템(Multi-level Security System) 이 존재하는 경우 계층 간의 보안 허점을 이용하여 공개 채널의 사용자에게는 노출되지 않는 통신 채널을 구성함. 이러한 성격 때문에 디지털 워터마크나 디지털 서명 등에 사용되고 있음 악성코드 간의 통신 등에도 사용되기 때문에 은닉 채널의 탐지가 주요 이슈가 되고 있음 유사한 용어로 스테가노그래피(Steganography), 잠재적인 채널(Subliminal Channel) 등이 있음 은닉 채널의 모델은 The Prisoners’ Problem 모델이 사실상의 표준 모델(De-facto Model) 이 되었음 색출이 어려움 컴퓨터 네트워크 프로토콜에서의 은닉 채널 개요 네트워크 트래픽에 대한 은닉 채널 형성 기법은 Open Systems Interconnection (OSI) 모델에서 데이터 링크 계층(4), 네트워크 계층과 전송 계층(5), 응용 계층(6)(7) 등 각 계층 별로 다양한 방법이 보고되고 있음. 컴퓨터 네트워크 프로토콜에서의 은닉 채널의 형성 기법을 분류하면 아래와 같음 사용하지 않는 헤더 비트 프로토콜 명세 상에서 특정 값을 사용하도록 명시하지 않음 수신자가 값을 확인하지 않음 추후 사용하기 위해 예약해둔(Reserved) 영역을 이용 확장 기능 및 패딩 많은 프로토콜들이 확장성을 고려해 헤더에 확장 기능(Extension Header) 을 정의하여 필요한 경우에 선택적으로 사용하고 있음 대부분의 헤더 확장 기능은 앞으로 추가될 기능을 충분히 고려하지 못하였기 때문에 보안에 잠재적인 위협이 될 수 있음 프로토콜 필드 프로토콜 명세에 정의된 필드를 임의의 값으로 수정, 패킷의 전송에 직접적으로 관련이 있는 필드인 경우 예상치 못한 에러를 가져올 수 있음 패킷 전송 타이밍 : 전송된 패킷의 시간 간격이나 유실을 이용한 낮은 속도의 은닉 채널을 구성할 수 있음 터널링 현 프로토콜(보통 IP프로토콜)을 다른 프로토콜로 전환하는 과정 중에 은닉 채널을 삽입할 수 있음. 이를 통해 방화벽 등의 보안 장비를 우회할 수 있음. 대응책 HIDS 통신대역폭에 대한 엄격한 제한 정기적인 감사</summary></entry><entry><title type="html">정보보안 - 접근통제 보안모델</title><link href="https://bluesplatter.com/is_certification/IS-Management-AccessControlModel/" rel="alternate" type="text/html" title="정보보안 - 접근통제 보안모델" /><published>2021-12-02T09:00:00+09:00</published><updated>2021-12-02T09:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-Management-AccessControlModel</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-Management-AccessControlModel/">&lt;h1 id=&quot;접근통제-보안모델&quot;&gt;접근통제 보안모델&lt;/h1&gt;
 &lt;ul&gt;
   &lt;li&gt;접근통제의 모델
     &lt;ul&gt;
@@ -528,7 +1418,120 @@
       &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="접근통제 보안모델" /><category term="MAC" /><category term="DAC" /><category term="RBAC" /><summary type="html">접근통제 보안모델 접근통제의 모델 강제적 접근통제 (MAC) - Mandatory Access Control : 규칙기반(Rule Based) 자원 - 보안레벨 (Security Level) 사용자 - 보안 취급인가 (Security Clearance) 보안레벨과 보안 취급인가를 비교하여 접근통제 Linux/Unix 는 객체(파일) 을 소유하고 있는 주체가 다른 사용자에게 권한 부여하나 MAC 에서는 주체가 다른 사용자에게 권한을 줄 수가 없음 (정해진 규칙(보안관리자가 통제) 만을 따름) - 강제적 접근통제 관리자만이 정보자원을 분류, 설정, 변경 객체에 대한 접근 규칙 : 규칙기반 접근통제 (중앙집중형 보안관리) - 사용자가 통제를 수정할 수 없다. 보안전문가에 의해 생성 운영자에 의해 설정 운영시스템에 의해서 집행 다른 보안기술에 의해 지원 단점 사용자의 기능이 매우 제한적 관리적 부담이 크다 비용이 많이 소요 성능저하가 발생할 수 있음 사용자 친화적이지 않음 : 상업적인 환경에 부적합 주로 군 시스템에서 사용 보안레이블 (민감성레이블 - Sensitivity Label) : 시스템에 있는 자원이 얼마나 민감한 자원인지 수치화 (자원민감도, 중요성) 모든 객체(자원)에 할당 : 파일, 디렉토리, 장비 등 보안허가증 : 주체가 특정 객체(특정자원) 에 접근할 수 있는지 표시 주체 S 는 객체 A 에 대한 보안허가증을 가지고 A에 접근 - 주체 S가 객체 A의 보안레이블 보다 보안허가가 높거나 같은 경우에 접근 가능 MLS (MultiLevel Security) policy : 다중 수준 보안 사용 예 BLP (벨라파둘라 모델) : 기밀성에 중점 Biba : 무결성에 중점 Clark-Willson Model : 무결성에 중점 Chinese Wall Model (만리장성 모델) : 무결성/기밀성 사용 예 NSA, SELinux, Trusted Solaris DAC 모델로의 전환이 쉽지 않음 (보안레이블, 취급인가가 호환되지 않음) 임의적 접근통제 (DAC) - Discretionary Access Control : 신분에 근거 TCSEC 표준 중 하나 1985년 발행된 안전한 컴퓨터 시스템을 위한 평가지침서 신원기반 접근통제 / 사용자기반 접근통제 / 혼합방식 접근통제 : 주체가 속한 그룹의 신원에 근거하여 객체에 대한 접근을 제한 소유자의 임의성에 기반하여 접근통제 사용자에게 동적으로 접근권한을 부여 : 분산형 보안관리 유닉스/리눅스, Windows, Mac, DBMS 에서 이용 통제기법 접근제어행렬 (Access Control Matrix) 주체(Row)(터미널/host/프로그램/개별사용자/그룹사용자…) 객체(Column) 접근권한(Cell) (소유/읽기/쓰기/실행..) 관계를 표현 - 접근제어 정책을 관리 주체와 객체가 많아진다면 행렬이 커지고(관리어려움), 빈 공간이 많아짐(비효율적) 자격목록 (CL - Capability List) : 한 주체가 갖는 자격(권한)들의 리스트 권한 -&amp;gt; 주체가 객체에 대해 갖는 접근권한 접근제어 행렬을 행(Row)단위로 관리하는 것 Linked List 로 표현됨 홍길동 -&amp;gt; 파일A(RWX) 포인터 -&amp;gt; 파일C(RW) 포인터 -&amp;gt; 파일D(R) 접근제어목록 (ACL - Access Control List) 자격목록 : 주체 관점 / 접근제어목록 : 객체 관점 객체의 관점에서 객체에 어떤 주체가 어떤 접근권한을 갖는지 명시 접근제어 행렬을 열(Column)단위로 관리하는 것 Linked List 로 표현됨 파일 A -&amp;gt; 홍길동(RWX) 포인터 -&amp;gt; 고길동(RW) 포인터 -&amp;gt; 강길동(R) 장점 객체별 세분화된 접근제어가 가능 객체의 소유자가 다른 주체에게 임의적으로 접근권한 부여가 가능 -&amp;gt; 유연한 접근제어 서비스 단점 시스템 전체적으로 접근제어이 일관성이 부족 권한이 높은 주체가 다른 주체에게 임의로 자료에 대한 접근을 허용할 수 있음 주체의 신분에 따라 접근 통제가 이루어지므로 다른 주체의 신분을 사용해 불법적 접근을 할 수 있음 멀웨어 (웜, 루트킷, 트로이목마, 키로거 등 악성코드) 취약점이 존재 트로이목마 예시 Data File 에 대해 user1 이 rw 권한을 가지고 있다. user1 은 프로그램을 이용해 Data File 에 접근한다. Attacker 는 프로그램 안에 트로이목마를 심고, 이 프로그램에 대응하는 Back-Pocket 파일을 생성 (Attacker 는 rw, user1 은 w 권한을 가짐) Attacker 는 프로그램에 user1의 권한을 부여, user1 은 트로이목마가 심어진 프로그램을 실행 user1 은 프로그램을 이용해 Data File 을 읽고, 해당 내용을 Back-Pocket 파일에 쓴다. 역할기반 접근통제 (RBAC) - Role Based Access Control : 역할에 기반 개요 역할에 기반 : 접근제어 관리가 단순 MAC과 DAC의 약점을 보완한 방식 - 권한을 역할에 연관시킴 그룹과 역할의 구분 그룹 : 사용자들의 집합 (권한의 집합은 아님) 역할 : 사용자들의 집합 &amp;amp; 권한의 집합 중앙에서 관리되는 통제의 모음을 사용 관리자에 의해서 중앙집중적인 역할 (사용자집합 &amp;amp; 권한집합) 설정 장점 전체 시스템 관점에서 일관성 있는 접근제어가 가능 역할만 사용자에게 부여하면 됨 정적이면서 동적인 접근통제 중앙에서 역할을 정의 (정적) Role1 (File1) Role2 (File1, File2) Role3 (File1, File2, File3) 사용자와 역할을 할당 (동적) user1 -&amp;gt; Role1 User2 -&amp;gt; Role1, Role2 (1:1일 필요 없음) user3 -&amp;gt; Role3 -&amp;gt; Role2 단점 역할수행에 반드시 필요한 접근권한만 부여해야 함 (최소권한부여원칙 준수-&amp;gt;직무분리원칙 충족용이)</summary></entry><entry><title type="html">정보보안 - 접근통제와 사용자 인증</title><link href="https://bluesplatter.com/is_certification/IS-Management-AccessControl/" rel="alternate" type="text/html" title="정보보안 - 접근통제와 사용자 인증" /><published>2021-12-01T09:00:00+09:00</published><updated>2021-12-01T09:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-Management-AccessControl</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-Management-AccessControl/">&lt;h1 id=&quot;접근통제&quot;&gt;접근통제&lt;/h1&gt;
+&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="접근통제 보안모델" /><category term="MAC" /><category term="DAC" /><category term="RBAC" /><summary type="html">접근통제 보안모델 접근통제의 모델 강제적 접근통제 (MAC) - Mandatory Access Control : 규칙기반(Rule Based) 자원 - 보안레벨 (Security Level) 사용자 - 보안 취급인가 (Security Clearance) 보안레벨과 보안 취급인가를 비교하여 접근통제 Linux/Unix 는 객체(파일) 을 소유하고 있는 주체가 다른 사용자에게 권한 부여하나 MAC 에서는 주체가 다른 사용자에게 권한을 줄 수가 없음 (정해진 규칙(보안관리자가 통제) 만을 따름) - 강제적 접근통제 관리자만이 정보자원을 분류, 설정, 변경 객체에 대한 접근 규칙 : 규칙기반 접근통제 (중앙집중형 보안관리) - 사용자가 통제를 수정할 수 없다. 보안전문가에 의해 생성 운영자에 의해 설정 운영시스템에 의해서 집행 다른 보안기술에 의해 지원 단점 사용자의 기능이 매우 제한적 관리적 부담이 크다 비용이 많이 소요 성능저하가 발생할 수 있음 사용자 친화적이지 않음 : 상업적인 환경에 부적합 주로 군 시스템에서 사용 보안레이블 (민감성레이블 - Sensitivity Label) : 시스템에 있는 자원이 얼마나 민감한 자원인지 수치화 (자원민감도, 중요성) 모든 객체(자원)에 할당 : 파일, 디렉토리, 장비 등 보안허가증 : 주체가 특정 객체(특정자원) 에 접근할 수 있는지 표시 주체 S 는 객체 A 에 대한 보안허가증을 가지고 A에 접근 - 주체 S가 객체 A의 보안레이블 보다 보안허가가 높거나 같은 경우에 접근 가능 MLS (MultiLevel Security) policy : 다중 수준 보안 사용 예 BLP (벨라파둘라 모델) : 기밀성에 중점 Biba : 무결성에 중점 Clark-Willson Model : 무결성에 중점 Chinese Wall Model (만리장성 모델) : 무결성/기밀성 사용 예 NSA, SELinux, Trusted Solaris DAC 모델로의 전환이 쉽지 않음 (보안레이블, 취급인가가 호환되지 않음) 임의적 접근통제 (DAC) - Discretionary Access Control : 신분에 근거 TCSEC 표준 중 하나 1985년 발행된 안전한 컴퓨터 시스템을 위한 평가지침서 신원기반 접근통제 / 사용자기반 접근통제 / 혼합방식 접근통제 : 주체가 속한 그룹의 신원에 근거하여 객체에 대한 접근을 제한 소유자의 임의성에 기반하여 접근통제 사용자에게 동적으로 접근권한을 부여 : 분산형 보안관리 유닉스/리눅스, Windows, Mac, DBMS 에서 이용 통제기법 접근제어행렬 (Access Control Matrix) 주체(Row)(터미널/host/프로그램/개별사용자/그룹사용자…) 객체(Column) 접근권한(Cell) (소유/읽기/쓰기/실행..) 관계를 표현 - 접근제어 정책을 관리 주체와 객체가 많아진다면 행렬이 커지고(관리어려움), 빈 공간이 많아짐(비효율적) 자격목록 (CL - Capability List) : 한 주체가 갖는 자격(권한)들의 리스트 권한 -&amp;gt; 주체가 객체에 대해 갖는 접근권한 접근제어 행렬을 행(Row)단위로 관리하는 것 Linked List 로 표현됨 홍길동 -&amp;gt; 파일A(RWX) 포인터 -&amp;gt; 파일C(RW) 포인터 -&amp;gt; 파일D(R) 접근제어목록 (ACL - Access Control List) 자격목록 : 주체 관점 / 접근제어목록 : 객체 관점 객체의 관점에서 객체에 어떤 주체가 어떤 접근권한을 갖는지 명시 접근제어 행렬을 열(Column)단위로 관리하는 것 Linked List 로 표현됨 파일 A -&amp;gt; 홍길동(RWX) 포인터 -&amp;gt; 고길동(RW) 포인터 -&amp;gt; 강길동(R) 장점 객체별 세분화된 접근제어가 가능 객체의 소유자가 다른 주체에게 임의적으로 접근권한 부여가 가능 -&amp;gt; 유연한 접근제어 서비스 단점 시스템 전체적으로 접근제어이 일관성이 부족 권한이 높은 주체가 다른 주체에게 임의로 자료에 대한 접근을 허용할 수 있음 주체의 신분에 따라 접근 통제가 이루어지므로 다른 주체의 신분을 사용해 불법적 접근을 할 수 있음 멀웨어 (웜, 루트킷, 트로이목마, 키로거 등 악성코드) 취약점이 존재 트로이목마 예시 Data File 에 대해 user1 이 rw 권한을 가지고 있다. user1 은 프로그램을 이용해 Data File 에 접근한다. Attacker 는 프로그램 안에 트로이목마를 심고, 이 프로그램에 대응하는 Back-Pocket 파일을 생성 (Attacker 는 rw, user1 은 w 권한을 가짐) Attacker 는 프로그램에 user1의 권한을 부여, user1 은 트로이목마가 심어진 프로그램을 실행 user1 은 프로그램을 이용해 Data File 을 읽고, 해당 내용을 Back-Pocket 파일에 쓴다. 역할기반 접근통제 (RBAC) - Role Based Access Control : 역할에 기반 개요 역할에 기반 : 접근제어 관리가 단순 MAC과 DAC의 약점을 보완한 방식 - 권한을 역할에 연관시킴 그룹과 역할의 구분 그룹 : 사용자들의 집합 (권한의 집합은 아님) 역할 : 사용자들의 집합 &amp;amp; 권한의 집합 중앙에서 관리되는 통제의 모음을 사용 관리자에 의해서 중앙집중적인 역할 (사용자집합 &amp;amp; 권한집합) 설정 장점 전체 시스템 관점에서 일관성 있는 접근제어가 가능 역할만 사용자에게 부여하면 됨 정적이면서 동적인 접근통제 중앙에서 역할을 정의 (정적) Role1 (File1) Role2 (File1, File2) Role3 (File1, File2, File3) 사용자와 역할을 할당 (동적) user1 -&amp;gt; Role1 User2 -&amp;gt; Role1, Role2 (1:1일 필요 없음) user3 -&amp;gt; Role3 -&amp;gt; Role2 단점 역할수행에 반드시 필요한 접근권한만 부여해야 함 (최소권한부여원칙 준수-&amp;gt;직무분리원칙 충족용이)</summary></entry><entry><title type="html">정보보안 - SSO(통합인증체계) / Kerberos</title><link href="https://bluesplatter.com/is_certification/IS-Management-SSO/" rel="alternate" type="text/html" title="정보보안 - SSO(통합인증체계) / Kerberos" /><published>2021-12-02T09:00:00+09:00</published><updated>2021-12-02T09:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-Management-SSO</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-Management-SSO/">&lt;h1 id=&quot;통합인증-체계sso&quot;&gt;통합인증 체계(SSO)&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;SSO(Single Sign On) 의 기본개념
+    &lt;ul&gt;
+      &lt;li&gt;통합 인증 체계(SSO) 정의
+        &lt;ul&gt;
+          &lt;li&gt;한 번의 시스템 인증을 통하여 접근하고자 하는 다양한 정보시스템에 재인증 절차 없이 접근할 수 있도록 하는 통합 로그인 솔루션
+            &lt;ul&gt;
+              &lt;li&gt;통합 로그인 솔루션 : 대표적인 인증방법으로는 커버로스(Kerberos) 를 이용한 윈도우의 액티브 디렉터리(Active Directory) 가 있다.&lt;/li&gt;
+              &lt;li&gt;사용 예
+                &lt;ul&gt;
+                  &lt;li&gt;Kerberos&lt;/li&gt;
+                  &lt;li&gt;유럽식 보안 시스템 : SESAME (공개키 암호화 방식 사용, Needham Schroeder Protocol 사용)&lt;/li&gt;
+                  &lt;li&gt;크립토나이트&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;통합신원관리 시스템의 중심적 개념은 SSO 를 사용하여 사용자가 한 번만 인증하면 네트워크의 모든 자원에 접속할 수 있게 하는 것&lt;/li&gt;
+          &lt;li&gt;장점 : 사용자 편의성, 운영비용 감소, PKI 기반 보안기능 (보안성 강화)&lt;/li&gt;
+          &lt;li&gt;단점 : 단일실패지점 (SPoF-SinglePointOfFailure)&lt;/li&gt;
+          &lt;li&gt;EAM (Extranet Access Management) (권한관리 시스템) 은 SSO 기술 기반으로 나온 시스템 (SSO + 보안성)
+            &lt;ul&gt;
+              &lt;li&gt;접근권한부여 / 관리 - 통합인증 권한관리 솔루션&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;SSO 구성요소
+        &lt;ul&gt;
+          &lt;li&gt;사용자&lt;/li&gt;
+          &lt;li&gt;인증서버&lt;/li&gt;
+          &lt;li&gt;LDAP (Lightweight Directory Access Protocol) : X.500 을 근거로 한 디렉토리 DB에 접속하기 위한 프로토콜&lt;/li&gt;
+          &lt;li&gt;SSO Agent : 각 정보시스템에 SSO 정보를 송수신&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;과정
+        &lt;ul&gt;
+          &lt;li&gt;User : User 가 Portal 에 접속&lt;/li&gt;
+          &lt;li&gt;User : Portal 로그인 화면 (인증서버) 으로 Redirect&lt;/li&gt;
+          &lt;li&gt;User : 인증서버에 사용자의 ID/PW (인증정보) 입력&lt;/li&gt;
+          &lt;li&gt;인증서버 : LDAP (사용자 프로파일 DB) 를 이용해 사용자의 인증정보를 검증&lt;/li&gt;
+          &lt;li&gt;인증서버 : Portal 에 로그인처리&lt;/li&gt;
+          &lt;li&gt;User : Portal 의 각 서비스에 접근이 가능&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;커버로스-kerberos&quot;&gt;커버로스 (Kerberos)&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;개요
+    &lt;ul&gt;
+      &lt;li&gt;커버로스(Kerberos) 는 인증 프로토콜이며 동시에 KDC 이다.&lt;/li&gt;
+      &lt;li&gt;이 이름은 문을 지키는 그리스 신화의 머리가 셋 달린 개의 이름에서 따온 것이다.&lt;/li&gt;
+      &lt;li&gt;MIT 에서 설계를 했고 여러 버전으로 업데이트 되었다.&lt;/li&gt;
+      &lt;li&gt;개방된 컴퓨터 네트워크 내에서 서비스 요구를 인증하기 위해 대칭키 암호기법에 바탕을 둔 티켓 기반 인증 프로토콜이다.&lt;/li&gt;
+      &lt;li&gt;수년 동안 유닉스 시스템에서 사용되었고, 현재 윈도우 서버 운영체제에서 기본 인증기법으로 사용되고 있다.&lt;/li&gt;
+      &lt;li&gt;분산 환경을 위한 SSO 의 한 예이며, 이종 네트워크를 위한 사실상의 표준&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;커버로스 구성요소
+    &lt;ul&gt;
+      &lt;li&gt;KDC(키분배센터) : AS(인증서버) + TGS(티켓발행서버)
+        &lt;ul&gt;
+          &lt;li&gt;AS (인증서버)
+            &lt;ul&gt;
+              &lt;li&gt;사용자에 대한 인증을 수행&lt;/li&gt;
+              &lt;li&gt;중앙집중식 DB에 패스워드를 모두 저장&lt;/li&gt;
+              &lt;li&gt;각 서버와 유일한 비밀키를 서로 공유하고 있음&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;TGS(티켓발행서버)
+            &lt;ul&gt;
+              &lt;li&gt;AS 에 인증받은 사용자에 티켓을 발행&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Ticket&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;과정
+    &lt;ul&gt;
+      &lt;li&gt;사용자 로그인 시
+        &lt;ul&gt;
+          &lt;li&gt;클라이언트 : 티켓-승인티켓을 요청 - 인증서버에 인증 시도&lt;/li&gt;
+          &lt;li&gt;인증서버 : 티켓 + 세션키를 클라이언트에 전송&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;서비스 유형마다
+        &lt;ul&gt;
+          &lt;li&gt;클라이언트 : 서비스-승인티켓을 티켓발행서버에 요청&lt;/li&gt;
+          &lt;li&gt;티켓발행서버 : 티켓 + 세션키를 클라이언트에 전송&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;서비스 요청
+        &lt;ul&gt;
+          &lt;li&gt;클라이언트 : 서버에 서비스 요청&lt;/li&gt;
+          &lt;li&gt;서버 : 클라이언트에 액세스 권한 부여&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;취약점
+    &lt;ul&gt;
+      &lt;li&gt;KDC 는 SPoF (실패단일지점) 가 될 수 있음.&lt;/li&gt;
+      &lt;li&gt;사용자에게 비밀키가 임시로 저장이 됨 -&amp;gt; 공격자가 세션키 획득 가능&lt;/li&gt;
+      &lt;li&gt;SSO 공통으로 패스워드 추측 공격에 취약&lt;/li&gt;
+      &lt;li&gt;위 취약점을 보완한 것이 SESAME&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="SSO" /><category term="Single Sign On" /><category term="Kerberos" /><summary type="html">통합인증 체계(SSO) SSO(Single Sign On) 의 기본개념 통합 인증 체계(SSO) 정의 한 번의 시스템 인증을 통하여 접근하고자 하는 다양한 정보시스템에 재인증 절차 없이 접근할 수 있도록 하는 통합 로그인 솔루션 통합 로그인 솔루션 : 대표적인 인증방법으로는 커버로스(Kerberos) 를 이용한 윈도우의 액티브 디렉터리(Active Directory) 가 있다. 사용 예 Kerberos 유럽식 보안 시스템 : SESAME (공개키 암호화 방식 사용, Needham Schroeder Protocol 사용) 크립토나이트 통합신원관리 시스템의 중심적 개념은 SSO 를 사용하여 사용자가 한 번만 인증하면 네트워크의 모든 자원에 접속할 수 있게 하는 것 장점 : 사용자 편의성, 운영비용 감소, PKI 기반 보안기능 (보안성 강화) 단점 : 단일실패지점 (SPoF-SinglePointOfFailure) EAM (Extranet Access Management) (권한관리 시스템) 은 SSO 기술 기반으로 나온 시스템 (SSO + 보안성) 접근권한부여 / 관리 - 통합인증 권한관리 솔루션 SSO 구성요소 사용자 인증서버 LDAP (Lightweight Directory Access Protocol) : X.500 을 근거로 한 디렉토리 DB에 접속하기 위한 프로토콜 SSO Agent : 각 정보시스템에 SSO 정보를 송수신 과정 User : User 가 Portal 에 접속 User : Portal 로그인 화면 (인증서버) 으로 Redirect User : 인증서버에 사용자의 ID/PW (인증정보) 입력 인증서버 : LDAP (사용자 프로파일 DB) 를 이용해 사용자의 인증정보를 검증 인증서버 : Portal 에 로그인처리 User : Portal 의 각 서비스에 접근이 가능</summary></entry><entry><title type="html">정보보안 - 접근통제와 사용자 인증</title><link href="https://bluesplatter.com/is_certification/IS-Management-AccessControl/" rel="alternate" type="text/html" title="정보보안 - 접근통제와 사용자 인증" /><published>2021-12-01T09:00:00+09:00</published><updated>2021-12-01T09:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-Management-AccessControl</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-Management-AccessControl/">&lt;h1 id=&quot;접근통제&quot;&gt;접근통제&lt;/h1&gt;
 &lt;ul&gt;
   &lt;li&gt;접근통제 개요
     &lt;ul&gt;
@@ -2170,1402 +3173,4 @@
       &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="비칭키 암호" /><summary type="html">비대칭키 암호 키 배송 문제 개요 대칭키 암호를 사용하려면 키 배송 문제(key distribution problem) 발생 암호화 키와 복호화 키가 동일 키 배송 중 도청 가능성 해결방안 키의 사전 공유에 의한 해결 키배포 센터에 의한 해결 Diffie-Hellman 키 교환에 의한 해결 공개키 암호에 의한 해결 키의 사전 공유에 의한 해결 안전한 키를 사전에 공유함 안전한 통로를 이용함 Trusted Authority (TA : 키관리기관) 인원이 많아지면 키가 많아져서 문제 n명의 사원이 자신 외의 사람과 통신시 키는 n(n-1)/2 이다. 키배포 센터에 의한 해결 KDC (Key Distribution Center : 온라인 키 분배 - 일종의 TA) 암호 통신이 필요해질 때마다 통신용 키를 키배포 센터라는 신뢰받은 3자에 의해 공유 과정 1 : A 가 KDC에 B와 통신을 하겠다고 요청 2 : KDC는 DB에서 A의 키와 B의 키를 추출(비밀키) 3 : KDC는 A의 키, B의 키를 이용해 세션키를 생성, 각각 비밀키로 암호화함 4 : A 에게 A의 키를 이용해 암호화한 세션키를 전달 5 : B 에게 B의 키를 이용해 암호화한 세션키를 전달 6 : A 는 자신의 개인키를 이용해 세션키를 복호화 7 : A 는 세션키를 이용해 전송할 메시지를 암호화하여 B에게 전송 8 : B 는 자신의 개인키를 이용해 세션키를 복호화 9 : B 는 세션키를 이용해 A에게 전송받은 메시지를 복호화 10 : 통신 종료 후 세션키는 폐기 Diffie-Hellman 키 교환에 의한 해결 개요 1976년 공개키 암호방식을 최초로 제안한 휘트필드 디피와 마틴 헬먼이 발명한 알고리즘 공개키 암호방식의 개념을 이용하여 두 사용자 간에 공통의 암호화키를 안전하게 공유할 수 있는 방법 제시 (최초의 비밀키 교환 프로토콜) Diffie-Hellman 프로토콜 방법에서는 양쪽 통신 주체가 KDC 없이 대칭 세션키를 생성, 대칭키를 만들기 전에 두 개의 수 p와 g를 선택해야 함. p는 매우 큰 소수로서 300자리가 넘는 십진수 키 교환이라는 이름이 붙어있지만 키 교환이 아니라 공유할 키를 계산하여 만들어 내는 것, 때문에 키 합의(Diffie-Hellman key agreement)로 불리기도 함 유한체상의 이산대수문제를 풀기 어렵다는 사실이 이를 뒷받침함 Diffie-Hellman의 안정성 두 가지 공격에 약점을 보임, 이산대수공격, 중간자 공격 이산대수공격 키 교환의 안정성을 이산대수문제를 풀기 어렵다는데 기반을 둔다. Eve가 R1과 R2를 가로챌 수 있으므로 대칭키 K를 계산할 수 있다. A : R1 (공개값) = g^x mod p B : R2 (공개값) = g^y mod p A 는 R1을 B에 전송 B 는 R2을 A에 전송 A : K = R2^x mod p B : K = R1^y mod p K = g^xy mod p Eve 가 R1, R2 를 가로채 x,y 를 추출하여 K를 생성할 수 있음 x, y값을 추출해내서 더 이상 비밀키가 비밀이 되지 않는다. 중간자 공격(man in the middle attack) 키 교환 프로토콜은 인증 단계가 없어서 이런 공격에 취약 공격을 막기 위해 디지털서명과 공개키 인증서 등을 이용하면 됨 DoS 공격 Diffie-Hellman 은 지수함수에 기초하고 있어 계산이 복잡함 동시에 통신 시 비밀키 생성 시 많은 부하가 걸림 키 생성을 다수 요청하면 서버가 마비됨 공개키 암호에 의한 해결 개요 대칭키 암호에서 암호화키와 복호화키는 같다. 공개키 암호에서는 이 두개가 다르다. 수신자는 미리 암호화키 (공개키) 를 송신자에게 알려준다. Eve 에게 알려져도 괜찮다. 송신자는 암호화키 (공개키) 로 암호화하여 수신자에게 보낸다. 복호화는 복호화키 (개인키) 를 가지고 있는 사람(수신자)만 가능하다. 이러면 복호화키를 전달할 필요가 없다. 공개키 암호 (public-key cryptography) 개요 대칭키 암호는 평문을 복잡한 형태로 변환해서 기밀성을 유지 공개키 암호는 수학적으로 해결하기 곤란한 문제 (소인수분해, 이산대수…) 를 토대로 해서 기밀성을 유지 전자문서의 무결성, 전자서명(부인방지) 구현에 활용 다양한 암호 프로토콜에 사용 공개키 암호에서는 암호화키와 복호화키가 분리되어 있음. 수학적으로 해결하기 곤란한 문제 소인수분해 문제 RSA Rabin 이산대수 문제 ElGamal DSA (DSS) ECC (타원곡선) ECDSA KCDSA 과정 1 : A가 세션키를 B의 공개키로 암호화 2 : A가 암호화된 세션키를 B에 전송 3 : B가 B의 개인키로 암호화된 세션키를 복호화 B의 공개키 / 개인키는 수학적으로 밀접한 관계가 있음 4 : A 와 B의 키 교환 완료 RSA 암호시스템 개요 기본 개념 RSA 는 공개키 암호 알고리즘 중 하나 세계적으로 사실상 표준 Rivest-Shamir-Adelman 의 첫 글자를 따서 붙여짐 인수분해 문제해결의 높은 난이도를 이용한 가장 대표적인 공개키 암호 알고리즘 디지털 서명의 용도로도 사용됨 SSL 프로토콜을 가진 웹 브라우저, PGP, 공개키 암호시스템을 사용하는 정부 시스템 등에서 사용 암호화와 복호화 RSA는 e와 d 두 지수를 사용 A (송신자) : C = P^e mod n B (수신자) : P = C^d mod n e : 공개하는 값 d : 비밀로 유지하는 값 P : 평문 C : 암호문 n : 매우 큰 수 RSA 에 대한 공격 소인수분해 공격 RSA 는 모듈러 값이 매우 커서 이 값을 적절한 시간 내에 소인수분해 하는 것이 불가능 B (수신자) 은 p와 q 를 선택하고 n = p * q 를 계산 n은 공개되지만 p와 q 는 비밀임 Eve가 n을 소인수분해하여 p와 q를 구할 수 있다면 Pi(N) 을 구할 수 있음 소인수분해 알고리즘 (Factoring Attack) 이 개발되지 않는다면 RSA는 안전하다고 할 수 있음 중간자 공격 중간자 공격은 기밀성에 매우 유효한 공격 방법 적극적 공격자 멜로리가 송신자와 수신자 사이에 들어가서 송신자에 대해서는 수신자처럼, 수신자에 대해서는 송신자처럼 행세하는 공격 중간자 공격을 막기 위해서는 입수한 공개키가 밥의 것이라는 것을 확인할 수단인 인증이 필요하다. Rabin 암호시스템 개요 M.Rabin 이 고안, RSA 암호시스템의 변형 RSA는 지수 합동, Rabin은 2차 합동에 근거 암호화와 복호화 Rabin 암호시스템에서 암호화는 매우 간단, 한 번의 곱셈으로 이루어짐 성능이 낮은 플랫폼에서 잘 활용됨 (스마트 카드 등) Rabin 시스템의 보안 p와 q 가 충분히 크기만 하면 안전 (mod N을 구하는 것이 어려움) RSA 만큼 안전 ElGamal 방식 개요 Taher ElGamal 이 발명 이산대수 문제에 근거해서 만든 시스템 (오픈 소스를 기초, 키 분배 방식 및 공개키 암호 방식 실현) 디지털 서명, 암호화, 키교환 Diffie-Hellman 암호화 기능의 확장, 속도가 느림 암호화와 복호화 Bob의 공개키를 이용해 누구든 Bob에게 메시지를 보낼 수 있음 고속 지수 알고리즘을 사용하면 다항식 정도의 복잡도를 가지는 시간 내에 수행 가능 암호화에서는 암호문의 길이가 평문의 2배가 되어 버린다는 결점 응용 RSA 를 활용할 수 있는 곳에는 어디에서나 사용 가능 키 교환, 인증, 짧은 메시지의 암호화와 복호화에 사용 암호 소프트웨어 GnuPG에 구현되어 있음 타원곡선 암호 (ECC, elliptic curve cryptosystem) 등장배경 RSA 와 ElGamal 이 안전한 비대칭키 암호시스템이기는 하지만 보안을 위해서 키의 길이가 매우 커야한다는 단점이 있음 따라서 키의 길이가 짧아도 되는 암호시스템을 연구 -&amp;gt; ECC 타원곡선 이론에 근거 특징 유한체 위에서 정의된 타원곡선 군에서의 이산대수 문제에 기초한 공개키 알고리즘 RSA 암호방식에 이어 전자상거래의 핵심 기술로 주목 1985년 코블리치(N.Koblitz) 와 밀러(V.S.Miller)가 RSA 암호방식의 대안으로 처음 제안 RSA보다 키의 비트 수를 적게 하면서도 동일한 성능을 제공하는 것이 특징 160비트 ECC는 1024비트 RSA 키와 동일한 보안수준 다양한 암호방식 설계가 용이 H/W 와 S/W 로 구현하기 용이 스마트카드나 무선통신단말기 등과 같이 메모리 처리능력이 제한된 응용 분야에 특히 효율적 전자상거래의 핵심 ECC 는 RSA 보다 상대적으로 지명도가 부족, 배경이론이 복잡하며 해당 분야의 전문가가 적다는 단점이 있음 빠른 속도로 구현이 가능 ECC 와 RSA 방식 비교 항목 ECC 방식 RSA 방식 기반구조 WPKI(무선) PKI(유선) 속도 우수 느림 키 크기 상대적으로 작은 키 ECC에 비해 큰 키 적용 소형 Mobile환경 인프라가 다소 구현된 환경</summary></entry><entry><title type="html">정보보안 - 대칭키 암호</title><link href="https://bluesplatter.com/is_certification/IS-Management-SymmetricKeyAlgorithm/" rel="alternate" type="text/html" title="정보보안 - 대칭키 암호" /><published>2021-07-26T09:00:00+09:00</published><updated>2021-07-26T09:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-Management-SymmetricKeyAlgorithm</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-Management-SymmetricKeyAlgorithm/">&lt;h1 id=&quot;대칭키-암호의-종류&quot;&gt;대칭키 암호의 종류&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;DES (Data Encryption Standard)
-    &lt;ul&gt;
-      &lt;li&gt;개요
-        &lt;ul&gt;
-          &lt;li&gt;NIST(미국 국립기술표준원) 에서 1973년 국가적으로 사용할 대칭키 암호시스템 제안요청서를 발표&lt;/li&gt;
-          &lt;li&gt;IBM의 제안으로 DES가 채택됨&lt;/li&gt;
-          &lt;li&gt;FIPS(연방정보처리기준) 의 초안으로 공표&lt;/li&gt;
-          &lt;li&gt;DES 발표 후 가장 널리 사용된 대칭키 블록 암호&lt;/li&gt;
-          &lt;li&gt;이후 삼충 DES 사용을 권고한 FIPS 46-3 발표&lt;/li&gt;
-          &lt;li&gt;최신 AES 는 DES 를 대체한 알고리즘&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;개관
-        &lt;ul&gt;
-          &lt;li&gt;평문의 길이는 64비트, 키의 길이는 56비트, 이보다 길면 64비트 블록으로 나눔&lt;/li&gt;
-          &lt;li&gt;DES 구조는 Feistel 네트워크의 변형, 라운드 회수는 16&lt;/li&gt;
-          &lt;li&gt;원래 키로부터 16개의 서브키를 생성하고 서브키를 각 라운드에서 사용&lt;/li&gt;
-          &lt;li&gt;DES 복호화 과정은 암호화 과정과 동일&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;DES의 구조
-        &lt;ul&gt;
-          &lt;li&gt;개요
-            &lt;ul&gt;
-              &lt;li&gt;두 개의 전치(P-박스)와 16개의 Feistel 라운드 함수로 구성&lt;/li&gt;
-              &lt;li&gt;P-박스는 초기 전치(initial Permutation) 과 최종 전치(Final Permutation) 임&lt;/li&gt;
-              &lt;li&gt;암호화
-                &lt;ul&gt;
-                  &lt;li&gt;
-                    &lt;table&gt;
-                      &lt;tbody&gt;
-                        &lt;tr&gt;
-                          &lt;td&gt;Plain Text&lt;/td&gt;
-                          &lt;td&gt;Plain Text (평문을 절반으로 자름)&lt;/td&gt;
-                        &lt;/tr&gt;
-                      &lt;/tbody&gt;
-                    &lt;/table&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;P-Box&lt;/li&gt;
-                  &lt;li&gt;1 Round
-                    &lt;ul&gt;
-                      &lt;li&gt;R2 = L1 XOR F1(R1)&amp;lt;-K1&lt;/li&gt;
-                      &lt;li&gt;L2 = R2&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;…&lt;/li&gt;
-                  &lt;li&gt;16 Round (교차 없음)
-                    &lt;ul&gt;
-                      &lt;li&gt;R16 = R15&lt;/li&gt;
-                      &lt;li&gt;L16 = L15 XOR F15(R15)&amp;lt;-K15&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;P-Box&lt;/li&gt;
-                  &lt;li&gt;64Bit 암호문(Cipher Text)&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;복호화도 동일하게 마지막 라운드에 교차 없음&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;라운드 함수
-            &lt;ul&gt;
-              &lt;li&gt;개요
-                &lt;ul&gt;
-                  &lt;li&gt;DES 는 16번의 라운드 함수를 사용&lt;/li&gt;
-                  &lt;li&gt;각 라운드 함수는 Fiestal 암호로 되어있음&lt;/li&gt;
-                  &lt;li&gt;라운드 함수는 이전 라운드 함수의 출력 값 L-1 과 R-1 을 입력으로 받고 다음 라운드에 입력으로 전송될 L 과 R을 생성&lt;/li&gt;
-                  &lt;li&gt;각 라운드에는 2개의 암호 요소 혼합기(mixer) 와 교환기 (swapper) 가 있음, 이런 요소들은 역연산이 가능함&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;DES 함수
-                &lt;ul&gt;
-                  &lt;li&gt;DES 의 핵심은 함수&lt;/li&gt;
-                  &lt;li&gt;라운드 함수에서 사용된 함수를 가리킴&lt;/li&gt;
-                  &lt;li&gt;DES 함수는 32비트 출력값을 산출하기 위해 가장 오른쪽의 32비트에 48비트 키를 적용&lt;/li&gt;
-                  &lt;li&gt;DES 함수는 확장 P-박스, 키 XOR, 8개의 S-박스 그리고 단순 P-박스의 4개 부분으로 구성
-                    &lt;ul&gt;
-                      &lt;li&gt;예시
-                        &lt;ul&gt;
-                          &lt;li&gt;32Bit 입력&lt;/li&gt;
-                          &lt;li&gt;확장 P-박스 (48Bit)&lt;/li&gt;
-                          &lt;li&gt;48Bit XOR Key (48Bit)&lt;/li&gt;
-                          &lt;li&gt;S-Box (8개)&lt;/li&gt;
-                          &lt;li&gt;32Bit 출력&lt;/li&gt;
-                          &lt;li&gt;단순 P-박스&lt;/li&gt;
-                          &lt;li&gt;32Bit 결과&lt;/li&gt;
-                        &lt;/ul&gt;
-                      &lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;암호화 알고리즘과 복호화 알고리즘
-            &lt;ul&gt;
-              &lt;li&gt;라운드 키들이 역순으로 적용되어야 한다는 사실이 중요&lt;/li&gt;
-              &lt;li&gt;암호화 과정에서 1라운드는 K1, 복호화 과정에서 1라운드는 K16&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;DES 분석
-        &lt;ul&gt;
-          &lt;li&gt;설계 기준
-            &lt;ul&gt;
-              &lt;li&gt;S-박스
-                &lt;ul&gt;
-                  &lt;li&gt;각 라운드에서 그 다음 라운드까지 혼돈과 확산 성질을 만족하도록 설계&lt;/li&gt;
-                  &lt;li&gt;비선형 함수&lt;/li&gt;
-                  &lt;li&gt;입력 값의 한 비트를 바꾸면 출력 값에서 두 비트 이상 바뀜&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;P-박스
-                &lt;ul&gt;
-                  &lt;li&gt;32비트에서 32비트로 가는 하나의 단순 P-박스&lt;/li&gt;
-                  &lt;li&gt;32비트에서 48비트로 가는 하나의 확장 P-박스&lt;/li&gt;
-                  &lt;li&gt;2개의 P-박스는 비트들을 동시에 확산(diffusion) 시킴&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;DES의 취약점
-            &lt;ul&gt;
-              &lt;li&gt;키의 크기(56비트)&lt;/li&gt;
-              &lt;li&gt;키에 대한 전수 조사를 위해 2의 56승 키를 조사&lt;/li&gt;
-              &lt;li&gt;전사공격 가능
-                &lt;ul&gt;
-                  &lt;li&gt;다중 DES 사용&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;다중 DES
-        &lt;ul&gt;
-          &lt;li&gt;삼중 DES
-            &lt;ul&gt;
-              &lt;li&gt;개요
-                &lt;ul&gt;
-                  &lt;li&gt;두 개의 키를 갖는 삼중 DES 와 세 개의 키를 갖는 삼중 DES가 있음&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;두 개의 키를 갖는 삼중 DES (DES-EDE2)
-                &lt;ul&gt;
-                  &lt;li&gt;두 개의 키를 갖는 삼중 DES 에서는 k1과 k2 두 개의 키를 사용&lt;/li&gt;
-                  &lt;li&gt;첫 번째와 세번째 단계에서는 k1, 두 번째 단계에서는 k2를 사용&lt;/li&gt;
-                  &lt;li&gt;하나의 DES로 삼중 DES를 만들기 위하여 암호화 과정의 중간 단게에서는 복호화 알고리즘을 사용하고, 복호화 과정에서는 DES 암호화 알고리즘을 사용&lt;/li&gt;
-                  &lt;li&gt;기지평문 공격에 취약&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;세 개의 키를 갖는 삼중 DES (Triple-DES)
-                &lt;ul&gt;
-                  &lt;li&gt;세 개의 키 k1, k2, k3 를 사용&lt;/li&gt;
-                  &lt;li&gt;P -&amp;gt; 암호화(k1) -&amp;gt; 복호화(k2) -&amp;gt; 암호화(k3) -&amp;gt; 암호문&lt;/li&gt;
-                  &lt;li&gt;PGP (이메일 보안, Pretty Good Privacy) 에서 사용&lt;/li&gt;
-                  &lt;li&gt;기지평문 공격 보완&lt;/li&gt;
-                  &lt;li&gt;복호화 : 암호화의 역&lt;/li&gt;
-                  &lt;li&gt;트리플 DES에서 모든 키를 동일하게 하면 3DES는 보통 DES와 같아짐&lt;/li&gt;
-                  &lt;li&gt;과거에 DES로 암호화된 암호문을 3DES를 사용하여 복호화 가능&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;AES
-    &lt;ul&gt;
-      &lt;li&gt;개요
-        &lt;ul&gt;
-          &lt;li&gt;역사
-            &lt;ul&gt;
-              &lt;li&gt;1997년 미국 국립기술표준원(NIST)은 DES를 대체하기 위해 Advanced Encryption Standard(AES) 암호 알고리즘을 공모&lt;/li&gt;
-              &lt;li&gt;NIST의 제안 요청서
-                &lt;ul&gt;
-                  &lt;li&gt;128비트 블록크기&lt;/li&gt;
-                  &lt;li&gt;128, 192, 256 비트의 세 가지 키 크기&lt;/li&gt;
-                  &lt;li&gt;공개 알고리즘으로 누구나 이용 가능해야 함&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;레인달(Rijndael) AES 알고리즘 선택&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;선정기준
-            &lt;ul&gt;
-              &lt;li&gt;안정성&lt;/li&gt;
-              &lt;li&gt;비용&lt;/li&gt;
-              &lt;li&gt;구현 효율성&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;라운드(Rounds)
-            &lt;ul&gt;
-              &lt;li&gt;AES는 128비트 평문을 128비트 암호문으로 출력하는 알고리즘&lt;/li&gt;
-              &lt;li&gt;Non-feistel 알고리즘&lt;/li&gt;
-              &lt;li&gt;10 (128bit key), 12 (192bit key), 14 (256bit key) 라운드 사용&lt;/li&gt;
-              &lt;li&gt;AES-128, AES-192, AES-256 으로 불림&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;암호(Ciphers)
-        &lt;ul&gt;
-          &lt;li&gt;개요
-            &lt;ul&gt;
-              &lt;li&gt;DES : Feistel 네트워크를 기본 구조로 사용&lt;/li&gt;
-              &lt;li&gt;Rijndael : SPN (Substitution-Permutation Network) 구조 사용&lt;/li&gt;
-              &lt;li&gt;연산은 바이트 단위의 연산을 사용&lt;/li&gt;
-              &lt;li&gt;S-Box 를 이용한 치환, 행이동, 행연산 열변환, 키연산 열변환의 4가지 기본연산을 수행&lt;/li&gt;
-              &lt;li&gt;알려진 공격방법들로부터 안전하도록 설계&lt;/li&gt;
-              &lt;li&gt;하드웨어, 소프트웨어 구현 시 속도나 코드 압축성 면에서 효율적&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;SPN 구조
-            &lt;ul&gt;
-              &lt;li&gt;라운드 함수가 역변환이 되어야 한다는 등의 제약이 있음&lt;/li&gt;
-              &lt;li&gt;더 많은 병렬성을 제공&lt;/li&gt;
-              &lt;li&gt;입력을 여러 개의 소블록으로 나누고 각 소블록을 S-box에 입력하여 치환, S-box의 출력을 P-box로 전치하는 과정 반복&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;Feistel 과 SPN 구조 알고리즘
-            &lt;ul&gt;
-              &lt;li&gt;Feistel : DES, Blowfish, MISTY, RC5&lt;/li&gt;
-              &lt;li&gt;SPN : IDEA, Rijndael (AES), Square&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;
-            &lt;p&gt;DES 와 AES 의 비교&lt;/p&gt;
-
-            &lt;table&gt;
-              &lt;thead&gt;
-                &lt;tr&gt;
-                  &lt;th style=&quot;text-align: center&quot;&gt;구분&lt;/th&gt;
-                  &lt;th style=&quot;text-align: center&quot;&gt;DES&lt;/th&gt;
-                  &lt;th style=&quot;text-align: center&quot;&gt;AES&lt;/th&gt;
-                &lt;/tr&gt;
-              &lt;/thead&gt;
-              &lt;tbody&gt;
-                &lt;tr&gt;
-                  &lt;td style=&quot;text-align: center&quot;&gt;년도&lt;/td&gt;
-                  &lt;td style=&quot;text-align: center&quot;&gt;1976&lt;/td&gt;
-                  &lt;td style=&quot;text-align: center&quot;&gt;1999&lt;/td&gt;
-                &lt;/tr&gt;
-                &lt;tr&gt;
-                  &lt;td style=&quot;text-align: center&quot;&gt;블록크기&lt;/td&gt;
-                  &lt;td style=&quot;text-align: center&quot;&gt;64bits&lt;/td&gt;
-                  &lt;td style=&quot;text-align: center&quot;&gt;128bits&lt;/td&gt;
-                &lt;/tr&gt;
-                &lt;tr&gt;
-                  &lt;td style=&quot;text-align: center&quot;&gt;키 길이&lt;/td&gt;
-                  &lt;td style=&quot;text-align: center&quot;&gt;56bits&lt;/td&gt;
-                  &lt;td style=&quot;text-align: center&quot;&gt;128,192,256bits&lt;/td&gt;
-                &lt;/tr&gt;
-                &lt;tr&gt;
-                  &lt;td style=&quot;text-align: center&quot;&gt;암호화 프리미티브&lt;/td&gt;
-                  &lt;td style=&quot;text-align: center&quot;&gt;치환,전치&lt;/td&gt;
-                  &lt;td style=&quot;text-align: center&quot;&gt;치환,시프트,비트 혼합&lt;/td&gt;
-                &lt;/tr&gt;
-                &lt;tr&gt;
-                  &lt;td style=&quot;text-align: center&quot;&gt;암호학적 프리미티브&lt;/td&gt;
-                  &lt;td style=&quot;text-align: center&quot;&gt;혼돈,확산&lt;/td&gt;
-                  &lt;td style=&quot;text-align: center&quot;&gt;혼돈,확산&lt;/td&gt;
-                &lt;/tr&gt;
-                &lt;tr&gt;
-                  &lt;td style=&quot;text-align: center&quot;&gt;설계&lt;/td&gt;
-                  &lt;td style=&quot;text-align: center&quot;&gt;공개&lt;/td&gt;
-                  &lt;td style=&quot;text-align: center&quot;&gt;공개&lt;/td&gt;
-                &lt;/tr&gt;
-                &lt;tr&gt;
-                  &lt;td style=&quot;text-align: center&quot;&gt;설계 원칙&lt;/td&gt;
-                  &lt;td style=&quot;text-align: center&quot;&gt;비공개&lt;/td&gt;
-                  &lt;td style=&quot;text-align: center&quot;&gt;공개&lt;/td&gt;
-                &lt;/tr&gt;
-                &lt;tr&gt;
-                  &lt;td style=&quot;text-align: center&quot;&gt;선택 과정&lt;/td&gt;
-                  &lt;td style=&quot;text-align: center&quot;&gt;비밀&lt;/td&gt;
-                  &lt;td style=&quot;text-align: center&quot;&gt;비밀,공모&lt;/td&gt;
-                &lt;/tr&gt;
-                &lt;tr&gt;
-                  &lt;td style=&quot;text-align: center&quot;&gt;출처&lt;/td&gt;
-                  &lt;td style=&quot;text-align: center&quot;&gt;IBM,NSA&lt;/td&gt;
-                  &lt;td style=&quot;text-align: center&quot;&gt;벨기에 암호학자&lt;/td&gt;
-                &lt;/tr&gt;
-              &lt;/tbody&gt;
-            &lt;/table&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;기타 대칭키 암호 알고리즘
-    &lt;ul&gt;
-      &lt;li&gt;IDEA(International Data Encryption Algorithm)
-        &lt;ul&gt;
-          &lt;li&gt;DES를 대체하기 위해 스위스 연방 기술 기관에서 개발&lt;/li&gt;
-          &lt;li&gt;128비트의 키를 사용해 64비트의 평문을 8라운드를 거쳐 64비트 암호문으로 변경&lt;/li&gt;
-          &lt;li&gt;Feistel 구조&lt;/li&gt;
-          &lt;li&gt;DES 보다 2배 빠름&lt;/li&gt;
-          &lt;li&gt;무차별 공격에 더욱 효율적으로 대응&lt;/li&gt;
-          &lt;li&gt;PGP 암호화 소프트웨어에서 사용&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;SEED
-        &lt;ul&gt;
-          &lt;li&gt;KISA 에서 개발한 알고리즘&lt;/li&gt;
-          &lt;li&gt;인터넷, 전자상거래, 무선 통신 등에서 공개될 경우 민감한 영향을 끼칠 수 있는 중요 정보 및 개인 정보를 보호하기 위해 개발된 대칭 알고리즘&lt;/li&gt;
-          &lt;li&gt;1999년 9월 정보통신단체표준(TTA) 로 제정&lt;/li&gt;
-          &lt;li&gt;2005년 국제 표준화 기구인 ISO/IEC 및 IETF에서 국제 블록암호 알고리즘 표준으로 제정
-            &lt;ul&gt;
-              &lt;li&gt;IEC(International Electro-technical Commission) : 국제전기기술위원회&lt;/li&gt;
-              &lt;li&gt;IETF(Internet Engineering Task Force) : 국제 인터넷 표준화기구&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;128비트 비밀키에서 생성된 16개의 64비트 라운드키를 사용하여 16라운드
-            &lt;ul&gt;
-              &lt;li&gt;2009년에는 256비트 비밀키 사용 (SEED256)&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;128비트의 평문 블록을 128비트 암호문 블록으로 출력&lt;/li&gt;
-          &lt;li&gt;DES 와 유사한 변형된 Feistel 구조&lt;/li&gt;
-          &lt;li&gt;f 함수의 비선형성 안전도에 의존&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;ARIA (Academy Research Institute Agency)
-        &lt;ul&gt;
-          &lt;li&gt;국가보안기술연구소(NSRI) 주도로 학계, 국가정보원 등의 암호기술전문가들이 개발한 국가 암호화 알고리즘&lt;/li&gt;
-          &lt;li&gt;ARIA : 개발팀이 학계, 연구소, 정부기관으로 구성됨&lt;/li&gt;
-          &lt;li&gt;ISPN(Involutional SPN) 구조&lt;/li&gt;
-          &lt;li&gt;128비트 블록 암호&lt;/li&gt;
-          &lt;li&gt;128비트, 192비트, 256비트의 3종류의 키 사용을 제공&lt;/li&gt;
-          &lt;li&gt;길이에 따라 ARIA-128, ARIA-192, ARIA-256&lt;/li&gt;
-          &lt;li&gt;입출력 크기와 사용가능한 키 크기는 미국 표준 블록 암호인 AES와 동일&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;HIGHT (HIGh security and light weigHT)
-        &lt;ul&gt;
-          &lt;li&gt;KISA, ETRI, 고려대에서 2005년도에 개발&lt;/li&gt;
-          &lt;li&gt;2006년에 TTA (정보통신단체) 표준으로 제정됨&lt;/li&gt;
-          &lt;li&gt;2010년 ISO/IES 국제표준 암호로 제정&lt;/li&gt;
-          &lt;li&gt;64bit 블록암호&lt;/li&gt;
-          &lt;li&gt;저전력, 경량화&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;LEA (Lightweight Encryption Algorithm)
-        &lt;ul&gt;
-          &lt;li&gt;2012년 국가보안기술연구소(NSRI) 가 개발한 경량 고속 암호화 알고리즘&lt;/li&gt;
-          &lt;li&gt;128bit 블록암호&lt;/li&gt;
-          &lt;li&gt;AES에 비해 1.5~2배 빠름&lt;/li&gt;
-          &lt;li&gt;스마트폰, 사물인터넷 등에 사용&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;RC5
-        &lt;ul&gt;
-          &lt;li&gt;1994년 RSA 연구소에서 개발&lt;/li&gt;
-          &lt;li&gt;입출력, 키, 라운드 수가 가변적임&lt;/li&gt;
-          &lt;li&gt;32bit, 64bit, 128bit 블록암호&lt;/li&gt;
-          &lt;li&gt;DES의 10배의 속도&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;대칭키 암호 정리&lt;/p&gt;
-
-    &lt;table&gt;
-      &lt;thead&gt;
-        &lt;tr&gt;
-          &lt;th style=&quot;text-align: center&quot;&gt;구분&lt;/th&gt;
-          &lt;th style=&quot;text-align: center&quot;&gt;국가&lt;/th&gt;
-          &lt;th style=&quot;text-align: center&quot;&gt;개발년도&lt;/th&gt;
-          &lt;th style=&quot;text-align: center&quot;&gt;특징&lt;/th&gt;
-          &lt;th style=&quot;text-align: center&quot;&gt;블록크기&lt;/th&gt;
-          &lt;th style=&quot;text-align: center&quot;&gt;키의길이&lt;/th&gt;
-          &lt;th style=&quot;text-align: center&quot;&gt;라운드수&lt;/th&gt;
-        &lt;/tr&gt;
-      &lt;/thead&gt;
-      &lt;tbody&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;DES&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;미국&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;1927년&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;NIST에서 표준으로 공표(1997년)&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;64&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;56&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;16&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;IDEA&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;유럽&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;1990년&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;PGP 채택&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;64&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;128&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;8&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;Rijndael&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;벨기에&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;2000년 AES알고리즘으로 선정&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;128&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;128,192,256&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;10,12,14&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;SEED&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;한국&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;1999년&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;한국표준 블록암호 알고리즘&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;128&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;128&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;16&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;CRYPTON&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;한국&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;1998년&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;128&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;0-256&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;12&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;RC5&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;미국&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;1994년&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;알고리즘이 간단, 속도가 빠름&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;64&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;0-256&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;16&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;FEAL&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;일본&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;1987년&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;S/W구현에 적합&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;64&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;64&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;4&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;MISTY&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;일본&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;1996년&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;차분/선형공격에 안정성증명구조&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;64&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;128&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;8&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;SKIPJACK&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;미국&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;1990년&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;Fortezza카드에 사용&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;64&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;80&lt;/td&gt;
-          &lt;td style=&quot;text-align: center&quot;&gt;32&lt;/td&gt;
-        &lt;/tr&gt;
-      &lt;/tbody&gt;
-    &lt;/table&gt;
-  &lt;/li&gt;
-  &lt;li&gt;현대 대칭키 암호를 이용한 암호화 기법
-    &lt;ul&gt;
-      &lt;li&gt;현대 블록 암호의 사용
-        &lt;ul&gt;
-          &lt;li&gt;개요
-            &lt;ul&gt;
-              &lt;li&gt;기본개념
-                &lt;ul&gt;
-                  &lt;li&gt;블록 암호를 다양한 응용에 사용하기 위해 NIST에서 5가지 운영모드를 정의&lt;/li&gt;
-                  &lt;li&gt;DES, AES를 포함한 어떤 대칭 블록 암호에도 적용 가능&lt;/li&gt;
-                  &lt;li&gt;ECB모드 : Electric CodeBook mode (전자 부호표 모드)&lt;/li&gt;
-                  &lt;li&gt;CBC모드 : Cipher Block Chaining mode (암호 블록 연쇄모드)&lt;/li&gt;
-                  &lt;li&gt;CFB 모드 : Cipher-FeedBack mode (암호 피드백 모드)&lt;/li&gt;
-                  &lt;li&gt;OFB 모드 : Output-FeedBack mode (출력 피드백 모드)&lt;/li&gt;
-                  &lt;li&gt;CTR 모드 : CounTeR mode (카운터 모드)
-                    &lt;ul&gt;
-                      &lt;li&gt;CFB, OFB, CTR 모드 : 스트림 암호화 방식&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;Electric CodeBook(ECB) 모드
-            &lt;ul&gt;
-              &lt;li&gt;개요
-                &lt;ul&gt;
-                  &lt;li&gt;가장 간단한 모드. 평문은 N개의 n비트 블록으로 분할&lt;/li&gt;
-                  &lt;li&gt;평문 크기가 블록 크기의 배수가 아니라면, 평문의 마지막 블록은 다른 블록들과 동일한 크기로 만들기 위하여 padding이 필요&lt;/li&gt;
-                  &lt;li&gt;각 블록에 키는 동일&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;응용
-                &lt;ul&gt;
-                  &lt;li&gt;매우 많은 데이터베이스를 암호화할 때 병렬적으로 처리 가능&lt;/li&gt;
-                  &lt;li&gt;암호화된 레코드를 저장하거나 복호화 해야하는 분야에서 독립성이 유용&lt;/li&gt;
-                  &lt;li&gt;다른 레코드에 영향을 주지 않음&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;암호화 예시
-                &lt;ul&gt;
-                  &lt;li&gt;P1 -&amp;gt; Enc(K1) = C1&lt;/li&gt;
-                  &lt;li&gt;P2 -&amp;gt; Enc(K1) = C2&lt;/li&gt;
-                  &lt;li&gt;P3 -&amp;gt; Enc(K1) = C3&lt;/li&gt;
-                  &lt;li&gt;P4 -&amp;gt; Enc(K1) = C4&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;Cipher Block Chaining(CBC) 모드
-            &lt;ul&gt;
-              &lt;li&gt;개요
-                &lt;ul&gt;
-                  &lt;li&gt;각각의 평문 블록은 암호화되기 전에 이전 암호화 블록과 XOR 됨&lt;/li&gt;
-                  &lt;li&gt;블록이 암호화될 때 암호화블록은 전송되지만, 다음 블록 암호화를 위해 메모리에 저장됨&lt;/li&gt;
-                  &lt;li&gt;첫 번째 블록은 이전 암호화 블록이 없으므로 초기벡터라고 불리는 허구의 블록이 사용됨&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;암호화와 복호화
-                &lt;ul&gt;
-                  &lt;li&gt;1단계 전에 수행되어 결과로 출력된 암호문 블록에 평문 블록을 XOR 하고 나서 암호화를 수행함&lt;/li&gt;
-                  &lt;li&gt;복호화할 때 암호문 블록 1개가 파손된 경우, 평문 블록에 미치는 영향은 2개 블록에 머문다. 반면 평문 블록 한 비트 오류는 모든 암호문에 영향을 미친다.&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;CBC 모드 활용
-                &lt;ul&gt;
-                  &lt;li&gt;인터넷에서 보안을 제공하는 프로토콜 중 하나인 IPSec 에서 통신의 기밀성을 지키기 위해 CBC 모드를 사용&lt;/li&gt;
-                  &lt;li&gt;3DES 를 CBC 모드로 사용한 3DES-CBC, AES를 CBC로 사용한 AES-CBC&lt;/li&gt;
-                  &lt;li&gt;CBC 모드 인증으로 수행하는 대칭키 암호 시스템의 하나인 Kerberos version 5에서도 사용&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;암호화 예시
-                &lt;ul&gt;
-                  &lt;li&gt;P1 -&amp;gt; IV Xor -&amp;gt; Enc(K1) = C1&lt;/li&gt;
-                  &lt;li&gt;P2 -&amp;gt; C1 Xor -&amp;gt; Enc(K2) = C2&lt;/li&gt;
-                  &lt;li&gt;P3 -&amp;gt; C2 Xor -&amp;gt; Enc(K3) = C3&lt;/li&gt;
-                  &lt;li&gt;P4 -&amp;gt; C3 Xor -&amp;gt; Enc(K4) = C4&lt;/li&gt;
-                  &lt;li&gt;IV 가 바뀌면 암호문 블록 모두가 바뀌게 됨&lt;/li&gt;
-                  &lt;li&gt;P1 가 바뀌면 암호문 블록 모두가 바뀌게 됨&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;복호화 예시
-                &lt;ul&gt;
-                  &lt;li&gt;C1 -&amp;gt; Dec(K1) -&amp;gt; IV Xor = P1&lt;/li&gt;
-                  &lt;li&gt;C2 -&amp;gt; Dec(K2) -&amp;gt; C1 Xor = P2&lt;/li&gt;
-                  &lt;li&gt;C3 -&amp;gt; Dec(K3) -&amp;gt; C2 Xor = P3&lt;/li&gt;
-                  &lt;li&gt;C4 -&amp;gt; Dec(K4) -&amp;gt; C3 Xor = P4&lt;/li&gt;
-                  &lt;li&gt;C2 가 손상되면 P2, P3가 영향을 받음
-                    &lt;ul&gt;
-                      &lt;li&gt;암호문 길이에는 변화가 없어야 함&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;Cipher-FeedBack(CFB) 모드 / 스트림암호 방식 블록암호 모드
-            &lt;ul&gt;
-              &lt;li&gt;개요
-                &lt;ul&gt;
-                  &lt;li&gt;어떤 블록 암호도 스트림 암호로 바꿀 수 있다.&lt;/li&gt;
-                  &lt;li&gt;스트림 암호의 경우 메시지의 길이가 블록의 정수배가 되도록 패딩 할 필요가 없으며 실시간으로 사용 가능&lt;/li&gt;
-                  &lt;li&gt;한 문자를 전송하는 경우 문자 중심 스트림 암호를 이용하여 각 문자가 암호화되는 즉시 전송 가능&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;암호화와 복호화
-                &lt;ul&gt;
-                  &lt;li&gt;복호화 과정은 평문 블록과 암호문 블록의 역할만 바뀌었을 뿐 동일
-                    &lt;ul&gt;
-                      &lt;li&gt;CBC에서는 복호화 함수를 사용&lt;/li&gt;
-                      &lt;li&gt;CFB에서는 암호화 함수를 복호화에 사용&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;DES 나 AES 와 같은 블록 암호를 이용한 운용 모드&lt;/li&gt;
-                  &lt;li&gt;그 결과는 스트림암호와 같다.
-                    &lt;ul&gt;
-                      &lt;li&gt;키 스트림이 암호문에 의존하는 비동기식 스트림암호와 비슷&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;암호화 예시
-                &lt;ul&gt;
-                  &lt;li&gt;IV -&amp;gt; Enc(K1) -&amp;gt; P1 Xor = C1&lt;/li&gt;
-                  &lt;li&gt;C1 -&amp;gt; Enc(K2) -&amp;gt; P2 Xor = C2&lt;/li&gt;
-                  &lt;li&gt;C2 -&amp;gt; Enc(K3) -&amp;gt; P3 Xor = C3&lt;/li&gt;
-                  &lt;li&gt;C3 -&amp;gt; Enc(K4) -&amp;gt; P4 Xor = C4&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;복호화 예시
-                &lt;ul&gt;
-                  &lt;li&gt;IV -&amp;gt; Enc(K1) -&amp;gt; C1 Xor = P1&lt;/li&gt;
-                  &lt;li&gt;C1 -&amp;gt; Enc(K2) -&amp;gt; C2 Xor = P2&lt;/li&gt;
-                  &lt;li&gt;C2 -&amp;gt; Enc(K3) -&amp;gt; C3 Xor = P3&lt;/li&gt;
-                  &lt;li&gt;C3 -&amp;gt; Enc(K4) -&amp;gt; C4 Xor = P4&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;Output-FeedBack(OFB) 모드 / 스트림암호 방식 블록암호 모드
-            &lt;ul&gt;
-              &lt;li&gt;개요
-                &lt;ul&gt;
-                  &lt;li&gt;CFB 모드와 유사하지만 모든 암호문 블록의 각 비트는 이전 암호문 블록의 비트들과 독립적
-                    &lt;ul&gt;
-                      &lt;li&gt;오류 파급의 영향을 피할 수 있음&lt;/li&gt;
-                      &lt;li&gt;오류 발생 시 다른 비트에 영향 안줌&lt;/li&gt;
-                      &lt;li&gt;CFB와 마찬가지로 초기화 벡터 사용&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;스트림 암호로서의 OFB 모드
-                    &lt;ul&gt;
-                      &lt;li&gt;블록 암호를 기반으로 한 스트림 암호&lt;/li&gt;
-                      &lt;li&gt;키 스트림은 평문이나 암호문과는 독립적이므로 동기식 스트림암호&lt;/li&gt;
-                      &lt;li&gt;IV 암호화 -&amp;gt; 평문 블록과 XOR -&amp;gt; 암호화 블록 생성&lt;/li&gt;
-                      &lt;li&gt;IV 암호화 결과를 암호화 -&amp;gt; 평문 블록과 XOR -&amp;gt; 암호화 블록 생성&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;암호화 예시
-                &lt;ul&gt;
-                  &lt;li&gt;IV -&amp;gt; Enc(K1) = I1 -&amp;gt; P1 Xor = C1&lt;/li&gt;
-                  &lt;li&gt;I1 -&amp;gt; Enc(K2) = I2 -&amp;gt; P2 Xor = C2&lt;/li&gt;
-                  &lt;li&gt;I2 -&amp;gt; Enc(K3) = I3 -&amp;gt; P3 Xor = C3&lt;/li&gt;
-                  &lt;li&gt;I3 -&amp;gt; Enc(K4) = I4 -&amp;gt; P4 Xor = C4&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;복호화 예시
-                &lt;ul&gt;
-                  &lt;li&gt;IV -&amp;gt; Enc(K1) = I1 -&amp;gt; C1 Xor = P1&lt;/li&gt;
-                  &lt;li&gt;I1 -&amp;gt; Enc(K2) = I2 -&amp;gt; C2 Xor = P2&lt;/li&gt;
-                  &lt;li&gt;I2 -&amp;gt; Enc(K3) = I3 -&amp;gt; C3 Xor = P3&lt;/li&gt;
-                  &lt;li&gt;I3 -&amp;gt; Enc(K4) = I4 -&amp;gt; C4 Xor = P4&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;초기치가 바뀌면 모든 암호문이 바뀜&lt;/li&gt;
-              &lt;li&gt;암호화 알고리즘의 결과는 평문과는 무관하다&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;CounTeR(CTR) 모드 / 스트림암호 방식 블록암호 모드
-            &lt;ul&gt;
-              &lt;li&gt;개요
-                &lt;ul&gt;
-                  &lt;li&gt;ATM(asynchronous transfer mod) 네트워크 보안과 IPSec 에 응용되면서 관심이 늘어남.&lt;/li&gt;
-                  &lt;li&gt;암호화 시 피드백이 존재하지 않음. -&amp;gt; 암/복호화 병렬처리가 가능&lt;/li&gt;
-                  &lt;li&gt;키 스트림의 의사난수성은 카운터를 사용함으로써 성취될 수 있음&lt;/li&gt;
-                  &lt;li&gt;CTR 값은 암호화 할 때마다 새로운 비표값으로 생성&lt;/li&gt;
-                  &lt;li&gt;CTR 모드는 OFB 모드와 마찬가지로 이전 암호문 블록과 독립적인 키 스트림을 생성하지만 (동기식) 피드백을 사용하지 않음&lt;/li&gt;
-                  &lt;li&gt;ECB 모드처럼 CTR 모드는 서로 독립적인 n비트 암호문 블록을 생성함
-                    &lt;ul&gt;
-                      &lt;li&gt;ECB와 CTR은 암복호화 병렬처리가 가능&lt;/li&gt;
-                      &lt;li&gt;OFB : 병렬처리 불가&lt;/li&gt;
-                      &lt;li&gt;CBC/CFB : 복호화만 병렬처리 가능&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;CTR 암호화 -&amp;gt; 평문블록과 XOR -&amp;gt; 암호화 블록 생성&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;암호화 예시
-                &lt;ul&gt;
-                  &lt;li&gt;CTR+0 -&amp;gt; Enc(K1) -&amp;gt; P1 Xor = C1&lt;/li&gt;
-                  &lt;li&gt;CTR+1 -&amp;gt; Enc(K2) -&amp;gt; P2 Xor = C2&lt;/li&gt;
-                  &lt;li&gt;CTR+2 -&amp;gt; Enc(K3) -&amp;gt; P3 Xor = C3&lt;/li&gt;
-                  &lt;li&gt;CTR+3 -&amp;gt; Enc(K4) -&amp;gt; P4 Xor = C4&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;복호화 예시
-                &lt;ul&gt;
-                  &lt;li&gt;CTR+0 -&amp;gt; Enc(K1) -&amp;gt; C1 Xor = P1&lt;/li&gt;
-                  &lt;li&gt;CTR+1 -&amp;gt; Enc(K2) -&amp;gt; C2 Xor = P2&lt;/li&gt;
-                  &lt;li&gt;CTR+2 -&amp;gt; Enc(K3) -&amp;gt; C3 Xor = P3&lt;/li&gt;
-                  &lt;li&gt;CTR+3 -&amp;gt; Enc(K4) -&amp;gt; C4 Xor = P4&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;블록 암호 공격
-    &lt;ul&gt;
-      &lt;li&gt;차분공격에 대한 기본 개념 (Differential Cryptanalysis)
-        &lt;ul&gt;
-          &lt;li&gt;선택 평문 공격&lt;/li&gt;
-          &lt;li&gt;두 개의 평문 블록들의 비트의 차이에 대응되는 암호문 블록들의 비트의 차이를 이용하여 사용된 암호키를 찾는 방법&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;선형공격에 대한 기본 개념 (Linear Cryptanalysis)
-        &lt;ul&gt;
-          &lt;li&gt;기지 평문 공격&lt;/li&gt;
-          &lt;li&gt;알고리즘 내부의 비선형 구조를 적당히 선형화시켜 암호키를 찾는 방법&lt;/li&gt;
-          &lt;li&gt;평문과 암호문 비트를 XOR 하여 0이 되는 확률&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;전수공격법 (Exhaustive key search)
-        &lt;ul&gt;
-          &lt;li&gt;암호화할 때 일어날 수 있는 모든 경우에 대해 조사&lt;/li&gt;
-          &lt;li&gt;경우의 수가 적을 때 좋음&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;통계적 분석 (Statistical analysis)
-        &lt;ul&gt;
-          &lt;li&gt;암호문에 대한 평문의 각 단어의 빈도에 관한 자료와 더불어 지금까지 알려진 모든 통계적인 자료를 이용하여 해독&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;수학적 분석 (Mathematical analysis)
-        &lt;ul&gt;
-          &lt;li&gt;통계적인 방법과 수학적 이론을 이용&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="대칭키 암호" /><summary type="html">대칭키 암호의 종류 DES (Data Encryption Standard) 개요 NIST(미국 국립기술표준원) 에서 1973년 국가적으로 사용할 대칭키 암호시스템 제안요청서를 발표 IBM의 제안으로 DES가 채택됨 FIPS(연방정보처리기준) 의 초안으로 공표 DES 발표 후 가장 널리 사용된 대칭키 블록 암호 이후 삼충 DES 사용을 권고한 FIPS 46-3 발표 최신 AES 는 DES 를 대체한 알고리즘 개관 평문의 길이는 64비트, 키의 길이는 56비트, 이보다 길면 64비트 블록으로 나눔 DES 구조는 Feistel 네트워크의 변형, 라운드 회수는 16 원래 키로부터 16개의 서브키를 생성하고 서브키를 각 라운드에서 사용 DES 복호화 과정은 암호화 과정과 동일 DES의 구조 개요 두 개의 전치(P-박스)와 16개의 Feistel 라운드 함수로 구성 P-박스는 초기 전치(initial Permutation) 과 최종 전치(Final Permutation) 임 암호화 Plain Text Plain Text (평문을 절반으로 자름) P-Box 1 Round R2 = L1 XOR F1(R1)&amp;lt;-K1 L2 = R2 … 16 Round (교차 없음) R16 = R15 L16 = L15 XOR F15(R15)&amp;lt;-K15 P-Box 64Bit 암호문(Cipher Text) 복호화도 동일하게 마지막 라운드에 교차 없음 라운드 함수 개요 DES 는 16번의 라운드 함수를 사용 각 라운드 함수는 Fiestal 암호로 되어있음 라운드 함수는 이전 라운드 함수의 출력 값 L-1 과 R-1 을 입력으로 받고 다음 라운드에 입력으로 전송될 L 과 R을 생성 각 라운드에는 2개의 암호 요소 혼합기(mixer) 와 교환기 (swapper) 가 있음, 이런 요소들은 역연산이 가능함 DES 함수 DES 의 핵심은 함수 라운드 함수에서 사용된 함수를 가리킴 DES 함수는 32비트 출력값을 산출하기 위해 가장 오른쪽의 32비트에 48비트 키를 적용 DES 함수는 확장 P-박스, 키 XOR, 8개의 S-박스 그리고 단순 P-박스의 4개 부분으로 구성 예시 32Bit 입력 확장 P-박스 (48Bit) 48Bit XOR Key (48Bit) S-Box (8개) 32Bit 출력 단순 P-박스 32Bit 결과 암호화 알고리즘과 복호화 알고리즘 라운드 키들이 역순으로 적용되어야 한다는 사실이 중요 암호화 과정에서 1라운드는 K1, 복호화 과정에서 1라운드는 K16 DES 분석 설계 기준 S-박스 각 라운드에서 그 다음 라운드까지 혼돈과 확산 성질을 만족하도록 설계 비선형 함수 입력 값의 한 비트를 바꾸면 출력 값에서 두 비트 이상 바뀜 P-박스 32비트에서 32비트로 가는 하나의 단순 P-박스 32비트에서 48비트로 가는 하나의 확장 P-박스 2개의 P-박스는 비트들을 동시에 확산(diffusion) 시킴 DES의 취약점 키의 크기(56비트) 키에 대한 전수 조사를 위해 2의 56승 키를 조사 전사공격 가능 다중 DES 사용 다중 DES 삼중 DES 개요 두 개의 키를 갖는 삼중 DES 와 세 개의 키를 갖는 삼중 DES가 있음 두 개의 키를 갖는 삼중 DES (DES-EDE2) 두 개의 키를 갖는 삼중 DES 에서는 k1과 k2 두 개의 키를 사용 첫 번째와 세번째 단계에서는 k1, 두 번째 단계에서는 k2를 사용 하나의 DES로 삼중 DES를 만들기 위하여 암호화 과정의 중간 단게에서는 복호화 알고리즘을 사용하고, 복호화 과정에서는 DES 암호화 알고리즘을 사용 기지평문 공격에 취약 세 개의 키를 갖는 삼중 DES (Triple-DES) 세 개의 키 k1, k2, k3 를 사용 P -&amp;gt; 암호화(k1) -&amp;gt; 복호화(k2) -&amp;gt; 암호화(k3) -&amp;gt; 암호문 PGP (이메일 보안, Pretty Good Privacy) 에서 사용 기지평문 공격 보완 복호화 : 암호화의 역 트리플 DES에서 모든 키를 동일하게 하면 3DES는 보통 DES와 같아짐 과거에 DES로 암호화된 암호문을 3DES를 사용하여 복호화 가능 AES 개요 역사 1997년 미국 국립기술표준원(NIST)은 DES를 대체하기 위해 Advanced Encryption Standard(AES) 암호 알고리즘을 공모 NIST의 제안 요청서 128비트 블록크기 128, 192, 256 비트의 세 가지 키 크기 공개 알고리즘으로 누구나 이용 가능해야 함 레인달(Rijndael) AES 알고리즘 선택 선정기준 안정성 비용 구현 효율성 라운드(Rounds) AES는 128비트 평문을 128비트 암호문으로 출력하는 알고리즘 Non-feistel 알고리즘 10 (128bit key), 12 (192bit key), 14 (256bit key) 라운드 사용 AES-128, AES-192, AES-256 으로 불림 암호(Ciphers) 개요 DES : Feistel 네트워크를 기본 구조로 사용 Rijndael : SPN (Substitution-Permutation Network) 구조 사용 연산은 바이트 단위의 연산을 사용 S-Box 를 이용한 치환, 행이동, 행연산 열변환, 키연산 열변환의 4가지 기본연산을 수행 알려진 공격방법들로부터 안전하도록 설계 하드웨어, 소프트웨어 구현 시 속도나 코드 압축성 면에서 효율적 SPN 구조 라운드 함수가 역변환이 되어야 한다는 등의 제약이 있음 더 많은 병렬성을 제공 입력을 여러 개의 소블록으로 나누고 각 소블록을 S-box에 입력하여 치환, S-box의 출력을 P-box로 전치하는 과정 반복 Feistel 과 SPN 구조 알고리즘 Feistel : DES, Blowfish, MISTY, RC5 SPN : IDEA, Rijndael (AES), Square DES 와 AES 의 비교</summary></entry><entry><title type="html">정보보안 - 블록 암호 / 스트림 암호</title><link href="https://bluesplatter.com/is_certification/IS-Management-Cryptography/" rel="alternate" type="text/html" title="정보보안 - 블록 암호 / 스트림 암호" /><published>2021-07-19T09:00:00+09:00</published><updated>2021-07-19T09:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-Management-Cryptography</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-Management-Cryptography/">&lt;h1 id=&quot;대칭키-암호&quot;&gt;대칭키 암호&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;대칭키 암호 = 공통키 암호&lt;/li&gt;
-  &lt;li&gt;비대칭키 암호 = 공개키 암호&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;현대-블록-암호&quot;&gt;현대 블록 암호&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;개요
-    &lt;ul&gt;
-      &lt;li&gt;기본 개념
-        &lt;ul&gt;
-          &lt;li&gt;대칭키 블록 암호는 n-비트 평문 블록을 암호화하거나 n-비트 암호문블록을 복호화, k비트 키를 사용&lt;/li&gt;
-          &lt;li&gt;복호화 알고리즘은 암호 알고리즘의 역함수, 동일한 비밀키를 사용&lt;/li&gt;
-          &lt;li&gt;메시지의 길이가 n비트보다 작다면 n비트 블록을 만들기 위하여 padding 추가&lt;/li&gt;
-          &lt;li&gt;대칭키 암호를 안전하게 사용하는 필수 사항
-            &lt;ul&gt;
-              &lt;li&gt;강한 암호 알고리즘이 있어야 함&lt;/li&gt;
-              &lt;li&gt;비밀키를 안전한 방법으로 획득하고 보관해야 함&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;치환(Substitution) 과 전치(Transposition)
-        &lt;ul&gt;
-          &lt;li&gt;현대 블록 암호는 치환 암호 혹은 전치 암호로 동작
-            &lt;ul&gt;
-              &lt;li&gt;암호기법 : 치환, 전치, 블록, 스트림, 합성&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;치환 암호로 설계되면, 평문 비트의 값은 임의의 값으로 대체. (1-&amp;gt;0, 0-&amp;gt;1)
-            &lt;ul&gt;
-              &lt;li&gt;교환&lt;/li&gt;
-              &lt;li&gt;평문과 암호문의 0과 1의 개수다 다르다.&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;전치 암호로 설계되면, 각각의 비트는 단지 재배열된다.
-            &lt;ul&gt;
-              &lt;li&gt;위치변경&lt;/li&gt;
-              &lt;li&gt;0과 1중 하나의 값을 가질 수 있다.&lt;/li&gt;
-              &lt;li&gt;n비트 평문 혹은 암호문의 개수는 2의 n승이다.&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;평문을 암호화할 경우 전치 암호의 특성(0과 1의 개수가 유지)는 전수조사 공격에 치명적이다.
-            &lt;ul&gt;
-              &lt;li&gt;보통 치환 암호로 설계한다.&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;현대 블록 암호의 구성요소
-        &lt;ul&gt;
-          &lt;li&gt;개요
-            &lt;ul&gt;
-              &lt;li&gt;확산, 혼돈과 같은 성질을 만족시키기 위하여 전치 요소, 치환 요소, 그 밖의 요소로 결합&lt;/li&gt;
-              &lt;li&gt;공격 방지 암호를 위해 이동요소(shift), 교환요소(swap), 분할요소(split), 조합요소 뿐만 아니라 전치 장치(transposition, P-box)와 치환 장치(substitution, S-box)와 XOR 연산의 조합으로 만듬.
-                &lt;ul&gt;
-                  &lt;li&gt;XOR 연산 : 같으면 0, 다르면 1&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;대칭키 암호 : 뒤죽박죽 섞음 &amp;gt; 스크램블드 에그와 유사&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;P-Box
-            &lt;ul&gt;
-              &lt;li&gt;문자 단위로 암호화를 수행했던 고전 전치 암호를 병렬적으로 수행&lt;/li&gt;
-              &lt;li&gt;단순(straight), 확장(extension), 축소(compression) P-박스로 세 가지 종류가 있음.
-                &lt;ul&gt;
-                  &lt;li&gt;축소 P-박스
-                    &lt;ul&gt;
-                      &lt;li&gt;n 비트를 입력받아 m비트를 출력, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;n&amp;gt;m&lt;/code&gt;을 만족&lt;/li&gt;
-                      &lt;li&gt;입력 중에 특정 비트는 소실&lt;/li&gt;
-                      &lt;li&gt;1, 2, 3, 4, 5 (5종)입력 -&amp;gt; 1, 2, 3 (3종)출력&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;확장 P-박스
-                    &lt;ul&gt;
-                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;n&amp;lt;m&lt;/code&gt;을 만족.&lt;/li&gt;
-                      &lt;li&gt;입력 비트 중 특정 비트는 한 개 이상의 출력비트와 연결.&lt;/li&gt;
-                      &lt;li&gt;비트를 치환하고 동시에 다음 단게에서 비트의 양을 증가시키고자 할 때 사용&lt;/li&gt;
-                      &lt;li&gt;1, 2, 3 (3종)입력 -&amp;gt; 1, 2, 3, 4, 5 (5종)출력&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;역함수의 존재성 : 단순 P-박스는 역함수가 존재하지만 나머지는 존재하지 않는다.&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;S-Box
-            &lt;ul&gt;
-              &lt;li&gt;치환 암호의 축소 모형. S-박스는 입력과 출력의 개수가 달라도 된다.&lt;/li&gt;
-              &lt;li&gt;역함수의 존재성 : 입출력 관계가 테이블 혹은 수학적 관계로 정의되는 암호임. 존재할 수도 있고 없을 수도 있다. 역함수가 존재하면 입출력 비트 개수가 동일하다.&lt;/li&gt;
-              &lt;li&gt;Substitution, Swap, Split, Shift, Combine, Exclusive-OR 이용&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;합성 암호(product Ciphers)
-            &lt;ul&gt;
-              &lt;li&gt;개요
-                &lt;ul&gt;
-                  &lt;li&gt;Shannon이 소개&lt;/li&gt;
-                  &lt;li&gt;치환, 전치, 그리고 기타의 구성요소를 결합한 복합적인 암호&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;확산(Diffusion) 과 혼돈(Confusion)
-                &lt;ul&gt;
-                  &lt;li&gt;설계된 블록 암호가 확산과 혼돈 두 가지 중요한 성질을 갖도록 하는 것&lt;/li&gt;
-                  &lt;li&gt;확산 : 암호문과 평문 사이의 관계를 숨기는 것&lt;/li&gt;
-                  &lt;li&gt;혼돈 : 암호문과 키의 관계를 숨기는 것
-                    &lt;ul&gt;
-                      &lt;li&gt;키의 단일비트가 변화하면 암호문의 모든 비트가 변화함&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;라운드(Rounds)
-                &lt;ul&gt;
-                  &lt;li&gt;확산과 혼돈은 각 반복이 S-박스, P-박스 그리고 기타 구성 요소들의 결합을 의미하는 반복적 합성 암호를 사용하여 얻어짐&lt;/li&gt;
-                  &lt;li&gt;반복적으로 사용되는 합성 암호를 라운드(round) 라고 칭함&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;합성 암호의 종류
-            &lt;ul&gt;
-              &lt;li&gt;Feistel 암호
-                &lt;ul&gt;
-                  &lt;li&gt;DES를 포함해서 대부분의 대칭 블록 암호 알고리즘은 1973년 IBM 의 Horst Feistel 이 최초로 소개한 구조를 따라 만들어짐&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;Feistel 암호 특징
-                &lt;ul&gt;
-                  &lt;li&gt;페이스텔 구조에서 네트워크라는 이름은 그 구성도가 그물을 짜는 것과 같이 교환되는 형태로 구성되어 있기 때문에 붙여짐&lt;/li&gt;
-                  &lt;li&gt;원하는 만큼 라운드 수를 늘릴 수 있음. 라운드 수를 아무리 늘려도 복호화할 수 없게 될 염려가 없음&lt;/li&gt;
-                  &lt;li&gt;암호화/복호화 알고리즘을 따로 구현할 필요가 없음&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;Feistel 암호 예시
-                &lt;ul&gt;
-                  &lt;li&gt;
-                    &lt;table&gt;
-                      &lt;tbody&gt;
-                        &lt;tr&gt;
-                          &lt;td&gt;64비트 평문을 32비트 2개 (L1&lt;/td&gt;
-                          &lt;td&gt;R1) 로 쪼갬&lt;/td&gt;
-                        &lt;/tr&gt;
-                      &lt;/tbody&gt;
-                    &lt;/table&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;Round1
-                    &lt;ul&gt;
-                      &lt;li&gt;Mixer 과정
-                        &lt;ul&gt;
-                          &lt;li&gt;R1 을 F(Round 함수)를 거쳐 결과값을 구함
-                            &lt;ul&gt;
-                              &lt;li&gt;Key 사용 (K1 : Round 마다 값이 틀림)&lt;/li&gt;
-                            &lt;/ul&gt;
-                          &lt;/li&gt;
-                          &lt;li&gt;L1 과 결과값을 XOR&lt;/li&gt;
-                        &lt;/ul&gt;
-                      &lt;/li&gt;
-                      &lt;li&gt;Swaper 과정
-                        &lt;ul&gt;
-                          &lt;li&gt;위 결과를 새로운 R2로 함&lt;/li&gt;
-                          &lt;li&gt;과정을 거치지 않은 R1을 L2로 함&lt;/li&gt;
-                        &lt;/ul&gt;
-                      &lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;Round2…&lt;/li&gt;
-                  &lt;li&gt;(라운드가 3라운드 이상일 것)&lt;/li&gt;
-                  &lt;li&gt;(짝수 라운드 구성)&lt;/li&gt;
-                  &lt;li&gt;(역변환이 가능할 것 -&amp;gt; 별도의 복호화 과정이 필요 없음)&lt;/li&gt;
-                  &lt;li&gt;(속도가 빠름)&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;대칭 블록 암호 구현
-                &lt;ul&gt;
-                  &lt;li&gt;블록 크기(Block Size)
-                    &lt;ul&gt;
-                      &lt;li&gt;블록 길이가 크다는 것은 더 강한 보안을 의미하지만 암/복호화 속도는 떨어짐&lt;/li&gt;
-                      &lt;li&gt;128비트의 블록 크기는 이를 조화시키는 합리적인 크기임&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;키 길이(Key Size)
-                    &lt;ul&gt;
-                      &lt;li&gt;키 길이가 길다는 것은 더 강한 보안을 의미하지만 속도가 떨어짐&lt;/li&gt;
-                      &lt;li&gt;보통 128비트의 길이를 사용&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;라운드 수(Number of rounds)
-                    &lt;ul&gt;
-                      &lt;li&gt;라운드 수를 증가하면 보안을 강화할 수 있다. 페이스텔 암호의 핵심&lt;/li&gt;
-                      &lt;li&gt;보통 16 라운드&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;서브키 생성 알고리즘(Subkey generation algorithm)
-                    &lt;ul&gt;
-                      &lt;li&gt;이 알고리즘이 복잡하면 복잡할수록 암호해독이 어려워짐&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;라운드 함수(round function)
-                    &lt;ul&gt;
-                      &lt;li&gt;이 알고리즘이 복잡하면 복잡할수록 암호해독이 어려워짐&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;SPN (Substitution Permutation Network)
-                &lt;ul&gt;
-                  &lt;li&gt;S-Box : 치환 암호의 축소형
-                    &lt;ul&gt;
-                      &lt;li&gt;64bit =&amp;gt; 16bit * 4 (4행 16열)&lt;/li&gt;
-                      &lt;li&gt;6개의 입력값을 받아 4개의 출력값을 출력&lt;/li&gt;
-                      &lt;li&gt;3행 6열의 값 1&lt;/li&gt;
-                      &lt;li&gt;b1, b6 = 행&lt;/li&gt;
-                      &lt;li&gt;b2, b3, b4, b5 = 열&lt;/li&gt;
-                      &lt;li&gt;3행 6열 : 101101&lt;/li&gt;
-                      &lt;li&gt;값 1 : 0001&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;SPN 암호 예시
-                    &lt;ul&gt;
-                      &lt;li&gt;Plain Text 를 Key0 와 XOR 수행&lt;/li&gt;
-                      &lt;li&gt;S1, S2, S3, S4&lt;/li&gt;
-                      &lt;li&gt;P box (S1, S2, S3, S4 결과 내 각각을 자리이동)&lt;/li&gt;
-                      &lt;li&gt;위 결과를 Key1 와 XOR 수행&lt;/li&gt;
-                      &lt;li&gt;…&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;현대 스트림 암호
-        &lt;ul&gt;
-          &lt;li&gt;개요
-            &lt;ul&gt;
-              &lt;li&gt;현대 스트림 암호에서 암호화와 복호화는 한 번에 비트를 생성함&lt;/li&gt;
-              &lt;li&gt;스트림 암호는 블록 암호보다 빠름&lt;/li&gt;
-              &lt;li&gt;하드웨어 구현 또한 블록 암호보다 용이&lt;/li&gt;
-              &lt;li&gt;키 스트림을 어떻게 생성하는지가 주 관심사&lt;/li&gt;
-              &lt;li&gt;동기식과 비동기식&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;예시
-            &lt;ul&gt;
-              &lt;li&gt;P =&amp;gt; Pn, Pn-1 … P2, P1&lt;/li&gt;
-              &lt;li&gt;K =&amp;gt; Kn, Kn-1 … K2, K1
-                &lt;ul&gt;
-                  &lt;li&gt;의사난수 생성기 이용-PRNG / 언젠가 반복되나 난수의 효과&lt;/li&gt;
-                  &lt;li&gt;보통 128bit&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;C =&amp;gt; Cn, Cn-1 … C2, C1&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;동기식 스트림 암호
-            &lt;ul&gt;
-              &lt;li&gt;개요
-                &lt;ul&gt;
-                  &lt;li&gt;동기식 스트림 암호에서 키 스트림은 평문 혹은 암호문 스트림과 독립적
-                    &lt;ul&gt;
-                      &lt;li&gt;비동기식 스트림암호:이전 평문이나 암호문에 종속적 (자기동기식)&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;키 스트림은 평문 혹은 암호문 비트와 키 비트 사이에 어떠한 관계도 없이 생성&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;One-Time Pad
-                &lt;ul&gt;
-                  &lt;li&gt;동기식 스트림 암호중에서 가장 간단하고 안전한 암호&lt;/li&gt;
-                  &lt;li&gt;Gilbert Vernam에 의해 설계됨&lt;/li&gt;
-                  &lt;li&gt;암호화를 수행할 때마다 랜덤하게 선택된 키스트림을 사용&lt;/li&gt;
-                  &lt;li&gt;해독 불가능하다는 것이 증명됨&lt;/li&gt;
-                  &lt;li&gt;암호화/복호화 알고리즘은 각각 배타적 논리합 연산을 사용&lt;/li&gt;
-                  &lt;li&gt;한번에 한 비트씩 사용&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;귀환 쉬프트 레지스터 (Feedback Shift Register)
-                &lt;ul&gt;
-                  &lt;li&gt;One-Time Pad 의 절충안&lt;/li&gt;
-                  &lt;li&gt;FSR은 소프트웨어, 하드웨어 환경에서 모두 구현될 수 있지만 하드웨어가 좀 더 용이&lt;/li&gt;
-                  &lt;li&gt;쉬프트 레지스터와 귀환 함수로 구성&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;선형 귀환 쉬프트 레지스터 (LFSR, Linear Feedback Shift Register)&lt;/li&gt;
-              &lt;li&gt;비선형 귀환 쉬프트 레지스터 (NLFSR, NonLinear Feedback Shift Register)
-                &lt;ul&gt;
-                  &lt;li&gt;LFSR은 선형성으로 공격에 취약, 따라서 더 안전한 스트림 암호 설계를 위해 사용&lt;/li&gt;
-                  &lt;li&gt;비선형으로 설계되는 것 외에는 LSFR 와 동일&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;비동기식 스트림 암호
-            &lt;ul&gt;
-              &lt;li&gt;키 스트림의 각 비트는 이전의 평문이나 암호문에 종속적으로 결정&lt;/li&gt;
-              &lt;li&gt;블록 암호에서 다른 운영 모드를 생성하기 위해 사용되는 한 가지 방법인 CFB모드 (Cipher Feedback Mode) 는 실제로 스트림 암호를 생성함&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="블록 암호" /><category term="스트림 암호" /><summary type="html">대칭키 암호 대칭키 암호 = 공통키 암호 비대칭키 암호 = 공개키 암호</summary></entry><entry><title type="html">정보보안 - 정보보호관리</title><link href="https://bluesplatter.com/is_certification/IS-Management-Outline/" rel="alternate" type="text/html" title="정보보안 - 정보보호관리" /><published>2021-07-13T09:00:00+09:00</published><updated>2021-07-13T09:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-Management-Outline</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-Management-Outline/">&lt;h1 id=&quot;정보보호-개요&quot;&gt;정보보호 개요&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;정보화 사회
-    &lt;ul&gt;
-      &lt;li&gt;정보화 사회 : 단일 생활권
-        &lt;ul&gt;
-          &lt;li&gt;사회 모습 변화&lt;/li&gt;
-          &lt;li&gt;전자 메일, 인터넷으로 정보 교환, 재택근무, 홈뱅킹&lt;/li&gt;
-          &lt;li&gt;미래 사이버 전쟁&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;정보화 역기능
-        &lt;ul&gt;
-          &lt;li&gt;사회 문제 뿐만 아니라 국가 안위에까지 위협&lt;/li&gt;
-          &lt;li&gt;프라이버시 침해, 해커와 바이러스 기승, 컴퓨터 범죄 등&lt;/li&gt;
-          &lt;li&gt;스마트폰 사용으로 정보보호가 더 중요해짐&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;사이버환경의 특징
-        &lt;ul&gt;
-          &lt;li&gt;비대면성, 익명성, 시간 및 공간적 운영의 무제한성, 무제한적인 정보 및 신속한 전송, 미래의 범죄 및 전쟁 공간&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;정보보호
-    &lt;ul&gt;
-      &lt;li&gt;정의
-        &lt;ul&gt;
-          &lt;li&gt;정보의 수집, 가공, 저장, 검색, 송신, 수신 중에 발생하는 정보의 훼손, 변조, 유출 등을 방지하기 위한 관리적, 기술적 수단 또는 그러한 수단으로 이루어지는 행위&lt;/li&gt;
-          &lt;li&gt;기밀성, 무결성, 가용성, 인증성 및 부인방지를 보장하기 위하여 기술적/물리적/관리적 보호대책을 강구하는 것&lt;/li&gt;
-          &lt;li&gt;정보보호 관리, 컴퓨터 및 데이터 보안, 네트워크 보안과 정보보호 정책&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;정보의 가용성과 안정성 (보안성)
-        &lt;ul&gt;
-          &lt;li&gt;정보보호는 정보의 활용과 정보의 통제 사이에서 균형감각을 갖는 행위&lt;/li&gt;
-          &lt;li&gt;사용 가능한 자원을 쉽게 얻을 수 있으면서도 정보에 위협이 되는 요소들을 최소화&lt;/li&gt;
-          &lt;li&gt;정보의 활용 : 가용성의 극대화&lt;/li&gt;
-          &lt;li&gt;정보의 통제 : 안정성을 확보하기 위해 최대한 통제&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;정보보호의 목표
-        &lt;ul&gt;
-          &lt;li&gt;기밀성
-            &lt;ul&gt;
-              &lt;li&gt;오직 인가된 사람, 인가된 프로세스, 시스템만이 알 필요성에 근거&lt;/li&gt;
-              &lt;li&gt;데이터 기밀성 : 개인정보나 기밀정보를 부정한 사용자가 이용하거나 그들에게 노출되지 않도록 하는 것&lt;/li&gt;
-              &lt;li&gt;프라이버시 : 개인과 관련된 어떤 정보가 수집되고 저장되는지, 누구에게 그 정보가 공개되는지, 누가 공개하는지 등을 통제하거나 영향이 미칠수 있도록 하는 것&lt;/li&gt;
-              &lt;li&gt;접근제어, 암호화 등&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;무결성
-            &lt;ul&gt;
-              &lt;li&gt;네트워크를 통하여 송수신되는 정보의 내용이 불법적으로 생성, 변경, 삭제되지 않도록 보호&lt;/li&gt;
-              &lt;li&gt;전력차단과 같은 시스템 중단이 정보에 예상치 못한 변형을 일으킬 수 있음&lt;/li&gt;
-              &lt;li&gt;접근제어, 메시지 인증, 침입 탐지, 백업&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;가용성
-            &lt;ul&gt;
-              &lt;li&gt;시스템이 지체없이 동작하도록 하고, 합법적 사용자가 서비스 사용을 거절당하지 않도록 하는 것&lt;/li&gt;
-              &lt;li&gt;정보는 지속적으로 변화, 인가된 자가 접근할 수 있어야 함.&lt;/li&gt;
-              &lt;li&gt;데이터 백업, 중복성 유지, 물리적 위협요소로부터의 보호&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;인증성
-            &lt;ul&gt;
-              &lt;li&gt;실체, 신뢰할 수 있는 데이터인지 확인&lt;/li&gt;
-              &lt;li&gt;전송 메시지나 메시지 출처에 대한 유효성, 신뢰성&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;책임추적성
-            &lt;ul&gt;
-              &lt;li&gt;부인방지 (부인봉쇄), 억제, 결함분리, 침입탐지 예방, 법적인 조치&lt;/li&gt;
-              &lt;li&gt;포렌식&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;정보보호 관리
-    &lt;ul&gt;
-      &lt;li&gt;정보보호 관리의 개념
-        &lt;ul&gt;
-          &lt;li&gt;정보는 기업이나 공공기관의 중요한 자산&lt;/li&gt;
-          &lt;li&gt;비인가자에게 노출되지 않도록 관리해야 함
-            &lt;ul&gt;
-              &lt;li&gt;기업이나 조직의 목적을 충족시키면서 위험 수위를 낮추는 것&lt;/li&gt;
-              &lt;li&gt;위험은 제거 대상이 아닌 관리(감소) 대상임
-                &lt;ul&gt;
-                  &lt;li&gt;최고 경영자의 지원과 관심 필요&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;정보보호 관리시스템
-            &lt;ul&gt;
-              &lt;li&gt;ISMS : 정보보호 관리체계&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;정보보호 관리와 정보보호 대책
-        &lt;ul&gt;
-          &lt;li&gt;&amp;lt;    &amp;lt;    &lt;기술적 보호대책=&quot;&quot;&gt; 물리적 보호대책&amp;gt; 관리적 보호대책&amp;gt;&lt;/기술적&gt;&lt;/li&gt;
-          &lt;li&gt;기술적 보호대책
-            &lt;ul&gt;
-              &lt;li&gt;정보 시스템, 통신망, 정보를 보호하기 위한 가장 기본적인 대책&lt;/li&gt;
-              &lt;li&gt;접근통제, 암호기술, 백업체계, 정보시스템 자체에 보안성이 강화된 시스템 소프트웨어 사용 등&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;물리적 보호대책
-            &lt;ul&gt;
-              &lt;li&gt;자연재해로부터 정보시스템이 위치한 정보처리시설을 보호하기 위한 재해대책&lt;/li&gt;
-              &lt;li&gt;불순 세력이나 적의 파괴로부터 출입통제, 시건장치 등&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;관리적 보호대책
-            &lt;ul&gt;
-              &lt;li&gt;법, 제도, 규정, 교육 등을 확립, 보안 계획을 수립하고 이를 운영&lt;/li&gt;
-              &lt;li&gt;위험 분석 및 보안감사 시행&lt;/li&gt;
-              &lt;li&gt;기술적 보호대책을 계획, 설계, 제도/정책/절차 생성&lt;/li&gt;
-              &lt;li&gt;내부자의 부당행위 방지 교육&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;정보보호 관리
-        &lt;ul&gt;
-          &lt;li&gt;정보보호 관리는 기업과 조직의 비즈니스 목적을 충족시키면서 수용가능한 수준으로 위험을 낮추는 것&lt;/li&gt;
-          &lt;li&gt;위험은 제거 대상이 아닌 관리 대상&lt;/li&gt;
-          &lt;li&gt;위험은 식별되거나 감소될 수 있지만 제거될 수 없음&lt;/li&gt;
-          &lt;li&gt;정보보호 관리를 위해서는 최고 경영진의 지원과 관심이 필요&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;OSI 보안 구조
-    &lt;ul&gt;
-      &lt;li&gt;개요
-        &lt;ul&gt;
-          &lt;li&gt;기본개념
-            &lt;ul&gt;
-              &lt;li&gt;ITU-T (국제 전기통신 연합 - 전기통신표준화 부문) X.800
-                &lt;ul&gt;
-                  &lt;li&gt;관리자가 효과적으로 보안문제를 조직화 할 수 있는 유용한 방법&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;보안공격 : 기관이 소유한 정보의 안정성을 침해하는 제반 행위&lt;/li&gt;
-              &lt;li&gt;보안 매커니즘 : 보안공격을 탐지, 예방하거나 침해를 복구하는 절차&lt;/li&gt;
-              &lt;li&gt;보안 서비스 : 조직의 보안을 강화하기 위한 처리 또는 통신 서비스, 보안 공격에 대응, 하나 이상의 보안 메커니즘을 사용&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;보안 공격
-            &lt;ul&gt;
-              &lt;li&gt;보안의 세 가지 목표 (기밀성,무결성,가용성) 은 보안공격에 위협을 받을 수 있음
-                &lt;ul&gt;
-                  &lt;li&gt;기밀성을 위협하는 공격
-                    &lt;ul&gt;
-                      &lt;li&gt;스누핑 (Snooping) : 데이터에 대한 비인가 접근 또는 탈취&lt;/li&gt;
-                      &lt;li&gt;트래픽 분석 (Traffic Analysis) : 암호화 되어 있을지라도 온라인 트래픽을 분석해 다른 형태의 정보를 얻을 수 있음&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;무결성을 위협하는 공격
-                    &lt;ul&gt;
-                      &lt;li&gt;변경 (메시지 수정, Modification) : 적법한 메시지의 일부를 불법으로 수정하거나 메시지 전송 순서를 바꾸는 것&lt;/li&gt;
-                      &lt;li&gt;가장 (Masquerading) : 신분위장은 한 개체가 다른 개체의 행세를 하는 것&lt;/li&gt;
-                      &lt;li&gt;재연 (재전송, Replaying) : 적극적 공격의 하나로 획득한 데이터 단위를 보관하고 있다가 시간이 경과한 후에 재전송함으로써 인가되지 않은 사항에 접근하는 효과를 노리는 행위&lt;/li&gt;
-                      &lt;li&gt;부인 (Repudiation) : 메시지의 송신이나 수신을 부인&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;가용성을 위협하는 공격
-                    &lt;ul&gt;
-                      &lt;li&gt;서비스 거부 (Denial of Service) : 매우 일방적인 공격. 시스템의 서비스를 느리게 하거나 완전히 차단&lt;/li&gt;
-                      &lt;li&gt;물리적 공격&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;소극적 공격과 적극적 공격
-                &lt;ul&gt;
-                  &lt;li&gt;소극적 공격 : 정보를 획득하거나 사용하려는 시도, 시스템 자원에는 영향을 끼치지 않음
-                    &lt;ul&gt;
-                      &lt;li&gt;Snooping
-                        &lt;ul&gt;
-                          &lt;li&gt;Snooping : 도청 + 탈취&lt;/li&gt;
-                          &lt;li&gt;Snipping : 도청&lt;/li&gt;
-                        &lt;/ul&gt;
-                      &lt;/li&gt;
-                      &lt;li&gt;Traffic Analysis&lt;/li&gt;
-                      &lt;li&gt;공격자의 목표는 정보 획득&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;적극적 공격 : 시스템 자원을 변경하거나 시스템 작동에 영향을 끼치는 공격 형태
-                    &lt;ul&gt;
-                      &lt;li&gt;변조, 가장, 재연, 부인&lt;/li&gt;
-                      &lt;li&gt;DoS, 물리적 공격&lt;/li&gt;
-                      &lt;li&gt;무결성과 가용성을 위협&lt;/li&gt;
-                      &lt;li&gt;공격자가 다양한 방법을 사용 : 방어보다 탐지가 더 쉬움&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;보안 서비스
-            &lt;ul&gt;
-              &lt;li&gt;보안 정책을 구현하고 보안 메커니즘에 의해 구현되는 것&lt;/li&gt;
-              &lt;li&gt;서비스 종류
-                &lt;ul&gt;
-                  &lt;li&gt;기밀성 / 무결성 / 가용성&lt;/li&gt;
-                  &lt;li&gt;인증&lt;/li&gt;
-                  &lt;li&gt;부인방지&lt;/li&gt;
-                  &lt;li&gt;접근제어&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;기본 보안용어 정의
-    &lt;ul&gt;
-      &lt;li&gt;자산 (Asset)
-        &lt;ul&gt;
-          &lt;li&gt;조직이 보호해야 할 대상, 데이터 혹은 자산 소유자가 가치를 부여한 실체&lt;/li&gt;
-          &lt;li&gt;하드웨어 : 컴퓨터 시스템, 데이터 처리/저장/통신 장비&lt;/li&gt;
-          &lt;li&gt;소프트웨어 : 운영체제, 시스템 도구, 어플리케이션&lt;/li&gt;
-          &lt;li&gt;데이터 : 파일, 데이터베이스, 암호파일과 같은 보안 관련 데이터&lt;/li&gt;
-          &lt;li&gt;통신 설비와 네트워크 : 지역과 광역 네트워크 통신 연결, 브리지, 라우터 등&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;취약점 (Vulnerability)
-        &lt;ul&gt;
-          &lt;li&gt;위협의 이용대상으로 관리적, 물리적, 기술적 약점 (정보보호 대책 미비)&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;위협 (Threat)
-        &lt;ul&gt;
-          &lt;li&gt;손실이나 손상의 원인이 될 가능성을 제공하는 환경의 집합
-            &lt;ul&gt;
-              &lt;li&gt;자연재해&lt;/li&gt;
-              &lt;li&gt;인간에 의한 의도적 위협 : 해커, 바이러스, 도청 등&lt;/li&gt;
-              &lt;li&gt;인간에 의한 비의도적 위협 : 실수, 태만&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;보안에 해를 끼치는 행동이나 사건&lt;/li&gt;
-          &lt;li&gt;가로채기 (interception)
-            &lt;ul&gt;
-              &lt;li&gt;비인가된 당사자가 자산으로의 접근을 획득한 것을 의미&lt;/li&gt;
-              &lt;li&gt;불법 복사, 도청 등&lt;/li&gt;
-              &lt;li&gt;기밀성에 영향&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;가로막음 (interruption)
-            &lt;ul&gt;
-              &lt;li&gt;시스템 자산이 손실되거나 사용 불가능하게 됨&lt;/li&gt;
-              &lt;li&gt;하드웨어 장치의 악의적 파괴, 파일 삭제, 서비스 거부 등&lt;/li&gt;
-              &lt;li&gt;가용성에 영향&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;변조 (modification)
-            &lt;ul&gt;
-              &lt;li&gt;비인가된 당사자가 접근하여 그 내용을 변경&lt;/li&gt;
-              &lt;li&gt;데이터베이스 값 변경, 특정 프로그램 변경&lt;/li&gt;
-              &lt;li&gt;무결성에 영향&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;위조 (fabrication)
-            &lt;ul&gt;
-              &lt;li&gt;비인가된 당사자가 컴퓨터 시스템 상 불법 객체의 위조 정보를 생성&lt;/li&gt;
-              &lt;li&gt;네트워크 통신에 가짜 거래 정보를 생성&lt;/li&gt;
-              &lt;li&gt;무결성에 영향&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;위협원 (Threat agents)
-        &lt;ul&gt;
-          &lt;li&gt;정보자산에 해를 끼치는 행동을 할 수 있는 실체&lt;/li&gt;
-          &lt;li&gt;해커, 일반 사용자, 컴퓨터 프로세스, 재난 등&lt;/li&gt;
-          &lt;li&gt;취약점을 이용하는 존재&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;위험 (Risk)
-        &lt;ul&gt;
-          &lt;li&gt;예상되는 위협에 의해 자산에 발생할 가능성이 있는 손실의 기대치&lt;/li&gt;
-          &lt;li&gt;자산의 가치, 취약점, 위협 요소의 능력, 보호 대책 효과 등에 의해 영향을 받음&lt;/li&gt;
-          &lt;li&gt;위협원이 취약점을 이용하여 위협이라는 행동을 통해 자산에 악영향을 미츤ㄴ 결과를 가져올 가능성&lt;/li&gt;
-          &lt;li&gt;위험 = 자산 * 위협 * 취약점&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;노출 (Exposure)
-        &lt;ul&gt;
-          &lt;li&gt;위협 주체에게 손실(losses)을 드러내 보이는 경우&lt;/li&gt;
-          &lt;li&gt;취약점은 발생 가능한 피해를 노출시킴&lt;/li&gt;
-          &lt;li&gt;패스워드 관리가 느슨하고 패스워드 규정이 집행되지 않으면, 사용자들의 패스워드가 유출되고 허가되지 않은 방법으로 사용될 가능성에 노출될 수 있음&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;안전장치/보안대책 (Safeguard / Countermeasures)
-        &lt;ul&gt;
-          &lt;li&gt;각종 위협이나 변경을 방어하거나 감소시키며 자산을 보호하는 기술, 정책 또는 절차&lt;/li&gt;
-          &lt;li&gt;위험을 완화하기 위한 예방적 수단&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;잔여 위험 (Residual Risk)
-        &lt;ul&gt;
-          &lt;li&gt;정보보호대책을 구현한 후 남아있는 위험&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;다계층 보안 / 심층 방어 (Defense in Depth)
-        &lt;ul&gt;
-          &lt;li&gt;Multi Layered(Level) Security&lt;/li&gt;
-          &lt;li&gt;여러 계층의 보안 대책이나 대응수단을 구성하는 것&lt;/li&gt;
-          &lt;li&gt;한 가지 통제가 대응에 실패하더라도 전체 시스템을 위험에 빠트리지 않음&lt;/li&gt;
-          &lt;li&gt;시스템의 취할 수 있는 가장 최선의 보안 접근 방법
-            &lt;ul&gt;
-              &lt;li&gt;보호, 탐지, 대응&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;직무상의 신의성실, 노력 (Due Care, Due Dilligence)
-        &lt;ul&gt;
-          &lt;li&gt;Due : 특정 목적을 위하여 필요하거나 요구되는 적절하고 충분한 의무&lt;/li&gt;
-          &lt;li&gt;Due Care : 특정 목적을 위하여 필요하거나 요구되는 충분한 주의&lt;/li&gt;
-          &lt;li&gt;Due Diligence : 특정 목적을 위하여 필요하거나 요구되는 충분한 노력&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;사회공학 (Social Engineering)
-        &lt;ul&gt;
-          &lt;li&gt;컴퓨터 보안에서 인간 상호 작용의 깊은 신뢰를 바탕으로 사람드을 속여 정상적인 보안절차를 깨트리기 위한 비기술적 침입 수단&lt;/li&gt;
-          &lt;li&gt;담당자와 신뢰를 쌓고 전화나 이메일을 통해 도움을 받고, 약점을 이용&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;가장 약한 링크 원칙 (Principle of Weakness Link)
-        &lt;ul&gt;
-          &lt;li&gt;보안은 가장 약한 링크보다 더 강할 수 없음&lt;/li&gt;
-          &lt;li&gt;방화벽에 전력을 공급하는 전원장치, 보안응용 기반으로 동작하는 운영체제, 제어수단을 기획/실현하고 관려하는 사람 중 어떤 하나의 제어수단의 실패가 전체 보안 실패를 야기&lt;/li&gt;
-          &lt;li&gt;보안 상 모든 취약점을 파악 vs 공격자는 하나의 취약점을 이용해 공격 (비대칭)&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;시점별 통제(Control)
-        &lt;ul&gt;
-          &lt;li&gt;취약점을 감소시키거나 억제하기 위해 사용되는 매커니즘&lt;/li&gt;
-          &lt;li&gt;예방통제 (Preventive Control)
-            &lt;ul&gt;
-              &lt;li&gt;사전에 위협과 취약점을 대처&lt;/li&gt;
-              &lt;li&gt;IPS&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;탐지통제 (Detective Control)
-            &lt;ul&gt;
-              &lt;li&gt;위협을 탐지하는 통제&lt;/li&gt;
-              &lt;li&gt;빠른 탐지일수록 대처에 용이&lt;/li&gt;
-              &lt;li&gt;IDS&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;교정통제 (Corrective Control)
-            &lt;ul&gt;
-              &lt;li&gt;사후처리&lt;/li&gt;
-              &lt;li&gt;이미 탐지된 위협이나 취약점에 대처&lt;/li&gt;
-              &lt;li&gt;위협이나 취약점을 감소시키는 통제&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;유효성의 원칙 : 제어수단이 효과적이고 적절하게 사용되어야 함.&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;대응 : 피해 최소화, 보고, 장비, 기법, 행위, 방지&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="정보보안 관리" /><summary type="html">정보보호 개요 정보화 사회 정보화 사회 : 단일 생활권 사회 모습 변화 전자 메일, 인터넷으로 정보 교환, 재택근무, 홈뱅킹 미래 사이버 전쟁 정보화 역기능 사회 문제 뿐만 아니라 국가 안위에까지 위협 프라이버시 침해, 해커와 바이러스 기승, 컴퓨터 범죄 등 스마트폰 사용으로 정보보호가 더 중요해짐 사이버환경의 특징 비대면성, 익명성, 시간 및 공간적 운영의 무제한성, 무제한적인 정보 및 신속한 전송, 미래의 범죄 및 전쟁 공간 정보보호 정의 정보의 수집, 가공, 저장, 검색, 송신, 수신 중에 발생하는 정보의 훼손, 변조, 유출 등을 방지하기 위한 관리적, 기술적 수단 또는 그러한 수단으로 이루어지는 행위 기밀성, 무결성, 가용성, 인증성 및 부인방지를 보장하기 위하여 기술적/물리적/관리적 보호대책을 강구하는 것 정보보호 관리, 컴퓨터 및 데이터 보안, 네트워크 보안과 정보보호 정책 정보의 가용성과 안정성 (보안성) 정보보호는 정보의 활용과 정보의 통제 사이에서 균형감각을 갖는 행위 사용 가능한 자원을 쉽게 얻을 수 있으면서도 정보에 위협이 되는 요소들을 최소화 정보의 활용 : 가용성의 극대화 정보의 통제 : 안정성을 확보하기 위해 최대한 통제 정보보호의 목표 기밀성 오직 인가된 사람, 인가된 프로세스, 시스템만이 알 필요성에 근거 데이터 기밀성 : 개인정보나 기밀정보를 부정한 사용자가 이용하거나 그들에게 노출되지 않도록 하는 것 프라이버시 : 개인과 관련된 어떤 정보가 수집되고 저장되는지, 누구에게 그 정보가 공개되는지, 누가 공개하는지 등을 통제하거나 영향이 미칠수 있도록 하는 것 접근제어, 암호화 등 무결성 네트워크를 통하여 송수신되는 정보의 내용이 불법적으로 생성, 변경, 삭제되지 않도록 보호 전력차단과 같은 시스템 중단이 정보에 예상치 못한 변형을 일으킬 수 있음 접근제어, 메시지 인증, 침입 탐지, 백업 가용성 시스템이 지체없이 동작하도록 하고, 합법적 사용자가 서비스 사용을 거절당하지 않도록 하는 것 정보는 지속적으로 변화, 인가된 자가 접근할 수 있어야 함. 데이터 백업, 중복성 유지, 물리적 위협요소로부터의 보호 인증성 실체, 신뢰할 수 있는 데이터인지 확인 전송 메시지나 메시지 출처에 대한 유효성, 신뢰성 책임추적성 부인방지 (부인봉쇄), 억제, 결함분리, 침입탐지 예방, 법적인 조치 포렌식 정보보호 관리 정보보호 관리의 개념 정보는 기업이나 공공기관의 중요한 자산 비인가자에게 노출되지 않도록 관리해야 함 기업이나 조직의 목적을 충족시키면서 위험 수위를 낮추는 것 위험은 제거 대상이 아닌 관리(감소) 대상임 최고 경영자의 지원과 관심 필요 정보보호 관리시스템 ISMS : 정보보호 관리체계 정보보호 관리와 정보보호 대책 &amp;lt; &amp;lt; 물리적 보호대책&amp;gt; 관리적 보호대책&amp;gt; 기술적 보호대책 정보 시스템, 통신망, 정보를 보호하기 위한 가장 기본적인 대책 접근통제, 암호기술, 백업체계, 정보시스템 자체에 보안성이 강화된 시스템 소프트웨어 사용 등 물리적 보호대책 자연재해로부터 정보시스템이 위치한 정보처리시설을 보호하기 위한 재해대책 불순 세력이나 적의 파괴로부터 출입통제, 시건장치 등 관리적 보호대책 법, 제도, 규정, 교육 등을 확립, 보안 계획을 수립하고 이를 운영 위험 분석 및 보안감사 시행 기술적 보호대책을 계획, 설계, 제도/정책/절차 생성 내부자의 부당행위 방지 교육 정보보호 관리 정보보호 관리는 기업과 조직의 비즈니스 목적을 충족시키면서 수용가능한 수준으로 위험을 낮추는 것 위험은 제거 대상이 아닌 관리 대상 위험은 식별되거나 감소될 수 있지만 제거될 수 없음 정보보호 관리를 위해서는 최고 경영진의 지원과 관심이 필요 OSI 보안 구조 개요 기본개념 ITU-T (국제 전기통신 연합 - 전기통신표준화 부문) X.800 관리자가 효과적으로 보안문제를 조직화 할 수 있는 유용한 방법 보안공격 : 기관이 소유한 정보의 안정성을 침해하는 제반 행위 보안 매커니즘 : 보안공격을 탐지, 예방하거나 침해를 복구하는 절차 보안 서비스 : 조직의 보안을 강화하기 위한 처리 또는 통신 서비스, 보안 공격에 대응, 하나 이상의 보안 메커니즘을 사용 보안 공격 보안의 세 가지 목표 (기밀성,무결성,가용성) 은 보안공격에 위협을 받을 수 있음 기밀성을 위협하는 공격 스누핑 (Snooping) : 데이터에 대한 비인가 접근 또는 탈취 트래픽 분석 (Traffic Analysis) : 암호화 되어 있을지라도 온라인 트래픽을 분석해 다른 형태의 정보를 얻을 수 있음 무결성을 위협하는 공격 변경 (메시지 수정, Modification) : 적법한 메시지의 일부를 불법으로 수정하거나 메시지 전송 순서를 바꾸는 것 가장 (Masquerading) : 신분위장은 한 개체가 다른 개체의 행세를 하는 것 재연 (재전송, Replaying) : 적극적 공격의 하나로 획득한 데이터 단위를 보관하고 있다가 시간이 경과한 후에 재전송함으로써 인가되지 않은 사항에 접근하는 효과를 노리는 행위 부인 (Repudiation) : 메시지의 송신이나 수신을 부인 가용성을 위협하는 공격 서비스 거부 (Denial of Service) : 매우 일방적인 공격. 시스템의 서비스를 느리게 하거나 완전히 차단 물리적 공격 소극적 공격과 적극적 공격 소극적 공격 : 정보를 획득하거나 사용하려는 시도, 시스템 자원에는 영향을 끼치지 않음 Snooping Snooping : 도청 + 탈취 Snipping : 도청 Traffic Analysis 공격자의 목표는 정보 획득 적극적 공격 : 시스템 자원을 변경하거나 시스템 작동에 영향을 끼치는 공격 형태 변조, 가장, 재연, 부인 DoS, 물리적 공격 무결성과 가용성을 위협 공격자가 다양한 방법을 사용 : 방어보다 탐지가 더 쉬움 보안 서비스 보안 정책을 구현하고 보안 메커니즘에 의해 구현되는 것 서비스 종류 기밀성 / 무결성 / 가용성 인증 부인방지 접근제어 기본 보안용어 정의 자산 (Asset) 조직이 보호해야 할 대상, 데이터 혹은 자산 소유자가 가치를 부여한 실체 하드웨어 : 컴퓨터 시스템, 데이터 처리/저장/통신 장비 소프트웨어 : 운영체제, 시스템 도구, 어플리케이션 데이터 : 파일, 데이터베이스, 암호파일과 같은 보안 관련 데이터 통신 설비와 네트워크 : 지역과 광역 네트워크 통신 연결, 브리지, 라우터 등 취약점 (Vulnerability) 위협의 이용대상으로 관리적, 물리적, 기술적 약점 (정보보호 대책 미비) 위협 (Threat) 손실이나 손상의 원인이 될 가능성을 제공하는 환경의 집합 자연재해 인간에 의한 의도적 위협 : 해커, 바이러스, 도청 등 인간에 의한 비의도적 위협 : 실수, 태만 보안에 해를 끼치는 행동이나 사건 가로채기 (interception) 비인가된 당사자가 자산으로의 접근을 획득한 것을 의미 불법 복사, 도청 등 기밀성에 영향 가로막음 (interruption) 시스템 자산이 손실되거나 사용 불가능하게 됨 하드웨어 장치의 악의적 파괴, 파일 삭제, 서비스 거부 등 가용성에 영향 변조 (modification) 비인가된 당사자가 접근하여 그 내용을 변경 데이터베이스 값 변경, 특정 프로그램 변경 무결성에 영향 위조 (fabrication) 비인가된 당사자가 컴퓨터 시스템 상 불법 객체의 위조 정보를 생성 네트워크 통신에 가짜 거래 정보를 생성 무결성에 영향 위협원 (Threat agents) 정보자산에 해를 끼치는 행동을 할 수 있는 실체 해커, 일반 사용자, 컴퓨터 프로세스, 재난 등 취약점을 이용하는 존재 위험 (Risk) 예상되는 위협에 의해 자산에 발생할 가능성이 있는 손실의 기대치 자산의 가치, 취약점, 위협 요소의 능력, 보호 대책 효과 등에 의해 영향을 받음 위협원이 취약점을 이용하여 위협이라는 행동을 통해 자산에 악영향을 미츤ㄴ 결과를 가져올 가능성 위험 = 자산 * 위협 * 취약점 노출 (Exposure) 위협 주체에게 손실(losses)을 드러내 보이는 경우 취약점은 발생 가능한 피해를 노출시킴 패스워드 관리가 느슨하고 패스워드 규정이 집행되지 않으면, 사용자들의 패스워드가 유출되고 허가되지 않은 방법으로 사용될 가능성에 노출될 수 있음 안전장치/보안대책 (Safeguard / Countermeasures) 각종 위협이나 변경을 방어하거나 감소시키며 자산을 보호하는 기술, 정책 또는 절차 위험을 완화하기 위한 예방적 수단 잔여 위험 (Residual Risk) 정보보호대책을 구현한 후 남아있는 위험 다계층 보안 / 심층 방어 (Defense in Depth) Multi Layered(Level) Security 여러 계층의 보안 대책이나 대응수단을 구성하는 것 한 가지 통제가 대응에 실패하더라도 전체 시스템을 위험에 빠트리지 않음 시스템의 취할 수 있는 가장 최선의 보안 접근 방법 보호, 탐지, 대응 직무상의 신의성실, 노력 (Due Care, Due Dilligence) Due : 특정 목적을 위하여 필요하거나 요구되는 적절하고 충분한 의무 Due Care : 특정 목적을 위하여 필요하거나 요구되는 충분한 주의 Due Diligence : 특정 목적을 위하여 필요하거나 요구되는 충분한 노력 사회공학 (Social Engineering) 컴퓨터 보안에서 인간 상호 작용의 깊은 신뢰를 바탕으로 사람드을 속여 정상적인 보안절차를 깨트리기 위한 비기술적 침입 수단 담당자와 신뢰를 쌓고 전화나 이메일을 통해 도움을 받고, 약점을 이용 가장 약한 링크 원칙 (Principle of Weakness Link) 보안은 가장 약한 링크보다 더 강할 수 없음 방화벽에 전력을 공급하는 전원장치, 보안응용 기반으로 동작하는 운영체제, 제어수단을 기획/실현하고 관려하는 사람 중 어떤 하나의 제어수단의 실패가 전체 보안 실패를 야기 보안 상 모든 취약점을 파악 vs 공격자는 하나의 취약점을 이용해 공격 (비대칭) 시점별 통제(Control) 취약점을 감소시키거나 억제하기 위해 사용되는 매커니즘 예방통제 (Preventive Control) 사전에 위협과 취약점을 대처 IPS 탐지통제 (Detective Control) 위협을 탐지하는 통제 빠른 탐지일수록 대처에 용이 IDS 교정통제 (Corrective Control) 사후처리 이미 탐지된 위협이나 취약점에 대처 위협이나 취약점을 감소시키는 통제 유효성의 원칙 : 제어수단이 효과적이고 적절하게 사용되어야 함. 대응 : 피해 최소화, 보고, 장비, 기법, 행위, 방지</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="비칭키 암호" /><summary type="html">비대칭키 암호 키 배송 문제 개요 대칭키 암호를 사용하려면 키 배송 문제(key distribution problem) 발생 암호화 키와 복호화 키가 동일 키 배송 중 도청 가능성 해결방안 키의 사전 공유에 의한 해결 키배포 센터에 의한 해결 Diffie-Hellman 키 교환에 의한 해결 공개키 암호에 의한 해결 키의 사전 공유에 의한 해결 안전한 키를 사전에 공유함 안전한 통로를 이용함 Trusted Authority (TA : 키관리기관) 인원이 많아지면 키가 많아져서 문제 n명의 사원이 자신 외의 사람과 통신시 키는 n(n-1)/2 이다. 키배포 센터에 의한 해결 KDC (Key Distribution Center : 온라인 키 분배 - 일종의 TA) 암호 통신이 필요해질 때마다 통신용 키를 키배포 센터라는 신뢰받은 3자에 의해 공유 과정 1 : A 가 KDC에 B와 통신을 하겠다고 요청 2 : KDC는 DB에서 A의 키와 B의 키를 추출(비밀키) 3 : KDC는 A의 키, B의 키를 이용해 세션키를 생성, 각각 비밀키로 암호화함 4 : A 에게 A의 키를 이용해 암호화한 세션키를 전달 5 : B 에게 B의 키를 이용해 암호화한 세션키를 전달 6 : A 는 자신의 개인키를 이용해 세션키를 복호화 7 : A 는 세션키를 이용해 전송할 메시지를 암호화하여 B에게 전송 8 : B 는 자신의 개인키를 이용해 세션키를 복호화 9 : B 는 세션키를 이용해 A에게 전송받은 메시지를 복호화 10 : 통신 종료 후 세션키는 폐기 Diffie-Hellman 키 교환에 의한 해결 개요 1976년 공개키 암호방식을 최초로 제안한 휘트필드 디피와 마틴 헬먼이 발명한 알고리즘 공개키 암호방식의 개념을 이용하여 두 사용자 간에 공통의 암호화키를 안전하게 공유할 수 있는 방법 제시 (최초의 비밀키 교환 프로토콜) Diffie-Hellman 프로토콜 방법에서는 양쪽 통신 주체가 KDC 없이 대칭 세션키를 생성, 대칭키를 만들기 전에 두 개의 수 p와 g를 선택해야 함. p는 매우 큰 소수로서 300자리가 넘는 십진수 키 교환이라는 이름이 붙어있지만 키 교환이 아니라 공유할 키를 계산하여 만들어 내는 것, 때문에 키 합의(Diffie-Hellman key agreement)로 불리기도 함 유한체상의 이산대수문제를 풀기 어렵다는 사실이 이를 뒷받침함 Diffie-Hellman의 안정성 두 가지 공격에 약점을 보임, 이산대수공격, 중간자 공격 이산대수공격 키 교환의 안정성을 이산대수문제를 풀기 어렵다는데 기반을 둔다. Eve가 R1과 R2를 가로챌 수 있으므로 대칭키 K를 계산할 수 있다. A : R1 (공개값) = g^x mod p B : R2 (공개값) = g^y mod p A 는 R1을 B에 전송 B 는 R2을 A에 전송 A : K = R2^x mod p B : K = R1^y mod p K = g^xy mod p Eve 가 R1, R2 를 가로채 x,y 를 추출하여 K를 생성할 수 있음 x, y값을 추출해내서 더 이상 비밀키가 비밀이 되지 않는다. 중간자 공격(man in the middle attack) 키 교환 프로토콜은 인증 단계가 없어서 이런 공격에 취약 공격을 막기 위해 디지털서명과 공개키 인증서 등을 이용하면 됨 DoS 공격 Diffie-Hellman 은 지수함수에 기초하고 있어 계산이 복잡함 동시에 통신 시 비밀키 생성 시 많은 부하가 걸림 키 생성을 다수 요청하면 서버가 마비됨 공개키 암호에 의한 해결 개요 대칭키 암호에서 암호화키와 복호화키는 같다. 공개키 암호에서는 이 두개가 다르다. 수신자는 미리 암호화키 (공개키) 를 송신자에게 알려준다. Eve 에게 알려져도 괜찮다. 송신자는 암호화키 (공개키) 로 암호화하여 수신자에게 보낸다. 복호화는 복호화키 (개인키) 를 가지고 있는 사람(수신자)만 가능하다. 이러면 복호화키를 전달할 필요가 없다. 공개키 암호 (public-key cryptography) 개요 대칭키 암호는 평문을 복잡한 형태로 변환해서 기밀성을 유지 공개키 암호는 수학적으로 해결하기 곤란한 문제 (소인수분해, 이산대수…) 를 토대로 해서 기밀성을 유지 전자문서의 무결성, 전자서명(부인방지) 구현에 활용 다양한 암호 프로토콜에 사용 공개키 암호에서는 암호화키와 복호화키가 분리되어 있음. 수학적으로 해결하기 곤란한 문제 소인수분해 문제 RSA Rabin 이산대수 문제 ElGamal DSA (DSS) ECC (타원곡선) ECDSA KCDSA 과정 1 : A가 세션키를 B의 공개키로 암호화 2 : A가 암호화된 세션키를 B에 전송 3 : B가 B의 개인키로 암호화된 세션키를 복호화 B의 공개키 / 개인키는 수학적으로 밀접한 관계가 있음 4 : A 와 B의 키 교환 완료 RSA 암호시스템 개요 기본 개념 RSA 는 공개키 암호 알고리즘 중 하나 세계적으로 사실상 표준 Rivest-Shamir-Adelman 의 첫 글자를 따서 붙여짐 인수분해 문제해결의 높은 난이도를 이용한 가장 대표적인 공개키 암호 알고리즘 디지털 서명의 용도로도 사용됨 SSL 프로토콜을 가진 웹 브라우저, PGP, 공개키 암호시스템을 사용하는 정부 시스템 등에서 사용 암호화와 복호화 RSA는 e와 d 두 지수를 사용 A (송신자) : C = P^e mod n B (수신자) : P = C^d mod n e : 공개하는 값 d : 비밀로 유지하는 값 P : 평문 C : 암호문 n : 매우 큰 수 RSA 에 대한 공격 소인수분해 공격 RSA 는 모듈러 값이 매우 커서 이 값을 적절한 시간 내에 소인수분해 하는 것이 불가능 B (수신자) 은 p와 q 를 선택하고 n = p * q 를 계산 n은 공개되지만 p와 q 는 비밀임 Eve가 n을 소인수분해하여 p와 q를 구할 수 있다면 Pi(N) 을 구할 수 있음 소인수분해 알고리즘 (Factoring Attack) 이 개발되지 않는다면 RSA는 안전하다고 할 수 있음 중간자 공격 중간자 공격은 기밀성에 매우 유효한 공격 방법 적극적 공격자 멜로리가 송신자와 수신자 사이에 들어가서 송신자에 대해서는 수신자처럼, 수신자에 대해서는 송신자처럼 행세하는 공격 중간자 공격을 막기 위해서는 입수한 공개키가 밥의 것이라는 것을 확인할 수단인 인증이 필요하다. Rabin 암호시스템 개요 M.Rabin 이 고안, RSA 암호시스템의 변형 RSA는 지수 합동, Rabin은 2차 합동에 근거 암호화와 복호화 Rabin 암호시스템에서 암호화는 매우 간단, 한 번의 곱셈으로 이루어짐 성능이 낮은 플랫폼에서 잘 활용됨 (스마트 카드 등) Rabin 시스템의 보안 p와 q 가 충분히 크기만 하면 안전 (mod N을 구하는 것이 어려움) RSA 만큼 안전 ElGamal 방식 개요 Taher ElGamal 이 발명 이산대수 문제에 근거해서 만든 시스템 (오픈 소스를 기초, 키 분배 방식 및 공개키 암호 방식 실현) 디지털 서명, 암호화, 키교환 Diffie-Hellman 암호화 기능의 확장, 속도가 느림 암호화와 복호화 Bob의 공개키를 이용해 누구든 Bob에게 메시지를 보낼 수 있음 고속 지수 알고리즘을 사용하면 다항식 정도의 복잡도를 가지는 시간 내에 수행 가능 암호화에서는 암호문의 길이가 평문의 2배가 되어 버린다는 결점 응용 RSA 를 활용할 수 있는 곳에는 어디에서나 사용 가능 키 교환, 인증, 짧은 메시지의 암호화와 복호화에 사용 암호 소프트웨어 GnuPG에 구현되어 있음 타원곡선 암호 (ECC, elliptic curve cryptosystem) 등장배경 RSA 와 ElGamal 이 안전한 비대칭키 암호시스템이기는 하지만 보안을 위해서 키의 길이가 매우 커야한다는 단점이 있음 따라서 키의 길이가 짧아도 되는 암호시스템을 연구 -&amp;gt; ECC 타원곡선 이론에 근거 특징 유한체 위에서 정의된 타원곡선 군에서의 이산대수 문제에 기초한 공개키 알고리즘 RSA 암호방식에 이어 전자상거래의 핵심 기술로 주목 1985년 코블리치(N.Koblitz) 와 밀러(V.S.Miller)가 RSA 암호방식의 대안으로 처음 제안 RSA보다 키의 비트 수를 적게 하면서도 동일한 성능을 제공하는 것이 특징 160비트 ECC는 1024비트 RSA 키와 동일한 보안수준 다양한 암호방식 설계가 용이 H/W 와 S/W 로 구현하기 용이 스마트카드나 무선통신단말기 등과 같이 메모리 처리능력이 제한된 응용 분야에 특히 효율적 전자상거래의 핵심 ECC 는 RSA 보다 상대적으로 지명도가 부족, 배경이론이 복잡하며 해당 분야의 전문가가 적다는 단점이 있음 빠른 속도로 구현이 가능 ECC 와 RSA 방식 비교 항목 ECC 방식 RSA 방식 기반구조 WPKI(무선) PKI(유선) 속도 우수 느림 키 크기 상대적으로 작은 키 ECC에 비해 큰 키 적용 소형 Mobile환경 인프라가 다소 구현된 환경</summary></entry></feed>
