@@ -1,0 +1,874 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.20.2 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>정보보안 - 윈도우 해킹프로그램 분석 | Bluesplatter</title>
+<meta name="description" content="윈도우 해킹프로그램 분석    해킹프로그램 분석            분석환경 구성                    최소 2개 이상의 가상서버를 구동 (물리적 서버 필요)                            Virtual Box               VMWare Workstation Pro                                   가상서버                            가상네트워크를 일반네트워크와 똑같이 구축 (Samba, HTTP, FTP 등 제공)               가상 서버 OS 를 리눅스로 구축                                    악성프로그램에 취약하지 않음                                               가상 서버 OS 를 윈도우로 구축 (피해시스템 - 해킹프로그램을 실행하는 서버)                                   해킹프로그램이 실행될 때 시스템 파일에서 발생되는 내용과 레지스트리에서 발생하는 내용을 모니터링하는 프로그램 필요           테스트 후 이전 상태(초기상태)로 복구되어야 함                            VMWare 의 Snapshot 기능을 이용                                   물리적 서버 (VMWare 서버)                            DHCP               외부관리프로그램                                   리눅스 서버 (가상서버) - 서비스제공                            Samba               DNS Server               Routing S/W               HTTP Server               SMTP Server               POP3 Server               IRC Server               Network Monitoring S/W                                   윈도우 서버 (가상서버) - 피해대상                            악성코드 실행서버               파일시스템 모니터링               사용자정보 모니터링               레지스트리 모니터링               서비스항목 모니터링               공유폴더 모니터링               시스템항목 모니터링               네트워크항목 모니터링                                               sysAnalyzer 도구                    http://sandsprite.com/iDef/SysAnalyzer           System에서 악성코드가 구동되는 동안 변경된 정보 수집, 비교, 분석하는 자동화된 툴           스냅샷을 비교하여 어떤 것이 바뀌었는지 비교                            Delay               Sniffit Hit : IRC/HTTP 접속정보               API Logger : 바이너리에 Injection 되는 DLL 이 어떤 것이 호출되는지 확인               Directory Watcher : 모니터링 되는 시점에서 생성되는 모든 파일 확인               시점별로 실행된 프로세스 확인               악성코드에 의해 오픈된 포트               explorer.exe 로드된 DLL 파일               커널에 로드된 모듈               변경 / 생성된 레지스트리 키                                               Malcode Analysis Pack                    악성코드 조사           Shell Ext : 문자열 확인           SocketTool : TCP 클라이언트 모니터링           MailPot : 메일서버 캡처 프로그램           fakeDNS : 스푸핑 미니 DNS 서버 프로그램. 악성프로그램이 접속하는 도메인을 다른 곳으로 유도하는 프로그램           Sniff_Hit : HTTP, IRC, DNS 스니퍼           sclog : 악성코드에서 사용하는 쉘코드 분석           GdiProcs : 숨겨진 프로세스 탐지           Shellcode2Exe : 인코드된 쉘코드로 변환하는 php 스크립트 프로그램 (3:27)                       모니터링 프로그램 활용                    파일 모니터링 : Filemon           레지스터 모니터링 : Regmon           CPU성능 모니터링 : Cpumon           네트워크 모니터링 : TCPView, TDImon           프로세스 모니터링 : procexp           스냅샷 모니터링 : Winanalysys           API 함수 추적 : API SPY           네트워크 트래픽 분석 : ethereal">
+
+
+  <meta name="author" content="HY03">
+  
+  <meta property="article:author" content="HY03">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Bluesplatter">
+<meta property="og:title" content="정보보안 - 윈도우 해킹프로그램 분석">
+<meta property="og:url" content="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-WindowsHackingTools/">
+
+
+  <meta property="og:description" content="윈도우 해킹프로그램 분석    해킹프로그램 분석            분석환경 구성                    최소 2개 이상의 가상서버를 구동 (물리적 서버 필요)                            Virtual Box               VMWare Workstation Pro                                   가상서버                            가상네트워크를 일반네트워크와 똑같이 구축 (Samba, HTTP, FTP 등 제공)               가상 서버 OS 를 리눅스로 구축                                    악성프로그램에 취약하지 않음                                               가상 서버 OS 를 윈도우로 구축 (피해시스템 - 해킹프로그램을 실행하는 서버)                                   해킹프로그램이 실행될 때 시스템 파일에서 발생되는 내용과 레지스트리에서 발생하는 내용을 모니터링하는 프로그램 필요           테스트 후 이전 상태(초기상태)로 복구되어야 함                            VMWare 의 Snapshot 기능을 이용                                   물리적 서버 (VMWare 서버)                            DHCP               외부관리프로그램                                   리눅스 서버 (가상서버) - 서비스제공                            Samba               DNS Server               Routing S/W               HTTP Server               SMTP Server               POP3 Server               IRC Server               Network Monitoring S/W                                   윈도우 서버 (가상서버) - 피해대상                            악성코드 실행서버               파일시스템 모니터링               사용자정보 모니터링               레지스트리 모니터링               서비스항목 모니터링               공유폴더 모니터링               시스템항목 모니터링               네트워크항목 모니터링                                               sysAnalyzer 도구                    http://sandsprite.com/iDef/SysAnalyzer           System에서 악성코드가 구동되는 동안 변경된 정보 수집, 비교, 분석하는 자동화된 툴           스냅샷을 비교하여 어떤 것이 바뀌었는지 비교                            Delay               Sniffit Hit : IRC/HTTP 접속정보               API Logger : 바이너리에 Injection 되는 DLL 이 어떤 것이 호출되는지 확인               Directory Watcher : 모니터링 되는 시점에서 생성되는 모든 파일 확인               시점별로 실행된 프로세스 확인               악성코드에 의해 오픈된 포트               explorer.exe 로드된 DLL 파일               커널에 로드된 모듈               변경 / 생성된 레지스트리 키                                               Malcode Analysis Pack                    악성코드 조사           Shell Ext : 문자열 확인           SocketTool : TCP 클라이언트 모니터링           MailPot : 메일서버 캡처 프로그램           fakeDNS : 스푸핑 미니 DNS 서버 프로그램. 악성프로그램이 접속하는 도메인을 다른 곳으로 유도하는 프로그램           Sniff_Hit : HTTP, IRC, DNS 스니퍼           sclog : 악성코드에서 사용하는 쉘코드 분석           GdiProcs : 숨겨진 프로세스 탐지           Shellcode2Exe : 인코드된 쉘코드로 변환하는 php 스크립트 프로그램 (3:27)                       모니터링 프로그램 활용                    파일 모니터링 : Filemon           레지스터 모니터링 : Regmon           CPU성능 모니터링 : Cpumon           네트워크 모니터링 : TCPView, TDImon           프로세스 모니터링 : procexp           스냅샷 모니터링 : Winanalysys           API 함수 추적 : API SPY           네트워크 트래픽 분석 : ethereal">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-01-07T09:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-WindowsHackingTools/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "HY03",
+      "url": "https://bluesplatter.com/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Bluesplatter Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo/logo.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          세상에 남기는 작은 흔적
+          <span class="site-subtitle">Bluesplatter</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/">연도별 포스트</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="https://bluesplatter.com/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#is_certification" itemprop="item"><span itemprop="name">Is_certification</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">정보보안 - 윈도우 해킹프로그램 분석</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/profile/photo.jpg" alt="HY03" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">HY03</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>저는 전문가가 아니고 이것 저것 알아보는 비전문가 입니다. <br /> 틀린 내용이 기술되어도 너그러이 봐주시고 댓글을 남겨주셨으면 좋겠습니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="http://bluesplatter.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:hyunik03@gmail.com">
+            <meta itemprop="email" content="hyunik03@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">이메일</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="정보보안 - 윈도우 해킹프로그램 분석">
+    <meta itemprop="description" content="윈도우 해킹프로그램 분석  해킹프로그램 분석          분석환경 구성                  최소 2개 이상의 가상서버를 구동 (물리적 서버 필요)                          Virtual Box              VMWare Workstation Pro                                가상서버                          가상네트워크를 일반네트워크와 똑같이 구축 (Samba, HTTP, FTP 등 제공)              가상 서버 OS 를 리눅스로 구축                                  악성프로그램에 취약하지 않음                                            가상 서버 OS 를 윈도우로 구축 (피해시스템 - 해킹프로그램을 실행하는 서버)                                해킹프로그램이 실행될 때 시스템 파일에서 발생되는 내용과 레지스트리에서 발생하는 내용을 모니터링하는 프로그램 필요          테스트 후 이전 상태(초기상태)로 복구되어야 함                          VMWare 의 Snapshot 기능을 이용                                물리적 서버 (VMWare 서버)                          DHCP              외부관리프로그램                                리눅스 서버 (가상서버) - 서비스제공                          Samba              DNS Server              Routing S/W              HTTP Server              SMTP Server              POP3 Server              IRC Server              Network Monitoring S/W                                윈도우 서버 (가상서버) - 피해대상                          악성코드 실행서버              파일시스템 모니터링              사용자정보 모니터링              레지스트리 모니터링              서비스항목 모니터링              공유폴더 모니터링              시스템항목 모니터링              네트워크항목 모니터링                                          sysAnalyzer 도구                  http://sandsprite.com/iDef/SysAnalyzer          System에서 악성코드가 구동되는 동안 변경된 정보 수집, 비교, 분석하는 자동화된 툴          스냅샷을 비교하여 어떤 것이 바뀌었는지 비교                          Delay              Sniffit Hit : IRC/HTTP 접속정보              API Logger : 바이너리에 Injection 되는 DLL 이 어떤 것이 호출되는지 확인              Directory Watcher : 모니터링 되는 시점에서 생성되는 모든 파일 확인              시점별로 실행된 프로세스 확인              악성코드에 의해 오픈된 포트              explorer.exe 로드된 DLL 파일              커널에 로드된 모듈              변경 / 생성된 레지스트리 키                                          Malcode Analysis Pack                  악성코드 조사          Shell Ext : 문자열 확인          SocketTool : TCP 클라이언트 모니터링          MailPot : 메일서버 캡처 프로그램          fakeDNS : 스푸핑 미니 DNS 서버 프로그램. 악성프로그램이 접속하는 도메인을 다른 곳으로 유도하는 프로그램          Sniff_Hit : HTTP, IRC, DNS 스니퍼          sclog : 악성코드에서 사용하는 쉘코드 분석          GdiProcs : 숨겨진 프로세스 탐지          Shellcode2Exe : 인코드된 쉘코드로 변환하는 php 스크립트 프로그램 (3:27)                    모니터링 프로그램 활용                  파일 모니터링 : Filemon          레지스터 모니터링 : Regmon          CPU성능 모니터링 : Cpumon          네트워크 모니터링 : TCPView, TDImon          프로세스 모니터링 : procexp          스냅샷 모니터링 : Winanalysys          API 함수 추적 : API SPY          네트워크 트래픽 분석 : ethereal                    ">
+    <meta itemprop="datePublished" content="2022-01-07T09:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">정보보안 - 윈도우 해킹프로그램 분석
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-01-07T09:00:00+09:00">January 7, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#윈도우-해킹프로그램-분석">윈도우 해킹프로그램 분석</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <h1 id="윈도우-해킹프로그램-분석">윈도우 해킹프로그램 분석</h1>
+<ul>
+  <li>해킹프로그램 분석
+    <ul>
+      <li>분석환경 구성
+        <ul>
+          <li>최소 2개 이상의 가상서버를 구동 (물리적 서버 필요)
+            <ul>
+              <li>Virtual Box</li>
+              <li>VMWare Workstation Pro</li>
+            </ul>
+          </li>
+          <li>가상서버
+            <ul>
+              <li>가상네트워크를 일반네트워크와 똑같이 구축 (Samba, HTTP, FTP 등 제공)</li>
+              <li>가상 서버 OS 를 리눅스로 구축
+                <ul>
+                  <li>악성프로그램에 취약하지 않음</li>
+                </ul>
+              </li>
+              <li>가상 서버 OS 를 윈도우로 구축 (피해시스템 - 해킹프로그램을 실행하는 서버)</li>
+            </ul>
+          </li>
+          <li>해킹프로그램이 실행될 때 시스템 파일에서 발생되는 내용과 레지스트리에서 발생하는 내용을 모니터링하는 프로그램 필요</li>
+          <li>테스트 후 이전 상태(초기상태)로 복구되어야 함
+            <ul>
+              <li>VMWare 의 Snapshot 기능을 이용</li>
+            </ul>
+          </li>
+          <li>물리적 서버 (VMWare 서버)
+            <ul>
+              <li>DHCP</li>
+              <li>외부관리프로그램</li>
+            </ul>
+          </li>
+          <li>리눅스 서버 (가상서버) - 서비스제공
+            <ul>
+              <li>Samba</li>
+              <li>DNS Server</li>
+              <li>Routing S/W</li>
+              <li>HTTP Server</li>
+              <li>SMTP Server</li>
+              <li>POP3 Server</li>
+              <li>IRC Server</li>
+              <li>Network Monitoring S/W</li>
+            </ul>
+          </li>
+          <li>윈도우 서버 (가상서버) - 피해대상
+            <ul>
+              <li>악성코드 실행서버</li>
+              <li>파일시스템 모니터링</li>
+              <li>사용자정보 모니터링</li>
+              <li>레지스트리 모니터링</li>
+              <li>서비스항목 모니터링</li>
+              <li>공유폴더 모니터링</li>
+              <li>시스템항목 모니터링</li>
+              <li>네트워크항목 모니터링</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>sysAnalyzer 도구
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">http://sandsprite.com/iDef/SysAnalyzer</code></li>
+          <li>System에서 악성코드가 구동되는 동안 변경된 정보 수집, 비교, 분석하는 자동화된 툴</li>
+          <li>스냅샷을 비교하여 어떤 것이 바뀌었는지 비교
+            <ul>
+              <li>Delay</li>
+              <li>Sniffit Hit : IRC/HTTP 접속정보</li>
+              <li>API Logger : 바이너리에 Injection 되는 DLL 이 어떤 것이 호출되는지 확인</li>
+              <li>Directory Watcher : 모니터링 되는 시점에서 생성되는 모든 파일 확인</li>
+              <li>시점별로 실행된 프로세스 확인</li>
+              <li>악성코드에 의해 오픈된 포트</li>
+              <li>explorer.exe 로드된 DLL 파일</li>
+              <li>커널에 로드된 모듈</li>
+              <li>변경 / 생성된 레지스트리 키</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Malcode Analysis Pack
+        <ul>
+          <li>악성코드 조사</li>
+          <li>Shell Ext : 문자열 확인</li>
+          <li>SocketTool : TCP 클라이언트 모니터링</li>
+          <li>MailPot : 메일서버 캡처 프로그램</li>
+          <li>fakeDNS : 스푸핑 미니 DNS 서버 프로그램. 악성프로그램이 접속하는 도메인을 다른 곳으로 유도하는 프로그램</li>
+          <li>Sniff_Hit : HTTP, IRC, DNS 스니퍼</li>
+          <li>sclog : 악성코드에서 사용하는 쉘코드 분석</li>
+          <li>GdiProcs : 숨겨진 프로세스 탐지</li>
+          <li>Shellcode2Exe : 인코드된 쉘코드로 변환하는 php 스크립트 프로그램 (3:27)</li>
+        </ul>
+      </li>
+      <li>모니터링 프로그램 활용
+        <ul>
+          <li>파일 모니터링 : <code class="language-plaintext highlighter-rouge">Filemon</code></li>
+          <li>레지스터 모니터링 : <code class="language-plaintext highlighter-rouge">Regmon</code></li>
+          <li>CPU성능 모니터링 : <code class="language-plaintext highlighter-rouge">Cpumon</code></li>
+          <li>네트워크 모니터링 : <code class="language-plaintext highlighter-rouge">TCPView</code>, <code class="language-plaintext highlighter-rouge">TDImon</code></li>
+          <li>프로세스 모니터링 : <code class="language-plaintext highlighter-rouge">procexp</code></li>
+          <li>스냅샷 모니터링 : <code class="language-plaintext highlighter-rouge">Winanalysys</code></li>
+          <li>API 함수 추적 : <code class="language-plaintext highlighter-rouge">API SPY</code></li>
+          <li>네트워크 트래픽 분석 : <code class="language-plaintext highlighter-rouge">ethereal</code></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#%EC%9C%88%EB%8F%84%EC%9A%B0-%EC%B9%A8%ED%95%B4%EC%82%AC%EA%B3%A0" class="page__taxonomy-item" rel="tag">윈도우 침해사고</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88%EA%B8%B0%EC%82%AC" class="page__taxonomy-item" rel="tag">정보보안기사</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#%ED%95%B4%ED%82%B9-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8" class="page__taxonomy-item" rel="tag">해킹 프로그램</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#is-certification" class="page__taxonomy-item" rel="tag">IS_Certification</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2022-01-07T09:00:00+09:00">January 7, 2022</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+%EC%9C%88%EB%8F%84%EC%9A%B0+%ED%95%B4%ED%82%B9%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8+%EB%B6%84%EC%84%9D%20https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-IncidentAnalysis-WindowsHackingTools%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-IncidentAnalysis-WindowsHackingTools%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-IncidentAnalysis-WindowsHackingTools%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/is_certification/IS-IncidentAnalysis-WindowsDetailAnalysis/" class="pagination--pager" title="정보보안 - 윈도우 침해사고 상세분석
+">이전</a>
+    
+    
+      <a href="/is_certification/IS-IncidentAnalysis-LinuxInitialResponse/" class="pagination--pager" title="정보보안 - 리눅스 사고 분석
+">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-IncidentAnalysis-LinuxInitialResponse/" rel="permalink">정보보안 - 리눅스 사고 분석
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-01-12T09:00:00+09:00">January 12, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">리눅스 침해사고 분석
+
+  기본 정보 수집
+    
+      OS 종류, 커널 버전
+      사용 용도
+      운영중인 서비스
+      네트워크 접속 현황
+      보안 패치 적용 현황
+      네트워크 구성 형태 및 보안 장비 운영 현황
+    
+  
+  휘발성 정보...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-IncidentAnalysis-WindowsDetailAnalysis/" rel="permalink">정보보안 - 윈도우 침해사고 상세분석
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-01-01T09:00:00+09:00">January 1, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">윈도우 침해사고 상세분석
+
+  분류
+    
+      레지스트리 분석
+        
+          시스템이 운영되는데 필요한 정보를 담고 있는 파일
+            
+              설치된 S/W 정보, 환경설정, 임시저장값
+              시스템의 ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-IncidentAnalysis-WindowsRootkit/" rel="permalink">정보보안 - 윈도우 루트킷 점검
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-12-31T09:00:00+09:00">December 31, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">윈도우 루트킷 점검
+
+  Rootkit
+    
+      정의
+        
+          시스템에 탐지되지 않도록 하는 코드, 프로그램 집합
+          시스템 관리자 권한을 획득하기 위한 프로그램
+        
+      
+      구분
+        
+    ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-IncidentAnalysis-WindowsInitialResponse/" rel="permalink">정보보안 - 윈도우 사고 초기분석
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-12-30T09:00:00+09:00">December 30, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">윈도우 침해사고 초기분석
+
+  초기분석 : 현재 피해시스템의 상황을 빠른 시간 안에 파악한다. (포렌식 툴을 사용하지 않는다는 가정 / 커맨드에서 실행)
+    
+      시스템 시간 확인
+        
+          공격자가 시스템 시간을 변경할 수 있음
+         ...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+<!--
+<script>
+	(function(d, h, m){
+    var js, fjs = d.getElementsByTagName(h)[0];
+    if (d.getElementById(m)){return;}
+    js = d.createElement(h); js.id = m;
+    js.onload = function(){
+        window.makerWidgetComInit({
+        position: "left",          
+        widget: "eqypoqmawbcz3azh-usiy9q7ma4ong1w1-juelcm3zfgcuwjds"                
+    })};
+    js.src = "https://makerwidget.com/js/embed.js";
+    fjs.parentNode.insertBefore(js, fjs)
+	}(document, "script", "dhm"))
+</script>
+-->
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:hyunik03@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 HY03. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://bluesplatter.com/is_certification/IS-IncidentAnalysis-WindowsHackingTools/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/is_certification/IS-IncidentAnalysis-WindowsHackingTools"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://bluesplatter.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

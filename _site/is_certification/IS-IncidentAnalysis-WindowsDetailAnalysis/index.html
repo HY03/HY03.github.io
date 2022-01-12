@@ -1,0 +1,970 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.20.2 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>정보보안 - 윈도우 침해사고 상세분석 | Bluesplatter</title>
+<meta name="description" content="윈도우 침해사고 상세분석    분류            레지스트리 분석                    시스템이 운영되는데 필요한 정보를 담고 있는 파일                            설치된 S/W 정보, 환경설정, 임시저장값               시스템의 모든 정보 포함                                   공격자의 흔적을 알아낼 수 있음           시작프로그램 등록 관련 레지스트리                            HKLM\Software\Microsoft\Windows\CurrentVersion\Run               HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce               HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnceEx               HKLM\Software\Microsoft\Windows\CurrentVersion\RunServices               HKLM\Software\Microsoft\Windows\CurrentVersion\RunServicesOnce               HKLM\Software\Microsoft\Windows\CurrentVersion\Windows\Load               HKLM\Software\Microsoft\Windows\CurrentVersion\Windows\Run               HKLM\Software\Microsoft\Windows\CurrentVersion\Winlogon\UserInit               HKCU\Software\Microsoft\Windows\CurrentVersion\Run               HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnce               HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnceEx               HKCU\Software\Microsoft\Windows\CurrentVersion\RunServicesOnce                                   Autoruns : 시작 레지스트리 Check (Sysinternals.com)           공격자가 남긴 레지스트리 정보 수집                            최근 사용한 문서 목록                                    HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Recentdocs                                               터미널 서비스 접속 목록                                    HKCU\Software\Microsoft\Terminal Server Client\Default                                               설치된 S/W 목록               열어본 파일 목록                                               자동실행 점검 - Autoruns 를 통해 점검 가능                    서비스 점검                            공격자가 윈도우 서비스에 악성 프로그램을 등록, 시스템 재부팅 시 악성 프로그램 실행               생소한 이름의 서비스               Description 영역의 내용이 비어있는 경우 / 영문으로 되어있는 경우               정상적 서비스 이름을 위장하는 경우                                    Backup System                   Remote Administrator Service                   System spooler Host                   Windows Management Drivers                   Universal Serial Bus Control Component                                                                   스케줄된 작업 확인                            시스템이 재부팅 되더라도 악성 프로그램이 실행될 수 있음                                   자동시작 폴더 점검                            윈도우 재시작 시 자동시작 폴더 내 각종 프로그램들을 실행함               c:\Documents and Settings\Administrator\시작메뉴\프로그램\시작프로그램               HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ShellFolders                                   Winlogon Notification DLL                            적은 코드로 구현이 가능, 안전모드에서 원하는 코드를 실행 가능               WinLogon.exe 파일에서 발생하는 이벤트 핸들러를 이용하여 원하는 코드를 실행 가능                                    Logon, Logoff, Startup, Shutdown, ScreenSaver 이벤트 등                                               악성코드 활용 소지가 있음               HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify\                                    DllName = arprmdg0.dll (악성코드 예시)                   Startup = arprmdg0                   Impersonate = 1 (인격화. 보안 환경변수 설정시 주로 설정, 인증된 사용자 계정으로 자원 실행할 수 있게 함)                                                                               이벤트 로그 분석                    공격자가 남긴 흔적, 활동 등의 정보를 찾아내기 위함           H/W, S/W, 시스템 문제 시 이벤트로그에 저장함 -&gt; 이벤트뷰어를 통해 확인                            관리도구 -&gt; 이벤트뷰어 (eventvwr.msc)                                    보안로그                   시스템로그                   응용프로그램로그                                                                   공격자들은 자신의 흔적을 최소화 하기 위해 ClearEvent 프로그램을 사용 (이벤트로그를 삭제)           공격자가 남기는 로그 유형                            로컬 로그온 시도 실패               계정의 잘못된 사용 (없는 계정 로그인 시도)               계정 잠김               터미널서비스 공격               사용자계정 생성                                               MAC time 분석                    파일, 디렉터리 등 파일시스템은 시간속성을 가지고 있음           공격자가 파일시스템을 통해서 어떠한 행동을 했는지 판단 (어떤 파일이 생성, 수정, 실행되었는지?)           mtime : 파일 수정, 생성           atime : 최근 파일을 읽은 시간, 실행한 시간           ctime : 파일 속성 변경 시간                       침입방법 분석                    공격자가 어떻게 침입했는지 분석 (사고 조치 이외에 원인분석을 하지 않으면 사고가 재발할 수 있음)           윈도우에서 해킹발생 취약점 분류 (대부분 해킹사고는 시스템 보안 업데이트 미실시, 웹서비스 취약점이 원인)                            윈도우 취약점                                    시스템 취약점 (보안업데이트 미실시)                                            최종 보안 업데이트 날짜 파악이 중요                                                    원격 공격 가능한 취약점이 있는지 파악                                                                       MS 에서 제공하는 Microsoft Baseline Security Analyzer 로 확인                                                    보안패치 상태                           IIS 상태                           SQL 상태                                                                                                           패스워드 취약점                   잘못된 공유설정                                               웹 어플리케이션 취약점                                    웹서비스 취약점                                            해킹 발생 시점에 발생한 로그를 분석하여 공격여부, 공격방법등을 파악                       IIS 로그 : C:\WINNT\system32\LogFiles\W3SVC1                                                           SQL Injection                   파일업로드                                               MS-SQL 취약점                                    Default password 사용                   패치 미실시                                                                               인터넷 임시파일 분석                    브라우저와 연관                            접속한 사이트의 페이지가 임시파일에 저장됨               접속 흔적이 히스토리에 남음               사용된 쿠키가 디스크에 저장됨                                   파일 위치 : indexView 도구를 다운받아 쉽게 분석 가능                            임시 인터넷 객체 : Download Program Files - 인터넷에서 다운로드 받은 파일들               임시 인터넷 파일 : Local Settings\Temporary Internet Files - 방문한 사이트 페이지               열어본 페이지 : Local Settings\History - 방문한 사이트 이름               임시쿠키 파일 : Local Settings\COOKIES">
+
+
+  <meta name="author" content="HY03">
+  
+  <meta property="article:author" content="HY03">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Bluesplatter">
+<meta property="og:title" content="정보보안 - 윈도우 침해사고 상세분석">
+<meta property="og:url" content="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-WindowsDetailAnalysis/">
+
+
+  <meta property="og:description" content="윈도우 침해사고 상세분석    분류            레지스트리 분석                    시스템이 운영되는데 필요한 정보를 담고 있는 파일                            설치된 S/W 정보, 환경설정, 임시저장값               시스템의 모든 정보 포함                                   공격자의 흔적을 알아낼 수 있음           시작프로그램 등록 관련 레지스트리                            HKLM\Software\Microsoft\Windows\CurrentVersion\Run               HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce               HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnceEx               HKLM\Software\Microsoft\Windows\CurrentVersion\RunServices               HKLM\Software\Microsoft\Windows\CurrentVersion\RunServicesOnce               HKLM\Software\Microsoft\Windows\CurrentVersion\Windows\Load               HKLM\Software\Microsoft\Windows\CurrentVersion\Windows\Run               HKLM\Software\Microsoft\Windows\CurrentVersion\Winlogon\UserInit               HKCU\Software\Microsoft\Windows\CurrentVersion\Run               HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnce               HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnceEx               HKCU\Software\Microsoft\Windows\CurrentVersion\RunServicesOnce                                   Autoruns : 시작 레지스트리 Check (Sysinternals.com)           공격자가 남긴 레지스트리 정보 수집                            최근 사용한 문서 목록                                    HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Recentdocs                                               터미널 서비스 접속 목록                                    HKCU\Software\Microsoft\Terminal Server Client\Default                                               설치된 S/W 목록               열어본 파일 목록                                               자동실행 점검 - Autoruns 를 통해 점검 가능                    서비스 점검                            공격자가 윈도우 서비스에 악성 프로그램을 등록, 시스템 재부팅 시 악성 프로그램 실행               생소한 이름의 서비스               Description 영역의 내용이 비어있는 경우 / 영문으로 되어있는 경우               정상적 서비스 이름을 위장하는 경우                                    Backup System                   Remote Administrator Service                   System spooler Host                   Windows Management Drivers                   Universal Serial Bus Control Component                                                                   스케줄된 작업 확인                            시스템이 재부팅 되더라도 악성 프로그램이 실행될 수 있음                                   자동시작 폴더 점검                            윈도우 재시작 시 자동시작 폴더 내 각종 프로그램들을 실행함               c:\Documents and Settings\Administrator\시작메뉴\프로그램\시작프로그램               HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ShellFolders                                   Winlogon Notification DLL                            적은 코드로 구현이 가능, 안전모드에서 원하는 코드를 실행 가능               WinLogon.exe 파일에서 발생하는 이벤트 핸들러를 이용하여 원하는 코드를 실행 가능                                    Logon, Logoff, Startup, Shutdown, ScreenSaver 이벤트 등                                               악성코드 활용 소지가 있음               HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify\                                    DllName = arprmdg0.dll (악성코드 예시)                   Startup = arprmdg0                   Impersonate = 1 (인격화. 보안 환경변수 설정시 주로 설정, 인증된 사용자 계정으로 자원 실행할 수 있게 함)                                                                               이벤트 로그 분석                    공격자가 남긴 흔적, 활동 등의 정보를 찾아내기 위함           H/W, S/W, 시스템 문제 시 이벤트로그에 저장함 -&gt; 이벤트뷰어를 통해 확인                            관리도구 -&gt; 이벤트뷰어 (eventvwr.msc)                                    보안로그                   시스템로그                   응용프로그램로그                                                                   공격자들은 자신의 흔적을 최소화 하기 위해 ClearEvent 프로그램을 사용 (이벤트로그를 삭제)           공격자가 남기는 로그 유형                            로컬 로그온 시도 실패               계정의 잘못된 사용 (없는 계정 로그인 시도)               계정 잠김               터미널서비스 공격               사용자계정 생성                                               MAC time 분석                    파일, 디렉터리 등 파일시스템은 시간속성을 가지고 있음           공격자가 파일시스템을 통해서 어떠한 행동을 했는지 판단 (어떤 파일이 생성, 수정, 실행되었는지?)           mtime : 파일 수정, 생성           atime : 최근 파일을 읽은 시간, 실행한 시간           ctime : 파일 속성 변경 시간                       침입방법 분석                    공격자가 어떻게 침입했는지 분석 (사고 조치 이외에 원인분석을 하지 않으면 사고가 재발할 수 있음)           윈도우에서 해킹발생 취약점 분류 (대부분 해킹사고는 시스템 보안 업데이트 미실시, 웹서비스 취약점이 원인)                            윈도우 취약점                                    시스템 취약점 (보안업데이트 미실시)                                            최종 보안 업데이트 날짜 파악이 중요                                                    원격 공격 가능한 취약점이 있는지 파악                                                                       MS 에서 제공하는 Microsoft Baseline Security Analyzer 로 확인                                                    보안패치 상태                           IIS 상태                           SQL 상태                                                                                                           패스워드 취약점                   잘못된 공유설정                                               웹 어플리케이션 취약점                                    웹서비스 취약점                                            해킹 발생 시점에 발생한 로그를 분석하여 공격여부, 공격방법등을 파악                       IIS 로그 : C:\WINNT\system32\LogFiles\W3SVC1                                                           SQL Injection                   파일업로드                                               MS-SQL 취약점                                    Default password 사용                   패치 미실시                                                                               인터넷 임시파일 분석                    브라우저와 연관                            접속한 사이트의 페이지가 임시파일에 저장됨               접속 흔적이 히스토리에 남음               사용된 쿠키가 디스크에 저장됨                                   파일 위치 : indexView 도구를 다운받아 쉽게 분석 가능                            임시 인터넷 객체 : Download Program Files - 인터넷에서 다운로드 받은 파일들               임시 인터넷 파일 : Local Settings\Temporary Internet Files - 방문한 사이트 페이지               열어본 페이지 : Local Settings\History - 방문한 사이트 이름               임시쿠키 파일 : Local Settings\COOKIES">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-01-01T09:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-WindowsDetailAnalysis/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "HY03",
+      "url": "https://bluesplatter.com/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Bluesplatter Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo/logo.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          세상에 남기는 작은 흔적
+          <span class="site-subtitle">Bluesplatter</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/">연도별 포스트</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="https://bluesplatter.com/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#is_certification" itemprop="item"><span itemprop="name">Is_certification</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">정보보안 - 윈도우 침해사고 상세분석</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/profile/photo.jpg" alt="HY03" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">HY03</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>저는 전문가가 아니고 이것 저것 알아보는 비전문가 입니다. <br /> 틀린 내용이 기술되어도 너그러이 봐주시고 댓글을 남겨주셨으면 좋겠습니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="http://bluesplatter.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:hyunik03@gmail.com">
+            <meta itemprop="email" content="hyunik03@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">이메일</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="정보보안 - 윈도우 침해사고 상세분석">
+    <meta itemprop="description" content="윈도우 침해사고 상세분석  분류          레지스트리 분석                  시스템이 운영되는데 필요한 정보를 담고 있는 파일                          설치된 S/W 정보, 환경설정, 임시저장값              시스템의 모든 정보 포함                                공격자의 흔적을 알아낼 수 있음          시작프로그램 등록 관련 레지스트리                          HKLM\Software\Microsoft\Windows\CurrentVersion\Run              HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce              HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnceEx              HKLM\Software\Microsoft\Windows\CurrentVersion\RunServices              HKLM\Software\Microsoft\Windows\CurrentVersion\RunServicesOnce              HKLM\Software\Microsoft\Windows\CurrentVersion\Windows\Load              HKLM\Software\Microsoft\Windows\CurrentVersion\Windows\Run              HKLM\Software\Microsoft\Windows\CurrentVersion\Winlogon\UserInit              HKCU\Software\Microsoft\Windows\CurrentVersion\Run              HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnce              HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnceEx              HKCU\Software\Microsoft\Windows\CurrentVersion\RunServicesOnce                                Autoruns : 시작 레지스트리 Check (Sysinternals.com)          공격자가 남긴 레지스트리 정보 수집                          최근 사용한 문서 목록                                  HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Recentdocs                                            터미널 서비스 접속 목록                                  HKCU\Software\Microsoft\Terminal Server Client\Default                                            설치된 S/W 목록              열어본 파일 목록                                          자동실행 점검 - Autoruns 를 통해 점검 가능                  서비스 점검                          공격자가 윈도우 서비스에 악성 프로그램을 등록, 시스템 재부팅 시 악성 프로그램 실행              생소한 이름의 서비스              Description 영역의 내용이 비어있는 경우 / 영문으로 되어있는 경우              정상적 서비스 이름을 위장하는 경우                                  Backup System                  Remote Administrator Service                  System spooler Host                  Windows Management Drivers                  Universal Serial Bus Control Component                                                              스케줄된 작업 확인                          시스템이 재부팅 되더라도 악성 프로그램이 실행될 수 있음                                자동시작 폴더 점검                          윈도우 재시작 시 자동시작 폴더 내 각종 프로그램들을 실행함              c:\Documents and Settings\Administrator\시작메뉴\프로그램\시작프로그램              HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ShellFolders                                Winlogon Notification DLL                          적은 코드로 구현이 가능, 안전모드에서 원하는 코드를 실행 가능              WinLogon.exe 파일에서 발생하는 이벤트 핸들러를 이용하여 원하는 코드를 실행 가능                                  Logon, Logoff, Startup, Shutdown, ScreenSaver 이벤트 등                                            악성코드 활용 소지가 있음              HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify\                                  DllName = arprmdg0.dll (악성코드 예시)                  Startup = arprmdg0                  Impersonate = 1 (인격화. 보안 환경변수 설정시 주로 설정, 인증된 사용자 계정으로 자원 실행할 수 있게 함)                                                                        이벤트 로그 분석                  공격자가 남긴 흔적, 활동 등의 정보를 찾아내기 위함          H/W, S/W, 시스템 문제 시 이벤트로그에 저장함 -&gt; 이벤트뷰어를 통해 확인                          관리도구 -&gt; 이벤트뷰어 (eventvwr.msc)                                  보안로그                  시스템로그                  응용프로그램로그                                                              공격자들은 자신의 흔적을 최소화 하기 위해 ClearEvent 프로그램을 사용 (이벤트로그를 삭제)          공격자가 남기는 로그 유형                          로컬 로그온 시도 실패              계정의 잘못된 사용 (없는 계정 로그인 시도)              계정 잠김              터미널서비스 공격              사용자계정 생성                                          MAC time 분석                  파일, 디렉터리 등 파일시스템은 시간속성을 가지고 있음          공격자가 파일시스템을 통해서 어떠한 행동을 했는지 판단 (어떤 파일이 생성, 수정, 실행되었는지?)          mtime : 파일 수정, 생성          atime : 최근 파일을 읽은 시간, 실행한 시간          ctime : 파일 속성 변경 시간                    침입방법 분석                  공격자가 어떻게 침입했는지 분석 (사고 조치 이외에 원인분석을 하지 않으면 사고가 재발할 수 있음)          윈도우에서 해킹발생 취약점 분류 (대부분 해킹사고는 시스템 보안 업데이트 미실시, 웹서비스 취약점이 원인)                          윈도우 취약점                                  시스템 취약점 (보안업데이트 미실시)                                          최종 보안 업데이트 날짜 파악이 중요                                                  원격 공격 가능한 취약점이 있는지 파악                                                                    MS 에서 제공하는 Microsoft Baseline Security Analyzer 로 확인                                                  보안패치 상태                          IIS 상태                          SQL 상태                                                                                                      패스워드 취약점                  잘못된 공유설정                                            웹 어플리케이션 취약점                                  웹서비스 취약점                                          해킹 발생 시점에 발생한 로그를 분석하여 공격여부, 공격방법등을 파악                      IIS 로그 : C:\WINNT\system32\LogFiles\W3SVC1                                                        SQL Injection                  파일업로드                                            MS-SQL 취약점                                  Default password 사용                  패치 미실시                                                                        인터넷 임시파일 분석                  브라우저와 연관                          접속한 사이트의 페이지가 임시파일에 저장됨              접속 흔적이 히스토리에 남음              사용된 쿠키가 디스크에 저장됨                                파일 위치 : indexView 도구를 다운받아 쉽게 분석 가능                          임시 인터넷 객체 : Download Program Files - 인터넷에서 다운로드 받은 파일들              임시 인터넷 파일 : Local Settings\Temporary Internet Files - 방문한 사이트 페이지              열어본 페이지 : Local Settings\History - 방문한 사이트 이름              임시쿠키 파일 : Local Settings\COOKIES                                          ">
+    <meta itemprop="datePublished" content="2022-01-01T09:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">정보보안 - 윈도우 침해사고 상세분석
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-01-01T09:00:00+09:00">January 1, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#윈도우-침해사고-상세분석">윈도우 침해사고 상세분석</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <h1 id="윈도우-침해사고-상세분석">윈도우 침해사고 상세분석</h1>
+<ul>
+  <li>분류
+    <ul>
+      <li>레지스트리 분석
+        <ul>
+          <li>시스템이 운영되는데 필요한 정보를 담고 있는 파일
+            <ul>
+              <li>설치된 S/W 정보, 환경설정, 임시저장값</li>
+              <li>시스템의 모든 정보 포함</li>
+            </ul>
+          </li>
+          <li>공격자의 흔적을 알아낼 수 있음</li>
+          <li>시작프로그램 등록 관련 레지스트리
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">HKLM\Software\Microsoft\Windows\CurrentVersion\Run</code></li>
+              <li><code class="language-plaintext highlighter-rouge">HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce</code></li>
+              <li><code class="language-plaintext highlighter-rouge">HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnceEx</code></li>
+              <li><code class="language-plaintext highlighter-rouge">HKLM\Software\Microsoft\Windows\CurrentVersion\RunServices</code></li>
+              <li><code class="language-plaintext highlighter-rouge">HKLM\Software\Microsoft\Windows\CurrentVersion\RunServicesOnce</code></li>
+              <li><code class="language-plaintext highlighter-rouge">HKLM\Software\Microsoft\Windows\CurrentVersion\Windows\Load</code></li>
+              <li><code class="language-plaintext highlighter-rouge">HKLM\Software\Microsoft\Windows\CurrentVersion\Windows\Run</code></li>
+              <li><code class="language-plaintext highlighter-rouge">HKLM\Software\Microsoft\Windows\CurrentVersion\Winlogon\UserInit</code></li>
+              <li><code class="language-plaintext highlighter-rouge">HKCU\Software\Microsoft\Windows\CurrentVersion\Run</code></li>
+              <li><code class="language-plaintext highlighter-rouge">HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnce</code></li>
+              <li><code class="language-plaintext highlighter-rouge">HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnceEx</code></li>
+              <li><code class="language-plaintext highlighter-rouge">HKCU\Software\Microsoft\Windows\CurrentVersion\RunServicesOnce</code></li>
+            </ul>
+          </li>
+          <li><code class="language-plaintext highlighter-rouge">Autoruns</code> : 시작 레지스트리 Check (Sysinternals.com)</li>
+          <li>공격자가 남긴 레지스트리 정보 수집
+            <ul>
+              <li>최근 사용한 문서 목록
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Recentdocs</code></li>
+                </ul>
+              </li>
+              <li>터미널 서비스 접속 목록
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">HKCU\Software\Microsoft\Terminal Server Client\Default</code></li>
+                </ul>
+              </li>
+              <li>설치된 S/W 목록</li>
+              <li>열어본 파일 목록</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>자동실행 점검 - <code class="language-plaintext highlighter-rouge">Autoruns</code> 를 통해 점검 가능
+        <ul>
+          <li>서비스 점검
+            <ul>
+              <li>공격자가 윈도우 서비스에 악성 프로그램을 등록, 시스템 재부팅 시 악성 프로그램 실행</li>
+              <li>생소한 이름의 서비스</li>
+              <li>Description 영역의 내용이 비어있는 경우 / 영문으로 되어있는 경우</li>
+              <li>정상적 서비스 이름을 위장하는 경우
+                <ul>
+                  <li>Backup System</li>
+                  <li>Remote Administrator Service</li>
+                  <li>System spooler Host</li>
+                  <li>Windows Management Drivers</li>
+                  <li>Universal Serial Bus Control Component</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>스케줄된 작업 확인
+            <ul>
+              <li>시스템이 재부팅 되더라도 악성 프로그램이 실행될 수 있음</li>
+            </ul>
+          </li>
+          <li>자동시작 폴더 점검
+            <ul>
+              <li>윈도우 재시작 시 자동시작 폴더 내 각종 프로그램들을 실행함</li>
+              <li><code class="language-plaintext highlighter-rouge">c:\Documents and Settings\Administrator\시작메뉴\프로그램\시작프로그램</code></li>
+              <li><code class="language-plaintext highlighter-rouge">HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ShellFolders</code></li>
+            </ul>
+          </li>
+          <li>Winlogon Notification DLL
+            <ul>
+              <li>적은 코드로 구현이 가능, 안전모드에서 원하는 코드를 실행 가능</li>
+              <li>WinLogon.exe 파일에서 발생하는 이벤트 핸들러를 이용하여 원하는 코드를 실행 가능
+                <ul>
+                  <li>Logon, Logoff, Startup, Shutdown, ScreenSaver 이벤트 등</li>
+                </ul>
+              </li>
+              <li>악성코드 활용 소지가 있음</li>
+              <li><code class="language-plaintext highlighter-rouge">HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify\</code>
+                <ul>
+                  <li>DllName = arprmdg0.dll (악성코드 예시)</li>
+                  <li>Startup = arprmdg0</li>
+                  <li>Impersonate = 1 (인격화. 보안 환경변수 설정시 주로 설정, 인증된 사용자 계정으로 자원 실행할 수 있게 함)</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>이벤트 로그 분석
+        <ul>
+          <li>공격자가 남긴 흔적, 활동 등의 정보를 찾아내기 위함</li>
+          <li>H/W, S/W, 시스템 문제 시 이벤트로그에 저장함 -&gt; 이벤트뷰어를 통해 확인
+            <ul>
+              <li>관리도구 -&gt; 이벤트뷰어 (eventvwr.msc)
+                <ul>
+                  <li>보안로그</li>
+                  <li>시스템로그</li>
+                  <li>응용프로그램로그</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>공격자들은 자신의 흔적을 최소화 하기 위해 <code class="language-plaintext highlighter-rouge">ClearEvent</code> 프로그램을 사용 (이벤트로그를 삭제)</li>
+          <li>공격자가 남기는 로그 유형
+            <ul>
+              <li>로컬 로그온 시도 실패</li>
+              <li>계정의 잘못된 사용 (없는 계정 로그인 시도)</li>
+              <li>계정 잠김</li>
+              <li>터미널서비스 공격</li>
+              <li>사용자계정 생성</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>MAC time 분석
+        <ul>
+          <li>파일, 디렉터리 등 파일시스템은 시간속성을 가지고 있음</li>
+          <li>공격자가 파일시스템을 통해서 어떠한 행동을 했는지 판단 (어떤 파일이 생성, 수정, 실행되었는지?)</li>
+          <li>mtime : 파일 수정, 생성</li>
+          <li>atime : 최근 파일을 읽은 시간, 실행한 시간</li>
+          <li>ctime : 파일 속성 변경 시간</li>
+        </ul>
+      </li>
+      <li>침입방법 분석
+        <ul>
+          <li>공격자가 어떻게 침입했는지 분석 (사고 조치 이외에 원인분석을 하지 않으면 사고가 재발할 수 있음)</li>
+          <li>윈도우에서 해킹발생 취약점 분류 (대부분 해킹사고는 시스템 보안 업데이트 미실시, 웹서비스 취약점이 원인)
+            <ul>
+              <li>윈도우 취약점
+                <ul>
+                  <li>시스템 취약점 (보안업데이트 미실시)
+                    <ul>
+                      <li>최종 보안 업데이트 날짜 파악이 중요
+                        <ul>
+                          <li>원격 공격 가능한 취약점이 있는지 파악</li>
+                        </ul>
+                      </li>
+                      <li>MS 에서 제공하는 Microsoft Baseline Security Analyzer 로 확인
+                        <ul>
+                          <li>보안패치 상태</li>
+                          <li>IIS 상태</li>
+                          <li>SQL 상태</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>패스워드 취약점</li>
+                  <li>잘못된 공유설정</li>
+                </ul>
+              </li>
+              <li>웹 어플리케이션 취약점
+                <ul>
+                  <li>웹서비스 취약점
+                    <ul>
+                      <li>해킹 발생 시점에 발생한 로그를 분석하여 공격여부, 공격방법등을 파악</li>
+                      <li>IIS 로그 : <code class="language-plaintext highlighter-rouge">C:\WINNT\system32\LogFiles\W3SVC1</code></li>
+                    </ul>
+                  </li>
+                  <li>SQL Injection</li>
+                  <li>파일업로드</li>
+                </ul>
+              </li>
+              <li>MS-SQL 취약점
+                <ul>
+                  <li>Default password 사용</li>
+                  <li>패치 미실시</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>인터넷 임시파일 분석
+        <ul>
+          <li>브라우저와 연관
+            <ul>
+              <li>접속한 사이트의 페이지가 임시파일에 저장됨</li>
+              <li>접속 흔적이 히스토리에 남음</li>
+              <li>사용된 쿠키가 디스크에 저장됨</li>
+            </ul>
+          </li>
+          <li>파일 위치 : <code class="language-plaintext highlighter-rouge">indexView</code> 도구를 다운받아 쉽게 분석 가능
+            <ul>
+              <li>임시 인터넷 객체 : <code class="language-plaintext highlighter-rouge">Download Program Files</code> - 인터넷에서 다운로드 받은 파일들</li>
+              <li>임시 인터넷 파일 : <code class="language-plaintext highlighter-rouge">Local Settings\Temporary Internet Files</code> - 방문한 사이트 페이지</li>
+              <li>열어본 페이지 : <code class="language-plaintext highlighter-rouge">Local Settings\History</code> - 방문한 사이트 이름</li>
+              <li>임시쿠키 파일 : <code class="language-plaintext highlighter-rouge">Local Settings\COOKIES</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#%EC%83%81%EC%84%B8%EB%B6%84%EC%84%9D" class="page__taxonomy-item" rel="tag">상세분석</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#%EC%9C%88%EB%8F%84%EC%9A%B0-%EC%B9%A8%ED%95%B4%EC%82%AC%EA%B3%A0" class="page__taxonomy-item" rel="tag">윈도우 침해사고</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88%EA%B8%B0%EC%82%AC" class="page__taxonomy-item" rel="tag">정보보안기사</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#is-certification" class="page__taxonomy-item" rel="tag">IS_Certification</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2022-01-01T09:00:00+09:00">January 1, 2022</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+%EC%9C%88%EB%8F%84%EC%9A%B0+%EC%B9%A8%ED%95%B4%EC%82%AC%EA%B3%A0+%EC%83%81%EC%84%B8%EB%B6%84%EC%84%9D%20https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-IncidentAnalysis-WindowsDetailAnalysis%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-IncidentAnalysis-WindowsDetailAnalysis%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-IncidentAnalysis-WindowsDetailAnalysis%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/is_certification/IS-IncidentAnalysis-WindowsRootkit/" class="pagination--pager" title="정보보안 - 윈도우 루트킷 점검
+">이전</a>
+    
+    
+      <a href="/is_certification/IS-IncidentAnalysis-WindowsHackingTools/" class="pagination--pager" title="정보보안 - 윈도우 해킹프로그램 분석
+">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-IncidentAnalysis-LinuxInitialResponse/" rel="permalink">정보보안 - 리눅스 사고 분석
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-01-12T09:00:00+09:00">January 12, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">리눅스 침해사고 분석
+
+  기본 정보 수집
+    
+      OS 종류, 커널 버전
+      사용 용도
+      운영중인 서비스
+      네트워크 접속 현황
+      보안 패치 적용 현황
+      네트워크 구성 형태 및 보안 장비 운영 현황
+    
+  
+  휘발성 정보...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-IncidentAnalysis-WindowsHackingTools/" rel="permalink">정보보안 - 윈도우 해킹프로그램 분석
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-01-07T09:00:00+09:00">January 7, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">윈도우 해킹프로그램 분석
+
+  해킹프로그램 분석
+    
+      분석환경 구성
+        
+          최소 2개 이상의 가상서버를 구동 (물리적 서버 필요)
+            
+              Virtual Box
+              VMWare W...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-IncidentAnalysis-WindowsRootkit/" rel="permalink">정보보안 - 윈도우 루트킷 점검
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-12-31T09:00:00+09:00">December 31, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">윈도우 루트킷 점검
+
+  Rootkit
+    
+      정의
+        
+          시스템에 탐지되지 않도록 하는 코드, 프로그램 집합
+          시스템 관리자 권한을 획득하기 위한 프로그램
+        
+      
+      구분
+        
+    ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-IncidentAnalysis-WindowsInitialResponse/" rel="permalink">정보보안 - 윈도우 사고 초기분석
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2021-12-30T09:00:00+09:00">December 30, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">윈도우 침해사고 초기분석
+
+  초기분석 : 현재 피해시스템의 상황을 빠른 시간 안에 파악한다. (포렌식 툴을 사용하지 않는다는 가정 / 커맨드에서 실행)
+    
+      시스템 시간 확인
+        
+          공격자가 시스템 시간을 변경할 수 있음
+         ...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+<!--
+<script>
+	(function(d, h, m){
+    var js, fjs = d.getElementsByTagName(h)[0];
+    if (d.getElementById(m)){return;}
+    js = d.createElement(h); js.id = m;
+    js.onload = function(){
+        window.makerWidgetComInit({
+        position: "left",          
+        widget: "eqypoqmawbcz3azh-usiy9q7ma4ong1w1-juelcm3zfgcuwjds"                
+    })};
+    js.src = "https://makerwidget.com/js/embed.js";
+    fjs.parentNode.insertBefore(js, fjs)
+	}(document, "script", "dhm"))
+</script>
+-->
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:hyunik03@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 HY03. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://bluesplatter.com/is_certification/IS-IncidentAnalysis-WindowsDetailAnalysis/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/is_certification/IS-IncidentAnalysis-WindowsDetailAnalysis"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://bluesplatter.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

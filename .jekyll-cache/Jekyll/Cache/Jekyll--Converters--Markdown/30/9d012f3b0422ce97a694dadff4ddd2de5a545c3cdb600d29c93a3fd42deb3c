@@ -1,0 +1,310 @@
+I"-<h1 id="침해사고-개요">침해사고 개요</h1>
+<ul>
+  <li>침해사고란?
+    <ul>
+      <li>정보통신망 이용촉진 및 정보보호 등에 관한 법률 제2조 1항 7조
+        <ul>
+          <li>“침해사고”란 해킹, 컴퓨터바이러스, 논리폭탄, 메일폭탄, 서비스 거부 또는 고출력 전자기파 등의 방법으로 정보통신망 또는 이와 관련된 정보시스템을 공격하는 행위를 하여 발생한 사태를 말한다.</li>
+        </ul>
+      </li>
+      <li>바이러스, 트로이목마, 웜, 백도어, 악성코드 등을 이용한 공격</li>
+      <li>비인가된 System, 파일, 네트워크 정보 접근</li>
+      <li>비인가된 사용자가 서비스를 무단 이용</li>
+      <li>서비스 거부 등 네트워크, 시스템의 마비, 파괴</li>
+    </ul>
+  </li>
+  <li>침해사고 대응 7단게
+    <ul>
+      <li>사고 발생,발견 또는 발생 시점 이전 단게
+        <ul>
+          <li>사고 전 준비</li>
+        </ul>
+      </li>
+      <li>침해 사고 발생
+        <ul>
+          <li>사고 탐지</li>
+          <li>초기 대응 : 기록, 침해사고 대응팀에 신고, 해당 부서에 통지</li>
+          <li>대응 전략 체게화 : 최적의 전략을 결정 (정책, 기술, 법…)</li>
+          <li>사고 조사 : 언제, 누구에 의해서, 피해 규모는 어느정도인지, 피해확산을 어떻게 방지할 것인지, 최소화 방안, 재발방지
+            <ul>
+              <li>데이터 수집 : 증거의 완벽한 확보</li>
+              <li>데이터 분석</li>
+            </ul>
+          </li>
+          <li>보고서 작성 : 경영진이 이해할 수 있는 내용으로 작성</li>
+        </ul>
+      </li>
+      <li>복구, 해결 과정</li>
+    </ul>
+  </li>
+  <li>KISA 분석 요청 시
+    <ul>
+      <li>악성코드, 프로세스 등을 제거하면 안됌</li>
+      <li>반드시 제거해야 하는 경우
+        <ul>
+          <li>악성파일 경로 확보</li>
+          <li>악성파일 백업</li>
+          <li>MAC Time 확보 (생성, 접근, 수정시간)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="사고-유형별-점검항목">사고 유형별 점검항목</h1>
+<ul>
+  <li>공통
+    <ul>
+      <li>계정
+        <ul>
+          <li>사용하지 않는 계정 확인 -&gt; 삭제</li>
+          <li>숨겨진 계정 확인 -&gt; 삭제</li>
+          <li>윈도우 : 관리도구 -&gt; 컴퓨터 관리도구 -&gt; 로컬사용자 및 그룹 -&gt; 사용자</li>
+          <li>리눅스 : <code class="language-plaintext highlighter-rouge">/etc/passwd</code> 확인
+            <ul>
+              <li>패스워드가 없는 계정</li>
+              <li>/bin/bash 쉘 확인</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>로그파일
+        <ul>
+          <li>이벤트로그, 시스템로그 변조 유무 확인</li>
+          <li>윈도우 : 관리도구 -&gt; 컴퓨터관리 -&gt; 이벤트뷰어</li>
+          <li>리눅스
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">/var/log/secure</code></li>
+              <li><code class="language-plaintext highlighter-rouge">/var/log/meesage</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>웹쉘
+        <ul>
+          <li>공격자가 원격에서 웹서버의 악의적 명령을 수행할 수 있도록 만들어진 파일</li>
+          <li>웹쉘 Signature 점검</li>
+          <li>asp, aspx, php, jsp, jpeg 등</li>
+          <li>업로드된 경로를 파악, 취약점을 제거</li>
+          <li>WHISTL 프로그램 사용하여 탐지</li>
+        </ul>
+      </li>
+      <li>백도어
+        <ul>
+          <li>nmap 이용 하여 의심가는 포트 확인</li>
+          <li>netstat, TCPview 등 이용</li>
+          <li>백도어 관련 서비스 삭제
+            <ul>
+              <li>방화벽 설정 (iptables, hosts.allow, hosts.deny)</li>
+            </ul>
+          </li>
+          <li>해당 포트 차단</li>
+          <li>바이너리 변조 확인</li>
+        </ul>
+      </li>
+      <li>루트킷
+        <ul>
+          <li>숨겨진 프로세스, 비정상적 프로세스 확인</li>
+          <li>변조된 파일, System 명령어 확인</li>
+          <li>윈도우 : IceSword</li>
+          <li>리눅스 : Rootkit Hunter, Check Rootkit</li>
+          <li>명령어 무결성 확인, 시스템 재설치 등</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>웹변조 (웹사이트 변조)
+    <ul>
+      <li>웹페이지
+        <ul>
+          <li>공통 확인 : index.html, main.html, default.html, index.php, main.php</li>
+          <li>IIS 계열 확인 : index.asp, main.asp, default.asp</li>
+          <li>메인페이지로 설정된 기타 파일 확인</li>
+          <li>웹페이지 내용이 변경된 경우 웹쉘의 감염 여부를 확인해야 함
+            <ul>
+              <li>WHISTL 프로그램을 통해 웹쉘 감염여부 확인</li>
+              <li>웹쉘이 발견된 경우 접속로그를 통해 웹쉘에 접근한 IP를 확인 / 차단</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>HTTP 메소드
+        <ul>
+          <li>윈도우 IIS 웹서버 : WebDAV 활성화 여부 확인
+            <ul>
+              <li>WebDAV : 사용자가 원격으로 서버에 저장되어 있는 파일을 편집, 관리하는 HTTP 확장 기능
+                <ul>
+                  <li>NAS 클라이언트를 사용해 HDD 드라이브처럼 사용</li>
+                </ul>
+              </li>
+              <li>관리도구 -&gt; IIS 관리 -&gt; 웹서비스 확장</li>
+              <li>활성화 되어 있는 경우 사용중지로 변경</li>
+            </ul>
+          </li>
+          <li>리눅스 Apache 웹서버 : <code class="language-plaintext highlighter-rouge">httpd.conf</code> 파일 확인
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">&lt;Directory /&gt;</code> 의 MOVE, PUT 메서드 의 Allow 여부 확인
+                <ul>
+                  <li>GET, POST 를 제외한 메서드들을 허용하지 않는 것이 바람직함</li>
+                  <li>HEAD : 웹서버 다운유무, 웹서버의 정보를 얻기 위함 (헤더만 전송)</li>
+                  <li>OPTIONS : 시스템에서 지원하는 메서드의 종류를 확인</li>
+                  <li>DELETE, COPY, MOVE</li>
+                  <li>PUT : POST와 유사하나 파일을 변조시킬 수 있음</li>
+                  <li>TRACE : 원격지 서버의 루프백 메시지를 호출하여 사용</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>웹로그 : 생성, 수정 시간 확인
+        <ul>
+          <li>윈도우 : IIS</li>
+          <li>리눅스 : <code class="language-plaintext highlighter-rouge">/usr/local/apache/logs</code></li>
+          <li>웹로그에서 특정 메서드의 사용유무를 확인 : grep</li>
+        </ul>
+      </li>
+      <li>IIS, Apache 등의 설정이 변경된 경우
+        <ul>
+          <li>Admin / root 등 서버관리자 계정 변경 필수</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>악성코드 경유지/유포지
+    <ul>
+      <li>웹페이지 / 접속 IP
+        <ul>
+          <li>악성코드 유포지 URL 이 삽입된 페이지를 검출</li>
+          <li>grep 명령어 사용</li>
+          <li>유포 페이지 생성, 수정 시간 확인
+            <ul>
+              <li>해당 시점 기준 접속 로그, 시스템 로그 등을 분석, 또 다른 침해 여부 확인</li>
+            </ul>
+          </li>
+          <li>접속 IP를 통해 좀비 PC를 찾아냄</li>
+          <li>WHISTL 을 이용해 웹쉘 감염 여부 확인, 삭제 조치</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>봇넷 C&amp;C
+    <ul>
+      <li>네트워크 연결 확인
+        <ul>
+          <li>윈도우 :
+            <ul>
+              <li>netstat -an</li>
+              <li>6666,6667 포트 등 의심포트 확인
+                <ul>
+                  <li>IRC (Internet Relay Chatting) Port (6667,6668)</li>
+                  <li>사용자 몰래 특정 IRC 서버에 접속하도록 함</li>
+                </ul>
+              </li>
+              <li>wireshark 를 통한 패킷 분석</li>
+            </ul>
+          </li>
+          <li>리눅스 :
+            <ul>
+              <li>netstat -an</li>
+              <li>lsof -i</li>
+              <li>tcpdump 를 통한 패킷 분석</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>외부 네트워크와 연결된 백도어 포트가 발견된 경우
+        <ul>
+          <li>방화벽을 이용해 해당 포트 접근 제한</li>
+          <li>해당 파일 삭제 조치</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>해킹 경유지
+    <ul>
+      <li>네트워크 연결
+        <ul>
+          <li>nmap, netstat 등을 활용하여 파악</li>
+        </ul>
+      </li>
+      <li>윈도우
+        <ul>
+          <li>RRAS(Routing and Remote Access Service) 서비스 중지
+            <ul>
+              <li>내부 네트워크에서 외부 네트워크 연결 시 사용</li>
+            </ul>
+          </li>
+          <li>이벤트 로그 분석을 통해 RRAS 를 실행한 서비스, IP를 확인</li>
+          <li>컴퓨터관리 -&gt; 서비스 및 응용프로그램 -&gt; 서비스 -&gt; Routing And Remote Access Service 사용안함</li>
+        </ul>
+      </li>
+      <li>리눅스
+        <ul>
+          <li>PPTP(Point-to-Point Tunneling Protocol) 서비스 중지
+            <ul>
+              <li>VPN 프로토콜, MS에서 개발</li>
+              <li>윈도우에서 오랫동안 사용</li>
+            </ul>
+          </li>
+          <li>시스템 로그를 이용해 PPTP 를 실행한 로그, IP를 확인 (21:37)</li>
+          <li>
+            <table>
+              <tbody>
+                <tr>
+                  <td>ps -ef</td>
+                  <td>grep pptpd</td>
+                </tr>
+              </tbody>
+            </table>
+          </li>
+        </ul>
+      </li>
+      <li>설치 프로그램
+        <ul>
+          <li>윈도우 : 제어판 -&gt; 프로그램 추가/제거 -&gt; CCProxy, RealVNC 등의 설치여부 확인</li>
+          <li>리눅스 : Rootkit Hunter 등을 활용</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="사고-유형별-대응전략">사고 유형별 대응전략</h1>
+<ul>
+  <li>DoS 공격
+    <ul>
+      <li>라우터 재설정 (공격 완화)</li>
+    </ul>
+  </li>
+  <li>비인가 사용
+    <ul>
+      <li>업무용 컴퓨터 오용 -&gt; 포렌식 이미징 작업, 용의자와 면담, 범인 식별, 증거확보</li>
+      <li>징계 결정 (직위, 과거조직 등 고려)</li>
+    </ul>
+  </li>
+  <li>파괴 행위
+    <ul>
+      <li>웹사이트가 손상이 되는 경우</li>
+      <li>복구 필요</li>
+    </ul>
+  </li>
+  <li>정보의 도난
+    <ul>
+      <li>신용카드 도난, 고객정보 유출</li>
+      <li>관련시스템 이미지 확보</li>
+      <li>수사기관 참여</li>
+      <li>도난신고, 법적 대응</li>
+    </ul>
+  </li>
+  <li>컴퓨터 침입
+    <ul>
+      <li>buffer overflow, IIS 등 으로 침입</li>
+      <li>비인가 접속 차단</li>
+      <li>취약점 식별</li>
+      <li>보안 패치</li>
+      <li>범인 식별</li>
+    </ul>
+  </li>
+</ul>
+:ET
