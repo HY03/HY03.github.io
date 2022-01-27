@@ -1,0 +1,1123 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.20.2 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>정보보안 - snort | Bluesplatter</title>
+<meta name="description" content="snort    개요            IDS (네트워크 이상징후 감시) 중 하나                    모든 트래픽을 감시하거나 샘플링을 통해 감시           미리 설정값을 저장           DB 와 비교, 알려진 공격 시그니처와 비교           공격자의 침입 경로 Block           사용자의 패턴을 분석해서 이상징후 탐지                       마틴 로시가 1998 년에 sniffer and more 라는 표어 (네트워크 트래픽을 더 많이 감시) 로 개발       프로토콜 검색, 컨텐츠 분석, 웜, 취약점 공격시도 탐지, 포트스캔, CGI           기능            snort 의 운영모드                    Sniffer Mode           Packet Logger Mode           Network IDS/IPS Mode                       패킷 스니퍼                    패킷 스니핑을 통해 계속 화면에 출력 -&gt; 작은 네트워크 규모에서 사용                       패킷 로거                    로그 남기기                       네트워크 IDS/IPS                    네트워크 트래픽 분석을 통한 공격 탐지/차단                           설치            RHEL (CentOS) 기준                    DAQ (Data Acquistion Package) 설치           Snort 패키지 설치                       Talos(제작사) 에서 Ruleset(최근 공격 패턴을 탐지할 수 있는) 을 만들어 배포           Snort 구조            sniffer : 패킷을 보기 좋게 Decode       preprocessor : 비정상 헤더구조 패킷, 트래픽 구분       Detection Engine : Rule 기반의 탐지 엔진, 사전 정의된 Rule 에 매칭 되는지 확인, Payload 확인       Alert / logging : Ruleset 에 일치하는 패킷에 대한 처리방법, SMB, SNMP, trap 등을 활용해 저장       설정값 저장 위치 : /etc/snort/snort.conf                    모니터링하고자 하는 Network 설정           Rules 위치 수정                           Snort 명령어            Sniffer Mode                    TCP/IP 패킷 헤더를 출력 : snort -v           TCP/ICMP/UDP 헤더와 IP를 출력 : snort -vd           패킷 데이터를 추가해서 표현하기 위한 명령어 : snort -vde           -v : snort 를 패킷 sniffing 모드로 변경           -d : 모든 네트워크 계층 포함           -e : 데이터링크 계층의 헤더를 포함           -c : 패킷 검출                           Snort Rule / Signature            Header                    내용                            처리방식               프로토콜               IP주소               포트번호                                   Rule 헤더 설정                            Rule Actions                                    패킷이 탐지되었을 때 처리방식                   8가지 유형이 존재                                            alert : 알람을 발생시키고 로그를 남김                       log : 패킷을 로그에 남김                       pass : 패킷을 무시함                       activate : alert 을 발생시키고, dynamic rule을 활성화                       dynamic : activate rule 에 의해 활성화 되고, log rule 과 동일하게 동작                       drop : 패킷을 차단하고 로그에 남김                       reject : 패킷을 차단하고 로그를 남김, 메시지를 전달                                                    TCP : TCP RST                           UDP : ICMP port Unreachable                                                                       sdrop : 패킷을 차단하지만 로그를 남기지 않음 (silent drop)                                                           Rule 이 매칭 되었을 때 처리방식                                               Protocols                                    탐지할 프로토콜을 설정.                   TCP, IP, UDP, ICMP                                               IP Addresses                                    출발지, 목적지 IP 주소.                   단일 IP, IP대역(CIDR표기), IP 리스트 (구분자:,) 등으로 표기, 부정연산자(!) 표현가능                                               Port Numbers                                    출발지, 목적지 Port                   단일 Port, Port Range (:이용), Port 리스트 표현                                            1:1023 : 1~1023                       :39910 : 1 ~ 39910                                                                                       Direction Operator                                    방향 지시자                                            출발지 -&gt; 목적지 (단방향)                       출발지 &lt;&gt; 목적지 (양방향)                       출발지 &lt;- 목적지 : 이러한 표현은 사용하지 않음                                                                                                           형태 : action protocol ipaddr port direction ipaddr port                            alert tcp any any -&gt; 192.168.59.0/24 80                                    192.168.59 대역의 80 포트에 들어오는 패킷을 탐지                                               log tcp $EXTERNAL_NET any &lt;&gt; $HOME_NET 80                                    외부 네트워크 IP 에서 내부 네트워크 80 포트간 송수신되는 패킷을 탐지                   $EXTERNAL_NET, $HOME_NET : snort.conf 에 정의된 환경변수                                                                               Body : 옵션 설정                    내용                            패킷탐지 규칙을 명시               snort 설정 generator 를 사용하여 간편하게 입력하는 방법도 존재                                   종류                            일반               Payload / 범위 관련               Payload / 정규표현식               Payload / HTTP               이벤트 제한 관련                                   일반 옵션 설정                            msg : alert, log 출력 시 이벤트 명으로 사용               reference : rule 과 관련된 외부 취약점 정보 참조시 사용               sid : 룰 식별자                                    99이하 : 시스템 예약 sid                   100 ~ 1000000 : snort 에서 배포하는 ruleset 에서 사용하는 sid                   1000001 이상 : 사용자가 정의한 rule sid                                               classtype : 공격유형, 기본우선순위(위험도) 정의               priority : 위험도에 대한 숫자, classtype 에서 지정한 우선순위(위험도) 를 덮어씀               rev : revision - rule 수정횟수                                   Payload / 범위 관련 : 범위를 지정해주는 옵션을 사용하면 성능 향상, 오탐을 줄임                            옵션                                    content : Payload 에서 검사할 문자열 설정 (전체 Payload 비교)                                            문자열 설정 시 text, text/binary, binary 형태 중 하나로 설정, 부정연산자 사용 가능                                                    text 형식 : content:&quot;문자열                           binary 형식 : content:&quot;|FFFF|문자열&quot;                                                            FF : 헥사 값 예시                                                                                   text/binary 형식 : content:&quot;|FFFF|&quot;                           !(부정연산자) : content:!&quot;문자열&quot; - 문자열이 없는 것                           Escape(\) 처리 필요 문자 : &quot;, ;, \                                                                                                           uricontent : HTTP Client 의 요청 URI (전체 Payload X) 에서 검사할 문자열 설정                   offset : Payload 에서 Content 문자열을 검사할 시작 위치를 지정                                            Payload 의 첫 번째 바이트 위치는 0 부터 시작                                                           depth : offset 부터 몇 바이트까지 검사할 것인지 지정                   distance : content:&quot;문자열&quot; 이 매치된 경우                                            이후부터 몇 바이트 떨어진 위치에서 다음 content를 검사할 것인지 지정                                                           within : content:&quot;문자열&quot; 이 매치된 경우                                            distance 부터 몇 바이트 범위 내에서 다음 content를 검사할 것인지 지정                                                           nocase : Payload 검사 시 대소문자를 구분하지 않음 (바이너리 형식도 동일)                                               예시 (29:10)                                    FTP root 로그인 시도 탐지 (제공 Ruleset 사용)                           alert tcp any any -&gt; 10.10.10.0/24 21       (msg:&quot;FTP root user access&quot;;content:&quot;USER root&quot;;nocase;sid:100100;)                                                           테스트 (content)                           alert tcp $EXTERNAL_NET any -&gt; $HOME_NET any       (msg:&quot;[TEST]content_text&quot;;content:&quot;/etc/passwd&quot;;nocase;sid:1000020;)                                                           테스트 (offset) - 3번째 바이트부터 (2) 3바이트 이내(2~4)에 5457 문자열이 있는지 확인                           alert tcp $EXTERNAL_NET any -&gt; $HOME_NET any       (msg:&quot;[TEST]offset&quot;;content:&quot;5457&quot;;offset:2;depth:3;nocase;sid:1000030;)                                                           테스트 (distance, within) - 3번째 바이트부터 (2) 5바이트 이내 (2~6) 에서 369 문자열을 찾고, 4바이트 (7,8,9,A) 떨어진 위치 (B) 에서부터 3바이트 이내 (B,C,D) 에서 ABC 문자열을 찾아 만족하면 알림 출력                           alert tcp $EXTERNAL_NET any -&gt; $HOME_NET any       (msg:&quot;[TEST]distance, within&quot;;content:&quot;369&quot;;offset:2;depth:5;content:&quot;ABC&quot;;distance:4;within:3;nocase;sid:1000034;)                                                                                                           Payload / 정규표현식                            정규표현식 : 일정 규칙을 갖는 문자열을 표현하는 방식               옵션 : PCRE (Perl Compatible Regular Expression) - Snort 에서는 Perl 기반 정규표현을 사용                                    pcre=&quot;/정규표현삭/&quot;                                               메타문자                                    \ : escape 문자로 사용 (특수문자 기능 제거)                   ^ : 캐럿. 다음에 나오는 문자는 문자열의 시작을 의미                   $ : $ 앞의 문자는 문자열의 끝을 의미                   . : 임의의 문자 한 개를 의미함                   [] : 집합 안에 지정한 문자들 중 하나와 일치                                            [a-zA-Z] : 소문자 a-z 사이 + 대문자 A-Z 사이 중 한 문자와 일치                       [0-9] : 0~9 사이의 숫자 중 하나                                                           [^] : 집합 안에 지정한 문자들을 제외한 임의의 문자 중 하나와 일치                                            [^0-9] : 숫자를 제외한 임의의 문자 중 하나와 일치                                                           | : OR, 항목을 묶을 때는 소괄호를 이용                                            (x|y|z) : x or y or z                       (tree|leaf|can) : tree or leaf or can                                                           * : * 앞에 나오는 문자가 0회 이상 나타남을 의미                                            Hs*deo : Hssdeo(O), Hdeo(O), Hsdeo(O), Hssssdeo(O) …. Hudeo(X)                                                           + : + 앞에 나오는 문자가 1회 이상 나타남을 의미                   ? : ? 앞에 나오는 문자가 0회 또는 1회 이상 나타남을 의미                                            x? : x가 존재하거나 존재하지 않음                                                           x{n} : {n} 앞에 오는 문자가 정확히 n 회 나타남                                            Ha{3}deo : Haaadeo                                                           x{n,} : x를 n번 이상 반복함을 의미                                            Ha{3,}deo : Haaadeo(O), Haaaadeo(O), …, Haadeo(X)                                                           x{n,m} : x를 n번 이상 m번 이하 반복함을 의미                                               예시                                    Get 또는 Post 로 시작하는 ‘=’ 나 ‘a=a’ 가 들어간 패킷 찾기                           alert tcp $EXTERNAL_NET any -&gt; $HOME_NET any       (msg:&quot;[TEST]pcre&quot;;content:&quot;+or+&quot;;       content:&quot;%27%3D%27&quot;;nocase;       distance:0;within:20;pcre=&quot;/^(GET|POST)/&quot;; sid:100050;)                                                                 + 는 space 를 의미                       %27%3D%27 : a=a                                                                                                           Payload / HTTP 관련 : HTTP 패킷에 대해 전체가 아닌 특정필드에서 패턴을 검사하는 기능 지원                            HTTP 구조 : GET /index.php HTTP/1.1               옵션 : 옵션에 raw 가 붙은 경우 (http_raw_*) 디코딩 없이 검사. (uri, header, cookie)                                    http_method : HTTP 요청 시 method 부분을 검사 (GET)                   http_uri : HTTP URI 부분을 검사 (index.php)                   http_header : HTTP의 Header 부분을 검사 (response/request)                   http_cookie : HTTP의 Cookie 부분을 검사                   http_client_body : HTTP client 의 Body 부분을 검사 (POST 요청에 대한 검사)                   http_stat_code : HTTP 의 Status_code 부분을 검사 (HTTP/1.1 200 OK 의 200 부분)                   http_stat_msg : HTTP 의 Status_msg 부분을 검사 (HTTP/1.1 200 OK 의 OK 부분)                                               예시 : (20:30)">
+
+
+  <meta name="author" content="HY03">
+  
+  <meta property="article:author" content="HY03">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Bluesplatter">
+<meta property="og:title" content="정보보안 - snort">
+<meta property="og:url" content="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-snort/">
+
+
+  <meta property="og:description" content="snort    개요            IDS (네트워크 이상징후 감시) 중 하나                    모든 트래픽을 감시하거나 샘플링을 통해 감시           미리 설정값을 저장           DB 와 비교, 알려진 공격 시그니처와 비교           공격자의 침입 경로 Block           사용자의 패턴을 분석해서 이상징후 탐지                       마틴 로시가 1998 년에 sniffer and more 라는 표어 (네트워크 트래픽을 더 많이 감시) 로 개발       프로토콜 검색, 컨텐츠 분석, 웜, 취약점 공격시도 탐지, 포트스캔, CGI           기능            snort 의 운영모드                    Sniffer Mode           Packet Logger Mode           Network IDS/IPS Mode                       패킷 스니퍼                    패킷 스니핑을 통해 계속 화면에 출력 -&gt; 작은 네트워크 규모에서 사용                       패킷 로거                    로그 남기기                       네트워크 IDS/IPS                    네트워크 트래픽 분석을 통한 공격 탐지/차단                           설치            RHEL (CentOS) 기준                    DAQ (Data Acquistion Package) 설치           Snort 패키지 설치                       Talos(제작사) 에서 Ruleset(최근 공격 패턴을 탐지할 수 있는) 을 만들어 배포           Snort 구조            sniffer : 패킷을 보기 좋게 Decode       preprocessor : 비정상 헤더구조 패킷, 트래픽 구분       Detection Engine : Rule 기반의 탐지 엔진, 사전 정의된 Rule 에 매칭 되는지 확인, Payload 확인       Alert / logging : Ruleset 에 일치하는 패킷에 대한 처리방법, SMB, SNMP, trap 등을 활용해 저장       설정값 저장 위치 : /etc/snort/snort.conf                    모니터링하고자 하는 Network 설정           Rules 위치 수정                           Snort 명령어            Sniffer Mode                    TCP/IP 패킷 헤더를 출력 : snort -v           TCP/ICMP/UDP 헤더와 IP를 출력 : snort -vd           패킷 데이터를 추가해서 표현하기 위한 명령어 : snort -vde           -v : snort 를 패킷 sniffing 모드로 변경           -d : 모든 네트워크 계층 포함           -e : 데이터링크 계층의 헤더를 포함           -c : 패킷 검출                           Snort Rule / Signature            Header                    내용                            처리방식               프로토콜               IP주소               포트번호                                   Rule 헤더 설정                            Rule Actions                                    패킷이 탐지되었을 때 처리방식                   8가지 유형이 존재                                            alert : 알람을 발생시키고 로그를 남김                       log : 패킷을 로그에 남김                       pass : 패킷을 무시함                       activate : alert 을 발생시키고, dynamic rule을 활성화                       dynamic : activate rule 에 의해 활성화 되고, log rule 과 동일하게 동작                       drop : 패킷을 차단하고 로그에 남김                       reject : 패킷을 차단하고 로그를 남김, 메시지를 전달                                                    TCP : TCP RST                           UDP : ICMP port Unreachable                                                                       sdrop : 패킷을 차단하지만 로그를 남기지 않음 (silent drop)                                                           Rule 이 매칭 되었을 때 처리방식                                               Protocols                                    탐지할 프로토콜을 설정.                   TCP, IP, UDP, ICMP                                               IP Addresses                                    출발지, 목적지 IP 주소.                   단일 IP, IP대역(CIDR표기), IP 리스트 (구분자:,) 등으로 표기, 부정연산자(!) 표현가능                                               Port Numbers                                    출발지, 목적지 Port                   단일 Port, Port Range (:이용), Port 리스트 표현                                            1:1023 : 1~1023                       :39910 : 1 ~ 39910                                                                                       Direction Operator                                    방향 지시자                                            출발지 -&gt; 목적지 (단방향)                       출발지 &lt;&gt; 목적지 (양방향)                       출발지 &lt;- 목적지 : 이러한 표현은 사용하지 않음                                                                                                           형태 : action protocol ipaddr port direction ipaddr port                            alert tcp any any -&gt; 192.168.59.0/24 80                                    192.168.59 대역의 80 포트에 들어오는 패킷을 탐지                                               log tcp $EXTERNAL_NET any &lt;&gt; $HOME_NET 80                                    외부 네트워크 IP 에서 내부 네트워크 80 포트간 송수신되는 패킷을 탐지                   $EXTERNAL_NET, $HOME_NET : snort.conf 에 정의된 환경변수                                                                               Body : 옵션 설정                    내용                            패킷탐지 규칙을 명시               snort 설정 generator 를 사용하여 간편하게 입력하는 방법도 존재                                   종류                            일반               Payload / 범위 관련               Payload / 정규표현식               Payload / HTTP               이벤트 제한 관련                                   일반 옵션 설정                            msg : alert, log 출력 시 이벤트 명으로 사용               reference : rule 과 관련된 외부 취약점 정보 참조시 사용               sid : 룰 식별자                                    99이하 : 시스템 예약 sid                   100 ~ 1000000 : snort 에서 배포하는 ruleset 에서 사용하는 sid                   1000001 이상 : 사용자가 정의한 rule sid                                               classtype : 공격유형, 기본우선순위(위험도) 정의               priority : 위험도에 대한 숫자, classtype 에서 지정한 우선순위(위험도) 를 덮어씀               rev : revision - rule 수정횟수                                   Payload / 범위 관련 : 범위를 지정해주는 옵션을 사용하면 성능 향상, 오탐을 줄임                            옵션                                    content : Payload 에서 검사할 문자열 설정 (전체 Payload 비교)                                            문자열 설정 시 text, text/binary, binary 형태 중 하나로 설정, 부정연산자 사용 가능                                                    text 형식 : content:&quot;문자열                           binary 형식 : content:&quot;|FFFF|문자열&quot;                                                            FF : 헥사 값 예시                                                                                   text/binary 형식 : content:&quot;|FFFF|&quot;                           !(부정연산자) : content:!&quot;문자열&quot; - 문자열이 없는 것                           Escape(\) 처리 필요 문자 : &quot;, ;, \                                                                                                           uricontent : HTTP Client 의 요청 URI (전체 Payload X) 에서 검사할 문자열 설정                   offset : Payload 에서 Content 문자열을 검사할 시작 위치를 지정                                            Payload 의 첫 번째 바이트 위치는 0 부터 시작                                                           depth : offset 부터 몇 바이트까지 검사할 것인지 지정                   distance : content:&quot;문자열&quot; 이 매치된 경우                                            이후부터 몇 바이트 떨어진 위치에서 다음 content를 검사할 것인지 지정                                                           within : content:&quot;문자열&quot; 이 매치된 경우                                            distance 부터 몇 바이트 범위 내에서 다음 content를 검사할 것인지 지정                                                           nocase : Payload 검사 시 대소문자를 구분하지 않음 (바이너리 형식도 동일)                                               예시 (29:10)                                    FTP root 로그인 시도 탐지 (제공 Ruleset 사용)                           alert tcp any any -&gt; 10.10.10.0/24 21       (msg:&quot;FTP root user access&quot;;content:&quot;USER root&quot;;nocase;sid:100100;)                                                           테스트 (content)                           alert tcp $EXTERNAL_NET any -&gt; $HOME_NET any       (msg:&quot;[TEST]content_text&quot;;content:&quot;/etc/passwd&quot;;nocase;sid:1000020;)                                                           테스트 (offset) - 3번째 바이트부터 (2) 3바이트 이내(2~4)에 5457 문자열이 있는지 확인                           alert tcp $EXTERNAL_NET any -&gt; $HOME_NET any       (msg:&quot;[TEST]offset&quot;;content:&quot;5457&quot;;offset:2;depth:3;nocase;sid:1000030;)                                                           테스트 (distance, within) - 3번째 바이트부터 (2) 5바이트 이내 (2~6) 에서 369 문자열을 찾고, 4바이트 (7,8,9,A) 떨어진 위치 (B) 에서부터 3바이트 이내 (B,C,D) 에서 ABC 문자열을 찾아 만족하면 알림 출력                           alert tcp $EXTERNAL_NET any -&gt; $HOME_NET any       (msg:&quot;[TEST]distance, within&quot;;content:&quot;369&quot;;offset:2;depth:5;content:&quot;ABC&quot;;distance:4;within:3;nocase;sid:1000034;)                                                                                                           Payload / 정규표현식                            정규표현식 : 일정 규칙을 갖는 문자열을 표현하는 방식               옵션 : PCRE (Perl Compatible Regular Expression) - Snort 에서는 Perl 기반 정규표현을 사용                                    pcre=&quot;/정규표현삭/&quot;                                               메타문자                                    \ : escape 문자로 사용 (특수문자 기능 제거)                   ^ : 캐럿. 다음에 나오는 문자는 문자열의 시작을 의미                   $ : $ 앞의 문자는 문자열의 끝을 의미                   . : 임의의 문자 한 개를 의미함                   [] : 집합 안에 지정한 문자들 중 하나와 일치                                            [a-zA-Z] : 소문자 a-z 사이 + 대문자 A-Z 사이 중 한 문자와 일치                       [0-9] : 0~9 사이의 숫자 중 하나                                                           [^] : 집합 안에 지정한 문자들을 제외한 임의의 문자 중 하나와 일치                                            [^0-9] : 숫자를 제외한 임의의 문자 중 하나와 일치                                                           | : OR, 항목을 묶을 때는 소괄호를 이용                                            (x|y|z) : x or y or z                       (tree|leaf|can) : tree or leaf or can                                                           * : * 앞에 나오는 문자가 0회 이상 나타남을 의미                                            Hs*deo : Hssdeo(O), Hdeo(O), Hsdeo(O), Hssssdeo(O) …. Hudeo(X)                                                           + : + 앞에 나오는 문자가 1회 이상 나타남을 의미                   ? : ? 앞에 나오는 문자가 0회 또는 1회 이상 나타남을 의미                                            x? : x가 존재하거나 존재하지 않음                                                           x{n} : {n} 앞에 오는 문자가 정확히 n 회 나타남                                            Ha{3}deo : Haaadeo                                                           x{n,} : x를 n번 이상 반복함을 의미                                            Ha{3,}deo : Haaadeo(O), Haaaadeo(O), …, Haadeo(X)                                                           x{n,m} : x를 n번 이상 m번 이하 반복함을 의미                                               예시                                    Get 또는 Post 로 시작하는 ‘=’ 나 ‘a=a’ 가 들어간 패킷 찾기                           alert tcp $EXTERNAL_NET any -&gt; $HOME_NET any       (msg:&quot;[TEST]pcre&quot;;content:&quot;+or+&quot;;       content:&quot;%27%3D%27&quot;;nocase;       distance:0;within:20;pcre=&quot;/^(GET|POST)/&quot;; sid:100050;)                                                                 + 는 space 를 의미                       %27%3D%27 : a=a                                                                                                           Payload / HTTP 관련 : HTTP 패킷에 대해 전체가 아닌 특정필드에서 패턴을 검사하는 기능 지원                            HTTP 구조 : GET /index.php HTTP/1.1               옵션 : 옵션에 raw 가 붙은 경우 (http_raw_*) 디코딩 없이 검사. (uri, header, cookie)                                    http_method : HTTP 요청 시 method 부분을 검사 (GET)                   http_uri : HTTP URI 부분을 검사 (index.php)                   http_header : HTTP의 Header 부분을 검사 (response/request)                   http_cookie : HTTP의 Cookie 부분을 검사                   http_client_body : HTTP client 의 Body 부분을 검사 (POST 요청에 대한 검사)                   http_stat_code : HTTP 의 Status_code 부분을 검사 (HTTP/1.1 200 OK 의 200 부분)                   http_stat_msg : HTTP 의 Status_msg 부분을 검사 (HTTP/1.1 200 OK 의 OK 부분)                                               예시 : (20:30)">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-01-26T09:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-snort/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "HY03",
+      "url": "https://bluesplatter.com/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Bluesplatter Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo/logo.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          세상에 남기는 작은 흔적
+          <span class="site-subtitle">Bluesplatter</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/">연도별 포스트</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="https://bluesplatter.com/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#is_certification" itemprop="item"><span itemprop="name">Is_certification</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">정보보안 - snort</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/profile/photo.jpg" alt="HY03" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">HY03</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>저는 전문가가 아니고 이것 저것 알아보는 비전문가 입니다. <br /> 틀린 내용이 기술되어도 너그러이 봐주시고 댓글을 남겨주셨으면 좋겠습니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="http://bluesplatter.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:hyunik03@gmail.com">
+            <meta itemprop="email" content="hyunik03@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">이메일</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="정보보안 - snort">
+    <meta itemprop="description" content="snort  개요          IDS (네트워크 이상징후 감시) 중 하나                  모든 트래픽을 감시하거나 샘플링을 통해 감시          미리 설정값을 저장          DB 와 비교, 알려진 공격 시그니처와 비교          공격자의 침입 경로 Block          사용자의 패턴을 분석해서 이상징후 탐지                    마틴 로시가 1998 년에 sniffer and more 라는 표어 (네트워크 트래픽을 더 많이 감시) 로 개발      프로토콜 검색, 컨텐츠 분석, 웜, 취약점 공격시도 탐지, 포트스캔, CGI        기능          snort 의 운영모드                  Sniffer Mode          Packet Logger Mode          Network IDS/IPS Mode                    패킷 스니퍼                  패킷 스니핑을 통해 계속 화면에 출력 -&gt; 작은 네트워크 규모에서 사용                    패킷 로거                  로그 남기기                    네트워크 IDS/IPS                  네트워크 트래픽 분석을 통한 공격 탐지/차단                      설치          RHEL (CentOS) 기준                  DAQ (Data Acquistion Package) 설치          Snort 패키지 설치                    Talos(제작사) 에서 Ruleset(최근 공격 패턴을 탐지할 수 있는) 을 만들어 배포        Snort 구조          sniffer : 패킷을 보기 좋게 Decode      preprocessor : 비정상 헤더구조 패킷, 트래픽 구분      Detection Engine : Rule 기반의 탐지 엔진, 사전 정의된 Rule 에 매칭 되는지 확인, Payload 확인      Alert / logging : Ruleset 에 일치하는 패킷에 대한 처리방법, SMB, SNMP, trap 등을 활용해 저장      설정값 저장 위치 : /etc/snort/snort.conf                  모니터링하고자 하는 Network 설정          Rules 위치 수정                      Snort 명령어          Sniffer Mode                  TCP/IP 패킷 헤더를 출력 : snort -v          TCP/ICMP/UDP 헤더와 IP를 출력 : snort -vd          패킷 데이터를 추가해서 표현하기 위한 명령어 : snort -vde          -v : snort 를 패킷 sniffing 모드로 변경          -d : 모든 네트워크 계층 포함          -e : 데이터링크 계층의 헤더를 포함          -c : 패킷 검출                      Snort Rule / Signature          Header                  내용                          처리방식              프로토콜              IP주소              포트번호                                Rule 헤더 설정                          Rule Actions                                  패킷이 탐지되었을 때 처리방식                  8가지 유형이 존재                                          alert : 알람을 발생시키고 로그를 남김                      log : 패킷을 로그에 남김                      pass : 패킷을 무시함                      activate : alert 을 발생시키고, dynamic rule을 활성화                      dynamic : activate rule 에 의해 활성화 되고, log rule 과 동일하게 동작                      drop : 패킷을 차단하고 로그에 남김                      reject : 패킷을 차단하고 로그를 남김, 메시지를 전달                                                  TCP : TCP RST                          UDP : ICMP port Unreachable                                                                    sdrop : 패킷을 차단하지만 로그를 남기지 않음 (silent drop)                                                        Rule 이 매칭 되었을 때 처리방식                                            Protocols                                  탐지할 프로토콜을 설정.                  TCP, IP, UDP, ICMP                                            IP Addresses                                  출발지, 목적지 IP 주소.                  단일 IP, IP대역(CIDR표기), IP 리스트 (구분자:,) 등으로 표기, 부정연산자(!) 표현가능                                            Port Numbers                                  출발지, 목적지 Port                  단일 Port, Port Range (:이용), Port 리스트 표현                                          1:1023 : 1~1023                      :39910 : 1 ~ 39910                                                                                  Direction Operator                                  방향 지시자                                          출발지 -&gt; 목적지 (단방향)                      출발지 &lt;&gt; 목적지 (양방향)                      출발지 &lt;- 목적지 : 이러한 표현은 사용하지 않음                                                                                                    형태 : action protocol ipaddr port direction ipaddr port                          alert tcp any any -&gt; 192.168.59.0/24 80                                  192.168.59 대역의 80 포트에 들어오는 패킷을 탐지                                            log tcp $EXTERNAL_NET any &lt;&gt; $HOME_NET 80                                  외부 네트워크 IP 에서 내부 네트워크 80 포트간 송수신되는 패킷을 탐지                  $EXTERNAL_NET, $HOME_NET : snort.conf 에 정의된 환경변수                                                                        Body : 옵션 설정                  내용                          패킷탐지 규칙을 명시              snort 설정 generator 를 사용하여 간편하게 입력하는 방법도 존재                                종류                          일반              Payload / 범위 관련              Payload / 정규표현식              Payload / HTTP              이벤트 제한 관련                                일반 옵션 설정                          msg : alert, log 출력 시 이벤트 명으로 사용              reference : rule 과 관련된 외부 취약점 정보 참조시 사용              sid : 룰 식별자                                  99이하 : 시스템 예약 sid                  100 ~ 1000000 : snort 에서 배포하는 ruleset 에서 사용하는 sid                  1000001 이상 : 사용자가 정의한 rule sid                                            classtype : 공격유형, 기본우선순위(위험도) 정의              priority : 위험도에 대한 숫자, classtype 에서 지정한 우선순위(위험도) 를 덮어씀              rev : revision - rule 수정횟수                                Payload / 범위 관련 : 범위를 지정해주는 옵션을 사용하면 성능 향상, 오탐을 줄임                          옵션                                  content : Payload 에서 검사할 문자열 설정 (전체 Payload 비교)                                          문자열 설정 시 text, text/binary, binary 형태 중 하나로 설정, 부정연산자 사용 가능                                                  text 형식 : content:&quot;문자열                          binary 형식 : content:&quot;|FFFF|문자열&quot;                                                          FF : 헥사 값 예시                                                                                text/binary 형식 : content:&quot;|FFFF|&quot;                          !(부정연산자) : content:!&quot;문자열&quot; - 문자열이 없는 것                          Escape(\) 처리 필요 문자 : &quot;, ;, \                                                                                                      uricontent : HTTP Client 의 요청 URI (전체 Payload X) 에서 검사할 문자열 설정                  offset : Payload 에서 Content 문자열을 검사할 시작 위치를 지정                                          Payload 의 첫 번째 바이트 위치는 0 부터 시작                                                        depth : offset 부터 몇 바이트까지 검사할 것인지 지정                  distance : content:&quot;문자열&quot; 이 매치된 경우                                          이후부터 몇 바이트 떨어진 위치에서 다음 content를 검사할 것인지 지정                                                        within : content:&quot;문자열&quot; 이 매치된 경우                                          distance 부터 몇 바이트 범위 내에서 다음 content를 검사할 것인지 지정                                                        nocase : Payload 검사 시 대소문자를 구분하지 않음 (바이너리 형식도 동일)                                            예시 (29:10)                                  FTP root 로그인 시도 탐지 (제공 Ruleset 사용)                          alert tcp any any -&gt; 10.10.10.0/24 21      (msg:&quot;FTP root user access&quot;;content:&quot;USER root&quot;;nocase;sid:100100;)                                                        테스트 (content)                          alert tcp $EXTERNAL_NET any -&gt; $HOME_NET any      (msg:&quot;[TEST]content_text&quot;;content:&quot;/etc/passwd&quot;;nocase;sid:1000020;)                                                        테스트 (offset) - 3번째 바이트부터 (2) 3바이트 이내(2~4)에 5457 문자열이 있는지 확인                          alert tcp $EXTERNAL_NET any -&gt; $HOME_NET any      (msg:&quot;[TEST]offset&quot;;content:&quot;5457&quot;;offset:2;depth:3;nocase;sid:1000030;)                                                        테스트 (distance, within) - 3번째 바이트부터 (2) 5바이트 이내 (2~6) 에서 369 문자열을 찾고, 4바이트 (7,8,9,A) 떨어진 위치 (B) 에서부터 3바이트 이내 (B,C,D) 에서 ABC 문자열을 찾아 만족하면 알림 출력                          alert tcp $EXTERNAL_NET any -&gt; $HOME_NET any      (msg:&quot;[TEST]distance, within&quot;;content:&quot;369&quot;;offset:2;depth:5;content:&quot;ABC&quot;;distance:4;within:3;nocase;sid:1000034;)                                                                                                    Payload / 정규표현식                          정규표현식 : 일정 규칙을 갖는 문자열을 표현하는 방식              옵션 : PCRE (Perl Compatible Regular Expression) - Snort 에서는 Perl 기반 정규표현을 사용                                  pcre=&quot;/정규표현삭/&quot;                                            메타문자                                  \ : escape 문자로 사용 (특수문자 기능 제거)                  ^ : 캐럿. 다음에 나오는 문자는 문자열의 시작을 의미                  $ : $ 앞의 문자는 문자열의 끝을 의미                  . : 임의의 문자 한 개를 의미함                  [] : 집합 안에 지정한 문자들 중 하나와 일치                                          [a-zA-Z] : 소문자 a-z 사이 + 대문자 A-Z 사이 중 한 문자와 일치                      [0-9] : 0~9 사이의 숫자 중 하나                                                        [^] : 집합 안에 지정한 문자들을 제외한 임의의 문자 중 하나와 일치                                          [^0-9] : 숫자를 제외한 임의의 문자 중 하나와 일치                                                        | : OR, 항목을 묶을 때는 소괄호를 이용                                          (x|y|z) : x or y or z                      (tree|leaf|can) : tree or leaf or can                                                        * : * 앞에 나오는 문자가 0회 이상 나타남을 의미                                          Hs*deo : Hssdeo(O), Hdeo(O), Hsdeo(O), Hssssdeo(O) …. Hudeo(X)                                                        + : + 앞에 나오는 문자가 1회 이상 나타남을 의미                  ? : ? 앞에 나오는 문자가 0회 또는 1회 이상 나타남을 의미                                          x? : x가 존재하거나 존재하지 않음                                                        x{n} : {n} 앞에 오는 문자가 정확히 n 회 나타남                                          Ha{3}deo : Haaadeo                                                        x{n,} : x를 n번 이상 반복함을 의미                                          Ha{3,}deo : Haaadeo(O), Haaaadeo(O), …, Haadeo(X)                                                        x{n,m} : x를 n번 이상 m번 이하 반복함을 의미                                            예시                                  Get 또는 Post 로 시작하는 ‘=’ 나 ‘a=a’ 가 들어간 패킷 찾기                          alert tcp $EXTERNAL_NET any -&gt; $HOME_NET any      (msg:&quot;[TEST]pcre&quot;;content:&quot;+or+&quot;;      content:&quot;%27%3D%27&quot;;nocase;      distance:0;within:20;pcre=&quot;/^(GET|POST)/&quot;; sid:100050;)                                                              + 는 space 를 의미                      %27%3D%27 : a=a                                                                                                    Payload / HTTP 관련 : HTTP 패킷에 대해 전체가 아닌 특정필드에서 패턴을 검사하는 기능 지원                          HTTP 구조 : GET /index.php HTTP/1.1              옵션 : 옵션에 raw 가 붙은 경우 (http_raw_*) 디코딩 없이 검사. (uri, header, cookie)                                  http_method : HTTP 요청 시 method 부분을 검사 (GET)                  http_uri : HTTP URI 부분을 검사 (index.php)                  http_header : HTTP의 Header 부분을 검사 (response/request)                  http_cookie : HTTP의 Cookie 부분을 검사                  http_client_body : HTTP client 의 Body 부분을 검사 (POST 요청에 대한 검사)                  http_stat_code : HTTP 의 Status_code 부분을 검사 (HTTP/1.1 200 OK 의 200 부분)                  http_stat_msg : HTTP 의 Status_msg 부분을 검사 (HTTP/1.1 200 OK 의 OK 부분)                                            예시 : (20:30)                                          ">
+    <meta itemprop="datePublished" content="2022-01-26T09:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">정보보안 - snort
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-01-26T09:00:00+09:00">January 26, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#snort">snort</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <h1 id="snort">snort</h1>
+<ul>
+  <li>개요
+    <ul>
+      <li>IDS (네트워크 이상징후 감시) 중 하나
+        <ul>
+          <li>모든 트래픽을 감시하거나 샘플링을 통해 감시</li>
+          <li>미리 설정값을 저장</li>
+          <li>DB 와 비교, 알려진 공격 시그니처와 비교</li>
+          <li>공격자의 침입 경로 Block</li>
+          <li>사용자의 패턴을 분석해서 이상징후 탐지</li>
+        </ul>
+      </li>
+      <li>마틴 로시가 1998 년에 sniffer and more 라는 표어 (네트워크 트래픽을 더 많이 감시) 로 개발</li>
+      <li>프로토콜 검색, 컨텐츠 분석, 웜, 취약점 공격시도 탐지, 포트스캔, CGI</li>
+    </ul>
+  </li>
+  <li>기능
+    <ul>
+      <li>snort 의 운영모드
+        <ul>
+          <li>Sniffer Mode</li>
+          <li>Packet Logger Mode</li>
+          <li>Network IDS/IPS Mode</li>
+        </ul>
+      </li>
+      <li>패킷 스니퍼
+        <ul>
+          <li>패킷 스니핑을 통해 계속 화면에 출력 -&gt; 작은 네트워크 규모에서 사용</li>
+        </ul>
+      </li>
+      <li>패킷 로거
+        <ul>
+          <li>로그 남기기</li>
+        </ul>
+      </li>
+      <li>네트워크 IDS/IPS
+        <ul>
+          <li>네트워크 트래픽 분석을 통한 공격 탐지/차단</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>설치
+    <ul>
+      <li>RHEL (CentOS) 기준
+        <ul>
+          <li>DAQ (Data Acquistion Package) 설치</li>
+          <li>Snort 패키지 설치</li>
+        </ul>
+      </li>
+      <li>Talos(제작사) 에서 Ruleset(최근 공격 패턴을 탐지할 수 있는) 을 만들어 배포</li>
+    </ul>
+  </li>
+  <li>Snort 구조
+    <ul>
+      <li>sniffer : 패킷을 보기 좋게 Decode</li>
+      <li>preprocessor : 비정상 헤더구조 패킷, 트래픽 구분</li>
+      <li>Detection Engine : Rule 기반의 탐지 엔진, 사전 정의된 Rule 에 매칭 되는지 확인, Payload 확인</li>
+      <li>Alert / logging : Ruleset 에 일치하는 패킷에 대한 처리방법, SMB, SNMP, trap 등을 활용해 저장</li>
+      <li>설정값 저장 위치 : <code class="language-plaintext highlighter-rouge">/etc/snort/snort.conf</code>
+        <ul>
+          <li>모니터링하고자 하는 Network 설정</li>
+          <li>Rules 위치 수정</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Snort 명령어
+    <ul>
+      <li>Sniffer Mode
+        <ul>
+          <li>TCP/IP 패킷 헤더를 출력 : <code class="language-plaintext highlighter-rouge">snort -v</code></li>
+          <li>TCP/ICMP/UDP 헤더와 IP를 출력 : <code class="language-plaintext highlighter-rouge">snort -vd</code></li>
+          <li>패킷 데이터를 추가해서 표현하기 위한 명령어 : <code class="language-plaintext highlighter-rouge">snort -vde</code></li>
+          <li><code class="language-plaintext highlighter-rouge">-v</code> : snort 를 패킷 sniffing 모드로 변경</li>
+          <li><code class="language-plaintext highlighter-rouge">-d</code> : 모든 네트워크 계층 포함</li>
+          <li><code class="language-plaintext highlighter-rouge">-e</code> : 데이터링크 계층의 헤더를 포함</li>
+          <li><code class="language-plaintext highlighter-rouge">-c</code> : 패킷 검출</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Snort Rule / Signature
+    <ul>
+      <li>Header
+        <ul>
+          <li>내용
+            <ul>
+              <li>처리방식</li>
+              <li>프로토콜</li>
+              <li>IP주소</li>
+              <li>포트번호</li>
+            </ul>
+          </li>
+          <li>Rule 헤더 설정
+            <ul>
+              <li>Rule Actions
+                <ul>
+                  <li>패킷이 탐지되었을 때 처리방식</li>
+                  <li>8가지 유형이 존재
+                    <ul>
+                      <li>alert : 알람을 발생시키고 로그를 남김</li>
+                      <li>log : 패킷을 로그에 남김</li>
+                      <li>pass : 패킷을 무시함</li>
+                      <li>activate : alert 을 발생시키고, dynamic rule을 활성화</li>
+                      <li>dynamic : activate rule 에 의해 활성화 되고, log rule 과 동일하게 동작</li>
+                      <li>drop : 패킷을 차단하고 로그에 남김</li>
+                      <li>reject : 패킷을 차단하고 로그를 남김, 메시지를 전달
+                        <ul>
+                          <li>TCP : TCP RST</li>
+                          <li>UDP : ICMP port Unreachable</li>
+                        </ul>
+                      </li>
+                      <li>sdrop : 패킷을 차단하지만 로그를 남기지 않음 (silent drop)</li>
+                    </ul>
+                  </li>
+                  <li>Rule 이 매칭 되었을 때 처리방식</li>
+                </ul>
+              </li>
+              <li>Protocols
+                <ul>
+                  <li>탐지할 프로토콜을 설정.</li>
+                  <li>TCP, IP, UDP, ICMP</li>
+                </ul>
+              </li>
+              <li>IP Addresses
+                <ul>
+                  <li>출발지, 목적지 IP 주소.</li>
+                  <li>단일 IP, IP대역(CIDR표기), IP 리스트 (구분자:,) 등으로 표기, 부정연산자(!) 표현가능</li>
+                </ul>
+              </li>
+              <li>Port Numbers
+                <ul>
+                  <li>출발지, 목적지 Port</li>
+                  <li>단일 Port, Port Range (:이용), Port 리스트 표현
+                    <ul>
+                      <li>1:1023 : 1~1023</li>
+                      <li>:39910 : 1 ~ 39910</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>Direction Operator
+                <ul>
+                  <li>방향 지시자
+                    <ul>
+                      <li>출발지 -&gt; 목적지 (단방향)</li>
+                      <li>출발지 &lt;&gt; 목적지 (양방향)</li>
+                      <li>출발지 &lt;- 목적지 : 이러한 표현은 사용하지 않음</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>형태 : <code class="language-plaintext highlighter-rouge">action protocol ipaddr port direction ipaddr port</code>
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">alert tcp any any -&gt; 192.168.59.0/24 80</code>
+                <ul>
+                  <li>192.168.59 대역의 80 포트에 들어오는 패킷을 탐지</li>
+                </ul>
+              </li>
+              <li><code class="language-plaintext highlighter-rouge">log tcp $EXTERNAL_NET any &lt;&gt; $HOME_NET 80</code>
+                <ul>
+                  <li>외부 네트워크 IP 에서 내부 네트워크 80 포트간 송수신되는 패킷을 탐지</li>
+                  <li><code class="language-plaintext highlighter-rouge">$EXTERNAL_NET</code>, <code class="language-plaintext highlighter-rouge">$HOME_NET</code> : <code class="language-plaintext highlighter-rouge">snort.conf</code> 에 정의된 환경변수</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Body : 옵션 설정
+        <ul>
+          <li>내용
+            <ul>
+              <li>패킷탐지 규칙을 명시</li>
+              <li>snort 설정 generator 를 사용하여 간편하게 입력하는 방법도 존재</li>
+            </ul>
+          </li>
+          <li>종류
+            <ul>
+              <li>일반</li>
+              <li>Payload / 범위 관련</li>
+              <li>Payload / 정규표현식</li>
+              <li>Payload / HTTP</li>
+              <li>이벤트 제한 관련</li>
+            </ul>
+          </li>
+          <li>일반 옵션 설정
+            <ul>
+              <li>msg : alert, log 출력 시 이벤트 명으로 사용</li>
+              <li>reference : rule 과 관련된 외부 취약점 정보 참조시 사용</li>
+              <li>sid : 룰 식별자
+                <ul>
+                  <li>99이하 : 시스템 예약 sid</li>
+                  <li>100 ~ 1000000 : snort 에서 배포하는 ruleset 에서 사용하는 sid</li>
+                  <li>1000001 이상 : 사용자가 정의한 rule sid</li>
+                </ul>
+              </li>
+              <li>classtype : 공격유형, 기본우선순위(위험도) 정의</li>
+              <li>priority : 위험도에 대한 숫자, classtype 에서 지정한 우선순위(위험도) 를 덮어씀</li>
+              <li>rev : revision - rule 수정횟수</li>
+            </ul>
+          </li>
+          <li><strong>Payload / 범위 관련</strong> : 범위를 지정해주는 옵션을 사용하면 성능 향상, 오탐을 줄임
+            <ul>
+              <li>옵션
+                <ul>
+                  <li><strong>content</strong> : Payload 에서 검사할 문자열 설정 (전체 Payload 비교)
+                    <ul>
+                      <li>문자열 설정 시 text, text/binary, binary 형태 중 하나로 설정, 부정연산자 사용 가능
+                        <ul>
+                          <li>text 형식 : <code class="language-plaintext highlighter-rouge">content:"문자열</code></li>
+                          <li>binary 형식 : <code class="language-plaintext highlighter-rouge">content:"|FFFF|문자열"</code>
+                            <ul>
+                              <li>FF : 헥사 값 예시</li>
+                            </ul>
+                          </li>
+                          <li>text/binary 형식 : <code class="language-plaintext highlighter-rouge">content:"|FFFF|"</code></li>
+                          <li>!(부정연산자) : <code class="language-plaintext highlighter-rouge">content:!"문자열"</code> - 문자열이 없는 것</li>
+                          <li>Escape(<code class="language-plaintext highlighter-rouge">\</code>) 처리 필요 문자 : <code class="language-plaintext highlighter-rouge">"</code>, <code class="language-plaintext highlighter-rouge">;</code>, <code class="language-plaintext highlighter-rouge">\</code></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>uricontent : HTTP Client 의 요청 URI (전체 Payload X) 에서 검사할 문자열 설정</li>
+                  <li><strong>offset</strong> : Payload 에서 Content 문자열을 검사할 시작 위치를 지정
+                    <ul>
+                      <li>Payload 의 첫 번째 바이트 위치는 0 부터 시작</li>
+                    </ul>
+                  </li>
+                  <li><strong>depth</strong> : offset 부터 몇 바이트까지 검사할 것인지 지정</li>
+                  <li><strong>distance</strong> : <code class="language-plaintext highlighter-rouge">content:"문자열"</code> 이 매치된 경우
+                    <ul>
+                      <li>이후부터 몇 바이트 떨어진 위치에서 다음 content를 검사할 것인지 지정</li>
+                    </ul>
+                  </li>
+                  <li><strong>within</strong> : <code class="language-plaintext highlighter-rouge">content:"문자열"</code> 이 매치된 경우
+                    <ul>
+                      <li>distance 부터 몇 바이트 범위 내에서 다음 content를 검사할 것인지 지정</li>
+                    </ul>
+                  </li>
+                  <li>nocase : Payload 검사 시 대소문자를 구분하지 않음 (바이너리 형식도 동일)</li>
+                </ul>
+              </li>
+              <li>예시 (29:10)
+                <ul>
+                  <li>FTP root 로그인 시도 탐지 (제공 Ruleset 사용)
+                    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      alert tcp any any -&gt; 10.10.10.0/24 21
+      (msg:"FTP root user access";content:"USER root";nocase;sid:100100;)
+</code></pre></div>                    </div>
+                  </li>
+                  <li>테스트 (content)
+                    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      alert tcp $EXTERNAL_NET any -&gt; $HOME_NET any
+      (msg:"[TEST]content_text";content:"/etc/passwd";nocase;sid:1000020;)
+</code></pre></div>                    </div>
+                  </li>
+                  <li>테스트 (offset) - 3번째 바이트부터 (2) 3바이트 이내(2~4)에 5457 문자열이 있는지 확인
+                    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      alert tcp $EXTERNAL_NET any -&gt; $HOME_NET any
+      (msg:"[TEST]offset";content:"5457";offset:2;depth:3;nocase;sid:1000030;)
+</code></pre></div>                    </div>
+                  </li>
+                  <li>테스트 (distance, within) - 3번째 바이트부터 (2) 5바이트 이내 (2~6) 에서 369 문자열을 찾고, 4바이트 (7,8,9,A) 떨어진 위치 (B) 에서부터 3바이트 이내 (B,C,D) 에서 ABC 문자열을 찾아 만족하면 알림 출력
+                    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      alert tcp $EXTERNAL_NET any -&gt; $HOME_NET any
+      (msg:"[TEST]distance, within";content:"369";offset:2;depth:5;content:"ABC";distance:4;within:3;nocase;sid:1000034;)
+</code></pre></div>                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Payload / 정규표현식
+            <ul>
+              <li>정규표현식 : 일정 규칙을 갖는 문자열을 표현하는 방식</li>
+              <li>옵션 : PCRE (Perl Compatible Regular Expression) - Snort 에서는 Perl 기반 정규표현을 사용
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">pcre="/정규표현삭/"</code></li>
+                </ul>
+              </li>
+              <li>메타문자
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">\</code> : escape 문자로 사용 (특수문자 기능 제거)</li>
+                  <li><code class="language-plaintext highlighter-rouge">^</code> : 캐럿. 다음에 나오는 문자는 문자열의 시작을 의미</li>
+                  <li><code class="language-plaintext highlighter-rouge">$</code> : $ 앞의 문자는 문자열의 끝을 의미</li>
+                  <li><code class="language-plaintext highlighter-rouge">.</code> : 임의의 문자 한 개를 의미함</li>
+                  <li><code class="language-plaintext highlighter-rouge">[]</code> : 집합 안에 지정한 문자들 중 하나와 일치
+                    <ul>
+                      <li><code class="language-plaintext highlighter-rouge">[a-zA-Z]</code> : 소문자 a-z 사이 + 대문자 A-Z 사이 중 한 문자와 일치</li>
+                      <li><code class="language-plaintext highlighter-rouge">[0-9]</code> : 0~9 사이의 숫자 중 하나</li>
+                    </ul>
+                  </li>
+                  <li><code class="language-plaintext highlighter-rouge">[^]</code> : 집합 안에 지정한 문자들을 제외한 임의의 문자 중 하나와 일치
+                    <ul>
+                      <li><code class="language-plaintext highlighter-rouge">[^0-9]</code> : 숫자를 제외한 임의의 문자 중 하나와 일치</li>
+                    </ul>
+                  </li>
+                  <li><code class="language-plaintext highlighter-rouge">|</code> : OR, 항목을 묶을 때는 소괄호를 이용
+                    <ul>
+                      <li><code class="language-plaintext highlighter-rouge">(x|y|z)</code> : x or y or z</li>
+                      <li><code class="language-plaintext highlighter-rouge">(tree|leaf|can)</code> : tree or leaf or can</li>
+                    </ul>
+                  </li>
+                  <li><code class="language-plaintext highlighter-rouge">*</code> : * 앞에 나오는 문자가 0회 이상 나타남을 의미
+                    <ul>
+                      <li><code class="language-plaintext highlighter-rouge">Hs*deo</code> : Hssdeo(O), Hdeo(O), Hsdeo(O), Hssssdeo(O) …. Hudeo(X)</li>
+                    </ul>
+                  </li>
+                  <li><code class="language-plaintext highlighter-rouge">+</code> : + 앞에 나오는 문자가 1회 이상 나타남을 의미</li>
+                  <li><code class="language-plaintext highlighter-rouge">?</code> : ? 앞에 나오는 문자가 0회 또는 1회 이상 나타남을 의미
+                    <ul>
+                      <li><code class="language-plaintext highlighter-rouge">x?</code> : x가 존재하거나 존재하지 않음</li>
+                    </ul>
+                  </li>
+                  <li><code class="language-plaintext highlighter-rouge">x{n}</code> : <code class="language-plaintext highlighter-rouge">{n}</code> 앞에 오는 문자가 정확히 n 회 나타남
+                    <ul>
+                      <li><code class="language-plaintext highlighter-rouge">Ha{3}deo</code> : Haaadeo</li>
+                    </ul>
+                  </li>
+                  <li><code class="language-plaintext highlighter-rouge">x{n,}</code> : x를 n번 이상 반복함을 의미
+                    <ul>
+                      <li><code class="language-plaintext highlighter-rouge">Ha{3,}deo</code> : Haaadeo(O), Haaaadeo(O), …, Haadeo(X)</li>
+                    </ul>
+                  </li>
+                  <li><code class="language-plaintext highlighter-rouge">x{n,m}</code> : x를 n번 이상 m번 이하 반복함을 의미</li>
+                </ul>
+              </li>
+              <li>예시
+                <ul>
+                  <li>Get 또는 Post 로 시작하는 ‘=’ 나 ‘a=a’ 가 들어간 패킷 찾기
+                    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      alert tcp $EXTERNAL_NET any -&gt; $HOME_NET any
+      (msg:"[TEST]pcre";content:"+or+";
+      content:"%27%3D%27";nocase;
+      distance:0;within:20;pcre="/^(GET|POST)/"; sid:100050;)
+</code></pre></div>                    </div>
+                    <ul>
+                      <li><code class="language-plaintext highlighter-rouge">+</code> 는 space 를 의미</li>
+                      <li><code class="language-plaintext highlighter-rouge">%27%3D%27</code> : a=a</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Payload / HTTP 관련 : HTTP 패킷에 대해 전체가 아닌 특정필드에서 패턴을 검사하는 기능 지원
+            <ul>
+              <li>HTTP 구조 : <code class="language-plaintext highlighter-rouge">GET /index.php HTTP/1.1</code></li>
+              <li>옵션 : 옵션에 raw 가 붙은 경우 (http_raw_*) 디코딩 없이 검사. (uri, header, cookie)
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">http_method</code> : HTTP 요청 시 method 부분을 검사 (GET)</li>
+                  <li><code class="language-plaintext highlighter-rouge">http_uri</code> : HTTP URI 부분을 검사 (index.php)</li>
+                  <li><code class="language-plaintext highlighter-rouge">http_header</code> : HTTP의 Header 부분을 검사 (response/request)</li>
+                  <li><code class="language-plaintext highlighter-rouge">http_cookie</code> : HTTP의 Cookie 부분을 검사</li>
+                  <li><code class="language-plaintext highlighter-rouge">http_client_body</code> : HTTP client 의 Body 부분을 검사 (POST 요청에 대한 검사)</li>
+                  <li><code class="language-plaintext highlighter-rouge">http_stat_code</code> : HTTP 의 Status_code 부분을 검사 (HTTP/1.1 200 OK 의 200 부분)</li>
+                  <li><code class="language-plaintext highlighter-rouge">http_stat_msg</code> : HTTP 의 Status_msg 부분을 검사 (HTTP/1.1 200 OK 의 OK 부분)</li>
+                </ul>
+              </li>
+              <li>예시 : (20:30)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#snort" class="page__taxonomy-item" rel="tag">snort</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88%EA%B8%B0%EC%82%AC" class="page__taxonomy-item" rel="tag">정보보안기사</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#is-certification" class="page__taxonomy-item" rel="tag">IS_Certification</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2022-01-26T09:00:00+09:00">January 26, 2022</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+snort%20https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-IncidentAnalysis-snort%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-IncidentAnalysis-snort%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-IncidentAnalysis-snort%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/is_certification/IS-IncidentAnalysis-DatabaseIntrusion/" class="pagination--pager" title="정보보안 - 데이터베이스 침해사고
+">이전</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-IncidentAnalysis-DatabaseIntrusion/" rel="permalink">정보보안 - 데이터베이스 침해사고
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-01-21T09:00:00+09:00">January 21, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">데이터베이스 침해사고
+
+  Data, 데이터베이스, DBMS
+    
+      데이터와 정보
+        
+          데이터 : 정보작성을 위한 필요자료, 특정목적에 대해 평가되지 않은 상태, 단순한 사실
+          정보 : 데이터를 추출, 분석, 비교 등의 가공...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-IncidentAnalysis-NetworkIntrusion/" rel="permalink">정보보안 - 네트워크 침해사고
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-01-14T09:00:00+09:00">January 14, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">네트워크 침해사고
+
+  사고 유형별 데이터 수집
+    
+      불법적인 자원 사용
+        
+          호스트 불법 사용 : 액세스로그, ps 상태, CPU 사용률, 파일 저장공간 상태
+          네트워크 대역폭 불법사용 : 회선상태, 송수신 패킷 수, I...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-IncidentAnalysis-LinuxInitialResponse/" rel="permalink">정보보안 - 리눅스 사고 분석
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-01-12T09:00:00+09:00">January 12, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">리눅스 침해사고 분석
+
+  기본 정보 수집
+    
+      OS 종류, 커널 버전
+      사용 용도
+      운영중인 서비스
+      네트워크 접속 현황
+      보안 패치 적용 현황
+      네트워크 구성 형태 및 보안 장비 운영 현황
+    
+  
+  휘발성 정보...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-IncidentAnalysis-WindowsHackingTools/" rel="permalink">정보보안 - 윈도우 해킹프로그램 분석
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-01-07T09:00:00+09:00">January 7, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">윈도우 해킹프로그램 분석
+
+  해킹프로그램 분석
+    
+      분석환경 구성
+        
+          최소 2개 이상의 가상서버를 구동 (물리적 서버 필요)
+            
+              Virtual Box
+              VMWare W...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+<!--
+<script>
+	(function(d, h, m){
+    var js, fjs = d.getElementsByTagName(h)[0];
+    if (d.getElementById(m)){return;}
+    js = d.createElement(h); js.id = m;
+    js.onload = function(){
+        window.makerWidgetComInit({
+        position: "left",          
+        widget: "eqypoqmawbcz3azh-usiy9q7ma4ong1w1-juelcm3zfgcuwjds"                
+    })};
+    js.src = "https://makerwidget.com/js/embed.js";
+    fjs.parentNode.insertBefore(js, fjs)
+	}(document, "script", "dhm"))
+</script>
+-->
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:hyunik03@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 HY03. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://bluesplatter.com/is_certification/IS-IncidentAnalysis-snort/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/is_certification/IS-IncidentAnalysis-snort"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://bluesplatter.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

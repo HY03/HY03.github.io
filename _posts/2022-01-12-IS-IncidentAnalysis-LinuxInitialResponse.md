@@ -93,6 +93,49 @@ toc: true
             - ls, ps, netstat, login, top, dir, du, ifconfig, find, tcpd ...
             - `ls` 명령어를 변조시켜 공격자가 만든 파일이 보이지 않도록 함
         * 시스템 프로그램 파일크기, 생성시간, 변경시간 확인
-        * `/bin`, `/usr/bin` 디렉토리 에서 `ls -alct | more` 명령을 통해 다른 프로그램이 기본적으로 설치된 시간과 다른 것이 있는지 확인 -> 파일사이즈 비교 (9:56)
-
+        * `/bin`, `/usr/bin` 디렉토리 에서 `ls -alct | more` 명령을 통해 다른 프로그램이 기본적으로 설치된 시간과 다른 것이 있는지 확인 -> 파일사이즈 비교
+            - `ls`
+                + `-a` : all - 숨겨진 파일, 디렉토리를 보고자 할때
+                + `-l` : long - 자세한 내용을 출력. 권한, 파일 수, 소유자, 그룹, 파일크기, 수정일자 등
+                + `-c` : ctime - 변경시간
+                    * MAC : mtime (수정), atime (접근), ctime (변경)
+                    * 기본값 mtime 으로 출력
+                    * `-u` : atime
+                + `-t` : 시간순 정렬
+                + `-S` : 파일 사이즈 순 정렬
+        * 무결성 검사 (리눅스) : `rpm -Va`
+            - `s.5.....GT /bin/df`
+                + s : 프로그램 사이즈 변경
+                + 5 : md5 checksum 값 변경
+                + T : vkdlfdml mtime 값 변경
+                + G : group 변경
+                + u : user 변경
+                + c : 설정파일 변경
+        * 무결성 검사 (솔라리스) : `fingerprint`
+            - 검사하고자 하는 파일의 checksum 값을 만들어 비교
+        * `strace` : System 콜 추적
+            - 예) ps 명령어 추적 : `strace -e trace=open ps|more`
+                + 결과가 `open("/usr/lib/locale/ro_RO/u~/procre)` 이라고 나왔을 경우 ps 가 해당 파일을 참조
+                    * 공격자가 숨기고 싶은 파일을 해당 파일에 등록
     + 해킹 관련 파일 조사
+        * 피해 시스템에 공격자가 어떤 작업을 했는지 알아보기 위한 절차
+            - 타 시스템 스캔
+            - 공격 프로그램 설치
+            - IRC 서버 설치
+            - 로그 삭제
+            - 스니퍼 프로그램 설치
+        * 새롭게 생긴 파일 찾기
+            - `find` 명령어를 이용해 최근 수정된 파일, 생성된 파일 찾기
+                + 변조를 감추기 위해 시간을 수정하는 경우 inode 변경시간 체크
+                + 수정일 7일 이내인 파일 찾기
+                    * `find [폴더] -type f -mtime 일수 -print` 
+                + 최근 5일동안 수정되거나 새롭게 생성된 파일을 찾아서 `/var/aaa/test.out` 파일에 저장
+                    * `find / -ctime -5 -print > /var/aaa/test.out` 
+                + setuid, setgid
+                    * `find / -user root -perm -4000 -print > suidlist` 
+                    * `find / -user root -perm -2000 -print > sgidlist` 
+        * `/usr, /var, /dev, /tmp` 디렉토리 안 파일 검사
+            - `/dev` 폴더 안 디바이스파일 이외의 일반파일이 있는 경우
+                + `find /dev -type f -print` 
+        * `. , ..` 으로 시작하는 디렉토리
+            - `ls` 명령어를 옵션 없이 사용시 비노출 (숨겨진 디렉토리)

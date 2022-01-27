@@ -1,0 +1,935 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.20.2 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>정보보안 - 데이터베이스 침해사고 | Bluesplatter</title>
+<meta name="description" content="데이터베이스 침해사고    Data, 데이터베이스, DBMS            데이터와 정보                    데이터 : 정보작성을 위한 필요자료, 특정목적에 대해 평가되지 않은 상태, 단순한 사실           정보 : 데이터를 추출, 분석, 비교 등의 가공절차를 통해 의사결정, 행동을 할 수 있는 의미있는 데이터                       데이터베이스 : 데이터의 집합, 여러 응용시스템이 공유. Integrated, Stored, Operational       DBMS : 데이터를 통합적으로 생성, 관리, 저장하는 소프트웨어. MySQL, MSSQL, ORACLE, DB2 등                    MySQL 서버가 침해사고의 대상이 되는 경우가 많음. (PHP)                           MySQL 점검 항목            관리자 아이디를 default 로 사용하는지 점검                    기본 패스워드 값은 누구나 알고 있음           무차별대입 / 사전대입 공격 - 추측 어려운 패스워드를 사용해야 함           mysql -uroot -p                       패스워드 설정 안된 계정 존재하는지 점검                    select user, password from user           update user set password = [] where user = []           flush privileges; : 변경사항을 즉시 반영                       Remote 에서 MySQL 서버로 접속이 가능한지 점검                    기본 포트 : 3306/tcp                            my.cnf 파일의 [mysqld] 에 skip-networking 추가 : 로컬 접속만 가능                                               MySQL 계정을 이용한 접속 가능한지 점검                    /etc/passwd 의 쉘 부분을 /bin/sh 대신 /bin/false 로 변경하여 원격 접속을 차단                       시스템 사용자들의 DB에 대한 권한 설정이 올바른지 점검                    필요 이상의 권한을 부여하지 않아야 함           select * from DB;           불필요한 권한을 Revoke 시킴           update db set update_priv = &#39;N&#39; where db=[]           flush privileges;                       데이터베이스 내의 사용자별 접속/권한 설정이 올바른지 점검                    dba 가 아닌 일반 user 가 중요 table 을 조작할 수 있음           select * from user;                                                                                                            Host                       User                       Password                       Select_priv                       …                       Process_priv                       File_priv                                                                                       File_priv : 파일에 대한 권한               Process_priv : 쓰레드 정보 확인 (쓰레드 중지 권한 포함)               Shutdown_priv : MySQL 서버의 실행을 중지시키는 권한                                   localhost 의 root 계정을 사용하지 않고 다른 DBA 계정을 만들어 사용하는 것이 바람직함           원격 Host 에서 root 계정등의 접근설정 확인                            update user set process_priv=&quot;N&quot; where host = [ip] and user = &quot;root&quot;;                                               안정적인 MySQL 버전을 사용하고 있는지 점검       MySQL 의 데이터 디렉터리는 안전하게 보호되고 있는지 점검                    my.cnf 파일에 대한 접근통제도 필요                           MS-SQL 점검 항목            계정의 패스워드 중 빈 패스워드나 약한 패스워드가 존재 하는가?                    select name, password from syslogins; : 결과 NULL 일 경우 패스워드가 없음. 단 Builtin 계정은 NULL 이 정상                       guest 계정이 비활성화 되어 있는가?                    SQL 서버의 Enterprise Manager 를 실행하여 guest 계정 확인, 삭제                       public 데이터베이스 역할이 부여되어 있는가?                    public 역할 : 모든 데이터베이스 사용자들의 표준에 해당되는 역할. 인가를 받지 않은 사용자도 권한을 행사할 수 있는 취약점                       SYSADMIN 그룹의 사용자를 인증된 사용자만으로 제한하고 있는가?                    System Administrator 권한                       방화벽에서 SQL Server 포트를 차단했는지?                    TCP/1433 or 1434                       가장 최신의 서비스 팩을 설치했는가?                    서버 보안을 위함                       Microsoft Baseline Security Analyzer(MBSA) 로 서버를 점검했는가?                    보안패치가 최신으로 유지되는지 확인           보안상 약점이 될만한 설정이 있는지 확인           기본 취약점 점검하는 도구                       SQL Server 연결에 대한 감사를 수행하는가?                    이벤트 정보 로그 기록                       웹서버 확인 필요 항목                    DB 접속 파일 확인                            예 : conn.asp 파일 침해                                    DB 서버의 IP 주소, Host Name                   DB 접근 게정 (ID)                   DB 서버 접근 패스워드 (PW)                                               sqlpoke.exe 프로그램을 업로드, 이용, 위에 획득한 정보로 접속                                   MS-SQL 서버 의 디폴트 계정 중 sa (system admin) 계정 이용                            서버 내부의 Administrator 계정으로 명령어를 전달할 수 있는 계정                                   net user 명령어 사용                            remote 에서 DB 서버에 계정을 생성 가능 (우회적으로 DB서버에 접근)                                   SQL Injection 공격                            IIS 웹로그 등을 통해 침입 흔적을 확인해야 함">
+
+
+  <meta name="author" content="HY03">
+  
+  <meta property="article:author" content="HY03">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Bluesplatter">
+<meta property="og:title" content="정보보안 - 데이터베이스 침해사고">
+<meta property="og:url" content="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-DatabaseIntrusion/">
+
+
+  <meta property="og:description" content="데이터베이스 침해사고    Data, 데이터베이스, DBMS            데이터와 정보                    데이터 : 정보작성을 위한 필요자료, 특정목적에 대해 평가되지 않은 상태, 단순한 사실           정보 : 데이터를 추출, 분석, 비교 등의 가공절차를 통해 의사결정, 행동을 할 수 있는 의미있는 데이터                       데이터베이스 : 데이터의 집합, 여러 응용시스템이 공유. Integrated, Stored, Operational       DBMS : 데이터를 통합적으로 생성, 관리, 저장하는 소프트웨어. MySQL, MSSQL, ORACLE, DB2 등                    MySQL 서버가 침해사고의 대상이 되는 경우가 많음. (PHP)                           MySQL 점검 항목            관리자 아이디를 default 로 사용하는지 점검                    기본 패스워드 값은 누구나 알고 있음           무차별대입 / 사전대입 공격 - 추측 어려운 패스워드를 사용해야 함           mysql -uroot -p                       패스워드 설정 안된 계정 존재하는지 점검                    select user, password from user           update user set password = [] where user = []           flush privileges; : 변경사항을 즉시 반영                       Remote 에서 MySQL 서버로 접속이 가능한지 점검                    기본 포트 : 3306/tcp                            my.cnf 파일의 [mysqld] 에 skip-networking 추가 : 로컬 접속만 가능                                               MySQL 계정을 이용한 접속 가능한지 점검                    /etc/passwd 의 쉘 부분을 /bin/sh 대신 /bin/false 로 변경하여 원격 접속을 차단                       시스템 사용자들의 DB에 대한 권한 설정이 올바른지 점검                    필요 이상의 권한을 부여하지 않아야 함           select * from DB;           불필요한 권한을 Revoke 시킴           update db set update_priv = &#39;N&#39; where db=[]           flush privileges;                       데이터베이스 내의 사용자별 접속/권한 설정이 올바른지 점검                    dba 가 아닌 일반 user 가 중요 table 을 조작할 수 있음           select * from user;                                                                                                            Host                       User                       Password                       Select_priv                       …                       Process_priv                       File_priv                                                                                       File_priv : 파일에 대한 권한               Process_priv : 쓰레드 정보 확인 (쓰레드 중지 권한 포함)               Shutdown_priv : MySQL 서버의 실행을 중지시키는 권한                                   localhost 의 root 계정을 사용하지 않고 다른 DBA 계정을 만들어 사용하는 것이 바람직함           원격 Host 에서 root 계정등의 접근설정 확인                            update user set process_priv=&quot;N&quot; where host = [ip] and user = &quot;root&quot;;                                               안정적인 MySQL 버전을 사용하고 있는지 점검       MySQL 의 데이터 디렉터리는 안전하게 보호되고 있는지 점검                    my.cnf 파일에 대한 접근통제도 필요                           MS-SQL 점검 항목            계정의 패스워드 중 빈 패스워드나 약한 패스워드가 존재 하는가?                    select name, password from syslogins; : 결과 NULL 일 경우 패스워드가 없음. 단 Builtin 계정은 NULL 이 정상                       guest 계정이 비활성화 되어 있는가?                    SQL 서버의 Enterprise Manager 를 실행하여 guest 계정 확인, 삭제                       public 데이터베이스 역할이 부여되어 있는가?                    public 역할 : 모든 데이터베이스 사용자들의 표준에 해당되는 역할. 인가를 받지 않은 사용자도 권한을 행사할 수 있는 취약점                       SYSADMIN 그룹의 사용자를 인증된 사용자만으로 제한하고 있는가?                    System Administrator 권한                       방화벽에서 SQL Server 포트를 차단했는지?                    TCP/1433 or 1434                       가장 최신의 서비스 팩을 설치했는가?                    서버 보안을 위함                       Microsoft Baseline Security Analyzer(MBSA) 로 서버를 점검했는가?                    보안패치가 최신으로 유지되는지 확인           보안상 약점이 될만한 설정이 있는지 확인           기본 취약점 점검하는 도구                       SQL Server 연결에 대한 감사를 수행하는가?                    이벤트 정보 로그 기록                       웹서버 확인 필요 항목                    DB 접속 파일 확인                            예 : conn.asp 파일 침해                                    DB 서버의 IP 주소, Host Name                   DB 접근 게정 (ID)                   DB 서버 접근 패스워드 (PW)                                               sqlpoke.exe 프로그램을 업로드, 이용, 위에 획득한 정보로 접속                                   MS-SQL 서버 의 디폴트 계정 중 sa (system admin) 계정 이용                            서버 내부의 Administrator 계정으로 명령어를 전달할 수 있는 계정                                   net user 명령어 사용                            remote 에서 DB 서버에 계정을 생성 가능 (우회적으로 DB서버에 접근)                                   SQL Injection 공격                            IIS 웹로그 등을 통해 침입 흔적을 확인해야 함">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-01-21T09:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-DatabaseIntrusion/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "HY03",
+      "url": "https://bluesplatter.com/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Bluesplatter Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo/logo.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          세상에 남기는 작은 흔적
+          <span class="site-subtitle">Bluesplatter</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/">연도별 포스트</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="https://bluesplatter.com/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#is_certification" itemprop="item"><span itemprop="name">Is_certification</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">정보보안 - 데이터베이스 침해사고</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/profile/photo.jpg" alt="HY03" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">HY03</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>저는 전문가가 아니고 이것 저것 알아보는 비전문가 입니다. <br /> 틀린 내용이 기술되어도 너그러이 봐주시고 댓글을 남겨주셨으면 좋겠습니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="http://bluesplatter.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:hyunik03@gmail.com">
+            <meta itemprop="email" content="hyunik03@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">이메일</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="정보보안 - 데이터베이스 침해사고">
+    <meta itemprop="description" content="데이터베이스 침해사고  Data, 데이터베이스, DBMS          데이터와 정보                  데이터 : 정보작성을 위한 필요자료, 특정목적에 대해 평가되지 않은 상태, 단순한 사실          정보 : 데이터를 추출, 분석, 비교 등의 가공절차를 통해 의사결정, 행동을 할 수 있는 의미있는 데이터                    데이터베이스 : 데이터의 집합, 여러 응용시스템이 공유. Integrated, Stored, Operational      DBMS : 데이터를 통합적으로 생성, 관리, 저장하는 소프트웨어. MySQL, MSSQL, ORACLE, DB2 등                  MySQL 서버가 침해사고의 대상이 되는 경우가 많음. (PHP)                      MySQL 점검 항목          관리자 아이디를 default 로 사용하는지 점검                  기본 패스워드 값은 누구나 알고 있음          무차별대입 / 사전대입 공격 - 추측 어려운 패스워드를 사용해야 함          mysql -uroot -p                    패스워드 설정 안된 계정 존재하는지 점검                  select user, password from user          update user set password = [] where user = []          flush privileges; : 변경사항을 즉시 반영                    Remote 에서 MySQL 서버로 접속이 가능한지 점검                  기본 포트 : 3306/tcp                          my.cnf 파일의 [mysqld] 에 skip-networking 추가 : 로컬 접속만 가능                                          MySQL 계정을 이용한 접속 가능한지 점검                  /etc/passwd 의 쉘 부분을 /bin/sh 대신 /bin/false 로 변경하여 원격 접속을 차단                    시스템 사용자들의 DB에 대한 권한 설정이 올바른지 점검                  필요 이상의 권한을 부여하지 않아야 함          select * from DB;          불필요한 권한을 Revoke 시킴          update db set update_priv = &#39;N&#39; where db=[]          flush privileges;                    데이터베이스 내의 사용자별 접속/권한 설정이 올바른지 점검                  dba 가 아닌 일반 user 가 중요 table 을 조작할 수 있음          select * from user;                                                                                                      Host                      User                      Password                      Select_priv                      …                      Process_priv                      File_priv                                                                                  File_priv : 파일에 대한 권한              Process_priv : 쓰레드 정보 확인 (쓰레드 중지 권한 포함)              Shutdown_priv : MySQL 서버의 실행을 중지시키는 권한                                localhost 의 root 계정을 사용하지 않고 다른 DBA 계정을 만들어 사용하는 것이 바람직함          원격 Host 에서 root 계정등의 접근설정 확인                          update user set process_priv=&quot;N&quot; where host = [ip] and user = &quot;root&quot;;                                          안정적인 MySQL 버전을 사용하고 있는지 점검      MySQL 의 데이터 디렉터리는 안전하게 보호되고 있는지 점검                  my.cnf 파일에 대한 접근통제도 필요                      MS-SQL 점검 항목          계정의 패스워드 중 빈 패스워드나 약한 패스워드가 존재 하는가?                  select name, password from syslogins; : 결과 NULL 일 경우 패스워드가 없음. 단 Builtin 계정은 NULL 이 정상                    guest 계정이 비활성화 되어 있는가?                  SQL 서버의 Enterprise Manager 를 실행하여 guest 계정 확인, 삭제                    public 데이터베이스 역할이 부여되어 있는가?                  public 역할 : 모든 데이터베이스 사용자들의 표준에 해당되는 역할. 인가를 받지 않은 사용자도 권한을 행사할 수 있는 취약점                    SYSADMIN 그룹의 사용자를 인증된 사용자만으로 제한하고 있는가?                  System Administrator 권한                    방화벽에서 SQL Server 포트를 차단했는지?                  TCP/1433 or 1434                    가장 최신의 서비스 팩을 설치했는가?                  서버 보안을 위함                    Microsoft Baseline Security Analyzer(MBSA) 로 서버를 점검했는가?                  보안패치가 최신으로 유지되는지 확인          보안상 약점이 될만한 설정이 있는지 확인          기본 취약점 점검하는 도구                    SQL Server 연결에 대한 감사를 수행하는가?                  이벤트 정보 로그 기록                    웹서버 확인 필요 항목                  DB 접속 파일 확인                          예 : conn.asp 파일 침해                                  DB 서버의 IP 주소, Host Name                  DB 접근 게정 (ID)                  DB 서버 접근 패스워드 (PW)                                            sqlpoke.exe 프로그램을 업로드, 이용, 위에 획득한 정보로 접속                                MS-SQL 서버 의 디폴트 계정 중 sa (system admin) 계정 이용                          서버 내부의 Administrator 계정으로 명령어를 전달할 수 있는 계정                                net user 명령어 사용                          remote 에서 DB 서버에 계정을 생성 가능 (우회적으로 DB서버에 접근)                                SQL Injection 공격                          IIS 웹로그 등을 통해 침입 흔적을 확인해야 함                                          ">
+    <meta itemprop="datePublished" content="2022-01-21T09:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">정보보안 - 데이터베이스 침해사고
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-01-21T09:00:00+09:00">January 21, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#데이터베이스-침해사고">데이터베이스 침해사고</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <h1 id="데이터베이스-침해사고">데이터베이스 침해사고</h1>
+<ul>
+  <li>Data, 데이터베이스, DBMS
+    <ul>
+      <li>데이터와 정보
+        <ul>
+          <li>데이터 : 정보작성을 위한 필요자료, 특정목적에 대해 평가되지 않은 상태, 단순한 사실</li>
+          <li>정보 : 데이터를 추출, 분석, 비교 등의 가공절차를 통해 의사결정, 행동을 할 수 있는 의미있는 데이터</li>
+        </ul>
+      </li>
+      <li>데이터베이스 : 데이터의 집합, 여러 응용시스템이 공유. Integrated, Stored, Operational</li>
+      <li>DBMS : 데이터를 통합적으로 생성, 관리, 저장하는 소프트웨어. MySQL, MSSQL, ORACLE, DB2 등
+        <ul>
+          <li>MySQL 서버가 침해사고의 대상이 되는 경우가 많음. (PHP)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>MySQL 점검 항목
+    <ul>
+      <li>관리자 아이디를 default 로 사용하는지 점검
+        <ul>
+          <li>기본 패스워드 값은 누구나 알고 있음</li>
+          <li>무차별대입 / 사전대입 공격 - 추측 어려운 패스워드를 사용해야 함</li>
+          <li><code class="language-plaintext highlighter-rouge">mysql -uroot -p</code></li>
+        </ul>
+      </li>
+      <li>패스워드 설정 안된 계정 존재하는지 점검
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">select user, password from user</code></li>
+          <li><code class="language-plaintext highlighter-rouge">update user set password = [] where user = []</code></li>
+          <li><code class="language-plaintext highlighter-rouge">flush privileges;</code> : 변경사항을 즉시 반영</li>
+        </ul>
+      </li>
+      <li>Remote 에서 MySQL 서버로 접속이 가능한지 점검
+        <ul>
+          <li>기본 포트 : 3306/tcp
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">my.cnf</code> 파일의 <code class="language-plaintext highlighter-rouge">[mysqld]</code> 에 <code class="language-plaintext highlighter-rouge">skip-networking</code> 추가 : 로컬 접속만 가능</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>MySQL 계정을 이용한 접속 가능한지 점검
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">/etc/passwd</code> 의 쉘 부분을 <code class="language-plaintext highlighter-rouge">/bin/sh</code> 대신 <code class="language-plaintext highlighter-rouge">/bin/false</code> 로 변경하여 원격 접속을 차단</li>
+        </ul>
+      </li>
+      <li>시스템 사용자들의 DB에 대한 권한 설정이 올바른지 점검
+        <ul>
+          <li>필요 이상의 권한을 부여하지 않아야 함</li>
+          <li><code class="language-plaintext highlighter-rouge">select * from DB;</code></li>
+          <li>불필요한 권한을 <code class="language-plaintext highlighter-rouge">Revoke</code> 시킴</li>
+          <li><code class="language-plaintext highlighter-rouge">update db set update_priv = 'N' where db=[]</code></li>
+          <li><code class="language-plaintext highlighter-rouge">flush privileges;</code></li>
+        </ul>
+      </li>
+      <li>데이터베이스 내의 사용자별 접속/권한 설정이 올바른지 점검
+        <ul>
+          <li>dba 가 아닌 일반 user 가 중요 table 을 조작할 수 있음</li>
+          <li><code class="language-plaintext highlighter-rouge">select * from user;</code>
+            <ul>
+              <li>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>Host</td>
+                      <td>User</td>
+                      <td>Password</td>
+                      <td>Select_priv</td>
+                      <td>…</td>
+                      <td>Process_priv</td>
+                      <td>File_priv</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+              <li>File_priv : 파일에 대한 권한</li>
+              <li>Process_priv : 쓰레드 정보 확인 (쓰레드 중지 권한 포함)</li>
+              <li>Shutdown_priv : MySQL 서버의 실행을 중지시키는 권한</li>
+            </ul>
+          </li>
+          <li>localhost 의 root 계정을 사용하지 않고 다른 DBA 계정을 만들어 사용하는 것이 바람직함</li>
+          <li>원격 Host 에서 root 계정등의 접근설정 확인
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">update user set process_priv="N" where host = [ip] and user = "root";</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>안정적인 MySQL 버전을 사용하고 있는지 점검</li>
+      <li>MySQL 의 데이터 디렉터리는 안전하게 보호되고 있는지 점검
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">my.cnf</code> 파일에 대한 접근통제도 필요</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>MS-SQL 점검 항목
+    <ul>
+      <li>계정의 패스워드 중 빈 패스워드나 약한 패스워드가 존재 하는가?
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">select name, password from syslogins;</code> : 결과 NULL 일 경우 패스워드가 없음. 단 Builtin 계정은 NULL 이 정상</li>
+        </ul>
+      </li>
+      <li>guest 계정이 비활성화 되어 있는가?
+        <ul>
+          <li>SQL 서버의 Enterprise Manager 를 실행하여 guest 계정 확인, 삭제</li>
+        </ul>
+      </li>
+      <li>public 데이터베이스 역할이 부여되어 있는가?
+        <ul>
+          <li>public 역할 : 모든 데이터베이스 사용자들의 표준에 해당되는 역할. 인가를 받지 않은 사용자도 권한을 행사할 수 있는 취약점</li>
+        </ul>
+      </li>
+      <li>SYSADMIN 그룹의 사용자를 인증된 사용자만으로 제한하고 있는가?
+        <ul>
+          <li>System Administrator 권한</li>
+        </ul>
+      </li>
+      <li>방화벽에서 SQL Server 포트를 차단했는지?
+        <ul>
+          <li>TCP/1433 or 1434</li>
+        </ul>
+      </li>
+      <li>가장 최신의 서비스 팩을 설치했는가?
+        <ul>
+          <li>서버 보안을 위함</li>
+        </ul>
+      </li>
+      <li>Microsoft Baseline Security Analyzer(MBSA) 로 서버를 점검했는가?
+        <ul>
+          <li>보안패치가 최신으로 유지되는지 확인</li>
+          <li>보안상 약점이 될만한 설정이 있는지 확인</li>
+          <li>기본 취약점 점검하는 도구</li>
+        </ul>
+      </li>
+      <li>SQL Server 연결에 대한 감사를 수행하는가?
+        <ul>
+          <li>이벤트 정보 로그 기록</li>
+        </ul>
+      </li>
+      <li>웹서버 확인 필요 항목
+        <ul>
+          <li>DB 접속 파일 확인
+            <ul>
+              <li>예 : conn.asp 파일 침해
+                <ul>
+                  <li>DB 서버의 IP 주소, Host Name</li>
+                  <li>DB 접근 게정 (ID)</li>
+                  <li>DB 서버 접근 패스워드 (PW)</li>
+                </ul>
+              </li>
+              <li>sqlpoke.exe 프로그램을 업로드, 이용, 위에 획득한 정보로 접속</li>
+            </ul>
+          </li>
+          <li>MS-SQL 서버 의 디폴트 계정 중 sa (system admin) 계정 이용
+            <ul>
+              <li>서버 내부의 Administrator 계정으로 명령어를 전달할 수 있는 계정</li>
+            </ul>
+          </li>
+          <li>net user 명령어 사용
+            <ul>
+              <li>remote 에서 DB 서버에 계정을 생성 가능 (우회적으로 DB서버에 접근)</li>
+            </ul>
+          </li>
+          <li>SQL Injection 공격
+            <ul>
+              <li>IIS 웹로그 등을 통해 침입 흔적을 확인해야 함</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%B9%A8%ED%95%B4%EC%82%AC%EA%B3%A0" class="page__taxonomy-item" rel="tag">데이터베이스 침해사고</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88%EA%B8%B0%EC%82%AC" class="page__taxonomy-item" rel="tag">정보보안기사</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#is-certification" class="page__taxonomy-item" rel="tag">IS_Certification</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2022-01-21T09:00:00+09:00">January 21, 2022</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4+%EC%B9%A8%ED%95%B4%EC%82%AC%EA%B3%A0%20https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-IncidentAnalysis-DatabaseIntrusion%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-IncidentAnalysis-DatabaseIntrusion%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-IncidentAnalysis-DatabaseIntrusion%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/is_certification/IS-IncidentAnalysis-NetworkIntrusion/" class="pagination--pager" title="정보보안 - 네트워크 침해사고
+">이전</a>
+    
+    
+      <a href="/is_certification/IS-IncidentAnalysis-snort/" class="pagination--pager" title="정보보안 - snort
+">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-IncidentAnalysis-snort/" rel="permalink">정보보안 - snort
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-01-26T09:00:00+09:00">January 26, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">snort
+
+  개요
+    
+      IDS (네트워크 이상징후 감시) 중 하나
+        
+          모든 트래픽을 감시하거나 샘플링을 통해 감시
+          미리 설정값을 저장
+          DB 와 비교, 알려진 공격 시그니처와 비교
+          ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-IncidentAnalysis-NetworkIntrusion/" rel="permalink">정보보안 - 네트워크 침해사고
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-01-14T09:00:00+09:00">January 14, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">네트워크 침해사고
+
+  사고 유형별 데이터 수집
+    
+      불법적인 자원 사용
+        
+          호스트 불법 사용 : 액세스로그, ps 상태, CPU 사용률, 파일 저장공간 상태
+          네트워크 대역폭 불법사용 : 회선상태, 송수신 패킷 수, I...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-IncidentAnalysis-LinuxInitialResponse/" rel="permalink">정보보안 - 리눅스 사고 분석
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-01-12T09:00:00+09:00">January 12, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">리눅스 침해사고 분석
+
+  기본 정보 수집
+    
+      OS 종류, 커널 버전
+      사용 용도
+      운영중인 서비스
+      네트워크 접속 현황
+      보안 패치 적용 현황
+      네트워크 구성 형태 및 보안 장비 운영 현황
+    
+  
+  휘발성 정보...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-IncidentAnalysis-WindowsHackingTools/" rel="permalink">정보보안 - 윈도우 해킹프로그램 분석
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-01-07T09:00:00+09:00">January 7, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">윈도우 해킹프로그램 분석
+
+  해킹프로그램 분석
+    
+      분석환경 구성
+        
+          최소 2개 이상의 가상서버를 구동 (물리적 서버 필요)
+            
+              Virtual Box
+              VMWare W...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+<!--
+<script>
+	(function(d, h, m){
+    var js, fjs = d.getElementsByTagName(h)[0];
+    if (d.getElementById(m)){return;}
+    js = d.createElement(h); js.id = m;
+    js.onload = function(){
+        window.makerWidgetComInit({
+        position: "left",          
+        widget: "eqypoqmawbcz3azh-usiy9q7ma4ong1w1-juelcm3zfgcuwjds"                
+    })};
+    js.src = "https://makerwidget.com/js/embed.js";
+    fjs.parentNode.insertBefore(js, fjs)
+	}(document, "script", "dhm"))
+</script>
+-->
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:hyunik03@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 HY03. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://bluesplatter.com/is_certification/IS-IncidentAnalysis-DatabaseIntrusion/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/is_certification/IS-IncidentAnalysis-DatabaseIntrusion"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://bluesplatter.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>
