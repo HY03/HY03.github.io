@@ -1,4 +1,88 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://bluesplatter.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://bluesplatter.com/" rel="alternate" type="text/html" /><updated>2022-01-27T17:46:51+09:00</updated><id>https://bluesplatter.com/feed.xml</id><title type="html">Bluesplatter</title><subtitle>전문적이지 않은 정보들, 감상, 즉흥적인 내용들</subtitle><author><name>HY03</name><email>hyunik03@gmail.com</email></author><entry><title type="html">정보보안 - snort</title><link href="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-snort/" rel="alternate" type="text/html" title="정보보안 - snort" /><published>2022-01-26T09:00:00+09:00</published><updated>2022-01-26T09:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-IncidentAnalysis-snort</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-snort/">&lt;h1 id=&quot;snort&quot;&gt;snort&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://bluesplatter.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://bluesplatter.com/" rel="alternate" type="text/html" /><updated>2022-02-07T17:57:44+09:00</updated><id>https://bluesplatter.com/feed.xml</id><title type="html">Bluesplatter</title><subtitle>전문적이지 않은 정보들, 감상, 즉흥적인 내용들</subtitle><author><name>HY03</name><email>hyunik03@gmail.com</email></author><entry><title type="html">정보보안 - iptables</title><link href="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-iptables/" rel="alternate" type="text/html" title="정보보안 - iptables" /><published>2022-02-07T09:00:00+09:00</published><updated>2022-02-07T09:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-IncidentAnalysis-iptables</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-iptables/">&lt;h1 id=&quot;iptables&quot;&gt;iptables&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;정의
+    &lt;ul&gt;
+      &lt;li&gt;리눅스 상에서 방화벽을 설정하는 도구&lt;/li&gt;
+      &lt;li&gt;패킷 필터링 기능 : 지나가는 패킷의 헤더를 보고 해당 패킷에 대한 허용/차단 (ACCEPT/DROP) 결정&lt;/li&gt;
+      &lt;li&gt;Rule 기반의 패킷 필터링 기능을 제공&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;기능
+    &lt;ul&gt;
+      &lt;li&gt;상태추적 (Connection Tracking or Stateful Inspection)
+        &lt;ul&gt;
+          &lt;li&gt;방화벽을 통과하는 모든 패킷에 대한 연결상태를 추적, 메모리에 기록하여 상태추적테이블을 생성&lt;/li&gt;
+          &lt;li&gt;모든 송 수신 패킷을 기록하고 검사&lt;/li&gt;
+          &lt;li&gt;기존 연결을 가장하여 접근할 경우 저장되어 있는 상태목록과 비교하여 허용/차단&lt;/li&gt;
+          &lt;li&gt;이미 연결된 상태의 패킷은 검사하지 않음&lt;/li&gt;
+          &lt;li&gt;Stateful Inspection : 이스라엘 보안업체인 Checkpoint 사 에서 최초로 개발한 방화벽 구조&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;NAT 기능
+        &lt;ul&gt;
+          &lt;li&gt;네트워크 주소 변환&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;패킷 레벨에서 로깅&lt;/li&gt;
+      &lt;li&gt;확장 모듈을 이용해 다양한 기능 제공&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;용어
+    &lt;ul&gt;
+      &lt;li&gt;Table
+        &lt;ul&gt;
+          &lt;li&gt;Filter Table
+            &lt;ul&gt;
+              &lt;li&gt;Chain : 패킷이 이동하는 경로 (3가지 기본 Chain 이 존재-삭제불가)
+                &lt;ul&gt;
+                  &lt;li&gt;Chain Input : 방화벽을 최종 목적지로 하는 체인&lt;/li&gt;
+                  &lt;li&gt;Chain Output : 방화벽을 최초 출발지로 정하는 체인&lt;/li&gt;
+                  &lt;li&gt;Chain Forward : 방화벽을 통과하는 체인 (방화벽을 별도의 서버로 구성해서 서비스할 때 사용하는 체인)&lt;/li&gt;
+                  &lt;li&gt;-&amp;gt; INPUT -&amp;gt; Linux Server -&amp;gt; Output -&amp;gt;&lt;/li&gt;
+                  &lt;li&gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt; FORWARD -&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;
+                    &lt;ul&gt;
+                      &lt;li&gt;Linux Server 를 목적지로 삼는 모든 패킷은 Input Chain 통과&lt;/li&gt;
+                      &lt;li&gt;Linux Server 에서 생성되어 외부로 보내지는 모든 패킷은 Output Chain 을 통과&lt;/li&gt;
+                      &lt;li&gt;Forward Chain 은 현재의 Linux Server 가 목적지가 아닌 패킷이 통과하는 Chain (방화벽을 별도의 서버로 구성)&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;Rule : 패킷 필터링을 하기 위한 Rule
+                &lt;ul&gt;
+                  &lt;li&gt;&lt;strong&gt;사용법&lt;/strong&gt;
+                    &lt;ul&gt;
+                      &lt;li&gt;기본구문 형식
+                        &lt;ul&gt;
+                          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;iptables [테이블] [체인] [룰] [타깃]&lt;/code&gt;&lt;/li&gt;
+                          &lt;li&gt;대 소문자 구분&lt;/li&gt;
+                        &lt;/ul&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;테이블 설정
+                        &lt;ul&gt;
+                          &lt;li&gt;형식 : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-t [테이블]&lt;/code&gt;&lt;/li&gt;
+                          &lt;li&gt;테이블을 명시하지 않으면 기본값으로 Filter Table 이 적용&lt;/li&gt;
+                        &lt;/ul&gt;
+                      &lt;/li&gt;
+                      &lt;li&gt;체인(Chain) 설정
+                        &lt;ul&gt;
+                          &lt;li&gt;형식 : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;iptables -[A|I|D] [체인]&lt;/code&gt;&lt;/li&gt;
+                          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-A&lt;/code&gt; : append 모드 (해당 체인의 가장 마지막 줄에 룰을 추가) (4:45)&lt;/li&gt;
+                        &lt;/ul&gt;
+                      &lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;NAT Table&lt;/li&gt;
+          &lt;li&gt;Mangle Table&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="iptables" /><summary type="html">iptables 정의 리눅스 상에서 방화벽을 설정하는 도구 패킷 필터링 기능 : 지나가는 패킷의 헤더를 보고 해당 패킷에 대한 허용/차단 (ACCEPT/DROP) 결정 Rule 기반의 패킷 필터링 기능을 제공 기능 상태추적 (Connection Tracking or Stateful Inspection) 방화벽을 통과하는 모든 패킷에 대한 연결상태를 추적, 메모리에 기록하여 상태추적테이블을 생성 모든 송 수신 패킷을 기록하고 검사 기존 연결을 가장하여 접근할 경우 저장되어 있는 상태목록과 비교하여 허용/차단 이미 연결된 상태의 패킷은 검사하지 않음 Stateful Inspection : 이스라엘 보안업체인 Checkpoint 사 에서 최초로 개발한 방화벽 구조 NAT 기능 네트워크 주소 변환 패킷 레벨에서 로깅 확장 모듈을 이용해 다양한 기능 제공 용어 Table Filter Table Chain : 패킷이 이동하는 경로 (3가지 기본 Chain 이 존재-삭제불가) Chain Input : 방화벽을 최종 목적지로 하는 체인 Chain Output : 방화벽을 최초 출발지로 정하는 체인 Chain Forward : 방화벽을 통과하는 체인 (방화벽을 별도의 서버로 구성해서 서비스할 때 사용하는 체인) -&amp;gt; INPUT -&amp;gt; Linux Server -&amp;gt; Output -&amp;gt; -&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt; FORWARD -&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt; Linux Server 를 목적지로 삼는 모든 패킷은 Input Chain 통과 Linux Server 에서 생성되어 외부로 보내지는 모든 패킷은 Output Chain 을 통과 Forward Chain 은 현재의 Linux Server 가 목적지가 아닌 패킷이 통과하는 Chain (방화벽을 별도의 서버로 구성) Rule : 패킷 필터링을 하기 위한 Rule 사용법 기본구문 형식 iptables [테이블] [체인] [룰] [타깃] 대 소문자 구분 테이블 설정 형식 : -t [테이블] 테이블을 명시하지 않으면 기본값으로 Filter Table 이 적용 체인(Chain) 설정 형식 : iptables -[A|I|D] [체인] -A : append 모드 (해당 체인의 가장 마지막 줄에 룰을 추가) (4:45) NAT Table Mangle Table</summary></entry><entry><title type="html">정보보안 - snort</title><link href="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-snort/" rel="alternate" type="text/html" title="정보보안 - snort" /><published>2022-01-26T09:00:00+09:00</published><updated>2022-01-26T09:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-IncidentAnalysis-snort</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-snort/">&lt;h1 id=&quot;snort&quot;&gt;snort&lt;/h1&gt;
 &lt;ul&gt;
   &lt;li&gt;개요
     &lt;ul&gt;
@@ -357,14 +441,287 @@
                   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http_stat_msg&lt;/code&gt; : HTTP 의 Status_msg 부분을 검사 (HTTP/1.1 200 OK 의 OK 부분)&lt;/li&gt;
                 &lt;/ul&gt;
               &lt;/li&gt;
-              &lt;li&gt;예시 : (20:30)&lt;/li&gt;
+              &lt;li&gt;예시
+                &lt;ul&gt;
+                  &lt;li&gt;http_method 테스트 : 클라이언트의 http 요청 라인 중 method 부분을 검사, content 가 GET 인 패킷을 탐지
+                    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      alert tcp $EXTERNAL_NET any -&amp;gt; $HOME_NET any
+      (msg:&quot;[TEST]http_GET&quot;;content:&quot;GET&quot;;http_method;sid:1000055;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                    &lt;/div&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;http_uri 테스트 : 클라이언트의 http 요청 중 uri 정보를 검사, uri 정보 중 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;script&amp;gt;&lt;/code&gt; 를 포함하는 패킷을 탐지 (XSS)
+                    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      alert tcp $EXTERNAL_NET any -&amp;gt; $HOME_NET any
+      (msg:&quot;[TEST]http_uri&quot;;content:&quot;&amp;lt;script&amp;gt;&quot;;http_uri;nocase;sid:1000063;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                    &lt;/div&gt;
+                  &lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;&lt;strong&gt;Event Threshold(이벤트 제한)&lt;/strong&gt; 관련
+            &lt;ul&gt;
+              &lt;li&gt;용도
+                &lt;ul&gt;
+                  &lt;li&gt;특정 시간동안 발생되는 이벤트 수를 제한하기 위한 옵션&lt;/li&gt;
+                  &lt;li&gt;과도하게 반복되는 이벤트를 막기 위한 옵션&lt;/li&gt;
+                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;threshold:type &amp;lt;limit|threshold|both&amp;gt;, track &amp;lt;by_src|by_dst&amp;gt;, count &amp;lt;c&amp;gt;, secods &amp;lt;s&amp;gt;&lt;/code&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;옵션
+                &lt;ul&gt;
+                  &lt;li&gt;type
+                    &lt;ul&gt;
+                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--limit&lt;/code&gt; : 매 s초 마다 패킷 count 개 발생 시 Action 을 1번 수행 (임계시간)&lt;/li&gt;
+                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--threshold&lt;/code&gt; : 매 s초 내에 패킷 count 개 발생 시 마다 Action 을 수행 (패킷양)&lt;/li&gt;
+                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--both&lt;/code&gt; : 매 s초 내에 패킷 count 개 발생 시 한번 Action 을 수행 (IP)&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;track
+                    &lt;ul&gt;
+                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;by_src&lt;/code&gt; : 출발지 IP 기준&lt;/li&gt;
+                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;by_dst&lt;/code&gt; : 목적지 IP 기준&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;예시
+                &lt;ul&gt;
+                  &lt;li&gt;limit 테스트 (임계시간)
+                    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      threshold:type limit, track by_dst, count 100, seconds 2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                    &lt;/div&gt;
+                    &lt;ul&gt;
+                      &lt;li&gt;2초 내에 패킷 100개 : 로그 1개&lt;/li&gt;
+                      &lt;li&gt;2초 내에 패킷 200개 : 로그 1개&lt;/li&gt;
+                      &lt;li&gt;4초 내에 패킷 400개 : 로그 2개&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;threshold 테스트 (패킷양)
+                    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      threshold:type threshold, track by_dst, count 100, seconds 2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                    &lt;/div&gt;
+                    &lt;ul&gt;
+                      &lt;li&gt;2초 내에 패킷 100개 : 로그 1개&lt;/li&gt;
+                      &lt;li&gt;2초 내에 패킷 200개 : 로그 2개&lt;/li&gt;
+                      &lt;li&gt;4초 내에 패킷 400개 : 로그 4개&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;both 테스트 (IP)
+                    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      threshold:type both, track by_dst, count 100, seconds 2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                    &lt;/div&gt;
+                    &lt;ul&gt;
+                      &lt;li&gt;2초 내에 패킷 100개 : 로그 1개&lt;/li&gt;
+                      &lt;li&gt;2초 내에 패킷 200개 : 로그 1개&lt;/li&gt;
+                      &lt;li&gt;4초 내에 패킷 400개 : 로그 1개&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
             &lt;/ul&gt;
           &lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="snort" /><summary type="html">snort 개요 IDS (네트워크 이상징후 감시) 중 하나 모든 트래픽을 감시하거나 샘플링을 통해 감시 미리 설정값을 저장 DB 와 비교, 알려진 공격 시그니처와 비교 공격자의 침입 경로 Block 사용자의 패턴을 분석해서 이상징후 탐지 마틴 로시가 1998 년에 sniffer and more 라는 표어 (네트워크 트래픽을 더 많이 감시) 로 개발 프로토콜 검색, 컨텐츠 분석, 웜, 취약점 공격시도 탐지, 포트스캔, CGI 기능 snort 의 운영모드 Sniffer Mode Packet Logger Mode Network IDS/IPS Mode 패킷 스니퍼 패킷 스니핑을 통해 계속 화면에 출력 -&amp;gt; 작은 네트워크 규모에서 사용 패킷 로거 로그 남기기 네트워크 IDS/IPS 네트워크 트래픽 분석을 통한 공격 탐지/차단 설치 RHEL (CentOS) 기준 DAQ (Data Acquistion Package) 설치 Snort 패키지 설치 Talos(제작사) 에서 Ruleset(최근 공격 패턴을 탐지할 수 있는) 을 만들어 배포 Snort 구조 sniffer : 패킷을 보기 좋게 Decode preprocessor : 비정상 헤더구조 패킷, 트래픽 구분 Detection Engine : Rule 기반의 탐지 엔진, 사전 정의된 Rule 에 매칭 되는지 확인, Payload 확인 Alert / logging : Ruleset 에 일치하는 패킷에 대한 처리방법, SMB, SNMP, trap 등을 활용해 저장 설정값 저장 위치 : /etc/snort/snort.conf 모니터링하고자 하는 Network 설정 Rules 위치 수정 Snort 명령어 Sniffer Mode TCP/IP 패킷 헤더를 출력 : snort -v TCP/ICMP/UDP 헤더와 IP를 출력 : snort -vd 패킷 데이터를 추가해서 표현하기 위한 명령어 : snort -vde -v : snort 를 패킷 sniffing 모드로 변경 -d : 모든 네트워크 계층 포함 -e : 데이터링크 계층의 헤더를 포함 -c : 패킷 검출 Snort Rule / Signature Header 내용 처리방식 프로토콜 IP주소 포트번호 Rule 헤더 설정 Rule Actions 패킷이 탐지되었을 때 처리방식 8가지 유형이 존재 alert : 알람을 발생시키고 로그를 남김 log : 패킷을 로그에 남김 pass : 패킷을 무시함 activate : alert 을 발생시키고, dynamic rule을 활성화 dynamic : activate rule 에 의해 활성화 되고, log rule 과 동일하게 동작 drop : 패킷을 차단하고 로그에 남김 reject : 패킷을 차단하고 로그를 남김, 메시지를 전달 TCP : TCP RST UDP : ICMP port Unreachable sdrop : 패킷을 차단하지만 로그를 남기지 않음 (silent drop) Rule 이 매칭 되었을 때 처리방식 Protocols 탐지할 프로토콜을 설정. TCP, IP, UDP, ICMP IP Addresses 출발지, 목적지 IP 주소. 단일 IP, IP대역(CIDR표기), IP 리스트 (구분자:,) 등으로 표기, 부정연산자(!) 표현가능 Port Numbers 출발지, 목적지 Port 단일 Port, Port Range (:이용), Port 리스트 표현 1:1023 : 1~1023 :39910 : 1 ~ 39910 Direction Operator 방향 지시자 출발지 -&amp;gt; 목적지 (단방향) 출발지 &amp;lt;&amp;gt; 목적지 (양방향) 출발지 &amp;lt;- 목적지 : 이러한 표현은 사용하지 않음 형태 : action protocol ipaddr port direction ipaddr port alert tcp any any -&amp;gt; 192.168.59.0/24 80 192.168.59 대역의 80 포트에 들어오는 패킷을 탐지 log tcp $EXTERNAL_NET any &amp;lt;&amp;gt; $HOME_NET 80 외부 네트워크 IP 에서 내부 네트워크 80 포트간 송수신되는 패킷을 탐지 $EXTERNAL_NET, $HOME_NET : snort.conf 에 정의된 환경변수 Body : 옵션 설정 내용 패킷탐지 규칙을 명시 snort 설정 generator 를 사용하여 간편하게 입력하는 방법도 존재 종류 일반 Payload / 범위 관련 Payload / 정규표현식 Payload / HTTP 이벤트 제한 관련 일반 옵션 설정 msg : alert, log 출력 시 이벤트 명으로 사용 reference : rule 과 관련된 외부 취약점 정보 참조시 사용 sid : 룰 식별자 99이하 : 시스템 예약 sid 100 ~ 1000000 : snort 에서 배포하는 ruleset 에서 사용하는 sid 1000001 이상 : 사용자가 정의한 rule sid classtype : 공격유형, 기본우선순위(위험도) 정의 priority : 위험도에 대한 숫자, classtype 에서 지정한 우선순위(위험도) 를 덮어씀 rev : revision - rule 수정횟수 Payload / 범위 관련 : 범위를 지정해주는 옵션을 사용하면 성능 향상, 오탐을 줄임 옵션 content : Payload 에서 검사할 문자열 설정 (전체 Payload 비교) 문자열 설정 시 text, text/binary, binary 형태 중 하나로 설정, 부정연산자 사용 가능 text 형식 : content:&quot;문자열 binary 형식 : content:&quot;|FFFF|문자열&quot; FF : 헥사 값 예시 text/binary 형식 : content:&quot;|FFFF|&quot; !(부정연산자) : content:!&quot;문자열&quot; - 문자열이 없는 것 Escape(\) 처리 필요 문자 : &quot;, ;, \ uricontent : HTTP Client 의 요청 URI (전체 Payload X) 에서 검사할 문자열 설정 offset : Payload 에서 Content 문자열을 검사할 시작 위치를 지정 Payload 의 첫 번째 바이트 위치는 0 부터 시작 depth : offset 부터 몇 바이트까지 검사할 것인지 지정 distance : content:&quot;문자열&quot; 이 매치된 경우 이후부터 몇 바이트 떨어진 위치에서 다음 content를 검사할 것인지 지정 within : content:&quot;문자열&quot; 이 매치된 경우 distance 부터 몇 바이트 범위 내에서 다음 content를 검사할 것인지 지정 nocase : Payload 검사 시 대소문자를 구분하지 않음 (바이너리 형식도 동일) 예시 (29:10) FTP root 로그인 시도 탐지 (제공 Ruleset 사용) alert tcp any any -&amp;gt; 10.10.10.0/24 21 (msg:&quot;FTP root user access&quot;;content:&quot;USER root&quot;;nocase;sid:100100;) 테스트 (content) alert tcp $EXTERNAL_NET any -&amp;gt; $HOME_NET any (msg:&quot;[TEST]content_text&quot;;content:&quot;/etc/passwd&quot;;nocase;sid:1000020;) 테스트 (offset) - 3번째 바이트부터 (2) 3바이트 이내(2~4)에 5457 문자열이 있는지 확인 alert tcp $EXTERNAL_NET any -&amp;gt; $HOME_NET any (msg:&quot;[TEST]offset&quot;;content:&quot;5457&quot;;offset:2;depth:3;nocase;sid:1000030;) 테스트 (distance, within) - 3번째 바이트부터 (2) 5바이트 이내 (2~6) 에서 369 문자열을 찾고, 4바이트 (7,8,9,A) 떨어진 위치 (B) 에서부터 3바이트 이내 (B,C,D) 에서 ABC 문자열을 찾아 만족하면 알림 출력 alert tcp $EXTERNAL_NET any -&amp;gt; $HOME_NET any (msg:&quot;[TEST]distance, within&quot;;content:&quot;369&quot;;offset:2;depth:5;content:&quot;ABC&quot;;distance:4;within:3;nocase;sid:1000034;) Payload / 정규표현식 정규표현식 : 일정 규칙을 갖는 문자열을 표현하는 방식 옵션 : PCRE (Perl Compatible Regular Expression) - Snort 에서는 Perl 기반 정규표현을 사용 pcre=&quot;/정규표현삭/&quot; 메타문자 \ : escape 문자로 사용 (특수문자 기능 제거) ^ : 캐럿. 다음에 나오는 문자는 문자열의 시작을 의미 $ : $ 앞의 문자는 문자열의 끝을 의미 . : 임의의 문자 한 개를 의미함 [] : 집합 안에 지정한 문자들 중 하나와 일치 [a-zA-Z] : 소문자 a-z 사이 + 대문자 A-Z 사이 중 한 문자와 일치 [0-9] : 0~9 사이의 숫자 중 하나 [^] : 집합 안에 지정한 문자들을 제외한 임의의 문자 중 하나와 일치 [^0-9] : 숫자를 제외한 임의의 문자 중 하나와 일치 | : OR, 항목을 묶을 때는 소괄호를 이용 (x|y|z) : x or y or z (tree|leaf|can) : tree or leaf or can * : * 앞에 나오는 문자가 0회 이상 나타남을 의미 Hs*deo : Hssdeo(O), Hdeo(O), Hsdeo(O), Hssssdeo(O) …. Hudeo(X) + : + 앞에 나오는 문자가 1회 이상 나타남을 의미 ? : ? 앞에 나오는 문자가 0회 또는 1회 이상 나타남을 의미 x? : x가 존재하거나 존재하지 않음 x{n} : {n} 앞에 오는 문자가 정확히 n 회 나타남 Ha{3}deo : Haaadeo x{n,} : x를 n번 이상 반복함을 의미 Ha{3,}deo : Haaadeo(O), Haaaadeo(O), …, Haadeo(X) x{n,m} : x를 n번 이상 m번 이하 반복함을 의미 예시 Get 또는 Post 로 시작하는 ‘=’ 나 ‘a=a’ 가 들어간 패킷 찾기 alert tcp $EXTERNAL_NET any -&amp;gt; $HOME_NET any (msg:&quot;[TEST]pcre&quot;;content:&quot;+or+&quot;; content:&quot;%27%3D%27&quot;;nocase; distance:0;within:20;pcre=&quot;/^(GET|POST)/&quot;; sid:100050;) + 는 space 를 의미 %27%3D%27 : a=a Payload / HTTP 관련 : HTTP 패킷에 대해 전체가 아닌 특정필드에서 패턴을 검사하는 기능 지원 HTTP 구조 : GET /index.php HTTP/1.1 옵션 : 옵션에 raw 가 붙은 경우 (http_raw_*) 디코딩 없이 검사. (uri, header, cookie) http_method : HTTP 요청 시 method 부분을 검사 (GET) http_uri : HTTP URI 부분을 검사 (index.php) http_header : HTTP의 Header 부분을 검사 (response/request) http_cookie : HTTP의 Cookie 부분을 검사 http_client_body : HTTP client 의 Body 부분을 검사 (POST 요청에 대한 검사) http_stat_code : HTTP 의 Status_code 부분을 검사 (HTTP/1.1 200 OK 의 200 부분) http_stat_msg : HTTP 의 Status_msg 부분을 검사 (HTTP/1.1 200 OK 의 OK 부분) 예시 : (20:30)</summary></entry><entry><title type="html">정보보안 - 데이터베이스 침해사고</title><link href="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-DatabaseIntrusion/" rel="alternate" type="text/html" title="정보보안 - 데이터베이스 침해사고" /><published>2022-01-21T09:00:00+09:00</published><updated>2022-01-21T09:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-IncidentAnalysis-DatabaseIntrusion</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-DatabaseIntrusion/">&lt;h1 id=&quot;데이터베이스-침해사고&quot;&gt;데이터베이스 침해사고&lt;/h1&gt;
+  &lt;li&gt;Snort 공격 패킷 탐지
+    &lt;ul&gt;
+      &lt;li&gt;FTP root 로그인 시도 탐지
+        &lt;ul&gt;
+          &lt;li&gt;FTP 서비스는 평문으로 송수신 되기 때문에 계정이 노출될 위험이 있음&lt;/li&gt;
+          &lt;li&gt;Wireshark 등을 통한 FTP 메시지 분석
+            &lt;ul&gt;
+              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;USER root\r\n&lt;/code&gt; 메시지 가 평문으로 전달됨 : 포트 21, User root 메시지 탐지
+                &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  alert tcp any any -&amp;gt; 10.10.10.0/24 21
+  (msg:&quot;FTP root user access&quot;; content:&quot;USER root&quot;; nocase; sid:1000070;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                &lt;/div&gt;
+                &lt;ul&gt;
+                  &lt;li&gt;alert 액션 : 메시지와 탐지 패킷 로그(pcap(default) 형식)를 남긴다.
+                    &lt;ul&gt;
+                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;snort.log.15151....&lt;/code&gt; : wireshark, tcpdump 등으로 확인 가능&lt;/li&gt;
+                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tcpdump -r snort.log.15151....&lt;/code&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Telnet root 로그인 성공 탐지
+        &lt;ul&gt;
+          &lt;li&gt;Wireshark 등을 통한 Telnet 메시지 분석
+            &lt;ul&gt;
+              &lt;li&gt;Telnet 클라이언트 로그인 성공 시 서버의 응답 데이터로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;login&lt;/code&gt; 키워드 와 쉘프롬프트 정보가 평문 전달됨
+                &lt;ul&gt;
+                  &lt;li&gt;예) 쉘프롬프트 : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[root@test~]#&lt;/code&gt;&lt;/li&gt;
+                  &lt;li&gt;root 계정은 중요한 계정이므로, telnet, ssh 등으로 직접 로그인이 가능하면 공격 대상이 될 수 있다.&lt;/li&gt;
+                  &lt;li&gt;root 계정에 대한 원격접속은 허용하지 않도록 설정한다.&lt;/li&gt;
+                  &lt;li&gt;텔넷 서버에서부터 응답 데이터를 탐지, content 를 통해 login 문자열이 포함되고, pcre 를 통해 정규표현식 포함
+                    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  alert tcp 10.10.10.0/24 23 -&amp;gt; any any
+  (msg:&quot;Telnet root login success&quot;; content:&quot;login&quot;; pcre:&quot;/root@.*#/&quot;; nocase; sid:1000100;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                    &lt;/div&gt;
+                  &lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;패스워드 크래킹 공격 탐지
+        &lt;ul&gt;
+          &lt;li&gt;패스워드 크래킹 종류
+            &lt;ul&gt;
+              &lt;li&gt;Brute Force&lt;/li&gt;
+              &lt;li&gt;Dictionary Attack&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;Telnet 로그인 실 시 응답 Data : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Login incorrect&lt;/code&gt;&lt;/li&gt;
+          &lt;li&gt;threshold 옵션, by_dst, 5초 동안 1번째 이벤트에만 액션 수행
+            &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      alert tcp 10.10.10.0/24 23 -&amp;gt; any any
+      (msg:&quot;Telnet login brute force attack&quot;; content:&quot;login incorrect&quot;; nocase;
+      threshold:type limit, track by_dst, count 1, seconds 5; sid:1000101;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;            &lt;/div&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;비정상 패킷 탐지
+    &lt;ul&gt;
+      &lt;li&gt;비정상 패킷 : RFC(Request for Comments) 문서에 정의된 프로토콜 표준 패킷 이외의 패킷
+        &lt;ul&gt;
+          &lt;li&gt;RFC : 인터넷 관련기술을 구현하는데 필요한 상세절차, 기본 틀 등을 제공하는 공문서와 같은 간행물
+            &lt;ul&gt;
+              &lt;li&gt;IETF(Internet Engineering Task Force) - 인터넷 국제 표준화 기구 에서 발행한 문서&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;IPS/IDS 에서 제대로 처리하지 못하면 시스템 오류/장애가 발생할 수 있음&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;비정상 IP 패킷
+        &lt;ul&gt;
+          &lt;li&gt;인터넷 구간의 사설 IP : 사설 IP 로 예약된 주소는 WAN 에서 사용할 수 없음
+            &lt;ul&gt;
+              &lt;li&gt;인터넷 구간에서 사설 IP 가 유입된 경우 조작된 IP임&lt;/li&gt;
+              &lt;li&gt;사설 IP 대역
+                &lt;ul&gt;
+                  &lt;li&gt;A Class : 10.0.0.0 ~ 10.255.255.255 (10.0.0.0/8)&lt;/li&gt;
+                  &lt;li&gt;B Class : 172.16.0.0 ~ 172.31.255.255 (172.16.0.0/12)&lt;/li&gt;
+                  &lt;li&gt;C Class : 192.168.0.0 ~ 192.168.255.255 (192.168.0.0/16)&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;예시
+                &lt;ul&gt;
+                  &lt;li&gt;UDP 트래픽 중 사설 IP로 설정되어 있는 비정상 패킷을 탐지
+                    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      alert udp 10.0.0.0/8 any -&amp;gt; $HOME_NET any
+      (msg:&quot;Private IP(10~) Detect&quot;; sid:1002100;)
+    
+      alert udp 172.16.0.0/12 any -&amp;gt; $HOME_NET any
+      (msg:&quot;Private IP(172~) Detect&quot;; sid:1002101;)
+    
+      alert udp 192.168.0.0/16 any -&amp;gt; $HOME_NET any
+      (msg:&quot;Private IP(192~) Detect&quot;; sid:1002102;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                    &lt;/div&gt;
+                  &lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;출발지와 목적지가 동일한 IP : Land Attack
+            &lt;ul&gt;
+              &lt;li&gt;예시
+                &lt;ul&gt;
+                  &lt;li&gt;출발지와 목적지가 동일한 IP 인 패킷 탐지
+                    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      alert ip any any -&amp;gt; $HOME_NET any
+      (msg:&quot;Land Attack(src/dst same IP) Detect&quot;; sameip; sid:1002300;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                    &lt;/div&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;메시지 결과  :
+                    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      [1002300] Land Attack(src/dst same IP) Detect
+      시간값 10.10.11.21 -&amp;gt; 10.10.11.21
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                    &lt;/div&gt;
+                  &lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;비정상 TCP 패킷
+        &lt;ul&gt;
+          &lt;li&gt;정상적인 TCP 패킷
+            &lt;ul&gt;
+              &lt;li&gt;3-Way Handshake : SYN -&amp;gt; SYN_ACK -&amp;gt; ACK (정상적 TCP 연결시 사용)&lt;/li&gt;
+              &lt;li&gt;4-Way Handshake : FIN_ACK -&amp;gt; ACK (정상적 연결 종료시 사용)&lt;/li&gt;
+              &lt;li&gt;RST_ACK (연결을 즉시 종료할 때)&lt;/li&gt;
+              &lt;li&gt;연결 후에는 송수신되는 패킷에 디폴트로 ACK Flag 를 포함 (필요시 PSH, URG 사용)&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;비정상적인 TCP 패킷
+            &lt;ul&gt;
+              &lt;li&gt;SYN_FIN : 동시에 설정될 수 없는 플래그. 구형의 IDS/IPS, FW 에서는 탐지 못함
+                &lt;ul&gt;
+                  &lt;li&gt;SYN : 연결 설정&lt;/li&gt;
+                  &lt;li&gt;FIN : 연결 종료&lt;/li&gt;
+                  &lt;li&gt;스캔 도구들이 SYN_FIN 패킷을 많이 사용&lt;/li&gt;
+                  &lt;li&gt;예시
+                    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      alert tcp any any -&amp;gt; 10.10.10.0/24 any
+      (msg:&quot;SYN_FIN Scan Detect&quot;; flags:SF; sid:1000340;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                    &lt;/div&gt;
+                    &lt;ul&gt;
+                      &lt;li&gt;flags 옵션 연산자 사용 예
+                        &lt;ul&gt;
+                          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;flags:SF&lt;/code&gt; : 연산자가 없는 경우 (SYN,FIN만 설정된 경우)&lt;/li&gt;
+                          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;flags:SF+&lt;/code&gt; : + 연산자가 있는 경우 (SYN,FIN은 반드시 포함)&lt;/li&gt;
+                          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;flags:SF*&lt;/code&gt; : * 연산자가 있는 경우 (지정한 flag를 하나 이상 포함)&lt;/li&gt;
+                          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;flags:!SF&lt;/code&gt; : ! 연산자가 있는 경우 (지정한 flag를 포함하지 않음)&lt;/li&gt;
+                        &lt;/ul&gt;
+                      &lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;메시지 결과
+                    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      [1000340]SYN_FIN Scan Detect
+      시간값 10.10.10.10 80 -&amp;gt; 10.10.10.20 80
+      *****SF
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                    &lt;/div&gt;
+                    &lt;ul&gt;
+                      &lt;li&gt;패킷의 출발지 포트는 1024 이상이어야 함. (위 예시는 비정상)&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;SYN_FIN 변형 TCP 패킷 : SIN_FIN 플래그만을 탐지하는 IDS/IPS 를 우회하기 위함
+                    &lt;ul&gt;
+                      &lt;li&gt;SYN,FIN,PSH 또는 SYN,FIN,RST 또는 SYN,FIN,PSH,RST 을 조합하여 사용
+                        &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  alert tcp any any -&amp;gt; 10.10.10.0/24 any
+  (msg:&quot;SYN_FIN + SCAN Detect&quot;; flags:SF+; sid:1000350;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                        &lt;/div&gt;
+                      &lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;FIN : FIN_ACK 는 정상적인 연결 종료 패킷, FIN 만 설정되는 경우 비정상 TCP 패킷
+                &lt;ul&gt;
+                  &lt;li&gt;스텔스 스캐닝 기법 중 하나 : FIN 플래그만 설정된 비정상 TCP 패킷
+                    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      alert tcp any any -&amp;gt; 10.10.10.0/24 any
+      (msg:&quot;FIN scan detect&quot;; flags:F; sid:1000360;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                    &lt;/div&gt;
+                  &lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;NULL : 플래그가 설정되지 않은 비정상 TCP 패킷
+                &lt;ul&gt;
+                  &lt;li&gt;모든 패킷은 Flag 가 설정되어 있음&lt;/li&gt;
+                  &lt;li&gt;NULL 패킷은 스텔스 스캐닝 기법 중 하나
+                    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      alert tcp any any -&amp;gt; 10.10.10.0/24 any
+      (msg:&quot;Null scan detect&quot;; flags:!UAPRSF; sid:1000370;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                    &lt;/div&gt;
+                  &lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="snort" /><summary type="html">snort 개요 IDS (네트워크 이상징후 감시) 중 하나 모든 트래픽을 감시하거나 샘플링을 통해 감시 미리 설정값을 저장 DB 와 비교, 알려진 공격 시그니처와 비교 공격자의 침입 경로 Block 사용자의 패턴을 분석해서 이상징후 탐지 마틴 로시가 1998 년에 sniffer and more 라는 표어 (네트워크 트래픽을 더 많이 감시) 로 개발 프로토콜 검색, 컨텐츠 분석, 웜, 취약점 공격시도 탐지, 포트스캔, CGI 기능 snort 의 운영모드 Sniffer Mode Packet Logger Mode Network IDS/IPS Mode 패킷 스니퍼 패킷 스니핑을 통해 계속 화면에 출력 -&amp;gt; 작은 네트워크 규모에서 사용 패킷 로거 로그 남기기 네트워크 IDS/IPS 네트워크 트래픽 분석을 통한 공격 탐지/차단 설치 RHEL (CentOS) 기준 DAQ (Data Acquistion Package) 설치 Snort 패키지 설치 Talos(제작사) 에서 Ruleset(최근 공격 패턴을 탐지할 수 있는) 을 만들어 배포 Snort 구조 sniffer : 패킷을 보기 좋게 Decode preprocessor : 비정상 헤더구조 패킷, 트래픽 구분 Detection Engine : Rule 기반의 탐지 엔진, 사전 정의된 Rule 에 매칭 되는지 확인, Payload 확인 Alert / logging : Ruleset 에 일치하는 패킷에 대한 처리방법, SMB, SNMP, trap 등을 활용해 저장 설정값 저장 위치 : /etc/snort/snort.conf 모니터링하고자 하는 Network 설정 Rules 위치 수정 Snort 명령어 Sniffer Mode TCP/IP 패킷 헤더를 출력 : snort -v TCP/ICMP/UDP 헤더와 IP를 출력 : snort -vd 패킷 데이터를 추가해서 표현하기 위한 명령어 : snort -vde -v : snort 를 패킷 sniffing 모드로 변경 -d : 모든 네트워크 계층 포함 -e : 데이터링크 계층의 헤더를 포함 -c : 패킷 검출 Snort Rule / Signature Header 내용 처리방식 프로토콜 IP주소 포트번호 Rule 헤더 설정 Rule Actions 패킷이 탐지되었을 때 처리방식 8가지 유형이 존재 alert : 알람을 발생시키고 로그를 남김 log : 패킷을 로그에 남김 pass : 패킷을 무시함 activate : alert 을 발생시키고, dynamic rule을 활성화 dynamic : activate rule 에 의해 활성화 되고, log rule 과 동일하게 동작 drop : 패킷을 차단하고 로그에 남김 reject : 패킷을 차단하고 로그를 남김, 메시지를 전달 TCP : TCP RST UDP : ICMP port Unreachable sdrop : 패킷을 차단하지만 로그를 남기지 않음 (silent drop) Rule 이 매칭 되었을 때 처리방식 Protocols 탐지할 프로토콜을 설정. TCP, IP, UDP, ICMP IP Addresses 출발지, 목적지 IP 주소. 단일 IP, IP대역(CIDR표기), IP 리스트 (구분자:,) 등으로 표기, 부정연산자(!) 표현가능 Port Numbers 출발지, 목적지 Port 단일 Port, Port Range (:이용), Port 리스트 표현 1:1023 : 1~1023 :39910 : 1 ~ 39910 Direction Operator 방향 지시자 출발지 -&amp;gt; 목적지 (단방향) 출발지 &amp;lt;&amp;gt; 목적지 (양방향) 출발지 &amp;lt;- 목적지 : 이러한 표현은 사용하지 않음 형태 : action protocol ipaddr port direction ipaddr port alert tcp any any -&amp;gt; 192.168.59.0/24 80 192.168.59 대역의 80 포트에 들어오는 패킷을 탐지 log tcp $EXTERNAL_NET any &amp;lt;&amp;gt; $HOME_NET 80 외부 네트워크 IP 에서 내부 네트워크 80 포트간 송수신되는 패킷을 탐지 $EXTERNAL_NET, $HOME_NET : snort.conf 에 정의된 환경변수 Body : 옵션 설정 내용 패킷탐지 규칙을 명시 snort 설정 generator 를 사용하여 간편하게 입력하는 방법도 존재 종류 일반 Payload / 범위 관련 Payload / 정규표현식 Payload / HTTP 이벤트 제한 관련 일반 옵션 설정 msg : alert, log 출력 시 이벤트 명으로 사용 reference : rule 과 관련된 외부 취약점 정보 참조시 사용 sid : 룰 식별자 99이하 : 시스템 예약 sid 100 ~ 1000000 : snort 에서 배포하는 ruleset 에서 사용하는 sid 1000001 이상 : 사용자가 정의한 rule sid classtype : 공격유형, 기본우선순위(위험도) 정의 priority : 위험도에 대한 숫자, classtype 에서 지정한 우선순위(위험도) 를 덮어씀 rev : revision - rule 수정횟수 Payload / 범위 관련 : 범위를 지정해주는 옵션을 사용하면 성능 향상, 오탐을 줄임 옵션 content : Payload 에서 검사할 문자열 설정 (전체 Payload 비교) 문자열 설정 시 text, text/binary, binary 형태 중 하나로 설정, 부정연산자 사용 가능 text 형식 : content:&quot;문자열 binary 형식 : content:&quot;|FFFF|문자열&quot; FF : 헥사 값 예시 text/binary 형식 : content:&quot;|FFFF|&quot; !(부정연산자) : content:!&quot;문자열&quot; - 문자열이 없는 것 Escape(\) 처리 필요 문자 : &quot;, ;, \ uricontent : HTTP Client 의 요청 URI (전체 Payload X) 에서 검사할 문자열 설정 offset : Payload 에서 Content 문자열을 검사할 시작 위치를 지정 Payload 의 첫 번째 바이트 위치는 0 부터 시작 depth : offset 부터 몇 바이트까지 검사할 것인지 지정 distance : content:&quot;문자열&quot; 이 매치된 경우 이후부터 몇 바이트 떨어진 위치에서 다음 content를 검사할 것인지 지정 within : content:&quot;문자열&quot; 이 매치된 경우 distance 부터 몇 바이트 범위 내에서 다음 content를 검사할 것인지 지정 nocase : Payload 검사 시 대소문자를 구분하지 않음 (바이너리 형식도 동일) 예시 (29:10) FTP root 로그인 시도 탐지 (제공 Ruleset 사용) alert tcp any any -&amp;gt; 10.10.10.0/24 21 (msg:&quot;FTP root user access&quot;;content:&quot;USER root&quot;;nocase;sid:100100;) 테스트 (content) alert tcp $EXTERNAL_NET any -&amp;gt; $HOME_NET any (msg:&quot;[TEST]content_text&quot;;content:&quot;/etc/passwd&quot;;nocase;sid:1000020;) 테스트 (offset) - 3번째 바이트부터 (2) 3바이트 이내(2~4)에 5457 문자열이 있는지 확인 alert tcp $EXTERNAL_NET any -&amp;gt; $HOME_NET any (msg:&quot;[TEST]offset&quot;;content:&quot;5457&quot;;offset:2;depth:3;nocase;sid:1000030;) 테스트 (distance, within) - 3번째 바이트부터 (2) 5바이트 이내 (2~6) 에서 369 문자열을 찾고, 4바이트 (7,8,9,A) 떨어진 위치 (B) 에서부터 3바이트 이내 (B,C,D) 에서 ABC 문자열을 찾아 만족하면 알림 출력 alert tcp $EXTERNAL_NET any -&amp;gt; $HOME_NET any (msg:&quot;[TEST]distance, within&quot;;content:&quot;369&quot;;offset:2;depth:5;content:&quot;ABC&quot;;distance:4;within:3;nocase;sid:1000034;) Payload / 정규표현식 정규표현식 : 일정 규칙을 갖는 문자열을 표현하는 방식 옵션 : PCRE (Perl Compatible Regular Expression) - Snort 에서는 Perl 기반 정규표현을 사용 pcre=&quot;/정규표현삭/&quot; 메타문자 \ : escape 문자로 사용 (특수문자 기능 제거) ^ : 캐럿. 다음에 나오는 문자는 문자열의 시작을 의미 $ : $ 앞의 문자는 문자열의 끝을 의미 . : 임의의 문자 한 개를 의미함 [] : 집합 안에 지정한 문자들 중 하나와 일치 [a-zA-Z] : 소문자 a-z 사이 + 대문자 A-Z 사이 중 한 문자와 일치 [0-9] : 0~9 사이의 숫자 중 하나 [^] : 집합 안에 지정한 문자들을 제외한 임의의 문자 중 하나와 일치 [^0-9] : 숫자를 제외한 임의의 문자 중 하나와 일치 | : OR, 항목을 묶을 때는 소괄호를 이용 (x|y|z) : x or y or z (tree|leaf|can) : tree or leaf or can * : * 앞에 나오는 문자가 0회 이상 나타남을 의미 Hs*deo : Hssdeo(O), Hdeo(O), Hsdeo(O), Hssssdeo(O) …. Hudeo(X) + : + 앞에 나오는 문자가 1회 이상 나타남을 의미 ? : ? 앞에 나오는 문자가 0회 또는 1회 이상 나타남을 의미 x? : x가 존재하거나 존재하지 않음 x{n} : {n} 앞에 오는 문자가 정확히 n 회 나타남 Ha{3}deo : Haaadeo x{n,} : x를 n번 이상 반복함을 의미 Ha{3,}deo : Haaadeo(O), Haaaadeo(O), …, Haadeo(X) x{n,m} : x를 n번 이상 m번 이하 반복함을 의미 예시 Get 또는 Post 로 시작하는 ‘=’ 나 ‘a=a’ 가 들어간 패킷 찾기 alert tcp $EXTERNAL_NET any -&amp;gt; $HOME_NET any (msg:&quot;[TEST]pcre&quot;;content:&quot;+or+&quot;; content:&quot;%27%3D%27&quot;;nocase; distance:0;within:20;pcre=&quot;/^(GET|POST)/&quot;; sid:100050;) + 는 space 를 의미 %27%3D%27 : a=a Payload / HTTP 관련 : HTTP 패킷에 대해 전체가 아닌 특정필드에서 패턴을 검사하는 기능 지원 HTTP 구조 : GET /index.php HTTP/1.1 옵션 : 옵션에 raw 가 붙은 경우 (http_raw_*) 디코딩 없이 검사. (uri, header, cookie) http_method : HTTP 요청 시 method 부분을 검사 (GET) http_uri : HTTP URI 부분을 검사 (index.php) http_header : HTTP의 Header 부분을 검사 (response/request) http_cookie : HTTP의 Cookie 부분을 검사 http_client_body : HTTP client 의 Body 부분을 검사 (POST 요청에 대한 검사) http_stat_code : HTTP 의 Status_code 부분을 검사 (HTTP/1.1 200 OK 의 200 부분) http_stat_msg : HTTP 의 Status_msg 부분을 검사 (HTTP/1.1 200 OK 의 OK 부분) 예시 http_method 테스트 : 클라이언트의 http 요청 라인 중 method 부분을 검사, content 가 GET 인 패킷을 탐지 alert tcp $EXTERNAL_NET any -&amp;gt; $HOME_NET any (msg:&quot;[TEST]http_GET&quot;;content:&quot;GET&quot;;http_method;sid:1000055;) http_uri 테스트 : 클라이언트의 http 요청 중 uri 정보를 검사, uri 정보 중 &amp;lt;script&amp;gt; 를 포함하는 패킷을 탐지 (XSS) alert tcp $EXTERNAL_NET any -&amp;gt; $HOME_NET any (msg:&quot;[TEST]http_uri&quot;;content:&quot;&amp;lt;script&amp;gt;&quot;;http_uri;nocase;sid:1000063;) Event Threshold(이벤트 제한) 관련 용도 특정 시간동안 발생되는 이벤트 수를 제한하기 위한 옵션 과도하게 반복되는 이벤트를 막기 위한 옵션 threshold:type &amp;lt;limit|threshold|both&amp;gt;, track &amp;lt;by_src|by_dst&amp;gt;, count &amp;lt;c&amp;gt;, secods &amp;lt;s&amp;gt; 옵션 type --limit : 매 s초 마다 패킷 count 개 발생 시 Action 을 1번 수행 (임계시간) --threshold : 매 s초 내에 패킷 count 개 발생 시 마다 Action 을 수행 (패킷양) --both : 매 s초 내에 패킷 count 개 발생 시 한번 Action 을 수행 (IP) track by_src : 출발지 IP 기준 by_dst : 목적지 IP 기준 예시 limit 테스트 (임계시간) threshold:type limit, track by_dst, count 100, seconds 2 2초 내에 패킷 100개 : 로그 1개 2초 내에 패킷 200개 : 로그 1개 4초 내에 패킷 400개 : 로그 2개 threshold 테스트 (패킷양) threshold:type threshold, track by_dst, count 100, seconds 2 2초 내에 패킷 100개 : 로그 1개 2초 내에 패킷 200개 : 로그 2개 4초 내에 패킷 400개 : 로그 4개 both 테스트 (IP) threshold:type both, track by_dst, count 100, seconds 2 2초 내에 패킷 100개 : 로그 1개 2초 내에 패킷 200개 : 로그 1개 4초 내에 패킷 400개 : 로그 1개 Snort 공격 패킷 탐지 FTP root 로그인 시도 탐지 FTP 서비스는 평문으로 송수신 되기 때문에 계정이 노출될 위험이 있음 Wireshark 등을 통한 FTP 메시지 분석 USER root\r\n 메시지 가 평문으로 전달됨 : 포트 21, User root 메시지 탐지 alert tcp any any -&amp;gt; 10.10.10.0/24 21 (msg:&quot;FTP root user access&quot;; content:&quot;USER root&quot;; nocase; sid:1000070;) alert 액션 : 메시지와 탐지 패킷 로그(pcap(default) 형식)를 남긴다. snort.log.15151.... : wireshark, tcpdump 등으로 확인 가능 tcpdump -r snort.log.15151.... Telnet root 로그인 성공 탐지 Wireshark 등을 통한 Telnet 메시지 분석 Telnet 클라이언트 로그인 성공 시 서버의 응답 데이터로 login 키워드 와 쉘프롬프트 정보가 평문 전달됨 예) 쉘프롬프트 : [root@test~]# root 계정은 중요한 계정이므로, telnet, ssh 등으로 직접 로그인이 가능하면 공격 대상이 될 수 있다. root 계정에 대한 원격접속은 허용하지 않도록 설정한다. 텔넷 서버에서부터 응답 데이터를 탐지, content 를 통해 login 문자열이 포함되고, pcre 를 통해 정규표현식 포함 alert tcp 10.10.10.0/24 23 -&amp;gt; any any (msg:&quot;Telnet root login success&quot;; content:&quot;login&quot;; pcre:&quot;/root@.*#/&quot;; nocase; sid:1000100;) 패스워드 크래킹 공격 탐지 패스워드 크래킹 종류 Brute Force Dictionary Attack Telnet 로그인 실 시 응답 Data : Login incorrect threshold 옵션, by_dst, 5초 동안 1번째 이벤트에만 액션 수행 alert tcp 10.10.10.0/24 23 -&amp;gt; any any (msg:&quot;Telnet login brute force attack&quot;; content:&quot;login incorrect&quot;; nocase; threshold:type limit, track by_dst, count 1, seconds 5; sid:1000101;)</summary></entry><entry><title type="html">정보보안 - 데이터베이스 침해사고</title><link href="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-DatabaseIntrusion/" rel="alternate" type="text/html" title="정보보안 - 데이터베이스 침해사고" /><published>2022-01-21T09:00:00+09:00</published><updated>2022-01-21T09:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-IncidentAnalysis-DatabaseIntrusion</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-DatabaseIntrusion/">&lt;h1 id=&quot;데이터베이스-침해사고&quot;&gt;데이터베이스 침해사고&lt;/h1&gt;
 &lt;ul&gt;
   &lt;li&gt;Data, 데이터베이스, DBMS
     &lt;ul&gt;
@@ -1997,312 +2354,4 @@
       &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="침해사고" /><summary type="html">침해사고 분석 절차 침해사고 분석의 목적 사고의 수습 누가 공격을 하였는지 파악 데이터 수집 -&amp;gt; 범행 단서 수집 법적 소송에 필요한 데이터 : 무결성, 적법성을 유지해야 함 수집하는 데이터 정보 종류 호스트 기반 정보 (증거) 시스템 시간 휘발성 데이터 (우선 수집 대상) 수집하기 위해서 Live Response 수행 필요 살아있는 System 에서 휘발성 정보를 수집하는 행위 Initial Live Response : 휘발성 데이터만 수집 In-depth Response : 휘발성 데이터 + 충분한 부가정보 (법적대응에 필요한 정보-무결성,적법) 수집 Full Live Response : Live System 의 완전조사 시스템의 날짜, 시간 시스템에서 현재 동작 중인 어플리케이션 현재 연결된 네트워크 상황 현재 열려진 소켓(포트) 열려진 소켓 상에서 대기하고 있던 어플리케이션 네트워크 인터페이스의 상태 메모리 정보, 현재 열려있는 파일, 시스템 패치 상황 시스템의 모든 파일들의 생성,수정 시간/날짜 정보 공격자에 의한 Upload 된 파일 식별을 위함 시스템으로 Upload / Download 된 파일 식별 출처 미확인 파일 디스크 백업 수집 네트워크 기반 정보 (증거) IDS 로그 수집 IPS 로그 수집 라우터 로그 수집 방화벽 로그 수집 인증서버 로그 수집 중앙호스트 (Syslog) 로부터의 원격로그 수집 일반적 증거 증인으로부터의 수집 증거 수집 전략 (네트워크) 장비를 종료/재부팅 하는 것을 피함 네트워크 기반의 증거들이 장비의 메모리에 휘발성 데이터로 존재 네트워크를 통한 접근 (원격접근) 보다 콘솔을 통해 연결 조사의 흔적을 최소화 하기 위함 원격접근은 Traffic 을 발생시킴 시스템 시간 정보 기록 네트워크 장비와 신뢰할 만한 시스템의 시간 차이를 확인 대부분의 포렌식 툴은 로그의 시간 차이를 조정하는 기능이 제공되지 않음 수동으로 비교, Script 를 만들어 사용 휘발성 정도에 따라서 증거를 수집 휘발성이 높은 증거부터 수집 조사활동을 모두 기록 실수에 의한 기록을 남기더라도 가능한한 모든 기록을 남기는 것이 중요 GUI 접속은 화면캡처나 사진 등 네트워크 기반의 증거 수집 패시브 증거 수집 : 계층 이상의 상위 계층에 데이터를 송신하지 않고 포렌식 용 증거를 수집하는 방법 케이블을 이용하여 감청 트래픽 스니핑 툴 사용 주파수 감청 (무선) 무선 AP Mac 주소 허브 (1계층) / 스위치 (2계층) 이용 포트 미러링 : 하나 이상의 포트에서 다른 포트의 트래픽을 복제 MAC 플러딩 : 다량의 맥 주소를 사용하는 임의의 이더넷 패킷을 보내 CAM 테이블을 채워, MAC 포트를 연결할 수 없게 되었을 때 모든 포트에 트래픽을 전송 ARP 스푸핑 : 공격자의 MAC 주소를 희생자의 IP와 매핑 시켜 거짓 ARP 패킷을 송신 트래픽 수집 소프트웨어 사용 libpcap 네트워크 상의 인터페이스에 대한 데이터링크 계층의 프레임을 캡쳐 winpcap 윈도우에서 돌아가는 libpcap 패킷스니퍼 libpcap 기반 동작 tcpdump 리눅스 기반 플랫폼에서 동작 / 윈도우의 경우 windump (winpcap) libpcap 기반 동작 트래픽 캡처 / 필터링 wireshark 트래픽 캡처 / 필터링 그래픽 기반 툴 액티브 (인터렉티브) 증거 수집 휘발성 증거는 시스템이 동작하고 네트워크가 연결된 상태에서 수집 네트워크 상의 스테이션과 상호 작용하여 증거를 수집하는 방법 콘솔로 직접 연결하는 방법 트래픽이 발생하지 않음 (흔적이 덜 남게 됨) SSH / SCP,SFTP 를 이용하는 방법 Telnet 이나 Rlogin, TFTP 같은 취약한 원격 연결 툴 (Plain Text 전송) 보다 감청을 당해도 안전 SNMP 프로토콜 사용 포렌식에서 사용되는 대부분의 툴이 SNMP 프로토콜을 사용 SSL / TLS 를 이용한 웹데이터 수집 네트워크 접근을 하지 않고 조사하는 방법 포트 스캐닝 취약점 조사 데이터 분석 절차 포렌식 이미징 작업 : 사본 만들기 데이터의 준비 수집 이미지의 사본 제작 파일 리스트 생성 삭제 파일 복구 비 할당 공간 복구 파일 시그니처 분석 수행 알려진 시스템 파일 식별 통계적인 데이터 파티션 테이블 파일 시스템 수행 데이터의 분석 이메일과 첨부파일 뽑아내기 브라우저 히스토리 파일 재검토 설치된 어플리케이션 재검토 수집된 데이터 재검토 적절한 스트링 검색 모든 네트워크 기반 증거 재검토 소프트웨어 분석 수행 암호화된 파일 식별과 해독 파일 대 파일 재검토 수행 특성화된 분석 수행</summary></entry><entry><title type="html">정보보안 - 침해사고 개요</title><link href="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-Outline/" rel="alternate" type="text/html" title="정보보안 - 침해사고 개요" /><published>2021-12-28T09:00:00+09:00</published><updated>2021-12-28T09:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-IncidentAnalysis-Outline</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-Outline/">&lt;h1 id=&quot;침해사고-개요&quot;&gt;침해사고 개요&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;침해사고란?
-    &lt;ul&gt;
-      &lt;li&gt;정보통신망 이용촉진 및 정보보호 등에 관한 법률 제2조 1항 7조
-        &lt;ul&gt;
-          &lt;li&gt;“침해사고”란 해킹, 컴퓨터바이러스, 논리폭탄, 메일폭탄, 서비스 거부 또는 고출력 전자기파 등의 방법으로 정보통신망 또는 이와 관련된 정보시스템을 공격하는 행위를 하여 발생한 사태를 말한다.&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;바이러스, 트로이목마, 웜, 백도어, 악성코드 등을 이용한 공격&lt;/li&gt;
-      &lt;li&gt;비인가된 System, 파일, 네트워크 정보 접근&lt;/li&gt;
-      &lt;li&gt;비인가된 사용자가 서비스를 무단 이용&lt;/li&gt;
-      &lt;li&gt;서비스 거부 등 네트워크, 시스템의 마비, 파괴&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;침해사고 대응 7단게
-    &lt;ul&gt;
-      &lt;li&gt;사고 발생,발견 또는 발생 시점 이전 단게
-        &lt;ul&gt;
-          &lt;li&gt;사고 전 준비&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;침해 사고 발생
-        &lt;ul&gt;
-          &lt;li&gt;사고 탐지&lt;/li&gt;
-          &lt;li&gt;초기 대응 : 기록, 침해사고 대응팀에 신고, 해당 부서에 통지&lt;/li&gt;
-          &lt;li&gt;대응 전략 체게화 : 최적의 전략을 결정 (정책, 기술, 법…)&lt;/li&gt;
-          &lt;li&gt;사고 조사 : 언제, 누구에 의해서, 피해 규모는 어느정도인지, 피해확산을 어떻게 방지할 것인지, 최소화 방안, 재발방지
-            &lt;ul&gt;
-              &lt;li&gt;데이터 수집 : 증거의 완벽한 확보&lt;/li&gt;
-              &lt;li&gt;데이터 분석&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;보고서 작성 : 경영진이 이해할 수 있는 내용으로 작성&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;복구, 해결 과정&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;KISA 분석 요청 시
-    &lt;ul&gt;
-      &lt;li&gt;악성코드, 프로세스 등을 제거하면 안됌&lt;/li&gt;
-      &lt;li&gt;반드시 제거해야 하는 경우
-        &lt;ul&gt;
-          &lt;li&gt;악성파일 경로 확보&lt;/li&gt;
-          &lt;li&gt;악성파일 백업&lt;/li&gt;
-          &lt;li&gt;MAC Time 확보 (생성, 접근, 수정시간)&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;사고-유형별-점검항목&quot;&gt;사고 유형별 점검항목&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;공통
-    &lt;ul&gt;
-      &lt;li&gt;계정
-        &lt;ul&gt;
-          &lt;li&gt;사용하지 않는 계정 확인 -&amp;gt; 삭제&lt;/li&gt;
-          &lt;li&gt;숨겨진 계정 확인 -&amp;gt; 삭제&lt;/li&gt;
-          &lt;li&gt;윈도우 : 관리도구 -&amp;gt; 컴퓨터 관리도구 -&amp;gt; 로컬사용자 및 그룹 -&amp;gt; 사용자&lt;/li&gt;
-          &lt;li&gt;리눅스 : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/passwd&lt;/code&gt; 확인
-            &lt;ul&gt;
-              &lt;li&gt;패스워드가 없는 계정&lt;/li&gt;
-              &lt;li&gt;/bin/bash 쉘 확인&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;로그파일
-        &lt;ul&gt;
-          &lt;li&gt;이벤트로그, 시스템로그 변조 유무 확인&lt;/li&gt;
-          &lt;li&gt;윈도우 : 관리도구 -&amp;gt; 컴퓨터관리 -&amp;gt; 이벤트뷰어&lt;/li&gt;
-          &lt;li&gt;리눅스
-            &lt;ul&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/var/log/secure&lt;/code&gt;&lt;/li&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/var/log/meesage&lt;/code&gt;&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;웹쉘
-        &lt;ul&gt;
-          &lt;li&gt;공격자가 원격에서 웹서버의 악의적 명령을 수행할 수 있도록 만들어진 파일&lt;/li&gt;
-          &lt;li&gt;웹쉘 Signature 점검&lt;/li&gt;
-          &lt;li&gt;asp, aspx, php, jsp, jpeg 등&lt;/li&gt;
-          &lt;li&gt;업로드된 경로를 파악, 취약점을 제거&lt;/li&gt;
-          &lt;li&gt;WHISTL 프로그램 사용하여 탐지&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;백도어
-        &lt;ul&gt;
-          &lt;li&gt;nmap 이용 하여 의심가는 포트 확인&lt;/li&gt;
-          &lt;li&gt;netstat, TCPview 등 이용&lt;/li&gt;
-          &lt;li&gt;백도어 관련 서비스 삭제
-            &lt;ul&gt;
-              &lt;li&gt;방화벽 설정 (iptables, hosts.allow, hosts.deny)&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;해당 포트 차단&lt;/li&gt;
-          &lt;li&gt;바이너리 변조 확인&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;루트킷
-        &lt;ul&gt;
-          &lt;li&gt;숨겨진 프로세스, 비정상적 프로세스 확인&lt;/li&gt;
-          &lt;li&gt;변조된 파일, System 명령어 확인&lt;/li&gt;
-          &lt;li&gt;윈도우 : IceSword&lt;/li&gt;
-          &lt;li&gt;리눅스 : Rootkit Hunter, Check Rootkit&lt;/li&gt;
-          &lt;li&gt;명령어 무결성 확인, 시스템 재설치 등&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;웹변조 (웹사이트 변조)
-    &lt;ul&gt;
-      &lt;li&gt;웹페이지
-        &lt;ul&gt;
-          &lt;li&gt;공통 확인 : index.html, main.html, default.html, index.php, main.php&lt;/li&gt;
-          &lt;li&gt;IIS 계열 확인 : index.asp, main.asp, default.asp&lt;/li&gt;
-          &lt;li&gt;메인페이지로 설정된 기타 파일 확인&lt;/li&gt;
-          &lt;li&gt;웹페이지 내용이 변경된 경우 웹쉘의 감염 여부를 확인해야 함
-            &lt;ul&gt;
-              &lt;li&gt;WHISTL 프로그램을 통해 웹쉘 감염여부 확인&lt;/li&gt;
-              &lt;li&gt;웹쉘이 발견된 경우 접속로그를 통해 웹쉘에 접근한 IP를 확인 / 차단&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;HTTP 메소드
-        &lt;ul&gt;
-          &lt;li&gt;윈도우 IIS 웹서버 : WebDAV 활성화 여부 확인
-            &lt;ul&gt;
-              &lt;li&gt;WebDAV : 사용자가 원격으로 서버에 저장되어 있는 파일을 편집, 관리하는 HTTP 확장 기능
-                &lt;ul&gt;
-                  &lt;li&gt;NAS 클라이언트를 사용해 HDD 드라이브처럼 사용&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;관리도구 -&amp;gt; IIS 관리 -&amp;gt; 웹서비스 확장&lt;/li&gt;
-              &lt;li&gt;활성화 되어 있는 경우 사용중지로 변경&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;리눅스 Apache 웹서버 : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;httpd.conf&lt;/code&gt; 파일 확인
-            &lt;ul&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;Directory /&amp;gt;&lt;/code&gt; 의 MOVE, PUT 메서드 의 Allow 여부 확인
-                &lt;ul&gt;
-                  &lt;li&gt;GET, POST 를 제외한 메서드들을 허용하지 않는 것이 바람직함&lt;/li&gt;
-                  &lt;li&gt;HEAD : 웹서버 다운유무, 웹서버의 정보를 얻기 위함 (헤더만 전송)&lt;/li&gt;
-                  &lt;li&gt;OPTIONS : 시스템에서 지원하는 메서드의 종류를 확인&lt;/li&gt;
-                  &lt;li&gt;DELETE, COPY, MOVE&lt;/li&gt;
-                  &lt;li&gt;PUT : POST와 유사하나 파일을 변조시킬 수 있음&lt;/li&gt;
-                  &lt;li&gt;TRACE : 원격지 서버의 루프백 메시지를 호출하여 사용&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;웹로그 : 생성, 수정 시간 확인
-        &lt;ul&gt;
-          &lt;li&gt;윈도우 : IIS&lt;/li&gt;
-          &lt;li&gt;리눅스 : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/usr/local/apache/logs&lt;/code&gt;&lt;/li&gt;
-          &lt;li&gt;웹로그에서 특정 메서드의 사용유무를 확인 : grep&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;IIS, Apache 등의 설정이 변경된 경우
-        &lt;ul&gt;
-          &lt;li&gt;Admin / root 등 서버관리자 계정 변경 필수&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;악성코드 경유지/유포지
-    &lt;ul&gt;
-      &lt;li&gt;웹페이지 / 접속 IP
-        &lt;ul&gt;
-          &lt;li&gt;악성코드 유포지 URL 이 삽입된 페이지를 검출&lt;/li&gt;
-          &lt;li&gt;grep 명령어 사용&lt;/li&gt;
-          &lt;li&gt;유포 페이지 생성, 수정 시간 확인
-            &lt;ul&gt;
-              &lt;li&gt;해당 시점 기준 접속 로그, 시스템 로그 등을 분석, 또 다른 침해 여부 확인&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;접속 IP를 통해 좀비 PC를 찾아냄&lt;/li&gt;
-          &lt;li&gt;WHISTL 을 이용해 웹쉘 감염 여부 확인, 삭제 조치&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;봇넷 C&amp;amp;C
-    &lt;ul&gt;
-      &lt;li&gt;네트워크 연결 확인
-        &lt;ul&gt;
-          &lt;li&gt;윈도우 :
-            &lt;ul&gt;
-              &lt;li&gt;netstat -an&lt;/li&gt;
-              &lt;li&gt;6666,6667 포트 등 의심포트 확인
-                &lt;ul&gt;
-                  &lt;li&gt;IRC (Internet Relay Chatting) Port (6667,6668)&lt;/li&gt;
-                  &lt;li&gt;사용자 몰래 특정 IRC 서버에 접속하도록 함&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;wireshark 를 통한 패킷 분석&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;리눅스 :
-            &lt;ul&gt;
-              &lt;li&gt;netstat -an&lt;/li&gt;
-              &lt;li&gt;lsof -i&lt;/li&gt;
-              &lt;li&gt;tcpdump 를 통한 패킷 분석&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;외부 네트워크와 연결된 백도어 포트가 발견된 경우
-        &lt;ul&gt;
-          &lt;li&gt;방화벽을 이용해 해당 포트 접근 제한&lt;/li&gt;
-          &lt;li&gt;해당 파일 삭제 조치&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;해킹 경유지
-    &lt;ul&gt;
-      &lt;li&gt;네트워크 연결
-        &lt;ul&gt;
-          &lt;li&gt;nmap, netstat 등을 활용하여 파악&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;윈도우
-        &lt;ul&gt;
-          &lt;li&gt;RRAS(Routing and Remote Access Service) 서비스 중지
-            &lt;ul&gt;
-              &lt;li&gt;내부 네트워크에서 외부 네트워크 연결 시 사용&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;이벤트 로그 분석을 통해 RRAS 를 실행한 서비스, IP를 확인&lt;/li&gt;
-          &lt;li&gt;컴퓨터관리 -&amp;gt; 서비스 및 응용프로그램 -&amp;gt; 서비스 -&amp;gt; Routing And Remote Access Service 사용안함&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;리눅스
-        &lt;ul&gt;
-          &lt;li&gt;PPTP(Point-to-Point Tunneling Protocol) 서비스 중지
-            &lt;ul&gt;
-              &lt;li&gt;VPN 프로토콜, MS에서 개발&lt;/li&gt;
-              &lt;li&gt;윈도우에서 오랫동안 사용&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;시스템 로그를 이용해 PPTP 를 실행한 로그, IP를 확인 (21:37)&lt;/li&gt;
-          &lt;li&gt;
-            &lt;table&gt;
-              &lt;tbody&gt;
-                &lt;tr&gt;
-                  &lt;td&gt;ps -ef&lt;/td&gt;
-                  &lt;td&gt;grep pptpd&lt;/td&gt;
-                &lt;/tr&gt;
-              &lt;/tbody&gt;
-            &lt;/table&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;설치 프로그램
-        &lt;ul&gt;
-          &lt;li&gt;윈도우 : 제어판 -&amp;gt; 프로그램 추가/제거 -&amp;gt; CCProxy, RealVNC 등의 설치여부 확인&lt;/li&gt;
-          &lt;li&gt;리눅스 : Rootkit Hunter 등을 활용&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;사고-유형별-대응전략&quot;&gt;사고 유형별 대응전략&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;DoS 공격
-    &lt;ul&gt;
-      &lt;li&gt;라우터 재설정 (공격 완화)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;비인가 사용
-    &lt;ul&gt;
-      &lt;li&gt;업무용 컴퓨터 오용 -&amp;gt; 포렌식 이미징 작업, 용의자와 면담, 범인 식별, 증거확보&lt;/li&gt;
-      &lt;li&gt;징계 결정 (직위, 과거조직 등 고려)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;파괴 행위
-    &lt;ul&gt;
-      &lt;li&gt;웹사이트가 손상이 되는 경우&lt;/li&gt;
-      &lt;li&gt;복구 필요&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;정보의 도난
-    &lt;ul&gt;
-      &lt;li&gt;신용카드 도난, 고객정보 유출&lt;/li&gt;
-      &lt;li&gt;관련시스템 이미지 확보&lt;/li&gt;
-      &lt;li&gt;수사기관 참여&lt;/li&gt;
-      &lt;li&gt;도난신고, 법적 대응&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;컴퓨터 침입
-    &lt;ul&gt;
-      &lt;li&gt;buffer overflow, IIS 등 으로 침입&lt;/li&gt;
-      &lt;li&gt;비인가 접속 차단&lt;/li&gt;
-      &lt;li&gt;취약점 식별&lt;/li&gt;
-      &lt;li&gt;보안 패치&lt;/li&gt;
-      &lt;li&gt;범인 식별&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="침해사고" /><summary type="html">침해사고 개요 침해사고란? 정보통신망 이용촉진 및 정보보호 등에 관한 법률 제2조 1항 7조 “침해사고”란 해킹, 컴퓨터바이러스, 논리폭탄, 메일폭탄, 서비스 거부 또는 고출력 전자기파 등의 방법으로 정보통신망 또는 이와 관련된 정보시스템을 공격하는 행위를 하여 발생한 사태를 말한다. 바이러스, 트로이목마, 웜, 백도어, 악성코드 등을 이용한 공격 비인가된 System, 파일, 네트워크 정보 접근 비인가된 사용자가 서비스를 무단 이용 서비스 거부 등 네트워크, 시스템의 마비, 파괴 침해사고 대응 7단게 사고 발생,발견 또는 발생 시점 이전 단게 사고 전 준비 침해 사고 발생 사고 탐지 초기 대응 : 기록, 침해사고 대응팀에 신고, 해당 부서에 통지 대응 전략 체게화 : 최적의 전략을 결정 (정책, 기술, 법…) 사고 조사 : 언제, 누구에 의해서, 피해 규모는 어느정도인지, 피해확산을 어떻게 방지할 것인지, 최소화 방안, 재발방지 데이터 수집 : 증거의 완벽한 확보 데이터 분석 보고서 작성 : 경영진이 이해할 수 있는 내용으로 작성 복구, 해결 과정 KISA 분석 요청 시 악성코드, 프로세스 등을 제거하면 안됌 반드시 제거해야 하는 경우 악성파일 경로 확보 악성파일 백업 MAC Time 확보 (생성, 접근, 수정시간) 사고 유형별 점검항목 공통 계정 사용하지 않는 계정 확인 -&amp;gt; 삭제 숨겨진 계정 확인 -&amp;gt; 삭제 윈도우 : 관리도구 -&amp;gt; 컴퓨터 관리도구 -&amp;gt; 로컬사용자 및 그룹 -&amp;gt; 사용자 리눅스 : /etc/passwd 확인 패스워드가 없는 계정 /bin/bash 쉘 확인 로그파일 이벤트로그, 시스템로그 변조 유무 확인 윈도우 : 관리도구 -&amp;gt; 컴퓨터관리 -&amp;gt; 이벤트뷰어 리눅스 /var/log/secure /var/log/meesage 웹쉘 공격자가 원격에서 웹서버의 악의적 명령을 수행할 수 있도록 만들어진 파일 웹쉘 Signature 점검 asp, aspx, php, jsp, jpeg 등 업로드된 경로를 파악, 취약점을 제거 WHISTL 프로그램 사용하여 탐지 백도어 nmap 이용 하여 의심가는 포트 확인 netstat, TCPview 등 이용 백도어 관련 서비스 삭제 방화벽 설정 (iptables, hosts.allow, hosts.deny) 해당 포트 차단 바이너리 변조 확인 루트킷 숨겨진 프로세스, 비정상적 프로세스 확인 변조된 파일, System 명령어 확인 윈도우 : IceSword 리눅스 : Rootkit Hunter, Check Rootkit 명령어 무결성 확인, 시스템 재설치 등 웹변조 (웹사이트 변조) 웹페이지 공통 확인 : index.html, main.html, default.html, index.php, main.php IIS 계열 확인 : index.asp, main.asp, default.asp 메인페이지로 설정된 기타 파일 확인 웹페이지 내용이 변경된 경우 웹쉘의 감염 여부를 확인해야 함 WHISTL 프로그램을 통해 웹쉘 감염여부 확인 웹쉘이 발견된 경우 접속로그를 통해 웹쉘에 접근한 IP를 확인 / 차단 HTTP 메소드 윈도우 IIS 웹서버 : WebDAV 활성화 여부 확인 WebDAV : 사용자가 원격으로 서버에 저장되어 있는 파일을 편집, 관리하는 HTTP 확장 기능 NAS 클라이언트를 사용해 HDD 드라이브처럼 사용 관리도구 -&amp;gt; IIS 관리 -&amp;gt; 웹서비스 확장 활성화 되어 있는 경우 사용중지로 변경 리눅스 Apache 웹서버 : httpd.conf 파일 확인 &amp;lt;Directory /&amp;gt; 의 MOVE, PUT 메서드 의 Allow 여부 확인 GET, POST 를 제외한 메서드들을 허용하지 않는 것이 바람직함 HEAD : 웹서버 다운유무, 웹서버의 정보를 얻기 위함 (헤더만 전송) OPTIONS : 시스템에서 지원하는 메서드의 종류를 확인 DELETE, COPY, MOVE PUT : POST와 유사하나 파일을 변조시킬 수 있음 TRACE : 원격지 서버의 루프백 메시지를 호출하여 사용 웹로그 : 생성, 수정 시간 확인 윈도우 : IIS 리눅스 : /usr/local/apache/logs 웹로그에서 특정 메서드의 사용유무를 확인 : grep IIS, Apache 등의 설정이 변경된 경우 Admin / root 등 서버관리자 계정 변경 필수 악성코드 경유지/유포지 웹페이지 / 접속 IP 악성코드 유포지 URL 이 삽입된 페이지를 검출 grep 명령어 사용 유포 페이지 생성, 수정 시간 확인 해당 시점 기준 접속 로그, 시스템 로그 등을 분석, 또 다른 침해 여부 확인 접속 IP를 통해 좀비 PC를 찾아냄 WHISTL 을 이용해 웹쉘 감염 여부 확인, 삭제 조치 봇넷 C&amp;amp;C 네트워크 연결 확인 윈도우 : netstat -an 6666,6667 포트 등 의심포트 확인 IRC (Internet Relay Chatting) Port (6667,6668) 사용자 몰래 특정 IRC 서버에 접속하도록 함 wireshark 를 통한 패킷 분석 리눅스 : netstat -an lsof -i tcpdump 를 통한 패킷 분석 외부 네트워크와 연결된 백도어 포트가 발견된 경우 방화벽을 이용해 해당 포트 접근 제한 해당 파일 삭제 조치 해킹 경유지 네트워크 연결 nmap, netstat 등을 활용하여 파악 윈도우 RRAS(Routing and Remote Access Service) 서비스 중지 내부 네트워크에서 외부 네트워크 연결 시 사용 이벤트 로그 분석을 통해 RRAS 를 실행한 서비스, IP를 확인 컴퓨터관리 -&amp;gt; 서비스 및 응용프로그램 -&amp;gt; 서비스 -&amp;gt; Routing And Remote Access Service 사용안함 리눅스 PPTP(Point-to-Point Tunneling Protocol) 서비스 중지 VPN 프로토콜, MS에서 개발 윈도우에서 오랫동안 사용 시스템 로그를 이용해 PPTP 를 실행한 로그, IP를 확인 (21:37) ps -ef grep pptpd 설치 프로그램 윈도우 : 제어판 -&amp;gt; 프로그램 추가/제거 -&amp;gt; CCProxy, RealVNC 등의 설치여부 확인 리눅스 : Rootkit Hunter 등을 활용</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="침해사고" /><summary type="html">침해사고 분석 절차 침해사고 분석의 목적 사고의 수습 누가 공격을 하였는지 파악 데이터 수집 -&amp;gt; 범행 단서 수집 법적 소송에 필요한 데이터 : 무결성, 적법성을 유지해야 함 수집하는 데이터 정보 종류 호스트 기반 정보 (증거) 시스템 시간 휘발성 데이터 (우선 수집 대상) 수집하기 위해서 Live Response 수행 필요 살아있는 System 에서 휘발성 정보를 수집하는 행위 Initial Live Response : 휘발성 데이터만 수집 In-depth Response : 휘발성 데이터 + 충분한 부가정보 (법적대응에 필요한 정보-무결성,적법) 수집 Full Live Response : Live System 의 완전조사 시스템의 날짜, 시간 시스템에서 현재 동작 중인 어플리케이션 현재 연결된 네트워크 상황 현재 열려진 소켓(포트) 열려진 소켓 상에서 대기하고 있던 어플리케이션 네트워크 인터페이스의 상태 메모리 정보, 현재 열려있는 파일, 시스템 패치 상황 시스템의 모든 파일들의 생성,수정 시간/날짜 정보 공격자에 의한 Upload 된 파일 식별을 위함 시스템으로 Upload / Download 된 파일 식별 출처 미확인 파일 디스크 백업 수집 네트워크 기반 정보 (증거) IDS 로그 수집 IPS 로그 수집 라우터 로그 수집 방화벽 로그 수집 인증서버 로그 수집 중앙호스트 (Syslog) 로부터의 원격로그 수집 일반적 증거 증인으로부터의 수집 증거 수집 전략 (네트워크) 장비를 종료/재부팅 하는 것을 피함 네트워크 기반의 증거들이 장비의 메모리에 휘발성 데이터로 존재 네트워크를 통한 접근 (원격접근) 보다 콘솔을 통해 연결 조사의 흔적을 최소화 하기 위함 원격접근은 Traffic 을 발생시킴 시스템 시간 정보 기록 네트워크 장비와 신뢰할 만한 시스템의 시간 차이를 확인 대부분의 포렌식 툴은 로그의 시간 차이를 조정하는 기능이 제공되지 않음 수동으로 비교, Script 를 만들어 사용 휘발성 정도에 따라서 증거를 수집 휘발성이 높은 증거부터 수집 조사활동을 모두 기록 실수에 의한 기록을 남기더라도 가능한한 모든 기록을 남기는 것이 중요 GUI 접속은 화면캡처나 사진 등 네트워크 기반의 증거 수집 패시브 증거 수집 : 계층 이상의 상위 계층에 데이터를 송신하지 않고 포렌식 용 증거를 수집하는 방법 케이블을 이용하여 감청 트래픽 스니핑 툴 사용 주파수 감청 (무선) 무선 AP Mac 주소 허브 (1계층) / 스위치 (2계층) 이용 포트 미러링 : 하나 이상의 포트에서 다른 포트의 트래픽을 복제 MAC 플러딩 : 다량의 맥 주소를 사용하는 임의의 이더넷 패킷을 보내 CAM 테이블을 채워, MAC 포트를 연결할 수 없게 되었을 때 모든 포트에 트래픽을 전송 ARP 스푸핑 : 공격자의 MAC 주소를 희생자의 IP와 매핑 시켜 거짓 ARP 패킷을 송신 트래픽 수집 소프트웨어 사용 libpcap 네트워크 상의 인터페이스에 대한 데이터링크 계층의 프레임을 캡쳐 winpcap 윈도우에서 돌아가는 libpcap 패킷스니퍼 libpcap 기반 동작 tcpdump 리눅스 기반 플랫폼에서 동작 / 윈도우의 경우 windump (winpcap) libpcap 기반 동작 트래픽 캡처 / 필터링 wireshark 트래픽 캡처 / 필터링 그래픽 기반 툴 액티브 (인터렉티브) 증거 수집 휘발성 증거는 시스템이 동작하고 네트워크가 연결된 상태에서 수집 네트워크 상의 스테이션과 상호 작용하여 증거를 수집하는 방법 콘솔로 직접 연결하는 방법 트래픽이 발생하지 않음 (흔적이 덜 남게 됨) SSH / SCP,SFTP 를 이용하는 방법 Telnet 이나 Rlogin, TFTP 같은 취약한 원격 연결 툴 (Plain Text 전송) 보다 감청을 당해도 안전 SNMP 프로토콜 사용 포렌식에서 사용되는 대부분의 툴이 SNMP 프로토콜을 사용 SSL / TLS 를 이용한 웹데이터 수집 네트워크 접근을 하지 않고 조사하는 방법 포트 스캐닝 취약점 조사 데이터 분석 절차 포렌식 이미징 작업 : 사본 만들기 데이터의 준비 수집 이미지의 사본 제작 파일 리스트 생성 삭제 파일 복구 비 할당 공간 복구 파일 시그니처 분석 수행 알려진 시스템 파일 식별 통계적인 데이터 파티션 테이블 파일 시스템 수행 데이터의 분석 이메일과 첨부파일 뽑아내기 브라우저 히스토리 파일 재검토 설치된 어플리케이션 재검토 수집된 데이터 재검토 적절한 스트링 검색 모든 네트워크 기반 증거 재검토 소프트웨어 분석 수행 암호화된 파일 식별과 해독 파일 대 파일 재검토 수행 특성화된 분석 수행</summary></entry></feed>

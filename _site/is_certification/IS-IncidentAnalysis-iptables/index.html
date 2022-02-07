@@ -1,0 +1,841 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.20.2 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>정보보안 - iptables | Bluesplatter</title>
+<meta name="description" content="iptables    정의            리눅스 상에서 방화벽을 설정하는 도구       패킷 필터링 기능 : 지나가는 패킷의 헤더를 보고 해당 패킷에 대한 허용/차단 (ACCEPT/DROP) 결정       Rule 기반의 패킷 필터링 기능을 제공           기능            상태추적 (Connection Tracking or Stateful Inspection)                    방화벽을 통과하는 모든 패킷에 대한 연결상태를 추적, 메모리에 기록하여 상태추적테이블을 생성           모든 송 수신 패킷을 기록하고 검사           기존 연결을 가장하여 접근할 경우 저장되어 있는 상태목록과 비교하여 허용/차단           이미 연결된 상태의 패킷은 검사하지 않음           Stateful Inspection : 이스라엘 보안업체인 Checkpoint 사 에서 최초로 개발한 방화벽 구조                       NAT 기능                    네트워크 주소 변환                       패킷 레벨에서 로깅       확장 모듈을 이용해 다양한 기능 제공           용어            Table                    Filter Table                            Chain : 패킷이 이동하는 경로 (3가지 기본 Chain 이 존재-삭제불가)                                    Chain Input : 방화벽을 최종 목적지로 하는 체인                   Chain Output : 방화벽을 최초 출발지로 정하는 체인                   Chain Forward : 방화벽을 통과하는 체인 (방화벽을 별도의 서버로 구성해서 서비스할 때 사용하는 체인)                   -&gt; INPUT -&gt; Linux Server -&gt; Output -&gt;                   -&gt;-&gt;-&gt;-&gt;-&gt;-&gt;-&gt; FORWARD -&gt;-&gt;-&gt;-&gt;-&gt;-&gt;-&gt;                                            Linux Server 를 목적지로 삼는 모든 패킷은 Input Chain 통과                       Linux Server 에서 생성되어 외부로 보내지는 모든 패킷은 Output Chain 을 통과                       Forward Chain 은 현재의 Linux Server 가 목적지가 아닌 패킷이 통과하는 Chain (방화벽을 별도의 서버로 구성)                                                                                       Rule : 패킷 필터링을 하기 위한 Rule                                    사용법                                            기본구문 형식                                                    iptables [테이블] [체인] [룰] [타깃]                           대 소문자 구분                                                                       테이블 설정                                                    형식 : -t [테이블]                           테이블을 명시하지 않으면 기본값으로 Filter Table 이 적용                                                                       체인(Chain) 설정                                                    형식 : iptables -[A|I|D] [체인]                           -A : append 모드 (해당 체인의 가장 마지막 줄에 룰을 추가) (4:45)                                                                                                                                                           NAT Table           Mangle Table">
+
+
+  <meta name="author" content="HY03">
+  
+  <meta property="article:author" content="HY03">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Bluesplatter">
+<meta property="og:title" content="정보보안 - iptables">
+<meta property="og:url" content="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-iptables/">
+
+
+  <meta property="og:description" content="iptables    정의            리눅스 상에서 방화벽을 설정하는 도구       패킷 필터링 기능 : 지나가는 패킷의 헤더를 보고 해당 패킷에 대한 허용/차단 (ACCEPT/DROP) 결정       Rule 기반의 패킷 필터링 기능을 제공           기능            상태추적 (Connection Tracking or Stateful Inspection)                    방화벽을 통과하는 모든 패킷에 대한 연결상태를 추적, 메모리에 기록하여 상태추적테이블을 생성           모든 송 수신 패킷을 기록하고 검사           기존 연결을 가장하여 접근할 경우 저장되어 있는 상태목록과 비교하여 허용/차단           이미 연결된 상태의 패킷은 검사하지 않음           Stateful Inspection : 이스라엘 보안업체인 Checkpoint 사 에서 최초로 개발한 방화벽 구조                       NAT 기능                    네트워크 주소 변환                       패킷 레벨에서 로깅       확장 모듈을 이용해 다양한 기능 제공           용어            Table                    Filter Table                            Chain : 패킷이 이동하는 경로 (3가지 기본 Chain 이 존재-삭제불가)                                    Chain Input : 방화벽을 최종 목적지로 하는 체인                   Chain Output : 방화벽을 최초 출발지로 정하는 체인                   Chain Forward : 방화벽을 통과하는 체인 (방화벽을 별도의 서버로 구성해서 서비스할 때 사용하는 체인)                   -&gt; INPUT -&gt; Linux Server -&gt; Output -&gt;                   -&gt;-&gt;-&gt;-&gt;-&gt;-&gt;-&gt; FORWARD -&gt;-&gt;-&gt;-&gt;-&gt;-&gt;-&gt;                                            Linux Server 를 목적지로 삼는 모든 패킷은 Input Chain 통과                       Linux Server 에서 생성되어 외부로 보내지는 모든 패킷은 Output Chain 을 통과                       Forward Chain 은 현재의 Linux Server 가 목적지가 아닌 패킷이 통과하는 Chain (방화벽을 별도의 서버로 구성)                                                                                       Rule : 패킷 필터링을 하기 위한 Rule                                    사용법                                            기본구문 형식                                                    iptables [테이블] [체인] [룰] [타깃]                           대 소문자 구분                                                                       테이블 설정                                                    형식 : -t [테이블]                           테이블을 명시하지 않으면 기본값으로 Filter Table 이 적용                                                                       체인(Chain) 설정                                                    형식 : iptables -[A|I|D] [체인]                           -A : append 모드 (해당 체인의 가장 마지막 줄에 룰을 추가) (4:45)                                                                                                                                                           NAT Table           Mangle Table">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-02-07T09:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-iptables/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "HY03",
+      "url": "https://bluesplatter.com/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Bluesplatter Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo/logo.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          세상에 남기는 작은 흔적
+          <span class="site-subtitle">Bluesplatter</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/">연도별 포스트</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="https://bluesplatter.com/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#is_certification" itemprop="item"><span itemprop="name">Is_certification</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">정보보안 - iptables</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/profile/photo.jpg" alt="HY03" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">HY03</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>저는 전문가가 아니고 이것 저것 알아보는 비전문가 입니다. <br /> 틀린 내용이 기술되어도 너그러이 봐주시고 댓글을 남겨주셨으면 좋겠습니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="http://bluesplatter.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:hyunik03@gmail.com">
+            <meta itemprop="email" content="hyunik03@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">이메일</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="정보보안 - iptables">
+    <meta itemprop="description" content="iptables  정의          리눅스 상에서 방화벽을 설정하는 도구      패킷 필터링 기능 : 지나가는 패킷의 헤더를 보고 해당 패킷에 대한 허용/차단 (ACCEPT/DROP) 결정      Rule 기반의 패킷 필터링 기능을 제공        기능          상태추적 (Connection Tracking or Stateful Inspection)                  방화벽을 통과하는 모든 패킷에 대한 연결상태를 추적, 메모리에 기록하여 상태추적테이블을 생성          모든 송 수신 패킷을 기록하고 검사          기존 연결을 가장하여 접근할 경우 저장되어 있는 상태목록과 비교하여 허용/차단          이미 연결된 상태의 패킷은 검사하지 않음          Stateful Inspection : 이스라엘 보안업체인 Checkpoint 사 에서 최초로 개발한 방화벽 구조                    NAT 기능                  네트워크 주소 변환                    패킷 레벨에서 로깅      확장 모듈을 이용해 다양한 기능 제공        용어          Table                  Filter Table                          Chain : 패킷이 이동하는 경로 (3가지 기본 Chain 이 존재-삭제불가)                                  Chain Input : 방화벽을 최종 목적지로 하는 체인                  Chain Output : 방화벽을 최초 출발지로 정하는 체인                  Chain Forward : 방화벽을 통과하는 체인 (방화벽을 별도의 서버로 구성해서 서비스할 때 사용하는 체인)                  -&gt; INPUT -&gt; Linux Server -&gt; Output -&gt;                  -&gt;-&gt;-&gt;-&gt;-&gt;-&gt;-&gt; FORWARD -&gt;-&gt;-&gt;-&gt;-&gt;-&gt;-&gt;                                          Linux Server 를 목적지로 삼는 모든 패킷은 Input Chain 통과                      Linux Server 에서 생성되어 외부로 보내지는 모든 패킷은 Output Chain 을 통과                      Forward Chain 은 현재의 Linux Server 가 목적지가 아닌 패킷이 통과하는 Chain (방화벽을 별도의 서버로 구성)                                                                                  Rule : 패킷 필터링을 하기 위한 Rule                                  사용법                                          기본구문 형식                                                  iptables [테이블] [체인] [룰] [타깃]                          대 소문자 구분                                                                    테이블 설정                                                  형식 : -t [테이블]                          테이블을 명시하지 않으면 기본값으로 Filter Table 이 적용                                                                    체인(Chain) 설정                                                  형식 : iptables -[A|I|D] [체인]                          -A : append 모드 (해당 체인의 가장 마지막 줄에 룰을 추가) (4:45)                                                                                                                                                  NAT Table          Mangle Table                    ">
+    <meta itemprop="datePublished" content="2022-02-07T09:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">정보보안 - iptables
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-02-07T09:00:00+09:00">February 7, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#iptables">iptables</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <h1 id="iptables">iptables</h1>
+<ul>
+  <li>정의
+    <ul>
+      <li>리눅스 상에서 방화벽을 설정하는 도구</li>
+      <li>패킷 필터링 기능 : 지나가는 패킷의 헤더를 보고 해당 패킷에 대한 허용/차단 (ACCEPT/DROP) 결정</li>
+      <li>Rule 기반의 패킷 필터링 기능을 제공</li>
+    </ul>
+  </li>
+  <li>기능
+    <ul>
+      <li>상태추적 (Connection Tracking or Stateful Inspection)
+        <ul>
+          <li>방화벽을 통과하는 모든 패킷에 대한 연결상태를 추적, 메모리에 기록하여 상태추적테이블을 생성</li>
+          <li>모든 송 수신 패킷을 기록하고 검사</li>
+          <li>기존 연결을 가장하여 접근할 경우 저장되어 있는 상태목록과 비교하여 허용/차단</li>
+          <li>이미 연결된 상태의 패킷은 검사하지 않음</li>
+          <li>Stateful Inspection : 이스라엘 보안업체인 Checkpoint 사 에서 최초로 개발한 방화벽 구조</li>
+        </ul>
+      </li>
+      <li>NAT 기능
+        <ul>
+          <li>네트워크 주소 변환</li>
+        </ul>
+      </li>
+      <li>패킷 레벨에서 로깅</li>
+      <li>확장 모듈을 이용해 다양한 기능 제공</li>
+    </ul>
+  </li>
+  <li>용어
+    <ul>
+      <li>Table
+        <ul>
+          <li>Filter Table
+            <ul>
+              <li>Chain : 패킷이 이동하는 경로 (3가지 기본 Chain 이 존재-삭제불가)
+                <ul>
+                  <li>Chain Input : 방화벽을 최종 목적지로 하는 체인</li>
+                  <li>Chain Output : 방화벽을 최초 출발지로 정하는 체인</li>
+                  <li>Chain Forward : 방화벽을 통과하는 체인 (방화벽을 별도의 서버로 구성해서 서비스할 때 사용하는 체인)</li>
+                  <li>-&gt; INPUT -&gt; Linux Server -&gt; Output -&gt;</li>
+                  <li>-&gt;-&gt;-&gt;-&gt;-&gt;-&gt;-&gt; FORWARD -&gt;-&gt;-&gt;-&gt;-&gt;-&gt;-&gt;
+                    <ul>
+                      <li>Linux Server 를 목적지로 삼는 모든 패킷은 Input Chain 통과</li>
+                      <li>Linux Server 에서 생성되어 외부로 보내지는 모든 패킷은 Output Chain 을 통과</li>
+                      <li>Forward Chain 은 현재의 Linux Server 가 목적지가 아닌 패킷이 통과하는 Chain (방화벽을 별도의 서버로 구성)</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>Rule : 패킷 필터링을 하기 위한 Rule
+                <ul>
+                  <li><strong>사용법</strong>
+                    <ul>
+                      <li>기본구문 형식
+                        <ul>
+                          <li><code class="language-plaintext highlighter-rouge">iptables [테이블] [체인] [룰] [타깃]</code></li>
+                          <li>대 소문자 구분</li>
+                        </ul>
+                      </li>
+                      <li>테이블 설정
+                        <ul>
+                          <li>형식 : <code class="language-plaintext highlighter-rouge">-t [테이블]</code></li>
+                          <li>테이블을 명시하지 않으면 기본값으로 Filter Table 이 적용</li>
+                        </ul>
+                      </li>
+                      <li>체인(Chain) 설정
+                        <ul>
+                          <li>형식 : <code class="language-plaintext highlighter-rouge">iptables -[A|I|D] [체인]</code></li>
+                          <li><code class="language-plaintext highlighter-rouge">-A</code> : append 모드 (해당 체인의 가장 마지막 줄에 룰을 추가) (4:45)</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>NAT Table</li>
+          <li>Mangle Table</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#iptables" class="page__taxonomy-item" rel="tag">iptables</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88%EA%B8%B0%EC%82%AC" class="page__taxonomy-item" rel="tag">정보보안기사</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#is-certification" class="page__taxonomy-item" rel="tag">IS_Certification</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2022-02-07T09:00:00+09:00">February 7, 2022</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+iptables%20https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-IncidentAnalysis-iptables%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-IncidentAnalysis-iptables%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-IncidentAnalysis-iptables%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/is_certification/IS-IncidentAnalysis-snort/" class="pagination--pager" title="정보보안 - snort
+">이전</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-IncidentAnalysis-snort/" rel="permalink">정보보안 - snort
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-01-26T09:00:00+09:00">January 26, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">snort
+
+  개요
+    
+      IDS (네트워크 이상징후 감시) 중 하나
+        
+          모든 트래픽을 감시하거나 샘플링을 통해 감시
+          미리 설정값을 저장
+          DB 와 비교, 알려진 공격 시그니처와 비교
+          ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-IncidentAnalysis-DatabaseIntrusion/" rel="permalink">정보보안 - 데이터베이스 침해사고
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-01-21T09:00:00+09:00">January 21, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">데이터베이스 침해사고
+
+  Data, 데이터베이스, DBMS
+    
+      데이터와 정보
+        
+          데이터 : 정보작성을 위한 필요자료, 특정목적에 대해 평가되지 않은 상태, 단순한 사실
+          정보 : 데이터를 추출, 분석, 비교 등의 가공...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-IncidentAnalysis-NetworkIntrusion/" rel="permalink">정보보안 - 네트워크 침해사고
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-01-14T09:00:00+09:00">January 14, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">네트워크 침해사고
+
+  사고 유형별 데이터 수집
+    
+      불법적인 자원 사용
+        
+          호스트 불법 사용 : 액세스로그, ps 상태, CPU 사용률, 파일 저장공간 상태
+          네트워크 대역폭 불법사용 : 회선상태, 송수신 패킷 수, I...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/is_certification/IS-IncidentAnalysis-LinuxInitialResponse/" rel="permalink">정보보안 - 리눅스 사고 분석
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-01-12T09:00:00+09:00">January 12, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">리눅스 침해사고 분석
+
+  기본 정보 수집
+    
+      OS 종류, 커널 버전
+      사용 용도
+      운영중인 서비스
+      네트워크 접속 현황
+      보안 패치 적용 현황
+      네트워크 구성 형태 및 보안 장비 운영 현황
+    
+  
+  휘발성 정보...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+<!--
+<script>
+	(function(d, h, m){
+    var js, fjs = d.getElementsByTagName(h)[0];
+    if (d.getElementById(m)){return;}
+    js = d.createElement(h); js.id = m;
+    js.onload = function(){
+        window.makerWidgetComInit({
+        position: "left",          
+        widget: "eqypoqmawbcz3azh-usiy9q7ma4ong1w1-juelcm3zfgcuwjds"                
+    })};
+    js.src = "https://makerwidget.com/js/embed.js";
+    fjs.parentNode.insertBefore(js, fjs)
+	}(document, "script", "dhm"))
+</script>
+-->
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:hyunik03@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 HY03. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://bluesplatter.com/is_certification/IS-IncidentAnalysis-iptables/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/is_certification/IS-IncidentAnalysis-iptables"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://bluesplatter.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

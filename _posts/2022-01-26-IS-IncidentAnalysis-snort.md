@@ -204,4 +204,168 @@ toc: true
                 + `http_client_body` : HTTP client 의 Body 부분을 검사 (POST 요청에 대한 검사)
                 + `http_stat_code` : HTTP 의 Status_code 부분을 검사 (HTTP/1.1 200 OK 의 200 부분) 
                 + `http_stat_msg` : HTTP 의 Status_msg 부분을 검사 (HTTP/1.1 200 OK 의 OK 부분) 
-            - 예시 : (20:30)
+            - 예시
+                + http_method 테스트 : 클라이언트의 http 요청 라인 중 method 부분을 검사, content 가 GET 인 패킷을 탐지
+                    ```
+                        alert tcp $EXTERNAL_NET any -> $HOME_NET any
+                        (msg:"[TEST]http_GET";content:"GET";http_method;sid:1000055;)
+                    ```
+                + http_uri 테스트 : 클라이언트의 http 요청 중 uri 정보를 검사, uri 정보 중 `<script>` 를 포함하는 패킷을 탐지 (XSS)
+                    ```
+                        alert tcp $EXTERNAL_NET any -> $HOME_NET any
+                        (msg:"[TEST]http_uri";content:"<script>";http_uri;nocase;sid:1000063;)
+                    ```
+        * **Event Threshold(이벤트 제한)** 관련
+            - 용도
+                + 특정 시간동안 발생되는 이벤트 수를 제한하기 위한 옵션
+                + 과도하게 반복되는 이벤트를 막기 위한 옵션
+                + `threshold:type <limit|threshold|both>, track <by_src|by_dst>, count <c>, secods <s>`
+            - 옵션
+                + type
+                    * `--limit` : 매 s초 마다 패킷 count 개 발생 시 Action 을 1번 수행 (임계시간)
+                    * `--threshold` : 매 s초 내에 패킷 count 개 발생 시 마다 Action 을 수행 (패킷양)
+                    * `--both` : 매 s초 내에 패킷 count 개 발생 시 한번 Action 을 수행 (IP)
+                + track
+                    * `by_src` : 출발지 IP 기준
+                    * `by_dst` : 목적지 IP 기준
+            - 예시
+                + limit 테스트 (임계시간)
+                    ```
+                        threshold:type limit, track by_dst, count 100, seconds 2
+                    ```
+                    * 2초 내에 패킷 100개 : 로그 1개
+                    * 2초 내에 패킷 200개 : 로그 1개
+                    * 4초 내에 패킷 400개 : 로그 2개
+                + threshold 테스트 (패킷양)
+                    ```
+                        threshold:type threshold, track by_dst, count 100, seconds 2
+                    ```
+                    * 2초 내에 패킷 100개 : 로그 1개
+                    * 2초 내에 패킷 200개 : 로그 2개
+                    * 4초 내에 패킷 400개 : 로그 4개
+                + both 테스트 (IP)
+                    ```
+                        threshold:type both, track by_dst, count 100, seconds 2
+                    ```
+                    * 2초 내에 패킷 100개 : 로그 1개
+                    * 2초 내에 패킷 200개 : 로그 1개
+                    * 4초 내에 패킷 400개 : 로그 1개
+- Snort 공격 패킷 탐지
+    + FTP root 로그인 시도 탐지
+        * FTP 서비스는 평문으로 송수신 되기 때문에 계정이 노출될 위험이 있음
+        * Wireshark 등을 통한 FTP 메시지 분석
+            - `USER root\r\n` 메시지 가 평문으로 전달됨 : 포트 21, User root 메시지 탐지
+            ```
+                alert tcp any any -> 10.10.10.0/24 21
+                (msg:"FTP root user access"; content:"USER root"; nocase; sid:1000070;)
+            ```
+                + alert 액션 : 메시지와 탐지 패킷 로그(pcap(default) 형식)를 남긴다.
+                    * `snort.log.15151....` : wireshark, tcpdump 등으로 확인 가능
+                    * `tcpdump -r snort.log.15151....`
+    + Telnet root 로그인 성공 탐지
+        * Wireshark 등을 통한 Telnet 메시지 분석
+            - Telnet 클라이언트 로그인 성공 시 서버의 응답 데이터로 `login` 키워드 와 쉘프롬프트 정보가 평문 전달됨
+                + 예) 쉘프롬프트 : `[root@test~]#`
+                + root 계정은 중요한 계정이므로, telnet, ssh 등으로 직접 로그인이 가능하면 공격 대상이 될 수 있다.
+                + root 계정에 대한 원격접속은 허용하지 않도록 설정한다.
+                + 텔넷 서버에서부터 응답 데이터를 탐지, content 를 통해 login 문자열이 포함되고, pcre 를 통해 정규표현식 포함
+                ```
+                    alert tcp 10.10.10.0/24 23 -> any any
+                    (msg:"Telnet root login success"; content:"login"; pcre:"/root@.*#/"; nocase; sid:1000100;)
+                ```
+    + 패스워드 크래킹 공격 탐지
+        * 패스워드 크래킹 종류
+            - Brute Force
+            - Dictionary Attack
+        * Telnet 로그인 실 시 응답 Data : `Login incorrect`
+        * threshold 옵션, by_dst, 5초 동안 1번째 이벤트에만 액션 수행
+            ```
+                alert tcp 10.10.10.0/24 23 -> any any
+                (msg:"Telnet login brute force attack"; content:"login incorrect"; nocase;
+                threshold:type limit, track by_dst, count 1, seconds 5; sid:1000101;)
+            ```
+
+- 비정상 패킷 탐지
+    + 비정상 패킷 : RFC(Request for Comments) 문서에 정의된 프로토콜 표준 패킷 이외의 패킷
+        * RFC : 인터넷 관련기술을 구현하는데 필요한 상세절차, 기본 틀 등을 제공하는 공문서와 같은 간행물
+            - IETF(Internet Engineering Task Force) - 인터넷 국제 표준화 기구 에서 발행한 문서
+        * IPS/IDS 에서 제대로 처리하지 못하면 시스템 오류/장애가 발생할 수 있음
+    + 비정상 IP 패킷
+        * 인터넷 구간의 사설 IP : 사설 IP 로 예약된 주소는 WAN 에서 사용할 수 없음
+            - 인터넷 구간에서 사설 IP 가 유입된 경우 조작된 IP임
+            - 사설 IP 대역
+                + A Class : 10.0.0.0 ~ 10.255.255.255 (10.0.0.0/8)
+                + B Class : 172.16.0.0 ~ 172.31.255.255 (172.16.0.0/12)
+                + C Class : 192.168.0.0 ~ 192.168.255.255 (192.168.0.0/16)
+            - 예시
+                + UDP 트래픽 중 사설 IP로 설정되어 있는 비정상 패킷을 탐지
+                    ```
+                        alert udp 10.0.0.0/8 any -> $HOME_NET any
+                        (msg:"Private IP(10~) Detect"; sid:1002100;)
+    
+                        alert udp 172.16.0.0/12 any -> $HOME_NET any
+                        (msg:"Private IP(172~) Detect"; sid:1002101;)
+    
+                        alert udp 192.168.0.0/16 any -> $HOME_NET any
+                        (msg:"Private IP(192~) Detect"; sid:1002102;)
+                    ```
+        * 출발지와 목적지가 동일한 IP : Land Attack
+            - 예시
+                + 출발지와 목적지가 동일한 IP 인 패킷 탐지
+                    ```
+                        alert ip any any -> $HOME_NET any
+                        (msg:"Land Attack(src/dst same IP) Detect"; sameip; sid:1002300;)
+                    ```
+                + 메시지 결과  :
+                    ```
+                        [1002300] Land Attack(src/dst same IP) Detect
+                        시간값 10.10.11.21 -> 10.10.11.21
+                    ```
+    + 비정상 TCP 패킷
+        * 정상적인 TCP 패킷
+            - 3-Way Handshake : SYN -> SYN_ACK -> ACK (정상적 TCP 연결시 사용)
+            - 4-Way Handshake : FIN_ACK -> ACK (정상적 연결 종료시 사용)
+            - RST_ACK (연결을 즉시 종료할 때)
+            - 연결 후에는 송수신되는 패킷에 디폴트로 ACK Flag 를 포함 (필요시 PSH, URG 사용)
+        * 비정상적인 TCP 패킷
+            - SYN_FIN : 동시에 설정될 수 없는 플래그. 구형의 IDS/IPS, FW 에서는 탐지 못함
+                + SYN : 연결 설정
+                + FIN : 연결 종료
+                + 스캔 도구들이 SYN_FIN 패킷을 많이 사용
+                + 예시
+                    ```
+                        alert tcp any any -> 10.10.10.0/24 any
+                        (msg:"SYN_FIN Scan Detect"; flags:SF; sid:1000340;)
+                    ```
+                    * flags 옵션 연산자 사용 예
+                        - `flags:SF` : 연산자가 없는 경우 (SYN,FIN만 설정된 경우)
+                        - `flags:SF+` : + 연산자가 있는 경우 (SYN,FIN은 반드시 포함) 
+                        - `flags:SF*` : * 연산자가 있는 경우 (지정한 flag를 하나 이상 포함)
+                        - `flags:!SF` : ! 연산자가 있는 경우 (지정한 flag를 포함하지 않음)
+                + 메시지 결과
+                    ```
+                        [1000340]SYN_FIN Scan Detect
+                        시간값 10.10.10.10 80 -> 10.10.10.20 80
+                        *****SF
+                    ```
+                    * 패킷의 출발지 포트는 1024 이상이어야 함. (위 예시는 비정상)
+
+                + SYN_FIN 변형 TCP 패킷 : SIN_FIN 플래그만을 탐지하는 IDS/IPS 를 우회하기 위함
+                    * SYN,FIN,PSH 또는 SYN,FIN,RST 또는 SYN,FIN,PSH,RST 을 조합하여 사용
+                    ```
+                        alert tcp any any -> 10.10.10.0/24 any
+                        (msg:"SYN_FIN + SCAN Detect"; flags:SF+; sid:1000350;)
+                    ```
+            - FIN : FIN_ACK 는 정상적인 연결 종료 패킷, FIN 만 설정되는 경우 비정상 TCP 패킷
+                + 스텔스 스캐닝 기법 중 하나 : FIN 플래그만 설정된 비정상 TCP 패킷
+                    ```
+                        alert tcp any any -> 10.10.10.0/24 any
+                        (msg:"FIN scan detect"; flags:F; sid:1000360;)
+                    ```
+            - NULL : 플래그가 설정되지 않은 비정상 TCP 패킷
+                + 모든 패킷은 Flag 가 설정되어 있음
+                + NULL 패킷은 스텔스 스캐닝 기법 중 하나
+                    ```
+                        alert tcp any any -> 10.10.10.0/24 any
+                        (msg:"Null scan detect"; flags:!UAPRSF; sid:1000370;)
+                    ```
