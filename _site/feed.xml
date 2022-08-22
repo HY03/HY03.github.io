@@ -1,4 +1,846 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://bluesplatter.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://bluesplatter.com/" rel="alternate" type="text/html" /><updated>2022-02-07T17:57:44+09:00</updated><id>https://bluesplatter.com/feed.xml</id><title type="html">Bluesplatter</title><subtitle>전문적이지 않은 정보들, 감상, 즉흥적인 내용들</subtitle><author><name>HY03</name><email>hyunik03@gmail.com</email></author><entry><title type="html">정보보안 - iptables</title><link href="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-iptables/" rel="alternate" type="text/html" title="정보보안 - iptables" /><published>2022-02-07T09:00:00+09:00</published><updated>2022-02-07T09:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-IncidentAnalysis-iptables</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-iptables/">&lt;h1 id=&quot;iptables&quot;&gt;iptables&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://bluesplatter.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://bluesplatter.com/" rel="alternate" type="text/html" /><updated>2022-08-22T17:40:22+09:00</updated><id>https://bluesplatter.com/feed.xml</id><title type="html">Bluesplatter</title><subtitle>전문적이지 않은 정보들, 감상, 즉흥적인 내용들</subtitle><author><name>HY03</name><email>hyunik03@gmail.com</email></author><entry><title type="html">행복하고 보람찬 삶 - 행복을 방해하는 7요소 - 우월함 추구</title><link href="https://bluesplatter.com/%ED%96%89%EB%B3%B5%ED%95%98%EA%B3%A0%20%EB%B3%B4%EB%9E%8C%EC%B0%AC%20%EC%82%B6/Hapiness-7-Happiness-Sins-Superior/" rel="alternate" type="text/html" title="행복하고 보람찬 삶 - 행복을 방해하는 7요소 - 우월함 추구" /><published>2022-08-22T12:00:00+09:00</published><updated>2022-08-22T12:00:00+09:00</updated><id>https://bluesplatter.com/%ED%96%89%EB%B3%B5%ED%95%98%EA%B3%A0%20%EB%B3%B4%EB%9E%8C%EC%B0%AC%20%EC%82%B6/Hapiness-7%20Happiness%20Sins-Superior</id><content type="html" xml:base="https://bluesplatter.com/%ED%96%89%EB%B3%B5%ED%95%98%EA%B3%A0%20%EB%B3%B4%EB%9E%8C%EC%B0%AC%20%EC%82%B6/Hapiness-7-Happiness-Sins-Superior/">&lt;h1 id=&quot;sins-행복을-방해하는-7-요소&quot;&gt;Sins (행복을 방해하는 7 요소)&lt;/h1&gt;
+
+&lt;h2 id=&quot;행복-가치의-과소평가&quot;&gt;행복 가치의 과소평가&lt;/h2&gt;
+
+&lt;h2 id=&quot;우월함-추구--다른-사람보다-우월함에서-행복을-추구&quot;&gt;우월함 추구 : 다른 사람보다 우월함에서 행복을 추구&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;왜 우월함을 추구하는가?
+    &lt;ul&gt;
+      &lt;li&gt;타인의 인정을 받고 기분이 좋음&lt;/li&gt;
+      &lt;li&gt;타인의 인정이 없더라도 이길 땐 기분이 좋음 (자존심을 높임)&lt;/li&gt;
+      &lt;li&gt;타인과 비교하면서 얼마나 발전(숙달)했는지 느낌&lt;/li&gt;
+      &lt;li&gt;자율성, 자주성을 더 누릴 수 있음&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;어떻게 우월함 추구는 행복도를 떨어뜨리는가?
+    &lt;ul&gt;
+      &lt;li&gt;사회적 비교
+        &lt;ul&gt;
+          &lt;li&gt;자신과 타인을 비교하거나 남과 경쟁&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;물질주의 (우월함을 비교하기 위한 가장 편한 방법)
+        &lt;ul&gt;
+          &lt;li&gt;고립되어 외로워짐&lt;/li&gt;
+          &lt;li&gt;적응하여 감정이 오래 가지 않음&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;우월함을 좇을 때 타인이 덜 좋아하게 됨
+        &lt;ul&gt;
+          &lt;li&gt;자기중심적이 되고 타인을 덜 배려하게 됨&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;애정-결핍-혹은-회피&quot;&gt;애정 결핍 혹은 회피&lt;/h2&gt;
+&lt;h2 id=&quot;과하게-통제하려-하는-태도--다른사람이나-결과가-내가-원하는-방향으로-통제되도록-노력하는-것&quot;&gt;과하게 통제하려 하는 태도 : 다른사람이나 결과가 내가 원하는 방향으로 통제되도록 노력하는 것&lt;/h2&gt;
+&lt;h2 id=&quot;타인을-믿지-않는-태도&quot;&gt;타인을 믿지 않는 태도&lt;/h2&gt;
+&lt;h2 id=&quot;인생에서-나타나는-결과나-일을-불신-부정적-태도&quot;&gt;인생에서 나타나는 결과나 일을 불신 (부정적 태도)&lt;/h2&gt;
+&lt;h2 id=&quot;내부의-원천-source-within-을-사용할-의자가-없거나-사용하지-못하는-것&quot;&gt;내부의 원천 (source within) 을 사용할 의자가 없거나 사용하지 못하는 것&lt;/h2&gt;
+
+&lt;h1 id=&quot;habits-습관&quot;&gt;Habits (습관)&lt;/h1&gt;
+
+&lt;h1 id=&quot;exercises-활동&quot;&gt;Exercises (활동)&lt;/h1&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="행복하고 보람찬 삶" /><category term="A Life of Happiness and Fulfillment" /><category term="불행의 7요소" /><category term="우월함 추구" /><category term="행복" /><summary type="html">Sins (행복을 방해하는 7 요소)</summary></entry><entry><title type="html">행복하고 보람찬 삶 - 행복을 방해하는 7요소 - 행복 가치의 과소평가</title><link href="https://bluesplatter.com/%ED%96%89%EB%B3%B5%ED%95%98%EA%B3%A0%20%EB%B3%B4%EB%9E%8C%EC%B0%AC%20%EC%82%B6/Hapiness-7-Happiness-Sins-Undervalued/" rel="alternate" type="text/html" title="행복하고 보람찬 삶 - 행복을 방해하는 7요소 - 행복 가치의 과소평가" /><published>2022-08-16T12:00:00+09:00</published><updated>2022-08-16T12:00:00+09:00</updated><id>https://bluesplatter.com/%ED%96%89%EB%B3%B5%ED%95%98%EA%B3%A0%20%EB%B3%B4%EB%9E%8C%EC%B0%AC%20%EC%82%B6/Hapiness-7%20Happiness%20Sins-Undervalued</id><content type="html" xml:base="https://bluesplatter.com/%ED%96%89%EB%B3%B5%ED%95%98%EA%B3%A0%20%EB%B3%B4%EB%9E%8C%EC%B0%AC%20%EC%82%B6/Hapiness-7-Happiness-Sins-Undervalued/">&lt;h1 id=&quot;sins-행복을-방해하는-7-요소&quot;&gt;Sins (행복을 방해하는 7 요소)&lt;/h1&gt;
+
+&lt;h2 id=&quot;행복-가치의-과소평가&quot;&gt;행복 가치의 과소평가&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;어떻게 행복 가치를 과소평가 하는가?
+    &lt;ul&gt;
+      &lt;li&gt;다른 가치를 위해 행복을 희생
+        &lt;ul&gt;
+          &lt;li&gt;샐러드바에서 먹고싶은 요리보다 비싼 요리를 가져오고, 다 먹지 못함 (돈의 가치를 우선함)&lt;/li&gt;
+          &lt;li&gt;직업을 선택함에 있어서 행복이 아닌 외적 요소를 우선하여 선택함&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;왜 행복 가치를 과소평가 하는가?
+    &lt;ul&gt;
+      &lt;li&gt;행복에 대한 부정적인 믿음 - 건강한 음식이 끌리지 않는 것과 비슷함 (건강한 음식이 맛이없다)
+        &lt;ul&gt;
+          &lt;li&gt;행복은 게으름이다. –&amp;gt; 사실은 행복할 때 더 창의적이게 됨&lt;/li&gt;
+          &lt;li&gt;행복은 이기적이다. –&amp;gt; 사실은 행복할 때 더 친절하게 됨&lt;/li&gt;
+          &lt;li&gt;행복은 덧없다. –&amp;gt; 행복을 어떻게 정의하느냐에 따라 다르다. (감각적 즐거움 &amp;lt; 사랑,연결 &amp;lt; 풍요로움-돌봄을 받고 있다는 느낌)&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;행복을 정확히 정의하는데 실패
+        &lt;ul&gt;
+          &lt;li&gt;Fluency Effect : 더 쉽게 인지하고 이해할 수 있는 것에 더 큰 가치를 부여함&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;수단의 극대화 (Medium Maximization) : 원하는 것을 얻기 위한 수단에만 집착하는 것&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;방안
+    &lt;ul&gt;
+      &lt;li&gt;행복을 좇기보다 우선 순위로 매기기
+        &lt;ul&gt;
+          &lt;li&gt;행복을 우선순위로 한 선택을 지속하면 행복 수치를 상당히 많이 끌어올릴 수 있음&lt;/li&gt;
+          &lt;li&gt;그러나 행복을 열심히 추구하면 지금 감정과 행복할 때 느끼는 감정을 비교하게 됨&lt;/li&gt;
+          &lt;li&gt;행복을 증진시키는 결정을 내리되, 행복 수치를 꾸준하게 관찰하지 않는 것&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;행복의 의미를 정확히 정의하는 것
+        &lt;ul&gt;
+          &lt;li&gt;감각적 쾌락 - 유지하기 어려움&lt;/li&gt;
+          &lt;li&gt;오만한 자존심 (타인보다 우월함) - 유지하기 어려움&lt;/li&gt;
+          &lt;li&gt;진정한 자존심 (이전의 자신보다 잘하고 있음)&lt;/li&gt;
+          &lt;li&gt;사랑 혹은 유대감&lt;/li&gt;
+          &lt;li&gt;풍족함 (삶이 완전하지 않기에 더 흥미로움) - 가장 지속력 있는 정의&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;나의 과제
+    &lt;ul&gt;
+      &lt;li&gt;나만의 행복을 정의하기
+        &lt;ul&gt;
+          &lt;li&gt;선한 영향력을 통한 유대&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;스스로 정의한 행복에 맞게 자신을 행복하게 하는 것들을 정의
+        &lt;ul&gt;
+          &lt;li&gt;금전적 성공 (금전적 자유)&lt;/li&gt;
+          &lt;li&gt;무언가를 원할 때 할 수 있는 것 (시간/선택의 자유)&lt;/li&gt;
+          &lt;li&gt;자신의 삶을 사랑하고 돌보는 것 (발전)&lt;/li&gt;
+          &lt;li&gt;어떠한 일에 능숙한 것 (능력적 자유)&lt;/li&gt;
+          &lt;li&gt;–&amp;gt; 내 그릇에 맞는 범위에서 이로운 사람이 되기&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;우월함-추구--다른-사람보다-우월함에서-행복을-추구&quot;&gt;우월함 추구 : 다른 사람보다 우월함에서 행복을 추구&lt;/h2&gt;
+&lt;h2 id=&quot;애정-결핍-혹은-회피&quot;&gt;애정 결핍 혹은 회피&lt;/h2&gt;
+&lt;h2 id=&quot;과하게-통제하려-하는-태도--다른사람이나-결과가-내가-원하는-방향으로-통제되도록-노력하는-것&quot;&gt;과하게 통제하려 하는 태도 : 다른사람이나 결과가 내가 원하는 방향으로 통제되도록 노력하는 것&lt;/h2&gt;
+&lt;h2 id=&quot;타인을-믿지-않는-태도&quot;&gt;타인을 믿지 않는 태도&lt;/h2&gt;
+&lt;h2 id=&quot;인생에서-나타나는-결과나-일을-불신-부정적-태도&quot;&gt;인생에서 나타나는 결과나 일을 불신 (부정적 태도)&lt;/h2&gt;
+&lt;h2 id=&quot;내부의-원천-source-within-을-사용할-의자가-없거나-사용하지-못하는-것&quot;&gt;내부의 원천 (source within) 을 사용할 의자가 없거나 사용하지 못하는 것&lt;/h2&gt;
+
+&lt;h1 id=&quot;habits-습관&quot;&gt;Habits (습관)&lt;/h1&gt;
+
+&lt;h1 id=&quot;exercises-활동&quot;&gt;Exercises (활동)&lt;/h1&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="행복하고 보람찬 삶" /><category term="A Life of Happiness and Fulfillment" /><category term="불행의 7요소" /><category term="행복 가치의 과소평가" /><category term="행복" /><summary type="html">Sins (행복을 방해하는 7 요소)</summary></entry><entry><title type="html">행복하고 보람찬 삶 - 행복을 방해하는 7요소 - 행복 가치의 과소평가</title><link href="https://bluesplatter.com/%ED%96%89%EB%B3%B5%ED%95%98%EA%B3%A0%20%EB%B3%B4%EB%9E%8C%EC%B0%AC%20%EC%82%B6/Hapiness-7-Happiness-Sins/" rel="alternate" type="text/html" title="행복하고 보람찬 삶 - 행복을 방해하는 7요소 - 행복 가치의 과소평가" /><published>2022-08-16T12:00:00+09:00</published><updated>2022-08-16T12:00:00+09:00</updated><id>https://bluesplatter.com/%ED%96%89%EB%B3%B5%ED%95%98%EA%B3%A0%20%EB%B3%B4%EB%9E%8C%EC%B0%AC%20%EC%82%B6/Hapiness-7%20Happiness%20Sins</id><content type="html" xml:base="https://bluesplatter.com/%ED%96%89%EB%B3%B5%ED%95%98%EA%B3%A0%20%EB%B3%B4%EB%9E%8C%EC%B0%AC%20%EC%82%B6/Hapiness-7-Happiness-Sins/">&lt;h1 id=&quot;sins-행복을-방해하는-7-요소&quot;&gt;Sins (행복을 방해하는 7 요소)&lt;/h1&gt;
+
+&lt;h2 id=&quot;행복-가치의-과소평가&quot;&gt;행복 가치의 과소평가&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;어떻게 행복 가치를 과소평가 하는가?
+    &lt;ul&gt;
+      &lt;li&gt;다른 가치를 위해 행복을 희생
+        &lt;ul&gt;
+          &lt;li&gt;샐러드바에서 먹고싶은 요리보다 비싼 요리를 가져오고, 다 먹지 못함 (돈의 가치를 우선함)&lt;/li&gt;
+          &lt;li&gt;직업을 선택함에 있어서 행복이 아닌 외적 요소를 우선하여 선택함&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;왜 행복 가치를 과소평가 하는가?
+    &lt;ul&gt;
+      &lt;li&gt;행복에 대한 부정적인 믿음 - 건강한 음식이 끌리지 않는 것과 비슷함 (건강한 음식이 맛이없다)
+        &lt;ul&gt;
+          &lt;li&gt;행복은 게으름이다. –&amp;gt; 사실은 행복할 때 더 창의적이게 됨&lt;/li&gt;
+          &lt;li&gt;행복은 이기적이다. –&amp;gt; 사실은 행복할 때 더 친절하게 됨&lt;/li&gt;
+          &lt;li&gt;행복은 덧없다. –&amp;gt; 행복을 어떻게 정의하느냐에 따라 다르다. (감각적 즐거움 &amp;lt; 사랑,연결 &amp;lt; 풍요로움-돌봄을 받고 있다는 느낌)&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;행복을 정확히 정의하는데 실패
+        &lt;ul&gt;
+          &lt;li&gt;Fluency Effect : 더 쉽게 인지하고 이해할 수 있는 것에 더 큰 가치를 부여함&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;수단의 극대화 (Medium Maximization) : 원하는 것을 얻기 위한 수단에만 집착하는 것&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;방안
+    &lt;ul&gt;
+      &lt;li&gt;행복을 좇기보다 우선 순위로 매기기
+        &lt;ul&gt;
+          &lt;li&gt;행복을 우선순위로 한 선택을 지속하면 행복 수치를 상당히 많이 끌어올릴 수 있음&lt;/li&gt;
+          &lt;li&gt;그러나 행복을 열심히 추구하면 지금 감정과 행복할 때 느끼는 감정을 비교하게 됨&lt;/li&gt;
+          &lt;li&gt;행복을 증진시키는 결정을 내리되, 행복 수치를 꾸준하게 관찰하지 않는 것&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;행복의 의미를 정확히 정의하는 것
+        &lt;ul&gt;
+          &lt;li&gt;감각적 쾌락 - 유지하기 어려움&lt;/li&gt;
+          &lt;li&gt;오만한 자존심 (타인보다 우월함) - 유지하기 어려움&lt;/li&gt;
+          &lt;li&gt;진정한 자존심 (이전의 자신보다 잘하고 있음)&lt;/li&gt;
+          &lt;li&gt;사랑 혹은 유대감&lt;/li&gt;
+          &lt;li&gt;풍족함 (삶이 완전하지 않기에 더 흥미로움) - 가장 지속력 있는 정의&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;나의 과제
+    &lt;ul&gt;
+      &lt;li&gt;나만의 행복을 정의하기
+        &lt;ul&gt;
+          &lt;li&gt;선한 영향력을 통한 유대&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;스스로 정의한 행복에 맞게 자신을 행복하게 하는 것들을 정의
+        &lt;ul&gt;
+          &lt;li&gt;금전적 성공 (금전적 자유)&lt;/li&gt;
+          &lt;li&gt;무언가를 원할 때 할 수 있는 것 (시간/선택의 자유)&lt;/li&gt;
+          &lt;li&gt;자신의 삶을 사랑하고 돌보는 것 (발전)&lt;/li&gt;
+          &lt;li&gt;어떠한 일에 능숙한 것 (능력적 자유)&lt;/li&gt;
+          &lt;li&gt;–&amp;gt; 내 그릇에 맞는 범위에서 이로운 사람이 되기&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;우월함-추구--다른-사람보다-우월함에서-행복을-추구&quot;&gt;우월함 추구 : 다른 사람보다 우월함에서 행복을 추구&lt;/h2&gt;
+&lt;h2 id=&quot;애정-결핍-혹은-회피&quot;&gt;애정 결핍 혹은 회피&lt;/h2&gt;
+&lt;h2 id=&quot;과하게-통제하려-하는-태도--다른사람이나-결과가-내가-원하는-방향으로-통제되도록-노력하는-것&quot;&gt;과하게 통제하려 하는 태도 : 다른사람이나 결과가 내가 원하는 방향으로 통제되도록 노력하는 것&lt;/h2&gt;
+&lt;h2 id=&quot;타인을-믿지-않는-태도&quot;&gt;타인을 믿지 않는 태도&lt;/h2&gt;
+&lt;h2 id=&quot;인생에서-나타나는-결과나-일을-불신-부정적-태도&quot;&gt;인생에서 나타나는 결과나 일을 불신 (부정적 태도)&lt;/h2&gt;
+&lt;h2 id=&quot;내부의-원천-source-within-을-사용할-의자가-없거나-사용하지-못하는-것&quot;&gt;내부의 원천 (source within) 을 사용할 의자가 없거나 사용하지 못하는 것&lt;/h2&gt;
+
+&lt;h1 id=&quot;habits-습관&quot;&gt;Habits (습관)&lt;/h1&gt;
+
+&lt;h1 id=&quot;exercises-활동&quot;&gt;Exercises (활동)&lt;/h1&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="행복하고 보람찬 삶" /><category term="A Life of Happiness and Fulfillment" /><category term="불행의 7요소" /><category term="행복 가치의 과소평가" /><category term="행복" /><summary type="html">Sins (행복을 방해하는 7 요소)</summary></entry><entry><title type="html">정보보안기사 실기 - 01.네트워크 - 02.OSI7 Layer</title><link href="https://bluesplatter.com/is_certification/IST-Network-OSI7/" rel="alternate" type="text/html" title="정보보안기사 실기 - 01.네트워크 - 02.OSI7 Layer" /><published>2022-03-17T12:00:00+09:00</published><updated>2022-03-17T12:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IST-Network-OSI7</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IST-Network-OSI7/">&lt;h1 id=&quot;osi7-layer&quot;&gt;OSI7 Layer&lt;/h1&gt;
+&lt;ol&gt;
+  &lt;li&gt;OSI Layer
+    &lt;ul&gt;
+      &lt;li&gt;개방시스템(Open System)의 기반 구조와 관계없이 시스템 간의 통신을 제공하는 계층형 프로토콜 집합&lt;/li&gt;
+      &lt;li&gt;7계층
+        &lt;ul&gt;
+          &lt;li&gt;사용자 계층
+            &lt;ul&gt;
+              &lt;li&gt;Application&lt;/li&gt;
+              &lt;li&gt;Presentation&lt;/li&gt;
+              &lt;li&gt;Session&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;전송 계층
+            &lt;ul&gt;
+              &lt;li&gt;Transport&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;네트워크 계층
+            &lt;ul&gt;
+              &lt;li&gt;Network&lt;/li&gt;
+              &lt;li&gt;Data link&lt;/li&gt;
+              &lt;li&gt;Physical&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;주요 용어
+    &lt;ul&gt;
+      &lt;li&gt;Node(노드) : 네트워크에 연결된 장치(device)를 의미&lt;/li&gt;
+      &lt;li&gt;HOST(호스트) : 일반적으로 Node(노드) 중 컴퓨터(PC, Server)노드를 가리켜 호스트라고 표현&lt;/li&gt;
+      &lt;li&gt;End-Node(종단 노드) : 통신의 양 끝단에 해당하는 노드로 최초 송신 노드(최초 출발지)와 최종 수신 노드(최종 목적지)&lt;/li&gt;
+      &lt;li&gt;Intermediate Node(중계 노드) : End-Node 사이에 패킷 중계를 해주는 노드&lt;/li&gt;
+      &lt;li&gt;Link(링크) : 노드 사이의 패킷을 전달하기 위한 물리적인 통신경로&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;OSI7 Layer 의 계층 구조
+    &lt;ul&gt;
+      &lt;li&gt;1계층 (물리 계층, Physical Layer)
+        &lt;ul&gt;
+          &lt;li&gt;전송을 위해 필요한 물리적 링크의 설정, 유지, 해제를 담당&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;2계층 (데이터링크 계층, Data link Layer)
+        &lt;ul&gt;
+          &lt;li&gt;논리적 연결제어를 담당하는 LLC(Logical Link Control) 또는 DLC(Data Link Control)과 장비와 장비간의 물리적인 접속을 담당하는 MAC(Media Access Control) 의 두개 sub 계층이 존재 - &lt;strong&gt;MAC 주소&lt;/strong&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;3계층 (네트워크 계층, Network Layer)
+        &lt;ul&gt;
+          &lt;li&gt;논리적 링크를 설정하고 상위 계층 데이터를 작은 크기의 패킷으로 분할하여 전송하는 역할&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;4계층 (전송 계층, Transport Layer)&lt;/li&gt;
+      &lt;li&gt;5계층 (세션 계층, Session Layer)&lt;/li&gt;
+      &lt;li&gt;6계층 (표현 계층, Presentation Layer)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사 실기" /><category term="네트워크" /><category term="OSI7 Layer" /><summary type="html">OSI7 Layer OSI Layer 개방시스템(Open System)의 기반 구조와 관계없이 시스템 간의 통신을 제공하는 계층형 프로토콜 집합 7계층 사용자 계층 Application Presentation Session 전송 계층 Transport 네트워크 계층 Network Data link Physical 주요 용어 Node(노드) : 네트워크에 연결된 장치(device)를 의미 HOST(호스트) : 일반적으로 Node(노드) 중 컴퓨터(PC, Server)노드를 가리켜 호스트라고 표현 End-Node(종단 노드) : 통신의 양 끝단에 해당하는 노드로 최초 송신 노드(최초 출발지)와 최종 수신 노드(최종 목적지) Intermediate Node(중계 노드) : End-Node 사이에 패킷 중계를 해주는 노드 Link(링크) : 노드 사이의 패킷을 전달하기 위한 물리적인 통신경로 OSI7 Layer 의 계층 구조 1계층 (물리 계층, Physical Layer) 전송을 위해 필요한 물리적 링크의 설정, 유지, 해제를 담당 2계층 (데이터링크 계층, Data link Layer) 논리적 연결제어를 담당하는 LLC(Logical Link Control) 또는 DLC(Data Link Control)과 장비와 장비간의 물리적인 접속을 담당하는 MAC(Media Access Control) 의 두개 sub 계층이 존재 - MAC 주소 3계층 (네트워크 계층, Network Layer) 논리적 링크를 설정하고 상위 계층 데이터를 작은 크기의 패킷으로 분할하여 전송하는 역할 4계층 (전송 계층, Transport Layer) 5계층 (세션 계층, Session Layer) 6계층 (표현 계층, Presentation Layer)</summary></entry><entry><title type="html">정보보안기사 실기 - 01.네트워크</title><link href="https://bluesplatter.com/is_certification/IST-Part1_Network/" rel="alternate" type="text/html" title="정보보안기사 실기 - 01.네트워크" /><published>2022-03-17T12:00:00+09:00</published><updated>2022-03-17T12:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IST-Part1_Network</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IST-Part1_Network/">&lt;h1 id=&quot;프로토콜-protocol&quot;&gt;프로토콜 (Protocol)&lt;/h1&gt;
+
+&lt;h2 id=&quot;프로토콜의-특징&quot;&gt;프로토콜의 특징&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;단편화(Fragmentation) : 긴 데이터 블록을 손쉽게 전송할 수 있도록 크기가 똑같은 작은 블록으로 나누어 전송&lt;/li&gt;
+  &lt;li&gt;재조립(Assembly) : 수신 측에서 쪼개진 작은 데이터 블록을 재합성하여 원래의 메시지로 복원&lt;/li&gt;
+  &lt;li&gt;캡슐화(Encapsulation) : 각 프로토콜에 적합한 데이터 블록을 만들려고 데이터에 정보를 추가하는 것&lt;/li&gt;
+  &lt;li&gt;연결제어(Connection Control) : 비연결 데이터 전송(데이터그램), 연결 위주 데이터 전송(가상회선)을 위한 통신로를 개설,유지, 종결하는 기능&lt;/li&gt;
+  &lt;li&gt;오류제어(Error Control) : 데이터 전송 중 발생할 수 있는 오류나 착오 등을 검출하고 정정&lt;/li&gt;
+  &lt;li&gt;동기화(Synchronization) : 두 통신 객체의 상태 (시작, 종류, 검사 등) 을 일치시키는 기능&lt;/li&gt;
+  &lt;li&gt;다중화(Multiplexing) : 하나의 통신로를 여러 개로 나누거나 회선 여러 개를 하나의 통신로로 변환시켜 다수의 가입자가 동시에 사용할 수 있도록 하는 기능&lt;/li&gt;
+  &lt;li&gt;주소지정(Addressing) : 발생지, 목적지 등의 주소를 명기하여 데이터를 정확하게 전달하는 기능&lt;/li&gt;
+  &lt;li&gt;전송서비스(Transmission Service) : 데이터 전송 중 발생할 수 있는 오류나 착오 등을 검출하고 정정하는 기능&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;통신-프로토콜의-종류&quot;&gt;통신 프로토콜의 종류&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;TCP(Transmission Control Protocol)&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사 실기" /><category term="네트워크" /><summary type="html">프로토콜 (Protocol)</summary></entry><entry><title type="html">정보보안기사 실기 - 00.시험대비 공부할 목차 정리</title><link href="https://bluesplatter.com/is_certification/IST-Book-List/" rel="alternate" type="text/html" title="정보보안기사 실기 - 00.시험대비 공부할 목차 정리" /><published>2022-03-17T12:00:00+09:00</published><updated>2022-03-17T12:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IST-Book-List</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IST-Book-List/">&lt;h1 id=&quot;-이론편-&quot;&gt;-이론편-&lt;/h1&gt;
+
+&lt;h1 id=&quot;part-01-시스템&quot;&gt;PART 01 시스템&lt;/h1&gt;
+
+&lt;h2 id=&quot;section-01-시스템-기본-학습&quot;&gt;SECTION 01 시스템 기본 학습&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;윈도우 기본 학습
+    &lt;ul&gt;
+      &lt;li&gt;루트 키 (registry)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;UNIX/Linux 기본 학습&lt;/li&gt;
+  &lt;li&gt;UNIX/Linux 시스템 관리&lt;/li&gt;
+  &lt;li&gt;UNIX/Linux 서버 보안&lt;/li&gt;
+  &lt;li&gt;시스템 해킹
+    &lt;ul&gt;
+      &lt;li&gt;교착상태&lt;/li&gt;
+      &lt;li&gt;RAID&lt;/li&gt;
+      &lt;li&gt;Run Level&lt;/li&gt;
+      &lt;li&gt;utmp&lt;/li&gt;
+      &lt;li&gt;wtmp&lt;/li&gt;
+      &lt;li&gt;btmp&lt;/li&gt;
+      &lt;li&gt;crontab&lt;/li&gt;
+      &lt;li&gt;at&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section-02-unixlinux-서버-취약점&quot;&gt;SECTION 02 UNIX/Linux 서버 취약점&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;계정 관리
+    &lt;ul&gt;
+      &lt;li&gt;패스워드 파일&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;파일 및 디렉터리 관리
+    &lt;ul&gt;
+      &lt;li&gt;umask&lt;/li&gt;
+      &lt;li&gt;chmod&lt;/li&gt;
+      &lt;li&gt;setuid&lt;/li&gt;
+      &lt;li&gt;setgid&lt;/li&gt;
+      &lt;li&gt;sticky bit&lt;/li&gt;
+      &lt;li&gt;chown&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section-03-윈도우-서버-취약점&quot;&gt;SECTION 03 윈도우 서버 취약점&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;계정 관리
+    &lt;ul&gt;
+      &lt;li&gt;winlogon&lt;/li&gt;
+      &lt;li&gt;lsa&lt;/li&gt;
+      &lt;li&gt;sam&lt;/li&gt;
+      &lt;li&gt;srm&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;서비스 관리
+    &lt;ul&gt;
+      &lt;li&gt;lsass&lt;/li&gt;
+      &lt;li&gt;net share&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;로그 관리
+    &lt;ul&gt;
+      &lt;li&gt;이벤트 로그&lt;/li&gt;
+      &lt;li&gt;DDE 취약점&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;part-02-네트워크&quot;&gt;PART 02 네트워크&lt;/h1&gt;
+
+&lt;h2 id=&quot;section-04-네트워크-기본-학습&quot;&gt;SECTION 04 네트워크 기본 학습&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;프로토콜(Protocol)&lt;/li&gt;
+  &lt;li&gt;OSI 7Layer
+    &lt;ul&gt;
+      &lt;li&gt;OSI 7Layer&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;OSI모델 데이터 교환 방식&lt;/li&gt;
+  &lt;li&gt;TCP/IP 프로토콜&lt;/li&gt;
+  &lt;li&gt;ARP/RARP 프로토콜(TCP/IP 인터넷 계층)
+    &lt;ul&gt;
+      &lt;li&gt;ARP Spoofing&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;IP(IPv4) 프로토콜
+    &lt;ul&gt;
+      &lt;li&gt;MTU&lt;/li&gt;
+      &lt;li&gt;Subnet Mask&lt;/li&gt;
+      &lt;li&gt;IP Spoofing&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;ICMP 프로토콜
+    &lt;ul&gt;
+      &lt;li&gt;ICMP 메시지 종류&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;TCP 프로토콜&lt;/li&gt;
+  &lt;li&gt;UDP 프로토콜&lt;/li&gt;
+  &lt;li&gt;네트워크 관리 명령어&lt;/li&gt;
+  &lt;li&gt;포트 스캐닝(Port Scanning)
+    &lt;ul&gt;
+      &lt;li&gt;NMAP Port Scan&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Stealth Scan
+        &lt;ul&gt;
+          &lt;li&gt;TCP FIN Scan&lt;/li&gt;
+          &lt;li&gt;TCP Null Scan&lt;/li&gt;
+          &lt;li&gt;TCP X-MAS Tree Scan&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;TCP Half Open Scan
+        &lt;ul&gt;
+          &lt;li&gt;TCP SYN Scan&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;UDP Scan
+      - TCP Fragmentation
+      - 스니핑?&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;서비스 거부(DoS:Denial of Service) 공격&lt;/li&gt;
+  &lt;li&gt;분산 서비스 거부(DDoS:Distributed Denial of Service) 공격
+    &lt;ul&gt;
+      &lt;li&gt;TCP SYN Flooding&lt;/li&gt;
+      &lt;li&gt;ICMP Flooding / Smurfing Attack&lt;/li&gt;
+      &lt;li&gt;Tear Drop&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Tiny Fragment&lt;/li&gt;
+      &lt;li&gt;Fragment Overlap&lt;/li&gt;
+      &lt;li&gt;IP Fragmentation
+        &lt;ul&gt;
+          &lt;li&gt;Ping of Death&lt;/li&gt;
+          &lt;li&gt;Tear Drop
+            &lt;ul&gt;
+              &lt;li&gt;Land Attack&lt;/li&gt;
+              &lt;li&gt;HTTP GET Flooding&lt;/li&gt;
+              &lt;li&gt;Slow HTTP Get/Post Attack&lt;/li&gt;
+              &lt;li&gt;Slow HTTP Read DoS&lt;/li&gt;
+              &lt;li&gt;Slow HTTP Header DoS(Slowloris)&lt;/li&gt;
+              &lt;li&gt;Hash DoS&lt;/li&gt;
+              &lt;li&gt;Hulk DoS&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;DRDoS(Distributed Reflection DoS)&lt;/li&gt;
+  &lt;li&gt;무선랜(Wireless LAN) 보안
+    &lt;ul&gt;
+      &lt;li&gt;WEP / WPA / WPA2&lt;/li&gt;
+      &lt;li&gt;네트워크 토폴로지 (트리형, 버스형, 성형, 링형, 망형)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section-05-네트워크-보안-프로토콜&quot;&gt;SECTION 05 네트워크 보안 프로토콜&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;가상 사설망(VPN:Virtual Private Network)
+    &lt;ul&gt;
+      &lt;li&gt;가상사설망&lt;/li&gt;
+      &lt;li&gt;SSL VPN&lt;/li&gt;
+      &lt;li&gt;IPSEC VPN&lt;/li&gt;
+      &lt;li&gt;PPTP VPN&lt;/li&gt;
+      &lt;li&gt;L2TP VPN&lt;/li&gt;
+      &lt;li&gt;L2F&lt;/li&gt;
+      &lt;li&gt;망분리&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;IP 보안 - IPsec(IP Security)
+    &lt;ul&gt;
+      &lt;li&gt;IPSEC Header&lt;/li&gt;
+      &lt;li&gt;IPSEC 키관리&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;전송 계층 보안 - SSL/TLS
+    &lt;ul&gt;
+      &lt;li&gt;SET&lt;/li&gt;
+      &lt;li&gt;이중서명&lt;/li&gt;
+      &lt;li&gt;SSL Handshake&lt;/li&gt;
+      &lt;li&gt;SSL Header&lt;/li&gt;
+      &lt;li&gt;OTP&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section-06-라우터-보안&quot;&gt;SECTION 06 라우터 보안&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;라우터 자체 보안&lt;/li&gt;
+  &lt;li&gt;라우터와 접근제어(ACL)&lt;/li&gt;
+  &lt;li&gt;라우터를 통한 네트워크 보안
+    &lt;ul&gt;
+      &lt;li&gt;OSPF&lt;/li&gt;
+      &lt;li&gt;RIP&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;part-03-어플리케이션&quot;&gt;PART 03 어플리케이션&lt;/h1&gt;
+
+&lt;h2 id=&quot;section-07-어플리케이션-기본-학습&quot;&gt;SECTION 07 어플리케이션 기본 학습&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;DNS(Domain Name System)
+    &lt;ul&gt;
+      &lt;li&gt;DNS Query&lt;/li&gt;
+      &lt;li&gt;DNS 증폭공격&lt;/li&gt;
+      &lt;li&gt;DNSSEC&lt;/li&gt;
+      &lt;li&gt;DNS캐시포이즈닝&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;HTTP(Hyper Text Transfer Protocol)
+    &lt;ul&gt;
+      &lt;li&gt;Request Header&lt;/li&gt;
+      &lt;li&gt;Response Header&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;FTP(File Transfer Protocol)
+    &lt;ul&gt;
+      &lt;li&gt;FTP 전송모드(Active/Passive)&lt;/li&gt;
+      &lt;li&gt;FTP / tFTP / sFTP&lt;/li&gt;
+      &lt;li&gt;ftp 접근 통제 파일&lt;/li&gt;
+      &lt;li&gt;FTP 취약점&lt;/li&gt;
+      &lt;li&gt;FTP 로그기록&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;SNMP(Simple Network Management Protocol)&lt;/li&gt;
+  &lt;li&gt;DHCP(Dynamic Host Configuration Protocol)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section-08-웹-어플리케이션-취약점&quot;&gt;SECTION 08 웹 어플리케이션 취약점&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;SQL Injection 취약점&lt;/li&gt;
+  &lt;li&gt;크로스 사이트 스크립트(XSS:Cross Site Script) 취약점&lt;/li&gt;
+  &lt;li&gt;크로스 사이트 요청 위조(CSRF:Cross Site Request Forgery) 취약점&lt;/li&gt;
+  &lt;li&gt;서버 사이트 요청 위조(SSRF:Server Side Request Forgery) 취약점&lt;/li&gt;
+  &lt;li&gt;운영체제 명령 실행(Command Execution) 취약점&lt;/li&gt;
+  &lt;li&gt;파일 업로드(File Upload) 취약점&lt;/li&gt;
+  &lt;li&gt;파일 다운로드(File Download) 취약점&lt;/li&gt;
+  &lt;li&gt;경로 추적(Path Traversal) 취약점&lt;/li&gt;
+  &lt;li&gt;파일 삽입(File Inclusion) 취약점&lt;/li&gt;
+  &lt;li&gt;URL/파라미터 변조 취약점&lt;/li&gt;
+  &lt;li&gt;불충분한 세션 관리 취약점
+    &lt;ul&gt;
+      &lt;li&gt;Session Hijacking&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;정보누출 취약점&lt;/li&gt;
+  &lt;li&gt;기타 웹 어플리케이션 취약점&lt;/li&gt;
+  &lt;li&gt;개발 보안 관리&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section-09-웹-서버-취약점&quot;&gt;SECTION 09 웹 서버 취약점&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;디렉터리 리스팅(Directory Listing) 취약점&lt;/li&gt;
+  &lt;li&gt;웹 서비스 메소드 설정 취약점&lt;/li&gt;
+  &lt;li&gt;관리자 페이지 노출 취약점&lt;/li&gt;
+  &lt;li&gt;위치공개 취약점&lt;/li&gt;
+  &lt;li&gt;검색엔진 정보 노출 취약점&lt;/li&gt;
+  &lt;li&gt;기타 웹서버 보안 대책(아파치 기준)&lt;/li&gt;
+  &lt;li&gt;웹 로그 분석&lt;/li&gt;
+  &lt;li&gt;보안서버(Security Server) 구축
+    &lt;ul&gt;
+      &lt;li&gt;APT 공격&lt;/li&gt;
+      &lt;li&gt;httpd.conf&lt;/li&gt;
+      &lt;li&gt;FollowSymLinks&lt;/li&gt;
+      &lt;li&gt;ServerSignature&lt;/li&gt;
+      &lt;li&gt;Server Tokens&lt;/li&gt;
+      &lt;li&gt;접근제어 (httpd.conf)&lt;/li&gt;
+      &lt;li&gt;세션관리&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section-10-이메일e-mail-보안&quot;&gt;SECTION 10 이메일(E-Mail) 보안&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;이메일 시스템 구조&lt;/li&gt;
+  &lt;li&gt;SMTP 메일 형식
+    &lt;ul&gt;
+      &lt;li&gt;POP3, IMAP&lt;/li&gt;
+      &lt;li&gt;PGP / PEM / S-MIME&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;메일서버(sendmail) 보안 설정&lt;/li&gt;
+  &lt;li&gt;이메일 인증 기술(스팸 메일 방지 기술)
+    &lt;ul&gt;
+      &lt;li&gt;RBL&lt;/li&gt;
+      &lt;li&gt;SPF&lt;/li&gt;
+      &lt;li&gt;Spam Assassin&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section-11-데이터베이스-보안&quot;&gt;SECTION 11 데이터베이스 보안&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;데이터베이스 보안 위협과 통제
+    &lt;ul&gt;
+      &lt;li&gt;집합성&lt;/li&gt;
+      &lt;li&gt;추론&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;DBMS 보안 통제&lt;/li&gt;
+  &lt;li&gt;데이터베이스 암호화 기술
+    &lt;ul&gt;
+      &lt;li&gt;DB 암호화 솔루션&lt;/li&gt;
+      &lt;li&gt;DB 감사 솔루션&lt;/li&gt;
+      &lt;li&gt;DB 백업 (전체, 차등, 증분)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;데이터베이스(MySQL) 취약점 점검&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section-12-클라우드-컴퓨팅-보안&quot;&gt;SECTION 12 클라우드 컴퓨팅 보안&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;클라우드 컴퓨팅 개요 및 특징&lt;/li&gt;
+  &lt;li&gt;클라우드 컴퓨팅 분류&lt;/li&gt;
+  &lt;li&gt;클라우드 기반 보안 서비스 : SecaaS&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;part-04-침해사고-분석-및-대응&quot;&gt;PART 04 침해사고 분석 및 대응&lt;/h1&gt;
+
+&lt;h2 id=&quot;section-13-보안장비-운영&quot;&gt;SECTION 13 보안장비 운영&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;침입탐지 시스템(snort)&lt;/li&gt;
+  &lt;li&gt;침입차단 시스템(iptables)
+    &lt;ul&gt;
+      &lt;li&gt;iptables&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;보안 솔루션 종류 및 특징
+    &lt;ul&gt;
+      &lt;li&gt;침입차단 시스템&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;ul&gt;
+      &lt;li&gt;패킷 필터링&lt;/li&gt;
+      &lt;li&gt;어플리케이션 게이트웨이&lt;/li&gt;
+      &lt;li&gt;회선 게이트웨이&lt;/li&gt;
+      &lt;li&gt;상태 기반 패킷 검사
+      - 침입차단 시스템 구축 유형&lt;/li&gt;
+      &lt;li&gt;스크리닝 라우터&lt;/li&gt;
+      &lt;li&gt;베스천 호스트&lt;/li&gt;
+      &lt;li&gt;듀얼 홈드 호스트&lt;/li&gt;
+      &lt;li&gt;스크린드 호스트&lt;/li&gt;
+      &lt;li&gt;스크린드 서브넷
+      - 침입탐지 시스템&lt;/li&gt;
+      &lt;li&gt;오용탐지&lt;/li&gt;
+      &lt;li&gt;이상탐지&lt;/li&gt;
+      &lt;li&gt;NIDS / HIDS&lt;/li&gt;
+      &lt;li&gt;지식기반 탐지 / 행위기반 탐지
+      - 침입대응 시스템
+      - UTM
+      - 허니팟
+      - NAC
+      - ESM
+      - SIEM
+      - SSO
+      - DRM
+      - 워터마킹
+      - 디지털 포렌식&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;네트워크 보안장비 운영&lt;/li&gt;
+  &lt;li&gt;보안 솔루션(장비) 취약점&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section-14-시스템-점검-도구&quot;&gt;SECTION 14 시스템 점검 도구&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;취약점(Vulnerability) 점검 도구(nessus/nikto)&lt;/li&gt;
+  &lt;li&gt;무결성(Integrity) 점검 도구(tripwire)&lt;/li&gt;
+  &lt;li&gt;루트킷(Rootkit) 점검 도구(chkrookit)
+    &lt;ul&gt;
+      &lt;li&gt;tripwire&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section-15-침해사고-유형별-시나리오&quot;&gt;SECTION 15 침해사고 유형별 시나리오&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;리버스 쉘(Reverse Shell) 침해 사고 시나리오&lt;/li&gt;
+  &lt;li&gt;루트킷(Rootkit) 침해 사고 시나리오&lt;/li&gt;
+  &lt;li&gt;DBD(Drive By Download) 침해 사고 시나리오&lt;/li&gt;
+  &lt;li&gt;악성코드 행위 분석 시나리오&lt;/li&gt;
+  &lt;li&gt;워터링 홀(Watering Hole) 침해 사고 시나리오&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section-16-주요-취약점vulnerability&quot;&gt;SECTION 16 주요 취약점(Vulnerability)&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;GNU Bash 취약점(ShellShock)
+    &lt;ul&gt;
+      &lt;li&gt;ShellShock&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;SSL/TLS 관련 취약점
+    &lt;ul&gt;
+      &lt;li&gt;OpenSSL Heartbleed&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;NTP 분산 서비스 거부(DDoS) 취약점&lt;/li&gt;
+  &lt;li&gt;SSDP 분산 서비스 거부(DDos) 취약점&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;part-05-정보보안-일반관리&quot;&gt;PART 05 정보보안 일반/관리&lt;/h1&gt;
+
+&lt;h2 id=&quot;section-17-정보보안-일반관리&quot;&gt;SECTION 17 정보보안 일반/관리&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;정보보호개요
+    &lt;ul&gt;
+      &lt;li&gt;예방 통제, 탐지 통제, 교정 통제&lt;/li&gt;
+      &lt;li&gt;생체인증 (보편성, 유일성, 지속성, 성능, 수용성, 저항성)&lt;/li&gt;
+      &lt;li&gt;논리폭탄&lt;/li&gt;
+      &lt;li&gt;커버로스 인증&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;암호학
+    &lt;ul&gt;
+      &lt;li&gt;대칭키 암호화&lt;/li&gt;
+      &lt;li&gt;공개키 암호화&lt;/li&gt;
+      &lt;li&gt;전자서명&lt;/li&gt;
+      &lt;li&gt;PKI&lt;/li&gt;
+      &lt;li&gt;스트림 암호화 / 블록 암호화&lt;/li&gt;
+      &lt;li&gt;암호분석 방법&lt;/li&gt;
+      &lt;li&gt;Diffie-Hellman 키 교환 알고리즘&lt;/li&gt;
+      &lt;li&gt;RSA&lt;/li&gt;
+      &lt;li&gt;Hash 함수&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;접근통제
+    &lt;ul&gt;
+      &lt;li&gt;MAC / DAC / RBAC&lt;/li&gt;
+      &lt;li&gt;CL / ACL&lt;/li&gt;
+      &lt;li&gt;Bell-Lapadula / Biba / Clark and Wilson / Chinese Wall&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;정보보호관리&lt;/li&gt;
+  &lt;li&gt;위험관리(Risk Management)
+    &lt;ul&gt;
+      &lt;li&gt;위험관리 체계&lt;/li&gt;
+      &lt;li&gt;접근방식에 따른 위험분석 기법&lt;/li&gt;
+      &lt;li&gt;정량적 위험분석 / 정성적 위험분석&lt;/li&gt;
+      &lt;li&gt;위험에 따른 손실액 분석&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;part-06-정보보안-법규&quot;&gt;PART 06 정보보안 법규&lt;/h1&gt;
+
+&lt;h2 id=&quot;section-18-정보보안-법규&quot;&gt;SECTION 18 정보보안 법규&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;법규관련 개요&lt;/li&gt;
+  &lt;li&gt;개인정보보호법(시행:2020.08.05.)&lt;/li&gt;
+  &lt;li&gt;개인정보의 안전성 확보조치 기준(시행:2021.09.15.)&lt;/li&gt;
+  &lt;li&gt;개인정보의 기술적·관리적 보호조치 기준(시행:2021.09.15.)&lt;/li&gt;
+  &lt;li&gt;정보통신망 이용촉진 및 정보보호 등에 관한 법률(시행:2021.12.09.)&lt;/li&gt;
+  &lt;li&gt;정보통신기반보호법(시행:2020.12.10.)&lt;/li&gt;
+  &lt;li&gt;전자서명법(시행:2021.06.10.)&lt;/li&gt;
+  &lt;li&gt;위치정보의 보호 및 이용 등에 관한 법률(시행:2021.02.05.)
+    &lt;ul&gt;
+      &lt;li&gt;ISMS-P&lt;/li&gt;
+      &lt;li&gt;ISMS 의무인증 대상&lt;/li&gt;
+      &lt;li&gt;ISMS-P 관리체계 인증심사&lt;/li&gt;
+      &lt;li&gt;정보보호 거버넌스 체계 수립&lt;/li&gt;
+      &lt;li&gt;정보보호 위험 평가 (자산/위험/위협/취약점)&lt;/li&gt;
+      &lt;li&gt;CC 인증&lt;/li&gt;
+      &lt;li&gt;개인정보 영향평가 제도&lt;/li&gt;
+      &lt;li&gt;개인정보보호법&lt;/li&gt;
+      &lt;li&gt;정보통신기반 보호법&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;-문제편-&quot;&gt;-문제편-&lt;/h1&gt;
+
+&lt;h2 id=&quot;section-01-시스템-보안&quot;&gt;Section 01 시스템 보안&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;시스템 보안 단답형&lt;/li&gt;
+  &lt;li&gt;시스템 보안 서술형&lt;/li&gt;
+  &lt;li&gt;시스템 보안 실무형&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section-02-네트워크-보안&quot;&gt;Section 02 네트워크 보안&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;네트워크 보안 단답형&lt;/li&gt;
+  &lt;li&gt;네트워크 보안 서술형&lt;/li&gt;
+  &lt;li&gt;네트워크 보안 실무형&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section-03-어플리케이션-보안&quot;&gt;Section 03 어플리케이션 보안&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;어플리케이션 보안 단답형&lt;/li&gt;
+  &lt;li&gt;어플리케이션 보안 서술형&lt;/li&gt;
+  &lt;li&gt;어플리케이션 보안 실무형&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section-04-침해사고-분석-및-대응&quot;&gt;Section 04 침해사고 분석 및 대응&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;침해사고 분석 및 대응 단답형&lt;/li&gt;
+  &lt;li&gt;침해사고 분석 및 대응 서술형&lt;/li&gt;
+  &lt;li&gt;침해사고 분석 및 대응 실무형&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section-05-정보보안-일반&quot;&gt;Section 05 정보보안 일반&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;정보보안 일반 단답형&lt;/li&gt;
+  &lt;li&gt;정보보안 일반 서술형&lt;/li&gt;
+  &lt;li&gt;정보보안 일반 실무형&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section-06-정보보안관리법규&quot;&gt;Section 06 정보보안관리/법규&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;정보보안관리/법규 단답형&lt;/li&gt;
+  &lt;li&gt;정보보안관리/법규 서술형&lt;/li&gt;
+  &lt;li&gt;정보보안관리/법규 실무형&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사 실기" /><category term="알기사 정보보안기사 실기" /><summary type="html">-이론편-</summary></entry><entry><title type="html">정보보안기사 실기 - 01.네트워크 - 01.프로토콜</title><link href="https://bluesplatter.com/is_certification/IST-Network-Protocol/" rel="alternate" type="text/html" title="정보보안기사 실기 - 01.네트워크 - 01.프로토콜" /><published>2022-03-17T09:00:00+09:00</published><updated>2022-03-17T09:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IST-Network-Protocol</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IST-Network-Protocol/">&lt;h1 id=&quot;프로토콜-protocol&quot;&gt;프로토콜 (Protocol)&lt;/h1&gt;
+&lt;ol&gt;
+  &lt;li&gt;프로토콜의 정의
+    &lt;ul&gt;
+      &lt;li&gt;서로 다른 시스템 및 기기 간 데이터 교환을 원할히 하기 위한 표준화된 통신 규약&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;프로토콜의 기본 요소
+    &lt;ul&gt;
+      &lt;li&gt;구문(Syntax) : 송수신 데이터 포멧 의미&lt;/li&gt;
+      &lt;li&gt;의미(Semantic) : 데이터의 각 항목이 가지는 의미&lt;/li&gt;
+      &lt;li&gt;타이밍(Timing) : 데이터 송수신 동작방식을 정의하는 것&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;프로토콜의 특징
+    &lt;ul&gt;
+      &lt;li&gt;단편화(Fragmentation) : 송신 측에서는 긴 데이터 블록을 손쉽게 전송할 수 있도록 크기가 똑같은 작은 블록으로 나누어 전송&lt;/li&gt;
+      &lt;li&gt;재조립(Assembly) : 수신 측에서 쪼개진 작은 데이터 블록을 재합성하여 원래의 메시지로 복원하는 기능&lt;/li&gt;
+      &lt;li&gt;캡슐화(Encapsulation) : 각 프로토콜에 적합한 데이터 블록을 만들려고 데이터에 정보를 추가하는 것&lt;/li&gt;
+      &lt;li&gt;연결 제어(Connection Control) : 비연결 데이터 전송(데이터그램)과 연결 위주 데이터 전송(가상회선)을 위한 통신로를 개설, 유지, 종결하는 기능&lt;/li&gt;
+      &lt;li&gt;오류 제어(Error Control) : 데이터 전송 중 발생할 수 있는 오류나 착오 등을 검출하고 정정하는 기능&lt;/li&gt;
+      &lt;li&gt;동기화(Synchronization) : 두 통신 객체의 상태(시작, 종류, 검사 등)를 일치시키는 기능&lt;/li&gt;
+      &lt;li&gt;다중화(Multiplexing) : 하나의 통신로를 여러 개로 나누거나 회선 여러개를 하나의 통신로로 변환시켜 다수의 가입자가 동시에 사용할 수 있도록 하는 기능&lt;/li&gt;
+      &lt;li&gt;주소지정(Addressing) : 발생지, 목적지 등의 주소를 명기하여 데이터를 정확하게 전달하는 기능&lt;/li&gt;
+      &lt;li&gt;전송 서비스(Transmission Service) : 데이터 전송 중 발생할 수 있는 오류나 착오 등을 검출하고 정정하는 기능&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;통신-프로토콜&quot;&gt;통신 프로토콜&lt;/h1&gt;
+&lt;ol&gt;
+  &lt;li&gt;통신 프로토콜의 정의
+    &lt;ul&gt;
+      &lt;li&gt;통신 프로토콜은 컴퓨터나 원거리 통신 장비 사이에서 메시지를 주고 받는 양식의 체계&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;통신 프로토콜의 종류
+    &lt;ul&gt;
+      &lt;li&gt;TCP(Transmission Control Protocol) : 전송 제어 프로토콜, 전송계층&lt;/li&gt;
+      &lt;li&gt;IP(Internet Protocol) : 송신 호스트와 수신 호스트가 패킷 교환 네트워크에서 정보를 주고받는데 사용하는 정보 프로토콜&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사 실기" /><category term="네트워크" /><category term="프로토콜" /><summary type="html">프로토콜 (Protocol) 프로토콜의 정의 서로 다른 시스템 및 기기 간 데이터 교환을 원할히 하기 위한 표준화된 통신 규약 프로토콜의 기본 요소 구문(Syntax) : 송수신 데이터 포멧 의미 의미(Semantic) : 데이터의 각 항목이 가지는 의미 타이밍(Timing) : 데이터 송수신 동작방식을 정의하는 것 프로토콜의 특징 단편화(Fragmentation) : 송신 측에서는 긴 데이터 블록을 손쉽게 전송할 수 있도록 크기가 똑같은 작은 블록으로 나누어 전송 재조립(Assembly) : 수신 측에서 쪼개진 작은 데이터 블록을 재합성하여 원래의 메시지로 복원하는 기능 캡슐화(Encapsulation) : 각 프로토콜에 적합한 데이터 블록을 만들려고 데이터에 정보를 추가하는 것 연결 제어(Connection Control) : 비연결 데이터 전송(데이터그램)과 연결 위주 데이터 전송(가상회선)을 위한 통신로를 개설, 유지, 종결하는 기능 오류 제어(Error Control) : 데이터 전송 중 발생할 수 있는 오류나 착오 등을 검출하고 정정하는 기능 동기화(Synchronization) : 두 통신 객체의 상태(시작, 종류, 검사 등)를 일치시키는 기능 다중화(Multiplexing) : 하나의 통신로를 여러 개로 나누거나 회선 여러개를 하나의 통신로로 변환시켜 다수의 가입자가 동시에 사용할 수 있도록 하는 기능 주소지정(Addressing) : 발생지, 목적지 등의 주소를 명기하여 데이터를 정확하게 전달하는 기능 전송 서비스(Transmission Service) : 데이터 전송 중 발생할 수 있는 오류나 착오 등을 검출하고 정정하는 기능 통신 프로토콜 통신 프로토콜의 정의 통신 프로토콜은 컴퓨터나 원거리 통신 장비 사이에서 메시지를 주고 받는 양식의 체계 통신 프로토콜의 종류 TCP(Transmission Control Protocol) : 전송 제어 프로토콜, 전송계층 IP(Internet Protocol) : 송신 호스트와 수신 호스트가 패킷 교환 네트워크에서 정보를 주고받는데 사용하는 정보 프로토콜</summary></entry><entry><title type="html">정보보안 - iptables</title><link href="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-iptables/" rel="alternate" type="text/html" title="정보보안 - iptables" /><published>2022-02-07T09:00:00+09:00</published><updated>2022-02-07T09:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-IncidentAnalysis-iptables</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-iptables/">&lt;h1 id=&quot;iptables&quot;&gt;iptables&lt;/h1&gt;
 &lt;ul&gt;
   &lt;li&gt;정의
     &lt;ul&gt;
@@ -31,58 +873,330 @@
     &lt;ul&gt;
       &lt;li&gt;Table
         &lt;ul&gt;
-          &lt;li&gt;Filter Table
+          &lt;li&gt;Filter Table&lt;/li&gt;
+          &lt;li&gt;NAT Table&lt;/li&gt;
+          &lt;li&gt;Mangle Table&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Chain : 패킷이 이동하는 경로 (3가지 기본 Chain 이 존재-삭제불가)
+        &lt;ul&gt;
+          &lt;li&gt;Chain Input : 방화벽을 최종 목적지로 하는 체인&lt;/li&gt;
+          &lt;li&gt;Chain Output : 방화벽을 최초 출발지로 정하는 체인&lt;/li&gt;
+          &lt;li&gt;Chain Forward : 방화벽을 통과하는 체인 (방화벽을 별도의 서버로 구성해서 서비스할 때 사용하는 체인)&lt;/li&gt;
+          &lt;li&gt;-&amp;gt; INPUT -&amp;gt; Linux Server -&amp;gt; Output -&amp;gt;&lt;/li&gt;
+          &lt;li&gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt; FORWARD -&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;
             &lt;ul&gt;
-              &lt;li&gt;Chain : 패킷이 이동하는 경로 (3가지 기본 Chain 이 존재-삭제불가)
+              &lt;li&gt;Linux Server 를 목적지로 삼는 모든 패킷은 Input Chain 통과&lt;/li&gt;
+              &lt;li&gt;Linux Server 에서 생성되어 외부로 보내지는 모든 패킷은 Output Chain 을 통과&lt;/li&gt;
+              &lt;li&gt;Forward Chain 은 현재의 Linux Server 가 목적지가 아닌 패킷이 통과하는 Chain (방화벽을 별도의 서버로 구성)&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Rule&lt;/strong&gt; : 패킷 필터링을 하기 위한 Rule
+        &lt;ul&gt;
+          &lt;li&gt;기본구문 형식
+            &lt;ul&gt;
+              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;iptables [테이블] [체인] [룰] [타깃]&lt;/code&gt;&lt;/li&gt;
+              &lt;li&gt;대 소문자 구분&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;테이블 설정
+            &lt;ul&gt;
+              &lt;li&gt;형식 : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-t [테이블]&lt;/code&gt;&lt;/li&gt;
+              &lt;li&gt;테이블을 명시하지 않으면 기본값으로 Filter Table 이 적용&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;체인(Chain) 설정
+            &lt;ul&gt;
+              &lt;li&gt;형식 : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;iptables -[A|I|D] [체인]&lt;/code&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-A&lt;/code&gt; : append 모드 (해당 체인의 가장 마지막 줄에 룰을 추가)&lt;/li&gt;
+              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-I&lt;/code&gt; : insert 모드 (해당 체인의 첫 줄에 룰을 추가)
                 &lt;ul&gt;
-                  &lt;li&gt;Chain Input : 방화벽을 최종 목적지로 하는 체인&lt;/li&gt;
-                  &lt;li&gt;Chain Output : 방화벽을 최초 출발지로 정하는 체인&lt;/li&gt;
-                  &lt;li&gt;Chain Forward : 방화벽을 통과하는 체인 (방화벽을 별도의 서버로 구성해서 서비스할 때 사용하는 체인)&lt;/li&gt;
-                  &lt;li&gt;-&amp;gt; INPUT -&amp;gt; Linux Server -&amp;gt; Output -&amp;gt;&lt;/li&gt;
-                  &lt;li&gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt; FORWARD -&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;
+                  &lt;li&gt;행번호 지정시 : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-I 체인 n(행번호)&lt;/code&gt; (n 행에 롤 추가)&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-D&lt;/code&gt; (delete) : delete 모드
+                &lt;ul&gt;
+                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-D 체인 룰&lt;/code&gt; : 해당 룰 삭제&lt;/li&gt;
+                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-D 체인 n(행번호)&lt;/code&gt; : n행의 룰 삭제
                     &lt;ul&gt;
-                      &lt;li&gt;Linux Server 를 목적지로 삼는 모든 패킷은 Input Chain 통과&lt;/li&gt;
-                      &lt;li&gt;Linux Server 에서 생성되어 외부로 보내지는 모든 패킷은 Output Chain 을 통과&lt;/li&gt;
-                      &lt;li&gt;Forward Chain 은 현재의 Linux Server 가 목적지가 아닌 패킷이 통과하는 Chain (방화벽을 별도의 서버로 구성)&lt;/li&gt;
+                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;iptables -D INPUT 1&lt;/code&gt;&lt;/li&gt;
                     &lt;/ul&gt;
                   &lt;/li&gt;
                 &lt;/ul&gt;
               &lt;/li&gt;
-              &lt;li&gt;Rule : 패킷 필터링을 하기 위한 Rule
+              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-P&lt;/code&gt; : 해당 체인의 기본 정책을 설정, 변경
                 &lt;ul&gt;
-                  &lt;li&gt;&lt;strong&gt;사용법&lt;/strong&gt;
+                  &lt;li&gt;기본 정책 : 해당 체인의 모든 룰에 매치가 되지 않으면 적용되는 정책&lt;/li&gt;
+                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;iptables -P [체인명] [ACCPET|DROP|REJECT|LOG]&lt;/code&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-R&lt;/code&gt; (replace) : 위치 선택 후 정책 교환&lt;/li&gt;
+              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-N&lt;/code&gt; (new chain) : 새로운 체인을 생성&lt;/li&gt;
+              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-Z&lt;/code&gt; : 체인의 모든 규칙들의 패킷과 바이트 카운트를 0으로 만듬&lt;/li&gt;
+              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-X&lt;/code&gt; (delete chain) : 비어있는 체인 제거&lt;/li&gt;
+              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-C&lt;/code&gt; (check) : 패킷을 테스트&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;룰 설정
+            &lt;ul&gt;
+              &lt;li&gt;형식 : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;iptables -A INPUT -s [발신지] --sport [발신지포트] -d [목적지] --dport [목적지포트] -j [정책]&lt;/code&gt;&lt;/li&gt;
+              &lt;li&gt;제어 옵션 명령어
+                &lt;ul&gt;
+                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-s&lt;/code&gt; (source) : 패킷의 송신지를 제어, IP 또는 IP 대역을 명시 가능
                     &lt;ul&gt;
-                      &lt;li&gt;기본구문 형식
-                        &lt;ul&gt;
-                          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;iptables [테이블] [체인] [룰] [타깃]&lt;/code&gt;&lt;/li&gt;
-                          &lt;li&gt;대 소문자 구분&lt;/li&gt;
-                        &lt;/ul&gt;
-                      &lt;/li&gt;
-                      &lt;li&gt;테이블 설정
-                        &lt;ul&gt;
-                          &lt;li&gt;형식 : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-t [테이블]&lt;/code&gt;&lt;/li&gt;
-                          &lt;li&gt;테이블을 명시하지 않으면 기본값으로 Filter Table 이 적용&lt;/li&gt;
-                        &lt;/ul&gt;
-                      &lt;/li&gt;
-                      &lt;li&gt;체인(Chain) 설정
-                        &lt;ul&gt;
-                          &lt;li&gt;형식 : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;iptables -[A|I|D] [체인]&lt;/code&gt;&lt;/li&gt;
-                          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-A&lt;/code&gt; : append 모드 (해당 체인의 가장 마지막 줄에 룰을 추가) (4:45)&lt;/li&gt;
-                        &lt;/ul&gt;
-                      &lt;/li&gt;
+                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-s 192.168.159.0/24&lt;/code&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-d&lt;/code&gt; (destination) : 패킷의 수신지를 제어, IP 또는 IP 대역을 명시 가능&lt;/li&gt;
+                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-j&lt;/code&gt; (jump) : 방화벽을 지난 후 패킷의 상태를 제어
+                    &lt;ul&gt;
+                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-j [정책]&lt;/code&gt; : 룰에 매치될 때 적용할 정책을 지정&lt;/li&gt;
+                      &lt;li&gt;ACCEPT : 허용&lt;/li&gt;
+                      &lt;li&gt;DROP : 해당 패킷을 차단한 후 아무런 응답 메시지를 전송하지 않음&lt;/li&gt;
+                      &lt;li&gt;REJECT : 해당 패킷을 차단한 후 ICMP 에러 메시지로 응답 (불필요한 네트워크 트래픽 발생)&lt;/li&gt;
+                      &lt;li&gt;LOG : 탐지 로그를 남김. 주로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/var/log/message&lt;/code&gt; 에 남김&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-p&lt;/code&gt; (protocol) : 프로토콜을 제어&lt;/li&gt;
+                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-i&lt;/code&gt; (inbound interface) : 패킷이 들어오는 네트워크 인터페이스&lt;/li&gt;
+                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-o&lt;/code&gt; (outbound interface) : 패킷이 나가는 네트워크 인터페이스&lt;/li&gt;
+                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-f&lt;/code&gt; (fragment) : 분절(단편화)된 패킷&lt;/li&gt;
+                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--sport&lt;/code&gt; : 송신지 포트 제어 (대역 명시 가능)
+                    &lt;ul&gt;
+                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--sport 1024:&lt;/code&gt; : 1024 이상의 포트&lt;/li&gt;
+                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--sport :65535&lt;/code&gt; : 65535 이하의 포트&lt;/li&gt;
+                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--sport 1:1023&lt;/code&gt; : 1 ~ 1023 대역의 포트&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--dport&lt;/code&gt; : 수신지 포트 제어&lt;/li&gt;
+                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--icmp-type [메시지타입]&lt;/code&gt; : ICMP 의 경우 타입과 코드를 이용한 메시지 식별
+                    &lt;ul&gt;
+                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--icmp-type echo-request&lt;/code&gt; (ICMP Echo Request 를 의미)&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;예시
+                &lt;ul&gt;
+                  &lt;li&gt;기본 정책을 ACCPET 로 설정
+                    &lt;ul&gt;
+                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;iptables -P INPUT ACCEPT&lt;/code&gt;&lt;/li&gt;
+                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;iptables -P OUTPUT ACCEPT&lt;/code&gt;&lt;/li&gt;
+                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;iptables -P FORWARD ACCEPT&lt;/code&gt;&lt;/li&gt;
+                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-P&lt;/code&gt; (policy) : 미리 만들어진 체인의 정책을 바꾸기&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;현재 자신의 방화벽 규칙을 보는 명령
+                    &lt;ul&gt;
+                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;iptables --list&lt;/code&gt;&lt;/li&gt;
+                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;iptables -L&lt;/code&gt; (list) : 적용되어 있는 정책 목록을 출력&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;규칙 추가 후에 저장하기
+                    &lt;ul&gt;
+                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;service iptables save -&amp;gt; /etc/sysconfig/iptables&lt;/code&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;현재 iptables 규칙을 초기화 하기
+                    &lt;ul&gt;
+                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;iptables -F&lt;/code&gt; (flush) : 체인의 모든 규칙을 삭제&lt;/li&gt;
+                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;iptables -F INPUT&lt;/code&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;특정 출발지의 패킷을 모두 차단
+                    &lt;ul&gt;
+                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;iptables -A INPUT -s 192.168.0.5 -j DROP&lt;/code&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;특정 목적지로 가는 패킷이 아니라면 허용
+                    &lt;ul&gt;
+                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;iptables -A INPUT -d !192.168.0.10 -j ACCPET&lt;/code&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;특정 프로토콜, 특정 포트일 경우 허용
+                    &lt;ul&gt;
+                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;iptables -A INPUT -p TCP --dport 80 -j ACCEPT&lt;/code&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;ICMP 의 경우 타입과 코드를 이용한 메시지 식별&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;상태 추적 (Connection Tracking)
+    &lt;ul&gt;
+      &lt;li&gt;상태 유형
+        &lt;ul&gt;
+          &lt;li&gt;New
+            &lt;ul&gt;
+              &lt;li&gt;상태추적 테이블에 연결 정보를 가지고 있지 않은 패킷&lt;/li&gt;
+              &lt;li&gt;최초로 들어온 패킷의 상태&lt;/li&gt;
+              &lt;li&gt;예) TCP 의 SYN 패킷&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;ESTABLISHED
+            &lt;ul&gt;
+              &lt;li&gt;상태추적 테이블에 연결 정보를 가지고 있는 패킷의 상태&lt;/li&gt;
+              &lt;li&gt;연결된 이후에 송수신되는 패킷들의 상태&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;RELATED
+            &lt;ul&gt;
+              &lt;li&gt;상태추적 테이블에 연관된 연결정보를 가지고 있는 패킷의 상태
+                &lt;ul&gt;
+                  &lt;li&gt;연관 : 연결 시에 포트의 정보가 서비스 수행중에 새롭게 추가될 수 있는데 이러한 서비스 패킷의 상태를 말함
+                    &lt;ul&gt;
+                      &lt;li&gt;예) FTP 프로토콜 (21/TCP 제어채널 -&amp;gt; 20/TCP 데이터채널)&lt;/li&gt;
                     &lt;/ul&gt;
                   &lt;/li&gt;
                 &lt;/ul&gt;
               &lt;/li&gt;
             &lt;/ul&gt;
           &lt;/li&gt;
-          &lt;li&gt;NAT Table&lt;/li&gt;
-          &lt;li&gt;Mangle Table&lt;/li&gt;
+          &lt;li&gt;INVALID
+            &lt;ul&gt;
+              &lt;li&gt;어떤 상태에도 해당되지 않는 패킷상태&lt;/li&gt;
+              &lt;li&gt;연결된 상태를 알 수 없거나 잘못된 헤더를 가지고 있는 경우&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;프로토콜 상태 유형
+        &lt;ul&gt;
+          &lt;li&gt;TCP 프로토콜 상태
+            &lt;ul&gt;
+              &lt;li&gt;방화벽 기준
+                &lt;ul&gt;
+                  &lt;li&gt;inbound SYN 패킷 : NEW&lt;/li&gt;
+                  &lt;li&gt;outbound SYN + ACK 패킷 : ESTABLISHED&lt;/li&gt;
+                  &lt;li&gt;연결종료 마지막 ACK 패킷이 보이기 전까지 ESTABLISHED 상태&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;UDP 프로토콜 상태
+            &lt;ul&gt;
+              &lt;li&gt;비연결 (Connectionless) 프로토콜 : 연결 상태를 유지하지 않음
+                &lt;ul&gt;
+                  &lt;li&gt;프로토콜 수준에서 연결상태 정보가 없음&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;최초 inbound : NEW 상태&lt;/li&gt;
+              &lt;li&gt;상태추적 테이블에 UDP 는 inbound 될 때마다 임의의 시간동안 정보를 유지 (ESTABLISHED 상태)&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;룰 설정 예시
+        &lt;ul&gt;
+          &lt;li&gt;위조된 TCP SYN 패킷을 차단
+            &lt;ul&gt;
+              &lt;li&gt;상태 추적 테이블 상 NEW 이면서 SYN 플래그로 설정되지 않은 패킷 -&amp;gt; DROP&lt;/li&gt;
+              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT&lt;/code&gt;
+                &lt;ul&gt;
+                  &lt;li&gt;상태추적 테이블에서 ESTABLISEHD, RELATED 상태의 패킷은 모두 허용
+                    &lt;ul&gt;
+                      &lt;li&gt;이미 허용된 트래픽에 대해서는 룰 검사를 다시 하지 않음 (성능 향상)&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-m state&lt;/code&gt; : 상태추적기능을 사용하기 위한 옵션 (state 모듈)&lt;/li&gt;
+                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--state&lt;/code&gt; : state 옵션&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;iptables -A INPUT -p tcp !--syn -m state --state NEW -j LOG --log-prefix &quot;[Forged SYN Packet]&quot;&lt;/code&gt;
+                &lt;ul&gt;
+                  &lt;li&gt;패킷의 상태가 NEW 이면서, SYN 플래그가 설정되지 않은 비정상 패킷을 로그에 남김&lt;/li&gt;
+                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--log-prefix &quot;접두어&quot;&lt;/code&gt; : 로그에 접두어를 만들어 표시&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;iptables -A INPUT -p tcp !--syn -m state --state NEW -j DROP&lt;/code&gt;
+                &lt;ul&gt;
+                  &lt;li&gt;패킷의 상태가 NEW 이면서, SYN 플래그가 설정되지 않은 비정상 패킷을 차단&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;설정 예시
+                &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      iptables -F INPUT
+      iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+      iptables -A INPUT -p tcp !--syn -m state --state NEW -j LOG --log-prefix &quot;[Forged SYN Packet]&quot;
+      iptables -A INPUT -p tcp !--syn -m state --state NEW -j DROP
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                &lt;/div&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;FTP ACTIVE MODE 상태추적 (Passive 모드일 경우 포트 지정을 1024 이상으로 하면 됌)
+            &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      iptables -F INPUT 
+      iptables -P INPUT DROP 
+      iptables -P OUTPUT DROP
+      iptables -A INPUT -m state --state ESTABLISHED -j LOG --log-prefix &quot;[INPUT ESTABLISHED]&quot;
+      iptables -A INPUT -m state --state RELATED -j LOG --log-prefix &quot;[INPUT RELATED]&quot;
+      iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+      iptables -A INPUT -m state --state NEW -p tcp --dport 21 -j LOG --log-prefix &quot;[FTP INPUT_NEW]&quot;
+      iptables -A INPUT -m state --state NEW -p tcp --dport 21 -j ACCEPT
+      iptables -A OUTPUT -m state --state ESTABLISHED -j LOG --log-prefix &quot;[OUTPUT ESTABLISHED]&quot;
+      iptables -A OUTPUT -m state --state RELATED -j LOG --log-prefix &quot;[OUTPUT RELATED]&quot;
+      iptables -A OUTPUT -m state --state ESTABLISHED, RELATED -j ACCEPT
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;            &lt;/div&gt;
+          &lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="iptables" /><summary type="html">iptables 정의 리눅스 상에서 방화벽을 설정하는 도구 패킷 필터링 기능 : 지나가는 패킷의 헤더를 보고 해당 패킷에 대한 허용/차단 (ACCEPT/DROP) 결정 Rule 기반의 패킷 필터링 기능을 제공 기능 상태추적 (Connection Tracking or Stateful Inspection) 방화벽을 통과하는 모든 패킷에 대한 연결상태를 추적, 메모리에 기록하여 상태추적테이블을 생성 모든 송 수신 패킷을 기록하고 검사 기존 연결을 가장하여 접근할 경우 저장되어 있는 상태목록과 비교하여 허용/차단 이미 연결된 상태의 패킷은 검사하지 않음 Stateful Inspection : 이스라엘 보안업체인 Checkpoint 사 에서 최초로 개발한 방화벽 구조 NAT 기능 네트워크 주소 변환 패킷 레벨에서 로깅 확장 모듈을 이용해 다양한 기능 제공 용어 Table Filter Table Chain : 패킷이 이동하는 경로 (3가지 기본 Chain 이 존재-삭제불가) Chain Input : 방화벽을 최종 목적지로 하는 체인 Chain Output : 방화벽을 최초 출발지로 정하는 체인 Chain Forward : 방화벽을 통과하는 체인 (방화벽을 별도의 서버로 구성해서 서비스할 때 사용하는 체인) -&amp;gt; INPUT -&amp;gt; Linux Server -&amp;gt; Output -&amp;gt; -&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt; FORWARD -&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt; Linux Server 를 목적지로 삼는 모든 패킷은 Input Chain 통과 Linux Server 에서 생성되어 외부로 보내지는 모든 패킷은 Output Chain 을 통과 Forward Chain 은 현재의 Linux Server 가 목적지가 아닌 패킷이 통과하는 Chain (방화벽을 별도의 서버로 구성) Rule : 패킷 필터링을 하기 위한 Rule 사용법 기본구문 형식 iptables [테이블] [체인] [룰] [타깃] 대 소문자 구분 테이블 설정 형식 : -t [테이블] 테이블을 명시하지 않으면 기본값으로 Filter Table 이 적용 체인(Chain) 설정 형식 : iptables -[A|I|D] [체인] -A : append 모드 (해당 체인의 가장 마지막 줄에 룰을 추가) (4:45) NAT Table Mangle Table</summary></entry><entry><title type="html">정보보안 - snort</title><link href="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-snort/" rel="alternate" type="text/html" title="정보보안 - snort" /><published>2022-01-26T09:00:00+09:00</published><updated>2022-01-26T09:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-IncidentAnalysis-snort</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-snort/">&lt;h1 id=&quot;snort&quot;&gt;snort&lt;/h1&gt;
+  &lt;li&gt;확장 모듈
+    &lt;ul&gt;
+      &lt;li&gt;connlimit 모듈
+        &lt;ul&gt;
+          &lt;li&gt;개요
+            &lt;ul&gt;
+              &lt;li&gt;동일한 ip 대역에 대한 동시 연결 개수 제한 모듈&lt;/li&gt;
+              &lt;li&gt;디도스 공격에 효과적 대응&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;주요옵션
+            &lt;ul&gt;
+              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--connlimit-above n&lt;/code&gt; : n을 초과하는 동시 연결을 제한&lt;/li&gt;
+              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--connlimit-mask mask&lt;/code&gt; : 0~32 범위의 mask 값을 지정, IP 대역에 대한 동시 연결 제한&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;예시
+            &lt;ul&gt;
+              &lt;li&gt;웹서버 80 포트에 대한 TCP SYN Flooding 공격 대응룰
+                &lt;ul&gt;
+                  &lt;li&gt;TCP 80포트에 동일 src IP 로 동시연결개수가 5개 초과시 이를 차단&lt;/li&gt;
+                  &lt;li&gt;로그 저장 위치 : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/var/log/messages&lt;/code&gt;
+                    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  iptables -F INPUT
+  iptables -A INPUT -m state --state ESTABLISHED, RELATED -j ACCEPT
+  iptables -A INPUT -p tcp --syn --dport 80 -m connlimit --connlimit-above 5 -j LOG --log-prefix &quot;[CONNLIMIT]&quot;
+  iptables -A INPUT -p tcp --syn --dport 80 -m connlimit --connlimit-above 5 -j DROP
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                    &lt;/div&gt;
+                  &lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;웹서버 (80/tcp) 에 대한 TCP SYN Flooding 공격에 대응하기 위한 룰 설정
+                &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      iptables -F INPUT
+      iptables -A INPUT -m state --state ESTABLISHED, RELATED -j ACCEPT
+      iptables -A INPUT -p tcp --syn --dport 80 -m connlimit --connlimit-above 10 --connlimit-mask 24 -j LOG --log-prefix &quot;[CONNLIMIT]&quot;
+      iptables -A
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                &lt;/div&gt;
+              &lt;/li&gt;
+              &lt;li&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;limit 모듈
+        &lt;ul&gt;
+          &lt;li&gt;룰에 매치되는 비율을 제한&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="iptables" /><summary type="html">iptables 정의 리눅스 상에서 방화벽을 설정하는 도구 패킷 필터링 기능 : 지나가는 패킷의 헤더를 보고 해당 패킷에 대한 허용/차단 (ACCEPT/DROP) 결정 Rule 기반의 패킷 필터링 기능을 제공 기능 상태추적 (Connection Tracking or Stateful Inspection) 방화벽을 통과하는 모든 패킷에 대한 연결상태를 추적, 메모리에 기록하여 상태추적테이블을 생성 모든 송 수신 패킷을 기록하고 검사 기존 연결을 가장하여 접근할 경우 저장되어 있는 상태목록과 비교하여 허용/차단 이미 연결된 상태의 패킷은 검사하지 않음 Stateful Inspection : 이스라엘 보안업체인 Checkpoint 사 에서 최초로 개발한 방화벽 구조 NAT 기능 네트워크 주소 변환 패킷 레벨에서 로깅 확장 모듈을 이용해 다양한 기능 제공 용어 Table Filter Table NAT Table Mangle Table Chain : 패킷이 이동하는 경로 (3가지 기본 Chain 이 존재-삭제불가) Chain Input : 방화벽을 최종 목적지로 하는 체인 Chain Output : 방화벽을 최초 출발지로 정하는 체인 Chain Forward : 방화벽을 통과하는 체인 (방화벽을 별도의 서버로 구성해서 서비스할 때 사용하는 체인) -&amp;gt; INPUT -&amp;gt; Linux Server -&amp;gt; Output -&amp;gt; -&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt; FORWARD -&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt;-&amp;gt; Linux Server 를 목적지로 삼는 모든 패킷은 Input Chain 통과 Linux Server 에서 생성되어 외부로 보내지는 모든 패킷은 Output Chain 을 통과 Forward Chain 은 현재의 Linux Server 가 목적지가 아닌 패킷이 통과하는 Chain (방화벽을 별도의 서버로 구성) Rule : 패킷 필터링을 하기 위한 Rule 기본구문 형식 iptables [테이블] [체인] [룰] [타깃] 대 소문자 구분 테이블 설정 형식 : -t [테이블] 테이블을 명시하지 않으면 기본값으로 Filter Table 이 적용 체인(Chain) 설정 형식 : iptables -[A|I|D] [체인] -A : append 모드 (해당 체인의 가장 마지막 줄에 룰을 추가) -I : insert 모드 (해당 체인의 첫 줄에 룰을 추가) 행번호 지정시 : -I 체인 n(행번호) (n 행에 롤 추가) -D (delete) : delete 모드 -D 체인 룰 : 해당 룰 삭제 -D 체인 n(행번호) : n행의 룰 삭제 iptables -D INPUT 1 -P : 해당 체인의 기본 정책을 설정, 변경 기본 정책 : 해당 체인의 모든 룰에 매치가 되지 않으면 적용되는 정책 iptables -P [체인명] [ACCPET|DROP|REJECT|LOG] -R (replace) : 위치 선택 후 정책 교환 -N (new chain) : 새로운 체인을 생성 -Z : 체인의 모든 규칙들의 패킷과 바이트 카운트를 0으로 만듬 -X (delete chain) : 비어있는 체인 제거 -C (check) : 패킷을 테스트 룰 설정 형식 : iptables -A INPUT -s [발신지] --sport [발신지포트] -d [목적지] --dport [목적지포트] -j [정책] 제어 옵션 명령어 -s (source) : 패킷의 송신지를 제어, IP 또는 IP 대역을 명시 가능 -s 192.168.159.0/24 -d (destination) : 패킷의 수신지를 제어, IP 또는 IP 대역을 명시 가능 -j (jump) : 방화벽을 지난 후 패킷의 상태를 제어 -j [정책] : 룰에 매치될 때 적용할 정책을 지정 ACCEPT : 허용 DROP : 해당 패킷을 차단한 후 아무런 응답 메시지를 전송하지 않음 REJECT : 해당 패킷을 차단한 후 ICMP 에러 메시지로 응답 (불필요한 네트워크 트래픽 발생) LOG : 탐지 로그를 남김. 주로 /var/log/message 에 남김 -p (protocol) : 프로토콜을 제어 -i (inbound interface) : 패킷이 들어오는 네트워크 인터페이스 -o (outbound interface) : 패킷이 나가는 네트워크 인터페이스 -f (fragment) : 분절(단편화)된 패킷 --sport : 송신지 포트 제어 (대역 명시 가능) --sport 1024: : 1024 이상의 포트 --sport :65535 : 65535 이하의 포트 --sport 1:1023 : 1 ~ 1023 대역의 포트 --dport : 수신지 포트 제어 --icmp-type [메시지타입] : ICMP 의 경우 타입과 코드를 이용한 메시지 식별 --icmp-type echo-request (ICMP Echo Request 를 의미) 예시 기본 정책을 ACCPET 로 설정 iptables -P INPUT ACCEPT iptables -P OUTPUT ACCEPT iptables -P FORWARD ACCEPT -P (policy) : 미리 만들어진 체인의 정책을 바꾸기 현재 자신의 방화벽 규칙을 보는 명령 iptables --list iptables -L (list) : 적용되어 있는 정책 목록을 출력 규칙 추가 후에 저장하기 service iptables save -&amp;gt; /etc/sysconfig/iptables 현재 iptables 규칙을 초기화 하기 iptables -F (flush) : 체인의 모든 규칙을 삭제 iptables -F INPUT 특정 출발지의 패킷을 모두 차단 iptables -A INPUT -s 192.168.0.5 -j DROP 특정 목적지로 가는 패킷이 아니라면 허용 iptables -A INPUT -d !192.168.0.10 -j ACCPET 특정 프로토콜, 특정 포트일 경우 허용 iptables -A INPUT -p TCP --dport 80 -j ACCEPT ICMP 의 경우 타입과 코드를 이용한 메시지 식별 상태 추적 (Connection Tracking) 상태 유형 New 상태추적 테이블에 연결 정보를 가지고 있지 않은 패킷 최초로 들어온 패킷의 상태 예) TCP 의 SYN 패킷 ESTABLISHED 상태추적 테이블에 연결 정보를 가지고 있는 패킷의 상태 연결된 이후에 송수신되는 패킷들의 상태 RELATED 상태추적 테이블에 연관된 연결정보를 가지고 있는 패킷의 상태 연관 : 연결 시에 포트의 정보가 서비스 수행중에 새롭게 추가될 수 있는데 이러한 서비스 패킷의 상태를 말함 예) FTP 프로토콜 (21/TCP 제어채널 -&amp;gt; 20/TCP 데이터채널) INVALID 어떤 상태에도 해당되지 않는 패킷상태 연결된 상태를 알 수 없거나 잘못된 헤더를 가지고 있는 경우 프로토콜 상태 유형 TCP 프로토콜 상태 방화벽 기준 inbound SYN 패킷 : NEW outbound SYN + ACK 패킷 : ESTABLISHED 연결종료 마지막 ACK 패킷이 보이기 전까지 ESTABLISHED 상태 UDP 프로토콜 상태 비연결 (Connectionless) 프로토콜 : 연결 상태를 유지하지 않음 프로토콜 수준에서 연결상태 정보가 없음 최초 inbound : NEW 상태 상태추적 테이블에 UDP 는 inbound 될 때마다 임의의 시간동안 정보를 유지 (ESTABLISHED 상태) 룰 설정 예시 위조된 TCP SYN 패킷을 차단 상태 추적 테이블 상 NEW 이면서 SYN 플래그로 설정되지 않은 패킷 -&amp;gt; DROP iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT 상태추적 테이블에서 ESTABLISEHD, RELATED 상태의 패킷은 모두 허용 이미 허용된 트래픽에 대해서는 룰 검사를 다시 하지 않음 (성능 향상) -m state : 상태추적기능을 사용하기 위한 옵션 (state 모듈) --state : state 옵션 iptables -A INPUT -p tcp !--syn -m state --state NEW -j LOG --log-prefix &quot;[Forged SYN Packet]&quot; 패킷의 상태가 NEW 이면서, SYN 플래그가 설정되지 않은 비정상 패킷을 로그에 남김 --log-prefix &quot;접두어&quot; : 로그에 접두어를 만들어 표시 iptables -A INPUT -p tcp !--syn -m state --state NEW -j DROP 패킷의 상태가 NEW 이면서, SYN 플래그가 설정되지 않은 비정상 패킷을 차단 설정 예시 iptables -F INPUT iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT iptables -A INPUT -p tcp !--syn -m state --state NEW -j LOG --log-prefix &quot;[Forged SYN Packet]&quot; iptables -A INPUT -p tcp !--syn -m state --state NEW -j DROP FTP ACTIVE MODE 상태추적 (Passive 모드일 경우 포트 지정을 1024 이상으로 하면 됌) iptables -F INPUT iptables -P INPUT DROP iptables -P OUTPUT DROP iptables -A INPUT -m state --state ESTABLISHED -j LOG --log-prefix &quot;[INPUT ESTABLISHED]&quot; iptables -A INPUT -m state --state RELATED -j LOG --log-prefix &quot;[INPUT RELATED]&quot; iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT iptables -A INPUT -m state --state NEW -p tcp --dport 21 -j LOG --log-prefix &quot;[FTP INPUT_NEW]&quot; iptables -A INPUT -m state --state NEW -p tcp --dport 21 -j ACCEPT iptables -A OUTPUT -m state --state ESTABLISHED -j LOG --log-prefix &quot;[OUTPUT ESTABLISHED]&quot; iptables -A OUTPUT -m state --state RELATED -j LOG --log-prefix &quot;[OUTPUT RELATED]&quot; iptables -A OUTPUT -m state --state ESTABLISHED, RELATED -j ACCEPT 확장 모듈 connlimit 모듈 개요 동일한 ip 대역에 대한 동시 연결 개수 제한 모듈 디도스 공격에 효과적 대응 주요옵션 --connlimit-above n : n을 초과하는 동시 연결을 제한 --connlimit-mask mask : 0~32 범위의 mask 값을 지정, IP 대역에 대한 동시 연결 제한 예시 웹서버 80 포트에 대한 TCP SYN Flooding 공격 대응룰 TCP 80포트에 동일 src IP 로 동시연결개수가 5개 초과시 이를 차단 로그 저장 위치 : /var/log/messages iptables -F INPUT iptables -A INPUT -m state --state ESTABLISHED, RELATED -j ACCEPT iptables -A INPUT -p tcp --syn --dport 80 -m connlimit --connlimit-above 5 -j LOG --log-prefix &quot;[CONNLIMIT]&quot; iptables -A INPUT -p tcp --syn --dport 80 -m connlimit --connlimit-above 5 -j DROP 웹서버 (80/tcp) 에 대한 TCP SYN Flooding 공격에 대응하기 위한 룰 설정 iptables -F INPUT iptables -A INPUT -m state --state ESTABLISHED, RELATED -j ACCEPT iptables -A INPUT -p tcp --syn --dport 80 -m connlimit --connlimit-above 10 --connlimit-mask 24 -j LOG --log-prefix &quot;[CONNLIMIT]&quot; iptables -A limit 모듈 룰에 매치되는 비율을 제한</summary></entry><entry><title type="html">정보보안 - snort</title><link href="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-snort/" rel="alternate" type="text/html" title="정보보안 - snort" /><published>2022-01-26T09:00:00+09:00</published><updated>2022-01-26T09:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-IncidentAnalysis-snort</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-snort/">&lt;h1 id=&quot;snort&quot;&gt;snort&lt;/h1&gt;
 &lt;ul&gt;
   &lt;li&gt;개요
     &lt;ul&gt;
@@ -896,1462 +2010,4 @@
       &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="데이터베이스 침해사고" /><summary type="html">데이터베이스 침해사고 Data, 데이터베이스, DBMS 데이터와 정보 데이터 : 정보작성을 위한 필요자료, 특정목적에 대해 평가되지 않은 상태, 단순한 사실 정보 : 데이터를 추출, 분석, 비교 등의 가공절차를 통해 의사결정, 행동을 할 수 있는 의미있는 데이터 데이터베이스 : 데이터의 집합, 여러 응용시스템이 공유. Integrated, Stored, Operational DBMS : 데이터를 통합적으로 생성, 관리, 저장하는 소프트웨어. MySQL, MSSQL, ORACLE, DB2 등 MySQL 서버가 침해사고의 대상이 되는 경우가 많음. (PHP) MySQL 점검 항목 관리자 아이디를 default 로 사용하는지 점검 기본 패스워드 값은 누구나 알고 있음 무차별대입 / 사전대입 공격 - 추측 어려운 패스워드를 사용해야 함 mysql -uroot -p 패스워드 설정 안된 계정 존재하는지 점검 select user, password from user update user set password = [] where user = [] flush privileges; : 변경사항을 즉시 반영 Remote 에서 MySQL 서버로 접속이 가능한지 점검 기본 포트 : 3306/tcp my.cnf 파일의 [mysqld] 에 skip-networking 추가 : 로컬 접속만 가능 MySQL 계정을 이용한 접속 가능한지 점검 /etc/passwd 의 쉘 부분을 /bin/sh 대신 /bin/false 로 변경하여 원격 접속을 차단 시스템 사용자들의 DB에 대한 권한 설정이 올바른지 점검 필요 이상의 권한을 부여하지 않아야 함 select * from DB; 불필요한 권한을 Revoke 시킴 update db set update_priv = &apos;N&apos; where db=[] flush privileges; 데이터베이스 내의 사용자별 접속/권한 설정이 올바른지 점검 dba 가 아닌 일반 user 가 중요 table 을 조작할 수 있음 select * from user; Host User Password Select_priv … Process_priv File_priv File_priv : 파일에 대한 권한 Process_priv : 쓰레드 정보 확인 (쓰레드 중지 권한 포함) Shutdown_priv : MySQL 서버의 실행을 중지시키는 권한 localhost 의 root 계정을 사용하지 않고 다른 DBA 계정을 만들어 사용하는 것이 바람직함 원격 Host 에서 root 계정등의 접근설정 확인 update user set process_priv=&quot;N&quot; where host = [ip] and user = &quot;root&quot;; 안정적인 MySQL 버전을 사용하고 있는지 점검 MySQL 의 데이터 디렉터리는 안전하게 보호되고 있는지 점검 my.cnf 파일에 대한 접근통제도 필요 MS-SQL 점검 항목 계정의 패스워드 중 빈 패스워드나 약한 패스워드가 존재 하는가? select name, password from syslogins; : 결과 NULL 일 경우 패스워드가 없음. 단 Builtin 계정은 NULL 이 정상 guest 계정이 비활성화 되어 있는가? SQL 서버의 Enterprise Manager 를 실행하여 guest 계정 확인, 삭제 public 데이터베이스 역할이 부여되어 있는가? public 역할 : 모든 데이터베이스 사용자들의 표준에 해당되는 역할. 인가를 받지 않은 사용자도 권한을 행사할 수 있는 취약점 SYSADMIN 그룹의 사용자를 인증된 사용자만으로 제한하고 있는가? System Administrator 권한 방화벽에서 SQL Server 포트를 차단했는지? TCP/1433 or 1434 가장 최신의 서비스 팩을 설치했는가? 서버 보안을 위함 Microsoft Baseline Security Analyzer(MBSA) 로 서버를 점검했는가? 보안패치가 최신으로 유지되는지 확인 보안상 약점이 될만한 설정이 있는지 확인 기본 취약점 점검하는 도구 SQL Server 연결에 대한 감사를 수행하는가? 이벤트 정보 로그 기록 웹서버 확인 필요 항목 DB 접속 파일 확인 예 : conn.asp 파일 침해 DB 서버의 IP 주소, Host Name DB 접근 게정 (ID) DB 서버 접근 패스워드 (PW) sqlpoke.exe 프로그램을 업로드, 이용, 위에 획득한 정보로 접속 MS-SQL 서버 의 디폴트 계정 중 sa (system admin) 계정 이용 서버 내부의 Administrator 계정으로 명령어를 전달할 수 있는 계정 net user 명령어 사용 remote 에서 DB 서버에 계정을 생성 가능 (우회적으로 DB서버에 접근) SQL Injection 공격 IIS 웹로그 등을 통해 침입 흔적을 확인해야 함</summary></entry><entry><title type="html">정보보안 - 네트워크 침해사고</title><link href="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-NetworkIntrusion/" rel="alternate" type="text/html" title="정보보안 - 네트워크 침해사고" /><published>2022-01-14T09:00:00+09:00</published><updated>2022-01-14T09:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-IncidentAnalysis-NetworkIntrusion</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-NetworkIntrusion/">&lt;h1 id=&quot;네트워크-침해사고&quot;&gt;네트워크 침해사고&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;사고 유형별 데이터 수집
-    &lt;ul&gt;
-      &lt;li&gt;불법적인 자원 사용
-        &lt;ul&gt;
-          &lt;li&gt;호스트 불법 사용 : 액세스로그, ps 상태, CPU 사용률, 파일 저장공간 상태&lt;/li&gt;
-          &lt;li&gt;네트워크 대역폭 불법사용 : 회선상태, 송수신 패킷 수, IP주소, 프로토콜 사용현황, 스위치 포트 상태&lt;/li&gt;
-          &lt;li&gt;메일 프록시 서버의 불법 Relay : 호스트 애플리케이션 로그, 프로세스 상태정보, 네트워크 IP주소, 프로토콜 사용현황&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;DoS : 서버의 자원소모를 통한 서비스 중단
-        &lt;ul&gt;
-          &lt;li&gt;서비스 자원소모를 통한 서비스 중단 / 불안정
-            &lt;ul&gt;
-              &lt;li&gt;호스트 : 프로세스 상태정보, CPU 사용률, 비정상적인 패킷 로그&lt;/li&gt;
-              &lt;li&gt;네트워크 : 회선상태, 비정상적인 패킷개수, IP주소, 비정상적인 패킷내용&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;네트워크 대역폭 과도한 점유를 통한 통신 중단 / 불안정
-            &lt;ul&gt;
-              &lt;li&gt;네트워크 : 송수신된 패킷 개수, IP주소, 프로토콜 사용현황, 데이터 내용&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;데이터 손상 및 변조
-        &lt;ul&gt;
-          &lt;li&gt;변조의 종류
-            &lt;ul&gt;
-              &lt;li&gt;웹페이지 변조&lt;/li&gt;
-              &lt;li&gt;데이터파일 변조&lt;/li&gt;
-              &lt;li&gt;프로그램 파일 변조&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;호스트 : 액세스 로그, 파일/저장장치 상태, 환경파일 내용&lt;/li&gt;
-          &lt;li&gt;네트워크
-            &lt;ul&gt;
-              &lt;li&gt;IP주소, 프로토콜 사용현황, 데이터 내용, 스위치 포트 상태&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;정보 누설
-        &lt;ul&gt;
-          &lt;li&gt;통신가로채기, 비공개자료 누설&lt;/li&gt;
-          &lt;li&gt;호스트 : 액세스 로그, 파일/저장장치 상태&lt;/li&gt;
-          &lt;li&gt;네트워크 : IP주소, 프로토콜 사용현황, 데이터 내용, 스위치 포트 상태&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;네트워크 트래픽 (패킷) 정보 분석 방법 (공통적으로 수집해야 할 정보)
-    &lt;ul&gt;
-      &lt;li&gt;분석 솔루션 / 툴
-        &lt;ul&gt;
-          &lt;li&gt;MRTG&lt;/li&gt;
-          &lt;li&gt;NMS (Network Management System)&lt;/li&gt;
-          &lt;li&gt;Firewall&lt;/li&gt;
-          &lt;li&gt;IDS&lt;/li&gt;
-          &lt;li&gt;라우터 / 스위치 장비 명령어&lt;/li&gt;
-          &lt;li&gt;Ethereal&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;네트워크의 정보
-        &lt;ul&gt;
-          &lt;li&gt;대역폭 사용량&lt;/li&gt;
-          &lt;li&gt;트래픽을 대량으로 발생시키는 IP 주소&lt;/li&gt;
-          &lt;li&gt;내부 사용자의 IP 주소&lt;/li&gt;
-          &lt;li&gt;서버의 IP 주소&lt;/li&gt;
-          &lt;li&gt;TCP/UDP 별 사용 현황&lt;/li&gt;
-          &lt;li&gt;라우터, 스위치 트래픽 발생 현황&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;프로토콜 개요
-    &lt;ul&gt;
-      &lt;li&gt;IPv4
-        &lt;ul&gt;
-          &lt;li&gt;Version(4) / Header Length(4) / Type of Service(8) / Total Length(16)&lt;/li&gt;
-          &lt;li&gt;Identification(16) / Flags(3) / Fragment Offset(13)
-            &lt;ul&gt;
-              &lt;li&gt;Flags(3bit)
-                &lt;ul&gt;
-                  &lt;li&gt;0 Bit : 0으로 설정&lt;/li&gt;
-                  &lt;li&gt;1 Bit : 0 (큰 패킷에 대한 조각), 1 (조각을 허용하지 않음)&lt;/li&gt;
-                  &lt;li&gt;2 Bit : 0 (해당 패킷이 마지막 조각), 1 (마지막이 아님)&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;Time to Live(TTL)(8) / Protocol type(8) / Header Checksum(16)
-            &lt;ul&gt;
-              &lt;li&gt;Time to Live(TTL)
-                &lt;ul&gt;
-                  &lt;li&gt;해당 패킷이 최대로 통과할 수 있는 라우터 홉수 (전송수명)&lt;/li&gt;
-                  &lt;li&gt;0이 되면 해당 패킷은 소실 - ICMP 프로토콜을 사용해 송신 시스템에게 에러가 발생함을 통보&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;Protocol type
-                &lt;ul&gt;
-                  &lt;li&gt;전송계층의 프로토콜을 표시&lt;/li&gt;
-                  &lt;li&gt;ICMP : 1&lt;/li&gt;
-                  &lt;li&gt;TCP : 6&lt;/li&gt;
-                  &lt;li&gt;UDP : 17&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;Source Address(32)&lt;/li&gt;
-          &lt;li&gt;Destination Address(32)&lt;/li&gt;
-          &lt;li&gt;Option / Padding&lt;/li&gt;
-          &lt;li&gt;Data(32)…&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;IPv6 : 기존 14개 헤더에서 8개 헤더로 줄어듦
-        &lt;ul&gt;
-          &lt;li&gt;Version(4) / Traffic Class(8) / Flow Label(20)&lt;/li&gt;
-          &lt;li&gt;Payload Length(16) / Next Header(8) / Hop limit(8)&lt;/li&gt;
-          &lt;li&gt;Source Address(128)&lt;/li&gt;
-          &lt;li&gt;Destination Address(128)&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;TCP : 시스템과 네트워크를 연결해주는 가장 중요한 계층
-        &lt;ul&gt;
-          &lt;li&gt;20 Bytes Header
-            &lt;ul&gt;
-              &lt;li&gt;Source Port number(16) / Destination Port number(16)
-                &lt;ul&gt;
-                  &lt;li&gt;Port : 0 ~ 65535&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;Sequence number(32)
-                &lt;ul&gt;
-                  &lt;li&gt;송신자가 전송하는 데이터의 TCP Segment 번호&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;Acknowledgement number(32)
-                &lt;ul&gt;
-                  &lt;li&gt;송신자가 해당 패킷을 수신한 호스트로부터 다음에 받아야 하는 패킷의 TCP Segment 번호&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;header length(4) / 예비(6) / TCP Control Flag(6) / Window size(16)
-                &lt;ul&gt;
-                  &lt;li&gt;TCP Control Flag : 패킷의 용도를 표시
-                    &lt;ul&gt;
-                      &lt;li&gt;URG : 긴급&lt;/li&gt;
-                      &lt;li&gt;ACK : 응답패킷&lt;/li&gt;
-                      &lt;li&gt;PSH : 세그먼트를 메모리에서 합성하지 않고 애플리케이션에 바로 전달&lt;/li&gt;
-                      &lt;li&gt;RST : 해당 세션을 강제로 종료&lt;/li&gt;
-                      &lt;li&gt;SYN : 초기에 접속을 시작하는 경우 사용, Sequence Number, Window Size 명시
-                        &lt;ul&gt;
-                          &lt;li&gt;SYN (100) -&amp;gt; SYN (1) + ACK (101) -&amp;gt; ACK (2)&lt;/li&gt;
-                        &lt;/ul&gt;
-                      &lt;/li&gt;
-                      &lt;li&gt;FIN : 해당 세션을 정상적으로 종료
-                        &lt;ul&gt;
-                          &lt;li&gt;
-                            &lt;table&gt;
-                              &lt;tbody&gt;
-                                &lt;tr&gt;
-                                  &lt;td&gt;FIN (100) -&amp;gt; ACK(100+1)&lt;/td&gt;
-                                  &lt;td&gt;FIN, ACK(1) -&amp;gt; ACK(2)&lt;/td&gt;
-                                &lt;/tr&gt;
-                              &lt;/tbody&gt;
-                            &lt;/table&gt;
-                          &lt;/li&gt;
-                        &lt;/ul&gt;
-                      &lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;Window size : 버퍼크기, 운영체제나 응용프로그램에 따라 다름.
-                    &lt;ul&gt;
-                      &lt;li&gt;너무 큰 세그먼트의 크기를 줄이라고 통보&lt;/li&gt;
-                      &lt;li&gt;네트워크 웜의 경우 TCP Window의 크기가 일정하게 고정됨&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;TCP Checksum(16) / urgent pointer(16)&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;Options&lt;/li&gt;
-          &lt;li&gt;Data&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;패킷 수집 및 디코드
-    &lt;ul&gt;
-      &lt;li&gt;트래픽과 패킷 수집
-        &lt;ul&gt;
-          &lt;li&gt;목적 : 외부 침입과 공격을 확인하기 위함&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;패킷 측정 구간
-        &lt;ul&gt;
-          &lt;li&gt;목적에 따라 위치가 달라질 수 있음
-            &lt;ul&gt;
-              &lt;li&gt;WAN - Router - F/W - LAN/WLAN …
-                &lt;ul&gt;
-                  &lt;li&gt;기본 : 라우터와 가까운 위치에 센서를 설치&lt;/li&gt;
-                  &lt;li&gt;F/W : NAT (Network Address Transition) : 사설IP &amp;lt;–&amp;gt; 공인IP 일 경우 방화벽 앞 뒤로 센서를 설치
-                    &lt;ul&gt;
-                      &lt;li&gt;같은 시간대에 세션을 찾아서 동일한 패킷들로 분석&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;네트워크 웜 (IP 를 변조) 분석
-                    &lt;ul&gt;
-                      &lt;li&gt;내부 네트워크 전 구간이 측정대상이 될 수 있음&lt;/li&gt;
-                      &lt;li&gt;백본, 주요 액세스 스위치의 포트 트래픽, CPU 상태 관찰 필요&lt;/li&gt;
-                      &lt;li&gt;대부분의 네트워크 공격은 내부에 있는 호스트가 서로 공격하도록 하는 DDoS 방법 이용 (22:38)&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;패킷 수집
-        &lt;ul&gt;
-          &lt;li&gt;캡쳐 기능을 이용해 버퍼나 파일로 저장
-            &lt;ul&gt;
-              &lt;li&gt;일정 개수의 파일을 항상 유지
-                &lt;ul&gt;
-                  &lt;li&gt;약 24-32MB 정도의 용량&lt;/li&gt;
-                  &lt;li&gt;패킷 수집구간에서 발생하는 트래픽과 패킷저장에 필요한 시간을 계산해서 설정&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;항상 최근의 패킷들만 포함 (Ring Buffer)&lt;/li&gt;
-              &lt;li&gt;언제 어떤 사고가 발생할지 알 수 없기 때문에 항상 일정시간 동안의 트래픽 정보와 패킷을 보관&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;실제 사용자들의 Data 가 필요하지 않을 때 패킷의 Header 부분만 캡쳐
-            &lt;ul&gt;
-              &lt;li&gt;모든 패킷의 시작부분에서 일정한 크기만큼만 캡쳐&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;트래픽 통계 관찰 - 분석기, NMS 나 시스템 내부 명령어를 통해 관찰
-        &lt;ul&gt;
-          &lt;li&gt;MAC 주소별 트래픽 통계
-            &lt;ul&gt;
-              &lt;li&gt;사용자들이나 서버들이 연결된 액세스 스위치 구간에서는 호스트별 MAC 주소를 확인, 트래픽 발생 상태를 관찰&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;IP 주소별 트래픽 통계
-            &lt;ul&gt;
-              &lt;li&gt;대부분 침입, 공격은 IP 기반&lt;/li&gt;
-              &lt;li&gt;IP 주소별로 모든 트래픽 통계를 분리 관찰 필요&lt;/li&gt;
-              &lt;li&gt;네트워크에서 웜이 활동하거나 DDoS 가 발생한 경우
-                &lt;ul&gt;
-                  &lt;li&gt;내부 IP 주소에서 전송하는 패킷 개수가 수신하는 패킷 개수보다 훨씬 많음&lt;/li&gt;
-                  &lt;li&gt;패킷 개수에 비해서 송수신되는 Byte 수가 적음&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;TCP/UDP 세션별 트래픽 통계
-            &lt;ul&gt;
-              &lt;li&gt;어느 세션이 서버에서 몇 분 동안 작업을 했는지, 어느정도의 패킷이나 데이터가 송수신되었는지 확인&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;패킷 디코드
-        &lt;ul&gt;
-          &lt;li&gt;패킷 컬럼
-            &lt;ul&gt;
-              &lt;li&gt;Time (Relative Time) : 기준 패킷으로부터 상대적인 시간차&lt;/li&gt;
-              &lt;li&gt;Delta Time : 시간 간격 - 바로 이전 패킷과 해당 패킷사이의 간격&lt;/li&gt;
-              &lt;li&gt;Abs.Time : 패킷이 캡쳐된 실제 시스템 시간&lt;/li&gt;
-              &lt;li&gt;Source : 패킷 송신 호스트의 주소 (IP or MAC)&lt;/li&gt;
-              &lt;li&gt;Destination : 패킷 수신 호스트의 주소 (IP or MAC)&lt;/li&gt;
-              &lt;li&gt;Length : 실제 패킷의 크기
-                &lt;ul&gt;
-                  &lt;li&gt;CRC (Cycle Redundancy Check) : 순환중복검사, 네트워크 오류 체크 값을 얻어내는 방식
-                    &lt;ul&gt;
-                      &lt;li&gt;데이터 전송 전에 데이터 값에 따라 CRC 계산, 값을 Data 에 붙여넣어 전송&lt;/li&gt;
-                      &lt;li&gt;H/W 방식 (직렬데이터-CRC:비트단위 출력) 과 S/W (병렬데이터-CRC:Octet-8비트 단위 출력) 방식이 있음&lt;/li&gt;
-                      &lt;li&gt;오류를 검출하는 데 탁월하나, 수정이 쉬워 데이터 무결성 검증은 할 수 없음.&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;CRC 값이 Length 에 포함될수도 안될수도 있음&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;Protocol&lt;/li&gt;
-              &lt;li&gt;Info : 송수신포트, 패킷의 용도, 애플리케이션의 설명, 패킷의 Seq 번호, Ack 번호, TCP Window size 등&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;패킷 헤더&lt;/li&gt;
-          &lt;li&gt;패킷 데이터
-            &lt;ul&gt;
-              &lt;li&gt;16진수 혹은 ASCII 코드&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;공격형 트래픽의 특징
-    &lt;ul&gt;
-      &lt;li&gt;특정 서버만을 공격하는 패턴
-        &lt;ul&gt;
-          &lt;li&gt;Web 서버, E-mail 서버, DNS 서버 등 (Application 서버) 을 공격
-            &lt;ul&gt;
-              &lt;li&gt;패킷의 크기가 크거나 불규칙&lt;/li&gt;
-              &lt;li&gt;해당 서버에서 인식하지 못하는 코드를 전송&lt;/li&gt;
-              &lt;li&gt;해당 서버에서 처리할 수 없을 정도의 많은 요청을 보냄&lt;/li&gt;
-              &lt;li&gt;서버에서 허용되지 않는 문장을 사용해서 요청 패킷을 전송&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;애플리케이션 서비스 중단
-            &lt;ul&gt;
-              &lt;li&gt;서비스 중단 코드를 서버에 삽입 : Buffer Overflow 공격 &amp;gt; 네트워크 과부하 발생 공격 (발전된 공격형태)&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;네트워크에 과부하를 발생시키는 공격 패턴
-        &lt;ul&gt;
-          &lt;li&gt;스위치, 방화벽, 라우터 등에 영향
-            &lt;ul&gt;
-              &lt;li&gt;영향을 주는 트래픽을 찾는 것은 쉬우나, 발생시키는 호스트를 찾는 것이 어려움 (IP 변조)&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;네트워크 과부하 발생 트래픽의 특징
-            &lt;ul&gt;
-              &lt;li&gt;불특정 IP 주소를 순차적으로 사용하여 특정 한 개의 IP 주소 대상으로 같은 형태의 패킷이 발생&lt;/li&gt;
-              &lt;li&gt;특정 IP 주소에서 불특정 다수의 IP 주소 대상으로 순차적으로 같은 형태의 패킷이 발생&lt;/li&gt;
-              &lt;li&gt;1초에 송신하는 패킷의 개수가 수백에서 수만개 까지 발생&lt;/li&gt;
-              &lt;li&gt;한 개 또는 몇 개의 TCP 포트를 대상으로 SYN 패킷을 전송&lt;/li&gt;
-              &lt;li&gt;발생하는 패킷의 크기가 작음&lt;/li&gt;
-              &lt;li&gt;패킷의 개수가 수신보다 송신이 매우 많음 (100-1000배 이상)&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;침입형 트래픽의 특징
-            &lt;ul&gt;
-              &lt;li&gt;목적지를 알고있는 상태인 경우 접속이 가능한 포트를 검색하여 접속을 시도 (여러 방법, 도구) 함&lt;/li&gt;
-              &lt;li&gt;목적지를 모르는 경우 네트워크를 통해 IP 와 포트를 검색해야 함&lt;/li&gt;
-              &lt;li&gt;해당 IP 주소에서 송신한 패킷 개수와 수신한 패킷 개수가 비슷함&lt;/li&gt;
-              &lt;li&gt;일반적으로 검색과정에서는 실제 데이터 송수신이 발생하지 않기때문에 송수신한 바이트 수도 비슷함&lt;/li&gt;
-              &lt;li&gt;패킷 가운데 RST 나 login Failure 가 포함된 패킷이 많음&lt;/li&gt;
-              &lt;li&gt;검색하려는 IP 주소 또는 포트가 순차적으로 바뀜&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;일반적인 침입과정
-            &lt;ul&gt;
-              &lt;li&gt;공격자
-                &lt;ul&gt;
-                  &lt;li&gt;침입자 -&amp;gt; Target : IP Scan
-                    &lt;ul&gt;
-                      &lt;li&gt;Ping 명령어 이용하여 검색
-                        &lt;ul&gt;
-                          &lt;li&gt;Echo Request - Echo Reply (호스트 있을 경우)&lt;/li&gt;
-                        &lt;/ul&gt;
-                      &lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;침입자 -&amp;gt; Target : 호스트 정보검색 (취약점)&lt;/li&gt;
-                  &lt;li&gt;침입자 -&amp;gt; Target : 취약점을 이용한 호스트 공격
-                    &lt;ul&gt;
-                      &lt;li&gt;관리자 권한 획득, Data 삭제, 백도어 설치, 자원의 불법사용, 보안정보 유출&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;Target
-                &lt;ul&gt;
-                  &lt;li&gt;IP Scan 검사 : 침입자의 IP 주소, 검사시간 확인&lt;/li&gt;
-                  &lt;li&gt;Port 검사&lt;/li&gt;
-                  &lt;li&gt;침입자의 명령어 검사, 코드 검사&lt;/li&gt;
-                  &lt;li&gt;침입자의 데이터 송수신 상태 검사&lt;/li&gt;
-                  &lt;li&gt;불법적인 통신 상태 검사&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;예시
-        &lt;ul&gt;
-          &lt;li&gt;MS Blaster 패턴
-            &lt;ul&gt;
-              &lt;li&gt;Window 계열 운영체제를 통해 확산된 웜 (Blaster Worm) - 2003년 전파&lt;/li&gt;
-              &lt;li&gt;여러 IP 에서 한 IP 주소에 패킷을 보냄&lt;/li&gt;
-              &lt;li&gt;짧은 Delta time, 많은 SYN 패킷 전송&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;Gabot 패턴
-            &lt;ul&gt;
-              &lt;li&gt;한 IP 주소에서 여러 IP 에 패킷을 보냄&lt;/li&gt;
-              &lt;li&gt;짧은 Delta time, 많은 SYN 패킷 전송&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;IP Scan 패턴
-            &lt;ul&gt;
-              &lt;li&gt;Echo Request 사용 (Ping)&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;Port Scan 패턴
-            &lt;ul&gt;
-              &lt;li&gt;TCP 포트 검색, 포트를 순차적 검색&lt;/li&gt;
-              &lt;li&gt;대상 Host 에서 연결을 거부할 경우 RST 패킷이 발생&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="네트워크 침해사고" /><summary type="html">네트워크 침해사고 사고 유형별 데이터 수집 불법적인 자원 사용 호스트 불법 사용 : 액세스로그, ps 상태, CPU 사용률, 파일 저장공간 상태 네트워크 대역폭 불법사용 : 회선상태, 송수신 패킷 수, IP주소, 프로토콜 사용현황, 스위치 포트 상태 메일 프록시 서버의 불법 Relay : 호스트 애플리케이션 로그, 프로세스 상태정보, 네트워크 IP주소, 프로토콜 사용현황 DoS : 서버의 자원소모를 통한 서비스 중단 서비스 자원소모를 통한 서비스 중단 / 불안정 호스트 : 프로세스 상태정보, CPU 사용률, 비정상적인 패킷 로그 네트워크 : 회선상태, 비정상적인 패킷개수, IP주소, 비정상적인 패킷내용 네트워크 대역폭 과도한 점유를 통한 통신 중단 / 불안정 네트워크 : 송수신된 패킷 개수, IP주소, 프로토콜 사용현황, 데이터 내용 데이터 손상 및 변조 변조의 종류 웹페이지 변조 데이터파일 변조 프로그램 파일 변조 호스트 : 액세스 로그, 파일/저장장치 상태, 환경파일 내용 네트워크 IP주소, 프로토콜 사용현황, 데이터 내용, 스위치 포트 상태 정보 누설 통신가로채기, 비공개자료 누설 호스트 : 액세스 로그, 파일/저장장치 상태 네트워크 : IP주소, 프로토콜 사용현황, 데이터 내용, 스위치 포트 상태 네트워크 트래픽 (패킷) 정보 분석 방법 (공통적으로 수집해야 할 정보) 분석 솔루션 / 툴 MRTG NMS (Network Management System) Firewall IDS 라우터 / 스위치 장비 명령어 Ethereal 네트워크의 정보 대역폭 사용량 트래픽을 대량으로 발생시키는 IP 주소 내부 사용자의 IP 주소 서버의 IP 주소 TCP/UDP 별 사용 현황 라우터, 스위치 트래픽 발생 현황 프로토콜 개요 IPv4 Version(4) / Header Length(4) / Type of Service(8) / Total Length(16) Identification(16) / Flags(3) / Fragment Offset(13) Flags(3bit) 0 Bit : 0으로 설정 1 Bit : 0 (큰 패킷에 대한 조각), 1 (조각을 허용하지 않음) 2 Bit : 0 (해당 패킷이 마지막 조각), 1 (마지막이 아님) Time to Live(TTL)(8) / Protocol type(8) / Header Checksum(16) Time to Live(TTL) 해당 패킷이 최대로 통과할 수 있는 라우터 홉수 (전송수명) 0이 되면 해당 패킷은 소실 - ICMP 프로토콜을 사용해 송신 시스템에게 에러가 발생함을 통보 Protocol type 전송계층의 프로토콜을 표시 ICMP : 1 TCP : 6 UDP : 17 Source Address(32) Destination Address(32) Option / Padding Data(32)… IPv6 : 기존 14개 헤더에서 8개 헤더로 줄어듦 Version(4) / Traffic Class(8) / Flow Label(20) Payload Length(16) / Next Header(8) / Hop limit(8) Source Address(128) Destination Address(128) TCP : 시스템과 네트워크를 연결해주는 가장 중요한 계층 20 Bytes Header Source Port number(16) / Destination Port number(16) Port : 0 ~ 65535 Sequence number(32) 송신자가 전송하는 데이터의 TCP Segment 번호 Acknowledgement number(32) 송신자가 해당 패킷을 수신한 호스트로부터 다음에 받아야 하는 패킷의 TCP Segment 번호 header length(4) / 예비(6) / TCP Control Flag(6) / Window size(16) TCP Control Flag : 패킷의 용도를 표시 URG : 긴급 ACK : 응답패킷 PSH : 세그먼트를 메모리에서 합성하지 않고 애플리케이션에 바로 전달 RST : 해당 세션을 강제로 종료 SYN : 초기에 접속을 시작하는 경우 사용, Sequence Number, Window Size 명시 SYN (100) -&amp;gt; SYN (1) + ACK (101) -&amp;gt; ACK (2) FIN : 해당 세션을 정상적으로 종료 FIN (100) -&amp;gt; ACK(100+1) FIN, ACK(1) -&amp;gt; ACK(2) Window size : 버퍼크기, 운영체제나 응용프로그램에 따라 다름. 너무 큰 세그먼트의 크기를 줄이라고 통보 네트워크 웜의 경우 TCP Window의 크기가 일정하게 고정됨 TCP Checksum(16) / urgent pointer(16) Options Data</summary></entry><entry><title type="html">정보보안 - 리눅스 사고 분석</title><link href="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-LinuxInitialResponse/" rel="alternate" type="text/html" title="정보보안 - 리눅스 사고 분석" /><published>2022-01-12T09:00:00+09:00</published><updated>2022-01-12T09:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-IncidentAnalysis-LinuxInitialResponse</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-LinuxInitialResponse/">&lt;h1 id=&quot;리눅스-침해사고-분석&quot;&gt;리눅스 침해사고 분석&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;기본 정보 수집
-    &lt;ul&gt;
-      &lt;li&gt;OS 종류, 커널 버전&lt;/li&gt;
-      &lt;li&gt;사용 용도&lt;/li&gt;
-      &lt;li&gt;운영중인 서비스&lt;/li&gt;
-      &lt;li&gt;네트워크 접속 현황&lt;/li&gt;
-      &lt;li&gt;보안 패치 적용 현황&lt;/li&gt;
-      &lt;li&gt;네트워크 구성 형태 및 보안 장비 운영 현황&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;휘발성 정보 수집
-    &lt;ul&gt;
-      &lt;li&gt;프로세스 확인
-        &lt;ul&gt;
-          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ps -ef&lt;/code&gt;
-            &lt;ul&gt;
-              &lt;li&gt;process 실행자&lt;/li&gt;
-              &lt;li&gt;PID&lt;/li&gt;
-              &lt;li&gt;실행 일시&lt;/li&gt;
-              &lt;li&gt;프로세스명&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lsof&lt;/code&gt; : List open file
-            &lt;ul&gt;
-              &lt;li&gt;System 에서 동작중인 Process 에 의해서 열린 파일들에 대한 정보를 보여주는 명령&lt;/li&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ps&lt;/code&gt; 명령어가 변조된 경우 공격자가 구동시킨 프로세스를 볼 수 없음&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;네트워크 상태
-        &lt;ul&gt;
-          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;netstat -an&lt;/code&gt;
-            &lt;ul&gt;
-              &lt;li&gt;현재 시스템의 네트워크 연결 상태 확인&lt;/li&gt;
-              &lt;li&gt;발신지 주소 확인&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nmap&lt;/code&gt; : network mapper
-            &lt;ul&gt;
-              &lt;li&gt;네트워크 보안 유틸리티&lt;/li&gt;
-              &lt;li&gt;대규모 네트워크를 고속으로 스캔
-                &lt;ul&gt;
-                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-sT&lt;/code&gt; : tcp 스캔&lt;/li&gt;
-                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-p&lt;/code&gt; : 특정 포트 점검&lt;/li&gt;
-                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nmap -sT -p [포트번호] [ip주소]&lt;/code&gt;&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fuser&lt;/code&gt;
-            &lt;ul&gt;
-              &lt;li&gt;어떤 프로세스에서 포트를 열었는지 확인&lt;/li&gt;
-              &lt;li&gt;현재 사용중인 파일, 소켓이 사용하는 프로세스 확인&lt;/li&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fuser 6001/tcp&lt;/code&gt;
-                &lt;ul&gt;
-                  &lt;li&gt;위 명령어의 결과 (예:pid 6333) 를 활용해 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ps [pid]&lt;/code&gt; 명령어 사용&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;사용자 로그인 상태
-        &lt;ul&gt;
-          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;w&lt;/code&gt;
-            &lt;ul&gt;
-              &lt;li&gt;현재 시스템에 성공적으로 로그인한 사용자에 대한 Snapshot 제공
-                &lt;ul&gt;
-                  &lt;li&gt;해당 사용자 목록 중에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;w&lt;/code&gt; 명령어에 없는 (성공적으로 로그인) 사용자는 백도어를 이용했을 확률이 있음&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;사용자들이 어디에서 로그인을 했는지, 어떤 작업을 하는지 알 수 있음&lt;/li&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;utmp&lt;/code&gt; : 정보 파일&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;공격자를 규정하기 위해 자세히 봐야할 정보
-        &lt;ul&gt;
-          &lt;li&gt;접속 계정이 정상적인지 확인&lt;/li&gt;
-          &lt;li&gt;접속출처가 정상 위치인지 확인 (내부 IP 주소 이외에 접속, 국외 IP 주소 접속 등)&lt;/li&gt;
-          &lt;li&gt;접속 사용자의 정상적인 행위인지 확인 (Scan 도구 사용, 다른 서버에 서비스거부공격 등)&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;프로세스 확인, 네트워크 상태를 확인해 시스템의 상황을 파악하고 공격자의 단서를 찾음, 이후 세부사항 확인&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;상세분석
-    &lt;ul&gt;
-      &lt;li&gt;패스워드 파일 분석
-        &lt;ul&gt;
-          &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/passwd&lt;/code&gt;&lt;/strong&gt;
-            &lt;ul&gt;
-              &lt;li&gt;관리자 권한을 가진 계정이 있는지 확인 : uid=0
-                &lt;ul&gt;
-                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;user1:x:0:0::/home/user1:/bin/bash&lt;/code&gt;&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;새로 생성된 계정이나 패스워드가 없는 계정 확인&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;로그 파일 분석&lt;/strong&gt;
-        &lt;ul&gt;
-          &lt;li&gt;사고가 일어난 뒤의 로그는 100% 신뢰할 수는 없다. 하지만 흔적은 어딘가에 남아있다.&lt;/li&gt;
-          &lt;li&gt;로그파일 생성일자, 변경일자 확인&lt;/li&gt;
-          &lt;li&gt;공격자는 공격을 통해 발생하는 시스템로그, 접속로그등을 삭제/변경함&lt;/li&gt;
-          &lt;li&gt;주요 로그 파일
-            &lt;ul&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;utmp&lt;/code&gt; : 현재 시스템에 로그인한 사용자의 정보&lt;/li&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wtmp&lt;/code&gt; : 과거에 로그인했던 사용자의 정보&lt;/li&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;messages&lt;/code&gt; : 시스템 장애 정보 + 공격으로 인한 정보&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;웹로그 파일
-            &lt;ul&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;access_log&lt;/code&gt;
-                &lt;ul&gt;
-                  &lt;li&gt;Host (도메인,IP주소) : 웹서버에 접속한 IP 주소&lt;/li&gt;
-                  &lt;li&gt;Identification : 사용자의 이름, - 로 표시&lt;/li&gt;
-                  &lt;li&gt;User Authentication : (사용자 인증이 된 경우) 패스워드가 표시되는 부분&lt;/li&gt;
-                  &lt;li&gt;Time Stamp : 방문자가 접속한 시간 (GMT - 그리니치 표준시 포함)&lt;/li&gt;
-                  &lt;li&gt;HTTP Request
-                    &lt;ul&gt;
-                      &lt;li&gt;사용자 접속한 방식 (POST, GET)&lt;/li&gt;
-                      &lt;li&gt;접속파일&lt;/li&gt;
-                      &lt;li&gt;HTTP 버전&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;Status : 사용자가 요청한 내용을 처리한 결과
-                    &lt;ul&gt;
-                      &lt;li&gt;200 : Success&lt;/li&gt;
-                      &lt;li&gt;3xx : Redirection&lt;/li&gt;
-                      &lt;li&gt;4xx : Client Error
-                        &lt;ul&gt;
-                          &lt;li&gt;404 : NotFound&lt;/li&gt;
-                        &lt;/ul&gt;
-                      &lt;/li&gt;
-                      &lt;li&gt;5xx : Server Error&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;Transfer Volume : 요청한 파일의 용량, 없는 경우 0 또는 - 로 표시&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;access&lt;/code&gt;&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;루트킷 확인
-        &lt;ul&gt;
-          &lt;li&gt;Rootkit : 정상적 프로그램을 변조시킴 (주로 바이너리 파일)
-            &lt;ul&gt;
-              &lt;li&gt;ls, ps, netstat, login, top, dir, du, ifconfig, find, tcpd …&lt;/li&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt; 명령어를 변조시켜 공격자가 만든 파일이 보이지 않도록 함&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;시스템 프로그램 파일크기, 생성시간, 변경시간 확인&lt;/li&gt;
-          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/bin&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/usr/bin&lt;/code&gt; 디렉토리 에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls -alct | more&lt;/code&gt; 명령을 통해 다른 프로그램이 기본적으로 설치된 시간과 다른 것이 있는지 확인 -&amp;gt; 파일사이즈 비교
-            &lt;ul&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt;
-                &lt;ul&gt;
-                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-a&lt;/code&gt; : all - 숨겨진 파일, 디렉토리를 보고자 할때&lt;/li&gt;
-                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-l&lt;/code&gt; : long - 자세한 내용을 출력. 권한, 파일 수, 소유자, 그룹, 파일크기, 수정일자 등&lt;/li&gt;
-                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-c&lt;/code&gt; : ctime - 변경시간
-                    &lt;ul&gt;
-                      &lt;li&gt;MAC : mtime (수정), atime (접근), ctime (변경)&lt;/li&gt;
-                      &lt;li&gt;기본값 mtime 으로 출력&lt;/li&gt;
-                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-u&lt;/code&gt; : atime&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-t&lt;/code&gt; : 시간순 정렬&lt;/li&gt;
-                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-S&lt;/code&gt; : 파일 사이즈 순 정렬&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;무결성 검사 (리눅스) : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rpm -Va&lt;/code&gt;
-            &lt;ul&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;s.5.....GT /bin/df&lt;/code&gt;
-                &lt;ul&gt;
-                  &lt;li&gt;s : 프로그램 사이즈 변경&lt;/li&gt;
-                  &lt;li&gt;5 : md5 checksum 값 변경&lt;/li&gt;
-                  &lt;li&gt;T : vkdlfdml mtime 값 변경&lt;/li&gt;
-                  &lt;li&gt;G : group 변경&lt;/li&gt;
-                  &lt;li&gt;u : user 변경&lt;/li&gt;
-                  &lt;li&gt;c : 설정파일 변경&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;무결성 검사 (솔라리스) : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fingerprint&lt;/code&gt;
-            &lt;ul&gt;
-              &lt;li&gt;검사하고자 하는 파일의 checksum 값을 만들어 비교&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;strace&lt;/code&gt; : System 콜 추적
-            &lt;ul&gt;
-              &lt;li&gt;예) ps 명령어 추적 : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;strace -e trace=open ps|more&lt;/code&gt;
-                &lt;ul&gt;
-                  &lt;li&gt;결과가 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;open(&quot;/usr/lib/locale/ro_RO/u~/procre)&lt;/code&gt; 이라고 나왔을 경우 ps 가 해당 파일을 참조
-                    &lt;ul&gt;
-                      &lt;li&gt;공격자가 숨기고 싶은 파일을 해당 파일에 등록&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;해킹 관련 파일 조사
-        &lt;ul&gt;
-          &lt;li&gt;피해 시스템에 공격자가 어떤 작업을 했는지 알아보기 위한 절차
-            &lt;ul&gt;
-              &lt;li&gt;타 시스템 스캔&lt;/li&gt;
-              &lt;li&gt;공격 프로그램 설치&lt;/li&gt;
-              &lt;li&gt;IRC 서버 설치&lt;/li&gt;
-              &lt;li&gt;로그 삭제&lt;/li&gt;
-              &lt;li&gt;스니퍼 프로그램 설치&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;새롭게 생긴 파일 찾기
-            &lt;ul&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;find&lt;/code&gt; 명령어를 이용해 최근 수정된 파일, 생성된 파일 찾기
-                &lt;ul&gt;
-                  &lt;li&gt;변조를 감추기 위해 시간을 수정하는 경우 inode 변경시간 체크&lt;/li&gt;
-                  &lt;li&gt;수정일 7일 이내인 파일 찾기
-                    &lt;ul&gt;
-                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;find [폴더] -type f -mtime 일수 -print&lt;/code&gt;&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;최근 5일동안 수정되거나 새롭게 생성된 파일을 찾아서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/var/aaa/test.out&lt;/code&gt; 파일에 저장
-                    &lt;ul&gt;
-                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;find / -ctime -5 -print &amp;gt; /var/aaa/test.out&lt;/code&gt;&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;setuid, setgid
-                    &lt;ul&gt;
-                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;find / -user root -perm -4000 -print &amp;gt; suidlist&lt;/code&gt;&lt;/li&gt;
-                      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;find / -user root -perm -2000 -print &amp;gt; sgidlist&lt;/code&gt;&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/usr, /var, /dev, /tmp&lt;/code&gt; 디렉토리 안 파일 검사
-            &lt;ul&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/dev&lt;/code&gt; 폴더 안 디바이스파일 이외의 일반파일이 있는 경우
-                &lt;ul&gt;
-                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;find /dev -type f -print&lt;/code&gt;&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;. , ..&lt;/code&gt; 으로 시작하는 디렉토리
-            &lt;ul&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt; 명령어를 옵션 없이 사용시 비노출 (숨겨진 디렉토리)&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="리눅스 침해사고" /><category term="초기 분석" /><category term="상세 분석" /><summary type="html">리눅스 침해사고 분석 기본 정보 수집 OS 종류, 커널 버전 사용 용도 운영중인 서비스 네트워크 접속 현황 보안 패치 적용 현황 네트워크 구성 형태 및 보안 장비 운영 현황 휘발성 정보 수집 프로세스 확인 ps -ef process 실행자 PID 실행 일시 프로세스명 lsof : List open file System 에서 동작중인 Process 에 의해서 열린 파일들에 대한 정보를 보여주는 명령 ps 명령어가 변조된 경우 공격자가 구동시킨 프로세스를 볼 수 없음 네트워크 상태 netstat -an 현재 시스템의 네트워크 연결 상태 확인 발신지 주소 확인 nmap : network mapper 네트워크 보안 유틸리티 대규모 네트워크를 고속으로 스캔 -sT : tcp 스캔 -p : 특정 포트 점검 nmap -sT -p [포트번호] [ip주소] fuser 어떤 프로세스에서 포트를 열었는지 확인 현재 사용중인 파일, 소켓이 사용하는 프로세스 확인 fuser 6001/tcp 위 명령어의 결과 (예:pid 6333) 를 활용해 ps [pid] 명령어 사용 사용자 로그인 상태 w 현재 시스템에 성공적으로 로그인한 사용자에 대한 Snapshot 제공 해당 사용자 목록 중에 w 명령어에 없는 (성공적으로 로그인) 사용자는 백도어를 이용했을 확률이 있음 사용자들이 어디에서 로그인을 했는지, 어떤 작업을 하는지 알 수 있음 utmp : 정보 파일 공격자를 규정하기 위해 자세히 봐야할 정보 접속 계정이 정상적인지 확인 접속출처가 정상 위치인지 확인 (내부 IP 주소 이외에 접속, 국외 IP 주소 접속 등) 접속 사용자의 정상적인 행위인지 확인 (Scan 도구 사용, 다른 서버에 서비스거부공격 등) 프로세스 확인, 네트워크 상태를 확인해 시스템의 상황을 파악하고 공격자의 단서를 찾음, 이후 세부사항 확인 상세분석 패스워드 파일 분석 /etc/passwd 관리자 권한을 가진 계정이 있는지 확인 : uid=0 user1:x:0:0::/home/user1:/bin/bash 새로 생성된 계정이나 패스워드가 없는 계정 확인 로그 파일 분석 사고가 일어난 뒤의 로그는 100% 신뢰할 수는 없다. 하지만 흔적은 어딘가에 남아있다. 로그파일 생성일자, 변경일자 확인 공격자는 공격을 통해 발생하는 시스템로그, 접속로그등을 삭제/변경함 주요 로그 파일 utmp : 현재 시스템에 로그인한 사용자의 정보 wtmp : 과거에 로그인했던 사용자의 정보 messages : 시스템 장애 정보 + 공격으로 인한 정보 웹로그 파일 access_log Host (도메인,IP주소) : 웹서버에 접속한 IP 주소 Identification : 사용자의 이름, - 로 표시 User Authentication : (사용자 인증이 된 경우) 패스워드가 표시되는 부분 Time Stamp : 방문자가 접속한 시간 (GMT - 그리니치 표준시 포함) HTTP Request 사용자 접속한 방식 (POST, GET) 접속파일 HTTP 버전 Status : 사용자가 요청한 내용을 처리한 결과 200 : Success 3xx : Redirection 4xx : Client Error 404 : NotFound 5xx : Server Error Transfer Volume : 요청한 파일의 용량, 없는 경우 0 또는 - 로 표시 access 루트킷 확인 Rootkit : 정상적 프로그램을 변조시킴 (주로 바이너리 파일) ls, ps, netstat, login, top, dir, du, ifconfig, find, tcpd … ls 명령어를 변조시켜 공격자가 만든 파일이 보이지 않도록 함 시스템 프로그램 파일크기, 생성시간, 변경시간 확인 /bin, /usr/bin 디렉토리 에서 ls -alct | more 명령을 통해 다른 프로그램이 기본적으로 설치된 시간과 다른 것이 있는지 확인 -&amp;gt; 파일사이즈 비교 ls -a : all - 숨겨진 파일, 디렉토리를 보고자 할때 -l : long - 자세한 내용을 출력. 권한, 파일 수, 소유자, 그룹, 파일크기, 수정일자 등 -c : ctime - 변경시간 MAC : mtime (수정), atime (접근), ctime (변경) 기본값 mtime 으로 출력 -u : atime -t : 시간순 정렬 -S : 파일 사이즈 순 정렬 무결성 검사 (리눅스) : rpm -Va s.5.....GT /bin/df s : 프로그램 사이즈 변경 5 : md5 checksum 값 변경 T : vkdlfdml mtime 값 변경 G : group 변경 u : user 변경 c : 설정파일 변경 무결성 검사 (솔라리스) : fingerprint 검사하고자 하는 파일의 checksum 값을 만들어 비교 strace : System 콜 추적 예) ps 명령어 추적 : strace -e trace=open ps|more 결과가 open(&quot;/usr/lib/locale/ro_RO/u~/procre) 이라고 나왔을 경우 ps 가 해당 파일을 참조 공격자가 숨기고 싶은 파일을 해당 파일에 등록 해킹 관련 파일 조사 피해 시스템에 공격자가 어떤 작업을 했는지 알아보기 위한 절차 타 시스템 스캔 공격 프로그램 설치 IRC 서버 설치 로그 삭제 스니퍼 프로그램 설치 새롭게 생긴 파일 찾기 find 명령어를 이용해 최근 수정된 파일, 생성된 파일 찾기 변조를 감추기 위해 시간을 수정하는 경우 inode 변경시간 체크 수정일 7일 이내인 파일 찾기 find [폴더] -type f -mtime 일수 -print 최근 5일동안 수정되거나 새롭게 생성된 파일을 찾아서 /var/aaa/test.out 파일에 저장 find / -ctime -5 -print &amp;gt; /var/aaa/test.out setuid, setgid find / -user root -perm -4000 -print &amp;gt; suidlist find / -user root -perm -2000 -print &amp;gt; sgidlist /usr, /var, /dev, /tmp 디렉토리 안 파일 검사 /dev 폴더 안 디바이스파일 이외의 일반파일이 있는 경우 find /dev -type f -print . , .. 으로 시작하는 디렉토리 ls 명령어를 옵션 없이 사용시 비노출 (숨겨진 디렉토리)</summary></entry><entry><title type="html">정보보안 - 윈도우 해킹프로그램 분석</title><link href="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-WindowsHackingTools/" rel="alternate" type="text/html" title="정보보안 - 윈도우 해킹프로그램 분석" /><published>2022-01-07T09:00:00+09:00</published><updated>2022-01-07T09:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-IncidentAnalysis-WindowsHackingTools</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-WindowsHackingTools/">&lt;h1 id=&quot;윈도우-해킹프로그램-분석&quot;&gt;윈도우 해킹프로그램 분석&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;해킹프로그램 분석
-    &lt;ul&gt;
-      &lt;li&gt;분석환경 구성
-        &lt;ul&gt;
-          &lt;li&gt;최소 2개 이상의 가상서버를 구동 (물리적 서버 필요)
-            &lt;ul&gt;
-              &lt;li&gt;Virtual Box&lt;/li&gt;
-              &lt;li&gt;VMWare Workstation Pro&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;가상서버
-            &lt;ul&gt;
-              &lt;li&gt;가상네트워크를 일반네트워크와 똑같이 구축 (Samba, HTTP, FTP 등 제공)&lt;/li&gt;
-              &lt;li&gt;가상 서버 OS 를 리눅스로 구축
-                &lt;ul&gt;
-                  &lt;li&gt;악성프로그램에 취약하지 않음&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;가상 서버 OS 를 윈도우로 구축 (피해시스템 - 해킹프로그램을 실행하는 서버)&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;해킹프로그램이 실행될 때 시스템 파일에서 발생되는 내용과 레지스트리에서 발생하는 내용을 모니터링하는 프로그램 필요&lt;/li&gt;
-          &lt;li&gt;테스트 후 이전 상태(초기상태)로 복구되어야 함
-            &lt;ul&gt;
-              &lt;li&gt;VMWare 의 Snapshot 기능을 이용&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;물리적 서버 (VMWare 서버)
-            &lt;ul&gt;
-              &lt;li&gt;DHCP&lt;/li&gt;
-              &lt;li&gt;외부관리프로그램&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;리눅스 서버 (가상서버) - 서비스제공
-            &lt;ul&gt;
-              &lt;li&gt;Samba&lt;/li&gt;
-              &lt;li&gt;DNS Server&lt;/li&gt;
-              &lt;li&gt;Routing S/W&lt;/li&gt;
-              &lt;li&gt;HTTP Server&lt;/li&gt;
-              &lt;li&gt;SMTP Server&lt;/li&gt;
-              &lt;li&gt;POP3 Server&lt;/li&gt;
-              &lt;li&gt;IRC Server&lt;/li&gt;
-              &lt;li&gt;Network Monitoring S/W&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;윈도우 서버 (가상서버) - 피해대상
-            &lt;ul&gt;
-              &lt;li&gt;악성코드 실행서버&lt;/li&gt;
-              &lt;li&gt;파일시스템 모니터링&lt;/li&gt;
-              &lt;li&gt;사용자정보 모니터링&lt;/li&gt;
-              &lt;li&gt;레지스트리 모니터링&lt;/li&gt;
-              &lt;li&gt;서비스항목 모니터링&lt;/li&gt;
-              &lt;li&gt;공유폴더 모니터링&lt;/li&gt;
-              &lt;li&gt;시스템항목 모니터링&lt;/li&gt;
-              &lt;li&gt;네트워크항목 모니터링&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;sysAnalyzer 도구
-        &lt;ul&gt;
-          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://sandsprite.com/iDef/SysAnalyzer&lt;/code&gt;&lt;/li&gt;
-          &lt;li&gt;System에서 악성코드가 구동되는 동안 변경된 정보 수집, 비교, 분석하는 자동화된 툴&lt;/li&gt;
-          &lt;li&gt;스냅샷을 비교하여 어떤 것이 바뀌었는지 비교
-            &lt;ul&gt;
-              &lt;li&gt;Delay&lt;/li&gt;
-              &lt;li&gt;Sniffit Hit : IRC/HTTP 접속정보&lt;/li&gt;
-              &lt;li&gt;API Logger : 바이너리에 Injection 되는 DLL 이 어떤 것이 호출되는지 확인&lt;/li&gt;
-              &lt;li&gt;Directory Watcher : 모니터링 되는 시점에서 생성되는 모든 파일 확인&lt;/li&gt;
-              &lt;li&gt;시점별로 실행된 프로세스 확인&lt;/li&gt;
-              &lt;li&gt;악성코드에 의해 오픈된 포트&lt;/li&gt;
-              &lt;li&gt;explorer.exe 로드된 DLL 파일&lt;/li&gt;
-              &lt;li&gt;커널에 로드된 모듈&lt;/li&gt;
-              &lt;li&gt;변경 / 생성된 레지스트리 키&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;Malcode Analysis Pack
-        &lt;ul&gt;
-          &lt;li&gt;악성코드 조사&lt;/li&gt;
-          &lt;li&gt;Shell Ext : 문자열 확인&lt;/li&gt;
-          &lt;li&gt;SocketTool : TCP 클라이언트 모니터링&lt;/li&gt;
-          &lt;li&gt;MailPot : 메일서버 캡처 프로그램&lt;/li&gt;
-          &lt;li&gt;fakeDNS : 스푸핑 미니 DNS 서버 프로그램. 악성프로그램이 접속하는 도메인을 다른 곳으로 유도하는 프로그램&lt;/li&gt;
-          &lt;li&gt;Sniff_Hit : HTTP, IRC, DNS 스니퍼&lt;/li&gt;
-          &lt;li&gt;sclog : 악성코드에서 사용하는 쉘코드 분석&lt;/li&gt;
-          &lt;li&gt;GdiProcs : 숨겨진 프로세스 탐지&lt;/li&gt;
-          &lt;li&gt;Shellcode2Exe : 인코드된 쉘코드로 변환하는 php 스크립트 프로그램 (3:27)&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;모니터링 프로그램 활용
-        &lt;ul&gt;
-          &lt;li&gt;파일 모니터링 : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Filemon&lt;/code&gt;&lt;/li&gt;
-          &lt;li&gt;레지스터 모니터링 : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Regmon&lt;/code&gt;&lt;/li&gt;
-          &lt;li&gt;CPU성능 모니터링 : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Cpumon&lt;/code&gt;&lt;/li&gt;
-          &lt;li&gt;네트워크 모니터링 : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TCPView&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TDImon&lt;/code&gt;&lt;/li&gt;
-          &lt;li&gt;프로세스 모니터링 : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;procexp&lt;/code&gt;&lt;/li&gt;
-          &lt;li&gt;스냅샷 모니터링 : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Winanalysys&lt;/code&gt;&lt;/li&gt;
-          &lt;li&gt;API 함수 추적 : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;API SPY&lt;/code&gt;&lt;/li&gt;
-          &lt;li&gt;네트워크 트래픽 분석 : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ethereal&lt;/code&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="윈도우 침해사고" /><category term="해킹 프로그램" /><summary type="html">윈도우 해킹프로그램 분석 해킹프로그램 분석 분석환경 구성 최소 2개 이상의 가상서버를 구동 (물리적 서버 필요) Virtual Box VMWare Workstation Pro 가상서버 가상네트워크를 일반네트워크와 똑같이 구축 (Samba, HTTP, FTP 등 제공) 가상 서버 OS 를 리눅스로 구축 악성프로그램에 취약하지 않음 가상 서버 OS 를 윈도우로 구축 (피해시스템 - 해킹프로그램을 실행하는 서버) 해킹프로그램이 실행될 때 시스템 파일에서 발생되는 내용과 레지스트리에서 발생하는 내용을 모니터링하는 프로그램 필요 테스트 후 이전 상태(초기상태)로 복구되어야 함 VMWare 의 Snapshot 기능을 이용 물리적 서버 (VMWare 서버) DHCP 외부관리프로그램 리눅스 서버 (가상서버) - 서비스제공 Samba DNS Server Routing S/W HTTP Server SMTP Server POP3 Server IRC Server Network Monitoring S/W 윈도우 서버 (가상서버) - 피해대상 악성코드 실행서버 파일시스템 모니터링 사용자정보 모니터링 레지스트리 모니터링 서비스항목 모니터링 공유폴더 모니터링 시스템항목 모니터링 네트워크항목 모니터링 sysAnalyzer 도구 http://sandsprite.com/iDef/SysAnalyzer System에서 악성코드가 구동되는 동안 변경된 정보 수집, 비교, 분석하는 자동화된 툴 스냅샷을 비교하여 어떤 것이 바뀌었는지 비교 Delay Sniffit Hit : IRC/HTTP 접속정보 API Logger : 바이너리에 Injection 되는 DLL 이 어떤 것이 호출되는지 확인 Directory Watcher : 모니터링 되는 시점에서 생성되는 모든 파일 확인 시점별로 실행된 프로세스 확인 악성코드에 의해 오픈된 포트 explorer.exe 로드된 DLL 파일 커널에 로드된 모듈 변경 / 생성된 레지스트리 키 Malcode Analysis Pack 악성코드 조사 Shell Ext : 문자열 확인 SocketTool : TCP 클라이언트 모니터링 MailPot : 메일서버 캡처 프로그램 fakeDNS : 스푸핑 미니 DNS 서버 프로그램. 악성프로그램이 접속하는 도메인을 다른 곳으로 유도하는 프로그램 Sniff_Hit : HTTP, IRC, DNS 스니퍼 sclog : 악성코드에서 사용하는 쉘코드 분석 GdiProcs : 숨겨진 프로세스 탐지 Shellcode2Exe : 인코드된 쉘코드로 변환하는 php 스크립트 프로그램 (3:27) 모니터링 프로그램 활용 파일 모니터링 : Filemon 레지스터 모니터링 : Regmon CPU성능 모니터링 : Cpumon 네트워크 모니터링 : TCPView, TDImon 프로세스 모니터링 : procexp 스냅샷 모니터링 : Winanalysys API 함수 추적 : API SPY 네트워크 트래픽 분석 : ethereal</summary></entry><entry><title type="html">정보보안 - 윈도우 침해사고 상세분석</title><link href="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-WindowsDetailAnalysis/" rel="alternate" type="text/html" title="정보보안 - 윈도우 침해사고 상세분석" /><published>2022-01-01T09:00:00+09:00</published><updated>2022-01-01T09:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-IncidentAnalysis-WindowsDetailAnalysis</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-WindowsDetailAnalysis/">&lt;h1 id=&quot;윈도우-침해사고-상세분석&quot;&gt;윈도우 침해사고 상세분석&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;분류
-    &lt;ul&gt;
-      &lt;li&gt;레지스트리 분석
-        &lt;ul&gt;
-          &lt;li&gt;시스템이 운영되는데 필요한 정보를 담고 있는 파일
-            &lt;ul&gt;
-              &lt;li&gt;설치된 S/W 정보, 환경설정, 임시저장값&lt;/li&gt;
-              &lt;li&gt;시스템의 모든 정보 포함&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;공격자의 흔적을 알아낼 수 있음&lt;/li&gt;
-          &lt;li&gt;시작프로그램 등록 관련 레지스트리
-            &lt;ul&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HKLM\Software\Microsoft\Windows\CurrentVersion\Run&lt;/code&gt;&lt;/li&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce&lt;/code&gt;&lt;/li&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnceEx&lt;/code&gt;&lt;/li&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HKLM\Software\Microsoft\Windows\CurrentVersion\RunServices&lt;/code&gt;&lt;/li&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HKLM\Software\Microsoft\Windows\CurrentVersion\RunServicesOnce&lt;/code&gt;&lt;/li&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HKLM\Software\Microsoft\Windows\CurrentVersion\Windows\Load&lt;/code&gt;&lt;/li&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HKLM\Software\Microsoft\Windows\CurrentVersion\Windows\Run&lt;/code&gt;&lt;/li&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HKLM\Software\Microsoft\Windows\CurrentVersion\Winlogon\UserInit&lt;/code&gt;&lt;/li&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HKCU\Software\Microsoft\Windows\CurrentVersion\Run&lt;/code&gt;&lt;/li&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnce&lt;/code&gt;&lt;/li&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnceEx&lt;/code&gt;&lt;/li&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HKCU\Software\Microsoft\Windows\CurrentVersion\RunServicesOnce&lt;/code&gt;&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Autoruns&lt;/code&gt; : 시작 레지스트리 Check (Sysinternals.com)&lt;/li&gt;
-          &lt;li&gt;공격자가 남긴 레지스트리 정보 수집
-            &lt;ul&gt;
-              &lt;li&gt;최근 사용한 문서 목록
-                &lt;ul&gt;
-                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Recentdocs&lt;/code&gt;&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;터미널 서비스 접속 목록
-                &lt;ul&gt;
-                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HKCU\Software\Microsoft\Terminal Server Client\Default&lt;/code&gt;&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;설치된 S/W 목록&lt;/li&gt;
-              &lt;li&gt;열어본 파일 목록&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;자동실행 점검 - &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Autoruns&lt;/code&gt; 를 통해 점검 가능
-        &lt;ul&gt;
-          &lt;li&gt;서비스 점검
-            &lt;ul&gt;
-              &lt;li&gt;공격자가 윈도우 서비스에 악성 프로그램을 등록, 시스템 재부팅 시 악성 프로그램 실행&lt;/li&gt;
-              &lt;li&gt;생소한 이름의 서비스&lt;/li&gt;
-              &lt;li&gt;Description 영역의 내용이 비어있는 경우 / 영문으로 되어있는 경우&lt;/li&gt;
-              &lt;li&gt;정상적 서비스 이름을 위장하는 경우
-                &lt;ul&gt;
-                  &lt;li&gt;Backup System&lt;/li&gt;
-                  &lt;li&gt;Remote Administrator Service&lt;/li&gt;
-                  &lt;li&gt;System spooler Host&lt;/li&gt;
-                  &lt;li&gt;Windows Management Drivers&lt;/li&gt;
-                  &lt;li&gt;Universal Serial Bus Control Component&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;스케줄된 작업 확인
-            &lt;ul&gt;
-              &lt;li&gt;시스템이 재부팅 되더라도 악성 프로그램이 실행될 수 있음&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;자동시작 폴더 점검
-            &lt;ul&gt;
-              &lt;li&gt;윈도우 재시작 시 자동시작 폴더 내 각종 프로그램들을 실행함&lt;/li&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;c:\Documents and Settings\Administrator\시작메뉴\프로그램\시작프로그램&lt;/code&gt;&lt;/li&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ShellFolders&lt;/code&gt;&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;Winlogon Notification DLL
-            &lt;ul&gt;
-              &lt;li&gt;적은 코드로 구현이 가능, 안전모드에서 원하는 코드를 실행 가능&lt;/li&gt;
-              &lt;li&gt;WinLogon.exe 파일에서 발생하는 이벤트 핸들러를 이용하여 원하는 코드를 실행 가능
-                &lt;ul&gt;
-                  &lt;li&gt;Logon, Logoff, Startup, Shutdown, ScreenSaver 이벤트 등&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;악성코드 활용 소지가 있음&lt;/li&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify\&lt;/code&gt;
-                &lt;ul&gt;
-                  &lt;li&gt;DllName = arprmdg0.dll (악성코드 예시)&lt;/li&gt;
-                  &lt;li&gt;Startup = arprmdg0&lt;/li&gt;
-                  &lt;li&gt;Impersonate = 1 (인격화. 보안 환경변수 설정시 주로 설정, 인증된 사용자 계정으로 자원 실행할 수 있게 함)&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;이벤트 로그 분석
-        &lt;ul&gt;
-          &lt;li&gt;공격자가 남긴 흔적, 활동 등의 정보를 찾아내기 위함&lt;/li&gt;
-          &lt;li&gt;H/W, S/W, 시스템 문제 시 이벤트로그에 저장함 -&amp;gt; 이벤트뷰어를 통해 확인
-            &lt;ul&gt;
-              &lt;li&gt;관리도구 -&amp;gt; 이벤트뷰어 (eventvwr.msc)
-                &lt;ul&gt;
-                  &lt;li&gt;보안로그&lt;/li&gt;
-                  &lt;li&gt;시스템로그&lt;/li&gt;
-                  &lt;li&gt;응용프로그램로그&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;공격자들은 자신의 흔적을 최소화 하기 위해 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ClearEvent&lt;/code&gt; 프로그램을 사용 (이벤트로그를 삭제)&lt;/li&gt;
-          &lt;li&gt;공격자가 남기는 로그 유형
-            &lt;ul&gt;
-              &lt;li&gt;로컬 로그온 시도 실패&lt;/li&gt;
-              &lt;li&gt;계정의 잘못된 사용 (없는 계정 로그인 시도)&lt;/li&gt;
-              &lt;li&gt;계정 잠김&lt;/li&gt;
-              &lt;li&gt;터미널서비스 공격&lt;/li&gt;
-              &lt;li&gt;사용자계정 생성&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;MAC time 분석
-        &lt;ul&gt;
-          &lt;li&gt;파일, 디렉터리 등 파일시스템은 시간속성을 가지고 있음&lt;/li&gt;
-          &lt;li&gt;공격자가 파일시스템을 통해서 어떠한 행동을 했는지 판단 (어떤 파일이 생성, 수정, 실행되었는지?)&lt;/li&gt;
-          &lt;li&gt;mtime : 파일 수정, 생성&lt;/li&gt;
-          &lt;li&gt;atime : 최근 파일을 읽은 시간, 실행한 시간&lt;/li&gt;
-          &lt;li&gt;ctime : 파일 속성 변경 시간&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;침입방법 분석
-        &lt;ul&gt;
-          &lt;li&gt;공격자가 어떻게 침입했는지 분석 (사고 조치 이외에 원인분석을 하지 않으면 사고가 재발할 수 있음)&lt;/li&gt;
-          &lt;li&gt;윈도우에서 해킹발생 취약점 분류 (대부분 해킹사고는 시스템 보안 업데이트 미실시, 웹서비스 취약점이 원인)
-            &lt;ul&gt;
-              &lt;li&gt;윈도우 취약점
-                &lt;ul&gt;
-                  &lt;li&gt;시스템 취약점 (보안업데이트 미실시)
-                    &lt;ul&gt;
-                      &lt;li&gt;최종 보안 업데이트 날짜 파악이 중요
-                        &lt;ul&gt;
-                          &lt;li&gt;원격 공격 가능한 취약점이 있는지 파악&lt;/li&gt;
-                        &lt;/ul&gt;
-                      &lt;/li&gt;
-                      &lt;li&gt;MS 에서 제공하는 Microsoft Baseline Security Analyzer 로 확인
-                        &lt;ul&gt;
-                          &lt;li&gt;보안패치 상태&lt;/li&gt;
-                          &lt;li&gt;IIS 상태&lt;/li&gt;
-                          &lt;li&gt;SQL 상태&lt;/li&gt;
-                        &lt;/ul&gt;
-                      &lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;패스워드 취약점&lt;/li&gt;
-                  &lt;li&gt;잘못된 공유설정&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;웹 어플리케이션 취약점
-                &lt;ul&gt;
-                  &lt;li&gt;웹서비스 취약점
-                    &lt;ul&gt;
-                      &lt;li&gt;해킹 발생 시점에 발생한 로그를 분석하여 공격여부, 공격방법등을 파악&lt;/li&gt;
-                      &lt;li&gt;IIS 로그 : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;C:\WINNT\system32\LogFiles\W3SVC1&lt;/code&gt;&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;SQL Injection&lt;/li&gt;
-                  &lt;li&gt;파일업로드&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;MS-SQL 취약점
-                &lt;ul&gt;
-                  &lt;li&gt;Default password 사용&lt;/li&gt;
-                  &lt;li&gt;패치 미실시&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;인터넷 임시파일 분석
-        &lt;ul&gt;
-          &lt;li&gt;브라우저와 연관
-            &lt;ul&gt;
-              &lt;li&gt;접속한 사이트의 페이지가 임시파일에 저장됨&lt;/li&gt;
-              &lt;li&gt;접속 흔적이 히스토리에 남음&lt;/li&gt;
-              &lt;li&gt;사용된 쿠키가 디스크에 저장됨&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;파일 위치 : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;indexView&lt;/code&gt; 도구를 다운받아 쉽게 분석 가능
-            &lt;ul&gt;
-              &lt;li&gt;임시 인터넷 객체 : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Download Program Files&lt;/code&gt; - 인터넷에서 다운로드 받은 파일들&lt;/li&gt;
-              &lt;li&gt;임시 인터넷 파일 : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Local Settings\Temporary Internet Files&lt;/code&gt; - 방문한 사이트 페이지&lt;/li&gt;
-              &lt;li&gt;열어본 페이지 : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Local Settings\History&lt;/code&gt; - 방문한 사이트 이름&lt;/li&gt;
-              &lt;li&gt;임시쿠키 파일 : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Local Settings\COOKIES&lt;/code&gt;&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="윈도우 침해사고" /><category term="상세분석" /><summary type="html">윈도우 침해사고 상세분석 분류 레지스트리 분석 시스템이 운영되는데 필요한 정보를 담고 있는 파일 설치된 S/W 정보, 환경설정, 임시저장값 시스템의 모든 정보 포함 공격자의 흔적을 알아낼 수 있음 시작프로그램 등록 관련 레지스트리 HKLM\Software\Microsoft\Windows\CurrentVersion\Run HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnceEx HKLM\Software\Microsoft\Windows\CurrentVersion\RunServices HKLM\Software\Microsoft\Windows\CurrentVersion\RunServicesOnce HKLM\Software\Microsoft\Windows\CurrentVersion\Windows\Load HKLM\Software\Microsoft\Windows\CurrentVersion\Windows\Run HKLM\Software\Microsoft\Windows\CurrentVersion\Winlogon\UserInit HKCU\Software\Microsoft\Windows\CurrentVersion\Run HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnce HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnceEx HKCU\Software\Microsoft\Windows\CurrentVersion\RunServicesOnce Autoruns : 시작 레지스트리 Check (Sysinternals.com) 공격자가 남긴 레지스트리 정보 수집 최근 사용한 문서 목록 HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Recentdocs 터미널 서비스 접속 목록 HKCU\Software\Microsoft\Terminal Server Client\Default 설치된 S/W 목록 열어본 파일 목록 자동실행 점검 - Autoruns 를 통해 점검 가능 서비스 점검 공격자가 윈도우 서비스에 악성 프로그램을 등록, 시스템 재부팅 시 악성 프로그램 실행 생소한 이름의 서비스 Description 영역의 내용이 비어있는 경우 / 영문으로 되어있는 경우 정상적 서비스 이름을 위장하는 경우 Backup System Remote Administrator Service System spooler Host Windows Management Drivers Universal Serial Bus Control Component 스케줄된 작업 확인 시스템이 재부팅 되더라도 악성 프로그램이 실행될 수 있음 자동시작 폴더 점검 윈도우 재시작 시 자동시작 폴더 내 각종 프로그램들을 실행함 c:\Documents and Settings\Administrator\시작메뉴\프로그램\시작프로그램 HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ShellFolders Winlogon Notification DLL 적은 코드로 구현이 가능, 안전모드에서 원하는 코드를 실행 가능 WinLogon.exe 파일에서 발생하는 이벤트 핸들러를 이용하여 원하는 코드를 실행 가능 Logon, Logoff, Startup, Shutdown, ScreenSaver 이벤트 등 악성코드 활용 소지가 있음 HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify\ DllName = arprmdg0.dll (악성코드 예시) Startup = arprmdg0 Impersonate = 1 (인격화. 보안 환경변수 설정시 주로 설정, 인증된 사용자 계정으로 자원 실행할 수 있게 함) 이벤트 로그 분석 공격자가 남긴 흔적, 활동 등의 정보를 찾아내기 위함 H/W, S/W, 시스템 문제 시 이벤트로그에 저장함 -&amp;gt; 이벤트뷰어를 통해 확인 관리도구 -&amp;gt; 이벤트뷰어 (eventvwr.msc) 보안로그 시스템로그 응용프로그램로그 공격자들은 자신의 흔적을 최소화 하기 위해 ClearEvent 프로그램을 사용 (이벤트로그를 삭제) 공격자가 남기는 로그 유형 로컬 로그온 시도 실패 계정의 잘못된 사용 (없는 계정 로그인 시도) 계정 잠김 터미널서비스 공격 사용자계정 생성 MAC time 분석 파일, 디렉터리 등 파일시스템은 시간속성을 가지고 있음 공격자가 파일시스템을 통해서 어떠한 행동을 했는지 판단 (어떤 파일이 생성, 수정, 실행되었는지?) mtime : 파일 수정, 생성 atime : 최근 파일을 읽은 시간, 실행한 시간 ctime : 파일 속성 변경 시간 침입방법 분석 공격자가 어떻게 침입했는지 분석 (사고 조치 이외에 원인분석을 하지 않으면 사고가 재발할 수 있음) 윈도우에서 해킹발생 취약점 분류 (대부분 해킹사고는 시스템 보안 업데이트 미실시, 웹서비스 취약점이 원인) 윈도우 취약점 시스템 취약점 (보안업데이트 미실시) 최종 보안 업데이트 날짜 파악이 중요 원격 공격 가능한 취약점이 있는지 파악 MS 에서 제공하는 Microsoft Baseline Security Analyzer 로 확인 보안패치 상태 IIS 상태 SQL 상태 패스워드 취약점 잘못된 공유설정 웹 어플리케이션 취약점 웹서비스 취약점 해킹 발생 시점에 발생한 로그를 분석하여 공격여부, 공격방법등을 파악 IIS 로그 : C:\WINNT\system32\LogFiles\W3SVC1 SQL Injection 파일업로드 MS-SQL 취약점 Default password 사용 패치 미실시 인터넷 임시파일 분석 브라우저와 연관 접속한 사이트의 페이지가 임시파일에 저장됨 접속 흔적이 히스토리에 남음 사용된 쿠키가 디스크에 저장됨 파일 위치 : indexView 도구를 다운받아 쉽게 분석 가능 임시 인터넷 객체 : Download Program Files - 인터넷에서 다운로드 받은 파일들 임시 인터넷 파일 : Local Settings\Temporary Internet Files - 방문한 사이트 페이지 열어본 페이지 : Local Settings\History - 방문한 사이트 이름 임시쿠키 파일 : Local Settings\COOKIES</summary></entry><entry><title type="html">정보보안 - 윈도우 루트킷 점검</title><link href="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-WindowsRootkit/" rel="alternate" type="text/html" title="정보보안 - 윈도우 루트킷 점검" /><published>2021-12-31T09:00:00+09:00</published><updated>2021-12-31T09:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-IncidentAnalysis-WindowsRootkit</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-WindowsRootkit/">&lt;h1 id=&quot;윈도우-루트킷-점검&quot;&gt;윈도우 루트킷 점검&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;Rootkit
-    &lt;ul&gt;
-      &lt;li&gt;정의
-        &lt;ul&gt;
-          &lt;li&gt;시스템에 탐지되지 않도록 하는 코드, 프로그램 집합&lt;/li&gt;
-          &lt;li&gt;시스템 관리자 권한을 획득하기 위한 프로그램&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;구분
-        &lt;ul&gt;
-          &lt;li&gt;사용자모드
-            &lt;ul&gt;
-              &lt;li&gt;파일교체 (DLL, IAT후킹, API 엔트리패치 방법을 이용해서 정보를 숨김)&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;커널모드
-            &lt;ul&gt;
-              &lt;li&gt;Native API (ntdll.dll, Kernel32.dll, user32.dll) 조작&lt;/li&gt;
-              &lt;li&gt;커널드라이브 - Win32 응용프로그램 간의 Data를 조작&lt;/li&gt;
-              &lt;li&gt;공격자의 정보를 숨김&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;기능
-        &lt;ul&gt;
-          &lt;li&gt;프로세스 / 스레드 감추기&lt;/li&gt;
-          &lt;li&gt;프로세스 보안설정 변경 / 제거&lt;/li&gt;
-          &lt;li&gt;파일 / 폴더 감추기&lt;/li&gt;
-          &lt;li&gt;레지스트리 / 서비스 감추기&lt;/li&gt;
-          &lt;li&gt;네트워크 정보 감추기&lt;/li&gt;
-          &lt;li&gt;스니핑, 시스템 제어&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;윈도우 루트킷 종류
-    &lt;ul&gt;
-      &lt;li&gt;Hacker Defender
-        &lt;ul&gt;
-          &lt;li&gt;현재 가장 광범위하게 사용됨&lt;/li&gt;
-          &lt;li&gt;다양한 변종이 존재&lt;/li&gt;
-          &lt;li&gt;프로세스, 네트워크, 시작프로그램, 레지스트리, 서비스 등을 숨기는 가장 많은 기능 제공&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;FU
-        &lt;ul&gt;
-          &lt;li&gt;“EPROCESS” 의 링크 조작을 통한 프로세스를 숨기는 기능 제공
-            &lt;ul&gt;
-              &lt;li&gt;중요한 정보들이 목록화 되어있는 파일&lt;/li&gt;
-              &lt;li&gt;시스템 커널이 실행중인 모든 프로세스의 리스트를 찾고자 할 때 사용
-                &lt;ul&gt;
-                  &lt;li&gt;윈도우 커널의 경우 프로세스가 아닌 스레드 기반으로 동작&lt;/li&gt;
-                  &lt;li&gt;연결리스트 포인터 수정 가능&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;ActiveProcessLinks 의 Linked List 를 조작&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;Vanquish
-        &lt;ul&gt;
-          &lt;li&gt;DLL 인젝션 기법을 사용한 루트킷&lt;/li&gt;
-          &lt;li&gt;프로세스, 레지스트리, 서비스를 숨기는 기능&lt;/li&gt;
-          &lt;li&gt;로그인 정보 기록 기능 제공&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;AFX rootkit
-        &lt;ul&gt;
-          &lt;li&gt;코드 인젝션과 API 후킹을 사용하는 루트킷&lt;/li&gt;
-          &lt;li&gt;프로세스, 모듈, 핸들, 파일, 포트, 레지스트리 등을 숨길 수 있는 기능 제공&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;NT Rootkit
-        &lt;ul&gt;
-          &lt;li&gt;초기 윈도우 루트킷으로 현재까지 업데이트가 없는 상태임&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;윈도우 루트킷 탐지 도구
-    &lt;ul&gt;
-      &lt;li&gt;procexp&lt;/li&gt;
-      &lt;li&gt;Rootkit Receiver&lt;/li&gt;
-      &lt;li&gt;BlackLight&lt;/li&gt;
-      &lt;li&gt;AntiRootkit&lt;/li&gt;
-      &lt;li&gt;IceSword&lt;/li&gt;
-      &lt;li&gt;Archon&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="윈도우 침해사고" /><category term="루트킷" /><summary type="html">윈도우 루트킷 점검 Rootkit 정의 시스템에 탐지되지 않도록 하는 코드, 프로그램 집합 시스템 관리자 권한을 획득하기 위한 프로그램 구분 사용자모드 파일교체 (DLL, IAT후킹, API 엔트리패치 방법을 이용해서 정보를 숨김) 커널모드 Native API (ntdll.dll, Kernel32.dll, user32.dll) 조작 커널드라이브 - Win32 응용프로그램 간의 Data를 조작 공격자의 정보를 숨김 기능 프로세스 / 스레드 감추기 프로세스 보안설정 변경 / 제거 파일 / 폴더 감추기 레지스트리 / 서비스 감추기 네트워크 정보 감추기 스니핑, 시스템 제어 윈도우 루트킷 종류 Hacker Defender 현재 가장 광범위하게 사용됨 다양한 변종이 존재 프로세스, 네트워크, 시작프로그램, 레지스트리, 서비스 등을 숨기는 가장 많은 기능 제공 FU “EPROCESS” 의 링크 조작을 통한 프로세스를 숨기는 기능 제공 중요한 정보들이 목록화 되어있는 파일 시스템 커널이 실행중인 모든 프로세스의 리스트를 찾고자 할 때 사용 윈도우 커널의 경우 프로세스가 아닌 스레드 기반으로 동작 연결리스트 포인터 수정 가능 ActiveProcessLinks 의 Linked List 를 조작 Vanquish DLL 인젝션 기법을 사용한 루트킷 프로세스, 레지스트리, 서비스를 숨기는 기능 로그인 정보 기록 기능 제공 AFX rootkit 코드 인젝션과 API 후킹을 사용하는 루트킷 프로세스, 모듈, 핸들, 파일, 포트, 레지스트리 등을 숨길 수 있는 기능 제공 NT Rootkit 초기 윈도우 루트킷으로 현재까지 업데이트가 없는 상태임 윈도우 루트킷 탐지 도구 procexp Rootkit Receiver BlackLight AntiRootkit IceSword Archon</summary></entry><entry><title type="html">정보보안 - 윈도우 사고 초기분석</title><link href="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-WindowsInitialResponse/" rel="alternate" type="text/html" title="정보보안 - 윈도우 사고 초기분석" /><published>2021-12-30T09:00:00+09:00</published><updated>2021-12-30T09:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-IncidentAnalysis-WindowsInitialResponse</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-WindowsInitialResponse/">&lt;h1 id=&quot;윈도우-침해사고-초기분석&quot;&gt;윈도우 침해사고 초기분석&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;초기분석 : 현재 피해시스템의 상황을 빠른 시간 안에 파악한다. (포렌식 툴을 사용하지 않는다는 가정 / 커맨드에서 실행)
-    &lt;ul&gt;
-      &lt;li&gt;시스템 시간 확인
-        &lt;ul&gt;
-          &lt;li&gt;공격자가 시스템 시간을 변경할 수 있음&lt;/li&gt;
-          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;date /T&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;time /T&lt;/code&gt; 등의 명령어 사용&lt;/li&gt;
-          &lt;li&gt;uptime : 시스템의 부팅시간 정보를 알려줌 (추가 다운로드 필요-sysinternals.com)&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;시스템 정보
-        &lt;ul&gt;
-          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;psinfo -h -s&lt;/code&gt; : OS 기본정보, 보안 업데이트 정보, 설치된 S/W 정보 (추가 다운로드 필요-sysinternals.com)&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;프로세스 정보 확인 (휘발성 증거)
-        &lt;ul&gt;
-          &lt;li&gt;공격자가 실행시킨 악성프로그램 확인
-            &lt;ul&gt;
-              &lt;li&gt;실행 프로세스명&lt;/li&gt;
-              &lt;li&gt;프로세스 실행 파일 위치&lt;/li&gt;
-              &lt;li&gt;프로세스 커맨드라인&lt;/li&gt;
-              &lt;li&gt;프로세스 실행시간&lt;/li&gt;
-              &lt;li&gt;프로세스 가 참조하고 있는 DLL 및 기타 파일&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pslist&lt;/code&gt; 명령어사용 (추가 다운로드 필요-sysinternals.com)
-            &lt;ul&gt;
-              &lt;li&gt;현재 구동중인 프로세스 목록 조회&lt;/li&gt;
-              &lt;li&gt;프로세스 실행시간 확인&lt;/li&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-t&lt;/code&gt; : 트리구조 옵션 (자식프로세스)&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;정상적인 윈도우 프로세스인지 확인하기 위한 용도
-            &lt;ul&gt;
-              &lt;li&gt;흔히 볼수 없었던 프로세스명은 악성코드일 확률이 있음&lt;/li&gt;
-              &lt;li&gt;정상파일로 위장을 해서 악성프로그램 실행을 하는 경우 실행파일 위치를 확인해야 함&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;프로그램들이 사용하는 DLL 을 자세히 점검할 필요가 있음
-            &lt;ul&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;listdlls&lt;/code&gt; (추가 다운로드 필요-sysinternals.com) : dll 경로, 사이즈, 버전정보
-                &lt;ul&gt;
-                  &lt;li&gt;프로세스들이 사용하는 DLL 정보 출력&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;handle&lt;/code&gt; 명령어 사용 (추가 다운로드 필요-sysinternals.com)
-            &lt;ul&gt;
-              &lt;li&gt;악성 봇 프로그램 같은 경우 프로세스가 참조하는 파일(설정파일 등)을 출력해야 함&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;네트워크 정보 확인 (휘발성 증거) - 공격자의 흔적 추적
-        &lt;ul&gt;
-          &lt;li&gt;피해시스템의 네트워크 정보&lt;/li&gt;
-          &lt;li&gt;서비스를 열고 있는 어플리케이션 정보&lt;/li&gt;
-          &lt;li&gt;서비스에 연결되어 있는 세션 정보&lt;/li&gt;
-          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ipconfig /all&lt;/code&gt; 명령어 사용 - IP 확인&lt;/li&gt;
-          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;netstat -an&lt;/code&gt;
-            &lt;ul&gt;
-              &lt;li&gt;프로토콜의 상태 확인&lt;/li&gt;
-              &lt;li&gt;IP 기반의 네트워크 연결 정보 확인&lt;/li&gt;
-              &lt;li&gt;현재 열려있는 포트&lt;/li&gt;
-              &lt;li&gt;포트에 연결되어 있는 IP 정보&lt;/li&gt;
-              &lt;li&gt;시스템이 사용하지 않는 포트가 LISTENING 상태로 있는지 확인
-                &lt;ul&gt;
-                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;telnet&lt;/code&gt; 이나 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nc&lt;/code&gt; 등의 명령어로 어떤 어플리케이션이 해당 포트를 구동중인지 확인&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fpont&lt;/code&gt; (추가 다운로드 필요-foundstone.com)
-            &lt;ul&gt;
-              &lt;li&gt;해당 포트에서 사용하고 있는 프로세스 확인 가능&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;promiscdetect&lt;/code&gt; (추가 다운로드 필요 - tesecurity.nu)
-            &lt;ul&gt;
-              &lt;li&gt;NIC 카드가 promisc 인지 확인 필요 (스니핑, 모니터링 여부)&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;사용자/그룹 확인
-        &lt;ul&gt;
-          &lt;li&gt;공격자에 의해서 추가된 유저나 그룹이 있는지 확인
-            &lt;ul&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;net user&lt;/code&gt; : 시스템에 존재하는 모든 계정 출력&lt;/li&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;net localgroup&lt;/code&gt; : 시스템에 있는 모든 그룹정보 출력&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;공유, 로그인 정보 확인
-        &lt;ul&gt;
-          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;net&lt;/code&gt; : 시스템의 공유 정보, 현재 로그인되어 있는 사용자 정보 확인&lt;/li&gt;
-          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nbtstat&lt;/code&gt; : NBT (Net Bios) 에 의해서 연결된 정보를 확인
-            &lt;ul&gt;
-              &lt;li&gt;NBT (Net Bios over TCP/IP)
-                &lt;ul&gt;
-                  &lt;li&gt;TCP/IP 사용 기기의 고유 IP주소가 있으면 통신이 가능&lt;/li&gt;
-                  &lt;li&gt;Windows OS 의 경우 NetBios 기술을 사용
-                    &lt;ul&gt;
-                      &lt;li&gt;NetBios 의 이름 (컴퓨터 이름) 을 IP 보다 더 중요하게 사용&lt;/li&gt;
-                      &lt;li&gt;NETBIOS 는 네트워크 통신을 위한 기본적인 명령어 세트&lt;/li&gt;
-                      &lt;li&gt;BIOS : Basic Input Output System&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;NetBIOS 의 기능
-                    &lt;ul&gt;
-                      &lt;li&gt;컴퓨터 이름(네트워크 참여 시 식별자 이름) 등록/해제 (이름 삭제를 통한 네트워크 이탈)&lt;/li&gt;
-                      &lt;li&gt;세션 서비스 - Session 지향 (1:1통신) 의 통신서비스 제공 (22:10)&lt;/li&gt;
-                      &lt;li&gt;데이터그램 서비스 - Datagram 지향 (상대에게 일방적으로 데이터를 보냄) 의 통신서비스 제공&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;NetBIOS 통신
-                    &lt;ul&gt;
-                      &lt;li&gt;NetBIOS 이름 등록 (네트워크 참여)
-                        &lt;ul&gt;
-                          &lt;li&gt;중앙집중식 네트워크 관리서버가 존재하지 않음&lt;/li&gt;
-                          &lt;li&gt;시스템이 켜지면 시스템이 가지고 있는 컴퓨터 이름을 Broadcasting
-                            &lt;ul&gt;
-                              &lt;li&gt;Network 상의 모든 컴퓨터에 통보&lt;/li&gt;
-                              &lt;li&gt;이름 충돌이 없으면 사용&lt;/li&gt;
-                            &lt;/ul&gt;
-                          &lt;/li&gt;
-                        &lt;/ul&gt;
-                      &lt;/li&gt;
-                      &lt;li&gt;NetBIOS 이름을 사용해서 통신상대를 식별, 통신 패킷을 송신&lt;/li&gt;
-                      &lt;li&gt;시스템 종료시 NetBIOS 이름 삭제 (네트워크 이탈)&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;예전에는 순수한 NetBIOS 인터페이스를 사용하였으나 최근에는 컴퓨터 이름으로 사용&lt;/li&gt;
-                  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nbtstat -c&lt;/code&gt; : NBT에 연결된 세션정보 출력&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;윈도우 감사정책이 설정되어 있는 경우 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ntlast&lt;/code&gt; (추가다운로드-foundstone.com) 명령어 사용
-            &lt;ul&gt;
-              &lt;li&gt;로그인/로그오프 성공, 실패 여부 확인&lt;/li&gt;
-              &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ntlast -f&lt;/code&gt; : 원격 접속 로그정보 출력&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;net share&lt;/code&gt; : 시스템 공유정보 출력&lt;/li&gt;
-          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;net session&lt;/code&gt; : 공유자원에 접속된 컴퓨터 정보 출력&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Batch 스크립트를 만들어 결과를 파일로 저장하거나 자동화된 도구를 사용&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="윈도우 침해사고" /><summary type="html">윈도우 침해사고 초기분석 초기분석 : 현재 피해시스템의 상황을 빠른 시간 안에 파악한다. (포렌식 툴을 사용하지 않는다는 가정 / 커맨드에서 실행) 시스템 시간 확인 공격자가 시스템 시간을 변경할 수 있음 date /T, time /T 등의 명령어 사용 uptime : 시스템의 부팅시간 정보를 알려줌 (추가 다운로드 필요-sysinternals.com) 시스템 정보 psinfo -h -s : OS 기본정보, 보안 업데이트 정보, 설치된 S/W 정보 (추가 다운로드 필요-sysinternals.com) 프로세스 정보 확인 (휘발성 증거) 공격자가 실행시킨 악성프로그램 확인 실행 프로세스명 프로세스 실행 파일 위치 프로세스 커맨드라인 프로세스 실행시간 프로세스 가 참조하고 있는 DLL 및 기타 파일 pslist 명령어사용 (추가 다운로드 필요-sysinternals.com) 현재 구동중인 프로세스 목록 조회 프로세스 실행시간 확인 -t : 트리구조 옵션 (자식프로세스) 정상적인 윈도우 프로세스인지 확인하기 위한 용도 흔히 볼수 없었던 프로세스명은 악성코드일 확률이 있음 정상파일로 위장을 해서 악성프로그램 실행을 하는 경우 실행파일 위치를 확인해야 함 프로그램들이 사용하는 DLL 을 자세히 점검할 필요가 있음 listdlls (추가 다운로드 필요-sysinternals.com) : dll 경로, 사이즈, 버전정보 프로세스들이 사용하는 DLL 정보 출력 handle 명령어 사용 (추가 다운로드 필요-sysinternals.com) 악성 봇 프로그램 같은 경우 프로세스가 참조하는 파일(설정파일 등)을 출력해야 함 네트워크 정보 확인 (휘발성 증거) - 공격자의 흔적 추적 피해시스템의 네트워크 정보 서비스를 열고 있는 어플리케이션 정보 서비스에 연결되어 있는 세션 정보 ipconfig /all 명령어 사용 - IP 확인 netstat -an 프로토콜의 상태 확인 IP 기반의 네트워크 연결 정보 확인 현재 열려있는 포트 포트에 연결되어 있는 IP 정보 시스템이 사용하지 않는 포트가 LISTENING 상태로 있는지 확인 telnet 이나 nc 등의 명령어로 어떤 어플리케이션이 해당 포트를 구동중인지 확인 fpont (추가 다운로드 필요-foundstone.com) 해당 포트에서 사용하고 있는 프로세스 확인 가능 promiscdetect (추가 다운로드 필요 - tesecurity.nu) NIC 카드가 promisc 인지 확인 필요 (스니핑, 모니터링 여부) 사용자/그룹 확인 공격자에 의해서 추가된 유저나 그룹이 있는지 확인 net user : 시스템에 존재하는 모든 계정 출력 net localgroup : 시스템에 있는 모든 그룹정보 출력 공유, 로그인 정보 확인 net : 시스템의 공유 정보, 현재 로그인되어 있는 사용자 정보 확인 nbtstat : NBT (Net Bios) 에 의해서 연결된 정보를 확인 NBT (Net Bios over TCP/IP) TCP/IP 사용 기기의 고유 IP주소가 있으면 통신이 가능 Windows OS 의 경우 NetBios 기술을 사용 NetBios 의 이름 (컴퓨터 이름) 을 IP 보다 더 중요하게 사용 NETBIOS 는 네트워크 통신을 위한 기본적인 명령어 세트 BIOS : Basic Input Output System NetBIOS 의 기능 컴퓨터 이름(네트워크 참여 시 식별자 이름) 등록/해제 (이름 삭제를 통한 네트워크 이탈) 세션 서비스 - Session 지향 (1:1통신) 의 통신서비스 제공 (22:10) 데이터그램 서비스 - Datagram 지향 (상대에게 일방적으로 데이터를 보냄) 의 통신서비스 제공 NetBIOS 통신 NetBIOS 이름 등록 (네트워크 참여) 중앙집중식 네트워크 관리서버가 존재하지 않음 시스템이 켜지면 시스템이 가지고 있는 컴퓨터 이름을 Broadcasting Network 상의 모든 컴퓨터에 통보 이름 충돌이 없으면 사용 NetBIOS 이름을 사용해서 통신상대를 식별, 통신 패킷을 송신 시스템 종료시 NetBIOS 이름 삭제 (네트워크 이탈) 예전에는 순수한 NetBIOS 인터페이스를 사용하였으나 최근에는 컴퓨터 이름으로 사용 nbtstat -c : NBT에 연결된 세션정보 출력 윈도우 감사정책이 설정되어 있는 경우 ntlast (추가다운로드-foundstone.com) 명령어 사용 로그인/로그오프 성공, 실패 여부 확인 ntlast -f : 원격 접속 로그정보 출력 net share : 시스템 공유정보 출력 net session : 공유자원에 접속된 컴퓨터 정보 출력 Batch 스크립트를 만들어 결과를 파일로 저장하거나 자동화된 도구를 사용</summary></entry><entry><title type="html">정보보안 - 침해사고 분석 절차</title><link href="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-Procedure/" rel="alternate" type="text/html" title="정보보안 - 침해사고 분석 절차" /><published>2021-12-29T09:00:00+09:00</published><updated>2021-12-29T09:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-IncidentAnalysis-Procedure</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-Procedure/">&lt;h1 id=&quot;침해사고-분석-절차&quot;&gt;침해사고 분석 절차&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;침해사고 분석의 목적
-    &lt;ul&gt;
-      &lt;li&gt;사고의 수습&lt;/li&gt;
-      &lt;li&gt;누가 공격을 하였는지 파악
-        &lt;ul&gt;
-          &lt;li&gt;데이터 수집 -&amp;gt; 범행 단서 수집&lt;/li&gt;
-          &lt;li&gt;법적 소송에 필요한 데이터 : 무결성, 적법성을 유지해야 함&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;수집하는 데이터 정보 종류
-        &lt;ul&gt;
-          &lt;li&gt;호스트 기반 정보 (증거)
-            &lt;ul&gt;
-              &lt;li&gt;시스템 시간&lt;/li&gt;
-              &lt;li&gt;휘발성 데이터 (우선 수집 대상)
-                &lt;ul&gt;
-                  &lt;li&gt;수집하기 위해서 Live Response 수행 필요
-                    &lt;ul&gt;
-                      &lt;li&gt;살아있는 System 에서 휘발성 정보를 수집하는 행위&lt;/li&gt;
-                      &lt;li&gt;Initial Live Response : 휘발성 데이터만 수집&lt;/li&gt;
-                      &lt;li&gt;In-depth Response : 휘발성 데이터 + 충분한 부가정보 (법적대응에 필요한 정보-무결성,적법) 수집&lt;/li&gt;
-                      &lt;li&gt;Full Live Response : Live System 의 완전조사&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/li&gt;
-                  &lt;li&gt;시스템의 날짜, 시간&lt;/li&gt;
-                  &lt;li&gt;시스템에서 현재 동작 중인 어플리케이션&lt;/li&gt;
-                  &lt;li&gt;현재 연결된 네트워크 상황&lt;/li&gt;
-                  &lt;li&gt;현재 열려진 소켓(포트)&lt;/li&gt;
-                  &lt;li&gt;열려진 소켓 상에서 대기하고 있던 어플리케이션&lt;/li&gt;
-                  &lt;li&gt;네트워크 인터페이스의 상태&lt;/li&gt;
-                  &lt;li&gt;메모리 정보, 현재 열려있는 파일, 시스템 패치 상황&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;시스템의 모든 파일들의 생성,수정 시간/날짜 정보
-                &lt;ul&gt;
-                  &lt;li&gt;공격자에 의한 Upload 된 파일 식별을 위함&lt;/li&gt;
-                  &lt;li&gt;시스템으로 Upload / Download 된 파일 식별&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;출처 미확인 파일&lt;/li&gt;
-              &lt;li&gt;디스크 백업 수집&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;네트워크 기반 정보 (증거)
-            &lt;ul&gt;
-              &lt;li&gt;IDS 로그 수집&lt;/li&gt;
-              &lt;li&gt;IPS 로그 수집&lt;/li&gt;
-              &lt;li&gt;라우터 로그 수집&lt;/li&gt;
-              &lt;li&gt;방화벽 로그 수집&lt;/li&gt;
-              &lt;li&gt;인증서버 로그 수집&lt;/li&gt;
-              &lt;li&gt;중앙호스트 (Syslog) 로부터의 원격로그 수집&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;일반적 증거
-            &lt;ul&gt;
-              &lt;li&gt;증인으로부터의 수집&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;증거 수집 전략 (네트워크)
-    &lt;ul&gt;
-      &lt;li&gt;장비를 종료/재부팅 하는 것을 피함
-        &lt;ul&gt;
-          &lt;li&gt;네트워크 기반의 증거들이 장비의 메모리에 휘발성 데이터로 존재&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;네트워크를 통한 접근 (원격접근) 보다 콘솔을 통해 연결
-        &lt;ul&gt;
-          &lt;li&gt;조사의 흔적을 최소화 하기 위함&lt;/li&gt;
-          &lt;li&gt;원격접근은 Traffic 을 발생시킴&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;시스템 시간 정보 기록
-        &lt;ul&gt;
-          &lt;li&gt;네트워크 장비와 신뢰할 만한 시스템의 시간 차이를 확인&lt;/li&gt;
-          &lt;li&gt;대부분의 포렌식 툴은 로그의 시간 차이를 조정하는 기능이 제공되지 않음
-            &lt;ul&gt;
-              &lt;li&gt;수동으로 비교, Script 를 만들어 사용&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;휘발성 정도에 따라서 증거를 수집
-        &lt;ul&gt;
-          &lt;li&gt;휘발성이 높은 증거부터 수집&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;조사활동을 모두 기록
-        &lt;ul&gt;
-          &lt;li&gt;실수에 의한 기록을 남기더라도 가능한한 모든 기록을 남기는 것이 중요&lt;/li&gt;
-          &lt;li&gt;GUI 접속은 화면캡처나 사진 등&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;네트워크 기반의 증거 수집
-    &lt;ul&gt;
-      &lt;li&gt;패시브 증거 수집 : 계층 이상의 상위 계층에 데이터를 송신하지 않고 포렌식 용 증거를 수집하는 방법
-        &lt;ul&gt;
-          &lt;li&gt;케이블을 이용하여 감청
-            &lt;ul&gt;
-              &lt;li&gt;트래픽 스니핑 툴 사용&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;주파수 감청 (무선)
-            &lt;ul&gt;
-              &lt;li&gt;무선 AP Mac 주소&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;허브 (1계층) / 스위치 (2계층) 이용
-            &lt;ul&gt;
-              &lt;li&gt;포트 미러링 : 하나 이상의 포트에서 다른 포트의 트래픽을 복제&lt;/li&gt;
-              &lt;li&gt;MAC 플러딩 : 다량의 맥 주소를 사용하는 임의의 이더넷 패킷을 보내 CAM 테이블을 채워, MAC 포트를 연결할 수 없게 되었을 때 모든 포트에 트래픽을 전송&lt;/li&gt;
-              &lt;li&gt;ARP 스푸핑 : 공격자의 MAC 주소를 희생자의 IP와 매핑 시켜 거짓 ARP 패킷을 송신&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;트래픽 수집 소프트웨어 사용
-            &lt;ul&gt;
-              &lt;li&gt;libpcap
-                &lt;ul&gt;
-                  &lt;li&gt;네트워크 상의 인터페이스에 대한 데이터링크 계층의 프레임을 캡쳐&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;winpcap
-                &lt;ul&gt;
-                  &lt;li&gt;윈도우에서 돌아가는 libpcap&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;패킷스니퍼
-                &lt;ul&gt;
-                  &lt;li&gt;libpcap 기반 동작&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;tcpdump
-                &lt;ul&gt;
-                  &lt;li&gt;리눅스 기반 플랫폼에서 동작 / 윈도우의 경우 windump (winpcap)&lt;/li&gt;
-                  &lt;li&gt;libpcap 기반 동작&lt;/li&gt;
-                  &lt;li&gt;트래픽 캡처 / 필터링&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;wireshark
-                &lt;ul&gt;
-                  &lt;li&gt;트래픽 캡처 / 필터링&lt;/li&gt;
-                  &lt;li&gt;그래픽 기반 툴&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;액티브 (인터렉티브) 증거 수집
-        &lt;ul&gt;
-          &lt;li&gt;휘발성 증거는 시스템이 동작하고 네트워크가 연결된 상태에서 수집&lt;/li&gt;
-          &lt;li&gt;네트워크 상의 스테이션과 상호 작용하여 증거를 수집하는 방법
-            &lt;ul&gt;
-              &lt;li&gt;콘솔로 직접 연결하는 방법
-                &lt;ul&gt;
-                  &lt;li&gt;트래픽이 발생하지 않음 (흔적이 덜 남게 됨)&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;SSH / SCP,SFTP 를 이용하는 방법
-                &lt;ul&gt;
-                  &lt;li&gt;Telnet 이나 Rlogin, TFTP 같은 취약한 원격 연결 툴 (Plain Text 전송) 보다 감청을 당해도 안전&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;SNMP 프로토콜 사용
-                &lt;ul&gt;
-                  &lt;li&gt;포렌식에서 사용되는 대부분의 툴이 SNMP 프로토콜을 사용&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-              &lt;li&gt;SSL / TLS 를 이용한 웹데이터 수집&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;네트워크 접근을 하지 않고 조사하는 방법
-            &lt;ul&gt;
-              &lt;li&gt;포트 스캐닝&lt;/li&gt;
-              &lt;li&gt;취약점 조사&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;데이터 분석 절차
-    &lt;ul&gt;
-      &lt;li&gt;포렌식 이미징 작업 : 사본 만들기&lt;/li&gt;
-      &lt;li&gt;데이터의 준비
-        &lt;ul&gt;
-          &lt;li&gt;수집 이미지의 사본 제작&lt;/li&gt;
-          &lt;li&gt;파일 리스트 생성&lt;/li&gt;
-          &lt;li&gt;삭제 파일 복구&lt;/li&gt;
-          &lt;li&gt;비 할당 공간 복구&lt;/li&gt;
-          &lt;li&gt;파일 시그니처 분석 수행&lt;/li&gt;
-          &lt;li&gt;알려진 시스템 파일 식별&lt;/li&gt;
-          &lt;li&gt;통계적인 데이터 파티션 테이블 파일 시스템 수행&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;데이터의 분석
-        &lt;ul&gt;
-          &lt;li&gt;이메일과 첨부파일 뽑아내기&lt;/li&gt;
-          &lt;li&gt;브라우저 히스토리 파일 재검토&lt;/li&gt;
-          &lt;li&gt;설치된 어플리케이션 재검토&lt;/li&gt;
-          &lt;li&gt;수집된 데이터 재검토&lt;/li&gt;
-          &lt;li&gt;적절한 스트링 검색&lt;/li&gt;
-          &lt;li&gt;모든 네트워크 기반 증거 재검토&lt;/li&gt;
-          &lt;li&gt;소프트웨어 분석 수행&lt;/li&gt;
-          &lt;li&gt;암호화된 파일 식별과 해독&lt;/li&gt;
-          &lt;li&gt;파일 대 파일 재검토 수행&lt;/li&gt;
-          &lt;li&gt;특성화된 분석 수행&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="침해사고" /><summary type="html">침해사고 분석 절차 침해사고 분석의 목적 사고의 수습 누가 공격을 하였는지 파악 데이터 수집 -&amp;gt; 범행 단서 수집 법적 소송에 필요한 데이터 : 무결성, 적법성을 유지해야 함 수집하는 데이터 정보 종류 호스트 기반 정보 (증거) 시스템 시간 휘발성 데이터 (우선 수집 대상) 수집하기 위해서 Live Response 수행 필요 살아있는 System 에서 휘발성 정보를 수집하는 행위 Initial Live Response : 휘발성 데이터만 수집 In-depth Response : 휘발성 데이터 + 충분한 부가정보 (법적대응에 필요한 정보-무결성,적법) 수집 Full Live Response : Live System 의 완전조사 시스템의 날짜, 시간 시스템에서 현재 동작 중인 어플리케이션 현재 연결된 네트워크 상황 현재 열려진 소켓(포트) 열려진 소켓 상에서 대기하고 있던 어플리케이션 네트워크 인터페이스의 상태 메모리 정보, 현재 열려있는 파일, 시스템 패치 상황 시스템의 모든 파일들의 생성,수정 시간/날짜 정보 공격자에 의한 Upload 된 파일 식별을 위함 시스템으로 Upload / Download 된 파일 식별 출처 미확인 파일 디스크 백업 수집 네트워크 기반 정보 (증거) IDS 로그 수집 IPS 로그 수집 라우터 로그 수집 방화벽 로그 수집 인증서버 로그 수집 중앙호스트 (Syslog) 로부터의 원격로그 수집 일반적 증거 증인으로부터의 수집 증거 수집 전략 (네트워크) 장비를 종료/재부팅 하는 것을 피함 네트워크 기반의 증거들이 장비의 메모리에 휘발성 데이터로 존재 네트워크를 통한 접근 (원격접근) 보다 콘솔을 통해 연결 조사의 흔적을 최소화 하기 위함 원격접근은 Traffic 을 발생시킴 시스템 시간 정보 기록 네트워크 장비와 신뢰할 만한 시스템의 시간 차이를 확인 대부분의 포렌식 툴은 로그의 시간 차이를 조정하는 기능이 제공되지 않음 수동으로 비교, Script 를 만들어 사용 휘발성 정도에 따라서 증거를 수집 휘발성이 높은 증거부터 수집 조사활동을 모두 기록 실수에 의한 기록을 남기더라도 가능한한 모든 기록을 남기는 것이 중요 GUI 접속은 화면캡처나 사진 등 네트워크 기반의 증거 수집 패시브 증거 수집 : 계층 이상의 상위 계층에 데이터를 송신하지 않고 포렌식 용 증거를 수집하는 방법 케이블을 이용하여 감청 트래픽 스니핑 툴 사용 주파수 감청 (무선) 무선 AP Mac 주소 허브 (1계층) / 스위치 (2계층) 이용 포트 미러링 : 하나 이상의 포트에서 다른 포트의 트래픽을 복제 MAC 플러딩 : 다량의 맥 주소를 사용하는 임의의 이더넷 패킷을 보내 CAM 테이블을 채워, MAC 포트를 연결할 수 없게 되었을 때 모든 포트에 트래픽을 전송 ARP 스푸핑 : 공격자의 MAC 주소를 희생자의 IP와 매핑 시켜 거짓 ARP 패킷을 송신 트래픽 수집 소프트웨어 사용 libpcap 네트워크 상의 인터페이스에 대한 데이터링크 계층의 프레임을 캡쳐 winpcap 윈도우에서 돌아가는 libpcap 패킷스니퍼 libpcap 기반 동작 tcpdump 리눅스 기반 플랫폼에서 동작 / 윈도우의 경우 windump (winpcap) libpcap 기반 동작 트래픽 캡처 / 필터링 wireshark 트래픽 캡처 / 필터링 그래픽 기반 툴 액티브 (인터렉티브) 증거 수집 휘발성 증거는 시스템이 동작하고 네트워크가 연결된 상태에서 수집 네트워크 상의 스테이션과 상호 작용하여 증거를 수집하는 방법 콘솔로 직접 연결하는 방법 트래픽이 발생하지 않음 (흔적이 덜 남게 됨) SSH / SCP,SFTP 를 이용하는 방법 Telnet 이나 Rlogin, TFTP 같은 취약한 원격 연결 툴 (Plain Text 전송) 보다 감청을 당해도 안전 SNMP 프로토콜 사용 포렌식에서 사용되는 대부분의 툴이 SNMP 프로토콜을 사용 SSL / TLS 를 이용한 웹데이터 수집 네트워크 접근을 하지 않고 조사하는 방법 포트 스캐닝 취약점 조사 데이터 분석 절차 포렌식 이미징 작업 : 사본 만들기 데이터의 준비 수집 이미지의 사본 제작 파일 리스트 생성 삭제 파일 복구 비 할당 공간 복구 파일 시그니처 분석 수행 알려진 시스템 파일 식별 통계적인 데이터 파티션 테이블 파일 시스템 수행 데이터의 분석 이메일과 첨부파일 뽑아내기 브라우저 히스토리 파일 재검토 설치된 어플리케이션 재검토 수집된 데이터 재검토 적절한 스트링 검색 모든 네트워크 기반 증거 재검토 소프트웨어 분석 수행 암호화된 파일 식별과 해독 파일 대 파일 재검토 수행 특성화된 분석 수행</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="데이터베이스 침해사고" /><summary type="html">데이터베이스 침해사고 Data, 데이터베이스, DBMS 데이터와 정보 데이터 : 정보작성을 위한 필요자료, 특정목적에 대해 평가되지 않은 상태, 단순한 사실 정보 : 데이터를 추출, 분석, 비교 등의 가공절차를 통해 의사결정, 행동을 할 수 있는 의미있는 데이터 데이터베이스 : 데이터의 집합, 여러 응용시스템이 공유. Integrated, Stored, Operational DBMS : 데이터를 통합적으로 생성, 관리, 저장하는 소프트웨어. MySQL, MSSQL, ORACLE, DB2 등 MySQL 서버가 침해사고의 대상이 되는 경우가 많음. (PHP) MySQL 점검 항목 관리자 아이디를 default 로 사용하는지 점검 기본 패스워드 값은 누구나 알고 있음 무차별대입 / 사전대입 공격 - 추측 어려운 패스워드를 사용해야 함 mysql -uroot -p 패스워드 설정 안된 계정 존재하는지 점검 select user, password from user update user set password = [] where user = [] flush privileges; : 변경사항을 즉시 반영 Remote 에서 MySQL 서버로 접속이 가능한지 점검 기본 포트 : 3306/tcp my.cnf 파일의 [mysqld] 에 skip-networking 추가 : 로컬 접속만 가능 MySQL 계정을 이용한 접속 가능한지 점검 /etc/passwd 의 쉘 부분을 /bin/sh 대신 /bin/false 로 변경하여 원격 접속을 차단 시스템 사용자들의 DB에 대한 권한 설정이 올바른지 점검 필요 이상의 권한을 부여하지 않아야 함 select * from DB; 불필요한 권한을 Revoke 시킴 update db set update_priv = &apos;N&apos; where db=[] flush privileges; 데이터베이스 내의 사용자별 접속/권한 설정이 올바른지 점검 dba 가 아닌 일반 user 가 중요 table 을 조작할 수 있음 select * from user; Host User Password Select_priv … Process_priv File_priv File_priv : 파일에 대한 권한 Process_priv : 쓰레드 정보 확인 (쓰레드 중지 권한 포함) Shutdown_priv : MySQL 서버의 실행을 중지시키는 권한 localhost 의 root 계정을 사용하지 않고 다른 DBA 계정을 만들어 사용하는 것이 바람직함 원격 Host 에서 root 계정등의 접근설정 확인 update user set process_priv=&quot;N&quot; where host = [ip] and user = &quot;root&quot;; 안정적인 MySQL 버전을 사용하고 있는지 점검 MySQL 의 데이터 디렉터리는 안전하게 보호되고 있는지 점검 my.cnf 파일에 대한 접근통제도 필요 MS-SQL 점검 항목 계정의 패스워드 중 빈 패스워드나 약한 패스워드가 존재 하는가? select name, password from syslogins; : 결과 NULL 일 경우 패스워드가 없음. 단 Builtin 계정은 NULL 이 정상 guest 계정이 비활성화 되어 있는가? SQL 서버의 Enterprise Manager 를 실행하여 guest 계정 확인, 삭제 public 데이터베이스 역할이 부여되어 있는가? public 역할 : 모든 데이터베이스 사용자들의 표준에 해당되는 역할. 인가를 받지 않은 사용자도 권한을 행사할 수 있는 취약점 SYSADMIN 그룹의 사용자를 인증된 사용자만으로 제한하고 있는가? System Administrator 권한 방화벽에서 SQL Server 포트를 차단했는지? TCP/1433 or 1434 가장 최신의 서비스 팩을 설치했는가? 서버 보안을 위함 Microsoft Baseline Security Analyzer(MBSA) 로 서버를 점검했는가? 보안패치가 최신으로 유지되는지 확인 보안상 약점이 될만한 설정이 있는지 확인 기본 취약점 점검하는 도구 SQL Server 연결에 대한 감사를 수행하는가? 이벤트 정보 로그 기록 웹서버 확인 필요 항목 DB 접속 파일 확인 예 : conn.asp 파일 침해 DB 서버의 IP 주소, Host Name DB 접근 게정 (ID) DB 서버 접근 패스워드 (PW) sqlpoke.exe 프로그램을 업로드, 이용, 위에 획득한 정보로 접속 MS-SQL 서버 의 디폴트 계정 중 sa (system admin) 계정 이용 서버 내부의 Administrator 계정으로 명령어를 전달할 수 있는 계정 net user 명령어 사용 remote 에서 DB 서버에 계정을 생성 가능 (우회적으로 DB서버에 접근) SQL Injection 공격 IIS 웹로그 등을 통해 침입 흔적을 확인해야 함</summary></entry></feed>

@@ -1,0 +1,56 @@
+I"�<ul class="toc__menu">
+  <li><a href="#-이론편-">-이론편-</a></li>
+  <li><a href="#part-01-시스템">PART 01 시스템</a>
+    <ul>
+      <li><a href="#section-01-시스템-기본-학습">SECTION 01 시스템 기본 학습</a></li>
+      <li><a href="#section-02-unixlinux-서버-취약점">SECTION 02 UNIX/Linux 서버 취약점</a></li>
+      <li><a href="#section-03-윈도우-서버-취약점">SECTION 03 윈도우 서버 취약점</a></li>
+    </ul>
+  </li>
+  <li><a href="#part-02-네트워크">PART 02 네트워크</a>
+    <ul>
+      <li><a href="#section-04-네트워크-기본-학습">SECTION 04 네트워크 기본 학습</a></li>
+      <li><a href="#section-05-네트워크-보안-프로토콜">SECTION 05 네트워크 보안 프로토콜</a></li>
+      <li><a href="#section-06-라우터-보안">SECTION 06 라우터 보안</a></li>
+    </ul>
+  </li>
+  <li><a href="#part-03-어플리케이션">PART 03 어플리케이션</a>
+    <ul>
+      <li><a href="#section-07-어플리케이션-기본-학습">SECTION 07 어플리케이션 기본 학습</a></li>
+      <li><a href="#section-08-웹-어플리케이션-취약점">SECTION 08 웹 어플리케이션 취약점</a></li>
+      <li><a href="#section-09-웹-서버-취약점">SECTION 09 웹 서버 취약점</a></li>
+      <li><a href="#section-10-이메일e-mail-보안">SECTION 10 이메일(E-Mail) 보안</a></li>
+      <li><a href="#section-11-데이터베이스-보안">SECTION 11 데이터베이스 보안</a></li>
+      <li><a href="#section-12-클라우드-컴퓨팅-보안">SECTION 12 클라우드 컴퓨팅 보안</a></li>
+    </ul>
+  </li>
+  <li><a href="#part-04-침해사고-분석-및-대응">PART 04 침해사고 분석 및 대응</a>
+    <ul>
+      <li><a href="#section-13-보안장비-운영">SECTION 13 보안장비 운영</a></li>
+      <li><a href="#section-14-시스템-점검-도구">SECTION 14 시스템 점검 도구</a></li>
+      <li><a href="#section-15-침해사고-유형별-시나리오">SECTION 15 침해사고 유형별 시나리오</a></li>
+      <li><a href="#section-16-주요-취약점vulnerability">SECTION 16 주요 취약점(Vulnerability)</a></li>
+    </ul>
+  </li>
+  <li><a href="#part-05-정보보안-일반관리">PART 05 정보보안 일반/관리</a>
+    <ul>
+      <li><a href="#section-17-정보보안-일반관리">SECTION 17 정보보안 일반/관리</a></li>
+    </ul>
+  </li>
+  <li><a href="#part-06-정보보안-법규">PART 06 정보보안 법규</a>
+    <ul>
+      <li><a href="#section-18-정보보안-법규">SECTION 18 정보보안 법규</a></li>
+    </ul>
+  </li>
+  <li><a href="#-문제편-">-문제편-</a>
+    <ul>
+      <li><a href="#section-01-시스템-보안">Section 01 시스템 보안</a></li>
+      <li><a href="#section-02-네트워크-보안">Section 02 네트워크 보안</a></li>
+      <li><a href="#section-03-어플리케이션-보안">Section 03 어플리케이션 보안</a></li>
+      <li><a href="#section-04-침해사고-분석-및-대응">Section 04 침해사고 분석 및 대응</a></li>
+      <li><a href="#section-05-정보보안-일반">Section 05 정보보안 일반</a></li>
+      <li><a href="#section-06-정보보안관리법규">Section 06 정보보안관리/법규</a></li>
+    </ul>
+  </li>
+</ul>
+:ET
