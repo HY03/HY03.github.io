@@ -9,7 +9,7 @@ tags:
 related: true
 categories:
 - 행복하고 보람찬 삶
-toc: true
+toc: false
 ---
 
 # Sins (행복을 방해하는 7 요소)

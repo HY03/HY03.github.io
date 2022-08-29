@@ -1,6 +1,6 @@
 ---
 title: 행복하고 보람찬 삶 - 행복을 방해하는 7요소 - 우월함 추구
-date: '2022-08-22 12:00:00'
+date: '2022-08-29 12:00:00'
 tags:
 - A Life of Happiness and Fulfillment
 - 불행의 7요소
@@ -9,7 +9,7 @@ tags:
 related: true
 categories:
 - 행복하고 보람찬 삶
-toc: true
+toc: false
 ---
 
 # Sins (행복을 방해하는 7 요소)
