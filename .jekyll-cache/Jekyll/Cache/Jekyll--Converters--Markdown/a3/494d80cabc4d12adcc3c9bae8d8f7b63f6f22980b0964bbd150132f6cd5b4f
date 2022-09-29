@@ -1,0 +1,262 @@
+I"�#<h1 id="후기">후기</h1>
+
+<p><img src="/assets/images/posts/coursera_Automatingyourdeliverypipeline_course_info.png" alt="강좌에 대한 설명" /></p>
+
+<ul>
+  <li>해당 강좌는 영상플레이 시간 1시간 (하지만 영어 강좌여서 2시간 이상) 소요 되는 강좌입니다.</li>
+  <li>개인적으로 추천하고 싶지는 않은데, 내용을 떠나 구축된 Cloud 환경의 젠킨스가 구 버전이어서 플러그인과 호환이 되질 않습니다.</li>
+  <li>실습의 절반정도는 영상을 보는 것으로만 하였습니다.</li>
+  <li>장점은 부담되는 양의 자료 (책, 강의 등) 를 보기 전에 짧은 시간 훑어보기에 좋은 강의라는 점입니다.</li>
+</ul>
+
+<h1 id="jenkins-란">Jenkins 란?</h1>
+
+<ul>
+  <li>DevOps 환경에서 Continuous integration and Delivery 를 가능하게 하는 툴</li>
+  <li>Continuous Delivery
+    <ul>
+      <li>개발자가 개발한 새 소스코드를 즉시 소스코드 저장소에 반영</li>
+      <li>빌딩, 테스팅, 패키징이 등이 일어나 배포 가능 버전이 생성됨</li>
+    </ul>
+  </li>
+  <li>이점
+    <ul>
+      <li>배포속도가 빨라짐</li>
+      <li>피드백을 빨리 받을 수 있음</li>
+      <li>초기 단게에서 결함을 발견할 수 있음</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="실습">실습</h1>
+
+<ol>
+  <li>젠킨스 서버에서 사용하기 위한 Maven 설정
+    <ul>
+      <li>DashBoard 에서 Global Tool Configuration 설정</li>
+      <li>하단의 Maven 설치 (네이밍 포함)</li>
+      <li>Maven : 자바용 프로젝트 빌드, 관리에 사용되는 도구</li>
+    </ul>
+    <ul>
+      <li>라이브러리의 추가, 라이브러리 버전 동기화의 어려움을 해소</li>
+      <li>프로젝트 생성, 테스트 빌드, 배포 등의 작업을 위함</li>
+    </ul>
+  </li>
+  <li>Spring pet clinic 어플리케이션의 첫번째 Job 생성
+    <ul>
+      <li>Spring pet clinic 의 깃헙 소스코드 fork 하기</li>
+      <li>Jenkins 의 파이프라인 첫 단계는 compile stage 혹은 build stage 가 될 것</li>
+      <li>New Item</li>
+    </ul>
+    <ul>
+      <li>Freestyle project : 어떠한 제약, 제한조건 없는 프로젝트
+        <ul>
+          <li>네이밍하기</li>
+        </ul>
+      </li>
+      <li>섹션들
+        <ul>
+          <li>General</li>
+          <li>Source Code Management</li>
+          <li>Build Triggers</li>
+          <li>Build Environment</li>
+          <li>Build</li>
+          <li>Post-build Actions</li>
+        </ul>
+      </li>
+      <li>Source Code Management 설정
+        <ul>
+          <li>Git URL 값 입력</li>
+          <li>Branch 입력 (소스코드가 위치하는 경로)</li>
+        </ul>
+      </li>
+      <li>Build 설정
+        <ul>
+          <li>Add build step -&gt; Invoke top-level Maven targets : Maven 을 통한 build task 수행</li>
+          <li>Maven 버전 설정 : Global Tool Configuration 에서 네이밍한 Maven 선택</li>
+          <li>Goals 설정 : compile 입력</li>
+          <li>Save
+            <ul>
+              <li>Build Now</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>#1 빌드 수행</li>
+      <li>버튼 색에 따른 상태
+        <ul>
+          <li>Blue : 성공(완료)</li>
+          <li>Blinking : 현재 실행중</li>
+          <li>Rend : 실패</li>
+        </ul>
+      </li>
+      <li>버튼 옆 arrow -&gt; Console Output 으로 결과 확인</li>
+    </ul>
+  </li>
+  <li>Delivery Pipeline 생성하기 (Build, Test Stage 생성하기)
+    <ul>
+      <li>Jenkins -&gt; New Item</li>
+    </ul>
+    <ul>
+      <li>Freestyle project
+        <ul>
+          <li>네이밍하기</li>
+        </ul>
+      </li>
+      <li>Source Code Management 설정
+        <ul>
+          <li>Git URL 값 입력</li>
+          <li>Branch 입력 (소스코드가 위치하는 경로)</li>
+        </ul>
+      </li>
+      <li>Build 설정
+        <ul>
+          <li>Add build step -&gt; Invoke top-level Maven targets : Maven 을 통한 build task 수행</li>
+          <li>Maven 버전 설정 : Global Tool Configuration 에서 네이밍한 Maven 선택</li>
+          <li>Goals 설정 : test 입력</li>
+          <li>Save
+            <ul>
+              <li>Build Now</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>#1 빌드 수행</li>
+      <li>Console Output 에서 테스트 케이스에 대한 성공/실패여부를 볼 수 있음
+    - Test Job 의 Configure (Build 수행 후 Test 를 진행하고 싶다)</li>
+      <li>Build Triggers : 어떻게 특정 Job 을 Trigger 할지 설정
+        <ul>
+          <li>Build after other projects are built
+            <ul>
+              <li>Projects to watch : Build Job 입력</li>
+            </ul>
+          </li>
+          <li>Save
+            <ul>
+              <li>Pipeline 전체를 살펴보기 위해 Plugin 설치하기</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Jenkins -&gt; Manage Jenkins -&gt; Manage Plugins
+        <ul>
+          <li>Available tab -&gt; search Build pipeline -&gt; install</li>
+        </ul>
+      </li>
+      <li>Jenkins Dashboard 의 작은 + 버튼 클릭 -&gt; Build Pipeline View
+        <ul>
+          <li>네이밍</li>
+        </ul>
+      </li>
+      <li>Pipeline Flow -&gt; Upstream / downstream config
+        <ul>
+          <li>Initial Job (첫 시작 Job) 설정</li>
+          <li>초록색 Job : 이미 실행된 Job</li>
+          <li>파란색 Job : 아직 실행되지 않은 Job</li>
+          <li>노란색 Job : 실행중인 Job</li>
+          <li>빨간색 Job : Job 실패</li>
+        </ul>
+      </li>
+      <li>Run</li>
+    </ul>
+  </li>
+  <li>Codify Pipeline
+    <ul>
+      <li>Build pipeline 의 코드화 필요성</li>
+    </ul>
+    <ul>
+      <li>위 활동에서의 Configuration Setup 을 직접 수행할 경우 신뢰성이 떨어짐</li>
+      <li>Jenkins 는 Groovy Script 를 사용함
+    - Pipeline Maven integration plugin 설치</li>
+      <li>메이븐과 젠킨스의 통합을 쉽게 해줌</li>
+      <li>scripted pipeline 에서 사용할 많은 Wrapper methods 를 제공
+    - New item</li>
+      <li>Pipeline
+        <ul>
+          <li>Pipeline Tab</li>
+        </ul>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  node{
+      stage('Checkout'){
+          git branch: 'main', url:'https://github.com/HY03/SpringPetClinic.git'
+      }
+      stage('Build'){
+          withMaven(maven: 'M3'){
+              sh 'mvn compile'
+          }
+      }
+  }
+</code></pre></div>        </div>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  - node : where you run your job
+      + master : where jenkins installed
+      + slave : for the distributed
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>declarative pipeline
+    <ul>
+      <li>필요성</li>
+    </ul>
+    <ul>
+      <li>Jenkins 와 엮여있는 Groovy Script 의 어려움
+    - New item</li>
+      <li>Pipeline
+        <ul>
+          <li>Pipeline Tab</li>
+        </ul>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  pipeline{
+      agent{label 'master'}
+      tools{maven 'M3'}
+      stages{
+          stage('Checkout'){
+              steps{
+                  git branch: 'main', url:'https://github.com/HY03/SpringPetClinic.git''
+              }
+          }
+          stage('Build'){
+              steps{
+                  sh 'mvn compile'   
+              }
+          }
+          stage('Test'){
+              steps{
+                  sh 'mvn test'
+              }
+          }
+          stage('Package'){
+              steps{
+                  sh 'mvn package'
+              }
+          }
+          stage('Deploy'){
+              steps{
+                  sh 'java -jar /var/lib/jenkins/workspace/PetClinicDeclarativePipeline/target/*.jar'
+              }
+          }
+      }
+  }
+</code></pre></div>        </div>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  - `sh 'mvn [goal]'` : 실행할 mvn goal 설정
+  - 메이븐은 여러 플러그인으로 구성되어 있으며, 각각의 플러그인은 하나 이상의 goal(명령, 작업)을 포함하고 있다. 
+  - Goal은 Maven의 실행 단위이다.
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>Declarative Pipeline 을 Jenkins File 로 저장시켜 저장소에 저장하기
+    <ul>
+      <li>소스코드 저장소에 Jenkins Pipeline 스크립트를 복사</li>
+      <li>Github 에서 파일 생성 : Jenkinsfile (파일명은 고정)</li>
+      <li>Job 의 Pipeline 설정에서 Pipeline script 대신 Pipeline script from SCM 선택</li>
+      <li>Git 경로 및 Branch 설정</li>
+      <li>Script Path : jenkinsfile 위치 설정</li>
+      <li>Lightweight Checkout 설정 : jenkinsfile 먼저 checkout 한 뒤, jenkinsfile 의 모든 스테이지를 수행</li>
+    </ul>
+  </li>
+</ol>
+
+:ET

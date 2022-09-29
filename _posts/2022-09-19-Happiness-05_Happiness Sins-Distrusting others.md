@@ -42,6 +42,8 @@ toc: false
 + 본능적 불신
 	* 그럼에도 본능적으로 타인을 신뢰하기 어려운데, 이는 배신당했을 때의 생존 리스크가 훨씬 크기 때문이다.
 
+
+
 # 상대를 먼저 신뢰함으로서 얻는 이점
 
 ## 상황의 가정
@@ -77,6 +79,8 @@ toc: false
 + 상호 신뢰 척도 (25개 항목) : 자신의 신뢰 성향이 어느 정도인지 확인
 	* https://isb.au1.qualtrics.com/jfe/form/SV_eXUEfevcsysAreB?user_id=%25USER_ID%25&Q_JFE=qdg
 	* Your score on the trust scale is 78 > Your level of interpersonal trust is high.
+
+
 	
 # 현명한 신뢰를 위한 3가지 전략
 

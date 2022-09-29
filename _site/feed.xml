@@ -1,4 +1,263 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://bluesplatter.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://bluesplatter.com/" rel="alternate" type="text/html" /><updated>2022-09-28T14:47:59+09:00</updated><id>https://bluesplatter.com/feed.xml</id><title type="html">Bluesplatter</title><subtitle>전문적이지 않은 정보들, 감상, 즉흥적인 내용들</subtitle><author><name>HY03</name><email>hyunik03@gmail.com</email></author><entry><title type="html">A Life of Happiness and Fulfillment - 08. 요약</title><link href="https://bluesplatter.com/a%20life%20of%20happiness%20and%20fulfillment%20(%ED%96%89%EB%B3%B5%ED%95%98%EA%B3%A0%20%EB%B3%B4%EB%9E%8C%EC%B0%AC%20%EC%82%B6)/Happiness-08_Summary/" rel="alternate" type="text/html" title="A Life of Happiness and Fulfillment - 08. 요약" /><published>2022-09-27T18:00:00+09:00</published><updated>2022-09-27T18:00:00+09:00</updated><id>https://bluesplatter.com/a%20life%20of%20happiness%20and%20fulfillment%20(%ED%96%89%EB%B3%B5%ED%95%98%EA%B3%A0%20%EB%B3%B4%EB%9E%8C%EC%B0%AC%20%EC%82%B6)/Happiness-08_Summary</id><content type="html" xml:base="https://bluesplatter.com/a%20life%20of%20happiness%20and%20fulfillment%20(%ED%96%89%EB%B3%B5%ED%95%98%EA%B3%A0%20%EB%B3%B4%EB%9E%8C%EC%B0%AC%20%EC%82%B6)/Happiness-08_Summary/">&lt;h1 id=&quot;요약&quot;&gt;요약&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://bluesplatter.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://bluesplatter.com/" rel="alternate" type="text/html" /><updated>2022-09-29T16:53:44+09:00</updated><id>https://bluesplatter.com/feed.xml</id><title type="html">Bluesplatter</title><subtitle>전문적이지 않은 정보들, 감상, 즉흥적인 내용들</subtitle><author><name>HY03</name><email>hyunik03@gmail.com</email></author><entry><title type="html">Jenkins - Automating your delivery pipeline</title><link href="https://bluesplatter.com/jenkins/Jenkins_Automating_your_dilivery_pipeline/" rel="alternate" type="text/html" title="Jenkins - Automating your delivery pipeline" /><published>2022-09-29T16:00:00+09:00</published><updated>2022-09-29T16:00:00+09:00</updated><id>https://bluesplatter.com/jenkins/Jenkins_Automating_your_dilivery_pipeline</id><content type="html" xml:base="https://bluesplatter.com/jenkins/Jenkins_Automating_your_dilivery_pipeline/">&lt;h1 id=&quot;후기&quot;&gt;후기&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/posts/coursera_Automatingyourdeliverypipeline_course_info.png&quot; alt=&quot;강좌에 대한 설명&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;해당 강좌는 영상플레이 시간 1시간 (하지만 영어 강좌여서 2시간 이상) 소요 되는 강좌입니다.&lt;/li&gt;
+  &lt;li&gt;개인적으로 추천하고 싶지는 않은데, 내용을 떠나 구축된 Cloud 환경의 젠킨스가 구 버전이어서 플러그인과 호환이 되질 않습니다.&lt;/li&gt;
+  &lt;li&gt;실습의 절반정도는 영상을 보는 것으로만 하였습니다.&lt;/li&gt;
+  &lt;li&gt;장점은 부담되는 양의 자료 (책, 강의 등) 를 보기 전에 짧은 시간 훑어보기에 좋은 강의라는 점입니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;jenkins-란&quot;&gt;Jenkins 란?&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DevOps 환경에서 Continuous integration and Delivery 를 가능하게 하는 툴&lt;/li&gt;
+  &lt;li&gt;Continuous Delivery
+    &lt;ul&gt;
+      &lt;li&gt;개발자가 개발한 새 소스코드를 즉시 소스코드 저장소에 반영&lt;/li&gt;
+      &lt;li&gt;빌딩, 테스팅, 패키징이 등이 일어나 배포 가능 버전이 생성됨&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;이점
+    &lt;ul&gt;
+      &lt;li&gt;배포속도가 빨라짐&lt;/li&gt;
+      &lt;li&gt;피드백을 빨리 받을 수 있음&lt;/li&gt;
+      &lt;li&gt;초기 단게에서 결함을 발견할 수 있음&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;실습&quot;&gt;실습&lt;/h1&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;젠킨스 서버에서 사용하기 위한 Maven 설정
+    &lt;ul&gt;
+      &lt;li&gt;DashBoard 에서 Global Tool Configuration 설정&lt;/li&gt;
+      &lt;li&gt;하단의 Maven 설치 (네이밍 포함)&lt;/li&gt;
+      &lt;li&gt;Maven : 자바용 프로젝트 빌드, 관리에 사용되는 도구&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;ul&gt;
+      &lt;li&gt;라이브러리의 추가, 라이브러리 버전 동기화의 어려움을 해소&lt;/li&gt;
+      &lt;li&gt;프로젝트 생성, 테스트 빌드, 배포 등의 작업을 위함&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Spring pet clinic 어플리케이션의 첫번째 Job 생성
+    &lt;ul&gt;
+      &lt;li&gt;Spring pet clinic 의 깃헙 소스코드 fork 하기&lt;/li&gt;
+      &lt;li&gt;Jenkins 의 파이프라인 첫 단계는 compile stage 혹은 build stage 가 될 것&lt;/li&gt;
+      &lt;li&gt;New Item&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Freestyle project : 어떠한 제약, 제한조건 없는 프로젝트
+        &lt;ul&gt;
+          &lt;li&gt;네이밍하기&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;섹션들
+        &lt;ul&gt;
+          &lt;li&gt;General&lt;/li&gt;
+          &lt;li&gt;Source Code Management&lt;/li&gt;
+          &lt;li&gt;Build Triggers&lt;/li&gt;
+          &lt;li&gt;Build Environment&lt;/li&gt;
+          &lt;li&gt;Build&lt;/li&gt;
+          &lt;li&gt;Post-build Actions&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Source Code Management 설정
+        &lt;ul&gt;
+          &lt;li&gt;Git URL 값 입력&lt;/li&gt;
+          &lt;li&gt;Branch 입력 (소스코드가 위치하는 경로)&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Build 설정
+        &lt;ul&gt;
+          &lt;li&gt;Add build step -&amp;gt; Invoke top-level Maven targets : Maven 을 통한 build task 수행&lt;/li&gt;
+          &lt;li&gt;Maven 버전 설정 : Global Tool Configuration 에서 네이밍한 Maven 선택&lt;/li&gt;
+          &lt;li&gt;Goals 설정 : compile 입력&lt;/li&gt;
+          &lt;li&gt;Save
+            &lt;ul&gt;
+              &lt;li&gt;Build Now&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;#1 빌드 수행&lt;/li&gt;
+      &lt;li&gt;버튼 색에 따른 상태
+        &lt;ul&gt;
+          &lt;li&gt;Blue : 성공(완료)&lt;/li&gt;
+          &lt;li&gt;Blinking : 현재 실행중&lt;/li&gt;
+          &lt;li&gt;Rend : 실패&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;버튼 옆 arrow -&amp;gt; Console Output 으로 결과 확인&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Delivery Pipeline 생성하기 (Build, Test Stage 생성하기)
+    &lt;ul&gt;
+      &lt;li&gt;Jenkins -&amp;gt; New Item&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Freestyle project
+        &lt;ul&gt;
+          &lt;li&gt;네이밍하기&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Source Code Management 설정
+        &lt;ul&gt;
+          &lt;li&gt;Git URL 값 입력&lt;/li&gt;
+          &lt;li&gt;Branch 입력 (소스코드가 위치하는 경로)&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Build 설정
+        &lt;ul&gt;
+          &lt;li&gt;Add build step -&amp;gt; Invoke top-level Maven targets : Maven 을 통한 build task 수행&lt;/li&gt;
+          &lt;li&gt;Maven 버전 설정 : Global Tool Configuration 에서 네이밍한 Maven 선택&lt;/li&gt;
+          &lt;li&gt;Goals 설정 : test 입력&lt;/li&gt;
+          &lt;li&gt;Save
+            &lt;ul&gt;
+              &lt;li&gt;Build Now&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;#1 빌드 수행&lt;/li&gt;
+      &lt;li&gt;Console Output 에서 테스트 케이스에 대한 성공/실패여부를 볼 수 있음
+    - Test Job 의 Configure (Build 수행 후 Test 를 진행하고 싶다)&lt;/li&gt;
+      &lt;li&gt;Build Triggers : 어떻게 특정 Job 을 Trigger 할지 설정
+        &lt;ul&gt;
+          &lt;li&gt;Build after other projects are built
+            &lt;ul&gt;
+              &lt;li&gt;Projects to watch : Build Job 입력&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;Save
+            &lt;ul&gt;
+              &lt;li&gt;Pipeline 전체를 살펴보기 위해 Plugin 설치하기&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Jenkins -&amp;gt; Manage Jenkins -&amp;gt; Manage Plugins
+        &lt;ul&gt;
+          &lt;li&gt;Available tab -&amp;gt; search Build pipeline -&amp;gt; install&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Jenkins Dashboard 의 작은 + 버튼 클릭 -&amp;gt; Build Pipeline View
+        &lt;ul&gt;
+          &lt;li&gt;네이밍&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Pipeline Flow -&amp;gt; Upstream / downstream config
+        &lt;ul&gt;
+          &lt;li&gt;Initial Job (첫 시작 Job) 설정&lt;/li&gt;
+          &lt;li&gt;초록색 Job : 이미 실행된 Job&lt;/li&gt;
+          &lt;li&gt;파란색 Job : 아직 실행되지 않은 Job&lt;/li&gt;
+          &lt;li&gt;노란색 Job : 실행중인 Job&lt;/li&gt;
+          &lt;li&gt;빨간색 Job : Job 실패&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Run&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Codify Pipeline
+    &lt;ul&gt;
+      &lt;li&gt;Build pipeline 의 코드화 필요성&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;ul&gt;
+      &lt;li&gt;위 활동에서의 Configuration Setup 을 직접 수행할 경우 신뢰성이 떨어짐&lt;/li&gt;
+      &lt;li&gt;Jenkins 는 Groovy Script 를 사용함
+    - Pipeline Maven integration plugin 설치&lt;/li&gt;
+      &lt;li&gt;메이븐과 젠킨스의 통합을 쉽게 해줌&lt;/li&gt;
+      &lt;li&gt;scripted pipeline 에서 사용할 많은 Wrapper methods 를 제공
+    - New item&lt;/li&gt;
+      &lt;li&gt;Pipeline
+        &lt;ul&gt;
+          &lt;li&gt;Pipeline Tab&lt;/li&gt;
+        &lt;/ul&gt;
+
+        &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  node{
+      stage(&apos;Checkout&apos;){
+          git branch: &apos;main&apos;, url:&apos;https://github.com/HY03/SpringPetClinic.git&apos;
+      }
+      stage(&apos;Build&apos;){
+          withMaven(maven: &apos;M3&apos;){
+              sh &apos;mvn compile&apos;
+          }
+      }
+  }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+
+        &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  - node : where you run your job
+      + master : where jenkins installed
+      + slave : for the distributed
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;declarative pipeline
+    &lt;ul&gt;
+      &lt;li&gt;필요성&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Jenkins 와 엮여있는 Groovy Script 의 어려움
+    - New item&lt;/li&gt;
+      &lt;li&gt;Pipeline
+        &lt;ul&gt;
+          &lt;li&gt;Pipeline Tab&lt;/li&gt;
+        &lt;/ul&gt;
+
+        &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  pipeline{
+      agent{label &apos;master&apos;}
+      tools{maven &apos;M3&apos;}
+      stages{
+          stage(&apos;Checkout&apos;){
+              steps{
+                  git branch: &apos;main&apos;, url:&apos;https://github.com/HY03/SpringPetClinic.git&apos;&apos;
+              }
+          }
+          stage(&apos;Build&apos;){
+              steps{
+                  sh &apos;mvn compile&apos;   
+              }
+          }
+          stage(&apos;Test&apos;){
+              steps{
+                  sh &apos;mvn test&apos;
+              }
+          }
+          stage(&apos;Package&apos;){
+              steps{
+                  sh &apos;mvn package&apos;
+              }
+          }
+          stage(&apos;Deploy&apos;){
+              steps{
+                  sh &apos;java -jar /var/lib/jenkins/workspace/PetClinicDeclarativePipeline/target/*.jar&apos;
+              }
+          }
+      }
+  }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+
+        &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  - `sh &apos;mvn [goal]&apos;` : 실행할 mvn goal 설정
+  - 메이븐은 여러 플러그인으로 구성되어 있으며, 각각의 플러그인은 하나 이상의 goal(명령, 작업)을 포함하고 있다. 
+  - Goal은 Maven의 실행 단위이다.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Declarative Pipeline 을 Jenkins File 로 저장시켜 저장소에 저장하기
+    &lt;ul&gt;
+      &lt;li&gt;소스코드 저장소에 Jenkins Pipeline 스크립트를 복사&lt;/li&gt;
+      &lt;li&gt;Github 에서 파일 생성 : Jenkinsfile (파일명은 고정)&lt;/li&gt;
+      &lt;li&gt;Job 의 Pipeline 설정에서 Pipeline script 대신 Pipeline script from SCM 선택&lt;/li&gt;
+      &lt;li&gt;Git 경로 및 Branch 설정&lt;/li&gt;
+      &lt;li&gt;Script Path : jenkinsfile 위치 설정&lt;/li&gt;
+      &lt;li&gt;Lightweight Checkout 설정 : jenkinsfile 먼저 checkout 한 뒤, jenkinsfile 의 모든 스테이지를 수행&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="Jenkins" /><category term="Coursera" /><category term="Anju M Dominic" /><category term="Jenkins" /><category term="Automating your delivery pipeline" /><category term="젠킨스" /><category term="CI/CD" /><summary type="html">후기</summary></entry><entry><title type="html">A Life of Happiness and Fulfillment - 08. 요약</title><link href="https://bluesplatter.com/a%20life%20of%20happiness%20and%20fulfillment%20(%ED%96%89%EB%B3%B5%ED%95%98%EA%B3%A0%20%EB%B3%B4%EB%9E%8C%EC%B0%AC%20%EC%82%B6)/Happiness-08_Summary/" rel="alternate" type="text/html" title="A Life of Happiness and Fulfillment - 08. 요약" /><published>2022-09-27T18:00:00+09:00</published><updated>2022-09-27T18:00:00+09:00</updated><id>https://bluesplatter.com/a%20life%20of%20happiness%20and%20fulfillment%20(%ED%96%89%EB%B3%B5%ED%95%98%EA%B3%A0%20%EB%B3%B4%EB%9E%8C%EC%B0%AC%20%EC%82%B6)/Happiness-08_Summary</id><content type="html" xml:base="https://bluesplatter.com/a%20life%20of%20happiness%20and%20fulfillment%20(%ED%96%89%EB%B3%B5%ED%95%98%EA%B3%A0%20%EB%B3%B4%EB%9E%8C%EC%B0%AC%20%EC%82%B6)/Happiness-08_Summary/">&lt;h1 id=&quot;요약&quot;&gt;요약&lt;/h1&gt;
 
 &lt;h2 id=&quot;mba-접근법&quot;&gt;MBA 접근법&lt;/h2&gt;
 
@@ -1968,18 +2227,4 @@
   &lt;li&gt;자신의 삶을 사랑하고 돌보는 것 (발전)&lt;/li&gt;
   &lt;li&gt;어떠한 일에 능숙한 것 (능력적 자유)&lt;/li&gt;
   &lt;li&gt;–&amp;gt; 내 그릇에 맞는 범위에서 타인에게 이로운 사람이 되기&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="A Life of Happiness and Fulfillment (행복하고 보람찬 삶)" /><category term="Coursera" /><category term="Indian School of Business" /><category term="Dr. Rajagopal Raghunathan" /><category term="A Life of Happiness and Fulfillment" /><category term="긍정심리학" /><category term="행복 가치의 과소평가" /><category term="행복" /><summary type="html">행복 가치의 과소평가</summary></entry><entry><title type="html">A Life of Happiness and Fulfillment - 00. 과정설명</title><link href="https://bluesplatter.com/a%20life%20of%20happiness%20and%20fulfillment%20(%ED%96%89%EB%B3%B5%ED%95%98%EA%B3%A0%20%EB%B3%B4%EB%9E%8C%EC%B0%AC%20%EC%82%B6)/Happiness-00_About-this-course/" rel="alternate" type="text/html" title="A Life of Happiness and Fulfillment - 00. 과정설명" /><published>2022-08-13T12:00:00+09:00</published><updated>2022-08-13T12:00:00+09:00</updated><id>https://bluesplatter.com/a%20life%20of%20happiness%20and%20fulfillment%20(%ED%96%89%EB%B3%B5%ED%95%98%EA%B3%A0%20%EB%B3%B4%EB%9E%8C%EC%B0%AC%20%EC%82%B6)/Happiness-00_About%20this%20course</id><content type="html" xml:base="https://bluesplatter.com/a%20life%20of%20happiness%20and%20fulfillment%20(%ED%96%89%EB%B3%B5%ED%95%98%EA%B3%A0%20%EB%B3%B4%EB%9E%8C%EC%B0%AC%20%EC%82%B6)/Happiness-00_About-this-course/">&lt;h1 id=&quot;a-life-of-happiness-and-fulfillment-by-isb&quot;&gt;A Life of Happiness and Fulfillment by ISB&lt;/h1&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/posts/coursera_ALOHA_courseinfo.png&quot; alt=&quot;강좌에 대한 설명&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;후기&quot;&gt;후기&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;카테고리 A Life of Happiness and Fulfillment (행복하고 보람찬 삶) 의 포스팅은 Coursera 의 강좌 “A Life of Happiness and Fulfillment” 의 내용을 정리한 것임을 밝힙니다.&lt;/li&gt;
-  &lt;li&gt;해당 강좌는 저에게 유익하였습니다. 기회가 되시면 수강을 추천드립니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;도입&quot;&gt;도입&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;행복은 풍선과도 같다. 풍선이 커질수록 행복도 커진다.&lt;/li&gt;
-  &lt;li&gt;이 풍선에 구멍을 내는 7개의 죄악(오류)와 이를 방지하고 풍선에 바람을 불어넣을 좋은 습관, 행동들에 대해서 알아보자.&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="A Life of Happiness and Fulfillment (행복하고 보람찬 삶)" /><category term="Coursera" /><category term="Indian School of Business" /><category term="Dr. Rajagopal Raghunathan" /><category term="A Life of Happiness and Fulfillment" /><category term="긍정심리학" /><category term="행복" /><summary type="html">A Life of Happiness and Fulfillment by ISB</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="A Life of Happiness and Fulfillment (행복하고 보람찬 삶)" /><category term="Coursera" /><category term="Indian School of Business" /><category term="Dr. Rajagopal Raghunathan" /><category term="A Life of Happiness and Fulfillment" /><category term="긍정심리학" /><category term="행복 가치의 과소평가" /><category term="행복" /><summary type="html">행복 가치의 과소평가</summary></entry></feed>
