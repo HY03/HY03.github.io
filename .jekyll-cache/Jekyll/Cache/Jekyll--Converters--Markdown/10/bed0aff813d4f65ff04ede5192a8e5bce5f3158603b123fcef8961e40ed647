@@ -1,4 +1,4 @@
-I"�)<h1 id="후기">후기</h1>
+I"�)<h1 id="후기">후기</h1>
 
 <p><img src="/assets/images/posts/coursera_JenkinsPipeline-DeclarativeandIaCapproachesforDevOps_course_info.png" alt="강좌에 대한 설명" /></p>
 
@@ -93,7 +93,7 @@
   </li>
   <li>Environment Variables (Global Variables)
     <ul>
-      <li><code class="language-plaintext highlighter-rouge">http://localhost:8080/pipeline-syntax/globals#env</code></li>
+      <li><strong><code class="language-plaintext highlighter-rouge">http://localhost:8080/pipeline-syntax/globals#env</code></strong></li>
     </ul>
   </li>
 </ul>
@@ -289,5 +289,4 @@
     </ul>
   </li>
 </ul>
-
 :ET

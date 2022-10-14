@@ -82,7 +82,7 @@ toc: false
 		}
 	```
 - Environment Variables (Global Variables)
-	+ `http://localhost:8080/pipeline-syntax/globals#env`
+	+ **`http://localhost:8080/pipeline-syntax/globals#env`**
 
 ## 첫 파이프라인 스크립트 작성과 환경변수 삽입
 
@@ -218,4 +218,3 @@ toc: false
 		* 브랜치 설정
 	+ Build Now
 		* Declarative: Checkout SCM 스테이지가 자동생성된 것을 확인할 수 있음
-		
