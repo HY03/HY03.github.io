@@ -1,0 +1,1091 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.20.2 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Sequences, Time Series and Prediction - 04. Real-world time series data | Bluesplatter</title>
+<meta name="description" content="Real-world time series data">
+
+
+  <meta name="author" content="HY03">
+  
+  <meta property="article:author" content="HY03">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Bluesplatter">
+<meta property="og:title" content="Sequences, Time Series and Prediction - 04. Real-world time series data">
+<meta property="og:url" content="https://bluesplatter.com/ai/time%20series/Sequences_TimeSeries_and_Prediction_04_Real-world_time_series_data/">
+
+
+  <meta property="og:description" content="Real-world time series data">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-11-07T14:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://bluesplatter.com/ai/time%20series/Sequences_TimeSeries_and_Prediction_04_Real-world_time_series_data/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "HY03",
+      "url": "https://bluesplatter.com/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Bluesplatter Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo/logo.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          세상에 남기는 작은 흔적
+          <span class="site-subtitle">Bluesplatter</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/">연도별 포스트</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="https://bluesplatter.com/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#ai" itemprop="item"><span itemprop="name">Ai</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#time-series" itemprop="item"><span itemprop="name">Time series</span></a>
+          <meta itemprop="position" content="3" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Sequences, Time Series and Prediction - 04. Real-world time series data</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/profile/photo.jpg" alt="HY03" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">HY03</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>저는 전문가가 아니고 이것 저것 알아보는 비전문가 입니다. <br /> 틀린 내용이 기술되어도 너그러이 봐주시고 댓글을 남겨주셨으면 좋겠습니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="http://bluesplatter.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:hyunik03@gmail.com">
+            <meta itemprop="email" content="hyunik03@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">이메일</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Sequences, Time Series and Prediction - 04. Real-world time series data">
+    <meta itemprop="description" content="Real-world time series data">
+    <meta itemprop="datePublished" content="2022-11-07T14:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Sequences, Time Series and Prediction - 04. Real-world time series data
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-11-07T14:00:00+09:00">November 7, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h1 id="real-world-time-series-data">Real-world time series data</h1>
+
+<h2 id="intro">Intro</h2>
+
+<ul>
+  <li>실사용 데이터 (태양의 흑점활동) 이용하기</li>
+  <li>Conv1D, LSTM, DNN 을 결합한 모델을 활용할 것</li>
+</ul>
+
+<h2 id="convolutions">Convolutions</h2>
+
+<ul>
+  <li>
+    <p>예시</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      model = tf.keras.models.Sequential([
+          tf.keras.layers.Conv1D(filters=32, kernel_size=5, // 32개의 필터를 학습할 1D Conv
+                              strides=1, padding="casual",
+                              activation="relu",
+                              input_shape=[None, 1]),
+          tf.keras.layers.LSTM(32, return_sequences=True),
+          tf.keras.layers.LSTM(32),
+          tf.keras.layers.Dense(1),
+          tf.keras.layers.Lambda(lambda x: x * 200)
+      ])
+
+      optimizer = tf.keras.optimizers.SGD(learning_late=1e-5, momentum=0.9)
+
+      model.compile(loss=tf.keras.losses.Huber(),
+                  optimizer=optimizer,
+                  metrics=["mae"])
+
+      model.fit(dataset, epochs=500)
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="bi-directional-lstms">Bi-directional LSTMs</h2>
+
+<ul>
+  <li>
+    <p>예시</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      model = tf.keras.models.Sequential([
+          tf.keras.layers.Conv1D(filters=32, kernel_size=5, 
+                              strides=1, padding="casual",
+                              activation="relu",
+                              input_shape=[None, 1]), // LSTM 의 입력값을 재구성하는 Lambda 레이어를 없앰
+          tf.keras.layers.LSTM(32, return_sequences=True),
+          tf.keras.layers.LSTM(32),
+          tf.keras.layers.Dense(1),
+          tf.keras.layers.Lambda(lambda x: x * 200)
+      ])
+
+      optimizer = tf.keras.optimizers.SGD(learning_late=1e-5, momentum=0.9) // 플로팅한 결과 불안정해지기 전의 학습률
+
+      model.compile(loss=tf.keras.losses.Huber(),
+                  optimizer=optimizer,
+                  metrics=["mae"])
+
+      model.fit(dataset, epochs=500) // epoch 늘리기
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>windowed_dataset 헬퍼 함수</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      def windowed_dataset(series, window_size, batch_size, shuffle_buffer):
+
+          ds = tf.data.Dataset.from_tensor_slices(series)
+          ds = ds.window(window_size + 1, shift=1, drop_remainder=True)
+          ds = ds.flat_map(lambda w: w.batch(window_size + 1))
+          ds = ds.shuffle(shuffle_buffer)
+          ds = ds.map(lambda w: (w[:-1], w[-1]))
+
+          return ds.batch(batch_size).prefetch(1)
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Bi-directional LSTM</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      model = tf.keras.models.Sequential([
+          tf.keras.layers.Conv1D(filters=32, kernel_size=5, 
+                              strides=1, padding="casual",
+                              activation="relu",
+                              input_shape=[None, 1]), 
+          tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(32, return_sequences=True)), // 양방향
+          tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(32)),
+          tf.keras.layers.Dense(1),
+          tf.keras.layers.Lambda(lambda x: x * 200)
+      ])
+
+      optimizer = tf.keras.optimizers.SGD(learning_late=1e-5, momentum=0.9) // 플로팅한 결과 불안정해지기 전의 학습률
+
+      model.compile(loss=tf.keras.losses.Huber(),
+                  optimizer=optimizer,
+                  metrics=["mae"])
+
+      model.fit(dataset, epochs=500)
+</code></pre></div>    </div>
+
+    <ul>
+      <li>결과수치는 긍정적이나 검증세트에 예측을 플로팅 해보면 과적합이 보여 일부 파라미터에 변화를 줄 필요가 있음</li>
+      <li>MAE 로 손실을 플로팅하면 문제점을 확인할 수 있음
+        <ul>
+          <li>스파이크 현상은 배치 크기가 작아서 무작위 노이즈가 많기 때문임</li>
+          <li>배치사이즈를 줄이거나 늘이는 것에 따라 학습과 예측이 달라짐</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="more-on-batch-sizing">More on batch sizing</h2>
+
+<ul>
+  <li>신경망을 더 빠르게 학습하도록 하는 최적화 알고리즘
+    <ul>
+      <li>머신러닝 : 잘 작동되는 모델을 찾기 위해 많은 훈련을 거쳐야 하는 반복적인 과정
+        <ul>
+          <li>모델을 빠르게 훈련시키는 것이 매우 중요함</li>
+        </ul>
+      </li>
+      <li>딥러닝은 빅데이터에서 가장 잘 작동됨 -&gt; 훈련이 어려움 (큰 데이터 세트에서 훈련하는 것은 매우 느린과정)</li>
+      <li>좋은 최적화 알고리즘을 찾는 것은 효율성을 향상시켜준다.</li>
+    </ul>
+  </li>
+  <li>미니배치 경사 하강법
+    <ul>
+      <li>벡터화 : m개의 샘플에 대한 계산을 효율적으로 만들어줌. 명시적인 반복문 없이도 훈련 세트를 진행할 수 있도록 함.</li>
+      <li>훈련 샘플을 받아서 큰 벡터에 저장함
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">X = [x^1, x^2, ..., x^m]</code> : shape : (n_x,m)</li>
+          <li><code class="language-plaintext highlighter-rouge">Y = [y^1, y^2, ..., y^m]</code> : shape : (1,m)</li>
+          <li>하지만 m 의 수치가 크면 여전히 학습은 느리다.</li>
+          <li>예를들어 m 의 수치가 500만 이라면?</li>
+        </ul>
+      </li>
+      <li>전체 훈련 세트에 대한 경사 하강법을 구현하면 경사 하강법의 작은 한 단계를 밟기 전에 모든 훈련 세트를 처리해야 함
+        <ul>
+          <li>즉, 경사하강법의 다음 단계를 밟기 전에 500만 개의 전체 훈련 샘플을 처리해야 함</li>
+          <li>500만 개의 전체 훈련 샘플을 모두 훈련하기 전에 경사 하강법이 진행되도록 하면 더 빠른 알고리즘을 얻을 수 있음</li>
+        </ul>
+      </li>
+      <li>훈련 세트를 더 작은 훈련세트 (미니배치) 로 나눔
+        <ul>
+          <li>mini-batch 가 1000개의 샘플을 갖는다고 가정</li>
+          <li><code class="language-plaintext highlighter-rouge">X = [x^1, x^2, ..., x^1000 | x^1001, ..., x^2000 | ... | ... x^m]</code></li>
+          <li><code class="language-plaintext highlighter-rouge">X = X^{1},                   X^{2}, ... ,               X^{5000}</code> : shape : (n_x, 1000)</li>
+          <li><code class="language-plaintext highlighter-rouge">Y = Y^{1},                   Y^{2}, ... ,               Y^{5000}</code> : shape : (1, 1000)</li>
+          <li>Mini-batch t : X^{t}, Y^{t}</li>
+        </ul>
+      </li>
+      <li>표기법 정의
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">x^(i)</code> : i 번째 훈련 샘플</li>
+          <li><code class="language-plaintext highlighter-rouge">z^[l]</code> : l 번째 신경망의 z 값</li>
+          <li><code class="language-plaintext highlighter-rouge">X^{t}</code> : t 번째 미니배치 X</li>
+        </ul>
+      </li>
+      <li>Batch Gradient Descent : 일반적인 경사하강법, 모든 훈련 세트를 동시에 훈련시킴, 훈련 샘플의 모든 배치를 진행시킨다는 관점</li>
+      <li>미니배치 : 전체 훈련 세트 X,Y 를 한번에 진행시키지 않고, 하나의 미니배치 X^{t}, Y^{t} 를 동시에 진행시키는 알고리즘
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  for t=1 ,..., 5000 : 총 미니배치의 수 (5000개)
+      // 1 step of gradient descent using X^{t}, Y^{t}
+      // (as if m=1000)
+      // 모든 1000개의 샘플에 대해 명시적인 반복문을 갖는 것보다 벡터화를 사용해 모든 1000개의 샘플을 동시에 진행함
+      Forward prop on X^{t}
+          Z^[1] = W^[1] * X^{t} + b^[1] : Vectorized Implementation (1000 examples)
+          A^[1] = g^[1] * (Z^[1]) : Vectorized Implementation (1000 examples)
+          ...
+          A^[l] = g^[l] * (Z^[l]) : Vectorized Implementation (1000 examples)
+      Compute cost J^{t} = 1/1000 * Sum (( i = 1 to l) Loss(expect(y^(i)), y^(i)))
+          + 정규화 항
+      Backprop to compute Gradients cost J^(t) using X^{t}, Y^{t}
+          W^[l] = W^[l] - adW^[l], b^[l] = b^[l] - adb^[l]
+      ...
+      1 epoch : pass through training set (5000 개의 경사하강단계)
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="convolutions-with-lstm-notebook">Convolutions with LSTM notebook</h2>
+
+<ul>
+  <li>Jupyter notebook 자료</li>
+</ul>
+
+<h2 id="convolutions-with-lstm">Convolutions with LSTM</h2>
+
+<ul>
+  <li>Jupyter notebook 자료</li>
+</ul>
+
+<h2 id="real-data---sunspots">Real data - sunspots</h2>
+
+<ul>
+  <li>
+    <p>소스 내려받기 : 케글에서 내려받거나, 이번학습을 위한 데이터 제공 저장소를 사용 (후자)</p>
+
+    <p><code class="language-plaintext highlighter-rouge">!wget --no-check-certificate https://storage.googleapis.com/laurencemoroney-blog.appspot.com/Sunspots.csv -O /tmp/sunspots.csv</code></p>
+  </li>
+  <li>
+    <p>CSV 읽기</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      import csv
+      time_step = []
+      sunspots = []
+
+      with open('/tmp/sunspots.csv') as csvfile:
+          reader = csv.reader(csvfile, delimiter=',')
+          next(reader)
+          for row in reader :
+              sunspots.append(float(row[2]))
+              time_step.append(int(row[0]))
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>numpy 배열로 전환</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      series = np.array(sunspots) // numpy 에 항목을 추가할 때마다 목록을 복제하는데,
+      time = np.array(time_step) // 메모리 관리 과정이 많이 진행되기 때문에 데이터 양이 많으면 느려질 수 있음
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>시계열을 훈련 및 검증 데이터 세트로 분할</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      split_time = 1000
+      time_train = time[:split_time]
+      x_train = series[:split_time]
+      time_valid = time[split_time:]
+      x_valid = series[split_time:]
+
+      window_size = 20
+      batch_size = 32
+      shuffle_buffer_size = 1000
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>이전 windowed_dataset 함수와 동일 코드를 사용</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      def windowed_dataset(series, window_size, batch_size, shuffle_buffer):
+          dataset = tf.data.Dataset.from_tensor_slices(series)
+          dataset = dataset.window(window_size + 1, shift=1, drop_remainder=True)
+          dataset = dataset.flat_map(lambda window: window.batch(window_size + 1))
+          dataset = dataset.shuffle(shuffle_buffer).map(lambda window: (window[:-1], window[-1]))
+          dataset = dataset.batch(batch_size).prefetch(1)
+          return dataset
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="train-and-tune-the-model">Train and tune the model</h2>
+
+<ul>
+  <li>이전 수업에서 배웠던 모델로 예측하여 플로팅하면, 결과는 괜찮아보이나 MAE 가 매우 큼</li>
+  <li>이는 이전 window_size 가 20 (여기서는 약 2년이 안되는 시간) 이나, 사실 흑점 데이터의 주기는 11년 혹은 22년으로 추정됨</li>
+  <li>window_size 를 11년에 해당하는 132로 두고 다시 훈련을 하면 차트는 더 잘 나오나 MAE는 더 커짐
+    <ul>
+      <li>데이터를 되돌아보면 11년 주기의 계절성을 갖지만 창 안에 계절 전체가 있어야 할 필요는 없음</li>
+      <li>플롯을 확대해보면 전형적인 시계열 형태 데이터임</li>
+      <li>나중에 오는 값이 앞선 값과 연관이 있지만 노이즈가 많음</li>
+      <li>그래서 훈련 시에 창 크기가 클 필요는 없을 수도 있음</li>
+    </ul>
+  </li>
+  <li>data 의 분할을 1000을 훈련, 2500을 검증으로 설정하였는데 이는 좋지 못한 분할임
+    <ul>
+      <li>3500과 500으로 지정</li>
+    </ul>
+  </li>
+  <li>신경망 설계와 파라미터의 크기 변경
+    <ul>
+      <li>10, 10, 1 레이어 를 30, 15, 1 로 값을 바꿔서 훈련 (입력 Shape 값이 30)</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="prediction">Prediction</h2>
+
+<ul>
+  <li>
+    <p>예측
+  <code class="language-plaintext highlighter-rouge">model.predict(series[3205:3235][np.newaxis])</code> : 7.077 개의 흑점 예상 (실 데이터 8.7 개)</p>
+  </li>
+  <li>
+    <p>설정 변경 : MAE 13.7</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  split_time = 3000
+  window_size = 60
+	
+  model = tf.keras.models.Sequential([
+      tf.keras.layers.Dense(20, input_shape=[window_size], activation="relu"),
+      tf.keras.layers.Dense(10, activation="relu"),
+      tf.keras.layers.Dense(1)
+  ])
+	
+  model.compile(loss="mse", optimizer=tf.keras.optimizers.SGD(lr=1e-7, momentum=0.9))
+</code></pre></div>    </div>
+    <ul>
+      <li>8.13 예측 (실제값 8.7)</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="sunspots-notebooks-lab-2--lab-3">Sunspots notebooks (Lab 2 &amp; Lab 3)</h2>
+
+<ul>
+  <li>jupyter notebook 으로 대체</li>
+</ul>
+
+<h2 id="sunspots">Sunspots</h2>
+
+<ul>
+  <li>입력 창의 크기를 60으로 함</li>
+  <li>DNN 을 Dense 20, 10, 1 로 학습</li>
+</ul>
+
+<h2 id="combining-our-tools-for-analysis">Combining our tools for analysis</h2>
+
+<ul>
+  <li>
+    <p>예시</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      window_size = 60
+      batch_size = 64
+      train_set = windowed_dataset(x_train, window_size, batch_size, shuffle_buffer_size)
+
+      model = tf.keras.models.Sequential([
+          tf.keras.layers.Conv1D(filters=32, kernel_size=5, strides=1, padding="casual", activation="relu", input_shape=[None, 1]),
+          tf.keras.layers.LSTM(32, return_sequences=True),
+          tf.keras.layers.LSTM(32),
+          tf.keras.layers.Dense(30, activation="relu"),
+          tf.keras.layers.Dense(10, activation="relu"),
+          tf.keras.layers.Dense(1),
+          tf.keras.layers.Lambda(lambda x: x * 400)
+      ])
+
+      lr_schedule = tf.keras.callbacks.LearningRateScheduler(lambda epoch: 1e-5 * 10**(epoch / 20))
+      optimizer = tf.keras.optimizers.SGD(learning_rate = 1e-8, momentum=0.9)
+      model.compile(loss=tf.keras.losses.Huber(), optimizer = optimizer, metrics=["mae"])
+      history = model.fit(train-set, epochs=100, callbacks=[lr_schedule])
+
+</code></pre></div>    </div>
+  </li>
+  <li>batch_size 의 변경 (256) : loss 에 노이즈가 생길 경우 고려해볼 파라미터</li>
+  <li>하이퍼파라미터를 다양하게 실험해 봐야 함</li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#coursera" class="page__taxonomy-item" rel="tag">Coursera</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#deeplearning-ai" class="page__taxonomy-item" rel="tag">deeplearning.ai</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#laurence-moroney" class="page__taxonomy-item" rel="tag">Laurence Moroney</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#tensorflow" class="page__taxonomy-item" rel="tag">tensorflow</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#timeseries" class="page__taxonomy-item" rel="tag">timeseries</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#%EC%8B%9C%EA%B3%84%EC%97%B4" class="page__taxonomy-item" rel="tag">시계열</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#ai" class="page__taxonomy-item" rel="tag">AI</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#time-series" class="page__taxonomy-item" rel="tag">Time Series</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2022-11-07T14:00:00+09:00">November 7, 2022</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Sequences%2C+Time+Series+and+Prediction+-+04.+Real-world+time+series+data%20https%3A%2F%2Fbluesplatter.com%2Fai%2Ftime%2520series%2FSequences_TimeSeries_and_Prediction_04_Real-world_time_series_data%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbluesplatter.com%2Fai%2Ftime%2520series%2FSequences_TimeSeries_and_Prediction_04_Real-world_time_series_data%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fbluesplatter.com%2Fai%2Ftime%2520series%2FSequences_TimeSeries_and_Prediction_04_Real-world_time_series_data%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/ai/time%20series/Sequences_TimeSeries_and_Prediction_03_Recurrent_Neural_Networks_for_Time_Series/" class="pagination--pager" title="Sequences, Time Series and Prediction - 03. Recurrent Neural Networks for Time Series
+">이전</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ai/time%20series/Sequences_TimeSeries_and_Prediction_03_Recurrent_Neural_Networks_for_Time_Series/" rel="permalink">Sequences, Time Series and Prediction - 03. Recurrent Neural Networks for Time Series
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-10-25T14:00:00+09:00">October 25, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Recurrent Neural Networks for Time Series
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ai/time%20series/Sequences_TimeSeries_and_Prediction_02_Deep_Neural_Networks_for_Time_Series/" rel="permalink">Sequences, Time Series and Prediction - 02. Deep Neural Networks for Time Series
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-10-21T14:00:00+09:00">October 21, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Deep_Neural_Networks_for_Time_Series
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ai/time%20series/Sequences_TimeSeries_and_Prediction_01_Sequences_and_Prediction/" rel="permalink">Sequences, Time Series and Prediction - 01. Sequences and Prediction
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-10-20T14:00:00+09:00">October 20, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Introduction
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ai/time%20series/Sequences_TimeSeries_and_Prediction_00_About-this-course/" rel="permalink">Sequences, Time Series and Prediction - 00. 강좌소개
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-10-17T14:00:00+09:00">October 17, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">강좌에 대한 설명
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+<!--
+<script>
+	(function(d, h, m){
+    var js, fjs = d.getElementsByTagName(h)[0];
+    if (d.getElementById(m)){return;}
+    js = d.createElement(h); js.id = m;
+    js.onload = function(){
+        window.makerWidgetComInit({
+        position: "left",          
+        widget: "eqypoqmawbcz3azh-usiy9q7ma4ong1w1-juelcm3zfgcuwjds"                
+    })};
+    js.src = "https://makerwidget.com/js/embed.js";
+    fjs.parentNode.insertBefore(js, fjs)
+	}(document, "script", "dhm"))
+</script>
+-->
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:hyunik03@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 HY03. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://bluesplatter.com/ai/time%20series/Sequences_TimeSeries_and_Prediction_04_Real-world_time_series_data/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/ai/time%20series/Sequences_TimeSeries_and_Prediction_04_Real-world_time_series_data"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://bluesplatter.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

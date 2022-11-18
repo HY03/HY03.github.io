@@ -1,4 +1,1003 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://bluesplatter.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://bluesplatter.com/" rel="alternate" type="text/html" /><updated>2022-10-14T13:00:31+09:00</updated><id>https://bluesplatter.com/feed.xml</id><title type="html">Bluesplatter</title><subtitle>전문적이지 않은 정보들, 감상, 즉흥적인 내용들</subtitle><author><name>HY03</name><email>hyunik03@gmail.com</email></author><entry><title type="html">Jenkins Pipeline - Declarative and IaC approaches for DevOps</title><link href="https://bluesplatter.com/jenkins/JenkinsPipeline_Declarative_and_IaC_approaches_for_DevOps/" rel="alternate" type="text/html" title="Jenkins Pipeline - Declarative and IaC approaches for DevOps" /><published>2022-09-30T14:00:00+09:00</published><updated>2022-09-30T14:00:00+09:00</updated><id>https://bluesplatter.com/jenkins/JenkinsPipeline_Declarative_and_IaC_approaches_for_DevOps</id><content type="html" xml:base="https://bluesplatter.com/jenkins/JenkinsPipeline_Declarative_and_IaC_approaches_for_DevOps/">&lt;h1 id=&quot;후기&quot;&gt;후기&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://bluesplatter.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://bluesplatter.com/" rel="alternate" type="text/html" /><updated>2022-11-18T16:23:46+09:00</updated><id>https://bluesplatter.com/feed.xml</id><title type="html">Bluesplatter</title><subtitle>전문적이지 않은 정보들, 감상, 즉흥적인 내용들</subtitle><author><name>HY03</name><email>hyunik03@gmail.com</email></author><entry><title type="html">Sequences, Time Series and Prediction - 04. Real-world time series data</title><link href="https://bluesplatter.com/ai/time%20series/Sequences_TimeSeries_and_Prediction_04_Real-world_time_series_data/" rel="alternate" type="text/html" title="Sequences, Time Series and Prediction - 04. Real-world time series data" /><published>2022-11-07T14:00:00+09:00</published><updated>2022-11-07T14:00:00+09:00</updated><id>https://bluesplatter.com/ai/time%20series/Sequences_TimeSeries_and_Prediction_04_Real-world_time_series_data</id><content type="html" xml:base="https://bluesplatter.com/ai/time%20series/Sequences_TimeSeries_and_Prediction_04_Real-world_time_series_data/">&lt;h1 id=&quot;real-world-time-series-data&quot;&gt;Real-world time series data&lt;/h1&gt;
+
+&lt;h2 id=&quot;intro&quot;&gt;Intro&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;실사용 데이터 (태양의 흑점활동) 이용하기&lt;/li&gt;
+  &lt;li&gt;Conv1D, LSTM, DNN 을 결합한 모델을 활용할 것&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;convolutions&quot;&gt;Convolutions&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;예시&lt;/p&gt;
+
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      model = tf.keras.models.Sequential([
+          tf.keras.layers.Conv1D(filters=32, kernel_size=5, // 32개의 필터를 학습할 1D Conv
+                              strides=1, padding=&quot;casual&quot;,
+                              activation=&quot;relu&quot;,
+                              input_shape=[None, 1]),
+          tf.keras.layers.LSTM(32, return_sequences=True),
+          tf.keras.layers.LSTM(32),
+          tf.keras.layers.Dense(1),
+          tf.keras.layers.Lambda(lambda x: x * 200)
+      ])
+
+      optimizer = tf.keras.optimizers.SGD(learning_late=1e-5, momentum=0.9)
+
+      model.compile(loss=tf.keras.losses.Huber(),
+                  optimizer=optimizer,
+                  metrics=[&quot;mae&quot;])
+
+      model.fit(dataset, epochs=500)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;bi-directional-lstms&quot;&gt;Bi-directional LSTMs&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;예시&lt;/p&gt;
+
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      model = tf.keras.models.Sequential([
+          tf.keras.layers.Conv1D(filters=32, kernel_size=5, 
+                              strides=1, padding=&quot;casual&quot;,
+                              activation=&quot;relu&quot;,
+                              input_shape=[None, 1]), // LSTM 의 입력값을 재구성하는 Lambda 레이어를 없앰
+          tf.keras.layers.LSTM(32, return_sequences=True),
+          tf.keras.layers.LSTM(32),
+          tf.keras.layers.Dense(1),
+          tf.keras.layers.Lambda(lambda x: x * 200)
+      ])
+
+      optimizer = tf.keras.optimizers.SGD(learning_late=1e-5, momentum=0.9) // 플로팅한 결과 불안정해지기 전의 학습률
+
+      model.compile(loss=tf.keras.losses.Huber(),
+                  optimizer=optimizer,
+                  metrics=[&quot;mae&quot;])
+
+      model.fit(dataset, epochs=500) // epoch 늘리기
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;windowed_dataset 헬퍼 함수&lt;/p&gt;
+
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      def windowed_dataset(series, window_size, batch_size, shuffle_buffer):
+
+          ds = tf.data.Dataset.from_tensor_slices(series)
+          ds = ds.window(window_size + 1, shift=1, drop_remainder=True)
+          ds = ds.flat_map(lambda w: w.batch(window_size + 1))
+          ds = ds.shuffle(shuffle_buffer)
+          ds = ds.map(lambda w: (w[:-1], w[-1]))
+
+          return ds.batch(batch_size).prefetch(1)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Bi-directional LSTM&lt;/p&gt;
+
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      model = tf.keras.models.Sequential([
+          tf.keras.layers.Conv1D(filters=32, kernel_size=5, 
+                              strides=1, padding=&quot;casual&quot;,
+                              activation=&quot;relu&quot;,
+                              input_shape=[None, 1]), 
+          tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(32, return_sequences=True)), // 양방향
+          tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(32)),
+          tf.keras.layers.Dense(1),
+          tf.keras.layers.Lambda(lambda x: x * 200)
+      ])
+
+      optimizer = tf.keras.optimizers.SGD(learning_late=1e-5, momentum=0.9) // 플로팅한 결과 불안정해지기 전의 학습률
+
+      model.compile(loss=tf.keras.losses.Huber(),
+                  optimizer=optimizer,
+                  metrics=[&quot;mae&quot;])
+
+      model.fit(dataset, epochs=500)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;결과수치는 긍정적이나 검증세트에 예측을 플로팅 해보면 과적합이 보여 일부 파라미터에 변화를 줄 필요가 있음&lt;/li&gt;
+      &lt;li&gt;MAE 로 손실을 플로팅하면 문제점을 확인할 수 있음
+        &lt;ul&gt;
+          &lt;li&gt;스파이크 현상은 배치 크기가 작아서 무작위 노이즈가 많기 때문임&lt;/li&gt;
+          &lt;li&gt;배치사이즈를 줄이거나 늘이는 것에 따라 학습과 예측이 달라짐&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;more-on-batch-sizing&quot;&gt;More on batch sizing&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;신경망을 더 빠르게 학습하도록 하는 최적화 알고리즘
+    &lt;ul&gt;
+      &lt;li&gt;머신러닝 : 잘 작동되는 모델을 찾기 위해 많은 훈련을 거쳐야 하는 반복적인 과정
+        &lt;ul&gt;
+          &lt;li&gt;모델을 빠르게 훈련시키는 것이 매우 중요함&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;딥러닝은 빅데이터에서 가장 잘 작동됨 -&amp;gt; 훈련이 어려움 (큰 데이터 세트에서 훈련하는 것은 매우 느린과정)&lt;/li&gt;
+      &lt;li&gt;좋은 최적화 알고리즘을 찾는 것은 효율성을 향상시켜준다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;미니배치 경사 하강법
+    &lt;ul&gt;
+      &lt;li&gt;벡터화 : m개의 샘플에 대한 계산을 효율적으로 만들어줌. 명시적인 반복문 없이도 훈련 세트를 진행할 수 있도록 함.&lt;/li&gt;
+      &lt;li&gt;훈련 샘플을 받아서 큰 벡터에 저장함
+        &lt;ul&gt;
+          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;X = [x^1, x^2, ..., x^m]&lt;/code&gt; : shape : (n_x,m)&lt;/li&gt;
+          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Y = [y^1, y^2, ..., y^m]&lt;/code&gt; : shape : (1,m)&lt;/li&gt;
+          &lt;li&gt;하지만 m 의 수치가 크면 여전히 학습은 느리다.&lt;/li&gt;
+          &lt;li&gt;예를들어 m 의 수치가 500만 이라면?&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;전체 훈련 세트에 대한 경사 하강법을 구현하면 경사 하강법의 작은 한 단계를 밟기 전에 모든 훈련 세트를 처리해야 함
+        &lt;ul&gt;
+          &lt;li&gt;즉, 경사하강법의 다음 단계를 밟기 전에 500만 개의 전체 훈련 샘플을 처리해야 함&lt;/li&gt;
+          &lt;li&gt;500만 개의 전체 훈련 샘플을 모두 훈련하기 전에 경사 하강법이 진행되도록 하면 더 빠른 알고리즘을 얻을 수 있음&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;훈련 세트를 더 작은 훈련세트 (미니배치) 로 나눔
+        &lt;ul&gt;
+          &lt;li&gt;mini-batch 가 1000개의 샘플을 갖는다고 가정&lt;/li&gt;
+          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;X = [x^1, x^2, ..., x^1000 | x^1001, ..., x^2000 | ... | ... x^m]&lt;/code&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;X = X^{1},                   X^{2}, ... ,               X^{5000}&lt;/code&gt; : shape : (n_x, 1000)&lt;/li&gt;
+          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Y = Y^{1},                   Y^{2}, ... ,               Y^{5000}&lt;/code&gt; : shape : (1, 1000)&lt;/li&gt;
+          &lt;li&gt;Mini-batch t : X^{t}, Y^{t}&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;표기법 정의
+        &lt;ul&gt;
+          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;x^(i)&lt;/code&gt; : i 번째 훈련 샘플&lt;/li&gt;
+          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;z^[l]&lt;/code&gt; : l 번째 신경망의 z 값&lt;/li&gt;
+          &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;X^{t}&lt;/code&gt; : t 번째 미니배치 X&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Batch Gradient Descent : 일반적인 경사하강법, 모든 훈련 세트를 동시에 훈련시킴, 훈련 샘플의 모든 배치를 진행시킨다는 관점&lt;/li&gt;
+      &lt;li&gt;미니배치 : 전체 훈련 세트 X,Y 를 한번에 진행시키지 않고, 하나의 미니배치 X^{t}, Y^{t} 를 동시에 진행시키는 알고리즘
+        &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  for t=1 ,..., 5000 : 총 미니배치의 수 (5000개)
+      // 1 step of gradient descent using X^{t}, Y^{t}
+      // (as if m=1000)
+      // 모든 1000개의 샘플에 대해 명시적인 반복문을 갖는 것보다 벡터화를 사용해 모든 1000개의 샘플을 동시에 진행함
+      Forward prop on X^{t}
+          Z^[1] = W^[1] * X^{t} + b^[1] : Vectorized Implementation (1000 examples)
+          A^[1] = g^[1] * (Z^[1]) : Vectorized Implementation (1000 examples)
+          ...
+          A^[l] = g^[l] * (Z^[l]) : Vectorized Implementation (1000 examples)
+      Compute cost J^{t} = 1/1000 * Sum (( i = 1 to l) Loss(expect(y^(i)), y^(i)))
+          + 정규화 항
+      Backprop to compute Gradients cost J^(t) using X^{t}, Y^{t}
+          W^[l] = W^[l] - adW^[l], b^[l] = b^[l] - adb^[l]
+      ...
+      1 epoch : pass through training set (5000 개의 경사하강단계)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;convolutions-with-lstm-notebook&quot;&gt;Convolutions with LSTM notebook&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Jupyter notebook 자료&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;convolutions-with-lstm&quot;&gt;Convolutions with LSTM&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Jupyter notebook 자료&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;real-data---sunspots&quot;&gt;Real data - sunspots&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;소스 내려받기 : 케글에서 내려받거나, 이번학습을 위한 데이터 제공 저장소를 사용 (후자)&lt;/p&gt;
+
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;!wget --no-check-certificate https://storage.googleapis.com/laurencemoroney-blog.appspot.com/Sunspots.csv -O /tmp/sunspots.csv&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;CSV 읽기&lt;/p&gt;
+
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      import csv
+      time_step = []
+      sunspots = []
+
+      with open(&apos;/tmp/sunspots.csv&apos;) as csvfile:
+          reader = csv.reader(csvfile, delimiter=&apos;,&apos;)
+          next(reader)
+          for row in reader :
+              sunspots.append(float(row[2]))
+              time_step.append(int(row[0]))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;numpy 배열로 전환&lt;/p&gt;
+
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      series = np.array(sunspots) // numpy 에 항목을 추가할 때마다 목록을 복제하는데,
+      time = np.array(time_step) // 메모리 관리 과정이 많이 진행되기 때문에 데이터 양이 많으면 느려질 수 있음
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;시계열을 훈련 및 검증 데이터 세트로 분할&lt;/p&gt;
+
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      split_time = 1000
+      time_train = time[:split_time]
+      x_train = series[:split_time]
+      time_valid = time[split_time:]
+      x_valid = series[split_time:]
+
+      window_size = 20
+      batch_size = 32
+      shuffle_buffer_size = 1000
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;이전 windowed_dataset 함수와 동일 코드를 사용&lt;/p&gt;
+
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      def windowed_dataset(series, window_size, batch_size, shuffle_buffer):
+          dataset = tf.data.Dataset.from_tensor_slices(series)
+          dataset = dataset.window(window_size + 1, shift=1, drop_remainder=True)
+          dataset = dataset.flat_map(lambda window: window.batch(window_size + 1))
+          dataset = dataset.shuffle(shuffle_buffer).map(lambda window: (window[:-1], window[-1]))
+          dataset = dataset.batch(batch_size).prefetch(1)
+          return dataset
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;train-and-tune-the-model&quot;&gt;Train and tune the model&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;이전 수업에서 배웠던 모델로 예측하여 플로팅하면, 결과는 괜찮아보이나 MAE 가 매우 큼&lt;/li&gt;
+  &lt;li&gt;이는 이전 window_size 가 20 (여기서는 약 2년이 안되는 시간) 이나, 사실 흑점 데이터의 주기는 11년 혹은 22년으로 추정됨&lt;/li&gt;
+  &lt;li&gt;window_size 를 11년에 해당하는 132로 두고 다시 훈련을 하면 차트는 더 잘 나오나 MAE는 더 커짐
+    &lt;ul&gt;
+      &lt;li&gt;데이터를 되돌아보면 11년 주기의 계절성을 갖지만 창 안에 계절 전체가 있어야 할 필요는 없음&lt;/li&gt;
+      &lt;li&gt;플롯을 확대해보면 전형적인 시계열 형태 데이터임&lt;/li&gt;
+      &lt;li&gt;나중에 오는 값이 앞선 값과 연관이 있지만 노이즈가 많음&lt;/li&gt;
+      &lt;li&gt;그래서 훈련 시에 창 크기가 클 필요는 없을 수도 있음&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;data 의 분할을 1000을 훈련, 2500을 검증으로 설정하였는데 이는 좋지 못한 분할임
+    &lt;ul&gt;
+      &lt;li&gt;3500과 500으로 지정&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;신경망 설계와 파라미터의 크기 변경
+    &lt;ul&gt;
+      &lt;li&gt;10, 10, 1 레이어 를 30, 15, 1 로 값을 바꿔서 훈련 (입력 Shape 값이 30)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;prediction&quot;&gt;Prediction&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;예측
+  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;model.predict(series[3205:3235][np.newaxis])&lt;/code&gt; : 7.077 개의 흑점 예상 (실 데이터 8.7 개)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;설정 변경 : MAE 13.7&lt;/p&gt;
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  split_time = 3000
+  window_size = 60
+	
+  model = tf.keras.models.Sequential([
+      tf.keras.layers.Dense(20, input_shape=[window_size], activation=&quot;relu&quot;),
+      tf.keras.layers.Dense(10, activation=&quot;relu&quot;),
+      tf.keras.layers.Dense(1)
+  ])
+	
+  model.compile(loss=&quot;mse&quot;, optimizer=tf.keras.optimizers.SGD(lr=1e-7, momentum=0.9))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;ul&gt;
+      &lt;li&gt;8.13 예측 (실제값 8.7)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;sunspots-notebooks-lab-2--lab-3&quot;&gt;Sunspots notebooks (Lab 2 &amp;amp; Lab 3)&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;jupyter notebook 으로 대체&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;sunspots&quot;&gt;Sunspots&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;입력 창의 크기를 60으로 함&lt;/li&gt;
+  &lt;li&gt;DNN 을 Dense 20, 10, 1 로 학습&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;combining-our-tools-for-analysis&quot;&gt;Combining our tools for analysis&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;예시&lt;/p&gt;
+
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      window_size = 60
+      batch_size = 64
+      train_set = windowed_dataset(x_train, window_size, batch_size, shuffle_buffer_size)
+
+      model = tf.keras.models.Sequential([
+          tf.keras.layers.Conv1D(filters=32, kernel_size=5, strides=1, padding=&quot;casual&quot;, activation=&quot;relu&quot;, input_shape=[None, 1]),
+          tf.keras.layers.LSTM(32, return_sequences=True),
+          tf.keras.layers.LSTM(32),
+          tf.keras.layers.Dense(30, activation=&quot;relu&quot;),
+          tf.keras.layers.Dense(10, activation=&quot;relu&quot;),
+          tf.keras.layers.Dense(1),
+          tf.keras.layers.Lambda(lambda x: x * 400)
+      ])
+
+      lr_schedule = tf.keras.callbacks.LearningRateScheduler(lambda epoch: 1e-5 * 10**(epoch / 20))
+      optimizer = tf.keras.optimizers.SGD(learning_rate = 1e-8, momentum=0.9)
+      model.compile(loss=tf.keras.losses.Huber(), optimizer = optimizer, metrics=[&quot;mae&quot;])
+      history = model.fit(train-set, epochs=100, callbacks=[lr_schedule])
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;batch_size 의 변경 (256) : loss 에 노이즈가 생길 경우 고려해볼 파라미터&lt;/li&gt;
+  &lt;li&gt;하이퍼파라미터를 다양하게 실험해 봐야 함&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="AI" /><category term="Time Series" /><category term="Coursera" /><category term="deeplearning.ai" /><category term="Laurence Moroney" /><category term="timeseries" /><category term="시계열" /><category term="tensorflow" /><summary type="html">Real-world time series data</summary></entry><entry><title type="html">Sequences, Time Series and Prediction - 03. Recurrent Neural Networks for Time Series</title><link href="https://bluesplatter.com/ai/time%20series/Sequences_TimeSeries_and_Prediction_03_Recurrent_Neural_Networks_for_Time_Series/" rel="alternate" type="text/html" title="Sequences, Time Series and Prediction - 03. Recurrent Neural Networks for Time Series" /><published>2022-10-25T14:00:00+09:00</published><updated>2022-10-25T14:00:00+09:00</updated><id>https://bluesplatter.com/ai/time%20series/Sequences_TimeSeries_and_Prediction_03_Recurrent_Neural_Networks_for_Time_Series</id><content type="html" xml:base="https://bluesplatter.com/ai/time%20series/Sequences_TimeSeries_and_Prediction_03_Recurrent_Neural_Networks_for_Time_Series/">&lt;h1 id=&quot;recurrent-neural-networks-for-time-series&quot;&gt;Recurrent Neural Networks for Time Series&lt;/h1&gt;
+
+&lt;h2 id=&quot;intro&quot;&gt;Intro&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Recurrent Neural Networks 와 Long Short Term Memory Networks 는 시계열 데이터의 예측과 분류에 매우 유용함&lt;/li&gt;
+  &lt;li&gt;Lambda Layer : 신경망 내 임의의 코드를 레이어로 활용할 수 있음 (전처리와 후처리)
+    &lt;ul&gt;
+      &lt;li&gt;명시적인 전처리 단계로 데이터를 스케일링한 다음 신경망에 넣는 게 아니라 Lambda 레이어를 사용할 수 있음&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;conceptual-overview&quot;&gt;Conceptual overview&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;RNN : 순환 레이어를 포함한 신경망
+    &lt;ul&gt;
+      &lt;li&gt;시퀀스 입력값을 순차적으로 처리하도록 설계&lt;/li&gt;
+      &lt;li&gt;입력값의 형태 : 배치 사이즈, 타임스탬프 (윈도우사이즈), 컬럼디멘전 (다변량) = 3차원
+        &lt;ul&gt;
+          &lt;li&gt;지금까지 사용한 입력값 형태 : 배치 사이즈, 입력값 특징 수 (윈도우 사이즈)&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;RNN Cell
+    &lt;ul&gt;
+      &lt;li&gt;겉으로 보기에는 셀이 많은 것 같지만, 셀은 하나 뿐이고 이를 반복적으로 사용하여 출력값을 산출&lt;/li&gt;
+      &lt;li&gt;입력값이 2개 (X 값과 상태벡터 H 값) - 상태벡터값을 이용해 이전 입력값의 잔존 데이터를 전달받음&lt;/li&gt;
+      &lt;li&gt;입력차원 (예: 타임스탬프가 30개) 만큼 반복&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;rnn-notebook&quot;&gt;RNN Notebook&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;jupyter notebook 자료&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;shape-of-the-inputs-to-the-rnn&quot;&gt;Shape of the inputs to the RNN&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;데이터의 형태, 데이터를 분할한 배치
+    &lt;ul&gt;
+      &lt;li&gt;예시
+        &lt;ul&gt;
+          &lt;li&gt;Window size 가 30 : 시간 단계가 30&lt;/li&gt;
+          &lt;li&gt;4개로 일괄 처리 : 배치값 4&lt;/li&gt;
+          &lt;li&gt;입력 형태는 4 * 30 * 1&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;셀의 관점
+        &lt;ul&gt;
+          &lt;li&gt;하나의 셀은 고정된 시간 단계에서 (Batch Size : 4 * 1) 의 입력을 받음&lt;/li&gt;
+          &lt;li&gt;레이어 내 메모리셀이 3개의 뉴런으로 구성된다면&lt;/li&gt;
+          &lt;li&gt;출력값 행렬은 4 * 3&lt;/li&gt;
+          &lt;li&gt;출력 형태는 4(Batch Size) * 30(Window Size) * 3(Unit Size)&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;단순 RNN 에서의 상태 출력값 H 는 출력값 행렬 Y 와 동일함&lt;/li&gt;
+      &lt;li&gt;일부 경우에는 시퀀스를 입력하되, 출력값의 경우 배치 내 각 인스턴스에 대한 단일 벡터를 얻고 싶은 경우가 있음
+        &lt;ul&gt;
+          &lt;li&gt;마지막 (마지막 시퀀스 스텝-Window) 을 제외하고 모든 출력값을 무시&lt;/li&gt;
+          &lt;li&gt;시퀀스 출력값을 도출하려면 레이어를 생성할 때 return_sequences 를 True 로 지정해야 함
+            &lt;ul&gt;
+              &lt;li&gt;하나의 RNN 레이어를 다른 레이어 위에 스태킹 할때 이 작업이 반드시 필요&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;outputting-a-sequence&quot;&gt;Outputting a sequence&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;적층 예시&lt;/p&gt;
+
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  model = tf.keras.models.Sequential([
+	tf.keras.layers.SimpleRNN(40, return_sequences=True, input_shape = [None,1]),
+	tf.keras.layers.SimpleRNN(40),
+	tf.keras.layers.Dense(1),
+  ])
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;타 RNN 레이어에 입력으로 들어가야 하는 RNN 레이어에 return_sequences 를 True 로 설정&lt;/li&gt;
+      &lt;li&gt;Dense 레이어에 입력으로 들어가야 하는 RNN 레이어는 마지막 시퀀스 단계의 결과값만을 출력&lt;/li&gt;
+      &lt;li&gt;input_shape (배치 사이즈) 를 설정하지 않음 : 어떤 크기든 상관이 없으니 정의할 필요가 없음&lt;/li&gt;
+      &lt;li&gt;Timestamp 값을 None 으로 설정 : 시퀀스 길이와 관계 없이 입력값을 받음&lt;/li&gt;
+      &lt;li&gt;마지막 차원이 1로 되어있는 이유 : 일변량 시계열을 다루기 때문&lt;/li&gt;
+      &lt;li&gt;두번째 층 RNN 레이어에 return_sequences 값을 True 로 설정할 경우
+        &lt;ul&gt;
+          &lt;li&gt;시퀀스 값이 출력됨&lt;/li&gt;
+          &lt;li&gt;Keras 는 각 시간 단계별로 동일한 Dense 레이어를 독립적으로 활용함&lt;/li&gt;
+          &lt;li&gt;입력값이 시퀀스이고 출력값 또한 시퀀스일 경우 : 시퀀스 to 시퀀스 RNN&lt;/li&gt;
+          &lt;li&gt;차원의 값은 RNN 레이어의 유닛 값에 따라 변동될 수 있음&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;lambda-layers&quot;&gt;Lambda layers&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;예시&lt;/p&gt;
+
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  model = tf.keras.models.Sequential([
+    tf.keras.layers.Lambda(lambda x: tf.expand_dims(x, axis=-1),
+                        input_shape=[window_size]),
+    tf.keras.layers.SimpleRNN(40, return_sequences=True),
+    tf.keras.layers.SimpleRNN(40),
+    tf.keras.layers.Dense(1),
+    tf.keras.layers.Lambda(lambda x: x * 100.0)
+  ])	
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;첫 lambda 레이어 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tf.expand_dims(x, axis=-1)&lt;/code&gt; : 기존 window 생성 function 을 그대로 활용하기 위해 차원을 하나 늘림 (2차원-&amp;gt;3차원)&lt;/li&gt;
+      &lt;li&gt;마지막 lambda 레이어 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lambda x: x * 100.0&lt;/code&gt; : RNN 의 기본 활성함수 tanh 의 출력값 -1 ~ 1 &amp;gt; 시계열 값은 10개 단위로 구성되고, 비슷한 값으로 출력값을 올리면 학습에 도움이 됨&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;adjusting-the-learning-rate-dynamically&quot;&gt;Adjusting the learning rate dynamically&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;예시&lt;/p&gt;
+
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  train_set = windowed_dataset(x_train, window_size, batch_size=128,
+      shuffle_buffer=shuffle_buffer_size)
+
+  model = tf.keras.models.Sequential([
+          tf.keras.layers.Lambda(lambda x: tf.expand_dims(x, axis=1), input_shape=[None]),
+          tf.keras.layers.SimpleRNN(40, return_sequences=True),
+          tf.keras.layers.SimpleRNN(40),
+          tf.keras.layers.Dense(1),
+          tf.keras.layers.Lambda(lambda x: x * 100.0)
+      ])
+
+  lr_schedule = tf.keras.callbacks.LearningRateScheduler(lambda epoch: 1e-8 * 10**(epoch / 20))
+
+  optimizer = tf.keras.optimizers.SGD(learning_rate=1e-8, momentum=0.9)
+
+  model.compile(loss=tf.kears.losses.Huber(),
+                  optimizer=optimizer,
+                  metrics=[&quot;mae&quot;])
+
+  history = model.fit(train_set, epochs=100, callbacks=[lr_schedule])
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;callback 함수를 활용, epoch 진행 별로 학습률을 약간 변경&lt;/li&gt;
+      &lt;li&gt;Huber 손실함수 : 이상치에 덜 민감하게 반응하는 손실함수, 데이터에 노이즈가 많이 섞여있을 때 시도해볼만 함
+        &lt;ul&gt;
+          &lt;li&gt;squared error loss 보다 이상치에 덜 민감함&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;lstm&quot;&gt;LSTM&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;RNN
+    &lt;ul&gt;
+      &lt;li&gt;X 가 셀에 투입되면 Y 결과값과 H 상태벡터가 출력되고, 이는 다음 셀에 영향을 줌&lt;/li&gt;
+      &lt;li&gt;Step 이 진행되면서 초기 H 상태벡터의 영향도는 점점 작아짐&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;LSTM
+    &lt;ul&gt;
+      &lt;li&gt;전체 훈련 기간 동안 상태를 유지해주는 셀 상태를 추가함&lt;/li&gt;
+      &lt;li&gt;상태 값이 셀 간에 이동을 하고 Step 사이를 이동하면서 더 잘 유지될 수 있게함 - 앞 단계에 있던 데이터가 전체 추정치에 더 큰 영향을 줌&lt;/li&gt;
+      &lt;li&gt;상태는 양방향으로 움직일 수 있음&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;coding-lstms&quot;&gt;Coding LSTMs&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;예시&lt;/p&gt;
+
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  tf.keras.backend.clear_session()
+  dataset = windowed_dataset(x_train, window_size, batch_size, shuffle_buffer_size)
+
+  model = tf.keras.models.Sequential([
+      tf.keras.layers.Lambda(lambda x: tf.expand_dims(x, axis=-1), input_shape=[None]),
+      tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(32)),
+      tf.keras.layers.Dense(1),
+      tf.keras.layers.Lambda(lambda x: x * 100.0)
+  ])	
+
+  model.compile(loss=&quot;mse&quot;, optimizer=tf.keras.optimizers.SGD(learning_rate=1e-6, momentum=0.9))
+  model.fit(dataset, epochs=100, verbose=0)
+	
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tf.keras.backend.clear_session()&lt;/code&gt; : 내부 변수를 초기화. 이후 버전에 영향을 주지 않고 여러 모델을 시험해 볼 수 있음&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(32))&lt;/code&gt; : 32개 셀의 단일 LSTM 레이어 추가. 예측에 미치는 영향을 파악할 수 있도록 양방향으로 만듦&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;예시&lt;/p&gt;
+
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  tf.keras.backend.clear_session()
+  dataset = windowed_dataset(x_train, window_size, batch_size, shuffle_buffer_size)
+
+  model = tf.keras.models.Sequential([
+      tf.keras.layers.Lambda(lambda x: tf.expand_dims(x, axis=-1), input_shape=[None]),
+      tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(32, return_sequences=True)),
+      tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(32)),
+      tf.keras.layers.Dense(1),
+      tf.keras.layers.Lambda(lambda x: x * 100.0)
+  ])	
+
+  model.compile(loss=&quot;mse&quot;, optimizer=tf.keras.optimizers.SGD(learning_rate=1e-6, momentum=0.9))
+  model.fit(dataset, epochs=100, verbose=0)
+	
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(32, return_sequences=True))&lt;/code&gt; : LSTM 레이어를 한층 더 쌓음, retrun_sequences 를 True 로 설정해야만 함&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="AI" /><category term="Time Series" /><category term="Coursera" /><category term="deeplearning.ai" /><category term="Laurence Moroney" /><category term="timeseries" /><category term="시계열" /><category term="tensorflow" /><summary type="html">Recurrent Neural Networks for Time Series</summary></entry><entry><title type="html">Sequences, Time Series and Prediction - 02. Deep Neural Networks for Time Series</title><link href="https://bluesplatter.com/ai/time%20series/Sequences_TimeSeries_and_Prediction_02_Deep_Neural_Networks_for_Time_Series/" rel="alternate" type="text/html" title="Sequences, Time Series and Prediction - 02. Deep Neural Networks for Time Series" /><published>2022-10-21T14:00:00+09:00</published><updated>2022-10-21T14:00:00+09:00</updated><id>https://bluesplatter.com/ai/time%20series/Sequences_TimeSeries_and_Prediction_02_Deep_Neural_Networks_for_Time_Series</id><content type="html" xml:base="https://bluesplatter.com/ai/time%20series/Sequences_TimeSeries_and_Prediction_02_Deep_Neural_Networks_for_Time_Series/">&lt;h1 id=&quot;deep_neural_networks_for_time_series&quot;&gt;Deep_Neural_Networks_for_Time_Series&lt;/h1&gt;
+
+&lt;h2 id=&quot;preparing-features-and-labels&quot;&gt;Preparing features and labels&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;시계열에서의 Input 값과 Label 값
+    &lt;ul&gt;
+      &lt;li&gt;Features : 입력되는 값
+        &lt;ul&gt;
+          &lt;li&gt;예 : 이전 30개의 시점의 값&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Labels : 예측할 값 (정답)
+        &lt;ul&gt;
+          &lt;li&gt;예 : 미래 시점의 값&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	# Generate a tf dataset with 10 elements (i.e. numbers 0 to 9)
+	dataset = tf.data.Dataset.range(10)
+
+	# Window the data but only take those with the specified size
+	dataset = dataset.window(5, shift=1, drop_remainder=True)
+
+	# Flatten the windows by putting its elements in a single batch
+	dataset = dataset.flat_map(lambda window: window.batch(5))
+
+	# Create tuples with features (first four elements of the window) and labels (last element)
+	dataset = dataset.map(lambda window: (window[:-1], window[-1]))
+
+	# Shuffle the windows
+	dataset = dataset.shuffle(buffer_size=10)
+
+	# Create batches of windows ( 한번에 여러 데이터 처리를 위함 )
+	dataset = dataset.batch(2).prefetch(1)
+
+	# Print the results
+	for x,y in dataset:
+	  print(&quot;x = &quot;, x.numpy())
+	  print(&quot;y = &quot;, y.numpy())
+	  print()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;feeding-windowed-dataset-into-neural-network&quot;&gt;Feeding windowed dataset into neural network&lt;/h2&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	def windowed_dataset(series, window_size, batch_size, shuffle_buffer):
+	    &quot;&quot;&quot;Generates dataset windows
+
+	    Args:
+	      series (array of float) - contains the values of the time series
+	      window_size (int) - the number of time steps to include in the feature
+	      batch_size (int) - the batch size
+	      shuffle_buffer(int) - buffer size to use for the shuffle method
+
+	    Returns:
+	      dataset (TF Dataset) - TF Dataset containing time windows
+	    &quot;&quot;&quot;
+	  
+	    # Generate a TF Dataset from the series values
+	    dataset = tf.data.Dataset.from_tensor_slices(series)
+	    
+	    # Window the data but only take those with the specified size
+	    dataset = dataset.window(window_size + 1, shift=1, drop_remainder=True)
+	    
+	    # Flatten the windows by putting its elements in a single batch
+	    dataset = dataset.flat_map(lambda window: window.batch(window_size + 1))
+
+	    # Create tuples with features and labels 
+	    dataset = dataset.map(lambda window: (window[:-1], window[-1]))
+
+	    # Shuffle the windows 
+	    dataset = dataset.shuffle(shuffle_buffer) // shuffle buffer 의 크기만큼 이동하면서 buffer 내에서 무작위로 하나씩 선택 (선택속도증가)
+	    
+	    # Create batches of windows
+	    dataset = dataset.batch(batch_size).prefetch(1)
+	    
+	    return dataset
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;single-layer-neural-network&quot;&gt;Single layer neural network&lt;/h2&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	# Generate the dataset windows
+	dataset = windowed_dataset(x_train, window_size, batch_size, shuffle_buffer_size)
+
+	# Build the single layer neural network
+	l0 = tf.keras.layers.Dense(1, input_shape=[window_size])
+	model = tf.keras.models.Sequential([l0])
+
+	# Print the initial layer weights
+	print(&quot;Layer weights: \n {} \n&quot;.format(l0.get_weights()))
+
+	# Print the model summary
+	model.summary()
+
+	# Set the training parameters
+	model.compile(loss=&quot;mse&quot;, optimizer=tf.keras.optimizers.SGD(learning_rate=1e-6, momentum=0.9))
+
+	# Train the model
+	model.fit(dataset,epochs=100)
+
+	# Print the layer weights
+	print(&quot;Layer weights {}&quot;.format(l0.get_weights()))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;machine-learning-on-time-windows&quot;&gt;Machine learning on time windows&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;jupyter notebook 자료&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;prediction&quot;&gt;Prediction&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;jupyter notebook 자료&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;more-on-single-layer-neural-network&quot;&gt;More on single layer neural network&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;jupyter notebook 자료&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;deep-neural-network-training-tuning-and-prediction&quot;&gt;Deep neural network training, tuning and prediction&lt;/h2&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+	dataset = windowed_dataset(x_train, window_size, batch_size, shuffle_buffer_size)
+	model = tf.keras.models.Sequential([
+		tf.keras.layers.Dense(10, input_shape=[window_size], activation=&quot;relu&quot;)
+		tf.keras.layers.Dense(10, activation=&quot;relu&quot;)
+		tf.keras.layers.Dense(1)
+	])
+
+	model.compile(loss=&quot;mse&quot;, optimizer=tf.keras.optimizers.SGD(learning_rate=1e-6, momentum=0.9))
+	model.fit(dataset, epochs=100, verbose=0)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;우리가 선택한 학습률이 아니라 최적의 학습률을 선택할 수 있다면 더 좋은 결과가 나올 것
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;callback 을 활용하는 기법&lt;/p&gt;
+
+        &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;		
+      dataset = windowed_dataset(x_train, window_size, batch_size, shuffle_buffer_size)
+      model = tf.keras.models.Sequential([
+          tf.keras.layers.Dense(10, input_shape=[window_size], activation=&quot;relu&quot;)
+          tf.keras.layers.Dense(10, activation=&quot;relu&quot;)
+          tf.keras.layers.Dense(1)
+      ])
+		
+      // 각 epoch 종료 시마다 callback 에서 호출, epoch 숫자값을 기준으로 학습률을 값으로 변경
+      // 
+      lr_schedule = tf.keras.callbacks.LearningRateScheduler(
+          lambda epoch: 1e-8 * 10**(epoch / 20))
+		
+      optimizer = tf.keras.optimizers.SGD(learning_rate=1e-8, momentum=0.9)
+		
+      model.compile(loss=&quot;mse&quot;, optimizer=optimizer)
+			
+      history = model.fit(dataset, epochs=100, callbacks=[lr_schedule])
+		
+      // 트레이닝을 마치고 나면 epoch 당 학습률에 대한 epoch 당 오차를 플로팅
+      // x 축은 learning rate, y축은 epoch 의 손실
+      lrs = 1e-8 (10 ** (np.arange(100) / 20))
+      plt.semilogx(lrs, history.history[&quot;loss&quot;])
+      plt.axis([1e-8, 1e-3, 0, 300])
+		
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;위에서 구한 learning_rate (7e-6) 로 재훈련&lt;/p&gt;
+
+        &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+      window_size = 30
+      dataset = windowed_dataset(x_train, window_size, batch_size, shuffle_buffer_size)
+      model = tf.keras.models.Sequential([
+          tf.keras.layers.Dense(10, input_shape=[window_size], activation=&quot;relu&quot;)
+          tf.keras.layers.Dense(10, activation=&quot;relu&quot;)
+          tf.keras.layers.Dense(1)
+      ])
+
+      optimizer = tf.keras.optimizers.SGD(learning_rate=7e-6, momentum=0.9)
+      model.compile(loss=&quot;mse&quot;, optimizer=optimizer)
+      model.fit(dataset, epochs=500)
+
+      // 훈련 도중 산출한 손실 플로팅 코드
+      loss = history.history[&apos;loss&apos;]
+      epochs = range(len(loss))
+      plt.plot(epochs, loss, &apos;b&apos;, label=&apos;Training Loss&apos;)
+      plt.show()
+
+      // 초기손실 (왜곡값) 자르기
+      loss = history.history[&apos;loss&apos;]
+      epochs = range(10, len(loss))
+      plot_loss = loss[10:]
+      print(plot_loss)
+      plt.plot(epochs, plot_loss, &apos;b&apos;, label=&apos;Training Loss&apos;)
+      plt.show()
+
+      // mean absolute error 값 확인
+      tf.keras.metrics.mean_absolute_error(x_valid, results).numpy()
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;deep-neural-network&quot;&gt;Deep neural network&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;jupyter notebook 참조&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="AI" /><category term="Time Series" /><category term="Coursera" /><category term="deeplearning.ai" /><category term="Laurence Moroney" /><category term="timeseries" /><category term="시계열" /><category term="tensorflow" /><summary type="html">Deep_Neural_Networks_for_Time_Series</summary></entry><entry><title type="html">Sequences, Time Series and Prediction - 01. Sequences and Prediction</title><link href="https://bluesplatter.com/ai/time%20series/Sequences_TimeSeries_and_Prediction_01_Sequences_and_Prediction/" rel="alternate" type="text/html" title="Sequences, Time Series and Prediction - 01. Sequences and Prediction" /><published>2022-10-20T14:00:00+09:00</published><updated>2022-10-20T14:00:00+09:00</updated><id>https://bluesplatter.com/ai/time%20series/Sequences_TimeSeries_and_Prediction_01_Sequences_and_Prediction</id><content type="html" xml:base="https://bluesplatter.com/ai/time%20series/Sequences_TimeSeries_and_Prediction_01_Sequences_and_Prediction/">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;순차 시계열 데이터 (Sequential time series data)
+    &lt;ul&gt;
+      &lt;li&gt;값이 시간에 따라 변하는 것&lt;/li&gt;
+      &lt;li&gt;예
+        &lt;ul&gt;
+          &lt;li&gt;주식거래의 종가&lt;/li&gt;
+          &lt;li&gt;특정 일의 기온&lt;/li&gt;
+          &lt;li&gt;웹사이트의 방문자 수&lt;/li&gt;
+          &lt;li&gt;스프레드시트에 기록할 수 있는 데이터&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;다룰 내용
+    &lt;ul&gt;
+      &lt;li&gt;미래 시점의 값 예측을 위한 다양한 방법론&lt;/li&gt;
+      &lt;li&gt;위의 내용의 구현법&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;introduction-a-conversation-with-andrew-ng&quot;&gt;Introduction, A conversation with Andrew Ng&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;데이터의 합성 시퀀스를 만들기&lt;/li&gt;
+  &lt;li&gt;데이터 시계열에서 공통 속성을 살펴보기
+    &lt;ul&gt;
+      &lt;li&gt;계절성 : 날씨의 경우 6월이 1월보다 따듯하고, 11월은 10월보다 습할 수 있음&lt;/li&gt;
+      &lt;li&gt;경향성 : 주식의 종가처럼 시간이 가면서 상승, 혹은 하강&lt;/li&gt;
+      &lt;li&gt;노이즈 : 무작위 요소&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;구현 : 흑점 활동 모니터
+    &lt;ul&gt;
+      &lt;li&gt;흑점 활동
+        &lt;ul&gt;
+          &lt;li&gt;11년, 혹은 22년의 주기 (계절성)&lt;/li&gt;
+          &lt;li&gt;노이즈&lt;/li&gt;
+          &lt;li&gt;250년 전부터 측정해온 데이터 활용&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;sequences-and-prediction&quot;&gt;Sequences and Prediction&lt;/h1&gt;
+
+&lt;h2 id=&quot;time-series-examples&quot;&gt;Time series examples&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;시계열 (Time Series) 이란 무엇인가?
+    &lt;ul&gt;
+      &lt;li&gt;오랜 시간에 걸쳐 균등한 간격으로 순서가 지정된 시퀀스로 나타나는 값&lt;/li&gt;
+      &lt;li&gt;다변량 시계열 : 각 시점에서 복수 개의 값이 표시된 경우
+        &lt;ul&gt;
+          &lt;li&gt;데이터에 추가값을 더하여 상관관계를 파악할 수 있음
+            &lt;ul&gt;
+              &lt;li&gt;시간의 흐름에 따른 기온과 이산화탄소 배출량의 상관관계&lt;/li&gt;
+              &lt;li&gt;자동차의 이동경로 (동시간의 간격 (속도), 위도, 경도 등)&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;machine-learning-applied-to-time-series&quot;&gt;Machine learning applied to time series&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;머신러닝으로 가능한 시계열 관련 작업
+    &lt;ul&gt;
+      &lt;li&gt;데이터를 기반으로 한 예측 작업&lt;/li&gt;
+      &lt;li&gt;이미 가지고 있는 데이터보다 이전 시점의 데이터를 예측&lt;/li&gt;
+      &lt;li&gt;실질적으로 존재하지 않는 데이터의 시점의 데이터를 예측&lt;/li&gt;
+      &lt;li&gt;변칙 감지에 활용&lt;/li&gt;
+      &lt;li&gt;패턴의 발견 (예: 음파를 인식)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;common-patterns-in-time-series&quot;&gt;Common patterns in time series&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;흔하게 나타나는 시계열 패턴 (눈으로 보고 인식하는데 유용)
+    &lt;ul&gt;
+      &lt;li&gt;추세 : 특정한 방향으로 움직이는 경우 (예: 무어의 법칙)&lt;/li&gt;
+      &lt;li&gt;계절성 : 패턴이 예측 가능한 간격으로 반복됨 (예: 쇼핑사이트 방문자수 (주말에 올라감))&lt;/li&gt;
+      &lt;li&gt;노이즈 : 전혀 예측이 불가능한 임의의 값들로 구성된 세트&lt;/li&gt;
+      &lt;li&gt;자기상관관계 : 시간의 흐름에 따라 과거 혹은 현재의 값이 미래에 영향을 주는 것&lt;/li&gt;
+      &lt;li&gt;복합적으로 나타나는 경우&lt;/li&gt;
+      &lt;li&gt;비정상시계열 : 명확한 패턴을 보이다가 큰 이벤트로 인해 패턴이 깨지는 경우
+        &lt;ul&gt;
+          &lt;li&gt;특정 경향성을 보이는 경우에 특정 구간만 학습&lt;/li&gt;
+          &lt;li&gt;하지만 현실의 데이터는 단순하지 않음 (패턴이 깨지며 경향이 나타났으나 다시 과거 패턴으로 회귀)&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;introduction-to-time-series&quot;&gt;Introduction to time series&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Colab 파일&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;train-validation-and-test-sets&quot;&gt;Train, validation and test sets&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;예측 모델의 성능 측정
+    &lt;ul&gt;
+      &lt;li&gt;Fixed Partitioning (고정 파티셔닝) : 시계열을 훈련기간, 검증 기간, 테스트 기간으로 분할
+        &lt;ul&gt;
+          &lt;li&gt;시계열이 계절성이 있는 경우 각각의 기간에 계절 전체를 포함하고 싶음&lt;/li&gt;
+          &lt;li&gt;시간이 지남에 따라 검증 기간의 데이터를 훈련에 사용, 테스트 기간의 데이터로 검증을 하고, 새로운 테스트 기간으로 테스트를 함&lt;/li&gt;
+          &lt;li&gt;테스트 기간은 현재 데이터에 가장 영향을 많이 줄 수 있는 데이터. 따라서 테스트 세트를 포기하는 경우가 흔함&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;롤 포워드 파티셔닝
+        &lt;ul&gt;
+          &lt;li&gt;짧은 훈련기간을 가지고, 점점 증가시켜 (한번에 하루, 한번에 한 주) 반복수행&lt;/li&gt;
+          &lt;li&gt;검증기간에는 다음 달이나 다음 주를 예측&lt;/li&gt;
+          &lt;li&gt;고정 파티셔닝을 여러 번 시행하고 모델을 계속 다듬는 과정&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;metrics-for-evaluating-performance&quot;&gt;Metrics for evaluating performance&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;성능을 계산할 지표
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      errors = forcasts - actual // 오차산출
+      mse = np.square(errors).mean() // 평균제곱오차 :  가장 일반적인 지표 (음수제거를 하여 에러간 상쇄가 없도록 함)
+      rmse = np.sqrt(mse) // 평균제곱근오차 : 원래 에러 규모와 동일한 규모를 만들기 위해 제곱근 계
+      mae = np.abs(errors).mean() // 평균절대오(편)차 :  제곱 대신 절대값을 사용
+      mape = np.abs(errors / x valid).mean() // 평균절대백분율오차 : 절대 오차와 절대값의 평균 비율 (값 대비 오차의 크기를 파악)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;ul&gt;
+      &lt;li&gt;작은 오차보다 큰 오차가 생겼을 경우 비용이 훨씬 크다면 MSE&lt;/li&gt;
+      &lt;li&gt;손익이 단순 오차의 크기에 비례한다면 MAE
+        &lt;ul&gt;
+          &lt;li&gt;케라스에서의 구현
+  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;keras.metrics.mean_absolute_error(x_valid, native_forecast).numpy()&lt;/code&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;moving-average-and-differencing&quot;&gt;Moving average and differencing&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;이동 평균을 계산 : 일반적이고 간단한 예측 방법
+    &lt;ul&gt;
+      &lt;li&gt;노이즈를 제거하고, 원본 시계열을 대략적으로 유추하는 곡선이 도출&lt;/li&gt;
+      &lt;li&gt;추세나 계절성을 예측하지는 않음 : 현재 시점에서 미래를 예측하고자 하는 기간 이후에는 단순 예측보다 결과가 저조할 수 있음&lt;/li&gt;
+      &lt;li&gt;차분은 이를 피하는 방법 중 하나 : 시계열에서 추세와 계절성을 제거
+        &lt;ul&gt;
+          &lt;li&gt;즉, 시계열 자체를 연구하는게 아니라 T 시점의 값과 이전 기간의 값 사이의 차이를 연구&lt;/li&gt;
+          &lt;li&gt;차분에 이동평균선을 예측하면 이는 차분에 대한 예측일 뿐이고, 원본 시계열에 대한 것은 아님
+            &lt;ul&gt;
+              &lt;li&gt;뺀 값 (이전 기간의 값) 을 다시 더해줘야 함&lt;/li&gt;
+              &lt;li&gt;하지만 이전의 값을 더해줄 때 노이즈도 같이 생기게 됨. &amp;gt; 이동 평균을 이용하여 과거의 노이즈를 제거&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;trailing-versus-centered-windows&quot;&gt;Trailing versus centered windows&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Trailing Window (현재 값의 이동 평균을 산출할때)
+  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;t1000 = (t970 + t971 + ... + t999) / 30&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Centered Window (과거 값의 이동 평균을 산출할때) : 정확도가 Trailing Window 보다 높음
+  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;t635 = (t630 + t631 + ... + t640) / 11&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;forecasting&quot;&gt;Forecasting&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;jupyter notebook 자료&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;week-1-working-with-time-series&quot;&gt;Week 1: Working with time series&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;jupyter notebook 자료&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="AI" /><category term="Time Series" /><category term="Coursera" /><category term="deeplearning.ai" /><category term="Laurence Moroney" /><category term="timeseries" /><category term="시계열" /><category term="tensorflow" /><summary type="html">Introduction</summary></entry><entry><title type="html">Sequences, Time Series and Prediction - 00. 강좌소개</title><link href="https://bluesplatter.com/ai/time%20series/Sequences_TimeSeries_and_Prediction_00_About-this-course/" rel="alternate" type="text/html" title="Sequences, Time Series and Prediction - 00. 강좌소개" /><published>2022-10-17T14:00:00+09:00</published><updated>2022-10-17T14:00:00+09:00</updated><id>https://bluesplatter.com/ai/time%20series/Sequences_TimeSeries_and_Prediction_00_About%20this%20course</id><content type="html" xml:base="https://bluesplatter.com/ai/time%20series/Sequences_TimeSeries_and_Prediction_00_About-this-course/">&lt;h1 id=&quot;강좌에-대한-설명&quot;&gt;강좌에 대한 설명&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/posts/coursera_SequencesTimeSeriesandPrediction.png&quot; alt=&quot;강좌에 대한 설명&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;시계열 분석 학습을 위한 강좌&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="AI" /><category term="Time Series" /><category term="Coursera" /><category term="deeplearning.ai" /><category term="Laurence Moroney" /><category term="timeseries" /><category term="시계열" /><category term="tensorflow" /><summary type="html">강좌에 대한 설명</summary></entry><entry><title type="html">Jenkins Pipeline - Declarative and IaC approaches for DevOps</title><link href="https://bluesplatter.com/jenkins/JenkinsPipeline_Declarative_and_IaC_approaches_for_DevOps/" rel="alternate" type="text/html" title="Jenkins Pipeline - Declarative and IaC approaches for DevOps" /><published>2022-09-30T14:00:00+09:00</published><updated>2022-09-30T14:00:00+09:00</updated><id>https://bluesplatter.com/jenkins/JenkinsPipeline_Declarative_and_IaC_approaches_for_DevOps</id><content type="html" xml:base="https://bluesplatter.com/jenkins/JenkinsPipeline_Declarative_and_IaC_approaches_for_DevOps/">&lt;h1 id=&quot;후기&quot;&gt;후기&lt;/h1&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/posts/coursera_JenkinsPipeline-DeclarativeandIaCapproachesforDevOps_course_info.png&quot; alt=&quot;강좌에 대한 설명&quot; /&gt;&lt;/p&gt;
 
@@ -1430,1024 +2429,4 @@
 &lt;ul&gt;
   &lt;li&gt;하루 동안 있었던 좋았던 일 세가지를 적기&lt;/li&gt;
   &lt;li&gt;나쁜 일 세가지가 결과적으로 좋은 효과를 가져온 경우를 적기 (극도로 안 좋은 일은 적지 않기)&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="A Life of Happiness and Fulfillment (행복하고 보람찬 삶)" /><category term="Coursera" /><category term="Indian School of Business" /><category term="Dr. Rajagopal Raghunathan" /><category term="A Life of Happiness and Fulfillment" /><category term="긍정심리학" /><category term="행복" /><category term="삶에 대한 불신" /><summary type="html">삶에 대한 불신</summary></entry><entry><title type="html">A Life of Happiness and Fulfillment - 05. 타인에 대한 불신</title><link href="https://bluesplatter.com/a%20life%20of%20happiness%20and%20fulfillment%20(%ED%96%89%EB%B3%B5%ED%95%98%EA%B3%A0%20%EB%B3%B4%EB%9E%8C%EC%B0%AC%20%EC%82%B6)/Happiness-05_Happiness-Sins-Distrusting-others/" rel="alternate" type="text/html" title="A Life of Happiness and Fulfillment - 05. 타인에 대한 불신" /><published>2022-09-19T12:00:00+09:00</published><updated>2022-09-19T12:00:00+09:00</updated><id>https://bluesplatter.com/a%20life%20of%20happiness%20and%20fulfillment%20(%ED%96%89%EB%B3%B5%ED%95%98%EA%B3%A0%20%EB%B3%B4%EB%9E%8C%EC%B0%AC%20%EC%82%B6)/Happiness-05_Happiness%20Sins-Distrusting%20others</id><content type="html" xml:base="https://bluesplatter.com/a%20life%20of%20happiness%20and%20fulfillment%20(%ED%96%89%EB%B3%B5%ED%95%98%EA%B3%A0%20%EB%B3%B4%EB%9E%8C%EC%B0%AC%20%EC%82%B6)/Happiness-05_Happiness-Sins-Distrusting-others/">&lt;h1 id=&quot;타인에-대한-불신&quot;&gt;타인에 대한 불신&lt;/h1&gt;
-
-&lt;h2 id=&quot;타인에-대한-불신과-신뢰의-중요성&quot;&gt;타인에 대한 불신과 신뢰의 중요성&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;불신
-    &lt;ul&gt;
-      &lt;li&gt;과하게 남을 믿지 않는 것&lt;/li&gt;
-      &lt;li&gt;타인이 믿을만한 사람이라는 것이 증명되기 전까지 믿지 않는 것&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;현명하게 신뢰하는 것
-    &lt;ul&gt;
-      &lt;li&gt;타인을 신뢰함으로서 얻을 수 있는 이익을 극대화 하는 방향으로 상대를 신뢰하는 것&lt;/li&gt;
-      &lt;li&gt;다른사람에게 속임을 당하거나 상처받을 확률을 최소화 하는 것&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;신뢰와 행복의 상관관계
-    &lt;ul&gt;
-      &lt;li&gt;타인을 신뢰할 수 있을 수록 경제가 발달하고 행복수치가 올라감&lt;/li&gt;
-      &lt;li&gt;주변인을 불신하게 되면 늘 긴장상태로 있어야 함&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;본능적-불신과-적극적-신뢰&quot;&gt;본능적 불신과 적극적 신뢰&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;실험 (타인은 신뢰할 만 한가?)
-    &lt;ul&gt;
-      &lt;li&gt;독립된 두 공간에 두 사람이 있고 각각 10달러를 준다.&lt;/li&gt;
-      &lt;li&gt;상대방에게 돈을 보낼 수 있다 이 경우 상대방은 자기몫인 10달러와 보낸금액인 10달러의 4배 금액을 받게 된다(50달러)&lt;/li&gt;
-      &lt;li&gt;아무도 돈을 보내지 않으면 게임은 종료되고 각자 10달러를  가져갈 수 있다&lt;/li&gt;
-      &lt;li&gt;서로에게 돈을 보낼 때 각자 25달러를 받을 수 있다&lt;/li&gt;
-      &lt;li&gt;오직 2%의 사람만 자기 몫을 챙기고 떠남&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;적극적 신뢰
-    &lt;ul&gt;
-      &lt;li&gt;사람은 타인을 신뢰할 때 옥시토신이라는 호르몬이 분비되고, 행복한 상태가 된다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;본능적 불신
-    &lt;ul&gt;
-      &lt;li&gt;그럼에도 본능적으로 타인을 신뢰하기 어려운데, 이는 배신당했을 때의 생존 리스크가 훨씬 크기 때문이다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;상대를-먼저-신뢰함으로서-얻는-이점&quot;&gt;상대를 먼저 신뢰함으로서 얻는 이점&lt;/h1&gt;
-
-&lt;h2 id=&quot;상황의-가정&quot;&gt;상황의 가정&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;고아의 해변가서 휴식 중 당신 옆에 맥주상인이 맥주를 80루피에 팔려고 함&lt;/li&gt;
-  &lt;li&gt;당신은 지갑에 100루피 지폐 한장을 가지고 있음&lt;/li&gt;
-  &lt;li&gt;상인은 거스름돈이 없다며 10분 안에 거스름돈을 가져온다고 함&lt;/li&gt;
-  &lt;li&gt;바로 100루피를 줄 것인지, 상인에게 거스름돈을 가져오면 거래한다고 할 지?&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;신뢰할-경우&quot;&gt;&lt;strong&gt;신뢰할 경우&lt;/strong&gt;&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt; &lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;위험&lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;보상(이익)&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;표면적 이점&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;⦁ 20 루피의 손실&lt;br /&gt;⦁ 속은 자신이 바보같이 느껴짐(정신적 피해)&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;⦁ 바로 마실 수 있는 시원한 맥주 한캔&lt;br /&gt;⦁ 신뢰에 대한 보상감&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;숨은 이점&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;⦁ 고아에서 신뢰할 만한 맥주 벤더를 알게 됨&lt;br /&gt;⦁ 신뢰할 수 있는 사회문화에 공헌&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;고아에 자주 가지 않는다면 숨은 이점이 별게 아닌 것처럼 느껴질 수 있음&lt;/li&gt;
-  &lt;li&gt;그러나 &lt;strong&gt;이런 삶의 태도는 당신 주변에 신뢰할 만한 사람들을 많이 만들 수 있음&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;신뢰할 수 있는 사회문화에 공헌 (노블레스 오블리주)&lt;/li&gt;
-  &lt;li&gt;물론 &lt;strong&gt;너무 큰 위험을 감수할 필요는 없음&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;사회-내에서의-인지적-vs-실제-신뢰도&quot;&gt;사회 내에서의 인지적 vs 실제 신뢰도&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;매일 노출되는 부정적인 신호들 (뉴스나 소식) 이 주변에 대한 불신을 키움&lt;/li&gt;
-  &lt;li&gt;지갑에 돈과 주소를 넣어 얼마나 돌아오는지에 대한 실험
-    &lt;ul&gt;
-      &lt;li&gt;사실 사람들이 인지하는 신뢰도 보다, 실제 사회의 신뢰도가 더 높음&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;타인을 다른 사람의 평균치보다 더 믿는 쪽이 현명함 (행복의 관점에서)
-    &lt;ul&gt;
-      &lt;li&gt;타인을 믿지 말아야 할 때 믿는 것은 어리석은 일이다.&lt;/li&gt;
-      &lt;li&gt;믿어야 할 타인을 불신하는 것은 불행한 일이다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;신뢰-측정&quot;&gt;신뢰 측정&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;상호 신뢰 척도 (25개 항목) : 자신의 신뢰 성향이 어느 정도인지 확인
-    &lt;ul&gt;
-      &lt;li&gt;https://isb.au1.qualtrics.com/jfe/form/SV_eXUEfevcsysAreB?user_id=%25USER_ID%25&amp;amp;Q_JFE=qdg&lt;/li&gt;
-      &lt;li&gt;Your score on the trust scale is 78 &amp;gt; Your level of interpersonal trust is high.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;현명한-신뢰를-위한-3가지-전략&quot;&gt;현명한 신뢰를 위한 3가지 전략&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;타인을 믿음으로써 자신의 이익은 극대화하고 타인으로부터 받는 상처는 최소화 하는 것&lt;/li&gt;
-  &lt;li&gt;타인에 대한 신뢰 : 3가지 전략
-    &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;사람들은 우리가 생각한 것보다 훨씬 더 신뢰할 수 있다는 사실&lt;/strong&gt;을 기억하기&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;믿음으로써 얻을 수 있는 숨겨진 이익을 분명하기 인식&lt;/strong&gt;하기&lt;/li&gt;
-      &lt;li&gt;속임을 당하거나 상처를 받을 가능성을 낮추기&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;신뢰를 통해 감수해야하는 위험 줄이기 : 3가지 전략
-    &lt;ul&gt;
-      &lt;li&gt;물질적인 부분 : &lt;strong&gt;내가 충분히 감내할만하다고 생각하는 것&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;나를 속인 타인이 어떠한 책임을 지도록 하는 것 (일을 바로잡는 것)&lt;/strong&gt; - 과정 속에서 오해가 있었다는 것을 깨닫기도 함&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;용서하는 행동은 불안감을 낮추고 자존감을 높임&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;더 성숙한 사람이 더 성숙한 마음을 가짐&lt;/strong&gt;
-        &lt;ul&gt;
-          &lt;li&gt;왜 나를 속여야 했는지에 대해 생각해보기&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="A Life of Happiness and Fulfillment (행복하고 보람찬 삶)" /><category term="Coursera" /><category term="Indian School of Business" /><category term="Dr. Rajagopal Raghunathan" /><category term="A Life of Happiness and Fulfillment" /><category term="긍정심리학" /><category term="행복" /><category term="타인에 대한 불신" /><summary type="html">타인에 대한 불신</summary></entry><entry><title type="html">정보보안 - 정보보안기사 실기 합격 후기</title><link href="https://bluesplatter.com/is_certification/IS-After-PracticalTest/" rel="alternate" type="text/html" title="정보보안 - 정보보안기사 실기 합격 후기" /><published>2022-09-13T18:00:00+09:00</published><updated>2022-09-13T18:00:00+09:00</updated><id>https://bluesplatter.com/is_certification/IS-After-PracticalTest</id><content type="html" xml:base="https://bluesplatter.com/is_certification/IS-After-PracticalTest/">&lt;h1 id=&quot;합격-후기&quot;&gt;합격 후기&lt;/h1&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/posts/IS_test_trial_list.png&quot; alt=&quot;합격내역&quot; /&gt;
-(수 많은 시도들의 흔적… 이번에 떨어졌으면 필기부터 다시 봐야했다.)&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;정보보안기사 시험은 내게 계륵과도 같은 시험이었음.
-    &lt;ul&gt;
-      &lt;li&gt;네트워크와 정보보안 용어들에 대한 이해를 목적으로 준비한 시험이었으나, 시험 자체를 너무 만만하게 본 것 같음.&lt;/li&gt;
-      &lt;li&gt;나의 직종 (교직원 전산직) 과 아주 밀접한 관계는 없었고, 자격증을 통해 혜택을 볼 여지는 없었음.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;그럼에도 몇 가지 이점은 있음
-    &lt;ul&gt;
-      &lt;li&gt;외부업체 (네트워크, 보안) 와의 미팅 때 그들이 무슨 이야기를 하는지는 알 수 있음.&lt;/li&gt;
-      &lt;li&gt;어려운 시험(이라고 생각함) 인 만큼 합격했을 때 성취감이 있음.&lt;/li&gt;
-      &lt;li&gt;교직원 구직 공고에 보안기사 (혹은 보안산업기사) 를 요구하는 곳이 있었음.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;서적에-대해&quot;&gt;서적에 대해&lt;/h1&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/posts/IS_testbook_2.jpg&quot; alt=&quot;알기사&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/posts/IS_testbook_1.jpg&quot; alt=&quot;이기적&quot; /&gt;
-(내돈 내산 서적)&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;개인적인 느낌
-    &lt;ul&gt;
-      &lt;li&gt;알기사
-        &lt;ul&gt;
-          &lt;li&gt;시험 위주의 책이라고 생각함&lt;/li&gt;
-          &lt;li&gt;시험에 많이 나오는 부분을 체계적으로 다룸&lt;/li&gt;
-          &lt;li&gt;하지만 뭔가 비어있는 느낌&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;이기적
-        &lt;ul&gt;
-          &lt;li&gt;광범위한 이론서라고 생각함&lt;/li&gt;
-          &lt;li&gt;알기사보다 넓은 범위를 포괄하는 만큼 체계적이진 않음&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;서적에 대한 결론
-    &lt;ul&gt;
-      &lt;li&gt;준비기간이 길거나 투자할 시간이 많음 : 책 둘다 보는 것이 좋음&lt;/li&gt;
-      &lt;li&gt;준비기간이 짧음 : 알기사를 볼 것 같음&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;모의문제집은 거의 풀지 않았다.
-    &lt;ul&gt;
-      &lt;li&gt;모의문제는 필기에서는 큰 효과를 발휘한다. (보았던 것들에 대한 기억을 토대로 찍을 수 있음)&lt;/li&gt;
-      &lt;li&gt;실기에서는 효과가 없었다. (내용이 너무 방대, 어중간한 지식으론 답안을 작성하기 힘듬) / 이론부분만 봄&lt;/li&gt;
-      &lt;li&gt;그럼에도 내가 어떤 부분을 잘 알고 모르는지 확인할 수 있는 수단은 된다.&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;https://q.fran.kr&quot;&gt;기출문제 사이트&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;준비했던-것들&quot;&gt;준비했던 것들&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;기억이 가물가물하지만 시험은 총 3년간 준비해서 본 것 같음 (필기 1년-1회 or 2회?, 실기 2년-4회)
-    &lt;ul&gt;
-      &lt;li&gt;남들처럼 올인해서 열심히 공부하지 않았음.&lt;/li&gt;
-      &lt;li&gt;일하면서 공부했고, 쉬는 기간도 많았음.
-        &lt;ul&gt;
-          &lt;li&gt;시험 후 발표기간 한달간은 공부하지 않았음&lt;/li&gt;
-          &lt;li&gt;시험 3개월~4개월 전에는 공부를 안하거나 쉬엄쉬엄 했음&lt;/li&gt;
-          &lt;li&gt;근무시간 틈틈히 1~2시간정도 공부하였고, 임박(2주전)한 주말에 공부함 (3~4시간)&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;주요했던 공부법
-    &lt;ul&gt;
-      &lt;li&gt;필기는 이기적 서적 1회독 (이론, 기출), 기출사이트 확인&lt;/li&gt;
-      &lt;li&gt;실기는 이기적 서적 1회독 (이론), 동영상 강의 (내용이 잘 기억나진 않았으나…), 알기사 서적 1.5회독 (이론)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;시험을 많이 보면 볼수록 출제의 경향이나 어떤 것이 중요하고 어떤것이 중요하지 않은지 알게 됨
-    &lt;ul&gt;
-      &lt;li&gt;시험을 볼수록 행정, 법률 부분이 중시된다는 느낌이 들었었음. 그러나.&lt;/li&gt;
-      &lt;li&gt;이번 합격한 차수에서는 작업형 문제가 두 문제 나오면서 합격이 어려울 수도 있다는 생각이 들었는데 다행히 합격함&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;마지막-하고-싶은-말&quot;&gt;마지막 하고 싶은 말&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;포기하지만 않으면, 할 수 있습니다. 마지막의 마지막에 저도 했으니까요.&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="IS_Certification" /><category term="정보보안기사" /><category term="정보보안실기" /><category term="합격 후기" /><summary type="html">합격 후기</summary></entry><entry><title type="html">A Life of Happiness and Fulfillment - 04. 지나친 통제</title><link href="https://bluesplatter.com/a%20life%20of%20happiness%20and%20fulfillment%20(%ED%96%89%EB%B3%B5%ED%95%98%EA%B3%A0%20%EB%B3%B4%EB%9E%8C%EC%B0%AC%20%EC%82%B6)/Happiness-04_Overly-Control-seeking/" rel="alternate" type="text/html" title="A Life of Happiness and Fulfillment - 04. 지나친 통제" /><published>2022-09-05T12:00:00+09:00</published><updated>2022-09-05T12:00:00+09:00</updated><id>https://bluesplatter.com/a%20life%20of%20happiness%20and%20fulfillment%20(%ED%96%89%EB%B3%B5%ED%95%98%EA%B3%A0%20%EB%B3%B4%EB%9E%8C%EC%B0%AC%20%EC%82%B6)/Happiness-04_Overly%20Control-seeking</id><content type="html" xml:base="https://bluesplatter.com/a%20life%20of%20happiness%20and%20fulfillment%20(%ED%96%89%EB%B3%B5%ED%95%98%EA%B3%A0%20%EB%B3%B4%EB%9E%8C%EC%B0%AC%20%EC%82%B6)/Happiness-04_Overly-Control-seeking/">&lt;h1 id=&quot;지나친-통제&quot;&gt;지나친 통제&lt;/h1&gt;
-
-&lt;h2 id=&quot;지나친-통제의-정의&quot;&gt;지나친 통제의 정의&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;배우자, 자녀 뿐만 아니라 부모, 친인척, 타인, 집 안의 온도, TV 채널, 직장 업무 등 모든 외부환경을 통제하려고 하는 것&lt;/li&gt;
-  &lt;li&gt;우리가 무언가를 통제하고 있을 때, 감정적으로나 신체적으로 더 좋아짐 - 생사가 걸린 문제라고 볼 수 있을 정도로 중요함
-    &lt;ul&gt;
-      &lt;li&gt;무언가에 선택권이 있는 것만으로 (통제할 권한) 피실험자들의 감정적 건강과 장수에 지대한 영향을 끼침&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;통제에 대한 욕망이 더 큰 사람들
-    &lt;ul&gt;
-      &lt;li&gt;더 높은 꿈을 성취하려고 하는 경향이 있음&lt;/li&gt;
-      &lt;li&gt;더 많은 것을 성취하는 경향이 있음&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;하지만 결과를 제어하는 데에는 한계가 있음 &amp;gt; 이상적인 지점이 있음
-    &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;우리는 항상 다른 사람들과 어떤 결과를 통제할 수는 없음&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;과하게 통제하는 경향은 결코 좋은 것이 아님&lt;/strong&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;지나친-통제는-왜-행복에-해로운가&quot;&gt;지나친 통제는 왜 행복에 해로운가?&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;첫 번째 측면 : &lt;strong&gt;타인을 과하게 통제하는 것&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;타인을 불행하게 만드는 것은 자신의 행복도에도 안좋은 영향을 줌
-        &lt;ul&gt;
-          &lt;li&gt;&lt;strong&gt;우리가 상대를 통제하려는 것처럼 상대도 타인에게 통제 받고 싶지 않아 하는 욕심이 있음&lt;/strong&gt;&lt;/li&gt;
-          &lt;li&gt;심리적 반발 : 타인을 통제하려 하면 상대는 이에 대한 심리적 반발을 보이게 됨&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;타인이 원하는대로 움직이지 않으면 분노, 좌절, 우울함을 겪게 됨
-        &lt;ul&gt;
-          &lt;li&gt;파워 스트레스 : 자신이 원하는 대로 남이 행동하지 않으면 화를 내고 좌절하는 경향&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;자신이 내리는 결정의 질이 떨어지게 됨
-        &lt;ul&gt;
-          &lt;li&gt;다양성에서 오는 의견과 조언을 경청해야 결정의 질이 올라감
-            &lt;ul&gt;
-              &lt;li&gt;주변에 자신의 의견에 반대하기를 주저하지 않는 사람들 두는 것도 중요함&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;타인을 과하게 통제하면 주변에 “예스맨” 만 남게 됨.&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;두 번째 측면 : &lt;strong&gt;결과를 과하게 통제하는 것&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;결과를 과하게 통제하는 것 != 자신이 바라는 결과를 얻는 데에 열중하는 것&lt;/li&gt;
-      &lt;li&gt;특정한 결과에 집착하게 되는 것 : 결과를 얻기 위한 욕구를 통제하는 것이 아닌 특정한 결과를 얻고자 하는 욕구가 나를 통제하는 것
-        &lt;ul&gt;
-          &lt;li&gt;특정한 결과를 얻지 못하면 세상이 망할 것이라고 생각하기 때문&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;인생의 대부분은 통제될 수 없음 : 과하게 통제하려 할 때 분노, 좌절, 우울함을 겪게 됨&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;자신이 내리는 결정의 질이 떨어지게 됨
-        &lt;ul&gt;
-          &lt;li&gt;통제의 환상 : 통제의 욕구가 높을 수록 미신을 더 믿거나, 실제로 상황을 통제할 수 있을거라는 망상&lt;/li&gt;
-          &lt;li&gt;미신을 믿음 : 통제의 욕구는 높은데, 통제가 안 되는 부분을 통제하고 싶은 마음, 현재 상황을 실제보다 잘 통제하고 있다고 믿는 것&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;열정의 잘못된 추구 방법 : 열정에 집착하는 것&lt;/strong&gt; / 열정의 올바른 추구 방법 : 조화로운 방법
-        &lt;ul&gt;
-          &lt;li&gt;자신이 열정을 가지는 것 외의 것들을 모조리 제쳐두는 것 (건강, 건강한 관계, 충분한 수면 등)&lt;/li&gt;
-          &lt;li&gt;&lt;strong&gt;덜 행복해지고 성공할 가능성은 더 낮아짐 (빨리 지치기 때문)&lt;/strong&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;적절한-통제&quot;&gt;적절한 통제&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;자기 주변의 사람에게 물어보기&lt;/li&gt;
-  &lt;li&gt;자기평가
-    &lt;ul&gt;
-      &lt;li&gt;통제 욕구 정도 (96점)
-        &lt;ul&gt;
-          &lt;li&gt;https://isb.asia.qualtrics.com/SE/?SID=SV_8CzIEgUbSdUEPVr&amp;amp;user_id=%USER_ID%&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;최대추구자 측정 (45점)
-        &lt;ul&gt;
-          &lt;li&gt;https://isb.au1.qualtrics.com/jfe/form/SV_ahs9pNCpzadKNhj?user_id=%25USER_ID%25&amp;amp;Q_JFE=qdg&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;자신의-행복에-대해-스스로-책임을-지는-것&quot;&gt;&lt;strong&gt;자신의 행복에 대해 스스로 책임을 지는 것&lt;/strong&gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;정의
-    &lt;ul&gt;
-      &lt;li&gt;자신이 느끼는 것에 대해 다른 사람이나 외부 환경을 탓하지 않는 것
-        &lt;ul&gt;
-          &lt;li&gt;타인이나 외부 환경을 통제하려는 것과 반대의 것&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;자신의 머리 속에서 느끼는 감정을 조절할 수 있는 능력&lt;/strong&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;우리의 상상력은 우리의 감정에 아주 큰 영향을 줌
-    &lt;ul&gt;
-      &lt;li&gt;실제보다 상상에서 더 많은 즐거움을 얻을 수 있음&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;자신의 생각으로 발생하는 감정을 스스로 조절하거나 규제할 수 있다는 것을 의미
-    &lt;ul&gt;
-      &lt;li&gt;분노 : 자신을 괴롭히거나 방해하는 생각이 앞서 나타나 자신이 바라던 목표를 얻는것을 가로막으려 한다고 생각.&lt;/li&gt;
-      &lt;li&gt;슬픔 : 자신이 아끼던 것이 사라지거나 잃어버렸다는 생각이 앞서게 됨&lt;/li&gt;
-      &lt;li&gt;불안 : 불확실하거나 통제력을 잃었다는 생각&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;자신의-행복에-대해-스스로-책임을-진다는-사실을-받아들이는-것을-막는-장애물&quot;&gt;자신의 행복에 대해 스스로 책임을 진다는 사실을 받아들이는 것을 막는 장애물&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;비관주의
-    &lt;ul&gt;
-      &lt;li&gt;아주 극단적인 일이 일어났을 경우 어떻게 행복할 수가 있는지?
-        &lt;ul&gt;
-          &lt;li&gt;나의 행복은 어느정도는 외부 환경에 영향을 받는다고 생각&lt;/li&gt;
-          &lt;li&gt;하지만 이런 질문 자체가 잘못되었음.&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;올바른 질문 : 일반적으로 일상에서 기분이 나쁠 만한 경우에도 행복할 수 있을까?
-        &lt;ul&gt;
-          &lt;li&gt;&lt;strong&gt;감정의 조절도 다른 기술과 마찬가지로 단계적 성장 (몰입) 을 통한 향상이 필요함.&lt;/strong&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;오해
-    &lt;ul&gt;
-      &lt;li&gt;자신의 행복에 대해 책임을 지게 되면, 주변에서 당신을 함부로 대하게 (이용하게) 될 것이다.
-        &lt;ul&gt;
-          &lt;li&gt;사실은 주변 사람에게 감정적으로 대할 경우, 논리적 사고능력이 떨어져 안 좋은 선택을 하게 되는 경우가 많음.&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;자신의 감정을 제어하는 것은, 주변 사람이 당신을 함부로 대했을 때 책임을 묻지 말라는 것이 아니다.&lt;/strong&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;자신을 제어하는 능력 (생각, 감정) 이 높을수록
-    &lt;ul&gt;
-      &lt;li&gt;성적이 좋고&lt;/li&gt;
-      &lt;li&gt;적응력이 좋으며 (정신이상이 적고, 높은 자존감)&lt;/li&gt;
-      &lt;li&gt;폭식이나 알콜 중독이 없으며&lt;/li&gt;
-      &lt;li&gt;더 좋은 관계를 가졌거나 대인 관계 기술이 뛰어나며&lt;/li&gt;
-      &lt;li&gt;안정적 애착관계를 가지며&lt;/li&gt;
-      &lt;li&gt;최적의 감정적 반응을 더 많이 보임&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;내면과-외면의-통제에-대한-상호-관계-보상적-관계&quot;&gt;내면과 외면의 통제에 대한 상호 관계 (보상적 관계)&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;과정
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;ol&gt;
-          &lt;li&gt;자신의 행복에 대해 책임을 짐&lt;/li&gt;
-        &lt;/ol&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;ol&gt;
-          &lt;li&gt;내면을 통제 - 생각과 감정을 제어&lt;/li&gt;
-        &lt;/ol&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;ol&gt;
-          &lt;li&gt;외부환경을 통제하고자 하는 욕구가 줄게 됨&lt;/li&gt;
-        &lt;/ol&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;내면이 통제가 잘 안되면 외부환경을 통제하고자 하는 욕구가 강해짐 (주변정리, 불안한 이유를 외부에서 찾으려 함)&lt;/li&gt;
-  &lt;li&gt;외부환경이 통제가 잘 안되면 내면을 통제하는 방법을 찾으려고 함 (영적, 종교적, 미신 등)
-    &lt;ul&gt;
-      &lt;li&gt;종교를 믿는 사람이 좀 더 행복한 이유 (불확실한 삶을 간접적으로라도 통제를 하고 있다고 믿는 것)&lt;/li&gt;
-      &lt;li&gt;종교를 믿는 사람이 스트레스를 받는 환경에서 더 잘 이겨낼 수 있는 이유&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;방법과 무관하게 내면의 환경을 잘 통제할 수록 스트레스를 더 잘 관리할 수 있게 됨&lt;/strong&gt;
-        &lt;ul&gt;
-          &lt;li&gt;외부환경에 덜 목매게 (집착하지 않게) 됨&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;내부-통제력을-얻는-전략&quot;&gt;내부 통제력을 얻는 전략&lt;/h1&gt;
-
-&lt;h2 id=&quot;자신의-감정을-조절하는-간단한-기술&quot;&gt;자신의 감정을 조절하는 간단한 기술&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;상황의 선택
-    &lt;ul&gt;
-      &lt;li&gt;싹을 잘라버리기 : &lt;strong&gt;자신이 원하지 않는 부정적인 감정이 들 만한 상황을 회피&lt;/strong&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;자신의 감정을 표시하기
-    &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;자신이 느끼는 감정을 스스로에게 말하기&lt;/strong&gt; : &lt;strong&gt;단순히 이름표를 다는 것만으로 감정이 가라앉게 됨&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;자신이 왜 짜증나는지 그 감정에 대해 분석하거나 이야기하는 것이 아님&lt;/strong&gt; : &lt;strong&gt;감정의 증폭&lt;/strong&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;주의 분산하기
-    &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;부정적인 생각으로부터 주의를 돌려 긍정적인 생각이 들도록 주의를 분산&lt;/strong&gt;시키는 것&lt;/li&gt;
-      &lt;li&gt;하지만 &lt;strong&gt;이기적 편향으로 주의를 분산하는 것은 그 순간 기분은 해결될 지라도 문제가 발생함&lt;/strong&gt;
-        &lt;ul&gt;
-          &lt;li&gt;이기적 편향 : 성공은 자신탓으로 돌리고 실패는 남이나 운 탓으로 돌리는 것&lt;/li&gt;
-          &lt;li&gt;타인을 누르고 자신을 치겨올리게 됨&lt;/li&gt;
-          &lt;li&gt;타인과의 관계가 망가지게 됨&lt;/li&gt;
-          &lt;li&gt;망상을 하게 됨 &amp;gt; 안 좋은 선택을 할 확률이 높아짐&lt;/li&gt;
-          &lt;li&gt;이기적 편향 대신 진정한 자부심, 사랑, 충만함을 가져야 함&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;인지적 재평가
-    &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;상황을 재해석하여 기분을 좋게 만드는 방법&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;중요한 회의때문에 스트레스를 받고 있다면, 힘든 육체적 노동을 안하고 있다는 것에 감사하는 마음을 가짐&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;감정을 억누르는 것을 피하기&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;회의에서 누군가에게 화나게 할 만한 말을 들었을 경우
-        &lt;ul&gt;
-          &lt;li&gt;감정을 표현하면 어색한 상황을 더 악화시킬 것이라고 생각&lt;/li&gt;
-          &lt;li&gt;좋은 의도에서 감정을 억누르게 됨&lt;/li&gt;
-          &lt;li&gt;하지만 이것은 좋은 방법이 아님&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;감정을 억누른다고 감정이 사라지지 않음
-        &lt;ul&gt;
-          &lt;li&gt;감정을 표출하지 않더라도 뇌에서는 계속 활성화된 상태로 있음&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;감정을 억누르면 뇌에 많은 능력과 능력이 사용됨
-        &lt;ul&gt;
-          &lt;li&gt;일이 손에 잡히지 않을 만큼 여력이 남지 않게 됨&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;다른 사람이 감정을 억누르고 있는 것을 감지하게 되고 그 상황에서 혈압이 높아지게 됨&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;건강한-생활-습관의-유지&quot;&gt;건강한 생활 습관의 유지&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;불확실성과 부족한 통제의 상황에 감사하기&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;모든것을 예측할 수 있고, 원하는대로 상황이 흘러가는 세상은 행복하지 않음&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;모든 상황을 알고 있어 지루한 것과 아무것도 예측이 되지 않아 불안해지게 되는 것의 사이 (몰입)&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;삶이 어느정도 통제 가능해 발 밑에 견고한 근본과 기반이 다져져 있다고 생각하는 것&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;우리가 맞닥뜨리는 불확실함과 통제 불가능한 일을 수용할 수 있는 상황
-        &lt;ul&gt;
-          &lt;li&gt;만약 현재 자신의 삶이 예측이 불가능하다거나 통제할 수 없다고 생각한다면…&lt;/li&gt;
-          &lt;li&gt;현재 자신이 맞닥뜨린 어려움을 감당하지 못하기 때문임 &amp;gt; 건강한 생활 습관을 키워야 함&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;잘 먹기&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;불량한 식습관 : 가공식품, 몸에서 쉽게 분해되는 음식(당), 부족한 식이섬유, 나쁜 지방의 과다섭취
-        &lt;ul&gt;
-          &lt;li&gt;살이 찌고 에너지량이 적어지게 됨 &amp;gt; 감정에 부정적 영향, 체내 스트레스 상승&lt;/li&gt;
-          &lt;li&gt;내면의 통제가 잘 안된다는 생각 &amp;gt; 외부를 더 통제하려고 함&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;더 많이 움직이기&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;의자병&lt;/strong&gt; : &lt;strong&gt;6시간 이상 의자에 앉아있는 것&lt;/strong&gt;
-        &lt;ul&gt;
-          &lt;li&gt;활동량 부족으로 죽는 사람이 흡연으로 죽는 사람보다 많음&lt;/li&gt;
-          &lt;li&gt;앉아있는 것은 심장병의 측면에서 흡연보다 더 해로움&lt;/li&gt;
-          &lt;li&gt;운동량이 같은 경우에도 앉아있는 것만으로 비만률은 2배로 증가한다.&lt;/li&gt;
-          &lt;li&gt;일주일에 7시간씩 운동을 한다고 해도 주로 좌식생활을 하는 경우 다른 어떤 경우보다 사망률이 50% 높다.&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;더 잘자기&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;충분한 수면을 취하지 않는 것&lt;/strong&gt; : &lt;strong&gt;하루 7시간 미만으로 수면하는 것&lt;/strong&gt;
-        &lt;ul&gt;
-          &lt;li&gt;충분한 수면을 취하지 않을 경우 덜 매력적으로 보임&lt;/li&gt;
-          &lt;li&gt;잘못된 결정을 할 확률이 높아짐&lt;/li&gt;
-          &lt;li&gt;낮 시간 동안 유지하는 경계 상태가 1/3 수준으로 낮아짐&lt;/li&gt;
-          &lt;li&gt;식습관과도 관계가 있음&lt;/li&gt;
-          &lt;li&gt;숙면은 안 좋은 기억을 없애주는 효과가 있음&lt;/li&gt;
-          &lt;li&gt;수면부족은 음주운전과 같은 효과를 줌&lt;/li&gt;
-          &lt;li&gt;수면부족은 직업에 대한 만족도를 저하시킴&lt;/li&gt;
-          &lt;li&gt;수면부족은 건강과 면역체계에 부정적인 영향을 줌&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;감정 통제 능력이 행복 증진에 도움이 되는 이유
-    &lt;ul&gt;
-      &lt;li&gt;행복의 열쇠를 본인이 가지는데 도움(외부가 아닌)&lt;/li&gt;
-      &lt;li&gt;개인적 기술 숙달에 도움&lt;/li&gt;
-      &lt;li&gt;타인과 성숙한 방식으로 소통&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;건강한-생활-습관을-위해-해야할-것--하지-말아야-할-것&quot;&gt;건강한 생활 습관을 위해 해야할 것 / 하지 말아야 할 것&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;건강하지 않은 생활 습관 (불량한 식습관, 움직임 부족, 수면부족) 이 야기하는 것
-    &lt;ul&gt;
-      &lt;li&gt;ADT (주의력 결핍 성향)
-        &lt;ul&gt;
-          &lt;li&gt;화가 많아짐&lt;/li&gt;
-          &lt;li&gt;인내심 부족&lt;/li&gt;
-          &lt;li&gt;주의가 산만해짐&lt;/li&gt;
-          &lt;li&gt;차분하지 못한 상태가 됨&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;ADT의 경우 삶을 제어, 감당할 수 없다고 느낌, 현재 마주한 어려움과 의무를 감당할 수 없음&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;옳은 결정은 내리기 힘들다. 옳을 결정을 내리기 위해 필요한 것
-    &lt;ul&gt;
-      &lt;li&gt;좋은 의도&lt;/li&gt;
-      &lt;li&gt;옳고 그름에 대한 지식&lt;/li&gt;
-      &lt;li&gt;(+@) 가 필요.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;더 잘 먹기 위해 해야할 일&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;건강한 간식을 쉽게 먹을 수 있도록 손이 닿는 곳에 두기&lt;/strong&gt;
-        &lt;ul&gt;
-          &lt;li&gt;당근이나 셀러리 같은 것들&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;최대한 작은 접시나 밥그릇으로 식사하기&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;흰색 그릇에 밥 먹지 않기&lt;/strong&gt; (밥, 파스타 등을 얼마나 먹었는지 쉽게 확인하기 위함)&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;외식이 잦을 겨우 건강한 간식을 가지고 다니기&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;배가 너무 고파지지 않게 유지하기&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;아침에 건강한 음식을 먹기&lt;/strong&gt; (단백질, 채소 등)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;더 많이 움직이기 위해 해야할 일&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;더 많이 움직이기 != 격렬한 운동을 하루 한시간 이상 하라는 의미는 아님&lt;/li&gt;
-      &lt;li&gt;더 많이 움직이기 == 규칙적으로 매일 더 많이 움직이기&lt;/li&gt;
-      &lt;li&gt;걸음 수 측정&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;직장에서 주기적으로 더 많이 움직이도록 상기시키기 (예: 알람)&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;운동기구를 집에 두기&lt;/li&gt;
-      &lt;li&gt;아침에 간단한 운동 하기&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;좋아하는 활동 (운동취미) 찾기&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;하루에 적정량 걷기&lt;/strong&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;숙면을 취하기 위해 해야할 일&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;7시간의 숙면 (침대에 7시간 누워있는 것이 아님)&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;침실에 인공적인 불빛을 최소화하기&lt;/strong&gt;
-        &lt;ul&gt;
-          &lt;li&gt;전자기기를 치우기&lt;/li&gt;
-          &lt;li&gt;침실에 두꺼운 블라인드나 커튼 치기&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;침실에 백색소음 기기를 두기&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;침실을 시원하게 유지하기 (적정하다 느끼는 온도에서 2~4도 낮게)&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;매일 같은 시간에 잠자리에 들고 일어나기&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;숙면을 망치는 스트레스를 받지 않도록 하기&lt;/strong&gt;
-        &lt;ul&gt;
-          &lt;li&gt;저녁을 먹은 뒤로는 이메일 등을 확인하지 않기&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;건강한-생활-습관-만들기-실천하기&quot;&gt;건강한 생활 습관 만들기 (실천하기)&lt;/h1&gt;
-
-&lt;h2 id=&quot;파트너와-함께-하기&quot;&gt;파트너와 함께 하기&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;목표로 향하는 과정에서 상대에게 자문을 구하는 것은 동기부여 및 성공 가능성을 높임&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;건강한-라이프스타일-계획하기-나의-계획&quot;&gt;건강한 라이프스타일 계획하기 (나의 계획)&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;더 잘 먹기
-    &lt;ul&gt;
-      &lt;li&gt;앱 (FatSecret) 이용 매일(주중/주말) 먹은 것 기록하기&lt;/li&gt;
-      &lt;li&gt;앱 (필라이즈) 이용 매일 비타민 먹은 것 기록하기&lt;/li&gt;
-      &lt;li&gt;주말에도 배달 음식 등 먹고 싶을 때 가격이 아닌 영양을 고려하기&lt;/li&gt;
-      &lt;li&gt;건강한 간식과 친해지기 (과일, 채소, 단백질)&lt;/li&gt;
-      &lt;li&gt;늘 갈증을 느끼지 않게 수분 섭취&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;더 많이 움직이기
-    &lt;ul&gt;
-      &lt;li&gt;토요일도 가급적 운동하기&lt;/li&gt;
-      &lt;li&gt;PC 30분 알람 사용하기&lt;/li&gt;
-      &lt;li&gt;활동적 취미 찾기&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;숙면을 취하기
-    &lt;ul&gt;
-      &lt;li&gt;10시 이전에 눕기&lt;/li&gt;
-      &lt;li&gt;수면용 음악 사용하기&lt;/li&gt;
-      &lt;li&gt;침실 온도 낮추기&lt;/li&gt;
-      &lt;li&gt;7시 이후 스트레스 받지 않기&lt;/li&gt;
-      &lt;li&gt;매일 2회 샤워하기&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="A Life of Happiness and Fulfillment (행복하고 보람찬 삶)" /><category term="Coursera" /><category term="Indian School of Business" /><category term="Dr. Rajagopal Raghunathan" /><category term="A Life of Happiness and Fulfillment" /><category term="긍정심리학" /><category term="행복" /><category term="지나친 통제" /><summary type="html">지나친 통제</summary></entry><entry><title type="html">A Life of Happiness and Fulfillment - 03. 애정결핍 / 회피</title><link href="https://bluesplatter.com/a%20life%20of%20happiness%20and%20fulfillment%20(%ED%96%89%EB%B3%B5%ED%95%98%EA%B3%A0%20%EB%B3%B4%EB%9E%8C%EC%B0%AC%20%EC%82%B6)/Happiness-03_Needy/" rel="alternate" type="text/html" title="A Life of Happiness and Fulfillment - 03. 애정결핍 / 회피" /><published>2022-08-31T12:00:00+09:00</published><updated>2022-08-31T12:00:00+09:00</updated><id>https://bluesplatter.com/a%20life%20of%20happiness%20and%20fulfillment%20(%ED%96%89%EB%B3%B5%ED%95%98%EA%B3%A0%20%EB%B3%B4%EB%9E%8C%EC%B0%AC%20%EC%82%B6)/Happiness-03_Needy</id><content type="html" xml:base="https://bluesplatter.com/a%20life%20of%20happiness%20and%20fulfillment%20(%ED%96%89%EB%B3%B5%ED%95%98%EA%B3%A0%20%EB%B3%B4%EB%9E%8C%EC%B0%AC%20%EC%82%B6)/Happiness-03_Needy/">&lt;h1 id=&quot;애정결핍과-회피&quot;&gt;애정결핍과 회피&lt;/h1&gt;
-
-&lt;h2 id=&quot;좋은-관계의-중요성&quot;&gt;좋은 관계의 중요성&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;인간은 사회적 동물, 마음 깊숙히 어딘가에 속하고 사랑 받길 원함. (소속의 욕구)&lt;/li&gt;
-  &lt;li&gt;의견에 동의해줄 사람만 있다면 지루한 영화를 보거나 파티에 가거나 여행을 갈 수 있음.&lt;/li&gt;
-  &lt;li&gt;집단에서 거부당하는 고통은 정신적 뿐만 아니라 육체적으로도 영향을 줌.&lt;/li&gt;
-  &lt;li&gt;하지만 문제는 우리가 이를 몹시 원하게 되어서 즉, 애정결핍이 되면 역효과가 나고 행복 수치를 낮추게 됨&lt;/li&gt;
-  &lt;li&gt;그렇다고 반대로 사랑 받기를 거부(회피) 하는 것 또한 해결책이 아니며 행복 수치를 낮추게 됨&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;왜-애정결핍은-행복에-악영향을-주는가&quot;&gt;왜 애정결핍은 행복에 악영향을 주는가?&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;애정을 갈구하는 것은 매력적이지 않기 때문
-    &lt;ul&gt;
-      &lt;li&gt;우리는 더 희소한 것을 더 소중하게 여기고 좋아하는 경향이 있음&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;존중받지 못하게 됨
-    &lt;ul&gt;
-      &lt;li&gt;애정결핍이 되면 기본적으로 누군가에게 무엇이든지 해주려 하게 되며 상대방은 이를 당연하게 여기게 됨&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;잘못된 관계를 맺게 됨
-    &lt;ul&gt;
-      &lt;li&gt;애정결핍일 때 회피형 (감정적으로 차갑고 거리가 느껴지는 사람들) 에게 끌리게 됨
-        &lt;ul&gt;
-          &lt;li&gt;회피형 : 자신이 스스로 강하고 독립적이라는 것을 확인하기 위해 애정결핍 유형과 사귀게 됨&lt;/li&gt;
-          &lt;li&gt;애정결핍 : 자신과 반대인 강하고 독립적인 사람들이 매력적으로 느껴지기에 그들과 사귀길 원하게 됨&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;자기자신에 대한 존중심을 잃게 됨
-    &lt;ul&gt;
-      &lt;li&gt;스스로에게 자신은 불완전하고 망가졌으며, 자신을 완성시킬 반려자가 절실하게 필요하다고 말하는 것&lt;/li&gt;
-      &lt;li&gt;자신의 전반적인 매력에 대해 불안함을 느낌 (다른 사람의 사랑과 관심을 받을 만한 자격이나 가치가 없다고 생각)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;왜-회피는-행복에-악영향을-주는가&quot;&gt;왜 회피는 행복에 악영향을 주는가?&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;행복에 다른 이의 사랑이 필요하지 않다는 것이 매력적으로 느껴지는 이유
-    &lt;ul&gt;
-      &lt;li&gt;자율성과 자유 (타인에게 의지하지 않고 완전히 행복해질 수 있다는 이론) / 사실 사람은 상당히 의존적임&lt;/li&gt;
-      &lt;li&gt;정신적인 강인함 (캐릭터 람보, 존 웨인과 같은) / 겉으로 강하고 독립적으로 보이는 것은 외관만 그러함&lt;/li&gt;
-      &lt;li&gt;사실 이것은 본성을 거스르는 행위임 - 사람은 기본적으로 사회적인 동물임&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;회피 성향은 사회적인 유대감(행복)의 기회를 날려버림 - 인간 본성에 반함&lt;/li&gt;
-  &lt;li&gt;회피형인 사람은 타인의 협조를 잘 얻지 못함 (감정의 공유를 잘 하지 않음) - 동료들이 좋아하지 않음&lt;/li&gt;
-  &lt;li&gt;회피형은 타인의 도움을 받을 때 덜 행복함&lt;/li&gt;
-  &lt;li&gt;회피형은 위와 같은 이유로 직업에 만족하지 못하게 됨&lt;/li&gt;
-  &lt;li&gt;회피형은 외로움&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;애정결핍과-회피형-사이---안정적-애착&quot;&gt;애정결핍과 회피형 사이 - 안정적 애착&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;테스트 점수 - Anxious / Avoidant Test score : 26 / 29 (Both)&lt;/li&gt;
-  &lt;li&gt;충분한 사랑과 관심을 받지 못하고 자라거나 유아기때 올바른 사랑을 받지 못한 사람이 애정결핍 혹은 회피형 인간이 됨&lt;/li&gt;
-  &lt;li&gt;하지만 이 영향력은 영원하지 않음 (정말로 원한다면 극복이 가능함)
-    &lt;ul&gt;
-      &lt;li&gt;안도감이 드는 단어 (사랑, 포옹 등) 혹은 안전하고 보호받고 있다는 느낌을 받는 상황을 상상하면 수치가 개선됨&lt;/li&gt;
-      &lt;li&gt;듣는 이야기나 경험을 통해 바뀔 수 있음&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;개선 방법
-    &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;자기 연민 연습 : 스스로에게 친절한 태도 - 관계 개선에 강한 영향을 주는 요인&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;감사 표현하기&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;사랑과 베풂의 욕구&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;사랑과-베풂&quot;&gt;사랑과 베풂&lt;/h1&gt;
-
-&lt;h2 id=&quot;사랑과-배풂은-왜-행복에-좋은-영향을-주는가&quot;&gt;사랑과 배풂은 왜 행복에 좋은 영향을 주는가?&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;아기들의 예시 : 아기들은 이기적이면서 동시에 이타적이기도 하며, 강도의 문제임. 이는 상황,환경 등 요인에 따라 달라질 수 있음&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;행복의 관점에서는 이타적인 것이 정답&lt;/strong&gt;이며, 인간은 기본적으로 친절하도록 설계되어 있음&lt;/li&gt;
-  &lt;li&gt;우리 스스로 자신이 친절하고 너그럽다고 말하는 것 : 나는 능력있고, 너그럽고, 친절한 사람이다.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;타인을 친절하게 대하면 그에 상응하는 호의를 받음&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;방법 1 : &lt;strong&gt;감사함을 표함&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;방법 2 : &lt;strong&gt;남들에게 좋은 일을 해주는 것&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;효과 : 관계의 개선, 커리어의 성공할 기회의 증진, 내적 변화를 촉구&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;한없이 주는 사람이 아닌 이타적으로 베푸는 사람이 되어야 함&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;베풂의-규칙&quot;&gt;베풂의 규칙&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;호혜적 스타일 - 일상적으로 다른 사람들과 어떻게 상호작용 하는지를 의미
-    &lt;ul&gt;
-      &lt;li&gt;Givers : 내가 줄 수 있는게 무엇일까?&lt;/li&gt;
-      &lt;li&gt;Takers : 넌 나에게 무엇을 줄래?&lt;/li&gt;
-      &lt;li&gt;Matchers : 공평, 정의, 동등한 관계 추구&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;성공의 사다리 최상단에 (Otherish) Giver 의 비중이 높음&lt;/strong&gt; : 가용할 수 있는 자원이 가장 많음 (은혜에 대한 보은을 받는 등)&lt;/li&gt;
-      &lt;li&gt;성공의 사다리 최하단에도 (Selfless) Giver 의 비중이 높음 : 무분별한 베풂 속에 지쳐 기회를 날려버리게 되는 경우&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;위 차이는 그들이 자기자신의 욕구를 충족할 수 있는지의 여부 차이&lt;/strong&gt;임 &amp;gt; &lt;strong&gt;자신을 챙겨야 함&lt;/strong&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;베풂의 비용을 고려 (예를들어 한번에 도울 수 있는 사람은 4~5명) &amp;gt; &lt;strong&gt;자기 자신도 도울 사람에 포함시켜야 함&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;가치확장전략 : 감사함과 자부심을 느낌 &amp;gt; 우리 스스로 자신이 친절하고 너그럽다고 (유능하다고) 말하는 것
-    &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;자신의 관대함이 타인에 미치는 영향력을 느끼기&lt;/strong&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;베풀면서 즐거움을 느끼기&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;과제--창의적-이타주의&quot;&gt;과제 : 창의적 이타주의&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;나와 연관이 없는 타인을 위한 선의의 장난을 수행하고, 상대방의 반응을 살펴보기
-    &lt;ul&gt;
-      &lt;li&gt;오픈채팅방의 회원들에게 스타벅스 기프티콘을 보내주고, 반응을 살펴봄&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="A Life of Happiness and Fulfillment (행복하고 보람찬 삶)" /><category term="Coursera" /><category term="Indian School of Business" /><category term="Dr. Rajagopal Raghunathan" /><category term="A Life of Happiness and Fulfillment" /><category term="긍정심리학" /><category term="행복" /><category term="애정결핍" /><category term="회피" /><summary type="html">애정결핍과 회피</summary></entry><entry><title type="html">A Life of Happiness and Fulfillment - 02.우월함 추구</title><link href="https://bluesplatter.com/a%20life%20of%20happiness%20and%20fulfillment%20(%ED%96%89%EB%B3%B5%ED%95%98%EA%B3%A0%20%EB%B3%B4%EB%9E%8C%EC%B0%AC%20%EC%82%B6)/Happiness-02_Superiority/" rel="alternate" type="text/html" title="A Life of Happiness and Fulfillment - 02.우월함 추구" /><published>2022-08-29T12:00:00+09:00</published><updated>2022-08-29T12:00:00+09:00</updated><id>https://bluesplatter.com/a%20life%20of%20happiness%20and%20fulfillment%20(%ED%96%89%EB%B3%B5%ED%95%98%EA%B3%A0%20%EB%B3%B4%EB%9E%8C%EC%B0%AC%20%EC%82%B6)/Happiness-02_Superiority</id><content type="html" xml:base="https://bluesplatter.com/a%20life%20of%20happiness%20and%20fulfillment%20(%ED%96%89%EB%B3%B5%ED%95%98%EA%B3%A0%20%EB%B3%B4%EB%9E%8C%EC%B0%AC%20%EC%82%B6)/Happiness-02_Superiority/">&lt;h1 id=&quot;우월함-추구--다른-사람보다-우월함에서-행복을-추구&quot;&gt;우월함 추구 : 다른 사람보다 우월함에서 행복을 추구&lt;/h1&gt;
-
-&lt;h2 id=&quot;왜-우월함을-추구하는가&quot;&gt;왜 우월함을 추구하는가?&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;타인의 인정을 받고 기분이 좋음&lt;/li&gt;
-  &lt;li&gt;타인의 인정이 없더라도 이길 땐 기분이 좋음 (자존심을 높임)&lt;/li&gt;
-  &lt;li&gt;타인과 비교하면서 얼마나 발전(숙달)했는지 느낌&lt;/li&gt;
-  &lt;li&gt;자율성, 자주성을 더 누릴 수 있음&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;어떻게-우월함-추구는-행복도를-떨어뜨리는가&quot;&gt;어떻게 우월함 추구는 행복도를 떨어뜨리는가?&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;사회적 비교
-    &lt;ul&gt;
-      &lt;li&gt;자신과 타인을 비교하거나 남과 경쟁&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;물질주의 (우월함을 비교하기 위한 가장 편한 방법)
-    &lt;ul&gt;
-      &lt;li&gt;고립되어 외로워짐&lt;/li&gt;
-      &lt;li&gt;적응하여 감정이 오래 가지 않음&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;우월함을 좇을 때 타인이 덜 좋아하게 됨
-    &lt;ul&gt;
-      &lt;li&gt;자기중심적이 되고 타인을 덜 배려하게 됨&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;우월함을-좇는-것이-성공에-정말-중요한-요소인가&quot;&gt;우월함을 좇는 것이 성공에 정말 중요한 요소인가?&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;사회적 통념
-    &lt;ul&gt;
-      &lt;li&gt;우월함을 좇는 것은 성취와 성공의 연료라고 여김&lt;/li&gt;
-      &lt;li&gt;하지만 과연 우월함을 좇는 것이 실제로 성공으로 이어지는 것인가?&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;진실
-    &lt;ul&gt;
-      &lt;li&gt;과제가 인지적 사고나 창의적 사고를 요하는 경우, 우월해지고자 하는 욕구는 스트레스를 일으켜 뇌의 기능이 저하됨
-        &lt;ul&gt;
-          &lt;li&gt;최고의 강사가 되고자 하는 욕구가 강의컨텐츠의 질을 향상시키는 노력에는 도움이 되나&lt;/li&gt;
-          &lt;li&gt;학생 앞에서 실제 수업을 할때는 경쟁심으로 인해 실제 핵심사항의 성취에 방해가 됨
-            &lt;ul&gt;
-              &lt;li&gt;과제가 지적인 능력을 요하지 않는 경우 우월함을 좇는 것이 도움이 됨. (예:스포츠 종목)&lt;/li&gt;
-              &lt;li&gt;스트레스를 받지 않는 환경에서는 우월함을 좇는 것이 도움이 됨. (더 많은 준비를 하는 방식 등)&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;무언가를 하기 위해 스스로 동기를 가지는 경우, 잘해야 한다는 압박감을 가지는 것 자체는 좋음 (의욕 상승)&lt;/li&gt;
-      &lt;li&gt;과제를 잘 수행하는 것과 관련해서는 남을 이기고자 하는 압박감으로 인해 좋은 결과를 얻을 수 없음.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;결론
-    &lt;ul&gt;
-      &lt;li&gt;우월함을 좇는 것 외에 다른 방법을 통해 동기를 찾는 것이 좋음
-        &lt;ul&gt;
-          &lt;li&gt;인간은 자신이 의미 있는 삶을 산다고 생각하지 않으면 행복하지 않다는 점에서 아주 독특한 존재&lt;/li&gt;
-          &lt;li&gt;&lt;strong&gt;사람들은 실제로 자신이 가장 의미 있다고 생각하는 것을 할때 가장 행복함&lt;/strong&gt; &amp;gt; 몰입 (Flow)&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;몰입-flow&quot;&gt;몰입 (Flow)&lt;/h1&gt;
-
-&lt;h2 id=&quot;몰입의-특징&quot;&gt;몰입의 특징&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;시간에 관한 왜곡된 인식을 가지는 것
-    &lt;ul&gt;
-      &lt;li&gt;테니스에서 서브를 받을 때 슬로우 모션으로 느껴지는 것&lt;/li&gt;
-      &lt;li&gt;테니스 게임이 끝나고 시계를 보았을 때 생각한 것보다 훨씬 더 많은 시간이 지나있는 것&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;자의식 부족
-    &lt;ul&gt;
-      &lt;li&gt;일에 모든 것을 쏟아 부어 스스로를 관찰하고 판단할 여력이 남아있지 않은 상태&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;현재의 순간에 고도로 집중하는 것&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;어떠한-경우에-몰입을-경험하게-되는가&quot;&gt;어떠한 경우에 몰입을 경험하게 되는가?&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;초조함(상대가 잘함)과 지루함(상대가 못함)의 감정 사이의 구간
-    &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;현재 기술을 자신이 목표로 하는 수준이나 조금 더 나은 수준으로 끌어올려야 하는 경우&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;몰입을 위해서는 초보자 이상의 스킬이 필요함&lt;/strong&gt; (초보자 vs 초보자)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;몰입을 경험하는 것은 내 인생의 목표를 인지하는 것에 척도가 될 수 있음.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;왜-몰입은-행복을-증진시키는가&quot;&gt;왜 몰입은 행복을 증진시키는가?&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;몰입하는 순간에 즐거움을 느낌
-    &lt;ul&gt;
-      &lt;li&gt;몰입을 경험하는 것은 의미있는 일인데, 사람은 의미있는 것에 즐거움을 느낌&lt;/li&gt;
-      &lt;li&gt;New, Creative, Original -&amp;gt; Meaningful, Grow, Evolve&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;대중은 몰입하는 사람들을 좋아함.
-    &lt;ul&gt;
-      &lt;li&gt;외적인 보상은 제로섬 게임인 것에 비해 몰입에서 느끼는 즐거움은 자신보자 못한 사람들에 의지하지 않는다는 것을 의미&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;왜-몰입은-성공확률을-높이는가&quot;&gt;왜 몰입은 성공확률을 높이는가?&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;우월함을 좇는 것이 성공확률을 높이는 길이 아닐까? 야구선수로서의 마이클조던의 예
-    &lt;ul&gt;
-      &lt;li&gt;그는 농구만큼이나 야구도 열심히 연습했지만 성공하진 못했음.&lt;/li&gt;
-      &lt;li&gt;그의 능력은 농구에 더 적합했음&lt;/li&gt;
-      &lt;li&gt;야구 기술을 농구 기술을 익히는 것만큼 시간을 투자하지 않았음.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;한 분야에 정통하려면 1만시간의 몰입 (10년) 의 시간이 필요함.&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;성공할 확률, 행복 모두 증가&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Practical Job (살기위한 직업) 이 아닌 진정 몰입할 수 있는 직업을 가지는 것이 성공에 도움이 됨.&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;몰입을-실-생활에-적용하는-법&quot;&gt;몰입을 실 생활에 적용하는 법&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;직장에서의 몰입
-    &lt;ul&gt;
-      &lt;li&gt;자신의 직업에 만족하지 않는 사람은 이러한 사실을 부끄럽게 생각하고 자신의 일을 무의미하다고 생각하거나 이에 만족하는 것이 좋지 않다고 생각함.&lt;/li&gt;
-      &lt;li&gt;이러한 이유로 하루 아침에 많은 사람들이 자신의 직업을 그만두고 더 의미있는 일을 하길 바람.&lt;/li&gt;
-      &lt;li&gt;하지만 이는 영원히 꿈으로 남게 됨. &amp;gt; 이를 실행하기에는 두려움.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;해법
-    &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;새로운 취미를 만들거나 이전에 가졌던 취미를 다시 해보기&lt;/strong&gt;
-        &lt;ul&gt;
-          &lt;li&gt;취미에는 진입장벽이 없음.&lt;/li&gt;
-          &lt;li&gt;책 읽기, 영화보기, 여행(새로운 문화 경험), 운동, 다른사람들과 어울리기 - 매주 2~3시간 정도로 시작&lt;/li&gt;
-          &lt;li&gt;취미와 관련된 도전을 해야 함&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;직장에서 몰입을 경험하기 (아래 항목의 교집합 찾기)
-        &lt;ul&gt;
-          &lt;li&gt;&lt;strong&gt;자신이 좋아하는 일이나 잘하는 일을 찾아 재능을 키우기 -&amp;gt; 직업에 적용 (직업과 관련된 실력 쌓기)&lt;/strong&gt;&lt;/li&gt;
-          &lt;li&gt;자기 주변의 커뮤니티를 인식하고 니즈를 파악하기 (얻는것이 아닌 돕는 것에 초점)&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;좋아하거나 잘하는 일을 찾기&lt;/strong&gt;
-        &lt;ul&gt;
-          &lt;li&gt;&lt;strong&gt;좋아하거나 잘하는 일을 찾는것은 쉽지 않음 -&amp;gt; 여러 가지를 시험해보기&lt;/strong&gt;&lt;/li&gt;
-          &lt;li&gt;관심 있는 일을 하는 다른 사람들을 만나보기&lt;/li&gt;
-          &lt;li&gt;색다른 일을 해보기&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;자신이 더 의미 있고 만족할 만한 직업으로 이직하는 것&lt;/strong&gt;
-        &lt;ul&gt;
-          &lt;li&gt;&lt;strong&gt;좋아하거나 잘하는 일을 찾는 것을 선행해야 함&lt;/strong&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;우월성에-대한-욕구를-줄이기-위한-전략&quot;&gt;우월성에 대한 욕구를 줄이기 위한 전략&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;우월함을 다시 추구하게 되는 함정 : &lt;strong&gt;몰입을 통해 분야에 정통해지고, 보상(주목)을 받아 다시 우월함을 좇게 되는 굴레&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;일이 잘못되고 있을 때 : 자기 연민&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;중요한 시험을 잘못 본 상황 - 자괴감과 죄책감, 두려움, 우울, 불안&lt;/li&gt;
-      &lt;li&gt;모든 것은 완벽할 수 없지만, &lt;strong&gt;사람들은 자기 자신의 실패에 대해 원래는 해서는 안될, 자기자신만이 실패자인 것 같은 고독감을 느낌&lt;/strong&gt;
-        &lt;ul&gt;
-          &lt;li&gt;&lt;strong&gt;사실은 모두가 실패를 하며&lt;/strong&gt;, 이 때 타인과 유대를 느낄 수 있는 기회가 될 수 있음.&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;사람은 &lt;strong&gt;자신에 대해 더 불친절하고 잔인하게 말하는 경향&lt;/strong&gt;이 있음 &lt;strong&gt;(자신이 아끼는 사람들에 대해서 절대로 하지 않을 것들)&lt;/strong&gt;
-        &lt;ul&gt;
-          &lt;li&gt;더 열심히 일하거나 다음 번에 더 잘하기 위한 동기가 된다고 생각하기 때문 &amp;gt; 실저로는 비참한 기분이 되고 동기를 잃게 됨&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;있는 그대로 받아들임.&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;자기 연민은 자기자신을 불쌍히 여기는 것과는 다름&lt;/strong&gt;
-        &lt;ul&gt;
-          &lt;li&gt;&lt;strong&gt;지금 나처럼 실패한 친구가 있다면, 그 친구에게 어떻게 말해줄 것인가?&lt;/strong&gt; - 자기연민을 신청할 수 있는 방법&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;일이 잘 풀릴 때 : 감사&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;오만한 자부심을 가지는 경우 우월성에 대한 욕구를 강화시킴&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;함께 한 사람들에 대한 감사하는 마음을 가지기&lt;/strong&gt;
-        &lt;ul&gt;
-          &lt;li&gt;유대감&lt;/li&gt;
-          &lt;li&gt;오만한 자부심과 유대감의 감정 사이에 감사함이 위치함&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;감사함의 효과
-        &lt;ul&gt;
-          &lt;li&gt;더 큰 타인과의 유대감 (vs. 우월성)&lt;/li&gt;
-          &lt;li&gt;다른 사람의 지지를 느낄 수 있음&lt;/li&gt;
-          &lt;li&gt;고양감을 느낄 수 있음&lt;/li&gt;
-          &lt;li&gt;보다 긍정적인 사고&lt;/li&gt;
-          &lt;li&gt;더 긴 행복의 여운&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;감사함을-표현하기-실천하기&quot;&gt;감사함을 표현하기 (실천하기)&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;감사함을 느끼는 사람에게 편지를 써서 전달하기&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="A Life of Happiness and Fulfillment (행복하고 보람찬 삶)" /><category term="Coursera" /><category term="Indian School of Business" /><category term="Dr. Rajagopal Raghunathan" /><category term="A Life of Happiness and Fulfillment" /><category term="긍정심리학" /><category term="행복" /><category term="우월함 추구" /><summary type="html">우월함 추구 : 다른 사람보다 우월함에서 행복을 추구</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>HY03</name><email>hyunik03@gmail.com</email></author><category term="A Life of Happiness and Fulfillment (행복하고 보람찬 삶)" /><category term="Coursera" /><category term="Indian School of Business" /><category term="Dr. Rajagopal Raghunathan" /><category term="A Life of Happiness and Fulfillment" /><category term="긍정심리학" /><category term="행복" /><category term="삶에 대한 불신" /><summary type="html">삶에 대한 불신</summary></entry></feed>

@@ -1,0 +1,983 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.20.2 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Sequences, Time Series and Prediction - 03. Recurrent Neural Networks for Time Series | Bluesplatter</title>
+<meta name="description" content="Recurrent Neural Networks for Time Series">
+
+
+  <meta name="author" content="HY03">
+  
+  <meta property="article:author" content="HY03">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Bluesplatter">
+<meta property="og:title" content="Sequences, Time Series and Prediction - 03. Recurrent Neural Networks for Time Series">
+<meta property="og:url" content="https://bluesplatter.com/ai/time%20series/Sequences_TimeSeries_and_Prediction_03_Recurrent_Neural_Networks_for_Time_Series/">
+
+
+  <meta property="og:description" content="Recurrent Neural Networks for Time Series">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-10-25T14:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://bluesplatter.com/ai/time%20series/Sequences_TimeSeries_and_Prediction_03_Recurrent_Neural_Networks_for_Time_Series/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "HY03",
+      "url": "https://bluesplatter.com/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Bluesplatter Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo/logo.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          세상에 남기는 작은 흔적
+          <span class="site-subtitle">Bluesplatter</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/">연도별 포스트</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="https://bluesplatter.com/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#ai" itemprop="item"><span itemprop="name">Ai</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#time-series" itemprop="item"><span itemprop="name">Time series</span></a>
+          <meta itemprop="position" content="3" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Sequences, Time Series and Prediction - 03. Recurrent Neural Networks for Time Series</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/profile/photo.jpg" alt="HY03" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">HY03</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>저는 전문가가 아니고 이것 저것 알아보는 비전문가 입니다. <br /> 틀린 내용이 기술되어도 너그러이 봐주시고 댓글을 남겨주셨으면 좋겠습니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="http://bluesplatter.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:hyunik03@gmail.com">
+            <meta itemprop="email" content="hyunik03@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">이메일</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Sequences, Time Series and Prediction - 03. Recurrent Neural Networks for Time Series">
+    <meta itemprop="description" content="Recurrent Neural Networks for Time Series">
+    <meta itemprop="datePublished" content="2022-10-25T14:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Sequences, Time Series and Prediction - 03. Recurrent Neural Networks for Time Series
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-10-25T14:00:00+09:00">October 25, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h1 id="recurrent-neural-networks-for-time-series">Recurrent Neural Networks for Time Series</h1>
+
+<h2 id="intro">Intro</h2>
+
+<ul>
+  <li>Recurrent Neural Networks 와 Long Short Term Memory Networks 는 시계열 데이터의 예측과 분류에 매우 유용함</li>
+  <li>Lambda Layer : 신경망 내 임의의 코드를 레이어로 활용할 수 있음 (전처리와 후처리)
+    <ul>
+      <li>명시적인 전처리 단계로 데이터를 스케일링한 다음 신경망에 넣는 게 아니라 Lambda 레이어를 사용할 수 있음</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="conceptual-overview">Conceptual overview</h2>
+
+<ul>
+  <li>RNN : 순환 레이어를 포함한 신경망
+    <ul>
+      <li>시퀀스 입력값을 순차적으로 처리하도록 설계</li>
+      <li>입력값의 형태 : 배치 사이즈, 타임스탬프 (윈도우사이즈), 컬럼디멘전 (다변량) = 3차원
+        <ul>
+          <li>지금까지 사용한 입력값 형태 : 배치 사이즈, 입력값 특징 수 (윈도우 사이즈)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>RNN Cell
+    <ul>
+      <li>겉으로 보기에는 셀이 많은 것 같지만, 셀은 하나 뿐이고 이를 반복적으로 사용하여 출력값을 산출</li>
+      <li>입력값이 2개 (X 값과 상태벡터 H 값) - 상태벡터값을 이용해 이전 입력값의 잔존 데이터를 전달받음</li>
+      <li>입력차원 (예: 타임스탬프가 30개) 만큼 반복</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="rnn-notebook">RNN Notebook</h2>
+
+<ul>
+  <li>jupyter notebook 자료</li>
+</ul>
+
+<h2 id="shape-of-the-inputs-to-the-rnn">Shape of the inputs to the RNN</h2>
+
+<ul>
+  <li>데이터의 형태, 데이터를 분할한 배치
+    <ul>
+      <li>예시
+        <ul>
+          <li>Window size 가 30 : 시간 단계가 30</li>
+          <li>4개로 일괄 처리 : 배치값 4</li>
+          <li>입력 형태는 4 * 30 * 1</li>
+        </ul>
+      </li>
+      <li>셀의 관점
+        <ul>
+          <li>하나의 셀은 고정된 시간 단계에서 (Batch Size : 4 * 1) 의 입력을 받음</li>
+          <li>레이어 내 메모리셀이 3개의 뉴런으로 구성된다면</li>
+          <li>출력값 행렬은 4 * 3</li>
+          <li>출력 형태는 4(Batch Size) * 30(Window Size) * 3(Unit Size)</li>
+        </ul>
+      </li>
+      <li>단순 RNN 에서의 상태 출력값 H 는 출력값 행렬 Y 와 동일함</li>
+      <li>일부 경우에는 시퀀스를 입력하되, 출력값의 경우 배치 내 각 인스턴스에 대한 단일 벡터를 얻고 싶은 경우가 있음
+        <ul>
+          <li>마지막 (마지막 시퀀스 스텝-Window) 을 제외하고 모든 출력값을 무시</li>
+          <li>시퀀스 출력값을 도출하려면 레이어를 생성할 때 return_sequences 를 True 로 지정해야 함
+            <ul>
+              <li>하나의 RNN 레이어를 다른 레이어 위에 스태킹 할때 이 작업이 반드시 필요</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="outputting-a-sequence">Outputting a sequence</h2>
+
+<ul>
+  <li>
+    <p>적층 예시</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  model = tf.keras.models.Sequential([
+	tf.keras.layers.SimpleRNN(40, return_sequences=True, input_shape = [None,1]),
+	tf.keras.layers.SimpleRNN(40),
+	tf.keras.layers.Dense(1),
+  ])
+</code></pre></div>    </div>
+
+    <ul>
+      <li>타 RNN 레이어에 입력으로 들어가야 하는 RNN 레이어에 return_sequences 를 True 로 설정</li>
+      <li>Dense 레이어에 입력으로 들어가야 하는 RNN 레이어는 마지막 시퀀스 단계의 결과값만을 출력</li>
+      <li>input_shape (배치 사이즈) 를 설정하지 않음 : 어떤 크기든 상관이 없으니 정의할 필요가 없음</li>
+      <li>Timestamp 값을 None 으로 설정 : 시퀀스 길이와 관계 없이 입력값을 받음</li>
+      <li>마지막 차원이 1로 되어있는 이유 : 일변량 시계열을 다루기 때문</li>
+      <li>두번째 층 RNN 레이어에 return_sequences 값을 True 로 설정할 경우
+        <ul>
+          <li>시퀀스 값이 출력됨</li>
+          <li>Keras 는 각 시간 단계별로 동일한 Dense 레이어를 독립적으로 활용함</li>
+          <li>입력값이 시퀀스이고 출력값 또한 시퀀스일 경우 : 시퀀스 to 시퀀스 RNN</li>
+          <li>차원의 값은 RNN 레이어의 유닛 값에 따라 변동될 수 있음</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="lambda-layers">Lambda layers</h2>
+
+<ul>
+  <li>
+    <p>예시</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  model = tf.keras.models.Sequential([
+    tf.keras.layers.Lambda(lambda x: tf.expand_dims(x, axis=-1),
+                        input_shape=[window_size]),
+    tf.keras.layers.SimpleRNN(40, return_sequences=True),
+    tf.keras.layers.SimpleRNN(40),
+    tf.keras.layers.Dense(1),
+    tf.keras.layers.Lambda(lambda x: x * 100.0)
+  ])	
+</code></pre></div>    </div>
+
+    <ul>
+      <li>첫 lambda 레이어 <code class="language-plaintext highlighter-rouge">tf.expand_dims(x, axis=-1)</code> : 기존 window 생성 function 을 그대로 활용하기 위해 차원을 하나 늘림 (2차원-&gt;3차원)</li>
+      <li>마지막 lambda 레이어 <code class="language-plaintext highlighter-rouge">lambda x: x * 100.0</code> : RNN 의 기본 활성함수 tanh 의 출력값 -1 ~ 1 &gt; 시계열 값은 10개 단위로 구성되고, 비슷한 값으로 출력값을 올리면 학습에 도움이 됨</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="adjusting-the-learning-rate-dynamically">Adjusting the learning rate dynamically</h2>
+
+<ul>
+  <li>
+    <p>예시</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  train_set = windowed_dataset(x_train, window_size, batch_size=128,
+      shuffle_buffer=shuffle_buffer_size)
+
+  model = tf.keras.models.Sequential([
+          tf.keras.layers.Lambda(lambda x: tf.expand_dims(x, axis=1), input_shape=[None]),
+          tf.keras.layers.SimpleRNN(40, return_sequences=True),
+          tf.keras.layers.SimpleRNN(40),
+          tf.keras.layers.Dense(1),
+          tf.keras.layers.Lambda(lambda x: x * 100.0)
+      ])
+
+  lr_schedule = tf.keras.callbacks.LearningRateScheduler(lambda epoch: 1e-8 * 10**(epoch / 20))
+
+  optimizer = tf.keras.optimizers.SGD(learning_rate=1e-8, momentum=0.9)
+
+  model.compile(loss=tf.kears.losses.Huber(),
+                  optimizer=optimizer,
+                  metrics=["mae"])
+
+  history = model.fit(train_set, epochs=100, callbacks=[lr_schedule])
+</code></pre></div>    </div>
+
+    <ul>
+      <li>callback 함수를 활용, epoch 진행 별로 학습률을 약간 변경</li>
+      <li>Huber 손실함수 : 이상치에 덜 민감하게 반응하는 손실함수, 데이터에 노이즈가 많이 섞여있을 때 시도해볼만 함
+        <ul>
+          <li>squared error loss 보다 이상치에 덜 민감함</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="lstm">LSTM</h2>
+
+<ul>
+  <li>RNN
+    <ul>
+      <li>X 가 셀에 투입되면 Y 결과값과 H 상태벡터가 출력되고, 이는 다음 셀에 영향을 줌</li>
+      <li>Step 이 진행되면서 초기 H 상태벡터의 영향도는 점점 작아짐</li>
+    </ul>
+  </li>
+  <li>LSTM
+    <ul>
+      <li>전체 훈련 기간 동안 상태를 유지해주는 셀 상태를 추가함</li>
+      <li>상태 값이 셀 간에 이동을 하고 Step 사이를 이동하면서 더 잘 유지될 수 있게함 - 앞 단계에 있던 데이터가 전체 추정치에 더 큰 영향을 줌</li>
+      <li>상태는 양방향으로 움직일 수 있음</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="coding-lstms">Coding LSTMs</h2>
+
+<ul>
+  <li>
+    <p>예시</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  tf.keras.backend.clear_session()
+  dataset = windowed_dataset(x_train, window_size, batch_size, shuffle_buffer_size)
+
+  model = tf.keras.models.Sequential([
+      tf.keras.layers.Lambda(lambda x: tf.expand_dims(x, axis=-1), input_shape=[None]),
+      tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(32)),
+      tf.keras.layers.Dense(1),
+      tf.keras.layers.Lambda(lambda x: x * 100.0)
+  ])	
+
+  model.compile(loss="mse", optimizer=tf.keras.optimizers.SGD(learning_rate=1e-6, momentum=0.9))
+  model.fit(dataset, epochs=100, verbose=0)
+	
+</code></pre></div>    </div>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">tf.keras.backend.clear_session()</code> : 내부 변수를 초기화. 이후 버전에 영향을 주지 않고 여러 모델을 시험해 볼 수 있음</li>
+      <li><code class="language-plaintext highlighter-rouge">tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(32))</code> : 32개 셀의 단일 LSTM 레이어 추가. 예측에 미치는 영향을 파악할 수 있도록 양방향으로 만듦</li>
+    </ul>
+  </li>
+  <li>
+    <p>예시</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  tf.keras.backend.clear_session()
+  dataset = windowed_dataset(x_train, window_size, batch_size, shuffle_buffer_size)
+
+  model = tf.keras.models.Sequential([
+      tf.keras.layers.Lambda(lambda x: tf.expand_dims(x, axis=-1), input_shape=[None]),
+      tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(32, return_sequences=True)),
+      tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(32)),
+      tf.keras.layers.Dense(1),
+      tf.keras.layers.Lambda(lambda x: x * 100.0)
+  ])	
+
+  model.compile(loss="mse", optimizer=tf.keras.optimizers.SGD(learning_rate=1e-6, momentum=0.9))
+  model.fit(dataset, epochs=100, verbose=0)
+	
+</code></pre></div>    </div>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(32, return_sequences=True))</code> : LSTM 레이어를 한층 더 쌓음, retrun_sequences 를 True 로 설정해야만 함</li>
+    </ul>
+  </li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#coursera" class="page__taxonomy-item" rel="tag">Coursera</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#deeplearning-ai" class="page__taxonomy-item" rel="tag">deeplearning.ai</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#laurence-moroney" class="page__taxonomy-item" rel="tag">Laurence Moroney</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#tensorflow" class="page__taxonomy-item" rel="tag">tensorflow</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#timeseries" class="page__taxonomy-item" rel="tag">timeseries</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#%EC%8B%9C%EA%B3%84%EC%97%B4" class="page__taxonomy-item" rel="tag">시계열</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#ai" class="page__taxonomy-item" rel="tag">AI</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#time-series" class="page__taxonomy-item" rel="tag">Time Series</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2022-10-25T14:00:00+09:00">October 25, 2022</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Sequences%2C+Time+Series+and+Prediction+-+03.+Recurrent+Neural+Networks+for+Time+Series%20https%3A%2F%2Fbluesplatter.com%2Fai%2Ftime%2520series%2FSequences_TimeSeries_and_Prediction_03_Recurrent_Neural_Networks_for_Time_Series%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbluesplatter.com%2Fai%2Ftime%2520series%2FSequences_TimeSeries_and_Prediction_03_Recurrent_Neural_Networks_for_Time_Series%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fbluesplatter.com%2Fai%2Ftime%2520series%2FSequences_TimeSeries_and_Prediction_03_Recurrent_Neural_Networks_for_Time_Series%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/ai/time%20series/Sequences_TimeSeries_and_Prediction_02_Deep_Neural_Networks_for_Time_Series/" class="pagination--pager" title="Sequences, Time Series and Prediction - 02. Deep Neural Networks for Time Series
+">이전</a>
+    
+    
+      <a href="/ai/time%20series/Sequences_TimeSeries_and_Prediction_04_Real-world_time_series_data/" class="pagination--pager" title="Sequences, Time Series and Prediction - 04. Real-world time series data
+">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ai/time%20series/Sequences_TimeSeries_and_Prediction_04_Real-world_time_series_data/" rel="permalink">Sequences, Time Series and Prediction - 04. Real-world time series data
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-11-07T14:00:00+09:00">November 7, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Real-world time series data
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ai/time%20series/Sequences_TimeSeries_and_Prediction_02_Deep_Neural_Networks_for_Time_Series/" rel="permalink">Sequences, Time Series and Prediction - 02. Deep Neural Networks for Time Series
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-10-21T14:00:00+09:00">October 21, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Deep_Neural_Networks_for_Time_Series
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ai/time%20series/Sequences_TimeSeries_and_Prediction_01_Sequences_and_Prediction/" rel="permalink">Sequences, Time Series and Prediction - 01. Sequences and Prediction
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-10-20T14:00:00+09:00">October 20, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Introduction
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ai/time%20series/Sequences_TimeSeries_and_Prediction_00_About-this-course/" rel="permalink">Sequences, Time Series and Prediction - 00. 강좌소개
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-10-17T14:00:00+09:00">October 17, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">강좌에 대한 설명
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+<!--
+<script>
+	(function(d, h, m){
+    var js, fjs = d.getElementsByTagName(h)[0];
+    if (d.getElementById(m)){return;}
+    js = d.createElement(h); js.id = m;
+    js.onload = function(){
+        window.makerWidgetComInit({
+        position: "left",          
+        widget: "eqypoqmawbcz3azh-usiy9q7ma4ong1w1-juelcm3zfgcuwjds"                
+    })};
+    js.src = "https://makerwidget.com/js/embed.js";
+    fjs.parentNode.insertBefore(js, fjs)
+	}(document, "script", "dhm"))
+</script>
+-->
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:hyunik03@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 HY03. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://bluesplatter.com/ai/time%20series/Sequences_TimeSeries_and_Prediction_03_Recurrent_Neural_Networks_for_Time_Series/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/ai/time%20series/Sequences_TimeSeries_and_Prediction_03_Recurrent_Neural_Networks_for_Time_Series"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://bluesplatter.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>
