@@ -2,7 +2,7 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://bluesplatter.com/wine/Wine_villa_M_some/</loc>
-<lastmod>2020-09-26T18:00:00+09:00</lastmod>
+<lastmod>2019-09-26T18:00:00+09:00</lastmod>
 </url>
 <url>
 <loc>https://bluesplatter.com/wine/Wine_KJVintnersChad/</loc>
@@ -485,10 +485,6 @@
 <lastmod>2022-09-30T14:00:00+09:00</lastmod>
 </url>
 <url>
-<loc>https://bluesplatter.com/ai/time%20series/Sequences_TimeSeries_and_Prediction_00_About-this-course/</loc>
-<lastmod>2022-10-17T14:00:00+09:00</lastmod>
-</url>
-<url>
 <loc>https://bluesplatter.com/ai/time%20series/Sequences_TimeSeries_and_Prediction_01_Sequences_and_Prediction/</loc>
 <lastmod>2022-10-20T14:00:00+09:00</lastmod>
 </url>
@@ -503,6 +499,22 @@
 <url>
 <loc>https://bluesplatter.com/ai/time%20series/Sequences_TimeSeries_and_Prediction_04_Real-world_time_series_data/</loc>
 <lastmod>2022-11-07T14:00:00+09:00</lastmod>
+</url>
+<url>
+<loc>https://bluesplatter.com/ai/reinforcement%20learning/Sequences_TimeSeries_and_Prediction_00_About-this-course/</loc>
+<lastmod>2022-11-18T14:00:00+09:00</lastmod>
+</url>
+<url>
+<loc>https://bluesplatter.com/ai/reinforcement%20learning/Fundamentals_of_Reinforcement_Learning_00_About-this-course/</loc>
+<lastmod>2022-11-18T14:00:00+09:00</lastmod>
+</url>
+<url>
+<loc>https://bluesplatter.com/ai/reinforcement%20learning/Fundamentals_of_Reinforcement_Learning_01_Week1/</loc>
+<lastmod>2022-11-18T14:00:00+09:00</lastmod>
+</url>
+<url>
+<loc>https://bluesplatter.com/wine/Textbook_Napa_Cabernet_Sauvignon_2020/</loc>
+<lastmod>2023-01-26T11:00:00+09:00</lastmod>
 </url>
 <url>
 <loc>https://bluesplatter.com/about/</loc>

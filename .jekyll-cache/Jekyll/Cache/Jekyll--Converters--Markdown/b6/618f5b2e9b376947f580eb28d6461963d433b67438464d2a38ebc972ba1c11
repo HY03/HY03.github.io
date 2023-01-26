@@ -1,0 +1,34 @@
+I"d<h2 id="lesson-1-the-k-armed-bandit-problem">Lesson 1: The K-Armed Bandit Problem</h2>
+
+<ul>
+  <li>Define reward</li>
+  <li>Understand the temporal nature of the bandit problem</li>
+  <li>Define k-armed bandit</li>
+  <li>Define action-values</li>
+</ul>
+
+<h2 id="lesson-2-what-to-learn-estimating-action-values">Lesson 2: What to Learn? Estimating Action Values</h2>
+
+<ul>
+  <li>Define action-value estimation methods</li>
+  <li>Define exploration and exploitation</li>
+  <li>Select actions greedily using an action-value function</li>
+  <li>Define online learning</li>
+  <li>Understand a simple online sample-average action-value estimation method</li>
+  <li>Define the general online update equation</li>
+  <li>Understand why we might use a constant step-size in the case of non-stationarity</li>
+</ul>
+
+<h2 id="lesson-3-exploration-vs-exploitation-tradeoff">Lesson 3: Exploration vs. Exploitation Tradeoff</h2>
+
+<ul>
+  <li>Define epsilon-greedy</li>
+  <li>Compare the short-term benefits of exploitation and the long-term benefits of exploration</li>
+  <li>Understand optimistic initial values</li>
+  <li>Describe the benefits of optimistic initial values for early exploration</li>
+  <li>Explain the criticisms of optimistic initial values</li>
+  <li>Describe the upper confidence bound action selection method</li>
+  <li>Define optimism in the face of uncertainty</li>
+</ul>
+
+:ET
