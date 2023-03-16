@@ -13,6 +13,7 @@ categories:
 - AI
 - Reinforcement Learning
 toc: false
+use_math: true
 ---
 
 ## Course Introduction
@@ -36,7 +37,7 @@ toc: false
 	+ **학습데이터 : 행동을 수행한 것에대한 평가를 학습한다.**
 	+ **피드백 : 이번 행동이 얼마나 좋았는지를 피드백한다. (그것이 최선/최악인지는 알 수 없다)**
 		* 피드백은 행동에 완전 종속됨.
-		* 때문에 최선의 행동을 찾아 끈임없이 탐험해야 함.
+		* 때문에 최선의 행동을 찾아 끊임없이 탐험해야 함.
 
 
 ## 관련 자료 (RLbook2018 Pages 25-36)
@@ -74,15 +75,15 @@ toc: false
 		
 			![2_1_1_value_of_action](/assets/images/posts/2_1_1_value_of_action.png)
 
-			- 위 수식은 문제를 풀었을 때 (q*) 의 value of the action 에 대한 수식이다.
+			- 위 수식은 문제를 풀었을 때 ($q_*$) 의 value of the action 에 대한 수식이다.
 			- value of the action : 각각의 k 행동들이 가지는 기대/평균 보상값
-			- At : time step t 시점에 선택한 action
-			- Rt : At 에 상응하는 보상
-			- q*(a) : a 가 선택되었을때 기대되는 보상값
-			- ≐ : is defined as
+			- $A_t$ : time-step $t$ 시점에 선택한 action
+			- $R_t$ : $A_t$ 에 상응하는 보상
+			- $q_*(a)$ : $a$ 가 선택되었을때 기대되는 보상값
+			- $\doteq$ : is defined as
 			- If you knew the "value of the each action" : 해당 문제를 풀었다고 볼 수 있음. 
-			- Qt(a) : q*(a) 와 유사한 값 (중간값)
-			- Q Star 값은 에이전트가 알고 있는 값이 아님
+			- $Q_t(a)$ : $q_*(a)$ 와 유사한 값 (중간값)
+			- $q_*$ 값은 에이전트가 알고 있는 값이 아님
 		* greedy actions
 			- action value 를 계속 추정하다 보면 어느 시점에서나 적어도 하나의 가장 큰 예측값을 가지는 action 이 존재
 			- 이것을 greedy actions 라고 함.
@@ -106,7 +107,7 @@ toc: false
 			- 위 수식은 action-value method 중 보상평균값으로 추정하는 방식에 대한 수식이다.
 			- Action-value 는 통상적으로 해당 Action 이 선택되었을 때 보상 값의 평균치를 말한다.
 			- 1(predictate) 는 행위를 하였을 때는 1, 아닌 경우 0 (가상의 1/0, 횟수의 개념)
-			- 분모가 무한하게 커지면 Qt(a) 의 값은 q*(a) 의 값에 수렴한다.
+			- 분모가 무한하게 커지면 $Q_t(a)$ 의 값은 $q_*(a)$ 의 값에 수렴한다.
 			- 이 방식을 sample-average method 라 부르며, 이는 Action-value 를 구하기 위한 많은 방법 중 하나이다.
 			
 		* 수식설명 2
@@ -116,14 +117,14 @@ toc: false
 			- 위 수식은 greedy action selection method 에 대한 수식이다.
 			- action selection 에서 가장 단순한 방법은 가장 큰 예측값에 해당하는 action을 선택하는 것이다.
 			- 현 시점 이전까지 가장 탐욕적인 action 으로 정의된 행동을 하는 것.
-			- argmaxa : 후술되는 값이 최대값이 되는 action a 를 의미
+			- $\underset{a}{\arg\max}$ : 후술되는 값이 최대값이 되는 action $a$ 를 의미
 			- Greedy action selection 은 현 지식을 이용해 당장의 보상을 최대화 하는 방식
 			- 정말 더 나은 방식을 찾기 위해 열등한 방식을 샘플링하는데 시간을 할애하지 않음.
 			
-		* e-greedy methods
+		* $\epsilon$-greedy methods
 			- 위와 다른 대안으로 대부분 탐욕스러운 행동을 하되
-			- 아주 작은 확률(e)로 action-value 와 관계 없이 균등한 확률로 a 를 선택하는 방법이 있음.
-			- 이 방법을 통한 샘플링 횟수가 무한하게 커지면 Qt(a) 의 값은 q*(a) 의 값에 수렴한다.
+			- 아주 작은 확률($\epsilon$)로 action-value 와 관계 없이 균등한 확률로 $a$ 를 선택하는 방법이 있음.
+			- 이 방법을 통한 샘플링 횟수가 무한하게 커지면 $Q_t(a)$ 의 값은 $q_*(a)$ 의 값에 수렴한다.
 			- 이것은 점근적인 보장일 뿐, 실질적인 효과에 대한 것은 아니다.
 			
 - The 10-armed Testbed
@@ -132,14 +133,14 @@ toc: false
 		![2_3_1_10_armed_testbed](/assets/images/posts/2_3_1_10_armed_testbed.png)
 
 		* 10-armed testbed 의 bandit problem 문제 예시
-		* 각 10 개 action 의 true value q*(a) 값 은 평균 0, 분산 1 인 정규분포 (표준정규분포) 를 따른다.
+		* 각 10 개 action 의 true value $q_*(a)$ 값 은 평균 0, 분산 1 인 정규분포 (표준정규분포) 를 따른다.
 		* 위 조건으로 2000번의 서로 다른 bandit problem 을 수행, 평균 값을 취함.
 		
 	+ 결과
 	
 		![2_3_2_result_10_armed_testbed](/assets/images/posts/2_3_2_result_10_armed_testbed.png)
 
-		* 보상의 분산이 클수록 더 많은 탐험이 필요하며 e-greedy methods 가 greedy methods 보다 더 잘 작동한다.
+		* 보상의 분산이 클수록 더 많은 탐험이 필요하며 $\epsilon$-greedy methods 가 greedy methods 보다 더 잘 작동한다.
 		* 만약 보상의 분산이 0이라면 각각의 action 후에 true value 값을 바로 알 수 있게 된다.
 		* 위의 경우 greedy methods 가 더 잘 작동하게 된다. (탐험할 필요가 없음.)
 		* 그러나 이런 결정론적인 상황에서도 몇가지 가정이 불확실하다면 탐험하는 쪽이 유리하다.
@@ -152,14 +153,14 @@ toc: false
 	
 		![2_4_1_estimated_value_of_single_action](/assets/images/posts/2_4_1_estimated_value_of_single_action.png)
 
-		* 특정 단일 Action 에 대한 Action-value 를 예측, action 은 n-1 번 선택됨.
+		* 특정 단일 Action 에 대한 Action-value 를 예측, action 은 $n-1$ 번 선택됨.
 		* 위 명확한 계산법은 모든 이전 기록을 가지고 있어야 하고, 예측값이 필요할 때마다 계산해야함.
 			- 메모리가 많이 필요하고 연산량이 상당해진다.
 			- 위의 방법이 아니라 이전 평균값에서 이번 보상값을 업데이트 하는 방식을 취하는 것이 효율적이다.
 			
 		![2_4_2_update_action_value](/assets/images/posts/2_4_2_update_action_value.png)
 
-		* 위의 구현법을 이용하면 메모리는 Qn 과 n 값만을 저장하고 있고, 작은 계산을 통해 매번 새로운 예측값을 구할 수 있음.
+		* 위의 구현법을 이용하면 메모리는 $Q_n$ 과 $n$ 값만을 저장하고 있고, 작은 계산을 통해 매번 새로운 예측값을 구할 수 있음.
 		
 		![2_4_3_update_action_value](/assets/images/posts/2_4_3_update_action_value.png)
 
@@ -167,7 +168,7 @@ toc: false
 		* Target - OldEstimate = error
 			- 위 에러 값은 예측값이 Target 에 가까워질 수록 작아짐
 			- Target 은 예측이 움직이기 원하는 방향을 가리킴
-		* StepSize : 각 타임스텝마다 변하는 step-size parameter 이며, 이 책에서는 알파 값 혹은 at(a) 로 나타낸다.
+		* StepSize : 각 타임스텝마다 변하는 step-size parameter 이며, 이 책에서는 $\alpha$ 혹은 $\alpha_t(a)$ 로 나타낸다.
 		
 		![2_4_4_simple_bandit_algorithm](/assets/images/posts/2_4_4_simple_bandit_algorithm.png)
 
@@ -180,27 +181,31 @@ toc: false
 	
 		![2_5_1_constant_step_size_parameter](/assets/images/posts/2_5_1_constant_step_size_parameter.png)
 
-		* 위의 수식을 weighted average 라고도 하는데 각 가중치(Q,R 앞 값) 의 합이 1이 되기 때문이다.
-		* 1-a 값이 1보다 작기 때문에 승수가 커질수록 (이전 step 의 값일수록) 가중치 값이 decay 됨
+		* 위의 수식을 weighted average 라고도 하는데 각 가중치의 합이 1이 되기 때문이다.
+			- $(1-\alpha)^n + \sum_{i=1}^n\alpha(1-\alpha)^{n-i} = 1$
+		* $1-\alpha$ 값이 1보다 작기 때문에 승수가 커질수록 (이전 step 의 값일수록) 가중치 값이 decay 됨
 		* 때로는 위 수식을 exponential recency-weighted average 라고도 함 (지수적 최근성 가중치 평균)
 	+ 때로는 step 별로 변동하는 step-size parameter 를 사용하는 것이 편할 때가 있음.
-		* 예를 들어 1/n step-size parameter (sample-average method) 는 충분히 큰 step 을 진행할 경우 true action value 로 수렴하는 것을 보장한다.
+		* 예를 들어 $\frac{1}{n}$ step-size parameter (sample-average method) 는 충분히 큰 step 을 진행할 경우 true action value 로 수렴하는 것을 보장한다.
 	+ 확률적 근사 이론은 확률 1로 수렴을 보장하는 데 필요한 조건을 제공한다. 
 	
 		![2_5_2_conditions_required_to_convergence_with_prob1](/assets/images/posts/2_5_2_conditions_required_to_convergence_with_prob1.png)
 
-		* 첫번째 조건은 초기 조건이나 무작위 변동을 극복할 수 있을 정도로 step 이 큰 것을 보장
-		* 두번째 조건은 step이 수렴을 확신할 정도로 충분히 작은 것을 보장
-		* 1/n 은 이 두 조건을 모두 만족하나, 상수 step 파라미터는 두번째 조건을 충족하지 않아 가장 최근의 보상값에 의해 완전히 수렴하지 못하게 됨.
+		* 첫번째 조건은 초기 조건이나 무작위 변동을 극복할 수 있을 정도로 step-size 가 큰 것을 보장
+		* 두번째 조건은 step-size 가 수렴을 확신할 정도로 충분히 작은 것을 보장
+		* $\frac{1}{n}$ 은 이 두 조건을 모두 만족하나, 상수 step 파라미터는 두번째 조건을 충족하지 않아 가장 최근의 보상값에 의해 완전히 수렴하지 못하게 됨.
 			- 이것은 비정상성 환경에서 필요한 내용이다.
 		* 두 조건이 만족하더라도 매우 느리게 수렴하거나, 만족스러운 수렴율을 얻기 위해 파라미터를 튜닝해야 할 수도 있음.
 		* 위 이론은 이론적인 내용에는 자주 사용되나, 실제 적용 환경에서는 잘 사용되지 않음.
 
 - Optimistic Initial Values
-	+ 위에 언급한 모든 방법들은 initial action-value estimates (Q1(a)) 에 어느정도 영향을 받는다.
+	+ 위에 언급한 모든 방법들은 initial action-value estimates ($Q_1(a)$) 에 어느정도 영향을 받는다.
 	+ 통계적 표현으로 이러한 방식들은 biased by their initial estimates (초기추정치에 의해 편향된다) 라고 한다.
-	+ 예를 들어 sample-average methods 는 이 편향이 action 이 최초 선택될 때 사라진다면
+	+ 예를 들어 sample-average methods 는 이 편향이 모든 action을 한 번 이상씩 수행했을 때 사라진다면
+		* 액션 a=1 to k 에 대해 초기값 $Q(a)$, $N(a)$ 를 초기값으로 쓰고, 한 번이라도 a 가 시도되면 수식에 따른 값으로 변경 
+		* n 으로 나눌 때 0 으로 나눌 수 없으므로..
 	+ 상수 a 를 사용하는 경우 이 편향은 영구적이다. (시간의 흐름에 따라 점차 감소하지만)
+		* 별도의 초기값 할당이 아니라 처음부터 수식을 사용하되, 수식 내 0번째 스텝의 값이 초기값임.
 	+ 장점 : 예상할 수 있는 보상 수준에 대한 사전지식을 제공하는 쉬운 방법
 	+ 단점 : 모든 매개변수를 0 으로 설정하는 경우 사용자가 반드시 파라미터를 선택해야 한다. 
 	+ 간단한 탐색 장려의 방법 : 초기 값을 0 대신 +5 로 설정 (10-armed testbed 상황으로 가정)
@@ -210,8 +215,8 @@ toc: false
 		
 		![2_6_1_optimistic_greedy](/assets/images/posts/2_6_1_optimistic_greedy.png)
 
-		* 10-armed bandit testbed 에서 greedy method 를 초기값 Q1(a) +5 로 세팅한 결과
-		* 비교군은 e-greedy method 에 초기값 Q1(a) = 0
+		* 10-armed bandit testbed 에서 greedy method 를 초기값 $Q_1(a) = +5$ 로 세팅한 결과
+		* 비교군은 $\epsilon$-greedy method 에 초기값 $Q_1(a) = 0$
 		* 이 trick 은 stationary problem 에서 꽤 효과적이나, 탐색을 장려하는 일반적인 방법은 아님.
 		* 이러한 비판은 sample-average methods 에서도 통용된다.
 			- 초기 시점을 특수한 이벤트로 여긴다.
@@ -220,7 +225,7 @@ toc: false
 - Upper-Confidence-Bound Action Selection
 	+ action-value 추정값의 불확실성 때문에 탐험은 반드시 필요하다.
 	+ greedy actions 는 현재 시점에는 가장 최적의 선택이나 다른 action 이 실제로는 더 좋은 것일 수 있다.
-	+ e-greedy action selection 은 강제적으로 non-greedy action 을 선택하지만 선호도 없이 무차별적인 선택을 하여 greedy 한 선택을 하게 될 수도 있다.
+	+ $\epsilon$-greedy action selection 은 강제적으로 non-greedy action 을 선택하지만 선호도 없이 무차별적인 선택을 하여 greedy 한 선택을 하게 될 수도 있다.
 		* 강제적인 선택을 할 때는 non-greedy 한 선택을 하는 것이 좋음
 		* 추정치가 최대치에 얼마나 가까운지와 추정치의 불확실성을 모두 고려
 		* 실제로 최적일 가능성에 따라 탐욕스럽지 않은 action 을 선택하는 것이 좋음.
@@ -228,15 +233,15 @@ toc: false
 		![2_7_1_UCB](/assets/images/posts/2_7_1_UCB.png)
 
 		* UCB (Upper-Confidence-Bound) Action Selection 은 그러한 효율적인 방식 중 하나이다.
-		* Nt(a) 는 t step 이 진행되었을때 a action 이 선택된 횟수로, 많이 선택될 수록 우항의 피연산자 값이 작아진다.
-		* 자연로그 t 는 step 이 커짐에 따라 값이 무한대까지 증가 (수렴하지 않음) 하나 그 증가폭이 서서히 줄어든다
-		* c는 탐험의 정도 (강도) 를 나타내는 수치이다.
-		* 즉 action이 많이 선택될수록 Qt(a) 의 값은 정확해지고, 우항의 피연산자 값은 작아진다.
+		* $N_t(a)$ 는 t step 이 진행되었을때 a action 이 선택된 횟수로, 많이 선택될 수록 우항의 피연산자 값이 작아진다.
+		* $\ln t$ 는 step 이 커짐에 따라 값이 무한대까지 증가 (수렴하지 않음) 하나 그 증가폭이 서서히 줄어든다
+		* $c$ 는 탐험의 정도 (강도) 를 나타내는 수치이다.
+		* 즉 action이 많이 선택될수록 $Q_t(a)$ 의 값은 정확해지고, 우항의 피연산자 값은 작아진다.
 		* action 이 한번도 선택되지 않을 경우 해당 a 를 maximizing action 으로 여긴다. (해당 a 에 대한 무조건적인 탐험)
 		
 		![2_7_2_UCB](/assets/images/posts/2_7_2_UCB.png)
 
-		* 이러한 UCB 방식은 10-armed testbed 에서 e-greedy 보다 나은 성과를 보여주기도 한다.
+		* 이러한 UCB 방식은 10-armed testbed 에서 $\epsilon$-greedy 보다 나은 성과를 보여주기도 한다.
 		* 단 몇가지 단점으로 인해 실용적이지 않은 방식이다.
 			- bandits 문제에서 reinforcement learning 문제로 확장하기 어렵다.
 			- nonstationary 한 문제들에는 더 어려운 방식의 action-value method 가 필요하다.
@@ -264,9 +269,9 @@ toc: false
 		* 액션 (Action) : 선택지 - 3가지 약 중 하나를 선택하는 것
 		* 보상 (Rewards) : 액션에 대한 결과 - 환자의 상태
 		* 값 (Value Function - Action-Value (Function)) : 기대되는 보상 값 - 환자의 혈압 값
-			- 에이전트가 액션을 선택했을 때 그 값 (Action-Value = q*)이 최대화 할 경우 목적을 달성함
-	+ q*(a) 값 구하기
-		* 각 약의 결과값이 서로 다른 확률분포를 가졌을 경우 q* 는 각 분포의 평균이 될 수 있다.
+			- 에이전트가 액션을 선택했을 때 그 값 (Action-Value = $q_*$)이 최대화 할 경우 목적을 달성함
+	+ $q_*(a)$ 값 구하기
+		* 각 약의 결과값이 서로 다른 확률분포를 가졌을 경우 $q_*$ 는 각 분포의 평균이 될 수 있다.
 	+ Bandits Problem 을 고려하는 이유
 		* 문제와 알고리즘 디자인 선택에 있어 가장 간단한 세팅
 
@@ -339,7 +344,7 @@ toc: false
 
 - Upper-Confidence Bound(UCB) Action Selection
 	+ UCB action-selection 방식이 예측의 불확실성을 이용해 탐색을 유도하는 방법
-	+ UCB의 C는 confidence 를 뜻하며, 예측한 Q(a) 값의 오차범주 범위(c) 내에 실제 값이 들어올 것이라 확신하는 정도의 수치이다.
+	+ UCB의 C는 confidence 를 뜻하며, 예측한 $Q(a)$ 값의 오차범주 범위 $(c)$ 내에 실제 값이 들어올 것이라 확신하는 정도의 수치이다.
 		* 범위가 작을수록 결과에 더욱 확신한다는 뜻임
 	+ 불확실성 (범위) 에 마주했을때 가장 높은 값 (Upper-Confidence Bound) 을 선택
 	+ 수식에 대한 풀이
