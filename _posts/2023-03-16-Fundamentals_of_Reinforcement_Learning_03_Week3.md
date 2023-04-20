@@ -1,6 +1,6 @@
 ---
-title: Fundamentals of Reinforcement Learning - 03. Week 3. Learning Objectives
-date: '2023-03-16 18:00:00'
+title: Fundamentals of Reinforcement Learning - 03. Week 3. Value Functions & Bellman Equations
+date: '2023-03-16 15:00:00'
 tags:
 - Coursera
 - Alberta Machine Intelligence Institute
@@ -8,7 +8,8 @@ tags:
 - 강화학습
 - Martha White
 - Adam White
-- Learning Objectives
+- Value Functions
+- Bellman Equations
 related: true
 categories:
 - AI
@@ -17,340 +18,496 @@ toc: false
 use_math: true
 ---
 
-## Course Introduction
+## 관련 자료 (RLbook2018 Pages 58-67)
 
-- 문제를 접하게 되었을 때, 가장 중요한 단계가 문제를 Markov Decision Process(MDP) 로 전환하는 것이다.
-- 솔루션의 질은 이 전환과 밀접한 관계가 있다.
-
-## 관련 자료 (RLbook2018 Pages 47-56)
-
-- Finite Markov Decision Processes (유한한 마르코프 결정 프로세스)
-
-	+ bandits 문제와 같이 피드백에 대한 평가를 포함
-	+ 또한 연관성 측면 (다른 상황에서 다른 액션을 선택하는 것) 의 성격도 가지고 있음
-		* bandits 문제는 동일 상황에서 다른 액션을 선택하는 것
-	+ MDP 는 고전적인 정형화된 sequential decision making (순차 결정) 이다.
-		* 액션이 즉각적인 보상에만 영향을 주는 것이 아닌,
-		* 후속 상황(situations), 에이전트의 상태(states), 미래의 보상 (future rewards) 에 영향을 줌.
-		* 그러므로 MDP 는 지연된 보상, 그리고 지연된 보상과 즉각적인 보상 간의 tradeoff (거래합의) 가 필요하다.
-	+ MDP 수식 관련
-		* bandit problems
-			- estimate the value $q_*(a)$
-		* MDP
-			- estimate the value $q_*(s,a)$ : a : action, s : state
-			- or estimate the value $\upsilon_*(s)$ : 상태 기반 추정값
-	+ MDP 는 강화학습 문제에 있어 수학적으로 이상적인 형태
-		* 수학적 구조 상 핵심 요소들 : 보상, 가치함수, 벨먼 방정식 등
-	+ 강화학습은 적용 가능성의 폭과 수학적 취급 용이성 사이에 있어 tradeoff (거래합의) 가 필요하다.
-
-- The Agent-Environment Interface
-  
-  ![3_1_1_agent_environment_in_MDP](/assets/images/posts/3_1_1_agent_environment_in_MDP.png)
-
-  + MDP 는 목표 달성을 위해 상호작용을 통한 학습 문제에 있어 직접적인 틀이다.
-  + 학습자 (learner) 와 결정자 (decision maker) 는 에이전트 (agent) 라 한다.
-  + 에이전트 (agent) 밖의 모든 구성으로 상호작용을 하는 것을 환경 (environment) 이라 한다.
-  + 상호작용은 연속적으로 발생한다.
-  	* 에이전트는 액션을 선택하고 환경은 액션에 반응한다.
-  		- 환경은 새로운 상황을 에이전트에 제공한다.
-  		- 환경은 에이전트에 보상을 제공한다.
-  		- 보상은 특정한 수치값으로 에이전트가 액션을 선택하는 것을 통해 최대화하길 원하는 값이다.
-  	* 특별히, 에이전트는 환경과 이산적 타임스텝 (0, 1, 2, 3) 의 순서로 상호작용한다고 가정한다.
-  		- 많은 아이디어들이 시간 연속적인 것이 될 수 있어도, 단순성을 유지하기 위해 케이스를 제한한다.
-  	* 각 타임스텝 t 에 따라...
-  		- agent 는 환경의 상태 (environment's state) 값을 받음 : $S_t \in$ S 
-  		- 이에 따라 agent 는 액션을 선택함 : $A_t \in$ A$(s)$
-  		- 액션에 따른 결과로 에이전트는 수치적 보상을 얻음 : $R_{t+1} \in R \subset$ R 
-  		- 이후 다른 환경의 상태 값을 제공받음 : $S_{t+1}$
-  	* 위에 따라 MDP 와 에이전트는 아래와 같은 시퀀스, 혹은 궤적 (trajectory) 를 남기게 됨
-  		- $ S_0, A_0, R_1, S_1, A_1, R_2, S_2, A_2, R_3, ...$
+- 용어설명
+	+ 휴리스틱 : 정립된 공식이 아닌 정보가 온전하지 않은 상황에서의 노력, 시행착오, 경험 등을 통해서 지식을 알게 되는 과정.
+		* 주먹구구식의 규칙 (Rule of Thumb) 을 통해 지식을 습득하게 되는 과정
+		* 잘 추측하는 기술 (art of good guessing)
+		* 알고리즘과 달리 휴리스틱은 해결책의 발견을 보장하지 않는다.
+		* 그러나 휴리스틱은 알고리즘보다 효율적이다. (쓸모없는 대안책들을 실제 시도하지 않고도 배제 가능)
+		* 출처 : <http://www.aistudy.com/heuristic/heuristic.htm>
+	+ 휴리스틱 서치
+		* 깊이우선 탐색이나 너비우선 탐색 등의 blind search method 는 goal 까지 의 경로를 찾는 상당히 소모적인 (exhaustive) 방법임.
+		* 즉 문제에 대한 해를 제공하지만 너무 많은 노드를 확장시키므로 실용적이지 못하다. 
+		* 탐색작업을 축소시키기 위해 항상 옳은 해를 제공하지는 못하지만 대부분의 경우에 잘맞는 경험에 의한 규칙 (rules of thumb) 을 이용
+		* 이렇게 그래프로써 표현된 문제에 대한 특별한 정보를 이용하여 탐색 (Search) 작업을 빠르게 진행시키는 방식
+		* 출처 : <http://www.aistudy.co.kr/heuristic/heuristic_search.htm>
 
 
-  ![3_1_2_MDP_function_p_1](/assets/images/posts/3_1_2_MDP_function_p_1.png) 
+- Policies and Value Functions
 
-
-	+ 유한 MDP (finite MDP) 에서 모든 상태, 액션, 보상의 집합은 유한한 수의 요소 (element) 이다.
-	+ $R_t$ 와 $S_t$ 는 이전 상태와 액션값에만 영향을 받는 이산확률분포 (discrete probability distributions) 로 정의됨
-		* 이산확률분포 : 확률변수가 가질 수 있는 값이 명확하고 셀 수 있는 경우의 분포 (주사위의 눈 $1, ..., 6$)
-		* 연속확률분포 : 확률변수가 가질 수 있는 값이 연속적인 실수여서 셀 수 없는 경우의 분포 ($y = f(x)$)
-  + 우선 제공된 state 와 action 에 따른 time t 시점의 확률 값이 존재 (상단 수식)
-  + 모든 $s', s \in S, r \in R, a \in A(s)$ 에 대해 function $p$ 는 dynamics of the MDP 로 정의된다.
-  + 일반적인 함수 표현, The dynamics function $p : S \times R \times S \times A \to [0,1]$
-  + \| : 조건부 확률에 대한 표기법이지만, 여기서는 $p$ 가 $s, a$ 의 각 선택에 대한 확률분포를 지정한다는 것을 뜻함.
-
-
-  ![3_1_3_MDP_function_p_2](/assets/images/posts/3_1_3_MDP_function_p_2.png) 
-
-  + MDP (Markov decision process) 에서 $p$ 로 주어진 확률은 환경의 역학을 완벽히 특성화함.
-  	* 즉, 가능한 $S_t$, $R_t$ 값에 대한 가능성은 이전에 즉시 제공된 $S_{t-1}$, $A_{t-1}$ 값에만 의존한다.
-  	* 그 이전의 상태값과 액션은 영향을 주지 않는다.
-  	* 이것은 결정 과정에 대한 제한이 아닌 상태에 대한 제한을 의미한다.
-  	* 상태에 미래의 차이를 발생 시킬 수 있는 이전 에이전트-환경 간 상호작용에 대한 측면이 모두 정보로 포함되어 있어야 한다.
-  	* 만약 그렇다면, 이 상태를 마르코프 속성 (Markov property) 이라 한다.
-  		- 이후 과정에서 Markov 속성에 의존하지 않는 근사 방법 (approximation methods) 을 고려할 것
-  		- 17장에서는 Markov 가 아닌 관찰값으로부터 어떻게 Markov 상태를 구성하고 학습할지를 고려할 것
-  	* 4개의 인수를 가진 dynamic function $p$ 에서 state-transition probabilities (상태 전이 확률) 와 같은 알고싶은 모든 것을 계산할 수 있음.
-  	
-  	![3_1_4_MDP_function_p_3](/assets/images/posts/3_1_4_MDP_function_p_3.png) 
-
-  	$p : S \times S \times A \to [0,1]$
-
-  	* 또한 예상되는 보상값을 2개 인자 (state,action) 의 r 함수로 계산할 수 있음.
-
-  	![3_1_5_MDP_function_p_4](/assets/images/posts/3_1_5_MDP_function_p_4.png)
-
-  	$r : S \times \ A \to R$
-
-  	* 예상되는 보상값을 3개 인자 (state, action, next state) 의 r 함수로 계산할 수 있음.
-
-  	![3_1_6_MDP_function_p_5](/assets/images/posts/3_1_6_MDP_function_p_5.png)   	
-
-  	$r : S \times \ A \times S \to R$
-  		
-  	* 이 책에서 우리는 주로 4개 인자의 $p$ 함수 (3.2) 를 사용하지만 때때로 다른 함수가 편리할 경우도 있음.
-
-	+ MDP 프레임워크는 추상적이고 유연하여 다양한 문제에 적용할 수 있음
-		* 스텝 (Step) 은 고정된 시간 간격일 필요가 없음. 의사 결정과 행동의 임의적 연속 단계일 수 있음
-		* 동작 (Action) 은 로봇 팔의 모터 전압과 같이 낮은 수준의 제어부터 대학원에 갈 것인지 여부를 정하는 높은 수준의 결정일 수 있음.
-		* 상태 (State) 는 직접적인 센서의 데이터처럼 낮은 수준의 감각일 수 있고, 방에 있는 물체에 대한 상직적 설명과 같이 높은 수준의 추상일 수 있음.
-		* 또한 상태 (State) 는 과거 감각의 기억이거나 정신적, 주관적인 것일 수 있음.
-			- 예를 들어 에이전트는 물체가 어디있는지 확신하지 못할 수 있음
-		* 액션 (Action) 은 정신적일수도, 계산적일 수도 있음
-			- 일부 동작은 에이전트가 어디에 집중할지 를 변경하는 것일 수 있음
-		* 즉 액션은 우리가 결정을 내리는 방법을 배우고자 하는 모든 결정, 상태는 결정을 내리는 데 유용한 모든 것이 될 수 있음. 
-
-	+ MDP 에서 에이전트와 환경의 경계는 일반적인 물리적 경계와 동일하지 않음.
-		* 대게 경계는 중간지점보다 에이전트에 더 가깝게 그려짐
-			- 예를 들어 로봇의 기계적 감지 하드웨어는 에이전트의 일부가 아닌 환경의 일부로 간주되어야 함.
-			- 생물체일 경우 근육, 골격 및 감각 기관은 환경의 일부로 간주되어야 함.
-		* 보상 또한 인공 학습 시스템 본체 내부에서 계산되지만, 에이전트 외부에 있는 것으로 간주됨.
-	
-	+ 즉, 에이전트가 임의로 변경할 수 없는 모든 것은 환경의 일부로 간주한다는 것임.
-		* 에이전트는 환경의 일부를 알고 있음
-			- 에이전트는 자신의 행동과 상태에 대해 보상이 어떻게 함수로 계산되는지에 대해 알고 있음.
-			- 그러나 보상 계산은 에이전트 밖의 영역임. 
-			- 우리가 루빅큐브가 어떻게 작동하는지 알지만, 여전히 해결할 수 없는 문제가 될 수 있는 것처럼
-			- 환경이 어떻게 작동하는 지에 모든 것을 알고있으면서도 여전히 어려운 강화 학습 작업에 직면할 수 있음.
-		* 즉, 에이전트와 환경의 경계는 에이전트의 지식이 아닌 제어의 한계를 나타냄.
+	+ 거의 대부분의 강화학습 알고리즘은 가치함수 (value function) 을 추정하는 것을 포함한다.
+		* 상태 (States) 혹은 상태-액션 쌍(State-action pairs) 에 대한 함수
+		* 에이전트에게 주어진 상태 (혹은 주어진 상태에서 주어진 액션) 이 얼마나 좋은지 (how good) 추정하는 것
+		* 얼마나 좋은지 (how good) 란 기대되는 미래 보상값 혹은 기대되는 결과값에 대한 이야기임
+	+ 미래의 보상 값은, 에이전트가 어떤 액션을 취할지에 달려있음
+		* 따라서 가치함수 (value function) 는 특정한 행동 방식 ( = Policy) 에 따라 정의된다.
+	+ 일반적으로 정책 (Policy) 은 환경 (States) 에 따른 선택 가능한 행동 (Action) 을 선택하는 확률의 매핑 정보이다.
+		* $\pi ( a \mid s )$
+			- 에이전트가 정책(policy) $\pi$ 를 따른다 가정할 경우
+			- time t 시점에서 $S_t = s$ 일 때 $A_t = a$ 일 확률을 가리킨다.
+			- mdp 함수 $p$ 와 같이 $\pi$ 또한 평범한 함수이다.
+				+ $\mid$ 는 각 $s \in S$ 에 대한 $a \in A(s)$ 의 확률 분포를 나타낸다.
+		* 강화 학습 함수는 에이전트의 경험 결과에 따라 어떻게 정책이 바뀔지를 지정한다.
+	+ $v_\pi (s)$ : policy $\pi$ 를 따를 때 state $s$ 일 때 가치 함수 (value function)
+		* $\pi$ 를 따를 때 $s$ 상태에서 시작할 경우 기대되는 결과값
 		
-	+ 에이전트와 환경의 경계는 서로 다른 목적을 위해 다르게 위치할 수 있음
-		* 복잡한 로봇을 예로 들면 각각 고유한 경계를 가진 여러 에이전트가 한번에 작동할 수 있음
-			- 높은 수준의 결정을 구현하는 에이전트가 낮은 수준의 에이전트가 직면한 상태의 일부를 형성하는 높은 수준의 결정을 내릴 수 있음
-		* 에이전트와 환경 간의 경계는 상태, 액션, 보상을 결정한 뒤 결정을 위한 관심사를 식별한 뒤에 정해짐.
+		![3_5_1_state_value_function](/assets/images/posts/3_5_1_state_value_function.png)
+		* $E_\pi [\cdot]$ : 에이전트가 policy $\pi$ 를 따르고, $t$ 는 임의의 time step 일 때 에이전트가 제공하는 무작위 변수에 대한 기대 리턴값
+		* Terminal state 에 대한 위의 값은 0
+		* 우리는 $v_\pi$ 를 정책 $\pi$ 에 대한 state-value function 이라 한다.
+
+		![3_5_2_action_value_function](/assets/images/posts/3_5_2_action_value_function.png)
+		* 위와 유사하게 policy $\pi$ 아래에서 state $s$ 에 action $a$ 를 취할 때의 value 를 측정할 경우 이를 $q_\pi (s,a)$ 로 정의할 수 있다.
+		* 이 때 $E_\pi [\cdot]$ 는 정책 $\pi$ 를 따를 경우 상태 $s$ 에서 시작하여 행동 $a$ 를 행했을 때 기대되는 리턴값을 뜻한다.
+		* 우리는 $q_\pi$ 를 정책 $\pi$ 에 대한 action-value function 이라 한다.
 		
-	+ 즉, MDP 프레임워크는 상호작용으로부터 목표 지향적 학습을 하는 문제를 추상화한 것이다.
-		* 감각, 기억, 제어 장치의 세부사항이 무엇이든
-		* 달성하려는 목표가 무엇이든
-		* 목표 지향적 행동을 학습하는 문제는 에이전트와 그 환경 사이를 오가는 3가지 신호로 축소될 수 있다고 제안하는 것.
-			- Actions : 에이전트의 선택을 나타내는 신호
-			- States : 선택이 이루어지는 기준(상태) 를 나타내는 신호
-			- Rewards : 에이전트의 목표를 정의하는 신호
-
-	+ 이 프레임워크는 모든 의사결정 학습문제를 유용하게 나타내기에 충분하지 않을 수 있지만, 널리 이용 가능하고 적용 가능한 것으로 입증됨.
-		* 물론 states 와 actions 는 작업마다 크게 다르며, 이것을 표현하는 방식이 성능에 큰 영향을 줌
-		* 다른 종류의 학습과 마찬가지로 강화학습에서 이러한 표현 선택은 과학보다 예술에 가까움.
-		* 이 책에서 우리는 상태와 행동을 나타내는 좋은 방법에 관한 몇 가지 조언과 예를 제공하지만,
-		* 우리의 주요 초점은 일반적인 원칙 (표현법이 선택되면 그것이 어떻게 동작하는지) 을 배우는 것에 있음.
-	
-
-	+ 예제 3.1 : Bioreactor (바이오 리액터 - 세포배양기)
-		* 강화 학습이 세포배양기의 순간 온도와 교반 속도 (뒤섞는 교반기의 회전 속도) 를 결정하기 위해 적용되어 있다고 가정
-		* Actions : 목표 온도와 목표 교반속도를 달성하기 위해 발열체와 모터를 직접 조종하는 하위 제어시스템에 전달되는 값
-		* States : 여과되고 지연된 열전대, 기타 센서 값과 대상 화학물질을 나타내는 상징적 입력값 등
-		* Rewards : 유용한 화합물이 생성되었는지에 대한 순간적인 측정값
-		* 여기서 상태 값은 list 혹은 vector 값 (센서 측정값, 상징적 입력값)
-		* 액션 값은 vector 값 (목표 온도와 교반속도로 이루어진)
-		* 보상 값은 항상 단일 숫자값
+	+ 가치함수 $v_\pi$ 와 $q_\pi$ 는 경험을 통해 추정할 수 있다.
+		* 예를 들어 정책 $\pi$ 를 따르는 에이전트가 각각의 상태를 마주하고 이에 따른 리턴 값의 평균을 보관할 경우, 해당 상태에 직면하는 횟수가 무한에 가까워지면 평균 값은 상태의 가치, $v_\pi (s)$ 로 수렴한다.
+		* 마찬가지로 각 상태에 보관된 평균 값을 행동에 따라 분리한다면 이는 행동의 가치, $q_\pi (s,a)$ 로 수렴한다.
+		* 우리는 이러한 추정 방식을 Monte Carlo methods 라 한다. (많은 랜덤한 샘플의 실제 리턴값을 평균내는 것을 포함하고 있기 때문)
+		* 물론 이러한 방식은 상태값이 많으면 각 상태 별로 분리된 평균값을 각각 가지는 것에 어려움이 있다.
+		* 대신, 에이전트는  $v_\pi$ 와 $q_\pi$ 를 파라미터화된 함수로 유지하고 이 파라미터를 조정하는 방식을 사용한다.
+			- 이 또한 정확한 추정치를 구할 수 있다.
+			- 이 경우 파라미터화 된 function approximator (함수 근사) 에 달려있다. (이는 이후 과정에서 설명)
+			
+	+ 가치함수의 핵심요소들은 강화학습 이나 다이나믹 프로그래밍 전반에 걸쳐 사용되며, 재귀적인 표현법으로 표현될 수 있다.
+		* 다음 조건은 $s$ 값과 그 값의 가능한 후속 states 사이에서 일관성있게 유지된다.
 		
-	+ 예제 3.2 : Pick-and-Place Robot
-		* 반복적인 물체 이동 작업에서 로봇 팔의 동작을 제어하기 위해 강화학습을 사용한다고 가정
-		* 빠르고 부드러운 동작을 학습하려면 학습 에이전트가 모터를 직접 제어하고, 기계 연결장치의 현재 위치와 속도에 대한 짧은 지연시간의 정보를 가져와야 함
-		* Actions : 각 관절의 모터에 적용되는 전압
-		* States : 관절의 각도와 속도의 최신 값
-		* Rewards : 잘 운반된 개체에 대해 + 1 값
-		* 부드러운 움직임을 장려하기 위해 각 단계의 순간순간의 갑작스러운 움직임에 작은 처벌 (보상의 음수값) 을 부여
-	
-	+ 예제 3.3 : Recycling Robot (재활용 로봇)
-		* 모바일 로못은 사무실 환경에서 빈 음료수 캔을 모으는 일을 함
-		* 로봇은 캔을 감지하는 센서, 캔을 집어 일체형 통에 넣을 수 있는 팔과 그리퍼를 가지고 있음
-		* 로봇은 충전식 배터리로 작동
-		* 로봇의 제어 시스템에는 센서 정보를 해석하는 파츠, 탐색기능 파츠, 팔과 그리퍼를 컨트롤 하는 파츠 가 있음.
-		* 높은 수준의 의사결정 (빈 캔을 어떻게 찾을지) 은 현재 배터리 충전 레벨에 따라 강화학습 에이전트가 내림.
-		* 간단한 예제를 만들기 위해 충전정도는 2가지 레벨만 구분한다고 가정, 작은 상태 집합 $S = \lbrace high,low \rbrace$  으로 구성
-		* 각 상태에서 에이전트는 다음 중 하나의 결정을 할 수 있음.
-			- (1) 일정 시간 동안 적극적으로 캔을 찾음
-			- (2) 움직이지 않고 누군가가 캔을 가져올 때까지 기다림
-			- (3) 배터리 충전을 위해 충전 장소로 돌아감
-		* 배터리가 많이 남았을 때 (high), 충전은 언제나 멍청한 선택이므로 해당 상태의 action set 으로 포함시키지 않는다.
-			- action set 은 $A(high) = \lbrace search,wait \rbrace$ 와 $A(low) = \lbrace search, wait, recharge \rbrace$ 이다.
-		* 대부분의 경우 보상은 0 이지만, 로봇이 빈 캔을 확보하면 (+), 배터리가 완전히 방전되면 큰 수치의 (-) 가 됨.
-		* 캔을 찾는 가장 좋은 방법은 능동적 탐색이지만 배터리가 소모됨 (배터리가 고갈될 가능성이 있음)
-		* 기다리는 것은 배터리가 소모되지 않음
-		* 배터리가 고갈되면 로못은 종료되고 구조될 때까지 기다려야 함 (낮은 보상 생성)
-		* 배터리가 많으면 배터리 고갈 위험 없이 빈 캔 탐색을 완료할 수 있음
-			- 배터리가 많을 때의 탐색 기간에서 배터리가 많이 남아 있을 확률 $\alpha$
-			- 배터리가 많을 때의 탐색 기간에서 배터리가 적어질 확률 $1 - \alpha$
-		* 반대로 배터리가 적으면
-			- 배터리가 적을 때의 탐색 기간에서 배터리가 적어질 확률 $\beta$
-			- 배터리가 적을 때의 탐색 기간에서 배터리가 고갈될 확률 $1 - \beta$
-		* 후자의 경우 로봇은 구조되어야만 하며, 이 경우 배터리는 다시 완충된다.
-		* 로봇에 의해 수집된 캔의 수량 만큼 보상이 주어지며, 로봇이 구출되었을 때 보상값 -3 이 주어진다.
-		* $r_{search}, r_{wait}$ with $r_{search} > r_{wait}$ : 로봇이 검색 혹은 대기 중에 수집할 것으로 추정되는 캔 수 (즉, 예상되는 보상)
-		* 충전을 위해 충전 장소로 돌아갈 때나, 배터리가 고갈되었을 때에는 캔을 회수할 수 없음
-		* 이 시스템은 유한한 MDP 이며 전확 확률과 예상 보상을 아래와 같이 표기할 수 있다.
+		![3_5_3_recursive_state_value_function](/assets/images/posts/3_5_3_recursive_state_value_function.png)
+
+		* 위의 재귀식은 아래의 조건을 따른다.
+			- $a \in A(s)$
+			- $s' \in S$ (Episodic problem 일 경우 $S^+$) 
+			- $r \in R$
+		* 위 식은 실제로 모든 변수 $a, s', r$ 에 대한 합계이다.
+		* 예상값을 구하기 위해 $\pi(a\|s)p(s',r\|s,a)$ 확률을 계산하여 $[ ]$ 안의 값에 가중치를 부여하고 이 모든 확률에 대한 합계를 구한다.
+		* 위의 3.14 방정식은 Bellman equation for $v_\pi$ 이다.
+			- 이것은 상태의 가치, 그리고 그 상태의 후속 상태의 가치에 대한 관계를 나타낸다.
 		
-		![3_1_7_MDP_transition_probabilities](/assets/images/posts/3_1_7_MDP_transition_probabilities.png)
+		![3_5_4_backup_diagram_for_v_pi](/assets/images/posts/3_5_4_backup_diagram_for_v_pi.png)
 
-		* 위 표는 현 상태 $s$, 액션 $a \in A(s)$, 다음 상태 $s'$ 의 각각의 가능한 조합으로 구성된 표이다.
-		* 몇몇 전환은 일어날 가능성이 0 이므로, 기대되는 보상 또한 없다.
+		* 에이전트는 state $s$ 에서 policy $\pi$ 에 기반한 행동들 ($a \in A(s)$) 을 할 수 있다.
+		* 환경은 함수 $p$ 에 따라 주어진 역학 (dynamic) 을 통해 보상 $r$ 과 함께 여러 다음 상태 중 하나인 $s'$ 로 응답할 수 있음. 
+		* 벨만 방정식 (The Bellman equation (3.14.)) 은 모든 가능성에 대해 평균을 내며, 발생 확률에 따라 가중치를 부여함. 
+		* 시작 상태의 값은 다음 상태의 (할인된) 값과 보상값의 합과 반드시 같다.
+		* 위의 다이어그램을 backup diagrams 라 한다.
+		
+		![3_5_4_1_backup_diagram_v_pi_q_pi](/assets/images/posts/3_5_4_1_backup_diagram_v_pi_q_pi.png)
+		![3_5_4_2_backup_diagram_q_pi_v_pi](/assets/images/posts/3_5_4_2_backup_diagram_q_pi_v_pi.png)
 
-		![3_1_8_MDP_transition_graph](/assets/images/posts/3_1_8_MDP_transition_graph.png)
+		* 위의 다이어그램은 $v_\pi (s)$ 와 $q_\pi (s)$ 의 관계를 나타낸다.
+		
+	+ Example 3.5 : Gridworld
+		
+		![3_5_5_Gridworld_example](/assets/images/posts/3_5_5_Gridworld_example.png)
 
-		* 위 그래프는 transition graph 로, 유한 MDP 의 역학을 요약하는 또다른 방법이다.
-		* state nodes 와 action nodes 가 있음.
-		* state nodes : 큰 빈 원, 원 안에 라벨링 된 이름
-		* action nodes : 작은 검은색 원과 state nodes 를 연결 시키는 화살표
-		* 상태 $s$ 에서 작업 $a$ 를 수행하면 상태노드 $s$ 에서 작업노드 $(s,a)$ 로 이동함.
-		* 그 다음 환경은 $(s,a)$ 를 떠나는 화살표 중 하나를 통해 다음 상태의 노드 $s'$ 로 전환시킴
-		* 각 화살표는 $(s, s', a)$ 에 해당함.
-		* 여기서 $s'$ 는 다음 상태이고, 전환확률 $p(s'\|s,a)$ 와 해당 전환에 대한 예상보상은 $r(s,a,s')$ 임.
-		* 작업 노드를 떠나는 화살표의 전환 확률의 합계는 항상 1임.
-
-
-- Goals and Rewards
-
-	+ 강화학습의 목적, 목표는 특별한 신호로 정형화 되는데 이를 보상 (Reward) 이라 하고 환경이 에이전트에 전달하는 값이다.
-	+ 각 스텝마다 보상은 단순한 숫자 값이다. $R_t \in R$
-	+ 비공식적으로, 에이전트의 목표는 총 보상의 양을 최대화 하는 것이다.
-		* 이 최대화의 의미는 당장의 보상을 최대화 하는 것이 아닌 장기적 누적 보상을 최대화 하는 것이다.
-	+ 보상 측면에서 위 목표를 공식화하는 것이 처음에는 제한적으로 보일 수 있지만, 실은 유연하고 광범위하게 적용될 수 있다.
-		* 예 1. 로봇이 걷는 법을 배움 : 보상은 로봇이 전진할 때마다 주어짐
-		* 예 2. 로봇이 미로를 통과하는 법을 배움 : 매 스텝마다 -1 의 보상을 주어 에이전트가 최대한 빨리 미로를 탈출하는 것을 장려한다.
-		* 예 3. 재활용 캔 수집을 하는 법을 배움 : 캔을 모을 때마다 +1 의 보상을 주며, 뭔가에 부딪히거나 누군가 소리를 지를 경우 - 보상을 준다.
-		* 예 4. 체스 두는 법을 배움 : 이길 때 +1점, 질 때 -1점, 비길 때 0점의 보상을 부여
-	+ 즉, 에이전트가 우리의 목표를 달성하게 하기 위해 최대화 할 수 있는 보상을 제공해줘야 한다.
-		* 따라서 보상이 정말 우리가 원하는 결과를 나타내는 것인지가 매우 중요하다.
-	+ 보상은 우리가 원하는 것을 달성하기 위한 사전지식을 전달하는 곳이 아니다.
-		* 이것에 적합한 위치는 초기 정책 또는 초기 가치 함수, 혹은 이들에 영향을 줄 수 있는 값이다.
-		* 예를 들어 체스 게임일 경우 상대의 말을 잡거나 센터를 장악하는 것에 보상이 주어저서는 안 된다.
-			- 에이전트는 승패의 여부와 관계없이 이 서브 목표를 달성하는 것을 학습할 것이다.
-		* 즉, 보상은 에이전트에게 달성해야 하는 것에 대한 소통을 하는 방법이고, 어떻게 달성할지에 대한 것을 이야기 하는 것이 아니다.
-
-- Returns and Episodes
+		* 위 gridworld 는 단순한 유한 MDP 를 나타낸다.
+		* 그리드의 각 셀은 환경의 state 를 나타낸다.
+		* 각 셀에서 동,서,남,북 의 action 이 가능하며, 해당 방향의 셀로 이동하게 된다.
+		* 가장자리에서의 이동은 이동 없이 해당 셀에 머물게 되나 보상으로 -1 을 얻게 된다.
+		* 특별한 상태인 A, B 를 제외하고 다른 곳에서의 이동은 보상으로 0 을 얻는다.
+		* A 에서의 이동은 action 의 방향과 관계없이 A' 로 이동하게 되며 +10의 보상을 얻는다.
+		* B 에서의 이동은 action 의 방향과 관계없이 B' 로 이동하게 되며 +5의 보상을 얻는다.
+		* 모든 상태에서 동일한 확률로 랜덤한 action 을 취하는 정책을 취할 때 우측의 그림은 그에따른 가치함수 (discounted reward $\gamma=0.9$)를 나타낸다.
+		* 위 가치함수는 (3.14) 의 선형방정식 (linear equations) 을 푼 결과이다. 
+			- 가장자리는 값 이 낮은데, 이는 가장자리에 부딪힐 확률이 높기 때문이다.
+			- State A 는 보상 값 +10 보다 낮은 가치를 가지는데 전이된 A' 에서 감점될 확률이 높기 때문이다.
+			- B 는 B' 로 전이되었을 때 A' 보다 감점될 확률이 적다.
 
 
-	![3_3_1_MDP_sum_of_rewards](/assets/images/posts/3_3_1_MDP_sum_of_rewards.png)
-	+ 정확히 시퀀스의 어떤 면을 최대화 하길 원하는지에 대하여, 가장 단순히 보상의 합계를 표현한 형태
-	+ final time step $T$ 라는 개념이 있을 경우
-		* 환경과 에이전트 간 상호작용이 자연스럽게 끊길 때, 우리는 이것을 에피소드 ($episode$) 라 표현
-		* 예를 들어 게임 한 판, 하나의 미로를 통과하는 것 혹은 어떠한 종류의 반복적인 상호작용 등
-	+ 에피소드가 끝난 상태를 terminal state 라 한다.
-		* 이후 표준 시작 상태로 재설정하거나, 시작 상태의 표준 분포에서 샘플을 재설정한다.
-		* 에피소드가 다른 방식으로 끝나더라도 (예를들어 게임에서의 승리,패배) 다음 에피소드는 이전 에피소드와 독립적으로 시행된다.
-		* 즉 에피소드는 모두 terminal state 로 끝나나, 보상과 결과는 다를 수 있다.
-	+ 위와 같은 에피소드 형태의 일을 episodic tasks 라 한다.
-		* $S$ : 모든 non-terminal state
-		* $S^+$ : 모든 non-terminal state + terminal state
-		* $T$ : The time of termination
-	+ 반면 많은 경우 환경과 에이전트의 상호작용은 자연스럽게 별개의 에피소드로 끊기지 않는다.
-		* 이를 continuing tasks 라 한다.
-		* final time step $T=\infty$ 이기 때문에 위 3.7의 수식으로 표현할 수 없다.
-		* (우리가 최대화를 원하는 리턴 값이 쉽게 무한대의 값이 될 수 있다.)
-		* 즉, discounting 이라는 추가적 개념이 필요하다.
-
-	![3_3_2_MDP_discounted_return](/assets/images/posts/3_3_2_MDP_discounted_return.png)
-	+ 에이전트는 미래의 할인된 보상값의 합 (sum of the discounted rewards) 이 최대값이 되도록 액션 ($A_t$)을 선택한다.
-	+ $0 \le \gamma \le 1$ 인 $\gamma$ 파라미터를 discount rate 라 한다.
-	+ discount rate 는 미래 보상의 현재 가치를 결정한다.
-		* 미래 $k$ time steps 에서 받을 보상은 현재의 가치로 따졌을 때 $\gamma^{k-1}$ 배의 가치만 있다.
-		* $\gamma < 1$ : 극한 합 (3.8) 의 값이 유한한 값으로 수렴한다. ($R_k$ 가 제한된 값일 경우)
-		* $\gamma = 0$ : 에이전트는 오직 $A_t$ 를 선택해 $R_{t+1}$ 값을 최대화하는 방법만을 학습한다. (근시안적)
-		* $\gamma \to 1$ : 1에 가까워질 수록 미래의 보상값을 더 강하게 계산. (원시안적)
-
-	![3_3_3_MDP_discounted_return](/assets/images/posts/3_3_3_MDP_discounted_return.png)
-	+ 연속적인 time step (successive time step) 에서의 보상은 상호간 연관관계에 있고, 이는 강화학습에서 중요한 개념이다.
-	+ 위 공식은 모든 time steps $t < T$ 에서 적용되며, 심지어 $t + 1$ 에서 termination 이 일어나는 경우에도 $G_T = 0$ 으로 정의함으로써 적용가능하다.
-	+ 3.8 의 인자 수가 무한대이지만, 보상이 0 이 아니고 상수 일 경우 여전히 유한한 숫자가 된다.
-		* 예를 들어 보상이 상수 $+1$ 이고 , $\gamma < 1$ 일 경우 보상 값은 아래의 값이 된다.
-		![3_3_4_MDP_discounted_return](/assets/images/posts/3_3_4_MDP_discounted_return.png)		
-
-
-	+ 예제 3.4 : Pole-Balancing
+	+ Example 3.6 : Golf
 	
-		![3_4_1_cart_pole](/assets/images/posts/3_4_1_cart_pole.png)	
+		![3_5_6_Golf_example](/assets/images/posts/3_5_6_Golf_example.png)
 
-		* 목표 : 카트에 힘을 적용하여 트랙 위를 카트가 이동할 수 있되, 폴이 서 있고 넘어지지 않게 유지하는 것
-		* 실패 : 폴이 주어진 각도를 넘어서 넘어지는것 혹은 카트가 트랙에서 탈선하는 것
-		* 폴은 매 실패 이후 리셋되어 수직으로 서게 된다 > 이 일은 episodic 으로 간주될 수 있음
-			- 자연스러운 에피소드가 반복됨
-			- 보상은 실패하기 전 모든 타임 스텝에 +1 을 줄 수 있다.
-		* 위의 설정은, 폴이 영원히 성공적으로 벨런스를 잡게 되면 보상은 무한수가 된다는 뜻이다.
-		* 또는 위 문제를 continuing task 로 간주할 수도 있다. (using discounting)
-			- 위의 경우 실패할 경우 보상은 -1 이 되고, 그 외에는 0 이 된다.
-			- 즉 보상 값은 $- \gamma^K$ 가 되며, $K$ 는 실패 이전의 타임스텝이 된다.
-		* 양쪽의 경우 모두 폴의 균형을 최대한 유지할 수록 보상이 최대화 된다.
+		* 그림 중 위의 부분에 대한 설명임.
+		* 공을 홀에 넣을 때까지 각 스트로크에 대해 -1 의 페널티 (마이너스보상).
+		* 공의 위치가 상태이며, 상태 값은 홀로부터 상태 위치 까지의 스트로크 횟수 (음수) 값이다.
+		* 행동은 공을 조준, 스윙하는 방법과 어떤 클럽을 선택하는가 등이 있지만 전자는 주어진 것으로 받아들이고 후자의 선택에만 집중한다.
+		* 홀의 값은 0
+		* 그린의 어느 곳에서든 퍼팅을 할 수 있다고 가정하며, 이러한 상태의 값은 -1
+		* 그린 밖에서는 퍼팅으로 홀에 도달할 수 없으며, 퍼팅을 통해 그린에 도달할 수 있다면 -2
+		* 마찬가지로 -2 등고선으로 퍼팅이 가능한 모든 위치는 -3 값을 가지며, 위와 같은 방식으로 등고선이 그려짐
+		* 퍼팅으로 모래 함정에서 벗어날 수 없으므로 $-\infty$ 의 값을 가지게 됨
+		* 전반적으로 퍼팅으로 티에서 홀 까지 가는데 6타가 걸림.
 
+- Optimal Policies and Optimal Value Functions
 
+	+ 강화학습 문제를 푼다는 것은, 간단히 말하면 긴 흐름 속에서 많은 보상을 획득하는 정책을 찾는 것이다.
+	+ 유한 MDP 문제에서 우리는 Optimal policy 를 아래와 같이 정의할 수 있다.
+		* 가치함수는 전체 정책에서 부분적인 순서를 결정한다.
+		* 정책 $\pi$ 가 정책 $\pi'$ 와 비교하여 모든 상태에서 예상되는 리턴 값이 크거나 같을 경우 정책 $\pi$ 는 정책 $\pi'$ 보다 좋거나 동등하다고 본다.
+		* $\pi \ge \pi'$, if and only if $v_\pi (s) \ge v_\pi' (s)$ for all $s \in S$.
+	+ 항상 최소한 하나의, 타 정책보다 나은 정책이 있는데 이를 최적 정책 (optimal policy) 라 한다.
+		* 우리는 optimal policies 를 $\pi_*$ 로 표기한다.
 
+		![3_6_1_optimal_state_value_function](/assets/images/posts/3_6_1_optimal_state_value_function.png)
+	
+		* 이는 optimal state-value function $v_*$ (for all $s \in S$) 를 공유한다.
+	
+		![3_6_2_optimal_action_value_function](/assets/images/posts/3_6_2_optimal_action_value_function.png)
+	
+		* 이는 또한 optimal action-value function $q_*$ (for all $s \in S$ and $a \in A(s)$) 를 공유한다.
+		
+		![3_6_3_optimal_action_state_value_function_relation](/assets/images/posts/3_6_3_optimal_action_state_value_function_relation.png)
+		
+		* 위 두 함수의 정의에 따라 위와같이 표현할 수 있다.
+	
+	+ Example 3.7 : Optimal Value Functions for Golf
 
+		![3_5_6_Golf_example](/assets/images/posts/3_5_6_Golf_example.png)
+
+		* 그림 중 아래 부분에 대한 설명임. (optimal action-value function $q_*(s,driver)$)
+		* 드라이버로 먼저 스트로크를 한 다음 나중에 드라이버나 퍼터 중 더 나은 쪽을 선택하는 경우 각 상태의 값
+		* 드라이버를 사용하면 공을 더 멀리 칠 수 있지만 정확도는 떨어져, 홀에서 가까운 부분만 -1 이 됨.
+		* 스트로크가 두번 있는 경우 -2 등고선에서 볼 수 있듯 더 먼 곳에서 홀까지 도달할 수 있음.
+		* 즉, 그린에만 떨어지면 퍼터를 사용할 수 있음.
+		* Optimal action-value function 은 처음 특정 행동을 한 이후에 값을 제공 (위의 경우 우선 드라이버를 사용하고 그 뒤에 무엇을 사용할지를 결정)
+		* -3 등고선은 더 멀리 있으며 시작 티를 포함함. 티에서 가장 좋은 순서는 드라이버2개, 퍼트1개로 공을 홀에 넣는 것임.
+
+	+ 벨만 최적 방정식
+		* $v_*$ 는 정책에 대한 가치함수이기 때문에 벨만 방정식(3.14) 에 의해 주어진 상태 값에 대한 자기 일관성 조건을 충족해야 한다.
+		* 하지만 최적 가치 함수이기 때문에 $v_*$ 의 일관성 조건은 특정 정책을 참조하지 않고 특별한 형태로 작성할 수 있음.
+		* 이것은 $v_*$ 에 대한 벨만 방정식 또는 벨만 최적 방정식 (Bellman Optimality equation) 이라 함.
+		* 직관적으로 Bellman 최적 방정식은 최적 정책 하의 상태 값이 해당 상태에서 최상의 조치에 대한 기대 수익과 같아야 한다는 사실을 나타냄.
+
+		* 마지막 두 방정식은 벨만 최적 방정식 ($v_*$) 의 두가지 형태를 나타낸다.	
+		![3_6_4_bellman_optimality_equation](/assets/images/posts/3_6_4_bellman_optimality_equation.png)
+		
+		* 벨만 최적방정식 ($q_*$) 는 아래와 같이 표현할 수 있다.
+		![3_6_5_bellman_optimality_equation](/assets/images/posts/3_6_5_bellman_optimality_equation.png)
+
+		* 아래는 벨만 최적방정식에 대한 backup diagrams 이다.
+		![3_6_6_backup_diagrams_bellman_optimality_equation](/assets/images/posts/3_6_6_backup_diagrams_bellman_optimality_equation.png)
+
+		* 이는 $v_\pi$ 와 $q_\pi$ 의 backup diagrams 와 같으나, 호 (arc) 가 추가되었음.
+			- 에이전트 선택 지점에 호가 추가되어 타 정책에 의해 주어진 예상 값이 아닌 해당 선택에 대한 최대값이 취해짐을 나타냄.
+		* 왼쪽 backup diagram 은 3.19의 식이, 오른쪽은 3.20의 식이 표현된 것임.
+		
+		* 유한 MDP 의 경우 $v_*$ (3.19) 에 대한 고유한 솔루션이 존재한다.
+		* 벨만 최적방정식은 각각의 state 별로 존재하는 방정식이다.
+			- 따라서 n개의 state 가 있을 경우 n 개의 방정식과 n 개의 미지수가 존재하게 된다.
+		* 만약 환경의 역학 $p$ 를 알면 비선형 방정식 시스템을 풀기 위한 다양한 방법 중 하나를 선택하여 $v_*$ 에 대한 방정식을 풀 수 있다.
+		* $v_*$ 를 알게 되면, 최적 정책을 결정하기가 상대적으로 쉽다.
+			- 모든 상태 s 에 대해 벨만 최적 방정식의 최대값을 얻는 하나 또는 그 이상의 action 이 존재하고, 이런 action 에만 0 이 아닌 확률을 배분하는 정책이 최적 정책이다.
+			- 즉 최적 가치 함수 $v_*$ 를 알면, one-step-ahead search 를 통해 어떤 action 이 최적의 action 인지 알게 된다.
+			- 다른 용어로 (optimal evaluation function $v_*$) 의 측면에서 greedy policy 라 할 수 있음.
+				+ greedy 함은 지역적 혹은 즉각적 고려를 통한 결정이며, 보다 나은 미래의 대안 가능성을 고려하지 않음.
+			- $v_*$ 는 이미 미래 행동의 모든 가능성을 고려하고 반영한 결과값이므로, 긴 기간동안의 리턴값을 지역적, 즉각적인 수량으로 나타낸 값이 된다.
+		* $q_*$ 를 알면, 최적의 행동을 선택하기 더 쉬워진다.
+			- 에이전트는 one-step-ahead search 를 할 필요 없이 s 상태에서 $q_*(s,a)$ 를 최대화 할 행동 a 를 선택하면 된다.
+			- $q_*$ 는 장기적인 기대 리턴값을 각각의 state-action pair 에 제한한다. 
+		* action-value function 은 더 효율적으로 모든 one-step-ahead search 의 결과값을 캐싱한다.
+			- 가능한 후속 상태 및 해당 값들에 대해 알 필요 없이 (즉, 환경의 역학에 대해 알 필요 없이) 최적 행동을 선택할 수 있다.
+	
+	+ Example 3.8: Solving the Gridworld
+	
+		![3_6_7_solving_the_gridworld](/assets/images/posts/3_6_7_solving_the_gridworld.png)
+
+		* Example 3.5 의 Gridworld 문제에 대한 벨만 방정식 (Bellman equation for $v_\pi$) 를 풀었다고 가정
+		* 중간 이미지는 optimal value function $v_*$ 를 나타낸다.
+		* 우측 이미지는 그에 상응하는 최적 정책 (optimal policies) 이다.
+
+	
+	+ Example 3.9: Bellman Optimality Equations for the Recycling Robot 
+	
+		![3_6_8_bellman_optimality_equations_for_the_recycling_robot](/assets/images/posts/3_6_8_bellman_optimality_equations_for_the_recycling_robot.png)
+
+		* 3.19 의 수식을 이용, 벨만 최적 방정식을 Recycling robot example 에 적용할 수 있다.
+		* states : high, row / actions : search, wait, recharge 를 각각 h, l, s, w, re 로 축약한다.
+		* 상태가 2개이므로 벨만 최적 방정식은 2개의 방정식으로 구성된다.
+		* $v_* (h)$ 에 대한 방정식은 위와 같이 표기할 수 있다.
+		* $r_s, r_w, \alpha, \beta, \gamma$ ($0 \le \gamma < 1, 0 \le \alpha,\beta \le 1$) 의 어떠한 케이스를 선택해도 정확히 한 쌍의 숫자, $v_* (h), v_* (l)$ 이 남는다. 이는 동시에 두 비선형 방정식을 만족함을 보여준다.
+		
+	+ Bellman 최적 방정식의 한계
+		* Bellman 최적 방정식의 해결은 최적의 정책을 찾고, 강화 학습 문제를 해결할 수 있음을 보여줌.
+		* 그러나 이 솔루션은 실제로 유용하지 않음.
+			- 모든 가능성을 내다보고 예상되는 보상 측면에서 발생 가능성을 계산하는 검색과 유사함.
+			- 실제로 거의 적용되지 않는 최소한 세 가지 가정에 의존함
+				1. 환경의 역학을 정확하게 알고 있음.
+			  2. 솔루션 계산을 완료하기에 충분한 계산 리소스가 있음
+			  3. Markov 속성
+			- 예를 들어 첫 번째와 세 번째 가정은 백개먼 게임에 아무런 문제가 없지만 두 번째 가정은 큰 장애물이 됨.
+			- 게임에는 약 $10^{20}$ 개의 상태가 있기 때문에 
+			- 오늘날의 가장 빠른 컴퓨터에서 $v_*$ 에 대한 Bellman 방정식을 푸는 데 수천 년이 걸리며 
+			- $q_*$ 를 찾는 것도 마찬가지이다.
+	+ 강화 학습에서는 일반적으로 근사 솔루션 (approximate solutions) 으로 만족해야 함.
+		* Bellman 최적 방정식을 근사로 푸는 방법으로 다양한 의사 결정 방법이 있음.
+			- 예를 들어 휴리스틱 검색 방법은 (3.19) 의 오른쪽을 여러 번 확장하여 어느 정도 깊이까지 형성함
+			- 이를 통해 가능성에 대한 트리구조를 만들고, 휴리스틱 평가 함수를 사용하여 리프 노드에서 $v_*$ 를 근사함.
+				+ $A^*$ 와 같은 휴리스틱 검색방법은 거의 항상 에피소드 사례를 기반으로 함.
+		* 동적 계획법 (dynamic programming) 이 Bellman 최적 방정식과 훨씬 더 밀접한 관계가 있음.
+		* 많은 강화 학습 방법은 transition 에 대한 지식 대신 transition 에 대한 경험을 토대로 근사치 해결을 함.
+
+- Optimality and Approximation
+	+ 최적 가치 함수와 최적 정책에 대해 정의를 했고, 실제로 이를 학습한 에이전트는 수행을 잘 하였으나 이러한 경우는 매우 드물다.
+		* 이러한 종류의 작업은 엄청난 계산비용으로만 생성할 수 있다.
+	+ 환경의 역학에 대해 완전하고 정확한 모델이 있더라도 벨만 최적 방정식을 풀어 최적의 정책을 계산하는 것은 일반적으로 불가능하다.
+		* 예를 들어 체스와 같은 보드게임도 여전히 최적의 수를 계산할 수 없음
+	+ 에이전트가 직면하는 문제
+		* 단일 time-step 에서 수행할 수 있는 계산의 양
+		* 사용 가능한 메모리 양 (가치함수, 정책, 모델 근사치의 구축 등에 필요)
+		* 작고 유한한 상태집합이 있는 작업에서는 각 상태 혹은 상태-행동 쌍 에 대해 배열 또는 테이블을 사용하여 근사치를 형성할 수 있음
+			- 우리는 이런 경우를 tabular case, tabluar method (테이블 형식) 이라 하나 실질적인 문제들은 테이블 항목으로 표현할 수 없을 정도로 훨씬 더 많은 상태를 가지고 있음
+			- 이러한 경우 더 간결한 형태의 매개 변수화된 함수 표현을 사용하여 근사화 해야 함
+	+ 근사화
+		* 강화학습의 온라인 특성
+			- 자주 경험하는 상태에 대해 좋은 결정을 내릴 수 있도록 더 많은 노력을 기울임
+			- 드물게 경험하는 상태는 상대적으로 더 적은 노력을 기울임
+				+ 최선의 선택이 아닌 선택을 할 확률이 매우 낮은 보상에 미미한 영향을 주는 상태들 
+				+ 예를 들어 백개먼 게임에서 실제로 거의 일어나지 않는 상황에서 악수를 둘 수 있지만, 전문가와 뛰어난 기술로 플레이 할 수 있음
+				+ 수 많은 다양한 환경에서 실제로 잘못된 결정을 내릴 확률이 있음.
+			- 이는 MDP 를 근사화 하여 해결하는 다른 접근방식과 강화학습을 구별하는 핵심 속성중 하나임
+			
 ## Policies and Value Functions
+	
+- Specifying Policies
+	
+	+ 학습목표
+		* 정책 (Policy) 은 각 가능한 상태 (State)에 대한 행동 (Action) 의 분포임을 인지한다.
+		* 확률론적 정책 (Stochastic Policies) 과 결정론적 정책 (Deterministic Policies) 의 유사점과 차이점을 설명한다.
+		* 잘 정의된 정책의 특성을 식별한다.
+		* 주어진 MDP 에 유효한 정책의 예시
 
-- 학습목표
-	+ 정책 (Policy) 은 각 가능한 상태 (State)에 대한 행동 (Action) 의 분포임을 인지한다.
-	+ 확률론적 정책 (Stochastic Policies) 과 결정론적 정책 (Deterministic Policies) 의 유사점과 차이점을 설명한다.
-	+ 잘 정의된 정책의 특성을 식별한다.
-	+ 주어진 MDP 에 유효한 정책의 예시
-	+ 강화학습에서 상태가치함수 (state-value functions) 와 행동가치함수 (action-value functions) 의 역할에 대한 설명
-	+ 가치 함수 (value function) 와 정책 (policy) 간의 관계 설명
-	+ 주어진 MDP 에 대해 유효한 가치함수 생성
+	+ Deterministic policy (결정론적 정책)
+		* 각 상태에 하나의 행동을 매핑
+		* $\pi(s) = a$
+		* 테이블로 표현 가능
+		
+			|State|Action|
+			|:---|:---|
+			|$s_0$|$a_1$|
+			|$s_1$|$a_0$|
+			|$s_2$|$a_0$|
 
+		* 예시
+		
+			![example_deterministic_policy](/assets/images/posts/example_deterministic_policy.png)
+
+	+ Stochastic policy (확률론적 정책)
+		* 각 상태에서 행동이 가지는 확률을 표현
+		* 하나의 상태에서도 각각 다른 행동이 선택될 수 있음 (확률이 0이 아닐 경우)
+		* $\pi(a\|s)$
+		* 확률 그래프로 표현 가능
+
+			![example_stochastic_policy](/assets/images/posts/example_stochastic_policy.png)
+
+		* 예시
+		
+			![example_stochastic_policy_2](/assets/images/posts/example_stochastic_policy_2.png)
+
+	+ 정책은 오직 현재 상태에만 영향을 받는 것이 중요함.
+		* 시간이나 이전 상태와 같은 요소에 영향을 받지 않아야 함.
+			- 50% : 50% 의 행동 확률이라고 번갈아 가며 행동하지 않음 (이것은 현 상태 외의 영향을 받은 정책임.) 
+			- 이런 면을 상태의 요구사항이며, 에이전트의 제한은 아닌 것으로 여기는 편이 좋음. 
+		* 현재 상태에 현재 행동을 결정할 모든 요소가 포함되어 있어야 함.
+	+ MDP 에서는 상태가 결정을 위한 모든 정보를 포함한 것으로 가정한다.
+		* 만약 번갈아 가며 하는 행동이 높은 보상값을 제공한다면, 상태값에 마지막 행동값이 포함되어야 한다.
+
+- Value Functions
+	
+	+ 학습목표
+		
+		* 강화학습에서 상태가치함수 (state-value functions) 와 행동가치함수 (action-value functions) 의 역할에 대한 설명
+		* 가치 함수 (value function) 와 정책 (policy) 간의 관계 설명
+		* 주어진 MDP 에 대해 유효한 가치함수 생성
+
+	+ 개념 설명
+		* 가치함수는 지연된 보상을 나타낸다.
+		* 강화학습에서는 장기적으로 최대의 보상을 얻는 정책을 학습하는 것을 목표로 한다.
+		
+	+ State-value functions
+	
+		* $G_t = \sum_{k=0}^\infty \gamma^k R_{t+k+1}$
+		* $v(s) \doteq E [G_t\|S_t=s]$	
+		* 주어진 환경에 대해 기대되는 보상 값을 의미
+		* 이 의미에 의해 value function 은 주어진 policy (agent 가 어떤 action을 취할 것인지) 에 영향을 받는다는 것을 의미
+		* $v_\pi (s) \doteq E_\pi [G_t\|S_t=s]$
+		* 주어진 정책 하에 현 상태에 기대되는 리턴값
+		
+	+ Action-value functions
+	
+		* $q_\pi (s,a) \doteq E_\pi [G_t\|S_t=s,A_t=a]$
+		* s에서 a를 선택한 후 정책을 따랐을 시 기대되는 리턴값
+		
+	+ Value function 의 의미
+		* 장기적인 결과를 관찰하기 위해 기다리는 대신
+		* 현재 상황의 품질을 질의할 수 있음
+		* 이 리턴 값은 즉시 사용할 수 없음
+		* 정책 및 환경 역학의 확률로 인해 리턴 값이 무작위일 수 있음
+		* Value function 은 미래의 모든 기대되는 리턴값을 평균값으로 요약함
+		* 이를 토대로 다른 정책들의 질을 판단할 수 있게 됨.
+		
+	+ Value function 의 예시 : Chess
+		* 체스는 episodic MDP 이다.
+		* State : 모든 말의 현 위치
+		* Action : 합법적인 이동
+		* Reward : 게임의 승리(+1), 패배 또는 무승부(0)
+		* 위의 보상으로 경기 중 에이전트가 얼마나 잘 플레이하는지에 대해 알 수 없음.
+		* 또한 보상을 보려면 에피소드가 끝날 때 까지 기다려야 함.
+		* 이 때 가치함수는 훨씬 더 많은 것을 알려줄 수 있음.
+			- 상태 가치함수 값은 단순히 현 Policy 를 따랐을 경우 이길 확률을 말함.
+			- 상대방의 움직임은 상태 전이이다.
+			- action value function 은 policy 를 따랐을 경우 현 동작을 통해 이길 확률을 나타낸다.
+
+- Rich Sutton and Andy Barto : A brief History of RL
 
 ## Bellman Equations
 
-- 학습목표
-	+ 상태가치함수 (state-value function) 에 대한 Bellman 방정식 유도
-	+ 행동가치함수 (action-value function) 에 대한 Bellman 방정식 유도
-	+ Bellman 방정식이 현재와 미래 가치를 연관시키는 방법을 이해
-	+ Bellman 방정식을 이용해 가치함수 (value functions) 를 계산
 
-- Continuing Tasks
-	+ Episodic tasks 와 달리 현실에서는 에이전트와 환경이 계속 상호작용 하는 경우 (Continuing) 가 많다.
-	
-		|Episodic Tasks|Continuing Tasks|
-		|:---|:---|
-		|상호작용이 자연스럽게 끝남|상호작용이 계속 유지됨|
-		|각각의 에피소드는 Terminal State 로 끝남|Terminal state 가 없음|
-		|에피소드는 상호독립적임||
-		|$G_t \doteq R_{t+1} + R_{t+2} + R_{t+3} + ... + R_T$|$G_t \doteq R_{t+1} + R_{t+2} + R_{t+3} + ...$ (무한)|
 
-	+ 예 ) 건물 안 온도조절기 : 환경과의 상호작용에 끝이 없음.
-		* 상태 : 시간, 건물 내 사람 수
-		* 액션 : 켜기, 끄기
-		* 보상 : 누군가가 온도를 수동조절 할 경우 -1, 그렇지 않은 경우 0
-	
-	+ State 가 무한함에 따라 보상의 합이 무한으로 발산하는 것을 방지하기 위해 Discounting 을 한다.
-		* Discounting 계수 $\gamma$ , $0 \leq \gamma < 1$ 
-		* $G_t \doteq R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + ... + \gamma^{k-1} R_{t+k} + ... =  \sum_{k=0}^\infty\gamma^k R_{t+k+1}$
-		* 이것은 현재의 1 달러가 1년 뒤에 받을 1달러 보다 가치가 있다고 생각하면 이치에 맞는다.
-		* $G_t$ 가 무한하지 않음 (Finite) 을 증명하는 수식
-			- $G_t = \sum_{k=0}^\infty\gamma^k R_{t+k+1} \leq \sum_{k=0}^\infty\gamma^k R_{max} = R_{max} \sum_{k=0}^\infty\gamma^k = R_{max} \times {1 \over 1-\gamma}$ 
-		* $\gamma$ 값에 따른 에이전트의 성향
-			- $\gamma = 0$ : 즉각적인 보상만을 추구하는 에이전트 (Short-sighted)
-			- $\gamma \to 1$ : 미래의 보상을 중시함 (Far-sighted)
-			
-	+ Return 값의 재귀적 표현법
-		* $G_t \doteq R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + ... = R_{t+1} + \gamma (R_{t+2} + \gamma R_{t+3} + \gamma^2 R_{t+4} + ... )$
-		* $G_t = R_{t+1} + \gamma G_{t+1}$ 
+- Bellman Equation Derivation
+
+	+ 학습목표
+		* 상태가치함수 (state-value function) 에 대한 Bellman 방정식 유도
+		* 행동가치함수 (action-value function) 에 대한 Bellman 방정식 유도
+		* Bellman 방정식이 현재와 미래 가치를 연관시키는 방법을 이해
+
+	+ State-value Bellman equation
+		* $G_t = \sum_{k=0}^\infty \gamma^k R_{t+k+1}$
+		* $v_\pi (s) \doteq E_\pi [G_t\|S_t=s]$
+		* $=E_\pi [R_{t+1} + \gamma G_{t+1}\|S_t=s]$
+		* $=\sum_a \pi(a\|s) \sum_{s'} \sum_r p(s',r\|s,a)[r+\gamma E_\pi [G_{t+1}\|S_{t+1}=s']]$
+		* $=\sum_a \pi(a\|s) \sum_{s'} \sum_r p(s',r\|s,a)[r+\gamma v_\pi (s')]$
+		
+	+ Action-value Bellman equation
+		* $q_\pi (s,a) \doteq E_\pi [G_t\|S_t=s,A_t=a]$
+		* $=\sum_{s'} \sum_r p(s',r\|s,a)[r+\gamma E_\pi [G_{t+1}\|S_{t+1}=s']]$
+		* $=\sum_{s'} \sum_r p(s',r\|s,a)[r+\gamma \sum_{a'} \pi(a'\|s')E_\pi[G_{t+1}\|S_{t+1}=s',A_{t+1}=a']]$
+		* $=\sum_{s'} \sum_r p(s',r\|s,a)[r+\gamma \sum_{a'} \pi(a'\|s')q_\pi (s',a')]$
+
+	+ 현 state value 혹은 state/action value 는 미래의 state value 혹은 state/action value 표현법으로 재귀적 표현이 가능하다.
+
+- Why Bellman Equations?
+
+	+ 학습목표
+		* Bellman 방정식을 이용해 가치함수 (value functions) 를 계산
+		
+	+ 예제 : Gridworld
+
+		![example_gridworld_bellman_equations_1](/assets/images/posts/example_gridworld_bellman_equations_1.png)
+		
+		![example_gridworld_bellman_equations_2](/assets/images/posts/example_gridworld_bellman_equations_2.png)
+
+		![example_gridworld_bellman_equations_3](/assets/images/posts/example_gridworld_bellman_equations_3.png)
+
+		![example_gridworld_bellman_equations_4](/assets/images/posts/example_gridworld_bellman_equations_4.png)
+
+		* 벨만 방정식은 가능한 모든 미래의 값을 무한히 더해가는 과정을 선형대수 문제로 치환시켜 준다.
+		
+	+ 벨만 방정식의 한계
+		* 체스게임과 같이 가능한 상태의 양이 많은 경우
+		* 위의 예시의 경우 상태가 4개이기 때문에 4개의 선형 방정식을 풀면 되지만..
+		* 체스 게임의 경우 $10^{45}$ 개의 선형 방정식을 풀어야 함.
 
 
 ## Optimality (Optimal Policies & Value Functions)
+	
+- Optimal Policies
 
-- 학습목표
-	+ Optimal policy 에 대한 정의
-	+ 정책이 모든 상태에서 다른 모든 정책만큼 좋을 수 있는 방법을 이해
-	+ 주어진 MDP 에 대한 최적의 정책 식별
-	+ 상태가치함수 (state-value functions) 에 대한 Bellman 최적 방정식 유도
-	+ 행동가치함수 (action-value functions) 에 대한 Bellman 최적 방정식 유도
-	+ Bellman 최적 방정식이 이전에 소개된 Bellman 방정식과 어떻게 관련되는지 이해
-	+ 최적가치함수 (Optimal value function) 과 최적정책 (Optimal Policy) 의 연관성 이해
-	+ 주어진 MDP 에 대한 최적가치함수 (Optimal value function) 확인
+	+ 개요
+		* 정책 : 에이전트가 어떻게 행동할지를 나타내는 것
+		* 정책이 결정된 후 value function 을 찾아볼 수 있다.
+		* 강화학습의 목표는 특정 정책을 평가하는 것이 아닌 최적의 정책을 찾는 것이다.
+		
+	+ 학습목표
+		* Optimal policy 에 대한 정의
+		* 특정 정책이 어떻게 모든 상태에서 다른 모든 정책만큼 좋을 수 있는 것인지를 이해
+		* 주어진 MDP 에 대한 최적의 정책 식별
+
+	+ Optimal Policy 란?
+	
+		![optimal_policy](/assets/images/posts/optimal_policy.png)
+
+		* 어떠한 상태에서도 타 정책과 같거나 더 좋은 경우
+		* 최소한 하나 이상의 Optimal Policy 가 존재
+			- 특정 상황에 $\pi_2$ 가 $\pi_1$ 보다 결과가 좋을 경우
+			- 해당 상황에서는 $\pi_2$ 정책을 사용하고 그 외의 경우 $\pi_1$ 을 사용하는 정책 $\pi_3$ 를 사용
+		* 작은 MDP 의 경우 직접적으로 풀 수 있지만...
+			- 2개의 결정론적 정책이 있을 경우 Brute-Force Search 로 문제 해결
+			- 하지만 일반적인 MDP 의 경우 $\|A\|^{\|S\|}$ 개의 결정론적 정책이 존재하여 Brute-Force Search 로 문제 해결이 불가함.
+			- 위의 경우 Bellman Optimality Equations 로 문제에 접근해야 함.
+
+- Optimal Value Functions
+
+	+ 학습목표
+		* 상태가치함수 (state-value functions) 에 대한 Bellman 최적 방정식 유도
+		* 행동가치함수 (action-value functions) 에 대한 Bellman 최적 방정식 유도
+		* Bellman 최적 방정식이 이전에 소개된 Bellman 방정식과 어떻게 관련되는지 이해
+		
+	+ Optimal Value Functions
+		* $v_\*$ : $v_{\pi_\*} (s) \doteq E_{\pi_\*} [G_t\|S_t=s] = \underset{\pi}{\max} v_\pi (s)$ for all $s \in S$
+		* $v_\* (s) = \sum_a \pi_\* (a\|s) \sum_{s'} \sum_r p(s',r\|s,a)[r+\gamma v_*(s')]$
+		* $v_\* (s) = \underset{a}{\max} \sum_{s'} \sum_r p(s',r\|s,a)[r+\gamma v_*(s')]$
+			- 언제나 하나 이상의 결정론적인 최적 정책이 존재한다.
+			- 모든 상태에서 하나의 최적 행동을 선택한다.
+			- 즉, 가장 높은 리턴값을 가지는 하나의 행동의 확률이 1이고, 나머지 행동의 확률은 0이 된다.
+			- Bellman Optimality Equation for $v_\*$
+		* $q_\*$ : $q_{\pi_\*} (s,a) = \underset{\pi}{\max} q_\pi (s,a)$ for all $s \in S$ and $a \in A$
+		* $q_\* (s,a) = \sum_{s'} \sum_r p(s',r\|s,a) [r+ \gamma \sum_{a'} \pi_{\*} (a'\|s') q_\* (s',a')]$
+		* $q_\* (s,a) = \sum_{s'} \sum_r p(s',r\|s,a) [r+ \gamma \underset{a'}{\max} q_{\*} (s',a')]$
+			- Bellman Optimality Equation for $q_\*$
+			
+		![bellman_optimality_equation_for_qastar_linear_system_solver](/assets/images/posts/bellman_optimality_equation_for_qastar_linear_system_solver.png)
+		* 위의 벨만 최적 방정식으로는 $v_{\*}$ 를 풀어낼 수가 없는데, $\max$ 함수가 선형이 아니기 때문이다.
+		* $\pi_{\*}$ 값을 이용해 같은 방식으로 $v_{\*}$ 를 구할 수도 없는데, $\pi_{\*}$ 값을 모를 뿐더러, $\pi_{\*}$ 를 구하는 것 자체가 목적이기 때문이다. 
+
+- Using Optimal Value Functions to Get Optimal Policies
+
+	+ 학습목표
+		* 최적가치함수 (Optimal value function) 과 최적정책 (Optimal Policy) 의 연관성 이해
+		* 주어진 MDP 에 대한 최적가치함수 (Optimal value function) 확인
+
+	+ Optimal Policy 와 Optimal Value Function 의 관계
+		![optimal_policy_and_optimal_value_function_1](/assets/images/posts/optimal_policy_and_optimal_value_function_1.png)
+		* $p$ 와 $v_*$ 에 접근할 수 있다고 가정
+		* 한 단계 진행 시의 값을 구할 수 있을 경우, $A_2$ 가 최대의 값을 가짐을 알 수 있다.
+		* $\max$ 는 최대의 값을, $\arg\max$ 는 박스가 최대의 값을 가지게 하는 $a$ 값 자체를 나타낸다.
+		
+		![optimal_policy_and_optimal_value_function_2](/assets/images/posts/optimal_policy_and_optimal_value_function_2.png)
+		* $p$ 와 $v_*$ 에 접근할 수 있을 때 계산법
+	
+		![optimal_policy_and_optimal_value_function_3](/assets/images/posts/optimal_policy_and_optimal_value_function_3.png)
+		* $p$ 는 확률적 요소여서 알기 힘들지만, 충분히 많이 접근하면 위의 수식에 따라 최적 정책을 구할 수 있게 된다.
+		* $q_*$ 를 알 경우 최적 정책을 구하기 훨씬 쉬워지는데, 다음 스텝의 계산을 할 필요가 없기 때문이다.
+
+
+- Week 3 Summary
+
+- Chapter Summary (RLbook2018 Pages 68-69)
+	+ Reinforcement learning : Learning from interaction how to behave in order to achieve a goal.
+		* interaction : 에이전트와 환경이 이산 스텝의 시퀀스에 따라 상호작용하는 것
+		* actions : 에이전트에 의해 이루어지는 선택
+		* states : 선택에 영향을 주는 요소
+		* rewards : 선택을 평가하는 요소
+		* 모든 agent 내의 요소들은 완전히 알고 있고, 에이전트에 의해 컨트롤된다.
+		* 모든 agent 밖의 요소는 불완전하게 제어되며, 완전히 알 고 있는 것일수도, 그렇지 않은 것일수도 있다.
+		* policy : 에이전트가 상태값을 인자로 한 함수를 통해 행동을 선택하는 확률적 규칙
+		* agent 의 목적 : 전체 시간 동안 받을 수 있는 보상을 최대화 하는 것 
+	+ Markov Decision Process (MDP)
+		* 위의 강화학습 설정이, 잘 정의된 전환 확률로 공식화되면 Markov Decision Process (MDP) 로 정의됨
+		* 유한 MDP : 유한한 상태, 행동 및 보상 세트가 있는 MDP
+		* 강화학습 이론의 대부분은 유한 MDP 로 제한하지만, 방법과 아이디어는 더 일반적으로 적용됨.
+	+ return : 미래의 보상에 대한 함수로 agent 가 최대화 하려는 기대값
+		* 작업의 특성과 지연된 보상의 할인 정도에 따라 다른 정의를 가질 수 있음
+		* 할인이 적용되지 않은 return 식은 episodic tasks 에 맞는 방식
+			- episodic tasks : 상호작용이 에피소드에 따라 자연스럽게 중지되는 형태
+		* 할인이 적용된 return 식은 continuing tasks 에 맞는 방식
+			- continuing tasks : 상호작용이 자연스럽게 중단되지 않고 제한 없이 계속 이어지는 형태
+	+ value functions and optimal value functions
+		* 정책의 가치함수는 에이전트가 해당 정책을 사용하는 경우, 각 상태 혹은 상태-행동 쌍과 그에 예상되는 수익을 할당함
+		* 최적 정책의 가치함수는 각 상태 혹은 상태-행동 쌍에 모든 정책 중 달성할 수 있는 최대의 기대 수익을 할당함 
+		* 최적 가치함수를 사용하는 정책을 최적 정책이라 한다.
+			- 최적 정책은 하나이거나 하나 이상일 수 있다. (예: 50 : 50 의 확률론적 최적 정책)
+			- 최적 가치 함수와 관련하여 탐욕적인 모든 정책은 최적 정책임.
+	+ Bellman optimality equations
+		* 최적 가치 함수을 만족하는 특별한 일관성 조건
+		* 이론적으로 최적 가치 함수를 풀 수 있는 방정식
+		* 최적 정책을 상대적으로 쉽게 결정할 수 있음
+	+ 강화학습은 주어진 조건에 따라 다양한 방식으로 제기될 수 있음
+		* 에이전트의 지식
+			- 환경의 역학 (역학 함수 $p$ 의 4개의 인자) 을 아는 경우와 모르는 경우
+		* 계산 퍼포먼스 및 메모리 이슈
+			- 테이블 방식의 접근을 할지, 근사함수를 사용할 지에 대한 사항
+	+ 강화학습 문제는 최적 솔루션을 찾는 것 보다, 어떻게 근사해야 할지에 더 집중하는 것이 바람직하다.
