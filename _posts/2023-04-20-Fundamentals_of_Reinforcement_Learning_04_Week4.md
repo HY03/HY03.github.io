@@ -17,496 +17,722 @@ toc: false
 use_math: true
 ---
 
-## 관련 자료 (RLbook2018 Pages 58-67)
+## 관련 자료 (RLbook2018 Pages 73-88)
 
-- 용어설명
-	+ 휴리스틱 : 정립된 공식이 아닌 정보가 온전하지 않은 상황에서의 노력, 시행착오, 경험 등을 통해서 지식을 알게 되는 과정.
-		* 주먹구구식의 규칙 (Rule of Thumb) 을 통해 지식을 습득하게 되는 과정
-		* 잘 추측하는 기술 (art of good guessing)
-		* 알고리즘과 달리 휴리스틱은 해결책의 발견을 보장하지 않는다.
-		* 그러나 휴리스틱은 알고리즘보다 효율적이다. (쓸모없는 대안책들을 실제 시도하지 않고도 배제 가능)
-		* 출처 : <http://www.aistudy.com/heuristic/heuristic.htm>
-	+ 휴리스틱 서치
-		* 깊이우선 탐색이나 너비우선 탐색 등의 blind search method 는 goal 까지 의 경로를 찾는 상당히 소모적인 (exhaustive) 방법임.
-		* 즉 문제에 대한 해를 제공하지만 너무 많은 노드를 확장시키므로 실용적이지 못하다. 
-		* 탐색작업을 축소시키기 위해 항상 옳은 해를 제공하지는 못하지만 대부분의 경우에 잘맞는 경험에 의한 규칙 (rules of thumb) 을 이용
-		* 이렇게 그래프로써 표현된 문제에 대한 특별한 정보를 이용하여 탐색 (Search) 작업을 빠르게 진행시키는 방식
-		* 출처 : <http://www.aistudy.co.kr/heuristic/heuristic_search.htm>
-
-
-- Policies and Value Functions
-
-	+ 거의 대부분의 강화학습 알고리즘은 가치함수 (value function) 을 추정하는 것을 포함한다.
-		* 상태 (States) 혹은 상태-액션 쌍(State-action pairs) 에 대한 함수
-		* 에이전트에게 주어진 상태 (혹은 주어진 상태에서 주어진 액션) 이 얼마나 좋은지 (how good) 추정하는 것
-		* 얼마나 좋은지 (how good) 란 기대되는 미래 보상값 혹은 기대되는 결과값에 대한 이야기임
-	+ 미래의 보상 값은, 에이전트가 어떤 액션을 취할지에 달려있음
-		* 따라서 가치함수 (value function) 는 특정한 행동 방식 ( = Policy) 에 따라 정의된다.
-	+ 일반적으로 정책 (Policy) 은 환경 (States) 에 따른 선택 가능한 행동 (Action) 을 선택하는 확률의 매핑 정보이다.
-		* $\pi ( a \mid s )$
-			- 에이전트가 정책(policy) $\pi$ 를 따른다 가정할 경우
-			- time t 시점에서 $S_t = s$ 일 때 $A_t = a$ 일 확률을 가리킨다.
-			- mdp 함수 $p$ 와 같이 $\pi$ 또한 평범한 함수이다.
-				+ $\mid$ 는 각 $s \in S$ 에 대한 $a \in A(s)$ 의 확률 분포를 나타낸다.
-		* 강화 학습 함수는 에이전트의 경험 결과에 따라 어떻게 정책이 바뀔지를 지정한다.
-	+ $v_\pi (s)$ : policy $\pi$ 를 따를 때 state $s$ 일 때 가치 함수 (value function)
-		* $\pi$ 를 따를 때 $s$ 상태에서 시작할 경우 기대되는 결과값
+- Dynamic Programming
+	+ 동적 프로그래밍이란?
+		* Markov decision process (MDP) 형태의 완벽한 환경 모델이 제공될 때 최적 정책을 계산하기 위한 알고리즘의 집합
+		* 완벽한 모델이라는 가정과 비싼 컴퓨팅 비용 때문에 전통적 동적 프로그램 (DP) 은 강화학습에서 활용성이 떨어짐
+		* 하지만 이론적으로 여전히 중요함 (필수적인 기초 지식)
+			- 모든 방식들이 위의 2가지 제약을 벗어나 DP (Dynamic Programming) 와 동일한 효과를 내는 것을 시도하는 것이라 볼 수 있다.
+	+ 주로 사용하는 동적 프로그래밍의 환경 조건
+		* a finite MDP (유한 MDP)
+			- state sets $S$, action sets $A$, reward sets $R$ 은 유한함
+			- 환경의 역학 (dynamics) 은 확률의 집합 $p(s',r\|s,a)$ 로 제공됨 ($s \in S, a \in A(s), r \in R, s' \in S^+$)
+				+ $S^+$ 는 $S$ 에 terminal state 를 포함한 것 (episodic task 일 경우) 
+		* 비록 DP 가 continuous state, action spaces 에서도 적용할 수 있다 해도 그것은 특이 케이스인 경우 뿐임.
+			- continuous state 에서 DP를 적용하는 통상의 방법은 state 와 action을 quantize (근사) 하여 유한 상태의 DP 방식을 적용하는 것이다.
+	+ DP, 그리고 일반적인 강화학습의 핵심 아이디어는 가치 함수를 사용하여 좋은 정책을 찾기 위한 구조화를 하는 것이다.
+		* 우리는 최적 정책을 벨만 최적 방정식을 만족하는 최적 가치함수를 구함으로서 쉽게 찾을 수 있다.
 		
-		![3_5_1_state_value_function](/assets/images/posts/3_5_1_state_value_function.png)
-		* $E_\pi [\cdot]$ : 에이전트가 policy $\pi$ 를 따르고, $t$ 는 임의의 time step 일 때 에이전트가 제공하는 무작위 변수에 대한 기대 리턴값
-		* Terminal state 에 대한 위의 값은 0
-		* 우리는 $v_\pi$ 를 정책 $\pi$ 에 대한 state-value function 이라 한다.
+		![4_0_1_bellman_optimality_equations](/assets/images/posts/4_0_1_bellman_optimality_equations.png)
 
-		![3_5_2_action_value_function](/assets/images/posts/3_5_2_action_value_function.png)
-		* 위와 유사하게 policy $\pi$ 아래에서 state $s$ 에 action $a$ 를 취할 때의 value 를 측정할 경우 이를 $q_\pi (s,a)$ 로 정의할 수 있다.
-		* 이 때 $E_\pi [\cdot]$ 는 정책 $\pi$ 를 따를 경우 상태 $s$ 에서 시작하여 행동 $a$ 를 행했을 때 기대되는 리턴값을 뜻한다.
-		* 우리는 $q_\pi$ 를 정책 $\pi$ 에 대한 action-value function 이라 한다.
+		* for all $s \in S$, $a \in A(s)$, $s' \in S^+$
+		* DP 알고리즘은 벨만 방정식을 원하는 가치함수 (최적가치함수) 의 근사값을 개선하는 업데이트 규칙으로 전환한다.
+
+- Policy Evaluation (Prediction)
+	+ 첫번째로 임의의 정책 $\pi$ 의 상태 가치 함수 $v_{\pi}$ 를 계산하는 방법을 고려한다.
+		* 이것을 DP (Dynamic Programming) 용어로 정책 평가 (Policy evaluation) 이라 한다.
+		![4_1_1_state_value_bellman_equation](/assets/images/posts/4_1_1_state_value_bellman_equation.png)
+		* $v_\pi$ 의 고유성은 $\gamma < 1$ 혹은 정착 $\pi$ 아래 모든 상태에서 필연적인 종료 (termination) 가 보장될 경우 보장된다. 
+		* 만일 환경의 역학을 완전히 알 경우 (4.4) 는 $\|S\|$ 개의 미지수를 가진 선형 방정식으로 풀릴 수 있다.
+			- 이는 직관적이지만 지루한 연산 과정이다.
+	+ 우리의 목적을 달성하기 위해 반복 솔루션 방법이 가장 적합하다.
+		* $S^+$ 와 $R$ (실제 숫자 값) 을 매핑하는 근사 가치함수 $v_0, v_1, v_2, ...$ 를 가정한다.
+		* 최초의 근사, $v_0$ 는 임의로 선택 (단, 최종 상태가 있는 경우 0을 지정)
+		* 각 연속적인 근사치는 벨만 방정식의 업데이트 규칙을 사용하여 얻음.
+		![4_1_2_bellman_equation_update_rule](/assets/images/posts/4_1_2_bellman_equation_update_rule.png)
+		* $v_\pi$ 에 대한 벨만 방정식이 등치를 보장하기 때문에, 모든 $s \in S$ 에 대해 $v_k = v_\pi$ 는 위 업데이트 규칙의 고정점이다.
+		* 사실 시퀀스 $\lbrace v_k \rbrace$ 는 일반적으로 $k \to \infty$ 에 따라 $v_\pi$ 로 수렴한다.
+		* 위 알고리즘을 반복 정책 평가 (iterative policy evaluation) 라 한다.
+	+ iterative policy evaluation
+		* expected update
+			- $v_k$ 로부터 $v_{k+1}$ 연속 근사를 생성하기 위해, iterative policy evaluation 은 각 $s$ 상태에 같은 연산을 적용한다.
+			- 평가 중인 정책의 가능한 모든 한 단계의 전환에 대하여...
+			- 이전 값 $s$ 를 새로운 값으로 교체하기 위해 $s$ 의 후속상태의 이전 값과 즉각적인 보상을 이용
+			- 우리는 이러한 연산을 expected update 라 한다.
+			- 위의 각 반복은 모든 상태의 값을 한번 업데이트 하여 $v_k$ 에서 $v_{k+1}$ 을 생성한다.
+		* several different kinds of expected updates
+			- state 를 업데이트 하거나, state-action pair 를 업데이트 할 수 있음
+			- 후속 상태의 추정 값이 결합되는 방법에 따라 달라짐
+			- DP 에서 사용하는 모든 업데이트 방식을 expected update 라 한다.
+				+ 모든 가능한 다음 상태의 추정값에 기반하기 때문 (다음 상태를 샘플링 하는 것이 아닌)
+				+ 방정식이나 백업 다이어그램 등으로 표현이 가능함.
+		* 순차 컴퓨터 프로그램으로 iterative policy evaluation 을 구현하는 방법
+			- two-array version
+				+ 두 개의 array 를 사용 (old values $v_k (s)$, new values $v_{k+1} (s)$)
+				+ 두 개의 array 를 사용함으로써, 이전 값의 변경 없이 새로운 값을 계산할 수 있음.
+			- in-place algorithm
+				+ 하나의 array 를 사용하여 제자리에서 값을 업데이트 한다.
+				+ 새로운 값이 즉각적으로 이전 값을 덮어 쓴다.
+				+ 각 상태의 업데이트 순서에 따라, 이전 값이 아닌 새로운 값을 업데이트에 쓰기도 한다.
+				+ 이 알고리즘 또한 $v_\pi$ 로 수렴한다.
+					* two-array version 보다 더 빠르게 수렴한다.
+					* 사용 가능한 새로운 데이터를 즉각 사용하기 때문
+					* 업데이트 되는 상태의 순서가 수렴율에 큰 영향을 끼친다.
+				+ DP 알고리즘에서의 알고리즘은 주로 in-place version 이라 생각하면 된다.
+		* in-place version of iterative policy evaluation (pseudocode)
+			![4_1_3_iterative_policy_evaluation](/assets/images/posts/4_1_3_iterative_policy_evaluation.png)
+			- 종료 상태를 관리함 (수렴은 극한 값에서 이루어지지만, 이보다 짧아야 함.)
+			- 의사코드는 $\max_{s \in S} \| v_{k+1} (s) - v_k (s) \|$ 의 값을 매 sweep 마다 체크하고, 값이 충분히 작아지면 중지한다.
+
+	+ 예제 4.1 : 4 x 4 gridworld
+		![4_1_4_example_4_1_gridworld](/assets/images/posts/4_1_4_example_4_1_gridworld.png)
+		* 종료상태 미포함 상태 $S= \{ 1,2,...,14 \}$
+		* 각 상태에서 가능한 행동 $A = \{ up, down, right, left \}$
+		* 행동에 따라 결정론적으로 상태의 전이가 일어남 (그리드를 벗어나는 행동에 대해서는 상태가 변하지 않음)
+			- $p(6,-1 \| 5,right) = 1$
+			- $p(7,-1 \| 7,right) = 1$
+			- $p(10,r \| 5,right) = 0$
+		* 이것은 할인이 없는, episodic task 이다.
+		* 모든 전이에 대한 보상은 -1 이며, terminal state 에 닿을 때까지 지속된다.
+		* terminal state 는 해당 그림에서 음영으로 표시된 상태이다.
+		* 모든 상태 $s, s'$ 와 행동 $a$ 에 대한 기대 보상 함수는 $r(s,a,s') = -1$ 이다. 
+		* 에이전트가 equprobable random policy (모든 action 이 동등 확률) 을 따른다고 가정한다.
+
+- Policy Improvement
+	
+	+ 예제 4.1 gridworld 의 iterative policy evaluation 의 수렴
+		![4_2_1_example_4_1_gridworld_convergence](/assets/images/posts/4_2_1_example_4_1_gridworld_convergence.png)
+	
+	+ 정책의 변경
+		* 임의의 결정론적 정책 $\pi$ 에 대한 가치함수 $v_\pi$ 를 결정했다고 가정할 경우,
+		* 일부 상태의 경우 결정론적으로 행동 $a \neq \pi (s)$ 인 a 를 선택하도록 정책을 변경해야 하는지 여부를 알고 싶음
+		* 우리는 $s$ 상태에서 현 정책을 따르는 것이 얼마나 좋은지 ($v_\pi (s)$) 를 알고 있지만, 새 정책으로 변경하는 것이 더 나은지 알고 싶음
+		* 위 질문에 대한 하나의 해법은 $s$ 상태에서 $a$ 를 선택하고, 그 뒤 기존 정책 $\pi$ 를 따라보는 것이다.
 		
-	+ 가치함수 $v_\pi$ 와 $q_\pi$ 는 경험을 통해 추정할 수 있다.
-		* 예를 들어 정책 $\pi$ 를 따르는 에이전트가 각각의 상태를 마주하고 이에 따른 리턴 값의 평균을 보관할 경우, 해당 상태에 직면하는 횟수가 무한에 가까워지면 평균 값은 상태의 가치, $v_\pi (s)$ 로 수렴한다.
-		* 마찬가지로 각 상태에 보관된 평균 값을 행동에 따라 분리한다면 이는 행동의 가치, $q_\pi (s,a)$ 로 수렴한다.
-		* 우리는 이러한 추정 방식을 Monte Carlo methods 라 한다. (많은 랜덤한 샘플의 실제 리턴값을 평균내는 것을 포함하고 있기 때문)
-		* 물론 이러한 방식은 상태값이 많으면 각 상태 별로 분리된 평균값을 각각 가지는 것에 어려움이 있다.
-		* 대신, 에이전트는  $v_\pi$ 와 $q_\pi$ 를 파라미터화된 함수로 유지하고 이 파라미터를 조정하는 방식을 사용한다.
-			- 이 또한 정확한 추정치를 구할 수 있다.
-			- 이 경우 파라미터화 된 function approximator (함수 근사) 에 달려있다. (이는 이후 과정에서 설명)
+		![4_2_2_q_pi_s_a](/assets/images/posts/4_2_2_q_pi_s_a.png)
+
+		* 그 값은 위와 같다.
+		* 위의 값이 $v_\pi (s)$ 보다 큰지 작은지가 중요하다.
+			- 클 경우, $s$ 에서 $a$ 를 선택한 뒤 $\pi$ 정책을 따르는 것이 $\pi$ 를 계속 따르는 것보다 낫다는 뜻임.
+			- 즉, $s$ 에서 $a$ 를 선택하는 정책이 $\pi$ 정책보다 더 나은 정책임.
+			- 이것을 정책 개선 정리 (policy improvement theorem) 라 한다.
+		
+		* $\pi$ 와 $\pi'$ 를 결정론적 정책이라 가정, $\textrm{all s} \in S$ 인 경우
+		
+		![4_2_3_policy_improvement_q_pi](/assets/images/posts/4_2_3_policy_improvement_q_pi.png)
+		* 정책 $\pi'$ 는 $\pi$ 와 같거나 보다 좋은 정책이다.
+		
+		![4_2_4_policy_improvement_v_pi](/assets/images/posts/4_2_4_policy_improvement_v_pi.png)
+		* 모든 상태에서 위 4.7이 성립할 경우 4.8 또한 성립한다.
+
+		![4_2_5_policy_improvement_reapplying](/assets/images/posts/4_2_5_policy_improvement_reapplying.png)
+		* 위와 같이 하나의 상태에서 특정 행동을 변경하는 정책을 어떻게 평가하는지 알아봤음.
+		* 이 방식을 모든 상태에 모든 선택가능한 행동에 적용하는 것으로 확장하는 것은 자연스러운 방법이다.
+		* 즉, 새로운 탐욕 정책 $\pi'$ 를 고려해본다.
+	
+	+ Policy Improvement
+
+		![4_2_6_new_greedy_policy_pi_quote](/assets/images/posts/4_2_6_new_greedy_policy_pi_quote.png)
+		* $\arg\max_a$ 는 뒤의 식이 최대값이 되는 $a$ 를 뜻한다. (동률일 경우 임의로 선택)
+		* greedy policy 는 $v_\pi$ 하의 단기적으로 가장 좋아보이는 행동을 선택한다. (한 번의 스텝 진행만을 고려)
+		* greedy policy 는 policy improvement theorm (4.7) 의 조건을 만족하므로, 기존 정책과 같거나 더 좋은 정책이라는 것을 알 수 있다.
+		* 기존 정책의 가치 함수를 사용하여 기존의 정책보다 더 나은 정책을 만드는 것을 policy improvement 라 한다.
+		
+		* new greedy policy $\pi'$ 가 old policy $\pi$ 만큼 좋지만, 더 좋지는 않은 상태를 가정한다.
+			- for $\textrm{all s} \in S$
+			- $v_\pi = v_{\pi'}$
+			- 4.9 의 식을 따름
+		![4_2_7_bellman_optimality_equation](/assets/images/posts/4_2_7_bellman_optimality_equation.png)
+		* 결국 위의 식은 Bellman optimality equation 이 된다.
+		* 따라서 $v_{\pi'}$ 는 $v_*$ 와 같고 $\pi$ 와 $\pi'$ 는 최적 정책 (optimal policy) 이 된다.
+		* 정책 개선 (Policy Improvement) 는 기존 정책이 이미 최적이 아닌 경우, 엄격하게 더 나은 정책을 제공한다.
+
+	+ 확률론적 정책 (stochastic policy) 의 경우
+		* 지금까지 결정론적 정책 (deterministic policy) 의 경우를 고려하였음.
+		* 일반적인 경우 확률론적 정책 (stochastic policy) $\pi$ 는 확률에 특화되어 있다.
+		* $\pi (a\|s)$ : $s$ 상태에서 $a$ 행동을 선택할 확률
+		* policy improvement theorem 은 사실 확률론적 정책으로 쉽게 확장이 가능하다.
+			- 최선의 행동이 복수개일 경우 특정 확률의 배분을 차지할 수 있다.
+			- 차선의 행동은 확률이 0 가 된다.
+			- (예제 4.1 gridworld 의 iterative policy evaluation 의 수렴 참조)
 			
-	+ 가치함수의 핵심요소들은 강화학습 이나 다이나믹 프로그래밍 전반에 걸쳐 사용되며, 재귀적인 표현법으로 표현될 수 있다.
-		* 다음 조건은 $s$ 값과 그 값의 가능한 후속 states 사이에서 일관성있게 유지된다.
-		
-		![3_5_3_recursive_state_value_function](/assets/images/posts/3_5_3_recursive_state_value_function.png)
-
-		* 위의 재귀식은 아래의 조건을 따른다.
-			- $a \in A(s)$
-			- $s' \in S$ (Episodic problem 일 경우 $S^+$) 
-			- $r \in R$
-		* 위 식은 실제로 모든 변수 $a, s', r$ 에 대한 합계이다.
-		* 예상값을 구하기 위해 $\pi(a\|s)p(s',r\|s,a)$ 확률을 계산하여 $[ ]$ 안의 값에 가중치를 부여하고 이 모든 확률에 대한 합계를 구한다.
-		* 위의 3.14 방정식은 Bellman equation for $v_\pi$ 이다.
-			- 이것은 상태의 가치, 그리고 그 상태의 후속 상태의 가치에 대한 관계를 나타낸다.
-		
-		![3_5_4_backup_diagram_for_v_pi](/assets/images/posts/3_5_4_backup_diagram_for_v_pi.png)
-
-		* 에이전트는 state $s$ 에서 policy $\pi$ 에 기반한 행동들 ($a \in A(s)$) 을 할 수 있다.
-		* 환경은 함수 $p$ 에 따라 주어진 역학 (dynamic) 을 통해 보상 $r$ 과 함께 여러 다음 상태 중 하나인 $s'$ 로 응답할 수 있음. 
-		* 벨만 방정식 (The Bellman equation (3.14.)) 은 모든 가능성에 대해 평균을 내며, 발생 확률에 따라 가중치를 부여함. 
-		* 시작 상태의 값은 다음 상태의 (할인된) 값과 보상값의 합과 반드시 같다.
-		* 위의 다이어그램을 backup diagrams 라 한다.
-		
-		![3_5_4_1_backup_diagram_v_pi_q_pi](/assets/images/posts/3_5_4_1_backup_diagram_v_pi_q_pi.png)
-		![3_5_4_2_backup_diagram_q_pi_v_pi](/assets/images/posts/3_5_4_2_backup_diagram_q_pi_v_pi.png)
-
-		* 위의 다이어그램은 $v_\pi (s)$ 와 $q_\pi (s)$ 의 관계를 나타낸다.
-		
-	+ Example 3.5 : Gridworld
-		
-		![3_5_5_Gridworld_example](/assets/images/posts/3_5_5_Gridworld_example.png)
-
-		* 위 gridworld 는 단순한 유한 MDP 를 나타낸다.
-		* 그리드의 각 셀은 환경의 state 를 나타낸다.
-		* 각 셀에서 동,서,남,북 의 action 이 가능하며, 해당 방향의 셀로 이동하게 된다.
-		* 가장자리에서의 이동은 이동 없이 해당 셀에 머물게 되나 보상으로 -1 을 얻게 된다.
-		* 특별한 상태인 A, B 를 제외하고 다른 곳에서의 이동은 보상으로 0 을 얻는다.
-		* A 에서의 이동은 action 의 방향과 관계없이 A' 로 이동하게 되며 +10의 보상을 얻는다.
-		* B 에서의 이동은 action 의 방향과 관계없이 B' 로 이동하게 되며 +5의 보상을 얻는다.
-		* 모든 상태에서 동일한 확률로 랜덤한 action 을 취하는 정책을 취할 때 우측의 그림은 그에따른 가치함수 (discounted reward $\gamma=0.9$)를 나타낸다.
-		* 위 가치함수는 (3.14) 의 선형방정식 (linear equations) 을 푼 결과이다. 
-			- 가장자리는 값 이 낮은데, 이는 가장자리에 부딪힐 확률이 높기 때문이다.
-			- State A 는 보상 값 +10 보다 낮은 가치를 가지는데 전이된 A' 에서 감점될 확률이 높기 때문이다.
-			- B 는 B' 로 전이되었을 때 A' 보다 감점될 확률이 적다.
-
-
-	+ Example 3.6 : Golf
+- Policy Iteration
 	
-		![3_5_6_Golf_example](/assets/images/posts/3_5_6_Golf_example.png)
-
-		* 그림 중 위의 부분에 대한 설명임.
-		* 공을 홀에 넣을 때까지 각 스트로크에 대해 -1 의 페널티 (마이너스보상).
-		* 공의 위치가 상태이며, 상태 값은 홀로부터 상태 위치 까지의 스트로크 횟수 (음수) 값이다.
-		* 행동은 공을 조준, 스윙하는 방법과 어떤 클럽을 선택하는가 등이 있지만 전자는 주어진 것으로 받아들이고 후자의 선택에만 집중한다.
-		* 홀의 값은 0
-		* 그린의 어느 곳에서든 퍼팅을 할 수 있다고 가정하며, 이러한 상태의 값은 -1
-		* 그린 밖에서는 퍼팅으로 홀에 도달할 수 없으며, 퍼팅을 통해 그린에 도달할 수 있다면 -2
-		* 마찬가지로 -2 등고선으로 퍼팅이 가능한 모든 위치는 -3 값을 가지며, 위와 같은 방식으로 등고선이 그려짐
-		* 퍼팅으로 모래 함정에서 벗어날 수 없으므로 $-\infty$ 의 값을 가지게 됨
-		* 전반적으로 퍼팅으로 티에서 홀 까지 가는데 6타가 걸림.
-
-- Optimal Policies and Optimal Value Functions
-
-	+ 강화학습 문제를 푼다는 것은, 간단히 말하면 긴 흐름 속에서 많은 보상을 획득하는 정책을 찾는 것이다.
-	+ 유한 MDP 문제에서 우리는 Optimal policy 를 아래와 같이 정의할 수 있다.
-		* 가치함수는 전체 정책에서 부분적인 순서를 결정한다.
-		* 정책 $\pi$ 가 정책 $\pi'$ 와 비교하여 모든 상태에서 예상되는 리턴 값이 크거나 같을 경우 정책 $\pi$ 는 정책 $\pi'$ 보다 좋거나 동등하다고 본다.
-		* $\pi \ge \pi'$, if and only if $v_\pi (s) \ge v_\pi' (s)$ for all $s \in S$.
-	+ 항상 최소한 하나의, 타 정책보다 나은 정책이 있는데 이를 최적 정책 (optimal policy) 라 한다.
-		* 우리는 optimal policies 를 $\pi_*$ 로 표기한다.
-
-		![3_6_1_optimal_state_value_function](/assets/images/posts/3_6_1_optimal_state_value_function.png)
-	
-		* 이는 optimal state-value function $v_*$ (for all $s \in S$) 를 공유한다.
-	
-		![3_6_2_optimal_action_value_function](/assets/images/posts/3_6_2_optimal_action_value_function.png)
-	
-		* 이는 또한 optimal action-value function $q_*$ (for all $s \in S$ and $a \in A(s)$) 를 공유한다.
+	+ Policy Iteration
+		* 정책 $\pi$ 에서 $v_\pi$ 를 이용해 더 나은 정책 $\pi'$ 를 도출했다면..
+		* $v_{\pi'}$ 를 계산하여 더 나은 정책 $\pi''$ 를 도출할 수도 있다.
+		* 따라서, 우리는 단조롭게 개선되는 일련의 정책과 가치 함수를 얻을 수 있다.
 		
-		![3_6_3_optimal_action_state_value_function_relation](/assets/images/posts/3_6_3_optimal_action_state_value_function_relation.png)
+		![4_3_1_policy_iteration](/assets/images/posts/4_3_1_policy_iteration.png)
+	
+		* $\overset{E}{\rightarrow}$ 는 policy evaluation 을,
+		* $\overset{I}{\rightarrow}$ 는 policy improvement 를 뜻한다.
+		* 각 정책은 이전의 정책보다 엄격히 개선되었다는 것을 보장한다. (이미 최적이 아닌 경우)
+		* 유한 MDP 는 유한한 수의 정책을 가지고 있기 때문에, 이 프로세스는 반드시 최적 정책과 최적 가치함수에 유한한 반복 진행으로 수렴한다.
+		* 위의 방법으로 최적 정책을 찾는 방법을 policy iteration 이라 한다.
 		
-		* 위 두 함수의 정의에 따라 위와같이 표현할 수 있다.
+		![4_3_2_policy_iteration_algorithm](/assets/images/posts/4_3_2_policy_iteration_algorithm.png)
+
+		* 반복 계산인 각 정책 평가 (policy evaluation) 은 이전 정책에 대한 가치 함수로 시작된다.
+		* 이것은 수렴의 속도를 크게 향상시키는데, 이전 정책에서 다음 정책으로 변화 할때, 가치 함수가 크게 바뀌지 않기 때문으로 추정된다. 
+
+- 예제 4.2 : Jack's Car Rental
+	+ 문제의 설정
+		* Jack 은 렌터카 회사의 두 지점을 관리한다.
+		* 매일 일정 수의 고객이 자동차를 렌트하기 위해 각 지점에 도착한다.
+			- 사용할 수 있는 자동차가 있으면 그것을 임대하고 $10 을 정립한다.
+			- 지점에 차가 없으면 사업을 잃게 됨
+		* 차량은 반납한 다음날부터 대여가 가능함
+		* 차량이 필요한 곳에서 사용될 수 있도록, 두 지점간 차량을 밤 사이에 이동시킬 수 있고, 차량 당 $2 가 든다.
+			- 한 위치에서 차량을 최대 5대 까지 이동할 수 있음
+		* 각 위치에서 요청되고 반환되는 자동차의 수는 푸아송 확률 변수라고 가정한다.
+			- 즉, 수량이 $n$ 일 확률은 $\frac{n!}{\lambda^n} e^{-\lambda}$ 이며, $\lambda$ 는 예상치이다.
+			- $\lambda$ 를, 첫 번째 위치와 두 번째 위치 각각, 3과 4 (렌탈 수량), 3과 2 (반납수량) 으로 가정한다.
+		* 각 지점에 차량이 최대 20대까지 있을 수 있음 (추가되는 차량은 사라짐)
+		* 할인율 $\gamma = 0.9$
+			- 할인율을 이용해 연속적인 유한 MDP 로 가정
+		* 하나의 step 기준은 하루
+		* States 는 하루가 끝날 때 각 위치의 자동차 수
+		* Actions 는 숫자 (밤 새 두 장소 사이를 오가는 차량의 수)
+	+ 하기 이미지는 차를 전혀 움직이지 않는 정책부터 시작하여, 정책 반복으로 찾은 정책의 순서를 보여준다.
 	
-	+ Example 3.7 : Optimal Value Functions for Golf
+	![4_3_3_Example_4_2_Jacks_Car_rental](/assets/images/posts/4_3_3_Example_4_2_Jacks_Car_rental.png)
 
-		![3_5_6_Golf_example](/assets/images/posts/3_5_6_Golf_example.png)
+	+ Jack 의 자동차 임대 문제에 대한 정책 반복으로 찾은 정책의 순서와 최종 상태가치 함수
+	+ 각 상태에 대해 몇 대의 차를 보내야 하는지를 보여줌 (음수는 두번째 위치에서 첫 번째 위치로의 이동을 나타냄)
+	+ 각 정책은 이전 정책에서의 엄격한 개선을 한 것이며, 마지막 정책이 최적 정책임.
 
-		* 그림 중 아래 부분에 대한 설명임. (optimal action-value function $q_*(s,driver)$)
-		* 드라이버로 먼저 스트로크를 한 다음 나중에 드라이버나 퍼터 중 더 나은 쪽을 선택하는 경우 각 상태의 값
-		* 드라이버를 사용하면 공을 더 멀리 칠 수 있지만 정확도는 떨어져, 홀에서 가까운 부분만 -1 이 됨.
-		* 스트로크가 두번 있는 경우 -2 등고선에서 볼 수 있듯 더 먼 곳에서 홀까지 도달할 수 있음.
-		* 즉, 그린에만 떨어지면 퍼터를 사용할 수 있음.
-		* Optimal action-value function 은 처음 특정 행동을 한 이후에 값을 제공 (위의 경우 우선 드라이버를 사용하고 그 뒤에 무엇을 사용할지를 결정)
-		* -3 등고선은 더 멀리 있으며 시작 티를 포함함. 티에서 가장 좋은 순서는 드라이버2개, 퍼트1개로 공을 홀에 넣는 것임.
-
-	+ 벨만 최적 방정식
-		* $v_*$ 는 정책에 대한 가치함수이기 때문에 벨만 방정식(3.14) 에 의해 주어진 상태 값에 대한 자기 일관성 조건을 충족해야 한다.
-		* 하지만 최적 가치 함수이기 때문에 $v_*$ 의 일관성 조건은 특정 정책을 참조하지 않고 특별한 형태로 작성할 수 있음.
-		* 이것은 $v_*$ 에 대한 벨만 방정식 또는 벨만 최적 방정식 (Bellman Optimality equation) 이라 함.
-		* 직관적으로 Bellman 최적 방정식은 최적 정책 하의 상태 값이 해당 상태에서 최상의 조치에 대한 기대 수익과 같아야 한다는 사실을 나타냄.
-
-		* 마지막 두 방정식은 벨만 최적 방정식 ($v_*$) 의 두가지 형태를 나타낸다.	
-		![3_6_4_bellman_optimality_equation](/assets/images/posts/3_6_4_bellman_optimality_equation.png)
+- Value Iteration
+	+ 정책 반복의 문제점
+		* 정책 반복의 한 가지 단점은, 각 반복에 정책 평가가 포함된다는 점이다.
+		* 정책 평가는 상태 세트를 여러 번 스윕하는 장 기간의 반복 계산일 수 있다.
+		* 반복적인 정책 평가를 하면 $v_\pi$ 로의 수렴은 극한에서만 일어난다.
+		* 그림 4.1 의 예는 정책 평가를 생략하는 것이 가능할 수 있음을 시사한다. (3번의 반복 이후에 greedy policy 에 영향을 주지 않음.)
+	+ 가치 반복 (Value Iteration)
+		* 정책 반복 (Policy iteration) 의 정책 평가 (Policy evaluation) 단계는 정책 반복의 수렴 보장을 유지한 채 여러 가지 방법으로 축소될 수 있음.
+		* 한 가지 중요한 특수 사례는 정책 평가 (Policy evaluation) 가 단 한번의 스윕 (각 상태의 업데이트 1회) 후에 중지되는 경우임.
+		* 위와 같은 사례 (알고리즘) 를 Value Iteration 이라 한다.
+		* 정책 개선 (Policy improvement) 과 축소된 정책 평가 (Policy evaluation) 는 단순한 업데이트 연산으로 결합할 수 있다.
 		
-		* 벨만 최적방정식 ($q_*$) 는 아래와 같이 표현할 수 있다.
-		![3_6_5_bellman_optimality_equation](/assets/images/posts/3_6_5_bellman_optimality_equation.png)
+		![4_4_1_value_iteration_1](/assets/images/posts/4_4_1_value_iteration_1.png)
 
-		* 아래는 벨만 최적방정식에 대한 backup diagrams 이다.
-		![3_6_6_backup_diagrams_bellman_optimality_equation](/assets/images/posts/3_6_6_backup_diagrams_bellman_optimality_equation.png)
+		* 정책 평가와 같이, Value Iteration 도 정확한 $v_*$ 로의 수렴을 위해 무한히 반복을 해야 한다.
+		* 실제로는, 가치 함수가 한 번의 스윕에서 매우 적은 양만 변화할 경우 중지한다.
+		* 아래의 박스는 완성된 알고리즘 (중지 상태를 포함) 을 보여준다.
 
-		* 이는 $v_\pi$ 와 $q_\pi$ 의 backup diagrams 와 같으나, 호 (arc) 가 추가되었음.
-			- 에이전트 선택 지점에 호가 추가되어 타 정책에 의해 주어진 예상 값이 아닌 해당 선택에 대한 최대값이 취해짐을 나타냄.
-		* 왼쪽 backup diagram 은 3.19의 식이, 오른쪽은 3.20의 식이 표현된 것임.
+		![4_4_2_value_iteration_2](/assets/images/posts/4_4_2_value_iteration_2.png)
+
+		* 가치 반복 (Value Iteration) 은 각 스윕에서 한 번의 정책 평가 스윕과 한 번의 정책 개선 스윕을 효과적으로 결합한다.
+		* 종종 각 정책 개선 (Policy Improvement) 스윕 사이에 여러 정책 평가 (Policy evaluation) 스윕을 삽입하여 달성된다.
+		* 일반적으로 축소된 정책 반복 알고리즘의 전체 클래스는 일부는 정책 평가 (Policy evaluation) 업데이트, 일부는 가치 반복 (Value Iteration) 업데이트 를 사용하는 스윕 시퀀스로 생각할 수 있다.
+			- 4.10 수식의 최대 (max) 연산이 유일한 차이점이기 때문
+			- 즉, 정책 평가의 일부 스윕에 최대 (max) 연산 작업이 추가됨을 의미함
+		* 이러한 모든 알고리즘은 할인된 유한 MDP 에 대한 최적의 정책으로 수렴함.
 		
-		* 유한 MDP 의 경우 $v_*$ (3.19) 에 대한 고유한 솔루션이 존재한다.
-		* 벨만 최적방정식은 각각의 state 별로 존재하는 방정식이다.
-			- 따라서 n개의 state 가 있을 경우 n 개의 방정식과 n 개의 미지수가 존재하게 된다.
-		* 만약 환경의 역학 $p$ 를 알면 비선형 방정식 시스템을 풀기 위한 다양한 방법 중 하나를 선택하여 $v_*$ 에 대한 방정식을 풀 수 있다.
-		* $v_*$ 를 알게 되면, 최적 정책을 결정하기가 상대적으로 쉽다.
-			- 모든 상태 s 에 대해 벨만 최적 방정식의 최대값을 얻는 하나 또는 그 이상의 action 이 존재하고, 이런 action 에만 0 이 아닌 확률을 배분하는 정책이 최적 정책이다.
-			- 즉 최적 가치 함수 $v_*$ 를 알면, one-step-ahead search 를 통해 어떤 action 이 최적의 action 인지 알게 된다.
-			- 다른 용어로 (optimal evaluation function $v_*$) 의 측면에서 greedy policy 라 할 수 있음.
-				+ greedy 함은 지역적 혹은 즉각적 고려를 통한 결정이며, 보다 나은 미래의 대안 가능성을 고려하지 않음.
-			- $v_*$ 는 이미 미래 행동의 모든 가능성을 고려하고 반영한 결과값이므로, 긴 기간동안의 리턴값을 지역적, 즉각적인 수량으로 나타낸 값이 된다.
-		* $q_*$ 를 알면, 최적의 행동을 선택하기 더 쉬워진다.
-			- 에이전트는 one-step-ahead search 를 할 필요 없이 s 상태에서 $q_*(s,a)$ 를 최대화 할 행동 a 를 선택하면 된다.
-			- $q_*$ 는 장기적인 기대 리턴값을 각각의 state-action pair 에 제한한다. 
-		* action-value function 은 더 효율적으로 모든 one-step-ahead search 의 결과값을 캐싱한다.
-			- 가능한 후속 상태 및 해당 값들에 대해 알 필요 없이 (즉, 환경의 역학에 대해 알 필요 없이) 최적 행동을 선택할 수 있다.
-	
-	+ Example 3.8: Solving the Gridworld
-	
-		![3_6_7_solving_the_gridworld](/assets/images/posts/3_6_7_solving_the_gridworld.png)
-
-		* Example 3.5 의 Gridworld 문제에 대한 벨만 방정식 (Bellman equation for $v_\pi$) 를 풀었다고 가정
-		* 중간 이미지는 optimal value function $v_*$ 를 나타낸다.
-		* 우측 이미지는 그에 상응하는 최적 정책 (optimal policies) 이다.
-
-	
-	+ Example 3.9: Bellman Optimality Equations for the Recycling Robot 
-	
-		![3_6_8_bellman_optimality_equations_for_the_recycling_robot](/assets/images/posts/3_6_8_bellman_optimality_equations_for_the_recycling_robot.png)
-
-		* 3.19 의 수식을 이용, 벨만 최적 방정식을 Recycling robot example 에 적용할 수 있다.
-		* states : high, row / actions : search, wait, recharge 를 각각 h, l, s, w, re 로 축약한다.
-		* 상태가 2개이므로 벨만 최적 방정식은 2개의 방정식으로 구성된다.
-		* $v_* (h)$ 에 대한 방정식은 위와 같이 표기할 수 있다.
-		* $r_s, r_w, \alpha, \beta, \gamma$ ($0 \le \gamma < 1, 0 \le \alpha,\beta \le 1$) 의 어떠한 케이스를 선택해도 정확히 한 쌍의 숫자, $v_* (h), v_* (l)$ 이 남는다. 이는 동시에 두 비선형 방정식을 만족함을 보여준다.
-		
-	+ Bellman 최적 방정식의 한계
-		* Bellman 최적 방정식의 해결은 최적의 정책을 찾고, 강화 학습 문제를 해결할 수 있음을 보여줌.
-		* 그러나 이 솔루션은 실제로 유용하지 않음.
-			- 모든 가능성을 내다보고 예상되는 보상 측면에서 발생 가능성을 계산하는 검색과 유사함.
-			- 실제로 거의 적용되지 않는 최소한 세 가지 가정에 의존함
-				1. 환경의 역학을 정확하게 알고 있음.
-			  2. 솔루션 계산을 완료하기에 충분한 계산 리소스가 있음
-			  3. Markov 속성
-			- 예를 들어 첫 번째와 세 번째 가정은 백개먼 게임에 아무런 문제가 없지만 두 번째 가정은 큰 장애물이 됨.
-			- 게임에는 약 $10^{20}$ 개의 상태가 있기 때문에 
-			- 오늘날의 가장 빠른 컴퓨터에서 $v_*$ 에 대한 Bellman 방정식을 푸는 데 수천 년이 걸리며 
-			- $q_*$ 를 찾는 것도 마찬가지이다.
-	+ 강화 학습에서는 일반적으로 근사 솔루션 (approximate solutions) 으로 만족해야 함.
-		* Bellman 최적 방정식을 근사로 푸는 방법으로 다양한 의사 결정 방법이 있음.
-			- 예를 들어 휴리스틱 검색 방법은 (3.19) 의 오른쪽을 여러 번 확장하여 어느 정도 깊이까지 형성함
-			- 이를 통해 가능성에 대한 트리구조를 만들고, 휴리스틱 평가 함수를 사용하여 리프 노드에서 $v_*$ 를 근사함.
-				+ $A^*$ 와 같은 휴리스틱 검색방법은 거의 항상 에피소드 사례를 기반으로 함.
-		* 동적 계획법 (dynamic programming) 이 Bellman 최적 방정식과 훨씬 더 밀접한 관계가 있음.
-		* 많은 강화 학습 방법은 transition 에 대한 지식 대신 transition 에 대한 경험을 토대로 근사치 해결을 함.
-
-- Optimality and Approximation
-	+ 최적 가치 함수와 최적 정책에 대해 정의를 했고, 실제로 이를 학습한 에이전트는 수행을 잘 하였으나 이러한 경우는 매우 드물다.
-		* 이러한 종류의 작업은 엄청난 계산비용으로만 생성할 수 있다.
-	+ 환경의 역학에 대해 완전하고 정확한 모델이 있더라도 벨만 최적 방정식을 풀어 최적의 정책을 계산하는 것은 일반적으로 불가능하다.
-		* 예를 들어 체스와 같은 보드게임도 여전히 최적의 수를 계산할 수 없음
-	+ 에이전트가 직면하는 문제
-		* 단일 time-step 에서 수행할 수 있는 계산의 양
-		* 사용 가능한 메모리 양 (가치함수, 정책, 모델 근사치의 구축 등에 필요)
-		* 작고 유한한 상태집합이 있는 작업에서는 각 상태 혹은 상태-행동 쌍 에 대해 배열 또는 테이블을 사용하여 근사치를 형성할 수 있음
-			- 우리는 이런 경우를 tabular case, tabluar method (테이블 형식) 이라 하나 실질적인 문제들은 테이블 항목으로 표현할 수 없을 정도로 훨씬 더 많은 상태를 가지고 있음
-			- 이러한 경우 더 간결한 형태의 매개 변수화된 함수 표현을 사용하여 근사화 해야 함
-	+ 근사화
-		* 강화학습의 온라인 특성
-			- 자주 경험하는 상태에 대해 좋은 결정을 내릴 수 있도록 더 많은 노력을 기울임
-			- 드물게 경험하는 상태는 상대적으로 더 적은 노력을 기울임
-				+ 최선의 선택이 아닌 선택을 할 확률이 매우 낮은 보상에 미미한 영향을 주는 상태들 
-				+ 예를 들어 백개먼 게임에서 실제로 거의 일어나지 않는 상황에서 악수를 둘 수 있지만, 전문가와 뛰어난 기술로 플레이 할 수 있음
-				+ 수 많은 다양한 환경에서 실제로 잘못된 결정을 내릴 확률이 있음.
-			- 이는 MDP 를 근사화 하여 해결하는 다른 접근방식과 강화학습을 구별하는 핵심 속성중 하나임
+	+ 예제 4.3 : Gambler's Problem
+		* 문제
+			- 도박꾼은 일련의 동전 던지기 결과에 대해 베팅할 기회가 있다.
+			- 동전이 앞면이 나오면 그는 걸었던 만큼의 달러를 얻고, 뒷면이면 지분을 잃는다.
+			- 도박꾼이 $100 의 목표에 도달하면 이기고, 돈을 다 잃으면 끝나게 된다.
+			- 매번 도박꾼은 자신의 자본 중 어느 정도를 걸어야 할 지 정해야 한다.
+			- 이 문제는 할인되지 않은, 에피소딕한 유한한 MDP 로 공식화될 수 있다.
+		* 정의
+			- 상태 : 도박꾼의 자본, $s \in \lbrace 1,2,...,99 \rbrace$
+			- 행동 : 베팅 금액, $a \in \lbrace 0, 1, ..., min(s, 100-s) \rbrace$
+			- 보상 : 도박꾼이 목표에 도달하였을때 +1, 그 외 모든 전환에서 0
+			- 상태가치 함수는 위의 경우 각 상태에서 승리할 확률을 제공한다.
+			- 정책은 자본과 베팅 금액 간 매핑이다.
+			- 최적의 정책은 목표에 도달할 확률을 최대화한다.
+			- $p_h$ : 동전이 앞면이 나올 확률
+			- $p_h$ 를 알게 되면, 전체 문제를 알 수 있고, 가치 반복 (Value Iteration) 등으로 풀 수 있다.
+			- 그림 4.3 은 가치 반복의 연속적인 스윕에 대한 가치 함수의 변화를 보여준다.
+			- 그림 4.3 은 $p_h = 0.4$ 인 경우 최적 정책을 보여준다. 이 정책은 최적이지만 고유하지는 않다.
+				+ 최적 가치 함수 상 값이 동률일 경우...
 			
-## Policies and Value Functions
+			![4_4_3_example_4_3_gamblers_problem](/assets/images/posts/4_4_3_example_4_3_gamblers_problem.png)
+
+
+- Asynchronous Dynamic Programming
+	+ 기존 DP 모델의 한계
+		* MDP 의 전체 상태 집합에 대한 연산을 포함한다.
+		* 즉, 상태 집합 전체에 대한 스윕이 필요함.
+		* 상태 세트가 매우 크면 한 번의 스윕도 엄청난 비용일 수 있다.
+		* 백게먼 게임에서 상태의 수는 $10^{20}$ 개 이다.
+		* 이는 초당 백만 개의 상태의 가치 반복 업데이트를 수행할 수 있더라도, 단일 스윕을 완료하는 데 천 년 이상이 걸린다.
+	+ 비동기식 DP 알고리즘
+		* 비동기식 DP 알고리즘은 상태 세트의 체계적 스윕이 구성되지 않은 내부 반복 DP 알고리즘이다.
+		* 이 알고리즘은 사용 가능한 다른 상태의 값을 사용하여 순서에 관계없이 상태 값을 업데이트한다.
+			- 일부 상태 값은 다른 상태 값이 업데이트 되기 전에 여러 번 업데이트 될 수 있다.
+			- 그러나 올바른 수렴을 위해 모든 상태의 값을 계속 업데이트 해야한다.
+			- 일정 시점 이후에는 어떤 상태도 무시할 수 없다.
+	+ 비동기식 DP 알고리즘의 이점
+		* 비동기 DP 알고리즘은 업데이트할 상태를 선택하는 데 큰 유연성을 제공한다.
+			- 예를 들어 가치 반복 업데이트 (4.10) 를 이용하여, 매 스탭 $k$ 에 대해 하나의 상태인 $s_k$ 에 대해서만 업데이트 하는 것이다. 
+			- 만약, $0 \leq \gamma < 1$ 일 경우, $v_*$ 에 대한 점근적인 수렴은 모든 상태가 시퀀스 $\lbrace s_k \rbrace$ 에서 무한한 횟수로 발생하는 경우에만 보장된다.
+				+ 시퀀스가 확률적일 수도 있음
+				+ 할인되지 않는 에피소드 케이스의 경우, 수렴되지 않는 일부 업데이트 순서가 있을 수 있지만 이는 상대적으로 피하기 쉬움)
+			- 마찬가지로 정책 평가와 가치 반복 업데이트를 혼합하여 일종의 비동기식 축소된 정책 반복을 생성할 수 있음
+			- 이것과 다른 더 특이한 DP 알고리즘에 대한 세부 사항은 이 책의 범위를 벗어남
+			- 몇 가지 다른 업데이트가 다양한 Sweepless DP 알고리즘에서 유연하게 사용할 수 있는 빌딩 블록을 형성한다는 것은 분명함
+			- 스윕을 피한다고 해서 반드시 적은 계산으로 벗어날 수 있다는 의미는 아님.
+				+ 이는 알고리즘이 정책을 개선하기 전에 절망적으로 긴 스윕에 갇힐 필요가 없음을 의미함
+			- 알고리즘의 진행률을 향상시키기 위해 업데이트를 적용할 상태를 선택하여 이러한 유연성을 활용할 수 있음.
+				+ 값 정보가 상태에서 상태로 효율적으로 전파되도록 업데이트 순서를 정할 수 있음
+				+ 일부 상태는 다른 상태만큼 자주 값을 업데이트할 필요가 없을 수 있음
+				+ 최적의 동작과 관련이 없는 경우 일부 상태를 완전히 업데이트 하지 않을 수도 있음
+		* 비동기식 알고리즘을 사용하여 실시간 상호작용 내용을 더 쉽게 혼합하여 계산할 수 있다.
+			- MDP 를 풀기 위해 에이전트가 실제로 MDP 를 경험하는 동안, 동시에 반복 DP 알고리즘을 수행할 수 있다.
+			- 에이전트의 경험은 DP 알고리즘이 업데이트를 적용할 상태를 결정하는 데 사용할 수 있다.
+			- 동시에 DP 알고리즘의 최신 값과 정책 정보를 이용해 에이전트의 의사 결정에 활용할 수 있다.
+				+ 예를 들어 에이전트가 특정 상태를 방문할 때 상태에 업데이트를 적용할 수 있다.
+				+ 이를 통해 에이전트와 가장 관련성 높은 상태 세트 부분의 업데이트에 집중할 수 있다.
+
+- Generalized Policy Iteration
+	+ 정책 반복 (Policy Iteration) 에 대한 내용 정리
+		* 정책 반복은 두 개의 동시 상호 작용 프로세스로 구성됨
+			- 현재 정책과 일치하는 가치 함수를 만들기 (정책 평가)
+			- 현재 가치함수와 관련하여 정책을 탐욕스럽게 만들기 (정책 개선)
+		* 정책 반복 : 이 두 프로세스는 서로 번갈아가며 다른 프로세스가 시작되기 전에 완료됨
+		* 가치 반복 : 각 정책 개선 사이에 정책 평가의 단일 반복만 수행됨
+		* 비동기식 DP 방법 : 평가 및 개선 프로세스가 훨씬 더 세밀하게 끼워넣어짐
+			- 예 : 다른 프로세스로 돌아가기 전에 한 프로세스에서 단일 상태가 업데이트됨
+		* 두 프로세스가 계속해서 모든 상태를 업데이트 하는 한, 궁극적인 결과는 일반적으로 최적 가치 함수와 최적 정책으로 수렴됨.
+	+ Generalized Policy Iteration (GPI) : 일반화된 정책 반복
+		* 우리는 일반화된 정책 반복 (GPI) 이라는 용어를 사용하여 정책 평가 및 정책 개선 과정이 서로 상호작용하는 일반 아이디어를 나타낸다.
+			- 두 과정의 세부 사항과 세분화와는 독립적인 개념임.
+		* 거의 모든 강화학습 방법은 GPI로 잘 설명되어 있음.
+		
+		![4_4_4_gpi_diagram](/assets/images/posts/4_4_4_gpi_diagram.png)
+
+		* 즉, 모든 것들은 식별 가능한 정책과 가치 함수를 가지며, 정책은 항상 가치 함수에 대해 개선되고, 가치 함수는 항삭 정책에 대한 가치 함수로 향하도록 조정된다.
+		* 만약 평가 과정과 개선 과정이 모두 안정화 되면, 즉 더 이상 변화가 발생하지 않으면, 가치 함수와 정책은 최적이어야 한다.
+		* 가치 함수는 현 정책과 일치할 때에만 안정화 되고, 정책은 현 가치함수에 대해 탐욕스러울 경우에만 안정화 된다.
+		* 따라서 두 과정이 모두 안정화되려면, 자신의 평가 함수에 대해 탐욕스러운 정책을 찾아야 한다.
+		* 이는 벨만 최적 방정식 (4.1) 이 성립하며, 정책과 가치함수가 최적임을 의미한다.
 	
-- Specifying Policies
+		![4_4_5_gpi_diagram_2](/assets/images/posts/4_4_5_gpi_diagram_2.png)
+
+		* GPI 의 평가 및 개선 프로세스는 경쟁과 협력으로 볼 수 있음
+			- 정책을 가치 함수에 대해 탐욕스럽게 만들면 일반적으로 가치 함수가 변경된 정책에 대해 부정확해짐
+			- 가치 함수를 정책과 일치하게 만들면 해당 정책이 더 이상 탐욕스러운 정책이 아니게 됨.
+			- 장기적으로 이 두 과정은 하나의 공통해결책인 최적의 가치 함수와 최적의 정책을 찾기 위해 상호작용함.
+		
+		* 위 다이어그램에서 제안된 대로 2차원 공간의 두 개의 선으로 생각해볼 수 있음.
+			- 실제 기하학은 이보다 훨씬 복잡하나, 이 다이어그램은 실제 상황이 어떤 식으로 일어나는지를 시사함.
+			- 각 과정은 가치함수, 정책을 두고 두 목표중 하나의 해결책을 나타내는 선으로 이끈다.
+			- 두 목표는 직교하지 않기 때문에 목표 간 상호작용이 발생 (한 목표로 직접적으로 나아가면 다른 목표에서 멀어지는 움직임)
+			- 그러나 결국 공동 프로세스는 최적의 목표에 가까워지게 된다.
+			- GPI 에서 각 목표에 대해 작고 불완전한 단계를 취할 수도 있으나, 어느 경우에도 두 과정은 전반적인 최적의 목표를 달성하기 위해 함께 작동한다.
+
+- Efficiency of Dynamic Programming
+	+ MDP 문제에서 DP 방식이 가지는 효율성
+		* DP(Dynamic Programming)는 매우 큰 문제에는 적합하지 않을 수 있지만, MDP(Markov Decision Processes)를 해결하기 위한 다른 방법과 비교하면 DP 방법은 실제로 꽤 효율적임.
+		* 일부 기술적인 세부 사항을 무시한다면, DP 방법이 최적 정책을 찾는 데 걸리는 (최악의 경우) 시간은 상태와 액션의 수에 다항식으로 표현됨.
+			- n과 k가 상태와 액션의 수를 나타낸다면, DP 방법은 n과 k의 다항식 함수보다 적은 계산 작업을 필요로 함.
+			- DP 방법은 전체 정책의 수가 $k^n$ 인 것과는 상관없이 다항 시간 내에 최적 정책을 찾을 것을 보장함.
+			- (직접 탐색 (모든 경우의 수, 가능한 정책을 검사하고 평가) 은 동일한 보장을 제공하기 위해 각 정책을 철저히 검사해야 함)
+		* 일부의 경우 선형 프로그래밍 방법 (문제를 선형 제약 조건과 목적함수를 활용해 수학적으로 리모델링) 도 MDP를 해결하는 데 사용될 수 있으며, DP 방법보다 수렴 보장이 더 좋을 수 있음.
+			- 예를 들어, MDP 문제에서 상태 공간이 크고 액션 수가 상대적으로 작은 경우
+			- 혹은 작은 상태 수
+		* 그러나 가장 큰 문제에 대해서는 DP 방법만이 실현 가능함.
+			- DP(Dynamic Programming)은 종종 차원의 저주(curse of dimensionality)라는 이유로 적용 가능성이 제한적으로 생각되기도 한다. 이는 상태 변수의 수에 따라 상태의 수가 지수적으로 증가하기 때문.
+			- 큰 상태 집합은 어려움을 일으킬 수 있지만, 이는 문제의 본질적인 어려움이며 DP 자체의 해결 방법의 어려움은 아니다.
+			- 실제로 DP는 직접 탐색이나 선형 프로그래밍과 같은 경쟁적 위치의 방법들보다 큰 상태 공간을 처리하는 데 더 적합함.
+
+	+ 비동기 DP 의 활용방식
+		* 실제로 DP(Dynamic Programming) 방법은 오늘날의 컴퓨터를 사용하여 수백만 개의 상태를 가진 MDP(Markov Decision Process)를 해결하는 데에 사용될 수 있다.
+		* 정책 이터레이션(policy iteration)과 가치 이터레이션(value iteration) 모두 널리 사용되며, 일반적으로 어떤 것이 더 우수한지 명확하지 않음.
+		* 이러한 방법들은 보통 좋은 초기 값 함수 또는 정책으로 시작되었을 때, 이론적인 최악의 경우 실행 시간보다 훨씬 빠르게 수렴함.
+		* 상태 공간이 큰 문제에서는 비동기적인 DP 방법이 종종 선호됨.
+		* 동기적인 방법의 경우 하나의 전체 순회를 완료하기 위해서는 모든 상태에 대한 계산과 메모리가 필요함.
+		* 일부 문제에서는 심지어 이 정도의 메모리와 계산도 실용적이지 않을 수 있지만, 최적 해결 경로에는 상대적으로 적은 수의 상태가 발생할 수 있으므로 문제는 여전히 해결이 가능함.
+		* 비동기적인 방법과 GPI의 다른 변형들은 이러한 경우에 적용될 수 있으며, 동기적인 방법보다 좋거나 최적의 정책을 훨씬 빠르게 찾을 수 있음.
 	
-	+ 학습목표
-		* 정책 (Policy) 은 각 가능한 상태 (State)에 대한 행동 (Action) 의 분포임을 인지한다.
-		* 확률론적 정책 (Stochastic Policies) 과 결정론적 정책 (Deterministic Policies) 의 유사점과 차이점을 설명한다.
-		* 잘 정의된 정책의 특성을 식별한다.
-		* 주어진 MDP 에 유효한 정책의 예시
 
-	+ Deterministic policy (결정론적 정책)
-		* 각 상태에 하나의 행동을 매핑
-		* $\pi(s) = a$
-		* 테이블로 표현 가능
-		
-			|State|Action|
-			|:---|:---|
-			|$s_0$|$a_1$|
-			|$s_1$|$a_0$|
-			|$s_2$|$a_0$|
 
-		* 예시
-		
-			![example_deterministic_policy](/assets/images/posts/example_deterministic_policy.png)
-
-	+ Stochastic policy (확률론적 정책)
-		* 각 상태에서 행동이 가지는 확률을 표현
-		* 하나의 상태에서도 각각 다른 행동이 선택될 수 있음 (확률이 0이 아닐 경우)
-		* $\pi(a\|s)$
-		* 확률 그래프로 표현 가능
-
-			![example_stochastic_policy](/assets/images/posts/example_stochastic_policy.png)
-
-		* 예시
-		
-			![example_stochastic_policy_2](/assets/images/posts/example_stochastic_policy_2.png)
-
-	+ 정책은 오직 현재 상태에만 영향을 받는 것이 중요함.
-		* 시간이나 이전 상태와 같은 요소에 영향을 받지 않아야 함.
-			- 50% : 50% 의 행동 확률이라고 번갈아 가며 행동하지 않음 (이것은 현 상태 외의 영향을 받은 정책임.) 
-			- 이런 면을 상태의 요구사항이며, 에이전트의 제한은 아닌 것으로 여기는 편이 좋음. 
-		* 현재 상태에 현재 행동을 결정할 모든 요소가 포함되어 있어야 함.
-	+ MDP 에서는 상태가 결정을 위한 모든 정보를 포함한 것으로 가정한다.
-		* 만약 번갈아 가며 하는 행동이 높은 보상값을 제공한다면, 상태값에 마지막 행동값이 포함되어야 한다.
-
-- Value Functions
+## Policy Evaluation (Prediction)
 	
-	+ 학습목표
-		
-		* 강화학습에서 상태가치함수 (state-value functions) 와 행동가치함수 (action-value functions) 의 역할에 대한 설명
-		* 가치 함수 (value function) 와 정책 (policy) 간의 관계 설명
-		* 주어진 MDP 에 대해 유효한 가치함수 생성
+- Policy Evaluation vs. Control
 
-	+ 개념 설명
-		* 가치함수는 지연된 보상을 나타낸다.
-		* 강화학습에서는 장기적으로 최대의 보상을 얻는 정책을 학습하는 것을 목표로 한다.
+	+ 학습 목표
+		* 정책 평가 (policy evaluation) 와 제어 (control) 의 구분
+		* 동적 프로그래밍 (Dynamic Programming) 이 적용될 수 있는 설정(환경) 과 제한을 이해
+
+	+ Policy Evaluation 과 Control 의 정의
+		* Policy Evaluation : 주어진 정책에 대한 stable 한 가치 함수를 구하는 것 (얼마나 좋은지 평가)
+			- $\pi \to v_\pi$
+			- $v_\pi (s) \doteq E_\pi \[ G_t \| S_t = s\]$
+			- $G_t \doteq \sum_{k=0}^\infty \gamma^k R_{t+k+1}$
+				+ 리턴 값은 미래의 보상에 대한 할인된 합계이다.
+		* Control : 가치 함수를 통해 가장 많은 보상을 얻는 정책을 찾는 것 (정책을 발전시키는 것)
 		
-	+ State-value functions
+			![policy_control_1](/assets/images/posts/policy_control_1.png)	
+
+			- 모든 상태에서의 가치가 같거나 더 나은 정책을 찾는 것
+			- 반복적으로 찾다 보면 최적의 정책을 찾게 됨.
+
+	+ Dynamic Programming Algorithms
 	
-		* $G_t = \sum_{k=0}^\infty \gamma^k R_{t+k+1}$
-		* $v(s) \doteq E [G_t\|S_t=s]$	
-		* 주어진 환경에 대해 기대되는 보상 값을 의미
-		* 이 의미에 의해 value function 은 주어진 policy (agent 가 어떤 action을 취할 것인지) 에 영향을 받는다는 것을 의미
-		* $v_\pi (s) \doteq E_\pi [G_t\|S_t=s]$
-		* 주어진 정책 하에 현 상태에 기대되는 리턴값
+
+
+		* 벨만 방정식을 사용해 가치 평가와 제어의 반복적인 알고리즘을 정의하는 것
 		
-	+ Action-value functions
+	![linear_solver_vs_dynamic_programming_1](/assets/images/posts/linear_solver_vs_dynamic_programming_1.png)	
 	
-		* $q_\pi (s,a) \doteq E_\pi [G_t\|S_t=s,A_t=a]$
-		* s에서 a를 선택한 후 정책을 따랐을 시 기대되는 리턴값
-		
-	+ Value function 의 의미
-		* 장기적인 결과를 관찰하기 위해 기다리는 대신
-		* 현재 상황의 품질을 질의할 수 있음
-		* 이 리턴 값은 즉시 사용할 수 없음
-		* 정책 및 환경 역학의 확률로 인해 리턴 값이 무작위일 수 있음
-		* Value function 은 미래의 모든 기대되는 리턴값을 평균값으로 요약함
-		* 이를 토대로 다른 정책들의 질을 판단할 수 있게 됨.
-		
-	+ Value function 의 예시 : Chess
-		* 체스는 episodic MDP 이다.
-		* State : 모든 말의 현 위치
-		* Action : 합법적인 이동
-		* Reward : 게임의 승리(+1), 패배 또는 무승부(0)
-		* 위의 보상으로 경기 중 에이전트가 얼마나 잘 플레이하는지에 대해 알 수 없음.
-		* 또한 보상을 보려면 에피소드가 끝날 때 까지 기다려야 함.
-		* 이 때 가치함수는 훨씬 더 많은 것을 알려줄 수 있음.
-			- 상태 가치함수 값은 단순히 현 Policy 를 따랐을 경우 이길 확률을 말함.
-			- 상대방의 움직임은 상태 전이이다.
-			- action value function 은 policy 를 따랐을 경우 현 동작을 통해 이길 확률을 나타낸다.
-
-- Rich Sutton and Andy Barto : A brief History of RL
-
-## Bellman Equations
-
-
-
-- Bellman Equation Derivation
-
-	+ 학습목표
-		* 상태가치함수 (state-value function) 에 대한 Bellman 방정식 유도
-		* 행동가치함수 (action-value function) 에 대한 Bellman 방정식 유도
-		* Bellman 방정식이 현재와 미래 가치를 연관시키는 방법을 이해
-
-	+ State-value Bellman equation
-		* $G_t = \sum_{k=0}^\infty \gamma^k R_{t+k+1}$
-		* $v_\pi (s) \doteq E_\pi [G_t\|S_t=s]$
-		* $=E_\pi [R_{t+1} + \gamma G_{t+1}\|S_t=s]$
-		* $=\sum_a \pi(a\|s) \sum_{s'} \sum_r p(s',r\|s,a)[r+\gamma E_\pi [G_{t+1}\|S_{t+1}=s']]$
-		* $=\sum_a \pi(a\|s) \sum_{s'} \sum_r p(s',r\|s,a)[r+\gamma v_\pi (s')]$
-		
-	+ Action-value Bellman equation
-		* $q_\pi (s,a) \doteq E_\pi [G_t\|S_t=s,A_t=a]$
-		* $=\sum_{s'} \sum_r p(s',r\|s,a)[r+\gamma E_\pi [G_{t+1}\|S_{t+1}=s']]$
-		* $=\sum_{s'} \sum_r p(s',r\|s,a)[r+\gamma \sum_{a'} \pi(a'\|s')E_\pi[G_{t+1}\|S_{t+1}=s',A_{t+1}=a']]$
-		* $=\sum_{s'} \sum_r p(s',r\|s,a)[r+\gamma \sum_{a'} \pi(a'\|s')q_\pi (s',a')]$
-
-	+ 현 state value 혹은 state/action value 는 미래의 state value 혹은 state/action value 표현법으로 재귀적 표현이 가능하다.
-
-- Why Bellman Equations?
-
-	+ 학습목표
-		* Bellman 방정식을 이용해 가치함수 (value functions) 를 계산
-		
-	+ 예제 : Gridworld
-
-		![example_gridworld_bellman_equations_1](/assets/images/posts/example_gridworld_bellman_equations_1.png)
-		
-		![example_gridworld_bellman_equations_2](/assets/images/posts/example_gridworld_bellman_equations_2.png)
-
-		![example_gridworld_bellman_equations_3](/assets/images/posts/example_gridworld_bellman_equations_3.png)
-
-		![example_gridworld_bellman_equations_4](/assets/images/posts/example_gridworld_bellman_equations_4.png)
-
-		* 벨만 방정식은 가능한 모든 미래의 값을 무한히 더해가는 과정을 선형대수 문제로 치환시켜 준다.
-		
-	+ 벨만 방정식의 한계
-		* 체스게임과 같이 가능한 상태의 양이 많은 경우
-		* 위의 예시의 경우 상태가 4개이기 때문에 4개의 선형 방정식을 풀면 되지만..
-		* 체스 게임의 경우 $10^{45}$ 개의 선형 방정식을 풀어야 함.
-
-
-## Optimality (Optimal Policies & Value Functions)
-	
-- Optimal Policies
-
-	+ 개요
-		* 정책 : 에이전트가 어떻게 행동할지를 나타내는 것
-		* 정책이 결정된 후 value function 을 찾아볼 수 있다.
-		* 강화학습의 목표는 특정 정책을 평가하는 것이 아닌 최적의 정책을 찾는 것이다.
-		
-	+ 학습목표
-		* Optimal policy 에 대한 정의
-		* 특정 정책이 어떻게 모든 상태에서 다른 모든 정책만큼 좋을 수 있는 것인지를 이해
-		* 주어진 MDP 에 대한 최적의 정책 식별
-
-	+ Optimal Policy 란?
-	
-		![optimal_policy](/assets/images/posts/optimal_policy.png)
-
-		* 어떠한 상태에서도 타 정책과 같거나 더 좋은 경우
-		* 최소한 하나 이상의 Optimal Policy 가 존재
-			- 특정 상황에 $\pi_2$ 가 $\pi_1$ 보다 결과가 좋을 경우
-			- 해당 상황에서는 $\pi_2$ 정책을 사용하고 그 외의 경우 $\pi_1$ 을 사용하는 정책 $\pi_3$ 를 사용
-		* 작은 MDP 의 경우 직접적으로 풀 수 있지만...
-			- 2개의 결정론적 정책이 있을 경우 Brute-Force Search 로 문제 해결
-			- 하지만 일반적인 MDP 의 경우 $\|A\|^{\|S\|}$ 개의 결정론적 정책이 존재하여 Brute-Force Search 로 문제 해결이 불가함.
-			- 위의 경우 Bellman Optimality Equations 로 문제에 접근해야 함.
-
-- Optimal Value Functions
-
-	+ 학습목표
-		* 상태가치함수 (state-value functions) 에 대한 Bellman 최적 방정식 유도
-		* 행동가치함수 (action-value functions) 에 대한 Bellman 최적 방정식 유도
-		* Bellman 최적 방정식이 이전에 소개된 Bellman 방정식과 어떻게 관련되는지 이해
-		
-	+ Optimal Value Functions
-		* $v_\*$ : $v_{\pi_\*} (s) \doteq E_{\pi_\*} [G_t\|S_t=s] = \underset{\pi}{\max} v_\pi (s)$ for all $s \in S$
-		* $v_\* (s) = \sum_a \pi_\* (a\|s) \sum_{s'} \sum_r p(s',r\|s,a)[r+\gamma v_*(s')]$
-		* $v_\* (s) = \underset{a}{\max} \sum_{s'} \sum_r p(s',r\|s,a)[r+\gamma v_*(s')]$
-			- 언제나 하나 이상의 결정론적인 최적 정책이 존재한다.
-			- 모든 상태에서 하나의 최적 행동을 선택한다.
-			- 즉, 가장 높은 리턴값을 가지는 하나의 행동의 확률이 1이고, 나머지 행동의 확률은 0이 된다.
-			- Bellman Optimality Equation for $v_\*$
-		* $q_\*$ : $q_{\pi_\*} (s,a) = \underset{\pi}{\max} q_\pi (s,a)$ for all $s \in S$ and $a \in A$
-		* $q_\* (s,a) = \sum_{s'} \sum_r p(s',r\|s,a) [r+ \gamma \sum_{a'} \pi_{\*} (a'\|s') q_\* (s',a')]$
-		* $q_\* (s,a) = \sum_{s'} \sum_r p(s',r\|s,a) [r+ \gamma \underset{a'}{\max} q_{\*} (s',a')]$
-			- Bellman Optimality Equation for $q_\*$
+	+ Linear equations 와 Dynamic Programming 비교
+		* Linear equations
+			- 가치함수 $v_\pi$ 를 찾기 위해, 각 상태별로 위의 하나의 방정식을 갖게 된다. 
+		* Dynamic Programming
+			- 통상 MDP 의 문제에서 DP 방식이 보다 더 적절한 방식이다.
 			
-		![bellman_optimality_equation_for_qastar_linear_system_solver](/assets/images/posts/bellman_optimality_equation_for_qastar_linear_system_solver.png)
-		* 위의 벨만 최적 방정식으로는 $v_{\*}$ 를 풀어낼 수가 없는데, $\max$ 함수가 선형이 아니기 때문이다.
-		* $\pi_{\*}$ 값을 이용해 같은 방식으로 $v_{\*}$ 를 구할 수도 없는데, $\pi_{\*}$ 값을 모를 뿐더러, $\pi_{\*}$ 를 구하는 것 자체가 목적이기 때문이다. 
+			![dynamic_programming_1](/assets/images/posts/dynamic_programming_1.png)
+			
+			- DP 에서는 다양한 형태의 벨만 방정식을 사용한다.
+			- 위의 경우 환경역학 $p$ 에 대한 지식을 기반으로 한다.
+			- 고전적인 DP 에서는 환경과의 상호작용을 포함하지 않는다. (대신 주어진 MDP 모델을 활용 / 함수 $p$ 에 접근할 수 있다는 가정.)
+			- 대부분의 강화학습 알고리즘은 모델이 없는 DP 의 근사화된 프로그래밍이라고 볼 수 있다. 
+			- (이러한 특징은 이후에 소개할 Temporal different space dynamic planning algorithm 에서 두드러진다.)
 
-- Using Optimal Value Functions to Get Optimal Policies
+- Iterative Policy Evaluation
 
 	+ 학습목표
-		* 최적가치함수 (Optimal value function) 과 최적정책 (Optimal Policy) 의 연관성 이해
-		* 주어진 MDP 에 대한 최적가치함수 (Optimal value function) 확인
+		* 주어진 정책에서 상태값 평가를 위한 반복 정책 평가 (iterative policy evaluation) 알고리즘의 개요
+		* 반복 정책 평가 (iterative policy evaluation) 를 적용하여 가치함수 계산
 
-	+ Optimal Policy 와 Optimal Value Function 의 관계
-		![optimal_policy_and_optimal_value_function_1](/assets/images/posts/optimal_policy_and_optimal_value_function_1.png)
-		* $p$ 와 $v_*$ 에 접근할 수 있다고 가정
-		* 한 단계 진행 시의 값을 구할 수 있을 경우, $A_2$ 가 최대의 값을 가짐을 알 수 있다.
-		* $\max$ 는 최대의 값을, $\arg\max$ 는 박스가 최대의 값을 가지게 하는 $a$ 값 자체를 나타낸다.
+	+ 벨만 방정식과 Iterative Policy Evaluation 간의 관계
+		* DP 알고리즘은 벨만 방정식을 업데이트 룰로 변경함으로써 얻을 수 있다.
+		* iterative policy evaluation 알고리즘 또한 이러한 알고리즘 중 하나이다.
 		
-		![optimal_policy_and_optimal_value_function_2](/assets/images/posts/optimal_policy_and_optimal_value_function_2.png)
-		* $p$ 와 $v_*$ 에 접근할 수 있을 때 계산법
+		![iterative_policy_evaluation_update_rule_1](/assets/images/posts/iterative_policy_evaluation_update_rule_1.png)
+
+		* 벨만 방정식 중 $v_\pi$ 에 대핸 재귀적 표현을 활용한다.
+		* 업데이트 룰에서는 참 가치함수가 아닌 예측 값을 활용한다.
+			- 이 방식은 점진적으로 보다 나은 대략적인 가치 함수를 제공하게 된다.
+			
+			![iterative_policy_evaluation_update_rule_2](/assets/images/posts/iterative_policy_evaluation_update_rule_2.png)
+
+			- 각각의 반복은 모든 상태 집합에 대해 업데이트를 적용하는데, 이를 스윕 (sweep) 이라고 한다.
+			- 만약 모든 상태에 대해, 가치 함수 근사값 $v_k$ 와 $v_{k+1}$ 의 값이 같을 경우 정책에 대한 참 가치 함수를 찾았다고 한다.
+			- ${v_0}$ 가 어떤 값이여도, $k$ 가 무한대에 수렴하면, $v_k$ 또한 $v_\pi$ 로 수렴하게 된다.
+			
+	+ 구현의 방식
+		* 2개의 배열 사용
+		
+			![iterative_policy_evaluation_two_array](/assets/images/posts/iterative_policy_evaluation_two_array.png)
+
+			- 모든 상태 세트에 대해 업데이트를 진행한다.
+			- Old value V 를 이용해 New value V' 를 갱신한다.
+			- Old value V 는 업데이트 중에 변동이 없다.
+			- 모든 상태를 순회, 업데이트 후에 V' 를 V 에 할당하고, V' 에 다시 업데이트를 진행한다.
+
+
+		* 1개의 배열 사용
+			
+			![iterative_policy_evaluation_one_array](/assets/images/posts/iterative_policy_evaluation_one_array.png)
+		
+			- V 배열만을 이용해 업데이트를 진행한다.
+			- 경우에 따라 특정 상태의 값을 참조할 때, Old value 가 아닌 New value 를 참조하기도 한다.
+			- 이러한 한 개의 배열 버전 또한 수렴을 보장하며, 사실 보통의 경우 최신 값을 사용하기에 더 빠르게 수렴한다.
+		
+		* 여기에서는 단순성을 위해 2개의 배열 버전에 집중한다.
+
+	+ Iterative Policy Evaluation 의 예시
+		* 4 x 4 의 grid world 를 가정
+		* 좌측 상단과 우측 하단에 Terminate State 가 있는 Episodic MDP 로 정의
+		* 모든 상태이동의 보상은 -1
+		* 할인 값은 없다고 가정 ($\gamma = 1$)
+		* 각 상태별로 4개의 방향으로 이동할 수 있음 (up, down, left, right). 각 행동은 결정론적임 (확률=100%)
+		* 그리도 밖으로의 이동은 에이전트가 해당 상태에 그대로 머물도록 함
+		* 정책은 uniform random policy (각 확률 25%).
+
+		![iterative_policy_evaluation_example_1](/assets/images/posts/iterative_policy_evaluation_example_1.png)
+
+		* 스윕은 좌에서 우로, 위에서 아래로 진행된다.
+		* 첫 스윕 결과는 위의 식에 의해 Terminal State 를 제외하고 모두 -1 이 된다.
+		* 첫 풀 스윕 이후 V' 을 V 로 카피하고, 위 과정을 반복한다.
+
+		![iterative_policy_evaluation_psuedo](/assets/images/posts/iterative_policy_evaluation_psuedo.png)
+
+		* 위는 iterative policy evaluation 의 전체 알고리즘이다.
+		* 각 상태의 이전과 이후의 차이 ($\delta$) 가 정의한 작은 숫자 ($\theta$) 보다 작을 경우 루프를 중지한다.
+		* $\theta$ 가 충분히 작을 경우, V 는 $v_\pi$ 에 가까운 값이라 할 수 있다.
+		
+		![iterative_policy_evaluation_example_2](/assets/images/posts/iterative_policy_evaluation_example_2.png)
+
+
+## Policy Iteration (Control)
 	
-		![optimal_policy_and_optimal_value_function_3](/assets/images/posts/optimal_policy_and_optimal_value_function_3.png)
-		* $p$ 는 확률적 요소여서 알기 힘들지만, 충분히 많이 접근하면 위의 수식에 따라 최적 정책을 구할 수 있게 된다.
-		* $q_*$ 를 알 경우 최적 정책을 구하기 훨씬 쉬워지는데, 다음 스텝의 계산을 할 필요가 없기 때문이다.
+- Policy Improvement
 
+	+ 학습목표
+		* 정책 개선 이론 (policy improvement theorem) 이해하기
+		* 주어진 MDP 에서 더 나은 정책의 생성을 위해 정책에 가치함수 적용하기
+		
+	+ Policy Improvement
+	
+		![policy_improvement_1](/assets/images/posts/policy_improvement_1.png)
+		
+		* 최적 가치함수 $v_*$ 에 대해 greedy action 을 취한 정책을 최적 정책 (Optimal Policy) 이라 한다.
+		* 임의의 정책 $\pi$ 를 따르는 가치 함수 $v_\pi$ 에 대해 greedy action 을 $v_\pi$ 에 대한 탐욕 정책이라 했을 때...
+		* 현재의 정책 $\pi$ 와 위의 정책이 차이가 없을 경우 $\pi$ 는 이미 $v_\pi$ 에 대한 탐욕 정책이며,
+		* 이 경우 $v_\pi$ 가 벨만 최적성 방정식을 따른다면, $\pi$ 는 최적 정책이다.
+		
+	+ Policy Improvement Theorem
+		* $\pi$ 가 최적정책이 아니라면, $\pi$ 보다 엄격한 개선이 이루어진 새로운 정책이 존재한다.
+		* $q_\pi (s, \pi'(s)) \geq q_\pi (s, \pi (s))$ for all $s \in S$  $\to \pi' \geq \pi$
 
-- Week 3 Summary
+		![policy_improvement_theorem_1](/assets/images/posts/policy_improvement_theorem_1.png)
+		
+		* uniform random policy 를 따르는 $v_\pi$ 가치함수에 대해, greedy policy $\pi'$ 이 Policy Improvement Theorem 에 의해 더 개선된 정책임.
+		* Policy Improvement Theorem 은 새로운 정책이 이전 정책보다 개선된 정책임 만을 보장한다.
+			- 개선된 정책이 최적 정책임은 보장하지 않음 (가치함수가 최적 가치함수가 아님)
 
-- Chapter Summary (RLbook2018 Pages 68-69)
-	+ Reinforcement learning : Learning from interaction how to behave in order to achieve a goal.
-		* interaction : 에이전트와 환경이 이산 스텝의 시퀀스에 따라 상호작용하는 것
-		* actions : 에이전트에 의해 이루어지는 선택
-		* states : 선택에 영향을 주는 요소
-		* rewards : 선택을 평가하는 요소
-		* 모든 agent 내의 요소들은 완전히 알고 있고, 에이전트에 의해 컨트롤된다.
-		* 모든 agent 밖의 요소는 불완전하게 제어되며, 완전히 알 고 있는 것일수도, 그렇지 않은 것일수도 있다.
-		* policy : 에이전트가 상태값을 인자로 한 함수를 통해 행동을 선택하는 확률적 규칙
-		* agent 의 목적 : 전체 시간 동안 받을 수 있는 보상을 최대화 하는 것 
-	+ Markov Decision Process (MDP)
-		* 위의 강화학습 설정이, 잘 정의된 전환 확률로 공식화되면 Markov Decision Process (MDP) 로 정의됨
-		* 유한 MDP : 유한한 상태, 행동 및 보상 세트가 있는 MDP
-		* 강화학습 이론의 대부분은 유한 MDP 로 제한하지만, 방법과 아이디어는 더 일반적으로 적용됨.
-	+ return : 미래의 보상에 대한 함수로 agent 가 최대화 하려는 기대값
-		* 작업의 특성과 지연된 보상의 할인 정도에 따라 다른 정의를 가질 수 있음
-		* 할인이 적용되지 않은 return 식은 episodic tasks 에 맞는 방식
-			- episodic tasks : 상호작용이 에피소드에 따라 자연스럽게 중지되는 형태
-		* 할인이 적용된 return 식은 continuing tasks 에 맞는 방식
-			- continuing tasks : 상호작용이 자연스럽게 중단되지 않고 제한 없이 계속 이어지는 형태
-	+ value functions and optimal value functions
-		* 정책의 가치함수는 에이전트가 해당 정책을 사용하는 경우, 각 상태 혹은 상태-행동 쌍과 그에 예상되는 수익을 할당함
-		* 최적 정책의 가치함수는 각 상태 혹은 상태-행동 쌍에 모든 정책 중 달성할 수 있는 최대의 기대 수익을 할당함 
-		* 최적 가치함수를 사용하는 정책을 최적 정책이라 한다.
-			- 최적 정책은 하나이거나 하나 이상일 수 있다. (예: 50 : 50 의 확률론적 최적 정책)
-			- 최적 가치 함수와 관련하여 탐욕적인 모든 정책은 최적 정책임.
-	+ Bellman optimality equations
-		* 최적 가치 함수을 만족하는 특별한 일관성 조건
-		* 이론적으로 최적 가치 함수를 풀 수 있는 방정식
-		* 최적 정책을 상대적으로 쉽게 결정할 수 있음
-	+ 강화학습은 주어진 조건에 따라 다양한 방식으로 제기될 수 있음
-		* 에이전트의 지식
-			- 환경의 역학 (역학 함수 $p$ 의 4개의 인자) 을 아는 경우와 모르는 경우
-		* 계산 퍼포먼스 및 메모리 이슈
-			- 테이블 방식의 접근을 할지, 근사함수를 사용할 지에 대한 사항
-	+ 강화학습 문제는 최적 솔루션을 찾는 것 보다, 어떻게 근사해야 할지에 더 집중하는 것이 바람직하다.
+- Policy Iteration
+
+	+ 학습목표
+		* 최적 정책을 찾기 위한 정책 반복 알고리즘 (policy iteration algorithm) 을 정의하기
+		* "the dance of policy and value" (평가와 개선을 반복하여 최적 정책을 찾는 것) 이해하기
+		* 정책 반복 (policy iteration) 을 적용하여 최적 정책과 최적 가치 함수 계산하기
+		
+	+ Policy Iteration
+	
+		![policy_iteration_1](/assets/images/posts/policy_iteration_1.png)
+
+		* 더 이상 가치 함수를 통한 정책이 변경되지 않으면 그것이 최적 정책이다.
+		* 결정론적 정책을 사용하기에, 필연적으로 최적 정책에 도달한다.
+		
+		![policy_iteration_2](/assets/images/posts/policy_iteration_2.png)
+		
+		* $\pi_1$ 에 대한 가치함수 $v_{\pi_1}$ 을 구하면, $\pi_1$ 은 더이상 greedy policy 가 아니게 되고...
+		* greedy policy $\pi_2$ 를 구하면 더 이상 가치함수 $v_{\pi_1}$ 이 정확한 가치함수가 아니게 된다.
+		* 위의 과정을 반복하면 필연적으로 변하지 않는 정책 $\pi_\*$ 와 정확한 가치함수 $v_\*$ 를 구하게 된다.
+		
+		![policy_iteration_psuedo_code](/assets/images/posts/policy_iteration_psuedo_code.png)
+
+		* 4x4 gridworld 예제의 정의
+		
+		![policy_iteration_example_4by4_gridworld_1](/assets/images/posts/policy_iteration_example_4by4_gridworld_1.png)
+		
+		* $\pi_0$
+		
+		![policy_iteration_example_4by4_gridworld_2](/assets/images/posts/policy_iteration_example_4by4_gridworld_2.png)
+
+		* $v_{\pi_0}$
+		
+		![policy_iteration_example_4by4_gridworld_3](/assets/images/posts/policy_iteration_example_4by4_gridworld_3.png)
+		
+		* $\pi_1$
+		
+		![policy_iteration_example_4by4_gridworld_4](/assets/images/posts/policy_iteration_example_4by4_gridworld_4.png)
+		
+		* $v_{\pi_1}$
+		
+		![policy_iteration_example_4by4_gridworld_5](/assets/images/posts/policy_iteration_example_4by4_gridworld_5.png)
+
+		* $\pi_2$
+		
+		![policy_iteration_example_4by4_gridworld_6](/assets/images/posts/policy_iteration_example_4by4_gridworld_6.png)
+
+		* $v_{\pi_2}$
+		
+		![policy_iteration_example_4by4_gridworld_7](/assets/images/posts/policy_iteration_example_4by4_gridworld_7.png)
+		
+		* $\pi_3$
+		
+		![policy_iteration_example_4by4_gridworld_8](/assets/images/posts/policy_iteration_example_4by4_gridworld_8.png)
+		
+		* $\pi_*$
+		
+		![policy_iteration_example_4by4_gridworld_9](/assets/images/posts/policy_iteration_example_4by4_gridworld_9.png)
+		
+		* The Power of Policy Iteration
+		
+		![policy_iteration_power_of_p_i](/assets/images/posts/policy_iteration_power_of_p_i.png)
+
+		* 최적 정책에 도달하기 전까지, 계속적으로 정책이 개선됨을 볼 수 있다.
+		* 최적 정책이 선형적이지 않을 때도 정책에 도달할 수 있다.
+
+## Generalized Policy Iteration
+	
+- Flexibility of the Policy Iteration Framework
+
+	+ 학습목표
+		* 일반화된 정책 반복 프레임워크 (framework of generalized policy iteration) 이해하기
+		* 가치 반복 (value iteration) 과 일반화된 정책 반복 (generalized policy iteration) 의 주요 예시
+		* 동기 (synchronous) / 비동기 (asynchronous) 동적 프로그래밍 방법 간 차이점을 이해하기
+
+	+ 유연한 Policy Iteration
+		
+		![flexible_policy_iteration_1](/assets/images/posts/flexible_policy_iteration_1.png)
+		
+		* 현 정책에 가까운 가치 함수 예측치를 사용
+		* 좀 더 탐욕적인 정책을 사용하나, 완전히 탐욕적인 정책은 아닌 정책을 사용
+		* 이러한 진행 또한 최적 정책과 최적 가치함수를 향해 나아간다.
+		* 이러한 Policy Iteration 을 Generalized Policy Iteration 이라고 함.
+	
+	+ Value Iteration
+		* Generalized Policy Iteration 중 하나
+		* 모든 상태를 sweep 하고, 현 가치 함수에 대해 탐욕 정책을 사용하는 것은 같음.
+		* 그러나, 완전한 정책 평가를 하는 것은 아님
+			- 모든 상태에 대해 단 한번의 스윕만을 진행
+			- 스윕 진행 후 다시 탐욕 정책을 사용함.
+		
+		![value_iteration_psuedo_code](/assets/images/posts/value_iteration_psuedo_code.png)
+		
+		* 이러한 업데이트 룰을 상태 가치함수에 바로 적용한다.
+			- $V(s) \gets \max_a \sum_{s',r} p(s',r\|s,a) \[r + \gamma V(s') \]$
+			- 업데이트가 어떠한 특정 정책을 참조하지 않기 때문에, 이 방식을 value iteration 이라 한다.
+		* 이 방식은 iterative policy evaluation 과 매우 유사한데, 고정된 정책을 이용해 업데이트 하는 것이 아닌, 현재의 추정 값을 이용해 최대화 하는 것이 특징이다.
+		* value iteration 또한 극한 값에서 $v_*$ 에 수렴한다.
+		* 우리는 극한으로 진행될 때까지 기다릴 수 없으므로, 종료 조건을 둔다.
+		* 최종적으로 구해진 최적 가치 함수에 대해 $\arg\max$ 를 취함으로서 최적 정책을 얻게 된다.
+	
+	+ Avoiding full sweeps
+		* Synchronous DP
+			- value iteration 또한 policy evaluation iteration 과 마찬가지로 모든 상태를 (순차적으로) 스윕한다.
+			- 시스템 적으로 스윕을 하는 방식을 synchronus (동기 방식) 라 한다.
+			- 만약 상태공간이 크다면, 이러한 방식은 문제가 된다.
+				+ 모든 스윕 단계에 매우 긴 시간을 소모함
+		* Asynchronous DP
+			- 상태의 값을 특정 순서 없이 업데이트 한다. (시스템 적인 스윕이 아님).
+			- 다른 상태값이 한번 업데이트 되는 동안 특정 상태값을 여러 번 업데이트 할 수 있음.
+			- 수렴을 보장하기 위해서는, 계속하여 모든 상태의 값을 업데이트 해야함.
+				+ 예를 들어 다른 상태를 무시하고 3개의 상태값만 계속 업데이트 한다면, 다른 상태의 값이 옳을 리가 없기 때문에 수렴할 수가 없음.
+			- 이러한 선택적 업데이트 덕분에, 값 정보를 빠르게 전파할 수 있음.
+				+ 어떠한 경우에서는 시스템적인 스윕보다 더 효율적일 수 있음.
+					* 예를 들어 최근 값이 변한 상태의 주변 값들을 집중적으로 업데이트.
+
+- Efficiency of Dynamic Programming
+
+	+ 학습목표
+		* 최적 정책을 찾기 위한 대안으로서의 무작위 탐색 방법 (brute force search) 설명
+		* 가치 함수 학습을 위한 대안으로서의 몬테카를로 (Monte Carlo) 방식 설명
+		* 최적 정책 탐색에 있어서 동적 프로그래밍 (Dynamic programming) 과 부트스트래핑 (bootstrapping) 방식이 대안 전략과 비교하여 가지는 이점을 이해하기
+		
+	+ A Sampling Alternative for Policy Evaluation (Monte Carlo)
+		* Dynamic Programming 의 policy evaluation iteration 의 대안
+		* Monte Carlo 방식
+
+			![policy_evaluation_monte_carlo_1](/assets/images/posts/policy_evaluation_monte_carlo_1.png)
+			
+			- 정책 $\pi$ 에 대한 많은 리턴값을 수집하여 평균 값을 구하는 방식
+			- 결국 값에 수렴하게 됨
+			
+			![policy_evaluation_monte_carlo_2](/assets/images/posts/policy_evaluation_monte_carlo_2.png)
+	
+			- 수렴을 위해서는 각 상태에 대한 많은 리턴 수집값이 필요
+				+ 이 값들은 $\pi$ 에 의해 선택된 random action, 환경 역학에 의한 random state transition 등 많은 random 성을 띄게 됨.
+			- 이러한 과정을 모든 상태에 대해 별개로 진행해야 함.
+		
+		* Dynamic Programming 의 이점 
+		
+			![policy_evaluation_dp_bootstrapping_1](/assets/images/posts/policy_evaluation_monte_carlo_2.png)
+
+			- Dynamic Programming 의 핵심은 각 상태의 평가를 별개의 문제로 취급할 필요가 없다는 점이다.
+				+ 이미 계산해 놓은 다른 상태의 값을 이용할 수 있음.
+			- 이렇게 이후 상태의 추측값을 사용해 현재의 추측값을 개선하는 것을 부트스르래핑 (bootstrapping) 이라 한다.
+				+ 이 방식이 각각의 상태를 별개로 계산하는 몬테카를로 방식보다 훨씬 효율적임.
+				
+	+ Brute-Force Search
+		* Dynamic Programming 의 policy iteration 의 대안
+		* Brute-Force Search 방식
+		
+			![policy_improvement_brute_force_search_1](/assets/images/posts/policy_improvement_brute_force_search_1.png)
+
+			- 이 방식은 단순히 모든 결정론적인 정책을 하나하나 평가하여 가장 높은 값의 정책을 선택하는 것임.
+			- 정책의 수는 유한하고, 언제나 최적 결정론적 정책은 존재함으로 최적 정책을 찾을 수 있음.
+			- 그러나 결정론적인 정책의 수가 너무 많을 수도 있음.
+				+ 각각의 상태에 대해 하나의 행동을 선택해야 함.
+					* $\| \mathscr{A} \| * \| \mathscr{A} \| * \cdots \* \| \mathscr{A} \|$
+				+ 즉, 결정론적 정책의 수는 지수적이다.
+					* ${\| \mathscr{A} \|}^{\| \mathscr{S} \|}$
+			- 따라서 이 프로세스는 시간이 매우 오래 걸린다.
+			
+		* Policy Improvement Theorem 의 이점
+			- 점점 더 나은 정책을 찾게 된다.
+			- 이 점은 모든 정책에 대한 검색보다 훨씬 효율적이다.
+			
+	+ Efficiency of Dynamic Programming
+		* Policy Iteration : $\| \mathscr{S} \|$ 와 $\| \mathscr{A}\|$ 에 대한 다항식 곱의 복잡도
+		* Brute-Force Search : ${\| \mathscr{A} \|}^{\| \mathscr{S} \|}$ 개의 정책
+		* Dynamic Programming 은 Brute-Force Search 에 비해 지수적으로 빠름
+			- 예를 들어 4x4 Grid World 의 경우 DP 는 위의 예시에서 약 5번의 스윕을 통해 최적 정책을 찾아냈으나, Brute-Force Search 의 경우 $4^{16}$ 개의 정책을 확인해야 함.
+			
+	+ The Curse of Dimensionality (차원의 저주)
+		* 관계된 요소의 수가 늘어날 수록 상태 공간의 크기가 지수적으로 늘어남
+		* MDP 문제는 상태의 크기가 커질 수록 풀기 어려워짐
+		* 하나의 에이전트가 Grid World 를 탐험하는 것은 괜찮지만, 대중교통을 설계하기 위해 몇천 명의 운전자가 수백 개의 지역을 돌아다니는 상태를 가정하면 어떻게 될까?
+		* 사실 이는 Dynamic Programming 의 문제가 아닌 문제 자체의 내제된 복잡성이다.
+
+- Warren Powell: Approximate Dynamic Programming for Fleet Management(Short)
+- Warren Powell: Approximate Dynamic Programming for Fleet Management(Long)
+
+- Week 4 Summary
+
+	+ Policy evaluation : 특정한 정책 $\pi$ 로부터 상태가치함수 $v_\pi$ 를 구하는 것
+		* Iterative Policy Evaluation
+			- $v_\pi (s) = \sum_a \pi (a\|s) \sum_{s'} \sum_r p(s',r \| s,a) \[ r+\gamma v_\pi (s') \]$
+			- $v_{k+1} (s) \gets \sum_a \pi (a\|s) \sum_{s'} \sum_r p(s',r \| s,a) \[ r+\gamma v_k (s') \]$
+			- $v_\pi$ 에 대한 벨만 방정식을 업데이트 룰로 바꾼 것
+			- 반복 과정을 거치며 점점 더 근사하는 가치함수를 찾을 수 있음
+	+ Control : 정책을 발전시키는 과정
+		* Policy improvement theorem
+			- $\pi' (s) \doteq \arg\max_a \sum_{s'} \sum_r p(s',r \| s,a) \[ r+\gamma v_\pi (s') \]$
+			- 새로운 정책 $\pi'$ 는 현 가치함수에서 단순히 탐욕화한 정책이다.
+			- $\pi'$ 은 $\pi$ 보다 엄격히 개선된 정책임을 보장한다. ($\pi$ 가 최적정책이 아닐 경우)
+		* Policy Iteration
+			- $E \to I \to \cdots \to E \to I \to v_* , \pi_*$
+		* Generalized Policy Iteration
+			- Policy Iteration 과 달리 Evaluation 과 Improvement step 을 끝까지 진행하지 않고 반복하는 것
+				+ value iteration : Generalized Policy Iteration 의 한 종류로, 모든 상태를 단 한번 스윕하고 정책을 개선시키는 것
+			- asynchronous DP
+				+ 모든 상태를 시스템적으로 스윕하는 것이 아닌, 불규칙적인 방식으로 상태를 업데이트 하는 것
+				+ 모든 상태를 지속적으로 업데이트한다는 가정 하에 최적 정책으로 수렴하게 됨
+				+ 특정 상황에서 더 빠르게 수렴할 수 있으며, 상태 공간이 큰 문제에 효율적임
+
+- Chapter Summary (RLbook2018 Pages 88-89)
+
+## Weekly Assessment
+
+## Course Wrap-up
+
+- Bandits
+
+	![wrap_up_1_bandits_1](/assets/images/posts/wrap_up_1_bandits_1.png)
+
+	+ 각 레버의 보상의 분포를 모르기 때문에, 각각의 arm 을 많이 시도하여 평균을 구해야 했었음.
+	+ Exploration - Exploitation Trade-Off
+		* 지금 당장의 최선의 arm 을 당길 것인지, 다른 arm 을 탐험할 것인지?
+	+ Bandit 문제는 늘 같은 state 에서 action 을 선택하는 문제였음.
+		* 불변하는 하나의 최상의 action 이 존재
+		* 보상은 지연되지 않고 즉시 지급되었음
+
+- MDP
+	
+	![wrap_up_2_mdp_1](/assets/images/posts/wrap_up_2_mdp_1.png)
+
+	+ Bandits 보다 복잡한 현실 문제를 더 잘 반영한 모델
+	+ 환경은 action 을 선택하였을 때 즉각적인 보상 뿐만 아니라 다음의 상태도 제공해 줌
+		* 이 상태는 미래의 보상에 잠재적인 영향을 준다.
+	+ 보상은 미래에 받을 잠재적 보상값의 할인된 합계이다.
+	
+- Basic Concepts of Reinforcement learning
+	+ 정책 (policy) : 에이전트가 각 상태 (state) 에서 어떤 action 을 취할 것인지를 말함
+	+ 가치함수 (value function)
+		* $v_\pi (s) \doteq E_{\pi} \[ G_t \| S_t = s \]$
+		* 특정 정책 하에 각 상태에 대해 미래의 예상되는 리턴 값을 측정해줌
+		* 혹은 특정 정책 하에  상태-행동 쌍에 대한 미래의 예상되는 리턴 값을 측정해줌
+	+ 벨만 방정식
+		* 각 상태 혹은 상태-행동 쌍의 값을 가능한 다음 값과 연결 시켜주는 방정식 (부트스트래핑)
+		
+- Dynamic Programming
+	
+	![wrap_up_3_dp_1](/assets/images/posts/wrap_up_3_dp_1.png)
+
+	+ prediction (Policy Evaluation)
+	+ control (Policy Improvement)
+	+ Dynamic Programming 의 경우 환경 역학 (Environment dynamics) 에 접근할 수 있어야 한다.
+	+ 강화학습 문제, 혹은 현실의 문제에서는 이 환경역학에 접근할 수 없다. (시도해 보기 전엔 어떤 영향을 줄 지 알 수 없음.)
+	+ Dynamic Programming 은 강화학습 알고리즘의 핵심 기초가 된다.
