@@ -1,0 +1,726 @@
+I"��<h2 id="관련-자료-rlbook-pages-119-128">관련 자료 (RLbook Pages 119-128)</h2>
+
+<ul>
+  <li>개요
+    <ul>
+      <li>강화 학습의 중심적이고 참신한 아이디어로 하나를 선택해야 한다면 temporal-difference (TD) learning (시간차학습) 이 될 것이다.</li>
+      <li>TD 학습은 몬테카를로 방식과 동적프로그래밍(DP) 방식의 조합이다.
+        <ul>
+          <li>TD 학습은 몬테카를로 방식과 마찬가지로 역학 없이 원시 경험에서 직접 학습할 수 있다.</li>
+          <li>TD 학습은 DP 방식과 마찬가지로 최종 결과를 기다리지 않고 다른 학습된 추정치를 기반으로 추정치를 업데이트한다. (부트스트랩)</li>
+        </ul>
+      </li>
+      <li>TD, DP 및 몬테카를로 방법 간의 관계는 강화학습에서 되풀이 되는 주제이다.
+        <ul>
+          <li>TD 에서 몬테카를로 방법으로 연결되는 n-step 알고리즘을 소개</li>
+          <li>TD 와 몬테카를로를 완벽하게 통합하는 TD($\lambda$) 알고리즘을 소개</li>
+        </ul>
+      </li>
+      <li>제어 문제 (최적 정책 찾기) 의 경우 DP, TD, 몬테카를로 방법 모두 일반화된 정책 반복(GPI) 의 일부 변형을 사용함.</li>
+      <li>정책평가와 예측문제, 주어진 정책 $\pi$ 에 대한 가치함수 $v_\pi$ 를 추정하는 문제에 초점을 맞춤</li>
+    </ul>
+  </li>
+  <li>TD Prediction
+    <ul>
+      <li>몬테카를로 방식과 TD 방식
+        <ul>
+          <li>공통점
+            <ul>
+              <li>몬테카를로와 TD 방법 모두 경험을 사용하여 예측 문제를 해결함.</li>
+              <li>정책 $\pi$ 에 따른 일부 경험을 통해 해당 경험에서 발생하는 비종료 상태 $S_t$ 에 대한 $v_\pi$ 의 추정치 $V$ 를 업데이트한다.</li>
+            </ul>
+          </li>
+          <li>몬테카를로 방식
+            <ul>
+              <li>몬테카를로 방식은 방문에 대한 리턴값을 알 때까지 기다린 다음, 해당 값을 $V(S_t)$ 의 목표값으로 사용한다.</li>
+              <li>
+                <p>비정상성 환경에서 가장 적합한 단순한 every-visit 몬테카를로 방식은 아래와 같다.</p>
+
+                <p><img src="/assets/images/posts/6_1_1_mc_every_visit_nonstationary.png" alt="6_1_1_mc_every_visit_nonstationary" /></p>
+
+                <ul>
+                  <li>$G_t$ : $t$ 시점의 실제 리턴값</li>
+                  <li>$\alpha$ : 상수값의 step-size 파라미터</li>
+                </ul>
+              </li>
+              <li>위의 방식을 constant-$\alpha$ MC 라 한다.</li>
+              <li>몬테카를로 방식은 에피소드가 끝나고 $V(S_t)$ 의 증분값이 결정될 때까지 기다려야만 한다. (그래야만 $G_t$ 를 알 수 있음)</li>
+            </ul>
+          </li>
+          <li>TD 방식
+            <ul>
+              <li>TD 방식은 다음 time step 까지만 기다리면 된다.</li>
+              <li>
+                <p>$t+1$ 시점에 즉시 목표를 생성하고, 관측된 보상 $R_{t+1}$ 과 추정치 $V(S_{t+1})$ 을 이용하여 유효한 업데이트를 진행한다.</p>
+
+                <p><img src="/assets/images/posts/6_1_2_td_update_for_estimate_V.png" alt="6_1_2_td_update_for_estimate_V" /></p>
+
+                <ul>
+                  <li>가장 단순한 TD 방식은 $S_{t+1}$ 로 전환되고 $R_{t+1}$ 을 받자마자 업데이트 된다.</li>
+                  <li>몬테카를로 업데이트에서 목표값은 $G_t$ 였으나, TD 업데이트에서는 $R_{t+1} + \gamma V(S_{t+1}$ 이다.</li>
+                  <li>위 방식을 TD(0) 혹은 one-step TD 라 부른다.</li>
+                  <li>이는 TD($\lambda$) 의 특이 케이스이며 n-step TD 는 추후에 다룬다.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>TD(0)
+        <ul>
+          <li>
+            <p>TD(0) 에 대해</p>
+
+            <p><img src="/assets/images/posts/6_1_3_td_0_psuedo_code.png" alt="6_1_3_td_0_psuedo_code" /></p>
+
+            <ul>
+              <li>TD(0) 는 기 존재하는 추정값의 일부로 업데이트를 하기 때문에 DP처럼 부트스트래핑 한다고 볼 수 있다.</li>
+            </ul>
+
+            <p><img src="/assets/images/posts/6_1_4_td_bootstrapping.png" alt="6_1_4_td_bootstrapping" /></p>
+
+            <ul>
+              <li>단순히 말해서, 몬테카를로 방식은 (6.3) 의 추정치를 목표로 사용하는 것이고, DP 의 경우 (6.4) 를 추정치의 목표로 삼는 것이다.</li>
+              <li>몬테카를로 목표는 (6.3) 의 예상 값을 알 수 없기 때문에 추정치이다. (실제 예상 리턴값 대신 샘플 리턴값이 사용됨)</li>
+              <li>DP 목표는 환경 모델에서 완전히 제공된다고 가정한 기대값 때문이 아니라 $v_\pi(S_{t+1})$ 을 알 수 없고, 현재 추정값 $V(S_{t+1})$ 이 사용되기에 추정치이다.</li>
+              <li>TD 목표는 두 가지 이유로 추정치이다.
+                <ul>
+                  <li>(6.4) 에서 예상 값을 샘플링함.</li>
+                  <li>실제 $v_\pi$ 대신 현재 추정치 $V$ 를 사용함.</li>
+                </ul>
+              </li>
+              <li>따라서 TD 방법은 몬테카를로의 샘플링과 DP 의 부트스트래핑을 결합한 방식이다.</li>
+            </ul>
+          </li>
+          <li>
+            <p>TD(0) 의 백업 다이어그램</p>
+
+            <p><img src="/assets/images/posts/6_1_5_td_0_backup_diagram.png" alt="6_1_5_td_0_backup_diagram" /></p>
+
+            <ul>
+              <li>위 그림은 tabular TD(0) 의 백업 다이어그램이다.</li>
+              <li>백업 다이어그램 상단에 있는 상태 노드에 대한 값 추정치는 바로 다음 상태로의 하나의 샘플 전환을 기반으로 업데이트 된다.
+                <ul>
+                  <li>우리는 TD 및 몬테카를로 업데이트를 샘플 업데이트라 한다.</li>
+                  <li>백업된 값을 계산하는 과정에서 후속 값과 보상을 사용 (샘플의 후속 상태 (또는 상태-행동 쌍) 을 봄) 하여 원래 상태의 값을 업데이트함.</li>
+                  <li>샘플 업데이트는 가능한 모든 후속 작업의 전체 배포가 아닌 단일 샘플 후속 작업을 기반으로 한다는 점에서 DP의 예상값 업데이트와 다르다.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p>TD error</p>
+            <ul>
+              <li>위 TD(0) 업데이트 pusedo code 의 대괄호 내의 값은 에러의 한 종류 ($S_t$ 의 추정치와 더 나은 추정값 $R_{t+1} + \gamma V(S_{t+1})$ 간의 차이) 이다.</li>
+              <li>이 값을 TD error 라 부르며, 강화 학습 전반에 걸쳐 다양한 형태로 나타난다.</li>
+            </ul>
+
+            <p><img src="/assets/images/posts/6_1_6_td_error.png" alt="6_1_6_td_error" /></p>
+
+            <ul>
+              <li>각 시간의 TD error 는 해당 시간에 만들어진 추정치의 오류이다.</li>
+              <li>TD error 는 다음 상태와 보상에 영향을 받으므로 다음 스텝의 진행 이전까지 접근할 수 없다.</li>
+              <li>즉 , $\delta_t$ 는 시간 $t+1$ 에 사용할 수 있는 $V(S_t)$ 의 오류이다.</li>
+              <li>또한 배열 $V$ 가 에피소드 내 변경이 없을 경우 (몬테카를로 방법에서는 변경되지 않음) Monte Carlo error 는 TD errors 의 합으로 기록될 수 있다.</li>
+            </ul>
+
+            <p><img src="/assets/images/posts/6_1_7_monte_carlo_td_error.png" alt="6_1_7_monte_carlo_td_error" /></p>
+
+            <ul>
+              <li>위 항등식은 에피소드 중 $V$ 가 업데이트 되는 경우 (TD(0) 와 같이) 정확하지 않지만, step-size 가 작으면 여전히 대략적으로 유지될 수 있다.</li>
+              <li>이 항등식의 일반화는 시간차 학습의 이론과 알고리즘에서 중요한 역할을 한다.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>예제 6.1 : Driving Home
+        <ul>
+          <li>문제의 설정
+            <ul>
+              <li>매일 직장에서 집으로 운전하여 퇴근하는데 걸리는 시간을 예측하고자 함.</li>
+              <li>사무실을 떠날 때 시간, 요일, 날짜 및 관련이 있을 수 있는 모든 것을 메모함</li>
+              <li>금요일에 정확히 6시에 출발한다고 가정하고 집에 도착하는 데 30분이 소요될 것으로 예상함.</li>
+              <li>차에 도착했을 때 시간은 6시 5분이고 비가 내리기 시작하는 것을 알게 됨.</li>
+              <li>비가 오면 교통 체증으로 인해 느려지는 경우가 많으므로 그 때부터 35분, 즉 총 40분이 소요될 것으로 재추산함.</li>
+              <li>15분 후 고속도로 구간을 순조롭게 완주하였고, 2차 도로로 나가면 예상 총 이동시간이 35분으로 단축됨.</li>
+              <li>불행하게도 이 시점, 느린 트럭 뒤에 갇히고 도로가 너무 좁아 추월할 수 없어 6시 40분까지 트럭을 따라감.</li>
+              <li>3분 후 집에 도착함.</li>
+              <li>상태, 시간 및 예측의 순서는 아래와 같음.</li>
+            </ul>
+
+            <p><img src="/assets/images/posts/6_1_8_example_6_1_1.png" alt="6_1_8_example_6_1_1" /></p>
+
+            <ul>
+              <li>보상은 여정의 각 구간에서 경과된 시간임.</li>
+              <li>할인을 적용하지 않음($\gamma = 1$). 따라서 각 상태에 대한 수익은 해당 상태에서 이동하는 실제 시간임.</li>
+              <li>각 상태의 값은 이동 예상 시간임.</li>
+              <li>위 표의 두번째 열은 각 상태에 대한 현재 예상 값을 제공함.</li>
+            </ul>
+          </li>
+          <li>
+            <p>문제의 해석</p>
+
+            <p><img src="/assets/images/posts/6_1_9_figure_6_1.png" alt="6_1_9_figure_6_1" /></p>
+
+            <ul>
+              <li>몬테카를로 방법의 동작을 보는 간단한 방법은 시퀀스에 대한 예측 총 시간 (마지막 열) 을 플로팅 하는 것이다. (위 그림 참조)
+                <ul>
+                  <li>빨간 화살표는 $\alpha = 1$ 인 경우의 constant-$\alpha$ MC 방식 (6.1) 에서 권장하는 예측의 변화를 보여준다.</li>
+                  <li>이것은 정확히 각 상태의 예상 값 (예상되는 이동시간) 과 실제 리턴값 (실제 이동 시간) 사이의 오차이다.
+                    <ul>
+                      <li>예를 들어 고속도로를 빠져나올 때 집 까지 15분 더 걸릴 줄 알았는데 실제로는 23분이 걸림.</li>
+                      <li>방정식 6.1 이 이 시점에 적용되며 고속도로를 빠져나간 후 이동하는 예상 시간의 증분을 결정함.</li>
+                      <li>이 때 error $G_t - V(S_t)$ 는 8분이다.</li>
+                      <li>step size 매개변수 $\alpha$ 가 $\frac{1}{2}$ 라 가정하면, 이 경험의 결과로 고속도로를 빠져나온 후 예상 소요시간이 4분 상향조정됨.
+                        <ul>
+                          <li>이 경우 너무 큰 변화일 수 있음.</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>어떤 경우든 변경은 오프라인에서만, 집에 도착한 후에만 가능함. 이 시점에서만 실제 수익을 알 수 있음.</li>
+                </ul>
+              </li>
+              <li>학습을 시작하기 전에 최종 결과가 알려질 때까지 기다려야 하는가?
+                <ul>
+                  <li>또 다른 날 사무실에서 집까지 차로 30분 걸릴 것이라 예상했지만, 엄청난 교틍 체증에 갇히게 되었다고 가정해보자.
+                    <ul>
+                      <li>사무실을 나온 지 25분이 지나도 여전히 고속도로 위에 있다.</li>
+                      <li>여기에서부터 25분이 더 소요될 것으로 예상한다. (총 50분)</li>
+                      <li>교통체증 속에서 이미 초기 예상시간인 30분은 너무 낙관적이었다는 것을 알고 있음.</li>
+                      <li>그럼에도 초기상태에 대한 추정치를 늘리기 전에 집에 도착할 때까지 기다려야 하는가?</li>
+                      <li>몬테카를로 접근 방식에 따르면 진정한 리턴값을 모르기 때문에 반드시 기다려야 한다.</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>TD 접근방식의 경우
+                <ul>
+                  <li>TD 접근 방식에 따르면 즉시 학습하여 초기 추정치를 30분에서 50분으로 이동함.</li>
+                  <li>실제로 각 추정치는 바로 뒤의 후속 추정치로 이동함.</li>
+                  <li>첫 날로 돌아가서 그림 (6.1) 은 TD 규칙 (6.2) 에서 권장하는 예측의 변경 사항을 보여줌. (이는 $\alpha = 1$ 인 경우 규칙에 의해 변경됨.)</li>
+                  <li>각 오류는 예측의 시간 경과에 따른 변화 (즉, 예측의 시간적 차이) 에 비례함.</li>
+                  <li>실제 반환을 알고 종료될 때까지 기다리는 것보다 현재 예측을 기반으로 학습하는 것이 유리한 몇 가지 계산상의 이유가 있음 (다음 섹션에서 학습)</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Advantages of TD Prediction Methods</p>
+
+    <ul>
+      <li>TD 방식은 좋은 방식일까?
+        <ul>
+          <li>TD 방식은 타 추정치를 기반으로 추정치를 업데이트한다.
+            <ul>
+              <li>추측으로부터 추측을 배움 (부트스트랩) : 이것은 좋은 방식일까?</li>
+            </ul>
+          </li>
+          <li>TD 방식은 몬테카를로, DP 방식에 비해 어떤 이점이 있는 것일까?</li>
+        </ul>
+      </li>
+      <li>TD 와 몬테카를로, DP 간 비교
+        <ul>
+          <li>TD 방식은 환경 모델, 다음 상태 확률 분포가 필요하지 않다는 점에서 DP 보다 이점이 있음.</li>
+          <li>몬테카를로 방식과 비교하여 TD 방식은 온라인에서 완전 증분 방식우로 자연스럽게 구현될 수 있음.
+            <ul>
+              <li>몬테카를로 방식은 에피소드가 끝날 때까지 기다려야 함 (반환값을 알기 위해)</li>
+              <li>TD 방식은 한 단계만 더 기다려도 된다.
+                <ul>
+                  <li>일부 응용프로그램에서의 에피소드는 너무 길어, 끝날 때까지 학습을 지연시키는 것은 비효율적임.</li>
+                  <li>또한 다른 응용프로그램에서는 에피소드 형태가 아닌 연속적 형태일 수 있음.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>특정 몬테카를로 방식은 실험적인 행동이 이루어진 에피소드를 무시하거나 할인해야 하는데, 이것이 학습 속도에 큰 영향을 줄 수 있다.
+            <ul>
+              <li>TD 방식은 후속 조치에 관계없이 각 전환에서 학습하기 때문에 이러한 문제에 훨씬 덜 취약하다.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>TD 의 수렴 보장
+        <ul>
+          <li>확실히 실제 결과를 기다리지 않고 다음 추측에서 추측값을 배우는 것은 여전히 정답에 대한 수렴을 보장한다.
+            <ul>
+              <li>모든 고정된 정책 $\pi$ 에 대해 TD(0) 는 $v_\pi$ 로 수렴하는 것이 입증되었음.</li>
+              <li>이는 step-size 파라미터가 충분히 작은 경우에서, 확률적 근사조건(2.7) 을 통해 파라미터 값이 감소할 경우 1의 확률로 수렴하게 된다.</li>
+            </ul>
+          </li>
+          <li>대부분의 수렴 증명은 위에 제시된 알고리즘 (6.2) 이 적용된 테이블 기반의 경우에만 적용되지만 일부는 일반 선형 함수 근사의 경우에도 적용됨. (9장에서 다룸)</li>
+        </ul>
+      </li>
+      <li>TD 의 수렴 속도
+        <ul>
+          <li>현재로서는 한 방법이 다른 방법보다 더 빨리 수렴된다는 것을 수학적으로 증명할 수 없음.</li>
+          <li>이 질문을 표현하는 가장 적절한 공식적인 방법이 무엇인지조차 명확하지 않음.</li>
+          <li>그러나 실제로 TD 방식은 일반적으로 예제 6.2 에 설명된 것처럼 확률론적 작업에서 constant-$\alpha$ MC 방법보다 빠르게 수렴하는 것으로 나타남.</li>
+        </ul>
+      </li>
+      <li>예제 6.2 : Random Walk
+        <ul>
+          <li>문제의 정의
+            <ul>
+              <li>이 예에서는 MRP (Markov reward process) 상에서의 TD(0) 와 constant-$\alpha$ MC 간 예측 능력을 경험적으로 비교한다.
+                <ul>
+                  <li>MRP 란?
+                    <ul>
+                      <li>행동이 없는 MDP</li>
+                      <li>환경과 에이전트로 인한 역학을 구분할 필요가 없는, 예측문제에 초점을 맞출 때 MRP 를 사용</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>이 mrp 에서 모든 에피소드는 중앙의 상태 C 에서 시작한다.</li>
+              <li>그 후 왼쪽, 또는 오른쪽으로 동일 확률로 한 스탭씩 이동한다.</li>
+            </ul>
+
+            <p><img src="/assets/images/posts/6_2_1_example_6_2_random_walk.png" alt="6_2_1_example_6_2_random_walk" /></p>
+
+            <ul>
+              <li>에피소드는 좌측 끝 혹은 우측 끝에서 끝난다.
+                <ul>
+                  <li>오른 쪽에서 에피소드가 종료되면 +1 의 보상이 발생하고 다른 모든 경우의 보상은 0 이다.</li>
+                  <li>따라서 일반적인 에피소드의 예는 (C,0, B,0, C,0, D,0, E,1) 과 같은 상태-보상 시퀀스로 구성될 수 있다.</li>
+                </ul>
+              </li>
+              <li>이 작업은 할인되지 않기 때문에, 각 상태의 진정한 가치는 해당 상태에서 시작하는 경우 오른쪽에서 종료할 확률이다.
+                <ul>
+                  <li>따라서 중심 상태의 참 값은 $v_\pi (C) = 0.5$ 이다.</li>
+                  <li>A 부터 E 까지 모든 상태의 참 값은 [$\frac{1}{6}, \frac{2}{6}, \frac{3}{6}, \frac{4}{6}, \frac{5}{6}$] 이다.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p>TD(0) 와 constant-$\alpha$ MC 의 결과값</p>
+
+            <p><img src="/assets/images/posts/6_2_2_example_6_2_random_walk_result.png" alt="6_2_2_example_6_2_random_walk_result" /></p>
+
+            <ul>
+              <li>왼쪽 그래프는 TD(0) 의 단일 실행에서 다양한 에피소드를 수 차례 학습한 값을 보여준다.
+                <ul>
+                  <li>100회의 에피소드 이후 추정치는 실제 값에 거의 근접한다.</li>
+                  <li>일정 크기 이상의 매개변수 (이 예에서는 $\alpha = 0.1$) 을 사용하면 가장 최근 에피소드의 결과에 따라 무한정 변동한다.</li>
+                </ul>
+              </li>
+              <li>우측 그래프는 다양한 알파 값에 대한 두 가지 방법의 학습 곡선을 보여준다.
+                <ul>
+                  <li>표시된 성능 측정은 학습된 가치함수와 실 가치함수 사이의 평균 제곱 오류 (RMS) 로, 5개의 상태에서 평균을 낸 다음 100회 실행에 대한 평균값이다.</li>
+                  <li>모든 경우 근사 가치함수는 모든 상태 $s$ 에 대한 중간값 $V(s) = 0.5$ 로 초기화하였다.</li>
+                </ul>
+              </li>
+              <li>위 작업에서는 TD 방식이 MC 방식보다 일관되게 우수하였다.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Optimality of TD(0)
+    <ul>
+      <li>제약된 에피소드에서의 배치 업데이트 가정
+        <ul>
+          <li>10개의 에피소드 또는 100개의 타임 스텝 과 같이 제한된 양의 경험만 사용할 수 있다고 가정
+            <ul>
+              <li>이 경우 증분 학습의 일반적 접근 방식은 답이 도달할 때까지 경험을 반복적으로 제시하는 것이다.</li>
+              <li>근사 함수 $V$ 가 주어지면, (6.1) 또는 (6.2) 로 지정된 증분은 종료상태에 도달하기 전까지, 매 타임스텝 $t$ 마다 계산되어진다.</li>
+              <li>하지만 가치함수는 모든 증분을 합계하여, 단 한번 바뀌게 된다.</li>
+              <li>그런 다음 사용 가능한 모든 경험은 새로운 가치 함수로 다시 처리되어, 가치 함수가 수렴하게 될 때까지 새로운 전체 증분을 생성한다.</li>
+              <li>학습 데이터의 전체 배치를 처리한 후에만 업데이트되기 때문에, 이 과정을 배치 업데이트라고 한다.</li>
+            </ul>
+          </li>
+          <li>배치 업데이트에서 TD(0) 와 constant-$\alpha$ MC 의 차이점
+            <ul>
+              <li>배치 업데이트에서 TD(0) 은 $\alpha$ 가 충분히 작게 선택되는 한 step-size 파라미터와 독립적으로, 단일 답변으로 수렴하게 된다</li>
+              <li>Constant-$\alpha$ MC 방법도 동일한 조건에서 결정론적으로 수렴하지만, 다른 답으로 수렴하게 된다.</li>
+              <li>정상적인 업데이트에서 각각의 방법은 배치의 답으로 완전히 이동하지 않지만, 이러한 방향으로 조치를 취하게 된다.</li>
+              <li>일반적으로 두 가지 답변을 이해하기 전, 몇가지 예를 살펴보자.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>예제 6.3 : Random walk under batch updating
+        <ul>
+          <li>아래는 TD(0) 및 constant-$\alpha$ MC 의 배치 업데이트 버전의 Random walk 예제 (예제 6.2) 의 적용 결과이다.</li>
+          <li>새로운 에피소드마다, 지금까지 본 모든 에피소드를 배치로 취급하였다.</li>
+          <li>이들은 알고리즘에 반복적으로 제시되었고, $\alpha$ 가 충분히 작아서 가치함수가 수렴하였다.</li>
+          <li>결과적으로 가치함수는 $v_\pi$ 와 비교되었으며, 다섯 개의 상태를 기준으로 한 평균 제곱근 오차를 계산하여 학습곡선을 얻기 위해 100번의 독립적인 실험을 반복적으로 수행하였다. ( 이 결과는 6.2 그림에 나타나 있음.)</li>
+        </ul>
+
+        <p><img src="/assets/images/posts/6_2_3_example_6_2_random_walk_batch_result.png" alt="6_3_1_example_6_2_random_walk_batch_result" /></p>
+
+        <ul>
+          <li>배치 TD 학습법이 몬테카를로 방식보다 일관되게 우수한 결과를 보여주었다.</li>
+          <li>배치 훈련에서의 Constant-$\alpha$ MC 방식은 각 상태 $s$ 를 방문한 후 경험한 실제 반환값의 샘플 평균인 $V(s)$ 에 수렴한다.</li>
+          <li>이는 훈련 세트의 실제 반환값과 평균 제곱 오차를 최소화하는 의미에서 최적의 추정치이다.</li>
+          <li>이런 의미에서 배치 TD 방식이 그림에 표기된 평균 제곱근 오차 측정에 따라 더 잘 수행할 수 있었다는 것으 놀라운 일이다.</li>
+          <li>답은 몬테카를로 방법이 한정적인 방식으로만 최적이고, TD 가 반환값 예측과 더 관련성 있는 방식으로 최적이기 때문.</li>
+        </ul>
+      </li>
+      <li>예제 6.4 : You are the Predictor
+        <ul>
+          <li>알려지지 않은 Markov reward process 에 대한 반환값을 예측해보자.</li>
+          <li>다음 8개의 에피소드가 관찰되었다고 가정한다.
+            <ul>
+              <li>(A,0,B,0) (B,1) (B,1) (B,1) (B,1) (B,1) (B,1) (B,0)</li>
+              <li>이것은 첫 번째 에피소드가 상태 A 에서 시작하여 보상이 0인 B로 전환된 다음 보상이 0인 B 에서 종료됨을 의미한다.</li>
+              <li>이 데이터 배치가 주어지면 최적의 예측, 추정치 $V(A)$ 및 $V(B)$ 에 대한 값을 무엇이라고 말하겠는가?</li>
+              <li>$V(B)$ 의 경우 최적값이 $\frac{3}{4}$ 라는 데 동의할 것이다.
+                <ul>
+                  <li>B 상태에서 8번중 6번의 에피소드가 1의 반환과 함께 즉시 종료되었고, 나머지 2번은 0인 상태에서 즉시 종료되었기 때문.</li>
+                </ul>
+              </li>
+              <li>그렇다면 추정값 $V(A)$ 는 무엇일까?</li>
+            </ul>
+          </li>
+        </ul>
+
+        <p><img src="/assets/images/posts/6_3_2_example_6_3_you_are_the_predictor.png" alt="6_3_2_example_6_3_you_are_the_predictor" /></p>
+
+        <ul>
+          <li>여기에는 두 가지 합리적인 답변이 있다.
+            <ul>
+              <li>에피소드가 상태 A에 있었던 시간의 100% 가 즉시 B로 이동했음을 관찰하는 것 (보상 0)
+                <ul>
+                  <li>B가 $\frac{3}{4}$ 의 값을 갖는다고 이미 결정했기 때문에 A도 $\frac{3}{4}$ 의 값을 가져야 한다.</li>
+                  <li>위의 그림에서 표시된 것처럼 Markov 프로세스를 모델링 한 다음 다음 모델이 주어진 올바른 추정치를 계산하는 것을 기반으로 함.</li>
+                  <li>위의 경우 실제로 $V(A) = \frac{3}{4}$ 이다.</li>
+                  <li>이것은 배치 TD(0) 가 제공하는 답이기도 하다.</li>
+                </ul>
+              </li>
+              <li>단순히 우리가 A를 한번 보았고 그에 따른 반환값이 0이라는 것을 관찰하는 것
+                <ul>
+                  <li>따라서 $V(A) = 0$ 으로 추정한다.</li>
+                  <li>이것은 배치 몬테카를로 방법이 제공하는 답임.</li>
+                  <li>학습 데이터에 대한 최소 제곱 오차를 제공하는 답이기도 함.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>실제 데이터 상 두번째 답이 오류가 없으나, 우리는 여전히 첫번째 답변이 더 나을 것으로 기대한다.</li>
+          <li>프로세스가 Markov 인 경우 몬테카를로 답변이 기존 데이터에서 더 우수하더라도 첫 번째 답변이 향후 데이터에서 더 낮은 오류를 생성할 것으로 예상한다.</li>
+        </ul>
+      </li>
+      <li>TD 방식과 몬테카를로 방식 간 비교
+        <ul>
+          <li>예제 6.4는 배치 TD(0) 와 배치 몬테카를로 방법으로 찾은 추정치 간의 일반적인 차이를 보여준다.
+            <ul>
+              <li>배치 몬테카를로 방법은 항상 훈련 세트에서 평균 제곱 오차를 최소화하는 추정치를 찾는다.</li>
+              <li>배치 TD(0) 는 항상 Markov 프로세스의 최대 가능도 모델에 대한 정확한 추정치를 찾는다.
+                <ul>
+                  <li>최대 가능도 (maximum-likelihood)
+                    <ul>
+                      <li>통계학에서 확률 분포의 모수(파라미터) 값을 추정하는 방법 중 하나</li>
+                      <li>주어진 데이터에 가장 적합한 모델 파라미터 값을 찾는 통계적 추정 방법 중 하나</li>
+                    </ul>
+                  </li>
+                  <li>일반적으로, 최대 가능도 추정은 데이터를 생성하는 확률이 가장 높은 파라미터 값을 의미한다.</li>
+                  <li>이 경우, 최대 가능도 추정은 관측된 에피소드로부터 자명한 방법으로 형성된 마코프 프로세스의 모델이다.</li>
+                  <li>여기서 i에서 j로의 전이 확률은 i에서 j로 간 관측된 전이의 비율로 추정되며, 관련된 기대 보상은 해당 전이에서 관측된 보상들의 평균이다.</li>
+                  <li>위 모델이 정확하다면 정확한 가치 함수의 추정치를 계산할 수 있다.
+                    <ul>
+                      <li>이는 프로세스의 추정치가 근사화되지 않고 확실하게 알려져있다고 가정하는 것과 동일하기 때문에 확실성 등가 추정치(certainty-equivalence estimate)라고 한다.</li>
+                    </ul>
+                  </li>
+                  <li>일반적으로 배치 TD(0) 는 확실성 등가 추정치 (certainty-equivalence estiamte)로 수렴된다.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>TD 방법이 몬테카를로 방법보다 더 빨리 수렴되는 이유를 설명
+            <ul>
+              <li>배치 형식에서 TD(0) 은 진정한 확실성 등가 추정치를 계산하기 때문에 몬테카를로 방법보다 빠르다.
+                <ul>
+                  <li>이는 랜덤 워크 작업에 대한 배치 결과에 표시된 TD(0) 의 이점을 설명함 (그림 6.2)</li>
+                  <li>비배치 TD(0) 에서도 더 나은 추정치를 향해 움직이고 있기 떄문에 constant-$\alpha$ MC 보다 더 빠를 수 있음.</li>
+                  <li>현재 온라인 TD 및 몬테카를로 방법의 상대적 효율성에 대해 더 명확하게 말할 수 있는 것은 없다.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>확실성 등가 추정(certainty-equivalence estimate)에 대해
+            <ul>
+              <li>어떤 의미에서 확실성 등가성 추정은 최적의 솔루션이지만 이를 직접 계산하는 것은 거의 불가능하다.</li>
+              <li>만약 $n=| \mathbb{S} |$ 의 상태의 수에서 프로세스 최대 가능도 추정을 형성하는 것만으로도 $n^2$ 의 메모리가 필요할 수 있으며, 해당 가치함수를 계산하려면 기존의 방식대로 수행하는 경우 $n^3$ 의 계산단계가 필요함.</li>
+              <li>이러한 상황에서 TD 방법이 $n$ 차 이하의 메모리와 트레이닝 세트에 대한 반복 계산을 사용하여 동일한 솔루션을 근사화할 수 있다는 점은 놀라운 점임.</li>
+              <li>상태공간이 큰 작업에서 TD 방법은 확실성 등가 솔루션을 근사화하는 유일한 실행 가능 방법일 수 있다.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="introduction-to-temporal-difference-learning">Introduction to Temporal Difference Learning</h2>
+
+<ul>
+  <li>
+    <p>What is Temporal Difference (TD) learning?</p>
+
+    <ul>
+      <li>학습목표
+        <ul>
+          <li>temporal-difference learning 정의하기</li>
+          <li>temporal-difference error 정의하기</li>
+          <li>TD(0) 알고리즘 이해하기</li>
+        </ul>
+      </li>
+      <li>Review : Estimating Values from Returns
+        <ul>
+          <li>예측 문제에서 우리의 목표는 주어진 상태에서 반환값을 유추하는 가치함수를 배우는 것이다.</li>
+          <li>$v_\pi (s) \doteq E_\pi [ G_t | S_t = s]$</li>
+          <li>밴딧 문제와 동일하게, 몬테카를로 방식에서도 상수를 이용해 가치함수를 업데이트할 수 있으며, 이는 반환값 리스트를 저장할 필요가 없음을 의미한다.</li>
+          <li>$V(S_t) \gets V(S_t) + \alpha [G_t - V(S_t)]$
+            <ul>
+              <li>몬테카를로 방식에서 리턴값 $G_t$ 를 구하기 위해서 우리는 전체 궤적에 대한 샘플이 필요하다.</li>
+              <li>이것은 우리가 에피소드 내에서 학습을 할 수 없음을 의미한다.</li>
+              <li>하지만 우리는 에피소드가 끝나기 전에 증분의 방식으로 학습하기를 원하고, 이는 새로운 업데이트 목표가 필요함을 의미한다.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Bootstrapping
+        <ul>
+          <li>value function 
+  <img src="/assets/images/posts/value_function_bootstrapping.png" alt="value_function_bootstrapping" /></li>
+          <li>Temporal Difference
+  <img src="/assets/images/posts/temporal_difference_bootstrapping.png" alt="temporal_difference_bootstrapping" />
+            <ul>
+              <li>위의 표기된 부분은 TD error 값임</li>
+            </ul>
+          </li>
+          <li>DP 와의 차이점
+  <img src="/assets/images/posts/difference_between_DP_and_TD.png" alt="difference_between_DP_and_TD" />
+            <ul>
+              <li>DP 의 경우 환경역학을 알고있어, 다음 단계의 총 합을 구해 값을 업데이트 하는 반면, TD의 경우 환경과 상호작용한 다음단계의 결과값만을 이용해 TD error 의 일부분만큼 업데이트 한다.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>1-Step TD
+        <ul>
+          <li>1-Step TD
+  <img src="/assets/images/posts/1_step_TD.png" alt="1_step_TD" /></li>
+          <li>TD(0) psuedo code
+  <img src="/assets/images/posts/TD_0_psuedo_code.png" alt="TD_0_psuedo_code" /></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Rich Sutton : The Importance of TD Learning</p>
+    <ul>
+      <li>Temporal Difference Learning : 예측 학습 (Prediction learning) 에 특화되어 있음.
+        <ul>
+          <li>Prediction learning : 기다림으로서 목표를 확보. 즉, 별도의 라벨링이 필요없는 unsupervised supervised learning 이다.</li>
+        </ul>
+      </li>
+      <li>TD는 추측으로부터의 추측을 통해 배운다. TD error 는 두 예측 사이의 차이 값이다.
+        <ul>
+          <li>위의 컨셉이 없으면 TD 학습은 supervised learning, backpropagating the error 와 동일하다.</li>
+        </ul>
+      </li>
+      <li>multi-step predictions
+        <ul>
+          <li>multi-step 을 큰 one-step 으로 생각하고 one-step 메서드를 사용할 수 있지 않을까?</li>
+          <li>one-step prediction 을 배우고, 그것을 반복하여 multi-step prediction을 생산할 수 있지 않을까?</li>
+          <li>둘 다 불가하며, 그렇게 되길 원치 않는다.</li>
+        </ul>
+      </li>
+      <li>one-step trap
+        <ul>
+          <li>long-term prediction 을 시뮬레이션을 통해 만들 수 있다.
+            <ul>
+              <li>이론에서는 가능하지만 실제로는 불가함.
+                <ul>
+                  <li>long-term prediction 을 시뮬레이션으로 만드는 것은 지수적으로 복잡하다.</li>
+                  <li>one-step prediction 에서의 작은 에러 또한 증폭된다.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>이 함정에 빠지는 경우는 매우 흔하다.
+            <ul>
+              <li>POMDPs, Bayesians, control theory, compression enthusiasts.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>유명한 one-step supervised learning 방식을 이용할 수 있을까?
+        <ul>
+          <li>목표를 추측값이 아닌 관측된 결과로 확정한 뒤 one-step 메서드를 사용? (게임이 끝날때 까지 기다린 뒤 결과값 회귀)
+            <ul>
+              <li>엄청난 컴퓨팅 자원이 필요함.</li>
+              <li>목표 값을 모르는 경우도 존재 (off-policy)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>TD 의 중요성
+        <ul>
+          <li>보편적이며, 중요한 학습</li>
+          <li>예측을 학습하는 것이며, 확장 가능한 유일한 학습 형태일 수도 있음.</li>
+          <li>일반적이고 다단계의 예측에 특화된 학습이며, 인식, 의미부여 및 세계 모델링에 중요한 개념일 수 있음.</li>
+          <li>상태 속성을 활용하여 빠르고, 데이터 효율적으로 학습함.</li>
+          <li>점진적으로 편향되는 특성이 있음.</li>
+          <li>계산적으로 적합하며, 보상 이외의 다른 목적으로 활용을 시작함.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="advantages-of-td">Advantages of TD</h2>
+
+<ul>
+  <li>지난 내용 복습 (About temporal difference learning)
+    <ul>
+      <li>TD (Temporal Difference learning) 는 Dynamic Programming 과 Monte Carlo 의 핵심 아이디어를 채용한 방식이다.
+        <ul>
+          <li>DP : Bootstrapping</li>
+          <li>MC : learn directly from experience</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>The advantages of temporal difference learning</p>
+
+    <ul>
+      <li>학습목표
+        <ul>
+          <li>TD 방식으로 실시간 학습의 장점 이해하기</li>
+          <li>DP 와 몬테카를로 방식과 관련하여 TD 방식이 가지는 핵심 이점 식별하기</li>
+        </ul>
+      </li>
+      <li>예제 : Driving Home
+        <ul>
+          <li>문제의 정의
+            <ul>
+              <li>매일, 당신은 집에 오기까지 얼마나 걸릴지를 예측한다.</li>
+              <li>시간, 요일, 날씨, 그 외의 요인 등을 관측한다.</li>
+              <li>이미 예전부터 많은 예측을 해왔었다.</li>
+            </ul>
+          </li>
+          <li>해석
+  <img src="/assets/images/posts/td_example_driving_home_01.png" alt="td_example_driving_home_01" />
+            <ul>
+              <li>원 안의 값은 남은 운전시간에 대한 예측치이다.</li>
+              <li>원가 원 사이의 값은 보상 값으로, 다음 단계까지의 실제 걸린 시간을 의미한다.</li>
+              <li>하단의 시간은 실제 걸린 누적 시간을 의미한다.</li>
+            </ul>
+
+            <p><img src="/assets/images/posts/td_example_driving_home_02.png" alt="td_example_driving_home_02" /></p>
+            <ul>
+              <li>몬테카를로 (Constant-$\alpha$ MC) 의 경우
+                <ul>
+                  <li>$G_t$ 의 값은 에피소드가 끝날 때 (집에 도착했을 때) 알수 있다.</li>
+                  <li>위의 표기된 $G_1$ 의 값은 38이며, 업데이트 식에 의해 35의 값은 38의 값으로 업데이트 되어야 한다.</li>
+                </ul>
+              </li>
+            </ul>
+
+            <p><img src="/assets/images/posts/td_example_driving_home_03.png" alt="td_example_driving_home_03" /></p>
+            <ul>
+              <li>TD 의 경우
+                <ul>
+                  <li>에피소드가 끝날 때까지 기다리는 것이 아닌, 다음 스텝까지만 진행하면 학습을 할 수 있음. (TD(0) 의 경우)</li>
+                  <li>위에 표기된 목표값은 할인($\gamma = 1$)된 다음 스텝의 예측값(35)과 보상(5)의 합인 40이 되며, TD error 는 10이 된다.</li>
+                  <li>상수 값($\alpha = 1$)을 적용한 업데이트가 이루어져, 30은 40으로 업데이트 된다.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>TD 의 이점
+            <ul>
+              <li>DP 와 달리 환경 모델을 필요로 하지 않는다. (경험으로부터 배움)</li>
+              <li>MC 와 달리 TD 는 매 스텝마다 학습한다. (부트스트래핑 사용)</li>
+              <li>TD 는 점근적으로 올바른 예측에 수렴한다.</li>
+              <li>TD 는 보편적으로 MC 보다 더 빠른 수렴이 가능하다.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Comparing TD and Monte Carlo</p>
+
+    <ul>
+      <li>학습목표
+        <ul>
+          <li>TD 학습의 경험적 이점을 식별하기</li>
+        </ul>
+      </li>
+      <li>
+        <p>예제 : Random Walk</p>
+
+        <p><img src="/assets/images/posts/td_monte_carlo_compare_random_walk_01.png" alt="td_monte_carlo_compare_random_walk_01" /></p>
+
+        <ul>
+          <li>A, B, C, D, E 의 Nonterminal 상태</li>
+          <li>left, right 의 deterministic actions</li>
+          <li>정책 : uniform random policy</li>
+          <li>모든 에피소드는 C 에서 초기화 (시작)</li>
+          <li>극좌, 극우의 상태에서 에피소드는 종료됨</li>
+          <li>극우의 상태에서 보상 1, 그 외에는 0</li>
+          <li>위의 설정 상, 결국 가치함수의 값은 해당 상태에서 우측으로 진행되어 종료될 확률과 같다.</li>
+        </ul>
+
+        <p><img src="/assets/images/posts/td_monte_carlo_compare_random_walk_02.png" alt="td_monte_carlo_compare_random_walk_02" /></p>
+
+        <ul>
+          <li>C, D, E 의 상태를 거쳐 우측에서 종료했을 경우
+            <ul>
+              <li>TD 에이전트의 경우 E 의 상태만 업데이트됨 (업데이트 식에서 그 이유를 알 수 있음)</li>
+              <li>몬테카를로 에이전트의 경우 C, D, E 가 다 같이 업데이트됨.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <p><img src="/assets/images/posts/td_monte_carlo_compare_random_walk_03.png" alt="td_monte_carlo_compare_random_walk_03" /></p>
+
+        <ul>
+          <li>위 에피소드를 진행 후 두 번째 에피소드를 진행
+            <ul>
+              <li>TD 의 경우 매 스텝마다 값이 업데이트되나, 몬테카를로의 경우 Terminate 상태가 되지 않는 한 값이 업데이트되지 않는다.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <p><img src="/assets/images/posts/td_monte_carlo_compare_random_walk_04.png" alt="td_monte_carlo_compare_random_walk_04" /></p>
+
+        <ul>
+          <li>위의 그래프는 TD 학습의 에피소드 학습 횟수별로 실제 값에 근사하는 모습을 보여줌 (constant-$\alpha$ = 0.1)
+            <ul>
+              <li>보다 작은 learning rate 나 decaying learning rate 를 사용하면 더 좋은 결과값을 얻을 수 있음.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <p><img src="/assets/images/posts/td_monte_carlo_compare_random_walk_05.png" alt="td_monte_carlo_compare_random_walk_05" /></p>
+
+        <ul>
+          <li>위의 그래프는 TD 학습과 몬테카를로 학습 간의 결과치를 비교한 것임.
+            <ul>
+              <li>TD 가 몬테카를로 보다 전반적으로 좋은 결과를 보여줌
+                <ul>
+                  <li>learning rate 가 크면, 학습 초반에 더 빠른 결과를 보여주나, learning rate 가 작은 학습이 최종적으로 에러율이 적게 나타남.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+:ET
