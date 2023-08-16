@@ -1,0 +1,1837 @@
+I"4t<h2 id="관련-자료-rlbook-pages-159-166">관련 자료 (RLbook Pages 159-166)</h2>
+
+<ul>
+  <li>Planning and Learning with Tabular Methods : 개요
+    <ul>
+      <li>이 장에서는 동적 프로그래밍과 휴리스틱 탐색과 같이 환경모델이 필요한 강화학습 방법과, 몬테카를로와 시간차 학습과 같이 환경모델 없이 사용할 수 있는 강화학습 방법에 대한 통합된 관점을 개발한다.</li>
+      <li>이러한 방법들은 각각 모델기반(model-based) 과 모델프리(model-free) 강화학습 방법으로 불린다.</li>
+      <li>모델기반(model-based) 방법은 주로 계획(planning)에 의존하며, 모델프리(model-free) 방법은 주로 학습(learning)에 의존한다.</li>
+      <li>이 두가지 방법 사이에는 실제로 차이가 있지만, 큰 유사점도 있다.
+        <ul>
+          <li>특히, 두 가지 방법 모두 가치함수를 계산하는 것이 핵심임.</li>
+          <li>또한 모든 방법들은 미래 이벤트를 예측하고 backed-up value 를 계산하며 이를 근사 가치함수의 업데이트 대상으로 사용한다.</li>
+        </ul>
+      </li>
+      <li>이전 장에서 몬테카를로 학습과 시간차 학습을 서로 다른 대안으로 소개한 후, n-step 방법으로 통합하는 방법을 보여줌.</li>
+      <li>이 장에서는 모델기반 방법과 모델프리 방법의 통합이며, 우선 이들을 구분하여 설명한 후 서로 어떻게 조합될 수 있는지를 탐구한다.</li>
+    </ul>
+  </li>
+  <li>Models and Planning
+    <ul>
+      <li>모델 (models) 에 대해서
+        <ul>
+          <li>환경의 모델 : 에이전트가 에이전트의 행동에 환경이 어떻게 응답할 것인지 예측하는 데 사용할 수 있는 것
+            <ul>
+              <li>특정 상태와 행동이 주어지면, 모델은 결과적인 다음 상태와 다음 보상에 대한 예측을 생성한다.</li>
+              <li>즉, 에이전트가 환경과 상호작용하여 얻은 경험을 바탕으로 환경의 동작을 예측하는 수단</li>
+            </ul>
+          </li>
+          <li>분포 모델 (distribution models)
+            <ul>
+              <li>모델이 확률적인 경우, 가능한 여러 다음 상태와 다음 보상들이 각각 발생할 확률과 함께 존재함</li>
+              <li>몇몇 모델들은 모등 가능성과 그 확률에 대한 설명을 생성하며, 이러한 모델들을 분포 모델이라고 한다.</li>
+              <li>예를 들어, 주사위 12개의 합을 모델링할 때 분포모델은 모든 가능한 합과 그들이 발생할 확률을 생성한다.</li>
+              <li>동적 프로그래밍에서 가정하는 모델의 종류인 MDP 의 역학 $p(s’,r | s,a)$ 는 분포모델이다.</li>
+            </ul>
+          </li>
+          <li>샘플 모델 (sample models)
+            <ul>
+              <li>어떤 모델들은 확률에 따라 샘플링된 하나의 가능성만 생성하며, 이러한 모델을 샘플 모델이라고 한다.</li>
+              <li>예를 들어, 주사위 12개의 합을 모델링할 때 샘플 모델은 이 확률 분포에 따라 샘플링된 개별 합을 생성한다.</li>
+              <li>Chapter 5 의 블랙잭 예시에서 사용되는 모델은 샘플 모델이다.</li>
+            </ul>
+          </li>
+          <li>분포 모델과 샘플 모델간의 비교
+            <ul>
+              <li>분포 모델은 항상 샘플을 생성할 수 있어, 샘플 모델보다 강력하다.</li>
+              <li>그러나 많은 경우 샘플 모델을 얻는 것이 분포 모델을 얻는 것 보다 훨씬 쉽다.
+                <ul>
+                  <li>주사위 12개의 경우가 간단한 예시가 될 수 있는데, 주사위를 굴린 결과를 시뮬레이션하고 합을 반환하는 컴퓨터 프로그램은 쉽게 작성할 수 있지만, 모든 가능한 합과 그들의 확률을 찾는 것은 어렵고 오류가 발생할 수 있다.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>모델의 활용
+        <ul>
+          <li>모델은 경험을 모방하거나 시뮬레이션 하는 데 사용될 수 있다.</li>
+          <li>시작 상태와 행동이 주어지면, 샘플 모델은 가능한 전이를 생성하고, 분포 모델은 그들의 확률에 따라 가중치가 주어진 모든 가능한 전이를 생성한다.</li>
+          <li>시작 상태와 정책이 주어지면, 샘플 모델은 전체 에피소드를 생성하고, 분포 모델은 모든 가능한 에피소드와 그들의 확률을 생성한다.</li>
+          <li>두 경우 모두, 모델은 환경을 시뮬레이션하고 모의 경험을 생성하는데 사용된다고 말한다.</li>
+        </ul>
+      </li>
+      <li>계획 (planning) 에 대해서
+        <ul>
+          <li>Planning 이라는 용어는 다른 분야에서 여러 가지 방식으로 사용됨.
+            <ul>
+              <li>강화학습에서는 모델을 입력으로 받아 환경과 상호작용하기 위한 정책을 생성하거나 개선하는 계산 과정을 가리키는 데 사용한다.
+                <ul>
+                  <li>즉, 모델을 사용하여 최적의 정책을 찾는 과정</li>
+                </ul>
+              </li>
+            </ul>
+
+            <p><img src="/assets/images/posts/8_1_1_planning_meaning_1.png" alt="8_1_1_planning_meaning_1" /></p>
+          </li>
+          <li>상태-공간 계획 (State-space planning)
+            <ul>
+              <li>최적 정책 또는 목표로의 최적 경로를 찾기 위해 상태 공간을 탐색하는 것</li>
+              <li>행동은 상태에서 상태로의 전이를 야기하며, 가치 함수는 상태 위에서 계산됨</li>
+              <li>강화학습에서 일반적으로 많이 사용되는 계획 방식으로, 주어진 상태에 가능한 모든 행동을 시뮬레이션하고 그에 따른 예상 보상을 계산하여 좋은 행동을 선택하는 것을 반복
+                <ul>
+                  <li>상태 공간이 작을 때 효과적, 모델 기반 강화학습 알고리즘 중 일반적으로 사용되는 것</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>계획-공간 계획 (Plan-space planning)
+            <ul>
+              <li>최적 정책 또는 목표로의 최적 경로를 찾기 위해 계획 공간을 탐색하는 것</li>
+              <li>연산자들은 한 계획을 다른 계획으로 변환하며, 가치함수 (있는 경우) 는 계획 공간 위에 정의됨</li>
+              <li>계획-공간 계획에는 진화적 방법과 부분순서계획 (partial-order planning) 이 포함됨.
+                <ul>
+                  <li>이는 계획의 단계별 순서가 완전히 결정되지 않은 인공지능에서의 일반적인 계획 방법임</li>
+                  <li>계획 공간 방법은 강화학습의 초점인 확률적 순차 결정 문제에 효율적으로 적용하기 어렵기 때문에, 이에 대해 더 이상 고려하지 않음.</li>
+                </ul>
+              </li>
+              <li>에이전트가 가능한 다양한 계획들을 생성하고 평가함
+                <ul>
+                  <li>위 방식으로 계획을 다른 계획으로 변환하거나 합성하여 최적의 전략을 도출</li>
+                  <li>계획들 사이의 관계를 탐색하고 변환하는 과정을 거쳐 최적의 계획을 찾는데 사용
+                    <ul>
+                      <li>계획들의 집합과 관계를 모델링하고 분석하는 것이 필요하기 때문에 복잡한 문제에 유용하게 적용</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>모든 상태-공간 계획 방법에 대한 통합된 관점
+            <ul>
+              <li>상태-공간 계획 방법은 공통된 구조를 가지고 있음
+                <ul>
+                  <li>모든 상태-공간 계획 방법은 정책 개선을 위한 핵심 중간단계로 가치함수를 계산하는 것을 포함한다.</li>
+                  <li>이들은 가치 함수를 시뮬레이션된 경험에 적용하는 업데이트 또는 백업 연산으로 계산한다.</li>
+                </ul>
+              </li>
+            </ul>
+
+            <p><img src="/assets/images/posts/8_1_2_planning_meaning_2.png" alt="8_1_2_planning_meaning_2" /></p>
+
+            <ul>
+              <li>동적 계획법의 예
+                <ul>
+                  <li>상태 공간을 훑으며 각 상태에서 가능한 전이의 분포를 생성</li>
+                  <li>각 분포는 업데이트 값 (업데이트 대상) 을 계산하는 데 사용되며, 상태의 추정값이 업데이트됨</li>
+                </ul>
+              </li>
+              <li>다양한 다른 상태-공간 계획 방법들 또한 이러한 구조에 맞으며, 개별적인 방법들은 업데이트 종류, 수행 순서, 얼마나 오래 업데이트 대상을 유지하는지 정도의 차이만 존재</li>
+            </ul>
+          </li>
+          <li>학습(learning) 과 계획 (planning) 방법
+            <ul>
+              <li>두 방법의 핵심은 백업 업데이트 연산에 의한 가치 함수의 추정임</li>
+              <li>차이점은 계획은 모델에서 생성된 시뮬레이션 경험을 사용하는 반면, 학습 방법은 환경에서 생성된 실제 경험을 사용한다는 것임
+                <ul>
+                  <li>이 차이는 성능 평가 방법과 경험 생성 유연성 등 다른 여러 가지 차이를 유발</li>
+                </ul>
+              </li>
+              <li>그러나 위의 공통된 구조는 계획과 학습 사이에서 많은 아이디어와 알고리즘을 상호 전달할 수 있음을 의미함
+                <ul>
+                  <li>특히 많은 경우 학습 알고리즘은 계획 방식의 핵심 업데이트 단계를 대체하는 데 사용될 수 있음
+                    <ul>
+                      <li>학습 방법은 경험만을 입력으로 필요로 하며, 많은 경우 실제 경험과 똑같이 시뮬레이션 경험에도 적용할 수 있음.</li>
+                      <li>One-step tabular Q-learning 과 샘플 모델(Sample model) 로부터의 무작위 샘플을 기반으로 한 계획 방법의 psuedo code</li>
+                    </ul>
+
+                    <p><img src="/assets/images/posts/8_1_3_ramdom_sample_one_step_tabular_q_planning_psuedo_code.png" alt="8_1_3_ramdom_sample_one_step_tabular_q_planning_psuedo_code" /></p>
+
+                    <ul>
+                      <li>위 방법은 ramdom-sample one-step tabular Q-planning 이라 한다.</li>
+                      <li>One-step tabular Q-learning 이 실 환경에서 최적 정책으로 수렴하는 것과 동일 조건으로 최적 정책에 수렴을 보장한다.
+                        <ul>
+                          <li>Step 1 에서 각 상태-행동 쌍이 무한히 선택</li>
+                          <li>시간이 지남에 따라 $\alpha$ 가 적절하게 감소</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>작고 점진적인 단계로 계획을 수행
+            <ul>
+              <li>계획과 학습 방법의 통합적 관점 이외에도, 작고 점진적인 단계로 계획을 수행하는 것은 장점이다.</li>
+              <li>계획은 언제든 중단되거나 방향을 바꿀 수 있으며, 거의 낭비되지 않은 계산으로 이루어질 수 있음.
+                <ul>
+                  <li>이는 계획과 행동, 그리고 모델의 학습을 효율적으로 혼합하기 위한 핵심 요건임</li>
+                </ul>
+              </li>
+              <li>매우 작은 단계로 계획을 수행하는 것은 순수한 계획 문제에서도 가장 효율적인 접근방법일 수 있으며, 만약 문제가 정확하게 해결될 수 없을 정도로 크다면 특히 그러함.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Dyna: Integrated Planning, Acting, and Learning</p>
+
+    <ul>
+      <li>개요
+        <ul>
+          <li>온라인으로 계획을 수행할 때 환경과 상호작용하면서 흥미로운 문제들이 발생함
+            <ul>
+              <li>상호작용으로 얻은 새로운 정보는 모델을 변경하고, 이로 인해 계획과 상호작용할 수 있다.</li>
+              <li>현재 고려 중이거나 가까운 장래에 예상되는 상태 또는 결정에 대해 어떤 식으로든 계획 프로세스를 사용자 지정하는 것이 바람직할 수 있다.</li>
+              <li>만약 의사결정과 모델학습이 모두 계산량이 많은 과정이라면, 사용 가능한 계산 자원을 이들 간에 분배해야 할 수도 있음.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>Dyna-Q 의 구조</p>
+
+        <p><img src="/assets/images/posts/8_2_1_dyna_q_diagram.png" alt="8_2_1_dyna_q_diagram" /></p>
+
+        <ul>
+          <li>Dyna-Q 개요
+            <ul>
+              <li>온라인 계획 에이전트에 필요한 주요 기능들을 통합한 간단한 구조</li>
+              <li>간결하게 기능 구성</li>
+              <li>각 기능을 달성하는 다른 대안적인 방법과, 이들 간의 균형점은 다음 섹션에서 다룸</li>
+            </ul>
+          </li>
+          <li>직접적 방법과 간접적 방법
+            <ul>
+              <li>계획 에이전트 내에서 실제 경험은 적어도 두 가지 역할을 할 수 있음
+                <ul>
+                  <li>모델 학습 : 모델을 개선하기 위해 사용 (실제 환경과 더 정확하게 일치하도록 만드는 역할)</li>
+                  <li>직접적 강화학습 (direct RL) : 강화학습 방법을 사용하여 가치함수와 정책을 직접적으로 개선하기 위해 사용 (이전 장에서 논의한 방법)</li>
+                </ul>
+              </li>
+              <li>계획에 관여하는 것은 간접적 강화학습이라고도 불림.</li>
+            </ul>
+          </li>
+          <li>직접적 방법과 간접적 방법의 장단점
+            <ul>
+              <li>간접적 방법
+                <ul>
+                  <li>종종 제한된 경험을 보다 효과적으로 활용하여 더 적은 환경 상호작용으로부터 더 나은 정책을 달성함</li>
+                </ul>
+              </li>
+              <li>직접적 방법
+                <ul>
+                  <li>간접적 방법보다 훨씬 간단하며, 모델 설계에 영향을 주지 않음</li>
+                  <li>대부분의 인간과 동물의 학습에 기여하는 방법</li>
+                </ul>
+              </li>
+              <li>심리학, 인공지능 분야에서는 의사결정과 반복적 학습 간의 상대적 중요성, 계획적 의사 결정과 반응적 의사 결정 간의 상대적 중요성에 대한 논의가 이루어지고 있음.
+                <ul>
+                  <li>첵의 관점은 이러한 논쟁들에서 대안 간의 대비는 과장된 것으로 보고, 실제 이 두가지 접근 방식 간의 유사성을 인정함으로써 더 많은 통찰력을 얻을 수 있다고 보고있음.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Dyna-Q 에 대하여
+            <ul>
+              <li>위 다이어그램에 표시된 모든 과정 - 계획, 행동, 모델학습 및 직접적 강화학습 - 이 지속적으로 발생하는 것을 포함한다.</li>
+              <li>계획 : random-sample one-step tabular Q-planning (위에 설명함)</li>
+              <li>직접 강화학습 (direct RL) : one-step tabular Q-learning</li>
+              <li>모델학습 : 테이블 기반, 결정론적 환경이라고 가정
+                <ul>
+                  <li>각 전이 $S_t, A_t \to R_{t+1}, S_{t+1}$ 이후 모델은 $S_t, A_t$ 에 대한 예측으로 $R_{t+1}, S_{t+1}$ 이 결정론적으로 발생한다는 정보를 기록</li>
+                  <li>따라서 모델이 이전에 경험한 상태-행동 쌍으로 쿼리되면, 마지막으로 관찰된 다음 상태와 보상을 예측으로 반환함</li>
+                  <li>계획 중 Q-planning 알고리즘은 이전에 경험한 상태-행동 쌍에서만 무작위 샘플링을 수행하기 때문에 모델은 정보가 없는 쌍으로 쿼리되지 않음.</li>
+                </ul>
+              </li>
+            </ul>
+
+            <p><img src="/assets/images/posts/8_2_2_figure_8_1_general_dyna_architecture.png" alt="8_2_2_figure_8_1_general_dyna_architecture" /></p>
+
+            <ul>
+              <li>Dyna-Q 알고리즘을 포함한 Dyna 에이전트의 전체적인 구조
+                <ul>
+                  <li>중앙 열은 에이전트와 환경 간의 상호작용을 나타내며, 실제 경험의 궤적을 만들어 냄</li>
+                  <li>왼쪽 화살표는 실제 경험에 적용하여 가치함수와 정책을 개선하는 직접적 강화학습을 나타냄</li>
+                  <li>오른쪽 부분은 모델 기반 프로세스를 나타냄
+                    <ul>
+                      <li>모델은 실제 경험으로부터 학습되어 모의 경험을 생성함</li>
+                      <li>모델이 생성한 모의 경험의 시작 상태와 행동을 선택하는 프로세스를 탐색 제어(search control) 라고 함</li>
+                    </ul>
+                  </li>
+                  <li>계획은 모의 경험 (simulated experience) 에 대해 실제로 일어난 것처럼 강화학습 방법을 적용함으로써 달성됨
+                    <ul>
+                      <li>일반적으로 (Dyna-Q 도 해당) 실제 경험으로부터 학습하는 데 사용된 강화학습 방법과 모의 경험으로부터 계획하는데 사용되는 강화학습 방법은 동일함</li>
+                      <li>따라서 강화학습 방법은 학습, 계획 모두에 대한 공통경로가 됨</li>
+                      <li>학습과 계획은 거의 모든 부분을 공유하므로 깊게 통합되어 있고, 경험의 소스만 다르다. (환경, 모델)</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+
+            <p><img src="/assets/images/posts/8_2_3_tabular_dyna_q_psuedo_code.png" alt="8_2_3_tabular_dyna_q_psuedo_code" /></p>
+
+            <ul>
+              <li>Tabular Dyna-Q
+                <ul>
+                  <li>개념적으로 계획, 행동, 모델학습, 직접적인 강화학습은 Dyna 에이전트에서 동시에 병렬적으로 발생한다.</li>
+                  <li>그러나 직렬 컴퓨터에서 구현하기 위해 시간 단위 내에 발생하는 순서를 지정한다.
+                    <ul>
+                      <li>Dyna-Q 에서 행동, 모델 학습 및 직접적 강화학습 프로세스는 거의 계산이 필요하지 않으며, 시간의 일부분만 소비한다고 가정한다.</li>
+                      <li>각 단계에서 남은 시간은 계산이 많이 필요한 계획 프로세스에 할당된다.</li>
+                      <li>행동, 모델 학습 및 직접적 강화학습 후 각 단계에서 Q-planning 알고리즘의 n 번째 반복 (step 1-3) 을 완료하기 위한 시간이 있다고 가정한다.</li>
+                      <li>위 psuedo code 알고리즘에서 $Model(s,a)$ 는 상태-행동 쌍 $(s,a)$ 에 대한 (다음 상태와 보상) 의 내용을 나타낸다.</li>
+                      <li>직접 강화학습, 모델 학습 및 계획은 각각 단계 (d), (e), (f) 로 구현된다.</li>
+                      <li>(e) 와 (f) 를 생략하면 남은 알고리즘은 one-step tabular Q-learning 이 된다.</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>예제 8.1 : Dyna Maze</p>
+
+        <p><img src="/assets/images/posts/8_2_4_figure_8_2_dyna_maze.png" alt="8_2_4_figure_8_2_dyna_maze" /></p>
+
+        <ul>
+          <li>문제의 정의
+            <ul>
+              <li>그림 8.2의 소형 미로를 고려한다.</li>
+              <li>상태 : 47개의 상태</li>
+              <li>동작
+                <ul>
+                  <li>위, 아래, 오른쪽 및 왼쪽으로 이동.</li>
+                  <li>각 동작은 대응하는 인접 상태로 결정론적으로 이동시킨다.</li>
+                  <li>다만 장애물 또는 미로의 가장자리로 이동하는 경우에는 에이전트가 현재 위치에 머물게 됨.</li>
+                </ul>
+              </li>
+              <li>보상
+                <ul>
+                  <li>모든 전이에서 0</li>
+                  <li>목표 상태로의 전이에서 +1</li>
+                </ul>
+              </li>
+              <li>목표 상태(G)에 도달한 후, 에이전트는 새로운 에피소드를 시작하기 위해 시작 상태(S) 로 돌아감.</li>
+              <li>감가율 적용 ($\gamma = 0.95$)</li>
+              <li>에피소드 형태의 문제</li>
+            </ul>
+          </li>
+          <li>결과의 해석
+            <ul>
+              <li>그림 8.2 에서 미로 과제에 Dyna-Q 에이전트가 적용된 실험에서의 평균 학습 곡선을 보여줌
+                <ul>
+                  <li>초기 행동가치는 0이며, step-size 파라미터는 $\alpha = 0.1$, 탐색 파라미터는 $\varepsilon = 0.1$ 이다.</li>
+                  <li>탐욕 방식으로 동작하였을 때, 동점일 경우 무작위로 결정한다.</li>
+                </ul>
+              </li>
+              <li>에이전트는 실제 단계마다 수행하는 계획 단계의 수인 n 에 의해 다양하게 변한다.
+                <ul>
+                  <li>각 n에 대해 실험을 30회 반복하여 에피소드에서 목표에 도달하기까지 취한 스텝 수를 평균화한 결과를 보여준다.
+                    <ul>
+                      <li>각 반복에서 난수생성기의 초기 시드는 동일하게 유지함</li>
+                      <li>따라서 첫 버째 에피소드는 모둔 n의 값에 대해 정확히 동일했으며 (약 1700 스텝), 그 데이터는 그림에서 표시되지 않았음.</li>
+                    </ul>
+                  </li>
+                  <li>첫 번째 에피소드 이후, 모든 n 값에 대해 성능이 향상되었지만, 특히 n 값이 큰 경우 더 빠르게 종료됨.</li>
+                  <li>$n=0$ 인 에이전트는 계획 없는 에이전트로서 직접 강화학습 (one-step tabular Q-learning) 만 사용</li>
+                  <li>계획 없는 에이전트는 최적 성능 ($\varepsilon$-optimal) 에 도달하는 데 약 25번의 에피소드가 걸렸으며, $n=5$ 인 에이전트는 5번의 에피소드, $n=50$ 인 에이전트는 3번의 에피소드가 걸렸음.</li>
+                </ul>
+              </li>
+            </ul>
+
+            <p><img src="/assets/images/posts/8_2_5_dyna_maze_planning.png" alt="8_2_5_dyna_maze_planning" /></p>
+
+            <ul>
+              <li>그림 8.3은 계획 에이전트가 계획 없는 에이전트보다 훨씬 빠르게 해결책을 찾은 이유를 보여준다.
+                <ul>
+                  <li>그림은 두 번째 에피소드의 중간 지점에서 $n=0$ 및 $n=50$ 에이전트가 찾은 정책이 표시된 것이다.</li>
+                  <li>$n=0$ 인 경우 (계획이 없는 경우), 각 에피소드는 정책에 마지막 한 스텝만 추가하므로, 하나의 스텝만을 학습하였다.</li>
+                  <li>계획을 사용하면, 첫 번째 에피소드에서는 하나의 단계만 배웠지만, 두 번째 에피소드에서는 광범위한 정책이 개발된다.
+                    <ul>
+                      <li>첫 번째 에피소드는 환경과 상호작용을 하면서 실제 경험을 얻는 과정이며, 이 경험은 진행된 경로에 한정하여 활용된다.</li>
+                      <li>두 번째 에피소드부터 모델 기반 학습을 통해 미래 상태에 대한 예측을 수행한다.
+                        <ul>
+                          <li>모델은 환경에서 얻은 실제 경험으로부터 구축되며, 각 상태에서 가능한 모든 행동과 보상에 대한 확률 분포를 기록한다.
+                            <ul>
+                              <li>실제 환경과의 상호작용을 통해 얻을 경험을 통해 일정한 정책이 개발</li>
+                              <li>모델 기반 학습을 통해 얻은 미래 상태에 대한 예측을 사용하여 더 다양한 정책을 탐색하고 개발</li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>세 번째 에피소드가 끝날 때 완전한 최적 정책이 발견되고, 완전한 성능이 달성된다.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Dyna-Q 의 진행 방식
+            <ul>
+              <li>Dyna-Q에서 학습과 계획은 정확히 동일한 알고리즘을 사용하여 실제 경험에 대해 학습하고 계획에서 가상 경험을 활용하여 수행
+                <ul>
+                  <li>계획은 점진적으로 진행되므로 계획과 행동을 혼합하는 것이 매우 간단하다.</li>
+                </ul>
+              </li>
+              <li>에이전트는 최신 감각 정보에 즉각적으로 응답하지만 항상 백그라운드에서 계획을 진행한다.</li>
+              <li>또한 백그라운드에서 모델 학습 프로세스도 진행한다.
+                <ul>
+                  <li>새로운 정보가 얻어지면 모델은 현실과 더 잘 일치하도록 업데이트된다.</li>
+                </ul>
+              </li>
+              <li>모델이 변경되면 지속적으로 계획되는 프로세스가 새로운 모델과 일치하도록 서서히 다른 방식으로 동작을 계산할 것임.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="what-is-a-model">What is a model?</h2>
+
+<ul>
+  <li>
+    <p>What is a Model?</p>
+
+    <ul>
+      <li>개요
+        <ul>
+          <li>실 생활에서의 결정의 예
+            <ul>
+              <li>결정할 때 많은 생각을 하지 않는 경우 - 직장에 어떻게 운전해서 가는지?</li>
+              <li>결정을 할 때 많은 가능한 시나리오를 생각하는 경우 - 한손으로 취약한 물건을 운반할 때 벌어질 수 있는 시나리오들을 상상하는 것</li>
+            </ul>
+          </li>
+          <li>이전에 배운 학습법의 경우
+            <ul>
+              <li>TD : 샘플링된 경험으로부터만 학습함</li>
+              <li>DP : 완성된 정보를 이용하여 계획함 (결정이 불필요)</li>
+            </ul>
+          </li>
+          <li>위 두 방법의 중간에 해당하는 방법을 통해 양 방법의 이점을 모두 활용할 방법 찾기
+            <ul>
+              <li>이번 장에서 다룰 Dyna 구조도 그러한 형태 중 하나임</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>학습목표
+        <ul>
+          <li>모델이 무엇인지와 어떻게 쓰이는지 설명</li>
+          <li>모델을 분포모델 (distribution models) 또는 샘플모델 (sample models) 로 분류</li>
+          <li>언제 분포모델을 쓸지 샘플모델을 쓸지 식별하기</li>
+        </ul>
+      </li>
+      <li>
+        <p>모델에 대하여</p>
+
+        <p><img src="/assets/images/posts/models_store_knowledge.png" alt="models_store_knowledge" /></p>
+
+        <ul>
+          <li>모델은 역학에 대한 지식을 저장한다.</li>
+          <li>이 장에서 모델은 상태전이와 보상에 대한 역학을 저장한다.
+            <ul>
+              <li>이것은 실제 행동을 하지 않고도 행동에 대한 결과를 살펴볼 수 있게 해줌</li>
+            </ul>
+          </li>
+        </ul>
+
+        <p><img src="/assets/images/posts/planning_with_models.png" alt="planning_with_models" /></p>
+
+        <ul>
+          <li>모델은 계획(Planning) 을 가능하게 한다.
+            <ul>
+              <li>계획 (Planning) 이란 모델을 이용하여 정책을 개선하는 프로세스를 말한다.</li>
+              <li>모델을 이용하여 계획하는 하나의 방법은 모델을 활용해 가상의 경험을 생성하여 가치함수와 정책을 개선하는 것이다.
+                <ul>
+                  <li>가상의 경험을 이용한다는 것은 최적 정책에 도달하기 위해 실제 환경과 상호작용이 덜 필요하다는 것을 의미함</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p>모델의 종류</p>
+
+            <p><a href="/assets/images/posts/sample_models.png">sample_models</a></p>
+
+            <ul>
+              <li>Sample model (샘플모델)
+                <ul>
+                  <li>기본 확률에서 도출된 실제 결과를 생성한 것</li>
+                  <li>예를 들어 하나의 코인을 던져 앞면인지 뒷면인지에 대한 무작위 시퀀스를 생성하는 것</li>
+                  <li>샘플 모델은 일련의 규칙에 따라 무작위 결과를 생성할 수 있기 때문에 저렴하다.
+                    <ul>
+                      <li>예를 들어 5개의 동전을 던지기 위해 임의로 하나의 동전을 독립적으로 5번 던져서 하나의 결과를 생성</li>
+                      <li>CloudFlare 사의 라바램프(불규칙한 자연적 무작위성)를 활용(샘플)한 암호화</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+
+            <p><img src="/assets/images/posts/distribution_models.png" alt="distribution_models" /></p>
+
+            <ul>
+              <li>Distribution model (분포모델)
+                <ul>
+                  <li>모든 결과의 가능성 또는 확률을 완전히 지정한 것</li>
+                  <li>예를 들어 하나의 코인을 던졌을 때 앞면일 확률은 50% 이고 뒷면인 확률은 50% 인 것, 이 정보를 이용해 특정 시퀀스가 발생할 확률을 생성할 수 있음</li>
+                  <li>분포모델은 더 많은 정보가 포함되어 있지만, 특정하기 어렵고 비용도 비싸다.
+                    <ul>
+                      <li>예를 들어 5개의 동전을 던질 때 가능한 앞면과 뒷면의 시퀀스 32개의 결과를 완전히 설명
+                        <ul>
+                          <li>결과의 명시 확률에 따라 결과를 샘플 모델로 사용할 수 있다. (분포모델이 더 많은 정보를 포함하고 있다.)</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Comparing Sample and Distribution Models</p>
+
+    <ul>
+      <li>학습목표
+        <ul>
+          <li>샘플모델과 분포모델의 장단점 설명</li>
+          <li>왜 샘플모델이 분포모델보다 간결하게 표현될 수 있는지 이유 설명</li>
+        </ul>
+      </li>
+      <li>12개의 주사위 문제
+        <ul>
+          <li>의도
+            <ul>
+              <li>12개의 주사위를 던지는 행위에 대한 샘플모델과 분포모델의 접근방식에 대해 알아보고자 함</li>
+            </ul>
+          </li>
+          <li>샘플모델
+            <ul>
+              <li>하나의 주사위를 12번 던져보는 것</li>
+              <li>프로그램으로 생각하면 1-6 사이의 무작위 수를 12번 생성하는 것</li>
+              <li>간결하고, 공동의 확률을 생각하지 않는다.</li>
+              <li>적은 메모리를 차지한다.</li>
+              <li>많은 샘플을 평균화 함으로써 예측되는 결과를 근사할 수 있다.</li>
+            </ul>
+          </li>
+          <li>분포모델
+            <ul>
+              <li>12개의 주사위가 가질 수 있는 모든 경우의 수와 그것에 대한 확률을 고려해야 한다.</li>
+              <li>12개의 주사위는 $6^{12}$ 의 경우의 수 (2176782336 가지) 를 가진다.</li>
+              <li>결과에 대한 정확한 확률을 생산한다는 장점이 있다.
+                <ul>
+                  <li>예상하는 결과를 직접 계산하거나 결과의 변동성을 정량화할 수 있음</li>
+                </ul>
+              </li>
+              <li>확률로 가중치를 부여한 모든 결과를 합산하여 정확한 예상결과를 계산할 수 있다.</li>
+              <li>위험을 평가할 수 있는 유연성이 있다.
+                <ul>
+                  <li>예를 들어 의사가 약을 처방할 때 가능한 많은 부작용과 발생할 가능성을 고려할 경우</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="planning">Planning</h2>
+
+<ul>
+  <li>
+    <p>Random Tabular Q-planning</p>
+
+    <ul>
+      <li>학습목표
+        <ul>
+          <li>정책 개선을 위해 계획이 어떻게 쓰이는지 설명</li>
+          <li>random-sample one-step tabular Q-planning 설명</li>
+        </ul>
+      </li>
+      <li>계획 (Planning)
+        <ul>
+          <li>모델을 강화학습에 적용 : 환경과의 상호작용 없이 모델을 활용하여 더 나은 의사결정을 할 수 있도록 하는 것
+            <ul>
+              <li>이 과정을 모델 경험을 통한 계획이라 한다.</li>
+            </ul>
+          </li>
+          <li>
+            <p>계획 (Planning) 의 정의</p>
+
+            <p><img src="/assets/images/posts/planning_diagram_1.png" alt="planning_diagram_1" /></p>
+
+            <ul>
+              <li>모델을 입력값으로 개선된 정책을 생성하는 과정</li>
+            </ul>
+
+            <p><img src="/assets/images/posts/planning_diagram_2.png" alt="planning_diagram_2" /></p>
+
+            <ul>
+              <li>계획에 대한 한 가지 접근 방식은 먼저 모델에서 경험을 샘플링하는 것임
+                <ul>
+                  <li>세상이 어떻게 돌아가는지에 대한 이해를 바탕으로 세상에서 가능한 시나리오를 상상하는 것과 같음.</li>
+                </ul>
+              </li>
+              <li>이 생성된 경험은 마치 실제 상호작용이 발생한 것처럼 가치함수에 대한 업데이트를 수행하는 데 사용할 수 있음.</li>
+              <li>이러한 개선된 가치에 탐욕 행동을 선택하면 정책이 개선됨.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>Random-sample one-step tabular Q-planning</p>
+
+        <ul>
+          <li>Q-learning 과 Q-planning 에 대해
+            <ul>
+              <li>Q-learning 은 환경에서 경험한 것을 사용하여 정책을 개선하기 위해 업데이트를 수행함.</li>
+              <li>Q-planning 은 모델의 경험을 사용하고, 유사한 업데이트를 수행하여 정책을 개선함.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <p><img src="/assets/images/posts/random_sample_one_step_tabular_q_planning.png" alt="random_sample_one_step_tabular_q_planning" /></p>
+
+        <ul>
+          <li>Random-sample one-step tabular Q-planning
+            <ul>
+              <li>가정
+                <ul>
+                  <li>전이 역학에 대한 샘플 모델을 가지고 있다고 가정한다.</li>
+                  <li>샘플에 상응하는 상태, 행동 쌍을 가지고 있다고 가정한다.</li>
+                </ul>
+              </li>
+              <li>하나의 선택지는 상태와 행동을 균일하게 샘플링하는 것이다.
+                <ul>
+                  <li>전체 상태, 행동 집합에서 랜덤하게 상태, 행동 쌍을 선택한다.</li>
+                  <li>그 뒤로 샘플 모델을 이용해 상태, 행동값에 대한 다음 상태와 보상을 질의한다.</li>
+                </ul>
+              </li>
+              <li>위의 입력값과 결과값을 이용해 Q-learning update 를 진행한다.</li>
+              <li>탐욕화를 이용해 정책을 개선한다.</li>
+            </ul>
+          </li>
+          <li>
+            <p>Planning 의 특징</p>
+
+            <p><img src="/assets/images/posts/planning_using_simulated_experiences.png" alt="planning_using_simulated_experiences" /></p>
+
+            <ul>
+              <li>Planning 은 환경과 에이전트의 상호작용 결과가 아닌, 가상의 (상상의) 경험을 사용한다.</li>
+            </ul>
+
+            <p><img src="/assets/images/posts/planning_advantages.png" alt="planning_advantages" /></p>
+
+            <ul>
+              <li>환경과 에이전트의 상호작용 없이 진행하거나, 상호작용을 하는 중에 동시에 진행되기도 한다.
+                <ul>
+                  <li>행동이 특정 시간대에 일어나면서, 학습 업데이트가 상대적으로 더 빠를 경우 시간적 공백이 생긴다.</li>
+                  <li>예를 들면, 이 공백 시간에 계획을 업데이트 할 수 있다.</li>
+                  <li>예를 들어 로봇이 절벽 쪽에 다가갔을때의 결과가 모델에 있고, 가치함수나 정책에 아직 반영이 되지 않은 경우 가상의 경험을 생성하여 계획을 진행해 볼 수 있다.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="dyna-as-formalism-for-planning">Dyna as formalism for planning</h2>
+
+<ul>
+  <li>
+    <p>The Dyna Architecture</p>
+
+    <ul>
+      <li>
+        <p>개요</p>
+
+        <p><img src="/assets/images/posts/q_learning_q_planning.png" alt="q_learning_q_planning" /></p>
+
+        <ul>
+          <li>Direct RL : World (환경) 와 직접적인 상호작용을 하고, Q-learning 을 통해 학습하는 것</li>
+          <li>Planning : 모델로부터 생성된 가상 경험을 통해 학습하는 것</li>
+          <li>Dyna 구조 : Direct RL + Planning</li>
+        </ul>
+      </li>
+      <li>학습목표
+        <ul>
+          <li>모델로부터의 가상경험과 환경으로부터의 상호작용 간의 차이점을 이해</li>
+          <li>Dyna 구조를 통해 직접 RL(direct RL) 과 계획 (planning) 업데이트를 결합하는 방법 이해</li>
+        </ul>
+      </li>
+      <li>Q-learning 과 Q-planning 의 결합
+        <ul>
+          <li>Q-learning update: 환경으로부터의 경험을 통해 정책과 가치함수 업데이트</li>
+          <li>Q-planning update: 모델에서 생성한 경험을 통해 정책과 가치함수 업데이트</li>
+          <li>Dyna 구조를 통한 Q-learning 과 Q-planning 의 결합</li>
+        </ul>
+      </li>
+      <li>
+        <p>Dyna 구조</p>
+
+        <p><img src="/assets/images/posts/dyna_architecture.png" alt="dyna_architecture" /></p>
+
+        <ul>
+          <li>(중간부분) 환경과의 상호작용을 통해 경험의 흐름을 생성한다.</li>
+          <li>(왼쪽부분) 위 경험을 직접적으로 이용해 정책/가치함수를 업데이트 하는 것을 direct RL update 라 한다.</li>
+          <li>(오른쪽 부분) Planning 을 위해서는 모델이 필요하다. 환경과의 상호작용을 통해 얻은 경험으로 모델을 학습시킬 수 있다.
+            <ul>
+              <li>모델은 model experience 를 생성한다.</li>
+              <li>위 경험을 생성할 때, 어떠한 가상 경험을 생성하여 계획을 구성할지 제어하는 것을 search control 이라 한다.</li>
+              <li>planning update 는 모델로부터 생성된 경험으로 정책/가치함수를 업데이트 하는 것을 말한다.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Dyna 의 예시 : simple maze
+        <ul>
+          <li>
+            <p>문제의 설명</p>
+
+            <p><img src="/assets/images/posts/dyna_example_maze_1.png" alt="dyna_example_maze_1" /></p>
+
+            <ul>
+              <li>로봇이 미로를 탈출하는 문제</li>
+              <li>로봇은 Goal 에서 +1 의 보상을 얻고, 그렇지 않은 부분에서는 0의 보상을 얻는다.</li>
+            </ul>
+
+            <p><img src="/assets/images/posts/dyna_example_maze_2.png" alt="dyna_example_maze_2" /></p>
+
+            <ul>
+              <li>로봇은 첫 시도에 헤메게 되며, 결국 골에 도착하고 보상 1 을 획득, 에피소드를 종료하게 된다.
+                <ul>
+                  <li>노랗게 표시된 부분은 로봇에 실제 한번 이상 방문한 상태이다.</li>
+                  <li>로봇은 행동가치함수를 업데이트 하는데, 실제 영향을 받는 부분은 보라색 상태 뿐이다.
+                    <ul>
+                      <li>$Q(s,a) \gets Q(s,a) + \alpha (r + \gamma \max_{a’} Q(s’,a’) - Q(s,a))$</li>
+                      <li>보상값이 존재하는 상태가 종료 상태 뿐이기 때문</li>
+                      <li>위의 업데이트가 direct RL 을 통해 이루어진 업데이트이다.</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>Dyna 는 첫 번째 에피소드 동안 생성된 모든 경험을 이용하여 모델을 학습한다.
+                <ul>
+                  <li>노랗게 표시된 부분이 첫 에피소드 동안 방문한 상태이다. 로봇은 전체 상태를 방문하지 않았지만, 대부분의 상태를 이미 방문하였다.</li>
+                  <li>Dyna 는 모든 타임스텝에 대해 planning 을 진행한다.
+                    <ul>
+                      <li>하지만, planning 은 첫 에피소드 동안에는 정책에 영향을 주지 않는다. (비록 모델이 각 타입스텝마다 점점 정확해지더라도…)</li>
+                      <li>첫 에피소드가 끝나면, planning 이 작동하기 시작한다.
+                        <ul>
+                          <li>모델을 통해 노랗게 표시된 부분에서 어떠한 반환값이 나올 지 이미 알고 있다.</li>
+                          <li>Dyna 는 이미 방문한 상태-행동 쌍에 대한 전이를 시뮬레이션 할 수 있다. (World 의 모방)</li>
+                          <li>Planning 의 각 타임스텝 동안 가상의 경험을 통해 Q-learning 업데이트를 진행할 수 있다.</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+
+            <p><img src="/assets/images/posts/dyna_example_maze_3.png" alt="dyna_example_maze_3" /></p>
+
+            <ul>
+              <li>충분한 Planning 단계를 거쳐, 에이전트는 모든 방문한 상태에 대한 정책을 업데이트 할 수 있다.
+                <ul>
+                  <li>Dyna 는 더 많은 계산을 하지만, 제한된 경험을 보다 효율적으로 활용한다.</li>
+                  <li>이것은 Cartoon 의 예시일 뿐, 실제로 에이전트는 위 정책보다 더 탐색적으로 행동하게 되고, Planning 단계에서 정책은 계속 수정되게 된다.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>The Dyna Algorithm</p>
+
+    <ul>
+      <li>학습목표
+        <ul>
+          <li>Tabular Dyna-Q 알고리즘 설명</li>
+          <li>Tabular Dyna-Q 내에서 직접RL과 계획 업데이트 식별</li>
+          <li>Tabular Dyna-Q 내에서 모델학습과 탐색제어 요소를 식별</li>
+        </ul>
+      </li>
+      <li>Tabular Dyna-Q 에서의 모델 학습
+        <ul>
+          <li>
+            <p>우선 Tabular Dyna-Q 는 결정론적 전이를 가정한다.</p>
+
+            <p><img src="/assets/images/posts/model_learning_deterministic_model.png" alt="model_learning_deterministic_model" /></p>
+
+            <ul>
+              <li>위 그림에서 토끼가 A 상태에서 오른쪽으로 움직이기로 결정하였다면, 오직 한 종류의 결과만이 발생한다. (B, 0)</li>
+              <li>에이전트가 위 세 가지 상태-행동을 경험하였다면, 모델은 위 세 가지 상태-행동에 따르는 결과를 알게 된다.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>Tabular Dyna-Q psuedo code</p>
+
+        <p><img src="/assets/images/posts/tabular_dyna_q_psuedo_code_1.png" alt="tabular_dyna_q_psuedo_code_1" /></p>
+
+        <ul>
+          <li>에이전트가 환경과 상호작용 하며, $\varepsilon$-greedy 정책을 따르고 있다.</li>
+          <li>위 정책에 따른 행동을 하면, 결과 보상과 다음 상태를 관측할 수 있다.</li>
+          <li>위 값들도 Q-learning update 를 진행한다. (여기까지가 direct-RL)</li>
+          <li>(여기에서 멈춘다면, Q-learning 알고리즘이 된다.)</li>
+        </ul>
+
+        <p><img src="/assets/images/posts/tabular_dyna_q_psuedo_code_2.png" alt="tabular_dyna_q_psuedo_code_2" /></p>
+
+        <ul>
+          <li>Dyna-Q는 이 전이를 이용해 model learning step 을 진행한다. (Model-free method 와 차이)
+            <ul>
+              <li>모델은 위의 전이를 기억, 저장한다. (환경이 결정론적이라는 가정)</li>
+            </ul>
+          </li>
+        </ul>
+
+        <p><img src="/assets/images/posts/tabular_dyna_q_psuedo_code_3.png" alt="tabular_dyna_q_psuedo_code_3" /></p>
+
+        <ul>
+          <li>Dyna-Q는 planning 을 n-step 진행한다.
+            <ul>
+              <li>각각의 planning step 은 3가지 단계를 포함한다.
+                <ul>
+                  <li>search control : 이전 방문한 상태, 행동 쌍을 랜덤하게 결정한다.</li>
+                  <li>model query : 위 선택된 상태, 행동 쌍을 이용, 모델에 다음 상태와 보상을 질의한다.</li>
+                  <li>value update : Q-learning update 를 진행한다.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <p><img src="/assets/images/posts/tabular_dyna_q_planning.png" alt="tabular_dyna_q_planning" /></p>
+
+        <ul>
+          <li>Dyna-Q는 각 전이에 대해 많은 planning update 를 수행한다.
+            <ul>
+              <li>첫 에피소드 184 step 이후 (이 때의 결과를 Model learning 에 활용)</li>
+              <li>두 번째 에피소드 1 step 당 100 회의 planning 을 진행함으로서 많은 정책이 개발되었음을 확인할 수 있음.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Dyna &amp; Q-learning in a Simple Maze
+    <ul>
+      <li></li>
+    </ul>
+  </li>
+  <li>학습목표
+    <ul>
+      <li>Tabular Dyna-Q 알고리즘 설명</li>
+      <li>Tabular Dyna-Q 내에서 직접RL과 계획 업데이트 식별</li>
+      <li>Tabular Dyna-Q 내에서 모델학습과 탐색제어 요소를 식별</li>
+      <li>직접 경험과 시뮬레이션된 경험으로부터의 학습이 성능에 어떤 영향을 주는지 설명</li>
+      <li>모델이 정확할 때 시뮬레이션된 경험이 어떻게 활용 가능한지 설명</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="dealing-with-inaccurate-models">Dealing with inaccurate models</h2>
+
+<ul>
+  <li>학습목표
+    <ul>
+      <li>어떠한 모델이 부정확한건지 식별하는 방법</li>
+      <li>부정확한 모델에서 계획이 어떤 효과를 주는지 설명</li>
+      <li>부분적으로 부정확한 모델에서 Dyna 가 계획을 성공적으로 하는 방법 서술</li>
+      <li>모델의 부정확성이 또다른 탐색-이용 trade-off 를 생성하는지 설명</li>
+      <li>위의 trade-off 를 Dyna-Q+ 가 해법을 제안하는 방법 설명</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="관련-자료-rlbook-pages-129-134">관련 자료 (RLbook Pages 129-134)</h2>
+
+<ul>
+  <li>
+    <p>Sarsa: On-policy TD Control</p>
+
+    <ul>
+      <li>개요
+        <ul>
+          <li>제어 문제를 위한 TD 예측 방법
+            <ul>
+              <li>평소와 같이 GPI (generalized policy iteration) 패턴을 따른다.</li>
+              <li>이번에는 평가 혹은 예측 부분을 TD 방식을 이용한다.</li>
+              <li>몬테카를로 방식과 마찬가지로 탐색과 이용사이의 등가교환 문제에 직면하게 된다.
+                <ul>
+                  <li>이에 대한 2가지 접근 방법 : On-policy, Off-policy</li>
+                </ul>
+              </li>
+              <li>이 장에서는 On-policy TD 제어 방법을 활용한다.</li>
+            </ul>
+          </li>
+          <li>On-policy TD 제어
+            <ul>
+              <li>첫 단계로 상태가치함수가 아닌 행동가치함수를 학습해야 한다.</li>
+              <li>On-policy 방식에서는 모든 상태 $s$ 및 동작 $a$ 에 대해 현 정책 $\pi$ 에 대한 $q_\pi (s,a)$ 를 추정해야 한다.
+                <ul>
+                  <li>이는 위 $v_\pi$ 학습의 TD 방식과 거의 동일하게 수행할 수 있음.
+                    <ul>
+                      <li>에피소드는 상태와 상태-행동 쌍의 번갈아가는 순서로 구성되는 것을 기억한다.</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+
+            <p><img src="/assets/images/posts/6_4_1_td_sequence.png" alt="6_4_1_td_sequence" /></p>
+
+            <ul>
+              <li>이전 상태가치함수에 대한 TD 예측문제와의 비교
+                <ul>
+                  <li>이전 섹션에서는 상태에서 상태로의 전이를 고려하고 상태의 가치를 학습했다면 이제는 상태-동작 쌍에서 상태-동작 쌍으로의 전이를 고려해서 상태-동작 쌍의 가치를 학습한다.</li>
+                  <li>위 두 경우의 형식은 동일하다 : 보상 프로세스가 있는 Markov chain</li>
+                  <li>TD(0)에 따른 상태 값의 수렴을 보장하는 정리는 행동 값에 대한 알고리즘에도 적용된다.</li>
+                </ul>
+              </li>
+            </ul>
+
+            <p><img src="/assets/images/posts/6_4_2_td_algorithm_for_action_value.png" alt="6_4_2_td_algorithm_for_action_value" /></p>
+
+            <ul>
+              <li>업데이트 식과 Sarsa 알고리즘에 대해
+                <ul>
+                  <li>이 업데이트는 비종료 상태 $S_t$ 로부터 모든 전이 후에 수행된다.</li>
+                  <li>만약 $S_{t+1}$ 이 종료 상태라면, $Q(S_{t+1}, A_{t+1})$ 은 0으로 정의된다.</li>
+                  <li>이 규칙은 상태-동작 쌍에서 다음 상태-동작 쌍으로의 전이를 이루는 이벤트인 $(S_t, A_t, R_{t+1}, S_{t+1}, A_{t+1})$ 의 모든 요소를 사용한다.</li>
+                  <li>이러한 다섯 요소에서 알고리즘의 이름 Sarsa 가 유래되었다.</li>
+                </ul>
+              </li>
+            </ul>
+
+            <p><img src="/assets/images/posts/6_4_3_sarsa_backup_diagram.png" alt="6_4_3_sarsa_backup_diagram" /></p>
+
+            <ul>
+              <li>Sarsa 예측 방법 기반 정책 제어 알고리즘
+                <ul>
+                  <li>모든 On-policy 방법과 마찬가지로 행동 정책 $\pi$ 에 대해 $q_\pi$ 를 지속적으로 추정하고 동시에 $\pi$ 를 $q_\pi$ 에 대한 탐욕 정책으로 변경한다.</li>
+                </ul>
+              </li>
+              <li>Sarsa 알고리즘과 수렴 속성
+                <ul>
+                  <li>Sarsa 알고리즘의 수렴은 정책이 Q에 의존하는 특성에 따라 달라진다.
+                    <ul>
+                      <li>예 : $\varepsilon$-greedy, $\varepsilon$-soft 정책 등</li>
+                    </ul>
+                  </li>
+                  <li>Sarsa는 모든 상태-행동 쌍이 무한한 횟수로 방문되고 정책이 한계에서 탐욕적인 정책으로 수렴하는 경우 (예를들어 $\varepsilon$-greedy 정책에서 $\varepsilon = \frac{1}{t}$) 확률 1로 최적 정책과 동작-가치함수로 수렴한다.</li>
+                </ul>
+              </li>
+            </ul>
+
+            <p><img src="/assets/images/posts/6_4_4_sarsa_psuedo_code.png" alt="6_4_4_sarsa_psuedo_code" /></p>
+          </li>
+        </ul>
+      </li>
+      <li>예제 6.5: Windy Gridworld
+        <ul>
+          <li>문제의 정의
+            <ul>
+              <li>일반적인 그리드월드 (시작 상태, 목표 상태 존재) 에서 한 가지 다른 점이 존재
+                <ul>
+                  <li>그리드 중간을 통해 위로 향하는 크로스윈드가 존재함
+                    <ul>
+                      <li>바람의 세기는 열마다 다름.</li>
+                      <li>각 열 아래에 바람의 세기가 표시되어 있음.</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>행동 : 상, 하, 좌, 우
+                <ul>
+                  <li>중간 지역에서는 바람에 의해 위로 이동됨
+                    <ul>
+                      <li>예를 들어, 목표 상태의 오른쪽 셀에서 왼쪽으로 이동하면 목표 상태의 바로 위의 셀로 이동함</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>할인이 없는 에피소드 기반의 작업</li>
+              <li>목표에 도달할 때까지 보상은 -1 로 제공</li>
+            </ul>
+          </li>
+          <li>
+            <p>결과</p>
+
+            <p><img src="/assets/images/posts/6_4_5_example_6_5_windy_gridworld.png" alt="6_4_5_example_6_5_windy_gridworld" /></p>
+
+            <ul>
+              <li>위 그래프는 $\varepsilon$-greedy Sarsa 를 적용한 결과를 보여준다. ($\varepsilon = 0.1, \alpha = 0.5$, $Q(s,a,)=0$ (초기값, 모든 s, a 에 대해))</li>
+              <li>그래프의 증가하는 기울기는 시간이 지남에 따라 목표에 더 빨리 도달하였음을 보여준다.</li>
+              <li>8000 번째 타임 스텝에서는 탐욕 정책이 이미 최적이었음 (inset 에서 해당 경로가 표시됨)</li>
+              <li>지속적인 $\varepsilon$-greedy 탐사로 인해 평균 에피소드 길이는 약 17단계로 유지되었으며, 최소값인 15보다 2단게 더 많았다.</li>
+              <li>Monte Carlo 방법은 모든 정책에 대해 종료가 보장되지 않기 때문에 여기에 쉽게 사용할 수 없음.
+                <ul>
+                  <li>에이전트가 같은 상태에 머무르는 것을 유도하는 정책을 찾은 경우 다음 에피소드는 결코 종료되지 않음.</li>
+                </ul>
+              </li>
+              <li>Sarsa 와 같은 온라인 학습방법은 이러한 문제가 없다.
+                <ul>
+                  <li>에피소드 동안 빠르게 학습하여 이러한 정책이 좋지 않음을 배우고 다른 정책으로 전환한다.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Q-learning: Off-policy TD Control</p>
+
+    <ul>
+      <li>개요
+        <ul>
+          <li>강화학습의 초기 돌파구 중 하나는 Q-learning (Watkins, 1989) 으로 알려진 Off-policy TD Control 알고리즘의 개발이었다.</li>
+        </ul>
+
+        <p><img src="/assets/images/posts/6_5_1_q_learning_algorithm.png" alt="6_5_1_q_learning_algorithm" /></p>
+
+        <ul>
+          <li>위 경우, 학습된 행동가치함수인 Q는 따르는 정책과는 독립적으로 최적의 행동가치함수인 $q_\pi$ 를 직접 근사함
+            <ul>
+              <li>이것은 알고리즘의 분석을 크게 단순화하고 초기 수렴 증명을 가능하게 함</li>
+              <li>정책은 여전히 영향을 미치며, 어떤 상태-행도 쌍이 방문되고 업데이트되는지를 결정함.
+                <ul>
+                  <li>그러나 올바른 수렴을 위해 필요한 것은 모든 쌍이 계속해서 업데이트 되는 것 뿐임</li>
+                  <li>이것은 일반적인 경우에 최적의 행동을 찾기 위해 보장된 어떤 방법이든 필요한 최소한의 요구사항임</li>
+                </ul>
+              </li>
+              <li>위 가정과 일반적인 확률 근사 조건의 변형에 따라, Q는 확률 1로 $q_\pi$ 에 수렴한다는 것이 증명되었음.</li>
+            </ul>
+          </li>
+          <li>아래는 Q-러닝 알고리즘의 psuedo code 이다.</li>
+        </ul>
+
+        <p><img src="/assets/images/posts/6_5_2_q_learning_psuedo_code.png" alt="6_5_2_q_learning_psuedo_code" /></p>
+      </li>
+      <li>예제 6.6: Cliff Walking
+        <ul>
+          <li>이 그리드월드 예제에서는 Sarsa와 Q-러닝을 비교하여 On-policy (Sarsa) 및 Off-policy (Q-learning) 방법의 차이를 강조한다.</li>
+        </ul>
+
+        <p><img src="/assets/images/posts/6_5_3_example_6_6_cliff_walking.png" alt="6_5_3_example_6_6_cliff_walking" /></p>
+
+        <ul>
+          <li>문제의 정의
+            <ul>
+              <li>표준적인 할인되지 않은 에피소드 형태</li>
+              <li>시작 상태와 목표 상태가 존재</li>
+              <li>행동 : 위, 아래, 오른쪽, 왼쪽</li>
+              <li>“Cliff” 로 표시된 영역으로의 이동을 제외한 모든 전이의 보상은 -1</li>
+              <li>“Cliff” 로 표시된 영역으로 진입하면 -100의 보상을 받고 즉시 시작지점으로 되돌아감.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <p><img src="/assets/images/posts/6_5_4_example_6_6_cliff_walking_result.png" alt="6_5_4_example_6_6_cliff_walking_result" /></p>
+
+        <ul>
+          <li>결과
+            <ul>
+              <li>위 그래프는 $\varepsilon$-greedy 행동 선택 ($\varepsilon = 0.1$) 정책에 대한 Sarsa 와 Q-learning 방법의 성능을 보여준다.
+                <ul>
+                  <li>초기 이후에 Q-러닝은 최적 정책인 절벽 가장자리를 따라 이동하는 경로의 값을 학습한다.</li>
+                  <li>그러나 $\varepsilon$-greedy 정책 때문에 가끔 절벽에서 떨어지는 경우가 발생한다.</li>
+                  <li>반면 Sarsa 는 행동 선택을 고려하여 멀지만 더 안정적인 경로를 학습한다.</li>
+                  <li>Q-러닝은 사실 최적의 정책을 학습하지만 온라인 성능은 Sarsa 보다 나쁘게 된다. (Sarsa 는 우회정책을 학습한다.)</li>
+                  <li>$\varepsilon$ 이 점차적으로 감소한다면 두 방법 모두 최적 정책으로 수렴하게 된다.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Expected Sarsa</p>
+
+    <ul>
+      <li>개요
+        <ul>
+          <li>Q-러닝과 동일하지만 다음 상태-행동 쌍에 대한 최대값 (Q-러닝) 대신 현재 정책에 따라 각 행동의 확률을 고려하여 예상값을 사용하는 학습 알고리즘을 가정해보자.</li>
+          <li>즉 업데이트 법칙의 알고리즘은 아래와 같지만, 나머지 부분은 Q-러닝의 영역을 따른다고 가정한다.</li>
+        </ul>
+
+        <p><img src="/assets/images/posts/6_6_1_expected_sarsa_algorithm.png" alt="6_6_1_expected_sarsa_algorithm" /></p>
+
+        <ul>
+          <li>다음의 상태 $S_{t+1}$ 이 주어지는 측면에서 알고리즘은 결정론적으로 Sarsa 와 같은 움직임 이나 예상값을 사용하는 측면에서 Expected Sarsa 라고 부른다.</li>
+        </ul>
+
+        <p><img src="/assets/images/posts/6_6_2_expected_sarsa_backup_diagram.png" alt="6_6_2_expected_sarsa_backup_diagram" /></p>
+
+        <ul>
+          <li>Expected Sarsa 의 백업 다이어그램은 위와 같다.</li>
+          <li>Expected Sarsa 는 계산적으로 Sarsa 보다 복잡하다.
+            <ul>
+              <li>그러나 결과에서 $A_{t+1}$ 의 무작위 선택에 따른 분산을 제거해준다.</li>
+              <li>즉, 같은 양의 학습경험을 할 경우 Sarsa 보다 성능이 조금 더 나으리라 기대할 수 있고, 실제로도 그렇다.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <p><img src="/assets/images/posts/6_6_3_expected_sarsa_cliff_walking_result.png" alt="6_6_3_expected_sarsa_cliff_walking_result" /></p>
+
+        <ul>
+          <li>위의 결과는 cliff-walking 문제에서 Expected Sarsa 와 Sarsa, Q-learning 간 결과의 비교값이다.
+            <ul>
+              <li>Expected Sarsa는 이 문제에서 Sarsa에 비해 상당한 이점을 유지한다.</li>
+              <li>또한, Expected Sarsa는 step-size 파라미터 $\alpha$ 의 다양한 값 범위에서 Sarsa에 비해 상당한 개선을 보여준다.</li>
+              <li>Cliff walking 에서 상태 전이는 모두 결정론적이며, 모든 무작위성은 정책으로부터 발생한다.
+                <ul>
+                  <li>이와 같은 경우, Expected Sarsa는 $\alpha = 1$ 로 안전하게 설정할 수 있으며, 한계적인 성능 저하 없이 수렴 성능을 유지할 수 있습니다.</li>
+                  <li>반면, Sarsa는 작은 $\alpha$ 값에서만 잘 동작하며, 이 경우 학습 초기 성능(Interim Performance)이 낮다.
+                    <ul>
+                      <li>Asymptotic Performance : 알고리즘이 충분한 학습을 진행한 후에 얻게 되는 최종적인 성능을 나타냄. 이는 알고리즘이 수렴하여 최적 정책과 가치 함수를 얻었을 때의 성능을 의미.</li>
+                      <li>Interim Performance : 알고리즘이 학습 도중에 어떤 성능을 보이는지를 나타냄. 즉, 알고리즘이 아직 수렴하지 않은 초기 학습 단계에서의 성능을 평가하는 지표.</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>이 Cliff walking 결과에서 Expected Sarsa 는 On-policy 로 사용되었지만, 목표 정책 $\pi$ 와 다른 정책을 사용하여 동작을 생성할 수 있으며, 이 경우 Off-policy 알고리즘이 된다.</li>
+              <li>예를 들어, $\pi$ 가 탐욕 정책이가 동작이 더 탐색적인 경우, Expected Sarsa 는 정확히 Q-learning 이 된다.
+                <ul>
+                  <li>이런 의미에서 Expected Sarsa 는 Q-learning 을 포괄하고 일반화하며, Sarsa 에 비해 신뢰할 수 있는 개선을 제공한다.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>적은 추가적인 계산 비용만 제외하면, Expected Sarsa 는 더 잘 알려진 TD 제어 알고리즘인 두 알고리즘을 완전히 압도할 수 있다.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="td-for-control">TD for Control</h2>
+
+<ul>
+  <li>
+    <p>Sarsa: GPI with TD</p>
+
+    <ul>
+      <li>학습목표
+        <ul>
+          <li>GPI (generalized policy iteration) 을 TD 와 함께 사용하여 개선된 정책을 찾는 법 설명하기.</li>
+          <li>Sarsa 제어 알고리즘 서술하기.</li>
+        </ul>
+      </li>
+      <li>GPI (generalized policy iteration) 에 대한 복기
+        <ul>
+          <li>GPI : policy iteration (policy evaluation $\to$ policy improvement)</li>
+          <li>GPI in Monte-carlo : 에피소드 진행 후 policy evaluation $\to$ policy improvement)
+            <ul>
+              <li>몬테카를로의 경우 정책개선 이전에 완전한 정책평가를 하지 않는다. (에피소드마다 정책평가, 정책개선을 한다.)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>TD within GPI
+        <ul>
+          <li>GPI 에 TD 를 적용하기 위해서는 행동가치함수를 학습해야 한다.
+            <ul>
+              <li>이전 섹션에서 TD 를 상태가치함수로 학습 (상태-상태)
+                <ul>
+                  <li>여기에서는 행동가치함수 (상태,행동-상태,행동) 의 값을 학습 : 이것을 Sarsa 예측이라고 함.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>Sarsa</p>
+
+        <p><img src="/assets/images/posts/sarsa_algorithm.png" alt="sarsa_algorithm" /></p>
+
+        <ul>
+          <li>Sarsa 의 약어는 업데이트에 쓰인 데이터 요소를 뜻함
+            <ul>
+              <li>$S_t$ : state</li>
+              <li>$A_t$ : action</li>
+              <li>$R_{t+1}$ : reward</li>
+              <li>$S_{t+1}$ : next state</li>
+              <li>$A_{t+1}$ : next action</li>
+            </ul>
+          </li>
+          <li>Sarsa 의 업데이트식은 상태가치함수를 업데이트하는 TD 식과 유사
+            <ul>
+              <li>단, Sarsa 는 상태-행동 쌍에 대한 행동가치함수 $Q(S_t,A_t)$ 에 대해 업데이트함.</li>
+            </ul>
+          </li>
+          <li>위의 그림은 정책평가에 대한 내용만 담겨 있다. (고정된 정책에 대한 행동가치함수의 학습)
+            <ul>
+              <li>그러나 GPI 의 요소를 이용, 제어 알고리즘으로 변환할 수 있다. (예: $\varepsilon$-greedy)
+                <ul>
+                  <li>Sarsa 제어 : TD 학습을 적용한 GPI 의 한 예</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Sarsa in the Windy GridWorld</p>
+
+    <ul>
+      <li>학습목표
+        <ul>
+          <li>Sarsa 제어 알고리즘이 예제 MDP 에서 작동하는 방식 이해하기.</li>
+          <li>학습 알고리즘의 성능 분석 방법을 경험하기</li>
+        </ul>
+      </li>
+      <li>
+        <p>The Windy Gridworld</p>
+
+        <ul>
+          <li>
+            <p>문제의 정의</p>
+
+            <p><img src="/assets/images/posts/sarsa_example_windy_gridworld_1.png" alt="sarsa_example_windy_gridworld_1" /></p>
+
+            <ul>
+              <li>State : 각각 하나의 시작과 종료상태가 존재
+                <ul>
+                  <li>열에 따라 바람이 위쪽 방향으로 불어, 의도한 행동의 결과와 다른 상태전이가 일어남
+                    <ul>
+                      <li>예를 들어 위 그림에서 에이전트는 왼쪽으로 움직이는게 아니라 좌측 상단 (대각선) 으로 움직임</li>
+                    </ul>
+                  </li>
+                  <li>가장자리에 부딪힐 경우 아무 일도 일어나지 않음</li>
+                </ul>
+              </li>
+              <li>Action : 에이전트는 4개의 방향으로 이동이 가능</li>
+              <li>Reward : 모든 상태에서 -1
+                <ul>
+                  <li>에이전트가 최대한 빨리 종료상태에 도달하도록 동기부여함</li>
+                </ul>
+              </li>
+              <li>Discount factor $\gamma$ : 1 (에피소딕)</li>
+            </ul>
+          </li>
+          <li>
+            <p>문제에 Sarsa 를 적용하고 그 결과를 해석</p>
+
+            <p><img src="/assets/images/posts/sarsa_example_windy_gridworld_2.png" alt="sarsa_example_windy_gridworld_2" /></p>
+
+            <ul>
+              <li>
+                <p>Sarsa 설정값</p>
+
+                <ul>
+                  <li>정책 : $\varepsilon$-greedy action selection
+                    <ul>
+                      <li>$\varepsilon = 0.1$</li>
+                    </ul>
+                  </li>
+                  <li>$\alpha = 0.5$</li>
+                  <li>초기값 = 0
+                    <ul>
+                      <li>optimistic initial values : 초기 탐색 장려</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <p>결과 해석</p>
+                <ul>
+                  <li>그래프 : 각 스텝 별로 몇 번의 에피소드를 끝냈는지를 의미
+                    <ul>
+                      <li>위 결과는 각각 100번의 시행의 평균 값임</li>
+                      <li>첫 몇 번의 에피소드는 2000 스텝을 진행하고 종료됨</li>
+                      <li>그래프의 기울기는 점점 가파르게 상승하고 이는 짧은 스텝으로 에피소드를 종료함을 뜻함</li>
+                      <li>7000 스텝 즈음 기울기는 더이상 상승하지 않는다. (탐욕 정책의 개선 종료-최적화)</li>
+                    </ul>
+                  </li>
+                  <li>몬테카를로 방법은 위 방식에 맞지 않다.
+                    <ul>
+                      <li>많은 정책이 종료상태까지 도달하지 못함</li>
+                      <li>몬테카를로 방식은 에피소드가 종료되어야 학습을 시작함
+                        <ul>
+                          <li>따라서 결정론적 정책은 함정에 빠지고, 좋은 정책을 배우지 못하게 됨
+                            <ul>
+                              <li>예를 들어 초기 정책이 왼쪽으로 이동하는 것이라면 에피소드가 영원히 끝나지 않게 됨</li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>Sarsa 는 에피소드를 진행하며 현재의 정책이 안좋은 정책이라는 것을 학습하고, 정책을 바꾸게 된다.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="off-policy-td-control--q-learning">Off-policy TD Control : Q-learning</h2>
+
+<ul>
+  <li>
+    <p>What is Q-learning?</p>
+
+    <ul>
+      <li>학습목표
+        <ul>
+          <li>Q-learning 알고리즘 서술하기.</li>
+          <li>Q-learning 과 벨만 최적 방정식 (Bellman Optimality equations) 간 관계 설명하기.</li>
+        </ul>
+      </li>
+      <li>The Q-learning algorithm
+        <ul>
+          <li>Q 러닝은 1989년에 개발되었고, 강화학습 알고리즘 중 첫번째 메인 온라인 학습 알고리즘이다.</li>
+        </ul>
+
+        <p><img src="/assets/images/posts/q_learning_psuedo_code.png" alt="q_learning_psuedo_code" /></p>
+
+        <ul>
+          <li>위 그림은 Q-learning 알고리즘의 psuedo code 이다.
+            <ul>
+              <li>에이전트는 상태에서 행동을 선택하고, 다음 상태와 보상을 관측한다.</li>
+              <li>이후 업데이트를 진행하고 사이클이 반복된다.</li>
+              <li>타 알고리즘과의 차이점은 업데이트 규칙에 있다.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <p><img src="/assets/images/posts/q_learning_sarsa_bellman_equation.png" alt="q_learning_sarsa_bellman_equation" /></p>
+
+        <ul>
+          <li>위 그림은 벨만방정식과 Sarsa, Q-learning 간의 수식 비교이다.
+            <ul>
+              <li>Sarsa : 벨만방정식의 행동가치 식과 유사
+                <ul>
+                  <li>Sarsa 는 벨만방정식의 행동가치 식을 풀기 위한 샘플기반의 알고리즘이다.</li>
+                  <li>Sarsa 는 샘플기반의 정책 반복 (policy iteration) (벨만 방정식 행동가치함수 사용)</li>
+                </ul>
+              </li>
+              <li>Q-learning : 벨만최적방정식의 행동가치 식과 유사
+                <ul>
+                  <li>Q-learning 또한 환경으로부터의 샘플을 이용해 벨만 방정식을 풀지만, 벨만 방정식 대신 벨만 최적 방정식을 사용한다.</li>
+                  <li>즉, $q_*$ 를 바로 학습함으로서, 정책평가와 정책개선 단계를 번갈아 가며 진행할 필요가 없게 된다.</li>
+                  <li>Q-learning 은 샘플 기반의 가치 반복 (value iteration) (벨만 최적 방정식 행동가치함수 사용)</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Q-learning 은 Value iteration 과 마찬가지로 최적가치함수에 수렴한다. (에이전트가 모든 상태-행동 쌍에 대해 지속적으로 탐색한다는 가정)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Q-learning in the Windy Grid World</p>
+
+    <ul>
+      <li>학습목표
+        <ul>
+          <li>Q-learning 이 예제 MDP 에서 작동하는 방식 이해</li>
+          <li>단일 MDP 에서 여러 학습 알고리즘의 성능을 비교하는 방식 경험</li>
+          <li>Q-learning 과 Sarsa 의 차이점 이해하기.</li>
+        </ul>
+      </li>
+      <li>
+        <p>The Windy Gridworld</p>
+
+        <p><img src="/assets/images/posts/q_learning_sarsa_windy_grid_world_1.png" alt="q_learning_sarsa_windy_grid_world_1" /></p>
+
+        <ul>
+          <li>Sarsa 와 Q-learning 간 비교 ($\alpha = 0.5$)
+            <ul>
+              <li>Q-learning 이 Sarsa 보다 뛰어난 결과를 보여준 이유를 명확히 설명할 수 없지만, 아마 update target 이 더 stable 했기 때문으로 추정함.
+                <ul>
+                  <li>Sarsa 의 경우 탐색에 해당하는 샘플의 업데이트가 큰 영향을 줬을 수도 있음. (탐색적인 행동을 할 때마다 update target 이 변경될 수 있음)</li>
+                  <li>Q-learning 의 경우 max 값을 이용해 업데이트 하기 때문에, 한 행동이 이전 행동보다 더 낫다는 것을 학습할 때에 update target 이 변경됨.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <p><img src="/assets/images/posts/q_learning_sarsa_windy_grid_world_2.png" alt="q_learning_sarsa_windy_grid_world_2" /></p>
+
+        <ul>
+          <li>
+            <p>Sarsa 와 Q-learning 간 비교 (Salsa : $\alpha = 0.1$)</p>
+
+            <ul>
+              <li>더 나은 Sarsa 의 결과를 위한 파라미터의 변경
+                <ul>
+                  <li>$\alpha = 0.1$</li>
+                  <li>더 많은 Time Steps 의 진행</li>
+                </ul>
+              </li>
+              <li>Sarsa 와 Q-learning 모두 동일한 정책으로 수렴함</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>강화학습은 파라미터의 값에 따라 다른 결과물을 보여줌.
+        <ul>
+          <li>$\alpha$, $\varepsilon$, initial values, length of the experiments</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>How is Q-learning off-policy?</p>
+
+    <ul>
+      <li>학습목표
+        <ul>
+          <li>Q-learning 이 importance sampling 없이 off-policy 로 동작할 수 있는 이유를 이해하기.</li>
+          <li>On-policy 기반과 Off-policy 기반 학습이 각각 제어 성능에 어떤 영향을 주는지 서술하기.</li>
+        </ul>
+      </li>
+      <li>
+        <p>On-policy 와 Off-policy 관점에서 Sarsa 와 Q-learning 비교</p>
+
+        <p><img src="/assets/images/posts/q_learning_sarsa_on_policy_off_policy.png" alt="q_learning_sarsa_on_policy_off_policy" /></p>
+
+        <ul>
+          <li>On-policy 와 Off-policy 복습
+            <ul>
+              <li>에이전트는 목표정책(target policy) 의 예상 리턴값을 토대로 가치함수를 추측한다.</li>
+              <li>에이전트는 행동정책(behavior policy) 에 따라 실제 행동한다.</li>
+              <li>목표정책과 행동정책이 같다면, 에이전트가 On-policy 학습을 한다 고 한다.</li>
+              <li>목표정책과 행동정책이 다르다면, 에이전트는 Off-policy 학습을 한다 고 한다.</li>
+            </ul>
+          </li>
+          <li>Sarsa : On-policy algorithm
+            <ul>
+              <li>에이전트가 다음에 수행할 작업의 값을 부트스트래핑 한다.
+                <ul>
+                  <li>다음 수행할 작업의 값은 행동정책 ($\pi$) 에 의해 샘플링한 값이다.</li>
+                </ul>
+              </li>
+              <li>즉 Sarsa 는 On-policy 학습이다.</li>
+            </ul>
+          </li>
+          <li>Q-learning : Off-policy algorithm
+            <ul>
+              <li>에이전트의 다음상태에 해당하는 행동값 중 가장 큰 값을 부트스트래핑한다.
+                <ul>
+                  <li>다음상태의 행동값 중 가장 큰 값은 탐욕정책(최적정책) ($\pi_* \noteq \pi$) 에 의해 샘플링된 값이다.</li>
+                </ul>
+              </li>
+              <li>즉 Q-learning 은 Off-policy 학습이다.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>Q-learning 의 Behavior policy 와 Target policy</p>
+
+        <p><img src="/assets/images/posts/q_learning_behavior_policy_target_policy.png" alt="q_learning_behavior_policy_target_policy" /></p>
+
+        <ul>
+          <li>강화학습에서의 자연스러운 질문 : 목표정책(target policy) 과 행동정책(behavior policy)은 무엇인가?
+            <ul>
+              <li>Q-learning 에서의 Target policy : 현재 값에 대한 탐욕 정책</li>
+              <li>Q-learning 에서의 Behavior policy : 모든 상태-행동 쌍에 접근할 수 있는 어떠한 정책도 될 수 있음 (예: $\varepsilon$-greedy)</li>
+            </ul>
+          </li>
+          <li>위에서 볼 수 있듯 Target policy 와 Behavior policy 가 다르므로 Off-policy 라 할 수 있다.</li>
+        </ul>
+      </li>
+      <li>
+        <p>Q-learning with No importance sampling</p>
+
+        <p><img src="/assets/images/posts/q_learning_no_importance_sampling.png" alt="q_learning_no_importance_sampling" /></p>
+
+        <ul>
+          <li>Q-learning 이 importance sampling 이 필요없는 이유
+            <ul>
+              <li>에이전트가 정해지지 않은 정책으로부터 행동값을 추정하고 있기 때문
+                <ul>
+                  <li>importance sampling ratio 로 행동 선택의 차이를 수정할 필요가 없다.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>상태가치함수 추정의 예시
+            <ul>
+              <li>행동가치함수는 주어진 상태에서 각 행동의 리턴값을 나타낸다.</li>
+              <li>에이전트의 target policy 는 주어진 상태에서 각각의 행동을 할 확률을 나타낸다.</li>
+              <li>즉 에이전트는 주어진 상태에서 target policy 를 따를 때 예상되는 리턴을 위 2개의 항목을 결합하여 나타낼 수 있다.</li>
+            </ul>
+          </li>
+          <li>Q-learning 의 target policy - greedy policy
+            <ul>
+              <li>가장 큰 리턴값을 가지는 행동을 선택. 즉, 다른 행동은 확률 0 을 가지게 됨.</li>
+              <li>해당 상태에서의 리턴 예상값은 행동값의 최대 값과 동일하다.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Q-learning 이 성능에 영향을 주는 경우
+        <ul>
+          <li>Q-learning 은 정책반복 (정책평가와 정책개선) 을 하지 않고 바로 최적값을 직접 학습한다.</li>
+          <li>
+            <p>최적가치함수와 정책을 직접 학습하는 것은 효율적으로 보이나, 가끔 미묘한 경우가 존재한다.</p>
+
+            <p><img src="/assets/images/posts/q_learning_bad_case.png" alt="q_learning_bad_case" /></p>
+
+            <ul>
+              <li>예 : $\varepsilon$-greedy 정책의 Q-learning 의 경우 Cliff walking 문제에서 Sarsa 보다 안좋은 결과를 보여준다.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="expected-sarsa">Expected Sarsa</h2>
+
+<ul>
+  <li>
+    <p>Expected Sarsa</p>
+
+    <ul>
+      <li>학습목표
+        <ul>
+          <li>Expected Sarsa 알고리즘 설명</li>
+        </ul>
+      </li>
+      <li>
+        <p>벨만방정식 (action-values) 과 Sarsa 알고리즘</p>
+
+        <p><img src="/assets/images/posts/expected_sarsa_bellman_equation_sarsa.png" alt="expected_sarsa_bellman_equation_sarsa" /></p>
+
+        <ul>
+          <li>위 벨만방정식을 살펴보면, 해당 상태-행동 쌍의 온전한 값을 구하기 위해 상태전이에 의한 다음상태의 합계와 정책에 의한 행동에 대한 합계를 구하는 것을 알 수 있다.</li>
+          <li>Sarsa 의 업데이트 식의 경우 Error 를 구하는 부분에서 다음 상태의 값을 샘플링하여 계산하는데, 이 샘플링 데이터는 상태전이와 정책에 의한 행동 요소가 들어가 있다.
+            <ul>
+              <li>이 때, 에이전트는 이미 정책을 알고 있으므로, 이 부분을 샘플링 데이터에 의지하지 않고 계산을 하면 어떻게 될까?</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>Expected Sarsa 알고리즘</p>
+
+        <p><img src="/assets/images/posts/expected_sarsa_algorithm_1.png" alt="expected_sarsa_algorithm_1" /></p>
+
+        <ul>
+          <li>명시적으로 다음 행동의 예측값을 계산하는 것이 Expected Sarsa 의 핵심 아이디어이다.</li>
+          <li>Expected Sarsa 또한 벨만 방정식 (action-values) 에 기반을 두고 있기에 업데이트식의 형식은 타 알고리즘과 유사하다.
+            <ul>
+              <li>차이점은 TD error 값을 샘플링을 통한 부트스트래핑 값이 아닌 다음 행동의 예측값으로서 정책과 부트스트래핑 값을 이용해 계산을 해낸다는 점이다.
+                <ul>
+                  <li>이것의 의미는 매 타임스텝 마다 정책 하의 예측 값(부트스트래핑)을 계산해야 한다는 의미이다.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <p><img src="/assets/images/posts/expected_sarsa_algorithm_2.png" alt="expected_sarsa_algorithm_2" /></p>
+
+        <ul>
+          <li>Expected Sarsa 는 Sarsa 에 비해 더 안정적인 update target 을 가지게 된다.
+            <ul>
+              <li>Sarsa 의 경우 샘플에 따라 잘못된 방향 (target) 으로 업데이트가 될 수 있다.
+                <ul>
+                  <li>물론 많은 업데이트를 통해 참 값으로 수렴하게 된다.</li>
+                </ul>
+              </li>
+              <li>Expected Sarsa 의 경우 곧바로 참 값 (target) 으로 업데이트가 이루어진다.
+                <ul>
+                  <li>이는 분산이 작아지는 효과를 가져온다.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Expected Sarsa 의 단점은 컴퓨팅 리소스 부분이다.
+            <ul>
+              <li>행동의 가지수가 늘어날 수록 계산 가격이 비싸진다. (특히 매 타임스텝마다 계산되는 부분이므로 더 부담스럽다.)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Expected Sarsa in the Cliff World</p>
+
+    <ul>
+      <li>학습목표
+        <ul>
+          <li>Expected Sarsa 의 행동을 예시 MDP에서 설명</li>
+          <li>Expected Sarsa 와 Sarsa 의 경험적 비교</li>
+        </ul>
+      </li>
+      <li>
+        <p>Cliff Walking 환경에서의 Sarsa 와 Expected Sarsa 비교 ($\varepsilon = 0.1$, 100회 학습, 50000회 독립시행 평균결과)</p>
+
+        <p><img src="/assets/images/posts/expected_sarsa_cliff_world_result_1.png" alt="expected_sarsa_cliff_world_result_1" /></p>
+
+        <ul>
+          <li>Expected Sarsa 는 Sarsa 에 비해 더 큰 $\alpha$ 값을 사용할 수 있다.
+            <ul>
+              <li>정책의 무작위성을 명시적 평균을 통해 해결</li>
+              <li>이 문제에서의 상태이동은 결정론적이기에 다른 무작위성이 없다.</li>
+              <li>즉 위 두 조건으로 Expected Sarsa 의 업데이트는 결정론적인 값이 된다.</li>
+            </ul>
+          </li>
+          <li>Sarsa 의 업데이트의 경우 다음 행동에 크게 영향을 받게 된다.</li>
+        </ul>
+      </li>
+      <li>
+        <p>Cliff Walking 환경에서의 Sarsa 와 Expected Sarsa 비교 ($\varepsilon = 0.1$, 100000회 학습, 50000회 독립시행 평균결과)</p>
+
+        <p><img src="/assets/images/posts/expected_sarsa_cliff_world_result_2.png" alt="expected_sarsa_cliff_world_result_2" /></p>
+
+        <ul>
+          <li>Expected Sarsa 는 $\alpha$ 값에 영향 없이 같은 결과를 보여줌
+            <ul>
+              <li>업데이트가 결정론적이기 때문</li>
+              <li>위 경우 step size 는 얼마나 목표 값에 빠르게 수렴하는지에만 영향을 줌</li>
+            </ul>
+          </li>
+          <li>Sarsa 의 경우 $\alpha$ 값에 큰 영향을 받음
+            <ul>
+              <li>$\alpha$ 값이 크면 수렴에 실패하며, $\alpha$ 값이 작으면 오랜 시간 학습 끝에 Expected Sarsa 와 거의 동일한 결과를 보여줌</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Generality of Expected Sarsa</p>
+
+    <ul>
+      <li>Sarsa, Q-learning, Expected Sarsa 간 비교 (도입부)
+        <ul>
+          <li>Sarsa 와 Expected Sarsa 는 동일한 벨만 방정식으로부터 유도되었다는 점에서 유사성이 있음.</li>
+          <li>Q-learning 과 Expected Sarsa 간에는 어떠한 관계가 있을까?</li>
+        </ul>
+      </li>
+      <li>학습목표
+        <ul>
+          <li>Expected Sarsa 가 importance sampling 없이 off-policy 학습을 할 수 있는 이유 설명</li>
+          <li>Expected Sarsa 가 Q-learning 의 일반화 버전인 이유</li>
+        </ul>
+      </li>
+      <li>
+        <p>Off-policy Expected Sarsa</p>
+
+        <p><img src="/assets/images/posts/expected_sarsa_off_policy.png" alt="expected_sarsa_off_policy" /></p>
+
+        <ul>
+          <li>(On-policy 의 경우를 가정) On-policy 의 경우에도 Expected Sarsa 는 실제 다음 선택된 행동 관련 업데이트를 하는 것이 아닌 정책 $\pi$ 에 관한 업데이트를 진행함
+            <ul>
+              <li>즉, $\pi$ 가 behavior policy 와 같을 필요가 없다고 볼 수 있음.</li>
+              <li>위의 관점은 Expected Sarsa 가 Q-learning 과 같이 importance sampling 없이 Off-policy 학습이 가능함을 보여줌.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>Greedy Expected Sarsa</p>
+
+        <p><img src="/assets/images/posts/expected_sarsa_greedy_q_learning_1.png" alt="expected_sarsa_greedy_q_learning_1" /></p>
+
+        <ul>
+          <li>만약 학습할 target policy 가 탐욕정책이라면 어떻게 될까?
+            <ul>
+              <li>이는 다음 상태에서 최대값을 이끌어내는 행동을 수행하는 것이고, Q-learning 과 동일한 방식이다.</li>
+            </ul>
+
+            <p><img src="/assets/images/posts/expected_sarsa_greedy_q_learning_2.png" alt="expected_sarsa_greedy_q_learning_2" /></p>
+
+            <ul>
+              <li>즉, Q-learning 은 Expected Sarsa 의 특별한 케이스이다.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Week 3 Summary</p>
+
+    <ul>
+      <li>
+        <p>TD control and Bellman equations</p>
+
+        <p><img src="/assets/images/posts/td_control_and_bellman_equations.png" alt="td_control_and_bellman_equations" /></p>
+
+        <ul>
+          <li>TD 제어는 벨만 방정식에 기반을 둔다.
+            <ul>
+              <li>Sarsa
+                <ul>
+                  <li>벨만 방정식의 샘플 기반 버전</li>
+                  <li>$q_\pi$ 를 학습</li>
+                  <li>On-policy 알고리즘 (현재 정책의 action value 를 학습)</li>
+                </ul>
+              </li>
+              <li>Q-learning
+                <ul>
+                  <li>벨만 최적 방정식을 이용</li>
+                  <li>$q_*$ 를 학습</li>
+                  <li>Off-policy 알고리즘 (현재 정책과 무관하게 optimal action value 를 학습)</li>
+                </ul>
+              </li>
+              <li>Expected Sarsa
+                <ul>
+                  <li>Sarsa 와 동일한 벨만 방정식을 이용</li>
+                  <li>그래나 Sarsa 와 샘플링을 하는 방식이 다름
+                    <ul>
+                      <li>다음 행동가치의 예측값 (Sum) 을 활용함.</li>
+                    </ul>
+                  </li>
+                  <li>On-policy, Off-policy 둘다 가능
+                    <ul>
+                      <li>behavior policy 가 deterministic 하다면 On-policy 가 된다.</li>
+                      <li>behavior policy 가 탐욕정책이라면 Q-learning 과 동일한 알고리즘이 되어버린다. (Q-learning 은 Expected Sarsa 의 특이 케이스)</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>Subtleties with off-policy control (Off-policy control 의 미묘함)</p>
+
+        <p><img src="/assets/images/posts/subtleties_with_off_policy_control_1.png" alt="subtleties_with_off_policy_control_1" /></p>
+
+        <ul>
+          <li>Online 학습에서 Q-learning 은 Sarsa 보다 값이 안좋게 나오는데, 이는 탐색정책의 랜덤성 때문이다.</li>
+        </ul>
+
+        <p><img src="/assets/images/posts/subtleties_with_off_policy_control_2.png" alt="subtleties_with_off_policy_control_2" /></p>
+
+        <ul>
+          <li>Expected Sarsa 의 경우 Online 학습에서 Sarsa 와 동일한 결과를 보여주면서, 동시에 더 좋은 학습률을 보여준다.
+            <ul>
+              <li>학습한 정책이 동일하다.</li>
+              <li>다음 행동가치의 예측값으로 학습하기 때문에, behavior policy 에 학습의 영향을 받는 Sarsa 보다 더 안정적인 학습을 한다.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Chapter summary</p>
+
+    <ul>
+      <li>TD learning
+        <ul>
+          <li>예측 : TD 방식은 예측 문제 해결을 위한 Monte Carlo 방법의 대안임.</li>
+          <li>제어 : 두 경우 모두 제어 문제에 대한 확장은 동적 프로그래밍에서 추상화한 일반화된 정책 반복(GPI)의 아이디어를 통해 이루어짐
+            <ul>
+              <li>근사 정책과 가치 함수가 둘 다 최적을 향해 움직이는 방향으로 상호 작용해야 한다는 아이디어임</li>
+              <li>가치 함수를 구동하여 현재 정책의 수익을 정확하게 예측 (예측의 문제)</li>
+              <li>현재 가치 함수와 관련하여 정책을 국지적으로 개선(예: e-greedy)하도록 유도 (정책개선)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>TD 제어 방법의 분류
+        <ul>
+          <li>경험을 기반으로 하는 경우에서의 탐색 문제가 발생한다.</li>
+          <li>On-policy : Sarsa</li>
+          <li>Off-policy : Q-learning, Expected Sarsa</li>
+          <li>이 외에 행위자 비평 방법 (Actor-Critic) 이 있는데 이러한 방법은 13장에서 다룸.</li>
+        </ul>
+      </li>
+      <li>TD learning 의 장점
+        <ul>
+          <li>가장 널리 사용되는 강화학습 방법
+            <ul>
+              <li>매우 단순
+                <ul>
+                  <li>최소한의 계산으로 환경과의 상호 작용에서 생성된 경험에 온라인으로 적용할 수 있음</li>
+                  <li>작은 컴퓨터 프로그램으로 구현할 수 있는 단일 방정식으로 거의 완벽하게 표현</li>
+                </ul>
+              </li>
+              <li>단순한 알고리즘을 확장하여 약간 더 복잡하고 훨씬 강력하게 만들 수 있음
+                <ul>
+                  <li>본질은 TD 의 것 그대로임.
+                    <ul>
+                      <li>적은 계산으로 온라인경험 처리 가능</li>
+                      <li>TD 오류에 의해 구동됨</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>이 장에서 다룬 TD 학습법의 특징
+        <ul>
+          <li>1 Step</li>
+          <li>Tabular</li>
+          <li>모델이 없는 TD 방법</li>
+        </ul>
+      </li>
+      <li>앞으로 배울 내용
+        <ul>
+          <li>n단계 형식(Monte Carlo 방법 관련)과 환경 모델을 포함하는 형식(계획 및 동적 프로그래밍 관련)으로 확장</li>
+          <li>테이블(딥 러닝 및 인공 신경망 관련)이 아닌 다양한 형태의 함수 근사치로 확장</li>
+        </ul>
+      </li>
+      <li>일반적인 방법으로서의 TD
+        <ul>
+          <li>강화 학습의 문제 맥락에서 TD 방법에 대해 살펴보았지만 실제로 TD 방법은 이보다 더 일반적임
+            <ul>
+              <li>동적 시스템에 대한 장기 예측을 학습하기 위한 일반적인 방법</li>
+              <li>강화학습이 아닌 순수한 예측의 방법으로 분석
+                <ul>
+                  <li>재무 데이터, 수명, 선거 결과, 날씨 패턴, 동물 행동, 발전소에 대한 수요, 고객 구매 예측 등의 문제에도 쓰일 수 있음</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>아직 TD 학습 압버의 잠재적 응용은 광범위하게 탐색되지 않음.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+:ET

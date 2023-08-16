@@ -1,5 +1,5 @@
 ---
-title: Sample-based Learning Methods - 02. Week 3. Temporal Difference Learning Methods for Control
+title: Sample-based Learning Methods - 03. Week 3. Temporal Difference Learning Methods for Control
 date: '2023-07-12 10:00:00'
 tags:
 - Coursera
@@ -527,4 +527,4 @@ use_math: true
 			- 동적 시스템에 대한 장기 예측을 학습하기 위한 일반적인 방법
 			- 강화학습이 아닌 순수한 예측의 방법으로 분석
 				+ 재무 데이터, 수명, 선거 결과, 날씨 패턴, 동물 행동, 발전소에 대한 수요, 고객 구매 예측 등의 문제에도 쓰일 수 있음
-		* 아직 TD 학습 압버의 잠재적 응용은 광범위하게 탐색되지 않음.
+		* 아직 TD 학습 방법의 잠재적 응용은 광범위하게 탐색되지 않음.
