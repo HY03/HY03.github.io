@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://bluesplatter.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://bluesplatter.com/" rel="alternate" type="text/html" /><updated>2023-08-16T17:49:43+09:00</updated><id>https://bluesplatter.com/feed.xml</id><title type="html">Bluesplatter</title><subtitle>전문적이지 않은 정보들, 감상, 즉흥적인 내용들</subtitle><author><name>HY03</name><email>hyunik03@gmail.com</email></author><entry><title type="html">Sample-based Learning Methods - 04. Week 4. Planning, Learning &amp;amp; Acting</title><link href="https://bluesplatter.com/ai/reinforcement%20learning/Sample_based_Learning_Methods_04_Week4/" rel="alternate" type="text/html" title="Sample-based Learning Methods - 04. Week 4. Planning, Learning &amp;amp; Acting" /><published>2023-07-16T10:00:00+09:00</published><updated>2023-07-16T10:00:00+09:00</updated><id>https://bluesplatter.com/ai/reinforcement%20learning/Sample_based_Learning_Methods_04_Week4</id><content type="html" xml:base="https://bluesplatter.com/ai/reinforcement%20learning/Sample_based_Learning_Methods_04_Week4/">&lt;h2 id=&quot;관련-자료-rlbook-pages-159-166&quot;&gt;관련 자료 (RLbook Pages 159-166)&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://bluesplatter.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://bluesplatter.com/" rel="alternate" type="text/html" /><updated>2023-08-31T11:08:20+09:00</updated><id>https://bluesplatter.com/feed.xml</id><title type="html">Bluesplatter</title><subtitle>전문적이지 않은 정보들, 감상, 즉흥적인 내용들</subtitle><author><name>HY03</name><email>hyunik03@gmail.com</email></author><entry><title type="html">Sample-based Learning Methods - 04. Week 4. Planning, Learning &amp;amp; Acting</title><link href="https://bluesplatter.com/ai/reinforcement%20learning/Sample_based_Learning_Methods_04_Week4/" rel="alternate" type="text/html" title="Sample-based Learning Methods - 04. Week 4. Planning, Learning &amp;amp; Acting" /><published>2023-07-16T10:00:00+09:00</published><updated>2023-07-16T10:00:00+09:00</updated><id>https://bluesplatter.com/ai/reinforcement%20learning/Sample_based_Learning_Methods_04_Week4</id><content type="html" xml:base="https://bluesplatter.com/ai/reinforcement%20learning/Sample_based_Learning_Methods_04_Week4/">&lt;h2 id=&quot;관련-자료-rlbook-pages-159-166&quot;&gt;관련 자료 (RLbook Pages 159-166)&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Planning and Learning with Tabular Methods : 개요
@@ -1198,6 +1198,47 @@
 
         &lt;ul&gt;
           &lt;li&gt;부정확한 모델의 경우 탐색 보너스를 통해 오랫동안 방문하지 않은 상태를 방문하도록 정책을 유도하여 모델을 업데이트하도록 한다.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Summary (생각해볼 점)&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;Part 1 에서 배운 강화학습의 종류&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/assets/images/posts/reinforcement_learning_dimensions_part_1.png&quot; alt=&quot;reinforcement_learning_dimensions_part_1&quot; /&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;생각해볼 점
+        &lt;ul&gt;
+          &lt;li&gt;반환(리턴)의 정의: 과제는 에피소드식인지 계속적인지, 할인 적용 여부에 따라 다름.&lt;/li&gt;
+          &lt;li&gt;행동 가치 vs 상태 가치 vs 후상태 가치: 어떤 종류의 가치를 추정해야 하는지? 상태 가치만 추정하는 경우, 행동 선택을 위해 모델이나 별도의 정책(액터-크리틱 방법과 같은)이 필요함.&lt;/li&gt;
+          &lt;li&gt;행동 선택/탐사: 탐사와 활용 사이의 적절한 균형을 유지하기 위해 어떻게 행동을 선택해야 하는지? 우리는 이를 위한 가장 간단한 방법만 고려해봄: e-greedy, 낙관적 초기화, 소프트 맥스 및 상한 신뢰 구간.&lt;/li&gt;
+          &lt;li&gt;동기화 vs 비동기화: 모든 상태의 업데이트는 동시에 수행되어야 하는가, 또는 어떤 순서로 하나씩 수행되어야 하는가?&lt;/li&gt;
+          &lt;li&gt;실제 vs 모의: 실제 경험 또는 모의 경험을 기반으로 업데이트. 둘 다 하는 경우, 각각 어느 정도씩 해야하는지?&lt;/li&gt;
+          &lt;li&gt;업데이트 위치: 어떤 상태나 상태-행동 쌍을 업데이트해야하는지? Model-free 방법은 실제로 만난 상태와 상태-행동 쌍 중에서만 선택할 수 있지만, Model-based 방법은 임의로 선택할 수 있음. 이 부분에는 여러 가지 가능성이 있음.&lt;/li&gt;
+          &lt;li&gt;업데이트 시점: 업데이트는 행동 선택의 일부로 수행되어야 할지, 아니면 그 후에만 수행되어야 할지?&lt;/li&gt;
+          &lt;li&gt;업데이트 기억: 업데이트된 값은 얼마나 오래 유지되어야 할지? 영구적으로 유지, 아니면 휴리스틱 탐색과 같이 행동 선택을 계산하는 동안만 유지&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;앞으로 살펴볼 점
+        &lt;ul&gt;
+          &lt;li&gt;이러한 차원들은 절대적이거나 상호배반적인 것이 아님.
+            &lt;ul&gt;
+              &lt;li&gt;각각의 알고리즘은 다양한 방식으로 차이가 있으며, 많은 알고리즘들은 여러 차원에서 여러 위치에 위치한다.&lt;/li&gt;
+              &lt;li&gt;예를 들어, Dyna 방법은 실제 경험과 모의 경험을 모두 사용하여 동일한 가치 함수에 영향을 미칩니다.&lt;/li&gt;
+              &lt;li&gt;서로 다른 방식이나 다른 상태 및 행동 표현에 걸쳐 계산된 여러 가치 함수를 유지하는 것도 합리적인 방법임.&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;그러나 이러한 차원들은 다양한 가능한 방법의 넓은 공간을 묘사하고 탐구하기 위한 일관된 아이디어의 집합을 형성한다.&lt;/li&gt;
+          &lt;li&gt;여기에 언급되지 않은 가장 중요한 차원은 함수 근사의 차원이다.
+            &lt;ul&gt;
+              &lt;li&gt;함수 근사는 한쪽 끝에서는 테이블 기반 방법을 통해 상태 집합, 다양한 선형 방법 및 다양한 비선형 방법으로 이어지는 여러 가지 가능성의 스펙트럼으로 볼 수 있다. 이 차원은 제 2부에서 탐구한다.&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
     &lt;/ul&gt;
