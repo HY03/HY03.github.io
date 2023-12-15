@@ -23,7 +23,7 @@
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="Bluesplatter">
 <meta property="og:title" content="정보보안 - DNS(Domain Name System)">
-<meta property="og:url" content="https://bluesplatter.com/is_certification/IS-Application-DNS/">
+<meta property="og:url" content="http://localhost:4000/is_certification/IS-Application-DNS/">
 
 
   <meta property="og:description" content="DNS (Domain Name System)    개요            DNS 는 프로토콜이라기 보다는 인터넷 네임체계를 규정하는 거대한 시스템                    www.google.com : 사람은 문자형태로 입력           192.168.0.1 : 컴퓨터가 알아볼 수 있는 형태           DNS : 사람과 컴퓨터가 알아볼 수 있는 형태로 변환해주는 체계                           과정            User -&gt; DNS    Client PC    WebServer                    User : 네임 입력                       User    DNS -&gt; Client PC    WebServer                    DNS 역할           DNS : 네임 요청처리           DNS : 주소 변환                       User    DNS    Client PC -&gt; WebServer                    Client PC : 자원요청           WebServer : 요청처리                       User    DNS    Client PC &lt;- WebServer                    WebServer : 응답생성           Client PC : 응답처리           User : 자원접근                           기능            네임 공간 정의 (네임구조)                    계층구조 예시 : www.google.com (계층구조)                            com : 최상위 도메인 (TLDs) 공간                                    google : 2단계 도메인                                                                   루트서버 (전 세계 13개정도가 있음)                            도메인에 대한 정보를 가지고 있지 않음               자신의 권한을 다른 서버들에게 위임, 서버만 참조               .com : TLDs                                    .google : 2단계 도메인                   .naver : 2단계 도메인                                            blog : 하위도메인                       cafe : 하위도메인                       mail : 하위도메인                                                                                       .edu : TLDs                                    .skku : 2단계 도메인                                               .net : TLDs                                    .daum : 2단계 도메인                                                                   DNS 서버                            도메인을 담당하는 호스트               저장되는 데이터                                    자원 레코드 (Resource Record, RR)                                            www.google.com = 192.168.xx.xx                                                           마스터 파일 (Zone 파일)                                            도메인에 대한 정보를 가지고 있음                       RR(복수개) 들을 관리                       RR의 추가, 변경, 삭제                                                    music.google.com = 192.168.xx.xx                                                                                                                                                           Zone : 도메인을 관리하는 단위 (영역)                            DNS 서버(네임서버) 하나가 책임이나 권한을 가지는 영역               도메인은 위임을 통해 관리가 가능한 단위로 분할 가능                                   자원 레코드 (Resource Record, RR)                            DNS 서버는 모든 데이터를 RR로 정의해서 저장                                    네임 (0~32)                                            도메인 혹은 Zone Name                                                                                                                                                           유형(Type) (0~16)                           클래스 (16~32)                                                                                                                 유형(Type)                                                                                                                                                                                    유형값                                   문자코드                                   RR유형                                                                                                                                                                                                                                                                                   1                                   A                                   주소 (IPv4)                                                                                                                                                                                                                                                                                   28                                   AAAA                                   주소 (IPv6)                                                                                                                                                                                                                                                                                   2                                   NS                                   네임서버 (이름)                                                                                                                                                                                                                                                                                   5                                   CNAME                                   정규네임 (Canonical)                                                                                                                                                                                                                                                                                   6                                   SoA                                   권한개시정보 (DNS Zone 정보)                                                                                                                                                         모든 Zone 은 하나의 SoA 레코드를 가지고 있음                                                                                                                                                                                                                   12                                   PTR                                   포인터 (다른 위치를 가리킴, 역방향 변환 이용)                                                                                                                                                                                                                                                                                   15                                   MX                                   메일 교환 (도메인으로 들어오는 이메일 처리를 위한 장비 이름 명시)                                                                                                                                                                                                                                                                                   16                                   TXT                                   문자열                                                                                                                                                                                               클래스                                                                                                                                                                                    1                                   IN (Internet, 가장많이 사용)                                                                                                                                                                                                                                                                                   2                                   Unassigned (할당되지 않음)                                                                                                                                                                                                                                                                                   3                                   CH (Chaos)                                                                                                                                                                                                                                                                                   4                                   HS (Hesiod)                                                                                                                                                                                                                                   유지시간 (0~32)                                            레코드를 읽은 장비가 캐시에 얼마동안 정보를 유지해야 하는지 명시                                                           데이터 길이 (0~32)                                            자원에 대한 데이터 크기                                                           데이터 (0~32)                                            실제 데이터                           이름 : www.google.com   유형 : 1   TTL (Time To Live) :   Size :   호스트 : 192.168.170.10   ...                                                                                                                                                           DNS 서버                            Master               Slave                                   DNS 메시지 구조                            사용자가 DNS 서버에 질의했을 때 받는 메시지                                    Header (12 Bytes)                                            메시지 유형 설명                                                           Question (가변)                                            질의 정보                                                           Answer (가변)                                            질문에 대한 답변 RR                                                           Authority (가변)                                            권한 네임서버를 가리키는 하나 이상의 RR 포함                                                           Additional (가변)                                            질의와 관련된 부가정보를 나타내는 하나 이상의 RR                                                                                                                       네임 등록                    IP 주소 (예:192.168.0.10) 에 웹서버를 구축한 경우                            이름 www.abc.com 으로 접근시키기 위해서 네임 등록               abc.com 도메인 공간 안에서는 마음대로 등록 가능                                    cafe.abc.com                   blog.abc.com                   …                                                                               네임 변환                    사용자가 www.abc.com 으로 접근했을 경우                            IP 주소 192.168.0.10 으로 변환시켜줌                                   DNS 네임 변환 과정                            DNS =&gt; Client / Server 가 존재                                    주소 =&gt; 이름                   이름 =&gt; 주소                   Resolver (변환기) : 네임서버에 질의를 수행하는 SW / 모듈                                               반복적 해석 (변환) : Iterative Query                                    Authoritative 서버에 질의할 경우                   User -&gt; 루트 NS    .Com 담당 NS    google 담당 NS                                            google.com 변환 요청                                                           User &lt;- 루트 NS    .Com 담당 NS    google 담당 NS                                            com 담당 네임서버 주소                                                           User        -&gt;     .Com 담당 NS    google 담당 NS                                            google.com 변환 요청                                                           User        &lt;-     .Com 담당 NS    google 담당 NS                                            google.com 담당 NS 주소                                                           User                     -&gt;         google 담당 NS                                            google.com 변환 요청                                                           User                     &lt;-         google 담당 NS                                            google.com IP 주소                                                                                       재귀적 해석 (변환) : Recursive Query                                    Recursive 서버에 질의할 경우                   중간 과정의 네임서버들이 모두 재귀적 변환을 허용해야 함                                            실제로는 그렇지 않음.                                                           User -&gt; 루트 NS    .Com 담당 NS    google 담당 NS                                            google.com 변환 요청                                                           User    루트 NS -&gt; .Com 담당 NS    google 담당 NS                                            google.com 변환 요청                                                           User    루트 NS    .Com 담당 NS -&gt; google 담당 NS                                            google.com 변환 요청                                                           User    루트 NS    .Com 담당 NS &lt;- google 담당 NS                                            google.com IP 주소                                                           User    루트 NS &lt;- .Com 담당 NS    google 담당 NS                                            google.com IP 주소                                                           User &lt;- 루트 NS    .Com 담당 NS    google 담당 NS                                            google.com IP 주소                                                                                       일반적인 DNS 네임 변환 과정                                    반복적(Iterative) 변환과 재귀적(Recursive) 변환을 함께 사용함                   DNS 서버의 종류                                            Recursive DNS Server : 조건이 만족될 때까지 반복적으로 처리                       Authoritative DNS Server (권한서버)                                                    Root Server, .Com NS, google NS 등 특정 도메인 영역 (Zone) 과 권한을 가지고 있는 서버                                                                       Cache : 캐시에 저장된 정보를 제공                       ISP 업체 (KT, SKT … ) 가 제공하는 서버                                                           Recursive Query 순서                                                                                                DNS Cache 검색                                                            자신에게 도메인 정보가 없을 시 DB를 검색하거나 타 서버에 요청해야 하나 시간이 오래 걸림                                                                                         캐시로 저장                                                                    속도는 빠르나 잘못된 정보를 매핑할 수 있음                                                                                               양성 캐싱(positive caching) : 한 번 질의 된 도메인 네임과 해당 IP 주소를 캐시에 유지하여 같은 질의가 올 때 캐시에서 응답해 주는 것                               음성 캐싱(negative caching) : 잘못된 도메인에 관한 요청을 캐싱하여 불필요한 트래픽과 지연을 줄이는 역할                                                                                                                                                                                   hosts 파일 검색                                                            host 명 : IP 주소 정보를 담고 있는 파일                               /etc/hosts (리눅스) / hosts.ics (Internet Connection Sharing 기능 - 윈도우)                                                                                         파밍사이트 접속유도를 위해 공격자가 목표로 하는 파일                               변조 위험성이 큼                                                                                                                                                                                   DNS 서버 질의                                                            Recursive DNS Server                               Authoritative DNS Server                                                                                                                                                                   일반적인 과정                                            재귀적 질의                                                    사용자가 브라우저에 URL 입력 : comps.googleex.edu                                                            Resolver : 사용자 DNS 클라이언트 소프트웨어                                                                                   PC 내 Resolver 가 PC 내 Cache 확인                           Resolver 가 로컬네임서버에 (Recursive DNS Server) 재귀적 질의                           로컬네임서버가 Cache 확인                                                                       반복적 질의                                                    로컬네임서버가 루트서버에 질의                           루트서버가 .edu 네임서버 주소를 전달                           로컬네임서버가 .edu 네임서버에 질의                           .edu 네임서버가 .googleex 네임서버 주소를 전달                           로컬네임서버가 .googleex 네임서버에 질의                           .googleex 네임서버가 comps.googleex.edu 네임서버 주소를 전달                           로컬네임서버가 comps.googleex.edu 네임서버에 질의                           comps.googleex.edu IP 주소를 전달                                                                       재귀적 질의                                                    로컬네임서버가 Cache 갱신                           로컬네임서버가 Resolver 에게 IP 전달                           Resolver 가 Cache 갱신                           Resolver 가 사용자에게 IP 주소를 전달                           사용자 브라우저가 IP 주소로 HTTP 요청">
@@ -45,7 +45,7 @@
   
 
 
-<link rel="canonical" href="https://bluesplatter.com/is_certification/IS-Application-DNS/">
+<link rel="canonical" href="http://localhost:4000/is_certification/IS-Application-DNS/">
 
 
 
@@ -56,7 +56,7 @@
     
       "@type": "Person",
       "name": "HY03",
-      "url": "https://bluesplatter.com/"
+      "url": "http://localhost:4000/"
     
   }
 </script>
@@ -178,7 +178,7 @@
     
       
         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-          <a href="https://bluesplatter.com/" itemprop="item"><span itemprop="name">Home</span></a>
+          <a href="http://localhost:4000/" itemprop="item"><span itemprop="name">Home</span></a>
           <meta itemprop="position" content="1" />
         </li>
         <span class="sep">/</span>
@@ -1425,11 +1425,11 @@
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+DNS%28Domain+Name+System%29%20https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Application-DNS%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+DNS%28Domain+Name+System%29%20http%3A%2F%2Flocalhost%3A4000%2Fis_certification%2FIS-Application-DNS%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Application-DNS%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fis_certification%2FIS-Application-DNS%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Application-DNS%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fis_certification%2FIS-Application-DNS%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
@@ -1455,6 +1455,42 @@
     <div class="page__related">
       <h4 class="page__related-title">참고</h4>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ai/reinforcement%20learning/Prediction_and_Control_with_Function_approximation_01_Week1/" rel="permalink">Prediction and Control with Function Approximation - 01. Week 1. On-policy Prediction with Approximation
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-08-31T10:00:00+09:00">August 31, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">강의 개요 (과정 로드맵)
+</p>
+  </article>
+</div>
+
         
           
 
@@ -1564,42 +1600,6 @@
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/ai/reinforcement%20learning/Sample_based_Learning_Methods_01_Week1/" rel="permalink">Sample-based Learning Methods - 01. Week 1. Monte Carlo Methods for Prediction &amp; Control
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        <time datetime="2023-06-12T15:00:00+09:00">June 12, 2023</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">관련 자료 (RLbook2018 Pages 91-104)
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -1694,7 +1694,7 @@
     
   <script>
     var disqus_config = function () {
-      this.page.url = "https://bluesplatter.com/is_certification/IS-Application-DNS/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.url = "http://localhost:4000/is_certification/IS-Application-DNS/";  /* Replace PAGE_URL with your page's canonical URL variable */
       this.page.identifier = "/is_certification/IS-Application-DNS"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
     };
     (function() { /* DON'T EDIT BELOW THIS LINE */

@@ -23,7 +23,7 @@
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="Bluesplatter">
 <meta property="og:title" content="정보보안 - 네트워크 DDoS">
-<meta property="og:url" content="https://bluesplatter.com/is_certification/IS-Network-DRDoS/">
+<meta property="og:url" content="http://localhost:4000/is_certification/IS-Network-DRDoS/">
 
 
   <meta property="og:description" content="DRDoS (Distributed Reflection Denial of Service) 공격    개요            공격자는 출발지 IP를 공격대상의 IP 로 위조 (IP Spoofing) 함.       다수의 반사서버(Reflector) 로 요청정보를 전송                    DDoS 의 Zombie PC 이용이 아닌 정상적인 서버를 이용                       공격대상은 반사서버로부터 다수의 응답을 받아 서비스 거부 상태가 됨.           DoS 공격과의 차이점            공격 근원지 파악이 어려움       좀비 PC 이용에 비해 공격 효율성이 좋음                    Victim으로부터 SYN+ACK 에 대한 응답이 없을 경우 일정 횟수 재전송을 함.                           DRDoS 의 공격 형태            3 way-handshake 의 취약점 이용                    정상적인 TCP서버들 또는 라우터를 활용           소스 IP를 Victim IP 로 위조하여 SYN 패킷 전송           정상적인 TCP 서버에서 SYN+ACK 을 Victim 에게 전송                       ICMP 프로토콜의 Echo Request 와 Echo Reply 를 이용                    정상적인 반사 서버를 이용           소스 IP를 Victim IP 로 위조하여 Echo Request 패킷 전송           정상적인 서버에서 Echo Reply 을 Victim 에게 전송                       UDP 프로토콜 서비스를 제공하는 서버를 반사서버로 이용하는 방법                    대표적인 방법, 응답메시지 증폭 (대량의 트래픽 생성)           유형                            DNS : DNS 질의 시 타입:ANY,TXT 등과 같이 많은 양의 레코드 정보 제공을 요구하여 공격대상자에게 대형 트랙픽 유발               NTP : NTP (Network Time Protocol) 서버에 최근 접속한 클라이언트 목록을 요청 (monlist) 하여 공격대상자에게 대량 트래픽 유발               SNMP : SNMP Agent 에 MIB와 같은 정보를 대량 요청(GetBulkRequest) 하여 공격대상자에게 대량 트래픽 유발               CHARGEN : CHARGEN (Character Generate) 서버에 접속시 대량의 문자열(abcd…) 전송을 유도하여 공격대상자에게 대량 트래픽 유발                                                   대응책            Ingress Filtering : IP 가 위조된 패킷 차단       반사서버에서 ICMP 프로토콜 차단       DNS (Resolving)                    내부사용자 주소만 쿼리           동일 IP에 대한 초당 요청개수 제한           응답 정보량을 제한 (방화벽 또는 네트워크 보안장비)                       NTP 서버의 경우 monlist 명령 해제">
@@ -45,7 +45,7 @@
   
 
 
-<link rel="canonical" href="https://bluesplatter.com/is_certification/IS-Network-DRDoS/">
+<link rel="canonical" href="http://localhost:4000/is_certification/IS-Network-DRDoS/">
 
 
 
@@ -56,7 +56,7 @@
     
       "@type": "Person",
       "name": "HY03",
-      "url": "https://bluesplatter.com/"
+      "url": "http://localhost:4000/"
     
   }
 </script>
@@ -178,7 +178,7 @@
     
       
         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-          <a href="https://bluesplatter.com/" itemprop="item"><span itemprop="name">Home</span></a>
+          <a href="http://localhost:4000/" itemprop="item"><span itemprop="name">Home</span></a>
           <meta itemprop="position" content="1" />
         </li>
         <span class="sep">/</span>
@@ -505,11 +505,11 @@
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC+DDoS%20https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Network-DRDoS%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC+DDoS%20http%3A%2F%2Flocalhost%3A4000%2Fis_certification%2FIS-Network-DRDoS%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Network-DRDoS%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fis_certification%2FIS-Network-DRDoS%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Network-DRDoS%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fis_certification%2FIS-Network-DRDoS%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
@@ -535,6 +535,42 @@
     <div class="page__related">
       <h4 class="page__related-title">참고</h4>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ai/reinforcement%20learning/Prediction_and_Control_with_Function_approximation_01_Week1/" rel="permalink">Prediction and Control with Function Approximation - 01. Week 1. On-policy Prediction with Approximation
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-08-31T10:00:00+09:00">August 31, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">강의 개요 (과정 로드맵)
+</p>
+  </article>
+</div>
+
         
           
 
@@ -644,42 +680,6 @@
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/ai/reinforcement%20learning/Sample_based_Learning_Methods_01_Week1/" rel="permalink">Sample-based Learning Methods - 01. Week 1. Monte Carlo Methods for Prediction &amp; Control
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        <time datetime="2023-06-12T15:00:00+09:00">June 12, 2023</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">관련 자료 (RLbook2018 Pages 91-104)
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -774,7 +774,7 @@
     
   <script>
     var disqus_config = function () {
-      this.page.url = "https://bluesplatter.com/is_certification/IS-Network-DRDoS/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.url = "http://localhost:4000/is_certification/IS-Network-DRDoS/";  /* Replace PAGE_URL with your page's canonical URL variable */
       this.page.identifier = "/is_certification/IS-Network-DRDoS"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
     };
     (function() { /* DON'T EDIT BELOW THIS LINE */

@@ -23,7 +23,7 @@
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="Bluesplatter">
 <meta property="og:title" content="정보보안 - 데이터베이스 침해사고">
-<meta property="og:url" content="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-DatabaseIntrusion/">
+<meta property="og:url" content="http://localhost:4000/is_certification/IS-IncidentAnalysis-DatabaseIntrusion/">
 
 
   <meta property="og:description" content="데이터베이스 침해사고    Data, 데이터베이스, DBMS            데이터와 정보                    데이터 : 정보작성을 위한 필요자료, 특정목적에 대해 평가되지 않은 상태, 단순한 사실           정보 : 데이터를 추출, 분석, 비교 등의 가공절차를 통해 의사결정, 행동을 할 수 있는 의미있는 데이터                       데이터베이스 : 데이터의 집합, 여러 응용시스템이 공유. Integrated, Stored, Operational       DBMS : 데이터를 통합적으로 생성, 관리, 저장하는 소프트웨어. MySQL, MSSQL, ORACLE, DB2 등                    MySQL 서버가 침해사고의 대상이 되는 경우가 많음. (PHP)                           MySQL 점검 항목            관리자 아이디를 default 로 사용하는지 점검                    기본 패스워드 값은 누구나 알고 있음           무차별대입 / 사전대입 공격 - 추측 어려운 패스워드를 사용해야 함           mysql -uroot -p                       패스워드 설정 안된 계정 존재하는지 점검                    select user, password from user           update user set password = [] where user = []           flush privileges; : 변경사항을 즉시 반영                       Remote 에서 MySQL 서버로 접속이 가능한지 점검                    기본 포트 : 3306/tcp                            my.cnf 파일의 [mysqld] 에 skip-networking 추가 : 로컬 접속만 가능                                               MySQL 계정을 이용한 접속 가능한지 점검                    /etc/passwd 의 쉘 부분을 /bin/sh 대신 /bin/false 로 변경하여 원격 접속을 차단                       시스템 사용자들의 DB에 대한 권한 설정이 올바른지 점검                    필요 이상의 권한을 부여하지 않아야 함           select * from DB;           불필요한 권한을 Revoke 시킴           update db set update_priv = &#39;N&#39; where db=[]           flush privileges;                       데이터베이스 내의 사용자별 접속/권한 설정이 올바른지 점검                    dba 가 아닌 일반 user 가 중요 table 을 조작할 수 있음           select * from user;                                                                                                            Host                       User                       Password                       Select_priv                       …                       Process_priv                       File_priv                                                                                       File_priv : 파일에 대한 권한               Process_priv : 쓰레드 정보 확인 (쓰레드 중지 권한 포함)               Shutdown_priv : MySQL 서버의 실행을 중지시키는 권한                                   localhost 의 root 계정을 사용하지 않고 다른 DBA 계정을 만들어 사용하는 것이 바람직함           원격 Host 에서 root 계정등의 접근설정 확인                            update user set process_priv=&quot;N&quot; where host = [ip] and user = &quot;root&quot;;                                               안정적인 MySQL 버전을 사용하고 있는지 점검       MySQL 의 데이터 디렉터리는 안전하게 보호되고 있는지 점검                    my.cnf 파일에 대한 접근통제도 필요                           MS-SQL 점검 항목            계정의 패스워드 중 빈 패스워드나 약한 패스워드가 존재 하는가?                    select name, password from syslogins; : 결과 NULL 일 경우 패스워드가 없음. 단 Builtin 계정은 NULL 이 정상                       guest 계정이 비활성화 되어 있는가?                    SQL 서버의 Enterprise Manager 를 실행하여 guest 계정 확인, 삭제                       public 데이터베이스 역할이 부여되어 있는가?                    public 역할 : 모든 데이터베이스 사용자들의 표준에 해당되는 역할. 인가를 받지 않은 사용자도 권한을 행사할 수 있는 취약점                       SYSADMIN 그룹의 사용자를 인증된 사용자만으로 제한하고 있는가?                    System Administrator 권한                       방화벽에서 SQL Server 포트를 차단했는지?                    TCP/1433 or 1434                       가장 최신의 서비스 팩을 설치했는가?                    서버 보안을 위함                       Microsoft Baseline Security Analyzer(MBSA) 로 서버를 점검했는가?                    보안패치가 최신으로 유지되는지 확인           보안상 약점이 될만한 설정이 있는지 확인           기본 취약점 점검하는 도구                       SQL Server 연결에 대한 감사를 수행하는가?                    이벤트 정보 로그 기록                       웹서버 확인 필요 항목                    DB 접속 파일 확인                            예 : conn.asp 파일 침해                                    DB 서버의 IP 주소, Host Name                   DB 접근 게정 (ID)                   DB 서버 접근 패스워드 (PW)                                               sqlpoke.exe 프로그램을 업로드, 이용, 위에 획득한 정보로 접속                                   MS-SQL 서버 의 디폴트 계정 중 sa (system admin) 계정 이용                            서버 내부의 Administrator 계정으로 명령어를 전달할 수 있는 계정                                   net user 명령어 사용                            remote 에서 DB 서버에 계정을 생성 가능 (우회적으로 DB서버에 접근)                                   SQL Injection 공격                            IIS 웹로그 등을 통해 침입 흔적을 확인해야 함">
@@ -45,7 +45,7 @@
   
 
 
-<link rel="canonical" href="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-DatabaseIntrusion/">
+<link rel="canonical" href="http://localhost:4000/is_certification/IS-IncidentAnalysis-DatabaseIntrusion/">
 
 
 
@@ -56,7 +56,7 @@
     
       "@type": "Person",
       "name": "HY03",
-      "url": "https://bluesplatter.com/"
+      "url": "http://localhost:4000/"
     
   }
 </script>
@@ -178,7 +178,7 @@
     
       
         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-          <a href="https://bluesplatter.com/" itemprop="item"><span itemprop="name">Home</span></a>
+          <a href="http://localhost:4000/" itemprop="item"><span itemprop="name">Home</span></a>
           <meta itemprop="position" content="1" />
         </li>
         <span class="sep">/</span>
@@ -612,11 +612,11 @@
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4+%EC%B9%A8%ED%95%B4%EC%82%AC%EA%B3%A0%20https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-IncidentAnalysis-DatabaseIntrusion%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4+%EC%B9%A8%ED%95%B4%EC%82%AC%EA%B3%A0%20http%3A%2F%2Flocalhost%3A4000%2Fis_certification%2FIS-IncidentAnalysis-DatabaseIntrusion%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-IncidentAnalysis-DatabaseIntrusion%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fis_certification%2FIS-IncidentAnalysis-DatabaseIntrusion%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-IncidentAnalysis-DatabaseIntrusion%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fis_certification%2FIS-IncidentAnalysis-DatabaseIntrusion%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
@@ -642,6 +642,42 @@
     <div class="page__related">
       <h4 class="page__related-title">참고</h4>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ai/reinforcement%20learning/Prediction_and_Control_with_Function_approximation_01_Week1/" rel="permalink">Prediction and Control with Function Approximation - 01. Week 1. On-policy Prediction with Approximation
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-08-31T10:00:00+09:00">August 31, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">강의 개요 (과정 로드맵)
+</p>
+  </article>
+</div>
+
         
           
 
@@ -751,42 +787,6 @@
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/ai/reinforcement%20learning/Sample_based_Learning_Methods_01_Week1/" rel="permalink">Sample-based Learning Methods - 01. Week 1. Monte Carlo Methods for Prediction &amp; Control
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        <time datetime="2023-06-12T15:00:00+09:00">June 12, 2023</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">관련 자료 (RLbook2018 Pages 91-104)
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -881,7 +881,7 @@
     
   <script>
     var disqus_config = function () {
-      this.page.url = "https://bluesplatter.com/is_certification/IS-IncidentAnalysis-DatabaseIntrusion/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.url = "http://localhost:4000/is_certification/IS-IncidentAnalysis-DatabaseIntrusion/";  /* Replace PAGE_URL with your page's canonical URL variable */
       this.page.identifier = "/is_certification/IS-IncidentAnalysis-DatabaseIntrusion"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
     };
     (function() { /* DON'T EDIT BELOW THIS LINE */

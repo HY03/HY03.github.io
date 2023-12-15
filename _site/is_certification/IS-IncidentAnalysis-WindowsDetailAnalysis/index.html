@@ -23,7 +23,7 @@
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="Bluesplatter">
 <meta property="og:title" content="정보보안 - 윈도우 침해사고 상세분석">
-<meta property="og:url" content="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-WindowsDetailAnalysis/">
+<meta property="og:url" content="http://localhost:4000/is_certification/IS-IncidentAnalysis-WindowsDetailAnalysis/">
 
 
   <meta property="og:description" content="윈도우 침해사고 상세분석    분류            레지스트리 분석                    시스템이 운영되는데 필요한 정보를 담고 있는 파일                            설치된 S/W 정보, 환경설정, 임시저장값               시스템의 모든 정보 포함                                   공격자의 흔적을 알아낼 수 있음           시작프로그램 등록 관련 레지스트리                            HKLM\Software\Microsoft\Windows\CurrentVersion\Run               HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce               HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnceEx               HKLM\Software\Microsoft\Windows\CurrentVersion\RunServices               HKLM\Software\Microsoft\Windows\CurrentVersion\RunServicesOnce               HKLM\Software\Microsoft\Windows\CurrentVersion\Windows\Load               HKLM\Software\Microsoft\Windows\CurrentVersion\Windows\Run               HKLM\Software\Microsoft\Windows\CurrentVersion\Winlogon\UserInit               HKCU\Software\Microsoft\Windows\CurrentVersion\Run               HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnce               HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnceEx               HKCU\Software\Microsoft\Windows\CurrentVersion\RunServicesOnce                                   Autoruns : 시작 레지스트리 Check (Sysinternals.com)           공격자가 남긴 레지스트리 정보 수집                            최근 사용한 문서 목록                                    HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Recentdocs                                               터미널 서비스 접속 목록                                    HKCU\Software\Microsoft\Terminal Server Client\Default                                               설치된 S/W 목록               열어본 파일 목록                                               자동실행 점검 - Autoruns 를 통해 점검 가능                    서비스 점검                            공격자가 윈도우 서비스에 악성 프로그램을 등록, 시스템 재부팅 시 악성 프로그램 실행               생소한 이름의 서비스               Description 영역의 내용이 비어있는 경우 / 영문으로 되어있는 경우               정상적 서비스 이름을 위장하는 경우                                    Backup System                   Remote Administrator Service                   System spooler Host                   Windows Management Drivers                   Universal Serial Bus Control Component                                                                   스케줄된 작업 확인                            시스템이 재부팅 되더라도 악성 프로그램이 실행될 수 있음                                   자동시작 폴더 점검                            윈도우 재시작 시 자동시작 폴더 내 각종 프로그램들을 실행함               c:\Documents and Settings\Administrator\시작메뉴\프로그램\시작프로그램               HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ShellFolders                                   Winlogon Notification DLL                            적은 코드로 구현이 가능, 안전모드에서 원하는 코드를 실행 가능               WinLogon.exe 파일에서 발생하는 이벤트 핸들러를 이용하여 원하는 코드를 실행 가능                                    Logon, Logoff, Startup, Shutdown, ScreenSaver 이벤트 등                                               악성코드 활용 소지가 있음               HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify\                                    DllName = arprmdg0.dll (악성코드 예시)                   Startup = arprmdg0                   Impersonate = 1 (인격화. 보안 환경변수 설정시 주로 설정, 인증된 사용자 계정으로 자원 실행할 수 있게 함)                                                                               이벤트 로그 분석                    공격자가 남긴 흔적, 활동 등의 정보를 찾아내기 위함           H/W, S/W, 시스템 문제 시 이벤트로그에 저장함 -&gt; 이벤트뷰어를 통해 확인                            관리도구 -&gt; 이벤트뷰어 (eventvwr.msc)                                    보안로그                   시스템로그                   응용프로그램로그                                                                   공격자들은 자신의 흔적을 최소화 하기 위해 ClearEvent 프로그램을 사용 (이벤트로그를 삭제)           공격자가 남기는 로그 유형                            로컬 로그온 시도 실패               계정의 잘못된 사용 (없는 계정 로그인 시도)               계정 잠김               터미널서비스 공격               사용자계정 생성                                               MAC time 분석                    파일, 디렉터리 등 파일시스템은 시간속성을 가지고 있음           공격자가 파일시스템을 통해서 어떠한 행동을 했는지 판단 (어떤 파일이 생성, 수정, 실행되었는지?)           mtime : 파일 수정, 생성           atime : 최근 파일을 읽은 시간, 실행한 시간           ctime : 파일 속성 변경 시간                       침입방법 분석                    공격자가 어떻게 침입했는지 분석 (사고 조치 이외에 원인분석을 하지 않으면 사고가 재발할 수 있음)           윈도우에서 해킹발생 취약점 분류 (대부분 해킹사고는 시스템 보안 업데이트 미실시, 웹서비스 취약점이 원인)                            윈도우 취약점                                    시스템 취약점 (보안업데이트 미실시)                                            최종 보안 업데이트 날짜 파악이 중요                                                    원격 공격 가능한 취약점이 있는지 파악                                                                       MS 에서 제공하는 Microsoft Baseline Security Analyzer 로 확인                                                    보안패치 상태                           IIS 상태                           SQL 상태                                                                                                           패스워드 취약점                   잘못된 공유설정                                               웹 어플리케이션 취약점                                    웹서비스 취약점                                            해킹 발생 시점에 발생한 로그를 분석하여 공격여부, 공격방법등을 파악                       IIS 로그 : C:\WINNT\system32\LogFiles\W3SVC1                                                           SQL Injection                   파일업로드                                               MS-SQL 취약점                                    Default password 사용                   패치 미실시                                                                               인터넷 임시파일 분석                    브라우저와 연관                            접속한 사이트의 페이지가 임시파일에 저장됨               접속 흔적이 히스토리에 남음               사용된 쿠키가 디스크에 저장됨                                   파일 위치 : indexView 도구를 다운받아 쉽게 분석 가능                            임시 인터넷 객체 : Download Program Files - 인터넷에서 다운로드 받은 파일들               임시 인터넷 파일 : Local Settings\Temporary Internet Files - 방문한 사이트 페이지               열어본 페이지 : Local Settings\History - 방문한 사이트 이름               임시쿠키 파일 : Local Settings\COOKIES">
@@ -45,7 +45,7 @@
   
 
 
-<link rel="canonical" href="https://bluesplatter.com/is_certification/IS-IncidentAnalysis-WindowsDetailAnalysis/">
+<link rel="canonical" href="http://localhost:4000/is_certification/IS-IncidentAnalysis-WindowsDetailAnalysis/">
 
 
 
@@ -56,7 +56,7 @@
     
       "@type": "Person",
       "name": "HY03",
-      "url": "https://bluesplatter.com/"
+      "url": "http://localhost:4000/"
     
   }
 </script>
@@ -178,7 +178,7 @@
     
       
         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-          <a href="https://bluesplatter.com/" itemprop="item"><span itemprop="name">Home</span></a>
+          <a href="http://localhost:4000/" itemprop="item"><span itemprop="name">Home</span></a>
           <meta itemprop="position" content="1" />
         </li>
         <span class="sep">/</span>
@@ -644,11 +644,11 @@
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+%EC%9C%88%EB%8F%84%EC%9A%B0+%EC%B9%A8%ED%95%B4%EC%82%AC%EA%B3%A0+%EC%83%81%EC%84%B8%EB%B6%84%EC%84%9D%20https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-IncidentAnalysis-WindowsDetailAnalysis%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+%EC%9C%88%EB%8F%84%EC%9A%B0+%EC%B9%A8%ED%95%B4%EC%82%AC%EA%B3%A0+%EC%83%81%EC%84%B8%EB%B6%84%EC%84%9D%20http%3A%2F%2Flocalhost%3A4000%2Fis_certification%2FIS-IncidentAnalysis-WindowsDetailAnalysis%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-IncidentAnalysis-WindowsDetailAnalysis%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fis_certification%2FIS-IncidentAnalysis-WindowsDetailAnalysis%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-IncidentAnalysis-WindowsDetailAnalysis%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fis_certification%2FIS-IncidentAnalysis-WindowsDetailAnalysis%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
@@ -674,6 +674,42 @@
     <div class="page__related">
       <h4 class="page__related-title">참고</h4>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ai/reinforcement%20learning/Prediction_and_Control_with_Function_approximation_01_Week1/" rel="permalink">Prediction and Control with Function Approximation - 01. Week 1. On-policy Prediction with Approximation
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-08-31T10:00:00+09:00">August 31, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">강의 개요 (과정 로드맵)
+</p>
+  </article>
+</div>
+
         
           
 
@@ -783,42 +819,6 @@
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/ai/reinforcement%20learning/Sample_based_Learning_Methods_01_Week1/" rel="permalink">Sample-based Learning Methods - 01. Week 1. Monte Carlo Methods for Prediction &amp; Control
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        <time datetime="2023-06-12T15:00:00+09:00">June 12, 2023</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">관련 자료 (RLbook2018 Pages 91-104)
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -913,7 +913,7 @@
     
   <script>
     var disqus_config = function () {
-      this.page.url = "https://bluesplatter.com/is_certification/IS-IncidentAnalysis-WindowsDetailAnalysis/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.url = "http://localhost:4000/is_certification/IS-IncidentAnalysis-WindowsDetailAnalysis/";  /* Replace PAGE_URL with your page's canonical URL variable */
       this.page.identifier = "/is_certification/IS-IncidentAnalysis-WindowsDetailAnalysis"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
     };
     (function() { /* DON'T EDIT BELOW THIS LINE */

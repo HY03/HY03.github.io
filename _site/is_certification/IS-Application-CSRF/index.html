@@ -23,7 +23,7 @@
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="Bluesplatter">
 <meta property="og:title" content="정보보안 - CSRF(Cross Site Request Forgery)">
-<meta property="og:url" content="https://bluesplatter.com/is_certification/IS-Application-CSRF/">
+<meta property="og:url" content="http://localhost:4000/is_certification/IS-Application-CSRF/">
 
 
   <meta property="og:description" content="CSRF (Cross Site Request Forgery)    개요            사용자의 브라우저에서 해당 사용자의 권한으로 어떤 기능을 수행하도록 만드는것       XSS의 취약점이 존재할 시 CSRF의 취약점이 존재할 수 있는 확률이 90% 이상임       공격자가 의도한대로 수정, 삭제, 등록하도록 하는 방법       XSS 는 사용자의 PC에서 공격이 이루어지나 CSRF는 정상적인 사용자가 서버에 공격자가 의도한 요청을 하도록 만드는 것           과정            공격자가 웹서버 (CSRF 취약점 존재 - 정상/비정상 요청을 구분하지 못함) 에 조작된 요청 (비밀번호 수정 등) 을 담은 게시물을 등록       웹서버는 게시물을 등록       희생자는 조작된 게시물을 열람       웹서버는 희생자의 권한으로 조작된 요청 (비밀번호 수정 등) 을 처리                    희생자의 비밀번호가 공격자가 입력한 비밀번호로 수정됨                       웹서버가 희생자에게 응답메시지(페이지) 전송       (사용자가 로그인한 상태에서 접속가능한 웹페이지나 동작가능한 스크립트를 공격대상으로 함 - modify.asp, modify.php … )       (IMG, EMBED 태그, javascript 등이 공격대상이 됨)           CSRF 의 공격 예            자동으로 게시판 글 추가/삭제       자동으로 댓글 달기       자동으로 친구 등록       강제로 회원 탈퇴       자동으로 게시판 조회수 조작       자동으로 회원정보 변경       강제 Browsing 을 유도하는 공격                    &lt;iframe width=0 height=0 src=http://광고페이지&gt;           &lt;img src=http://광고페이지&gt;                       인증된 사용자 공격                    희생자의 계좌에서 공격자의 계좌로 입금           ID/PW 필요없이 가능한 공격                            대다수의 사이트는 한번 로그인을 하면 세션쿠키로 인증관리를 한다.               XSS : 세션쿠키를 가로채서 공격자가 정상적인 사용자로 위장가능               CSRF : 세션쿠키를 가로챌 필요 없이 CSRF 요청페이지를 수행하기만 하면 됨                                                   대응책            정상적인 요청과 비정상적인 요청을 판별할 수 있게 함 (토큰 사용)                    예측이 어려운 토큰을 사용           사용자가 요청한 내용이 위조되었는지 여부를 판별하기 위함           세션정보의 토큰 값과 요청내용 내 토큰 값이 같은지 비교                       XSS, CSRF 의 취약점 제거       입력화면 폼 작성시 GET 보다 POST 사용">
@@ -45,7 +45,7 @@
   
 
 
-<link rel="canonical" href="https://bluesplatter.com/is_certification/IS-Application-CSRF/">
+<link rel="canonical" href="http://localhost:4000/is_certification/IS-Application-CSRF/">
 
 
 
@@ -56,7 +56,7 @@
     
       "@type": "Person",
       "name": "HY03",
-      "url": "https://bluesplatter.com/"
+      "url": "http://localhost:4000/"
     
   }
 </script>
@@ -178,7 +178,7 @@
     
       
         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-          <a href="https://bluesplatter.com/" itemprop="item"><span itemprop="name">Home</span></a>
+          <a href="http://localhost:4000/" itemprop="item"><span itemprop="name">Home</span></a>
           <meta itemprop="position" content="1" />
         </li>
         <span class="sep">/</span>
@@ -504,11 +504,11 @@
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+CSRF%28Cross+Site+Request+Forgery%29%20https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Application-CSRF%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+CSRF%28Cross+Site+Request+Forgery%29%20http%3A%2F%2Flocalhost%3A4000%2Fis_certification%2FIS-Application-CSRF%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Application-CSRF%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fis_certification%2FIS-Application-CSRF%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Application-CSRF%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fis_certification%2FIS-Application-CSRF%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
@@ -534,6 +534,42 @@
     <div class="page__related">
       <h4 class="page__related-title">참고</h4>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ai/reinforcement%20learning/Prediction_and_Control_with_Function_approximation_01_Week1/" rel="permalink">Prediction and Control with Function Approximation - 01. Week 1. On-policy Prediction with Approximation
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-08-31T10:00:00+09:00">August 31, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">강의 개요 (과정 로드맵)
+</p>
+  </article>
+</div>
+
         
           
 
@@ -643,42 +679,6 @@
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/ai/reinforcement%20learning/Sample_based_Learning_Methods_01_Week1/" rel="permalink">Sample-based Learning Methods - 01. Week 1. Monte Carlo Methods for Prediction &amp; Control
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        <time datetime="2023-06-12T15:00:00+09:00">June 12, 2023</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">관련 자료 (RLbook2018 Pages 91-104)
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -773,7 +773,7 @@
     
   <script>
     var disqus_config = function () {
-      this.page.url = "https://bluesplatter.com/is_certification/IS-Application-CSRF/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.url = "http://localhost:4000/is_certification/IS-Application-CSRF/";  /* Replace PAGE_URL with your page's canonical URL variable */
       this.page.identifier = "/is_certification/IS-Application-CSRF"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
     };
     (function() { /* DON'T EDIT BELOW THIS LINE */

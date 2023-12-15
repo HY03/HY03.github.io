@@ -23,7 +23,7 @@
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="Bluesplatter">
 <meta property="og:title" content="정보보안 - DHCP(Dynamic Host Configuration Protocol)">
-<meta property="og:url" content="https://bluesplatter.com/is_certification/IS-Application-DHCP/">
+<meta property="og:url" content="http://localhost:4000/is_certification/IS-Application-DHCP/">
 
 
   <meta property="og:description" content="DHCP (Dynamic Host Configuration Protocol)    네트워크 통신            TCP/IP 기반 네트워크 노드 (컴퓨터, host) 는 자신의 IP를 알아야 함                    IPv4 클래스 : A, B, C, D           Classless 주소체계 : 서브넷 마스크 필요                       외부네트워크와 통신하기 위해 디폴트 라우터 주소나 이름과 네임서버 주소를 알고 있어야 함       네트워크에 접속한 모든 컴퓨터가 알아야 할 정보                    자신의 IP 주소           라우터 IP 주소           네임서버 IP 주소           서브넷 마스크                           네트워크 역사            RARP =&gt; BOOTP (Bootstrap) =&gt; DHCP (동적 호스트 설정 프로토콜)       RARP (Reverse Address Resolution Protocol)                    자신의 IP를 모를 때 이용           인터넷 초창기에 부팅된 컴퓨터의 IP주소 제공           물리주소 (Mac Address) 를 IP 주소로 변환           ARP : IP 주소를 물리주소 (Mac Address) 로 바꿔주는 역할           현재 사용하지 않음                            IP 주소만을 제공 (라우터, 네임서버 IP나 서브넷 마스크를 모름)               ARP 서버가 각 네트워크 망에 존재해야 함                                               BOOTP (Bootstrap)                    RARP의 2가지 단점을 보완한 클라이언트/서버 형태의 프로토콜           인터넷 상에 BOOTP 서버 존재                            4가지 정보 항목 (자신, 라우터, 네임서버 IP, 서브넷 마스크) 모두 제공               정적 설정 프로토콜                                   포트번호 67 (Server), 68 (Client) 사용 =&gt; DHCP 로 사용 가능                       DHCP (Dynamic Host Configuration Protocol)                    UDP 기반 프로토콜           서버가 네트워크 클라이언트에게 IP주소를 실시간으로 부여           IP 주소가 수동으로 설정되는 정적 IP주소와는 다르게, 사용 가능한 IP주소를 자동으로 확인           클라이언트/서버 형태의 응용계층 프로토콜           처음 부팅된 컴퓨터나 디스크가 없는 컴퓨터에게 4개의 정보를 제공                           장점            네트워크 설계 변경 / 구성 변경이 쉬움                    DHCP 서버에서 변경                       IP 절약       관리 용이 (TCP/IP 설정을 따로 할 필요없음)           단점            IP 없는 클라이언트 부팅 시 네트워크 상의 DHCP 서버에 IP 요청 브로드캐스트                    네트워크 성능 저하                       전원이 켜져있는 호스트에게 IP 할당                    IP 낭비                       IP 임대기간동안 다른 단말기에 해당 IP가 할당되지 않음                    IP 낭비                       호스트가 너무 많은 경우 서버 과부하가 발생           DHCP 동작과정            Client -&gt; Server                    Client 자신의 IP를 모르는 상태           Server : 192.168.172.10 으로 가정           DHCPDISCOVER 메시지 전송 (UDP)                            Client IP : 0.0.0.0               전송지 : 255.255.255.255                                               Client &lt;- Server                    DHCPOFFER 메시지 전송                            여러 개의 IP 주소를 제안                                               Client -&gt; Server                    Client 는 IP 주소를 선택           DHCPREQUEST                       Client &lt;- Server                    DHCPACK                       IP 주소가 마음에 안 들 경우 반복">
@@ -45,7 +45,7 @@
   
 
 
-<link rel="canonical" href="https://bluesplatter.com/is_certification/IS-Application-DHCP/">
+<link rel="canonical" href="http://localhost:4000/is_certification/IS-Application-DHCP/">
 
 
 
@@ -56,7 +56,7 @@
     
       "@type": "Person",
       "name": "HY03",
-      "url": "https://bluesplatter.com/"
+      "url": "http://localhost:4000/"
     
   }
 </script>
@@ -178,7 +178,7 @@
     
       
         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-          <a href="https://bluesplatter.com/" itemprop="item"><span itemprop="name">Home</span></a>
+          <a href="http://localhost:4000/" itemprop="item"><span itemprop="name">Home</span></a>
           <meta itemprop="position" content="1" />
         </li>
         <span class="sep">/</span>
@@ -567,11 +567,11 @@
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+DHCP%28Dynamic+Host+Configuration+Protocol%29%20https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Application-DHCP%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+DHCP%28Dynamic+Host+Configuration+Protocol%29%20http%3A%2F%2Flocalhost%3A4000%2Fis_certification%2FIS-Application-DHCP%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Application-DHCP%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fis_certification%2FIS-Application-DHCP%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Application-DHCP%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fis_certification%2FIS-Application-DHCP%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
@@ -597,6 +597,42 @@
     <div class="page__related">
       <h4 class="page__related-title">참고</h4>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ai/reinforcement%20learning/Prediction_and_Control_with_Function_approximation_01_Week1/" rel="permalink">Prediction and Control with Function Approximation - 01. Week 1. On-policy Prediction with Approximation
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-08-31T10:00:00+09:00">August 31, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">강의 개요 (과정 로드맵)
+</p>
+  </article>
+</div>
+
         
           
 
@@ -706,42 +742,6 @@
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/ai/reinforcement%20learning/Sample_based_Learning_Methods_01_Week1/" rel="permalink">Sample-based Learning Methods - 01. Week 1. Monte Carlo Methods for Prediction &amp; Control
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        <time datetime="2023-06-12T15:00:00+09:00">June 12, 2023</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">관련 자료 (RLbook2018 Pages 91-104)
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -836,7 +836,7 @@
     
   <script>
     var disqus_config = function () {
-      this.page.url = "https://bluesplatter.com/is_certification/IS-Application-DHCP/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.url = "http://localhost:4000/is_certification/IS-Application-DHCP/";  /* Replace PAGE_URL with your page's canonical URL variable */
       this.page.identifier = "/is_certification/IS-Application-DHCP"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
     };
     (function() { /* DON'T EDIT BELOW THIS LINE */

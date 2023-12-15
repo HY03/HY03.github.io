@@ -23,7 +23,7 @@
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="Bluesplatter">
 <meta property="og:title" content="정보보안 - 대칭키 암호">
-<meta property="og:url" content="https://bluesplatter.com/is_certification/IS-Management-SymmetricKeyAlgorithm/">
+<meta property="og:url" content="http://localhost:4000/is_certification/IS-Management-SymmetricKeyAlgorithm/">
 
 
   <meta property="og:description" content="대칭키 암호의 종류    DES (Data Encryption Standard)            개요                    NIST(미국 국립기술표준원) 에서 1973년 국가적으로 사용할 대칭키 암호시스템 제안요청서를 발표           IBM의 제안으로 DES가 채택됨           FIPS(연방정보처리기준) 의 초안으로 공표           DES 발표 후 가장 널리 사용된 대칭키 블록 암호           이후 삼충 DES 사용을 권고한 FIPS 46-3 발표           최신 AES 는 DES 를 대체한 알고리즘                       개관                    평문의 길이는 64비트, 키의 길이는 56비트, 이보다 길면 64비트 블록으로 나눔           DES 구조는 Feistel 네트워크의 변형, 라운드 회수는 16           원래 키로부터 16개의 서브키를 생성하고 서브키를 각 라운드에서 사용           DES 복호화 과정은 암호화 과정과 동일                       DES의 구조                    개요                            두 개의 전치(P-박스)와 16개의 Feistel 라운드 함수로 구성               P-박스는 초기 전치(initial Permutation) 과 최종 전치(Final Permutation) 임               암호화                                                                                                                                    Plain Text                           Plain Text (평문을 절반으로 자름)                                                                                                           P-Box                   1 Round                                            R2 = L1 XOR F1(R1)&lt;-K1                       L2 = R2                                                           …                   16 Round (교차 없음)                                            R16 = R15                       L16 = L15 XOR F15(R15)&lt;-K15                                                           P-Box                   64Bit 암호문(Cipher Text)                                               복호화도 동일하게 마지막 라운드에 교차 없음                                   라운드 함수                            개요                                    DES 는 16번의 라운드 함수를 사용                   각 라운드 함수는 Fiestal 암호로 되어있음                   라운드 함수는 이전 라운드 함수의 출력 값 L-1 과 R-1 을 입력으로 받고 다음 라운드에 입력으로 전송될 L 과 R을 생성                   각 라운드에는 2개의 암호 요소 혼합기(mixer) 와 교환기 (swapper) 가 있음, 이런 요소들은 역연산이 가능함                                               DES 함수                                    DES 의 핵심은 함수                   라운드 함수에서 사용된 함수를 가리킴                   DES 함수는 32비트 출력값을 산출하기 위해 가장 오른쪽의 32비트에 48비트 키를 적용                   DES 함수는 확장 P-박스, 키 XOR, 8개의 S-박스 그리고 단순 P-박스의 4개 부분으로 구성                                            예시                                                    32Bit 입력                           확장 P-박스 (48Bit)                           48Bit XOR Key (48Bit)                           S-Box (8개)                           32Bit 출력                           단순 P-박스                           32Bit 결과                                                                                                                                                           암호화 알고리즘과 복호화 알고리즘                            라운드 키들이 역순으로 적용되어야 한다는 사실이 중요               암호화 과정에서 1라운드는 K1, 복호화 과정에서 1라운드는 K16                                               DES 분석                    설계 기준                            S-박스                                    각 라운드에서 그 다음 라운드까지 혼돈과 확산 성질을 만족하도록 설계                   비선형 함수                   입력 값의 한 비트를 바꾸면 출력 값에서 두 비트 이상 바뀜                                               P-박스                                    32비트에서 32비트로 가는 하나의 단순 P-박스                   32비트에서 48비트로 가는 하나의 확장 P-박스                   2개의 P-박스는 비트들을 동시에 확산(diffusion) 시킴                                                                   DES의 취약점                            키의 크기(56비트)               키에 대한 전수 조사를 위해 2의 56승 키를 조사               전사공격 가능                                    다중 DES 사용                                                                               다중 DES                    삼중 DES                            개요                                    두 개의 키를 갖는 삼중 DES 와 세 개의 키를 갖는 삼중 DES가 있음                                               두 개의 키를 갖는 삼중 DES (DES-EDE2)                                    두 개의 키를 갖는 삼중 DES 에서는 k1과 k2 두 개의 키를 사용                   첫 번째와 세번째 단계에서는 k1, 두 번째 단계에서는 k2를 사용                   하나의 DES로 삼중 DES를 만들기 위하여 암호화 과정의 중간 단게에서는 복호화 알고리즘을 사용하고, 복호화 과정에서는 DES 암호화 알고리즘을 사용                   기지평문 공격에 취약                                               세 개의 키를 갖는 삼중 DES (Triple-DES)                                    세 개의 키 k1, k2, k3 를 사용                   P -&gt; 암호화(k1) -&gt; 복호화(k2) -&gt; 암호화(k3) -&gt; 암호문                   PGP (이메일 보안, Pretty Good Privacy) 에서 사용                   기지평문 공격 보완                   복호화 : 암호화의 역                   트리플 DES에서 모든 키를 동일하게 하면 3DES는 보통 DES와 같아짐                   과거에 DES로 암호화된 암호문을 3DES를 사용하여 복호화 가능                                                                                   AES            개요                    역사                            1997년 미국 국립기술표준원(NIST)은 DES를 대체하기 위해 Advanced Encryption Standard(AES) 암호 알고리즘을 공모               NIST의 제안 요청서                                    128비트 블록크기                   128, 192, 256 비트의 세 가지 키 크기                   공개 알고리즘으로 누구나 이용 가능해야 함                                               레인달(Rijndael) AES 알고리즘 선택                                   선정기준                            안정성               비용               구현 효율성                                   라운드(Rounds)                            AES는 128비트 평문을 128비트 암호문으로 출력하는 알고리즘               Non-feistel 알고리즘               10 (128bit key), 12 (192bit key), 14 (256bit key) 라운드 사용               AES-128, AES-192, AES-256 으로 불림                                               암호(Ciphers)                    개요                            DES : Feistel 네트워크를 기본 구조로 사용               Rijndael : SPN (Substitution-Permutation Network) 구조 사용               연산은 바이트 단위의 연산을 사용               S-Box 를 이용한 치환, 행이동, 행연산 열변환, 키연산 열변환의 4가지 기본연산을 수행               알려진 공격방법들로부터 안전하도록 설계               하드웨어, 소프트웨어 구현 시 속도나 코드 압축성 면에서 효율적                                   SPN 구조                            라운드 함수가 역변환이 되어야 한다는 등의 제약이 있음               더 많은 병렬성을 제공               입력을 여러 개의 소블록으로 나누고 각 소블록을 S-box에 입력하여 치환, S-box의 출력을 P-box로 전치하는 과정 반복                                   Feistel 과 SPN 구조 알고리즘                            Feistel : DES, Blowfish, MISTY, RC5               SPN : IDEA, Rijndael (AES), Square                                   DES 와 AES 의 비교">
@@ -45,7 +45,7 @@
   
 
 
-<link rel="canonical" href="https://bluesplatter.com/is_certification/IS-Management-SymmetricKeyAlgorithm/">
+<link rel="canonical" href="http://localhost:4000/is_certification/IS-Management-SymmetricKeyAlgorithm/">
 
 
 
@@ -56,7 +56,7 @@
     
       "@type": "Person",
       "name": "HY03",
-      "url": "https://bluesplatter.com/"
+      "url": "http://localhost:4000/"
     
   }
 </script>
@@ -178,7 +178,7 @@
     
       
         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-          <a href="https://bluesplatter.com/" itemprop="item"><span itemprop="name">Home</span></a>
+          <a href="http://localhost:4000/" itemprop="item"><span itemprop="name">Home</span></a>
           <meta itemprop="position" content="1" />
         </li>
         <span class="sep">/</span>
@@ -1155,11 +1155,11 @@
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+%EB%8C%80%EC%B9%AD%ED%82%A4+%EC%95%94%ED%98%B8%20https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Management-SymmetricKeyAlgorithm%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88+-+%EB%8C%80%EC%B9%AD%ED%82%A4+%EC%95%94%ED%98%B8%20http%3A%2F%2Flocalhost%3A4000%2Fis_certification%2FIS-Management-SymmetricKeyAlgorithm%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Management-SymmetricKeyAlgorithm%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fis_certification%2FIS-Management-SymmetricKeyAlgorithm%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fbluesplatter.com%2Fis_certification%2FIS-Management-SymmetricKeyAlgorithm%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fis_certification%2FIS-Management-SymmetricKeyAlgorithm%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
@@ -1185,6 +1185,42 @@
     <div class="page__related">
       <h4 class="page__related-title">참고</h4>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ai/reinforcement%20learning/Prediction_and_Control_with_Function_approximation_01_Week1/" rel="permalink">Prediction and Control with Function Approximation - 01. Week 1. On-policy Prediction with Approximation
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-08-31T10:00:00+09:00">August 31, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">강의 개요 (과정 로드맵)
+</p>
+  </article>
+</div>
+
         
           
 
@@ -1294,42 +1330,6 @@
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/ai/reinforcement%20learning/Sample_based_Learning_Methods_01_Week1/" rel="permalink">Sample-based Learning Methods - 01. Week 1. Monte Carlo Methods for Prediction &amp; Control
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        <time datetime="2023-06-12T15:00:00+09:00">June 12, 2023</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">관련 자료 (RLbook2018 Pages 91-104)
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -1424,7 +1424,7 @@
     
   <script>
     var disqus_config = function () {
-      this.page.url = "https://bluesplatter.com/is_certification/IS-Management-SymmetricKeyAlgorithm/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.url = "http://localhost:4000/is_certification/IS-Management-SymmetricKeyAlgorithm/";  /* Replace PAGE_URL with your page's canonical URL variable */
       this.page.identifier = "/is_certification/IS-Management-SymmetricKeyAlgorithm"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
     };
     (function() { /* DON'T EDIT BELOW THIS LINE */
