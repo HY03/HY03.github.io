@@ -17,6 +17,677 @@ toc: false
 use_math: true
 ---
 
+## 관련 자료 (RLbook Pages 204-210, 215-222, 223-228)
+
+### Linear Methods
+
+- Linear Methods 에 대하여
+	- 근사함수 $\hat{v}(\cdot ,w)$ 중 가장 중요하고 특수한 케이스는 선형함수임.
+	- 실제 값을 가진, $\textbf{w}$ 와 동일한 요소 수를 가진 벡터 $\textbf{x} (s) \doteq (x_1(s),x_2(s),\cdots , x_d(s))^{\top}$ 와 대응한다.
+	- 상태-가치 함수의 선형 근사 방식은 $\textbf{w}$ 와 $\textbf{x} (s)$ 의 내적으로 이루어 진다.
+	
+		$\hat{v}(s,\textbf{w}) \doteq \textbf{w}^{\top} \textbf{x} (s) \doteq \sum_{i=1}^d w_i x_i (s)$
+
+- Features 에 대하여
+	- $\textbf{x} (s)$ 는 상태 s 를 표현하는 feature vector 라 한다.
+	- 여기서 feature 는 위 함수 자체라 생각하고, 상태 s 에 대한 이 함수 값을 s 의 feature 라 일컷는다.
+	- 선형함수에서 feature 는 기저함수 (basis function) 이 되는데 이는 근사 함수의 선형 기저를 형성하기 때문이다.
+		- 기저함수는 함수 공간 내에서 다양한 형태의 함수를 생성하는데 사용됨.
+		- 예를 들어, feature 의 요소 중 하나가 실제 값이 아닌 가공된 비선형 값일 경우, 선형함수의 한계를 극복하고 더 복잡한 표현이 가능하게 된다.
+		- 이러한 feature 들을 선정하는 방법에는 다양한 방법이 있다.
+
+- 선형 근사함수에 대한 SGD 업데이트가 가지는 장점
+	- 가중치 $\textbf{w}$ 에 대한 가치 근사함수의 미분값
+		
+		$\nabla \hat{v} (s,\textbf{w}) = \textbf{x} (s)$
+
+	- 따라서 SGD 업데이트 는 아래의 간단한 형태로 표현된다.
+	
+		$w_{t+1} \doteq w_t + \alpha \[U_t - \hat{v}(S_t, w_t) \] x(S_t)$
+
+- Linear SGD 에 대해
+	- 위의 간단한 식 때문에, 수학적 분석에서 linear SGD 는 가장 선호되는 방식이다.
+	- 모든 종류의 학습 시스템에서 대부분의 유용한 수렴의 결과는 선형 혹은 단순한 함수 근사 방식 덕분이다.
+	- 특히 선형의 경우 하나의 최적값을 가진다.
+	- 또한 이 로컬/전역 최적점으로 수렴하는 것이 자동으로 보장된다.
+	- 예를 들어 이전 장의 gradient Monte Carlo 알고리즘은 $\alpha$ 값이  선형 가치근사 함수 하에 $\overline{VE}$ 의 전역 최적점으로 수렴한다.
+
+- The semi-gradient TD(0) under linear function approximation
+	- semi-gradient TD(0) 또한 선형 근사함수 하에 수렴한다. 그러나 이는 Linear SGD 와 다르게 몇 가지 이론이 더 필요하다.
+	- 또한 가중치 벡터도 전역 최적점으로 수렴하는 것이 아닌 가까운 지역 최적점으로 수렴하게 된다.
+	- 이러한 케이스는 연속적인 경우에 유용하다.
+	- 아래는 업데이트 식이다.
+	
+		$w_{t+1} \doteq w_t + \alpha (R_{t+1} + \gamma w_t^{\top} x_{t+1} - w_t^{\top} x_t) x_t$
+		        $= w_t + \alpha (R_{t+1}x_t - x_t(x_t - \gamma x_{t+1})^{\top} w_t)$
+
+		- 여기에서 $x_t = x(S_t)$ 이다.
+
+	- 만약 시스템이 안정화 되었을 때, 주어진 $w_t$ 에 대해, 다음 스텝의 가중치 벡터는 아래와 같이 표현할 수 있다.
+		$\mathbb{E} \[w_{t+1}\|w_t\] = w_t + \alpha (b-Aw_t)$
+		$b \doteq \mathbb{E} \[R_{t+1}x_t \] \in \mathbb{R}^d$ and $A \doteq \mathbb{E} \[x_t(x_t - \gamma x_{t+1})^{\top} \] \in \mathbb{R}^d x \mathbb{R}^d$
+
+	- 위 식에 따라, 만약 시스템이 수렴한다면, 가중치 벡터는 반드시 아래의 $w_{TD}$ 로 수렴하게 된다.
+		$b-Aw_{TD} = 0$
+		$\Rightarrow b = Aw_{TD}$
+		$\Rightarrow w_{TD} \doteq A^{-1}b$
+
+	- 위 값을 TD fixed point 라고 한다.
+	- linear semi-gradient TD(0) 는 이 지점으로 수렴하게 된다.
+	- TD fixed point 에서 $\overline{VE}$ 는 가능한 최소 에러값의 확장된 경계선 내에 있음이 보장된다. (연속적인 케이스에서)
+	
+		$\overline{VE}(w_{TD}) \leq \frac{1}{1-\gamma} \min_w \overline{VE} (w)$
+
+		- $\gamma$ 값이 흔히 1과 가까운 경우가 많으므로, 이 확장계수는 상당히 커질 수 있으며 TD 의 점근적 성능에 영향을 줄 수 있다.
+		- 반면에 TD 방식은 몬테카를로 방식과 비교하여 분산이 크게 감소되는 경우가 많으며, 학습속도도 빠르다.
+		- 어떤 방식이 더 나을 지는 근사와 문제, 학습이 얼마나 지속되는지에 따라 다르다.
+		
+- 타 방식에 대한 건
+	- 타 on-policy bootstrapping 방식에도 위 TD fixed point 와 에러 경계선이 적용된다.
+		- linear semi-gradient DP
+		- One-step semi-gradient action-value methods (Semi-gradient Sarsa(0))
+	- 이러한 수렴 결과의 한계는 상태가 on-policy distribution 에 따라 업데이트 된다는 점이다.
+		- 그러나, 선형 함수 근사를 사용하여 강화학습을 할 때, 안정적으로 수렴하려면 정책에 따라 상태를 업데이트하는 분포가 필요하며, 다른 분포에서는 부트스트래핑이 불안정할 수 있음
+		
+- Bootstrapping on the 1000-state Random Walk
+	- 이전 예제에 쓰였던 1000-state Random Walk 를 동일한 방식으로 10개의 상태 그룹으로 묶어 (State aggregation) 진행한 결과
+
+	![9_4_1_figure_9_1_1000_state_random_walk_gradient_mc](/assets/images/posts/9_4_1_figure_9_1_1000_state_random_walk_gradient_mc.png)
+
+	- 위 이미지는 문제를 gradient MC 방식으로 진행한 결과값
+	
+	![9_4_1_figure_9_2_1000_state_random_walk_semi_gradient_td](/assets/images/posts/9_4_1_figure_9_2_1000_state_random_walk_semi_gradient_td.png)
+
+	- 위 이미지는 문제를 semi-gradient TD 방식으로 진행한 결과값
+	- 위 결과와 같이 TD approximation 은 Monte Carlo approximation 보다 참 값에서 거리가 멀다.
+	- 그럼에도, TD 는 학습률에서 큰 잠재적 장점을 가지고 있고, 
+	- 위 오른쪽 그림에서처럼, 일반화된 Monte Carlo 방식을 n-step TD 를 이용해 진행할 수 있다.
+
+- n-step semi-gradient TD
+	- semi-gradient n-step TD 는 tabular n-step TD 알고리즘에 function approximation 을 적용한 자연스러운 확장이다.
+	- Pseudocode 는 아래와 같다.
+	
+	![9_4_2_n_step_semi_gradient_td_pseudocode](/assets/images/posts/9_4_2_n_step_semi_gradient_td_pseudocode.png)
+	
+### Feature Construction for Linear Methods
+
+- 개요
+	- Linear Methods 는 수렴 보장, 데이터와 계산의 효율성 등의 이점이 있다.
+	- 이와 더불어 어떠한 상태의 특성을 선택하는지가 매우 중요하다.
+	- 이 일은 강화학습 시스템에 사전 도메인 지식을 추가하는 주요한 방법이다.
+	- Linear Form 의 한계는, 각각의 feature 가 서로 간섭할 수 없다는 점이다.
+		- pole-balancing 작업에서 각속도와 각도는 상호의 값에 따라 좋은 상태일 수도, 나쁜 상태일 수도 있다.
+		- 선형 가치함수는 각속도와 각도를 각각 상태로 입력받은 경우, 이러한 부분을 표현할 수 없다.
+		- 만약 이런 부분의 고려가 필요하다면, 관련된 값을 feature 로서 제공해 주어야 한다.
+	- 위를 가능하게 하는 다양한 방식에 대해 알아본다.
+
+- Polynomials
+	- 다양한 문제들은 숫자로 표현된다.
+	- 이러한 문제들은 강화학습에서의 함수 근사가 interpolation (보간) 과 regression (회귀) 의 작업과 유사한 작업을 수행한다.
+		- interpolation (보간) : 주어진 데이터 사이의 값을 추정
+		- regression (회귀) : 독립 변수(입력 변수)와 종속 변수(출력 변수) 간의 관계를 모델링
+	- Polynomials (다항식) 은 보간과 회귀에서 보편적으로 사용되는 특성으로, 강화학습에도 적용이 가능하다.
+		- 여기에서 논의하는 다항식 특성은 여기에서 논의하는 강화학습에서의 다른 형태의 특성과 같이 잘 적용되지는 않으나, 간단하고 익숙한 방식이다.
+			$\textbf{x}(s) = (s_1,s_2)^{\top}$
+			$\textbf{x}(s) = (1, s_1, s_1 s_2, s_1^2, s_2^2, s_1 s_2^2, s_1^2 s_2, s_1^2 s_2^2)^{\top}$
+		- 기존 $s_1, s_2$ 만 features 로 있을 경우, 두 feature 간 상호작용이 불가하며, 두 feature 의 값이 0일 경우, 근사 가치 또한 0이 된다.
+		- 하단의 features 는 이러한 한계를 극복한 features 이나, 원 feature 가 늘어날 수록 생성하는 feature 의 갯수가 지수적으로 늘어난다.
+- Fourier Basis
+	- Fourier 기저 함수는 주기적인 함수를 표현하는 데 사용되는 수학적인 개념이다.
+		- 주기적인 신호를 주파수 도메인에서 다양한 주파수 성분으로 분해하여 표현
+		- Fourier 기저 함수는 코사인 함수와 사인 함수의 선형 조합으로 이루어져 있음.
+	- 여기에서는 주어진 상태를 근사하기 위해 Fourier Basis 를 사용하여 가치함수를 선형 함수로 근사하는데 활용된다.
+		- 값이 가지는 계절성이나 주기성을 포착, 이를 Fourier Basis 를 이용하여 가치 함수를 생성하고, Fourier Basis 의 계수를 학습한다.
+		- 이 때 함수의 구조는 선형으로 나타나게 된다.
+	- 또한 Fourier 기저 함수는 상태 공간의 차원을 줄이는 데에도 사용될 수 있다.
+
+- Coarse Coding
+	
+	![9_5_3_1_figure_9_6_coarse_coding](/assets/images/posts/9_5_3_1_figure_9_6_coarse_coding.png)
+	
+	- 예를 들어 2차원의 상태 셋이 있을 경우, 위 그림과 같이 해당 차원에 특정 영역을 만들고 해당 영역에 해당할 경우 1, 그렇지 않을 경우 0을 부여할 수 있다.
+		- 1, 0 으로 표현되는 상태 특성을 binary feature 라 한다.
+	- 위와 같은 형태의 상태 feature 를 나타내는 방식 (비록 형태가 원이 아니고, 값이 binary 가 아닐 지라도) 을 coarse coding 이라 한다.
+	- 각각의 영역에 대항하는 하나의 가중치가 있다고 하였을 때, 특정 지점의 상태에 대한 학습을 진행할 경우 이 상태를 포함한 영역의 모든 가중치 값이 영향을 받게 된다.
+		- 즉, 이 영역의 shape 가 일반화에 대한 내용을 결정하게 된다.
+	- 수용 필드가 큰 feature 는 광범위한 일반화를 제공하지만, 미세한 차별을 만들 수 없다.
+		- 그러나 다행이도 정밀한 식별은 전체 특징 수에 의해 더 많이 제어된다.
+	- Figure 9.8 : 초기 일반화에 대한 특징 너비의 강력한 효과(첫 번째 행) 및 점근적 정확도에 대한 약한 효과(마지막 행)의 예
+	
+		![9_5_3_2_figure_9_8_coarse_coding_feature_width](/assets/images/posts/9_5_3_2_figure_9_8_coarse_coding_feature_width.png)
+
+- Tile Coding
+
+	![9_5_4_1_figure_9_9_tile_coding](/assets/images/posts/9_5_4_1_figure_9_9_tile_coding.png)
+	
+	- Tile coding 은 coarse coding 의 한 종류로, 연속 공간에서 유연하고 계산에 용이하도록 구역을 나누는 것이다.
+	- 위의 그림과 같이 구역을 나누는데, 만약 하나의 Tiling 을 사용한다면 이것은 state aggregation 의 케이스에 해당한다.
+	- 위의 그림에서 feature vector $\textbf{x}(s)$ 는 각 타일별로 1개의 요소를 가지게 되며 총 $4x4x4=64$ 개의 요소를 가지게 된다.
+		- 위의 한 지점의 경우 64개 중 4개의 요소가 1이 되며 나머지는 0이 된다.
+	- 또한 Tile coding이 가지는 이점으로, 각 tiling 별로 상태가 속하는 partition은 하나가 되며, 이러한 특성으로 step-size parameter 를 설정하기 쉽다.
+		- 1 Tiling 에 $\alpha = 0.0001$ 이라면 50 Tiling 에 $\alpha = 0.0001/50$
+	- 값이 0과 1로 이루어져 있어 계산에 이점이 있다.
+	
+	![9_5_4_2_figure_9_11_tile_coding_uniform_asymmetric](/assets/images/posts/9_5_4_2_figure_9_11_tile_coding_uniform_asymmetric.png)
+	
+	- tiling 을 할 때, uniform 한 것 보다 asymmetric 한 것이 좋다. (위의 이미지는 인접점에 대한 예시)
+
+	![9_5_4_3_figure_9_12_tile_coding_different_tilings](/assets/images/posts/9_5_4_3_figure_9_12_tile_coding_different_tilings.png)
+	
+	- tiling 은 반드시 grid 여야 할 필요는 없다.
+	- Hashing 기법을 사용하여 큰 타일을 훨씬 작은 타일 세트로 일관되게 의사 난수로 축소
+		- 해싱은 상태 공간 전체에 무작위로 퍼져 있지만 여전히 완전한 파티션을 형성하는 연속되지 않고 분리된 영역으로 구성된 타일을 생성한다.
+		- 예를 들어 하나의 타일은 오른쪽에 표시된 4개의 하위 타일로 구성될 수 있다.
+		- 해싱을 통해 메모리 요구 사항은 성능 손실이 거의 없이 크게 감소되는 경우가 많다.
+		- 이는 상태 공간의 작은 부분에만 고해상도가 필요하기 때문에 가능
+		- 즉, 해싱은 메모리 요구 사항이 차원의 수에 따라 기하급수적으로 늘어날 필요가 없고, 작업의 실제 요구 사항과 일치하면 된다는 점에서 차원의 저주에서 우리를 해방시킨다.
+
+- Radial Basis Function
+	- RBF 는 coarse coding 의 일반화의 종류로 0과 1로 표현하는 것이 아닌 0에서부터 1까지의 값으로 표현한다.
+	- 중심으로부터 떨어진 거리의 표준값
+	- RBF 방법은 미분이 가능한 근사 함수를 원할하게 생성한다는 장점이 있으나 잘 쓰이지 않는다.
+		- 상당한 추가 계산 복잡성이 필요
+		- 2개 이상의 차원 상태에서는 성능이 저하됨
+		- 가장자리에서의 잘 제어된 활성화를 얻는 것이 어려움.
+
+
+- Nonlinear Function Approximation : Artificial Neural Networks
+
+	- Artifical neural networks (ANNs) 은 비선형 함수 근사에 많이 쓰인다.
+	- ANN 은 상호 연결된 유닛 (뉴런의 정보를 가지고 있는) 들로 신경망 시스템의 주 요소이다.
+	
+	![9_7_1_figure_9_14_generic_feedforward_ann](/assets/images/posts/9_7_1_figure_9_14_generic_feedforward_ann.png)
+
+	- 위의 이미지는 일반적 feedforward (순전파) ANN 을 다룬다.
+		- 네트워크 상 순환고리가 없으며, 유닛의 출력값이 입력값에 영향을 영향을 주는 path 가 없는 경우
+	- input layer, output layer, hidden layer 로 구성됨.
+	- 각각의 연결에 실제 값인 가중치가 부여되어 있음.
+		- 가중치는 실제 신경망 시냅스 연결 효율성과 대략적으로 일치함.
+	- ANN 이 연결에 하나라도 루프가 있다면, 이것은 feedforward ANN 이 아닌 recurrent ANN 이 된다.
+	- 위의 원 모양 요소는 semi-linear units 으로, 입력값들과 가중치들의 합을 구한 뒤, 비선형 함수 (activation function) 을 적용하게 된다.
+		- S-shaped
+		- sigmoid (로그함수와 비슷한) : $f(x) = \frac{1}{(1+e^{-x})}$
+		- 비선형 정류기 : $f(x) = \max (0,x)$
+		- Step function : $f(x) = 1$ if $x \geq \theta$ , and 0 otherwise
+	- 활성화 함수의 비선형성이 필수적으로 요구된다.
+		- 선형 함수를 겹쳐도 또 다른 선형함수로 표현된다.
+	- 단일 hidden-layer 의 보편적 근사 속성에도 불구하고 경험과 이론 모두, 복잡한 함수를 근사하는 것이 필요하다는 것을 보여준다.
+	- ANN 에서 은닉층을 훈련시킨다는 것은 손으로 요소를 선별하는 것이 아닌 주어진 문제에 적합한 요소를 자동으로 생성한다는 것과 같다.
+		- ANN 은 보편적으로 확률적 경사 방식으로, 전체 네트워크의 성능을 Objective function 으로 측정하여 개선 (maximize/minimize) 시키는 것이다.
+	- ANN 의 가중치를 학습하는 가장 효과적인 방법은 역전파 알고리즘이다.
+		- 순전파는 입력값에 대한 각 유닛의 활성화를 계산
+		- 순전파 이후 역전파는 각 가중치의 편미분 값을 계산해낸다.
+	- 역전파 알고리즘은 얕은 네트워크 층 (1, 2개의 은닉층을 가진) 에서 잘 작동하나, 심층 네트워크에서는 잘 동작하지 않는다.
+		- $k+1$ 층의 네트워크 훈련이 $k$ 층 네트워크의 훈련보다 더 안좋은 성능을 보여준다.
+	- ANN 이 가지는 문제점들
+		- 많은 수의 가중치는 과적합의 문제를 야기한다.
+		- 역전파는 심층 인공신경망에서 잘 동작하지 않는다. (편미분 값이 층을 이동하며 빠르게 소실된다.)
+			- 학습속도가 매우 느려지거나, 수렴하지 않게 된다.
+	- 과적합 문제의 해결
+		- 과적합은 제한된 학습 데이터에서 일어나는 문제로, 온라인 강화학습 (제한된 학습 데이터셋이 아님) 에서는 덜 문제가 되는 경향이 있다.
+		- 그러나 효과적인 일반화는 여전히 중요한 문제이다.
+		- 과적합 문제는 ANN 에서 보편적이나, 특히 심층 ANN 에서 중요하다.
+		- 해결을 위한 방법
+			- Cross validation : Validation data 를 통해 성능이 떨어지기 시작하면 학습을 중단하는 방법
+			- Regularization : Objective function 을 변경해 근사의 복잡성을 줄이는 방법
+			- Weight Sharing : 차원 (Degrees of freedom) 을 줄이기 위한 가중치 간 종속성의 도입
+			- Dropout : 네트워크에서 유닛을 랜덤하게 제거하는 것 (드물게 발생하는 경우에 지나치게 특화되지 않도록 함)
+	- Deep ANN 의 훈련법
+		- Deep belief networks : 가장 깊은 층 부터 출력 값에 대한 비지도학습을 진행하여 가중치를 초기화한 뒤 학습하는 방법
+		- Batch normalization : 네트워크의 입력 변수들을 정규화
+		- deep residual learning : deep ANN 에서 그래디언트 소실 문제를 해결하기 위해 입력값과 출력값의 차이를 학습하여 더하는 방식으로 학습을 진행
+		
+		![9_7_2_figure_9_15_deep_convolutional_network](/assets/images/posts/9_7_2_figure_9_15_deep_convolutional_network.png)
+
+		- deep convolutional network : 구조적인 특수성 덕분에 그래디언트 소실 문제가 완화되고, 네트워크가 깊어질 수록 성능이 향상될 수 있음
+			- 계층적인 특징을 학습, 공간적인 구조 정보의 보존
+
+## Feature Construction for Linear Methods
+
+- 가치 측정을 위한 feature 의 선정은 강화학습 에이전트의 가장 중요한 요소 중 하나이다.
+
+### Coarse coding
+
+- 학습목표
+	- 거친 코딩에 대해 설명하기
+	- 거친 코딩이 state aggregation 과 어떠한 연관이 있는지 설명하기
+
+- 선형 가치함수 근사
+	- $v_\pi (s) \approx \hat{v}(s, \textbf{w} ) = \textbf{w}^{\top} \textbf{x} (s)$
+		- feature vector $\textbf{x} (s)$ 생성
+		- 가중치 벡터와 내적 계산
+- 선형 가치함수 근사의 특수 케이스로서의 표 형식 표현 (tabular case)
+
+	![coarse_coding_tabular_case](/assets/images/posts/coarse_coding_tabular_case.png)
+
+	- tabular case 는 선형 가치함수 근사의 특수 케이스로 위 그림과 같이 하나의 상태를 binary one-hot encoding 방식으로 표현할 수 있다.
+	- 하지만 상태가 많아질 경우, 위 방식은 한계가 있다.
+
+- State Aggregation
+	- 2차원 상태에서의 상태값을 생각해보면, 아래 물고기는 무한한 위치에 있을 수 있고, 이것을 유한한 테이블 형태로 표현이 불가능하다.
+
+	![coarse_coding_state_aggregation](/assets/images/posts/coarse_coding_state_aggregation.png)
+	
+	- 위 그림과 같이 그룹으로 묶어 해당 구역에서는 같은 값으로 표현한다.
+	- 위 구역의 모양은 반드시 그리드 형태일 필요는 없다. (불규칙적이어도 상관없음)
+	- 상태값이 2차원일 필요는 없음
+
+- Coarse coding
+
+	![coarse_coding_coarse_coding](/assets/images/posts/coarse_coding_coarse_coding.png)
+
+	- 영역의 중복을 허용
+	- 각 영역에 포함되는지 안되는지를 표현
+	- 상태값이 2차원일 필요는 없음
+	- coarse coding 은 state aggreagtion 을 일반화한 표현방식이다.
+
+### Generalization Properties of Coarse Coding
+
+- 학습목표
+	- coarse coding 의 파라미터가 어떻게 차별 (discrimination) 과 일반화 (generalization) 에 영향을 주는지 이해
+	- 위의 구분 (discrimination) 과 일반화 (generalization) 가 어떻게 학습 속도와 정확도에 영향을 주는지 이해
+
+- Coarse Coding 의 요소
+
+	![coarse_coding_broadness_of_generalization](/assets/images/posts/coarse_coding_broadness_of_generalization.png)
+	
+	- active feature 에 대응하는 영역의 집합이 클수록 특징 표현은 더 일반화된다.
+
+	![coarse_coding_direction_of_generalization](/assets/images/posts/coarse_coding_direction_of_generalization.png)
+	
+	- 영역의 형태에 따라 일반화를 하는 방향이 달라진다.
+	
+	![coarse_coding_state_discrimination](/assets/images/posts/coarse_coding_state_discrimination.png)
+
+	- 위의 독립된 영역의 크기가 상태 구분의 정도를 나타낸다.
+	- 완벽한 상태의 구분은 할 수가 없는데, 하나의 상태 값의 업데이트가 다른 상태 값 또한 업데이트 시키기 떄문
+	- 위의 같은 색으로 표현된 상태들은 동일한 feature vector 값을 가지게 된다.
+	- 즉, 위의 구역이 더 세분화 될수록 더 높은 상태의 구분도를 가지게 된다.
+	
+- 1D Example
+
+	- interval 이 짧은 경우
+
+	![coarse_coding_1d_example_with_short_interval](/assets/images/posts/coarse_coding_1d_example_with_short_interval.png)
+	
+	- interval 이 긴 경우
+
+	![coarse_coding_1d_example_with_long_interval](/assets/images/posts/coarse_coding_1d_example_with_long_interval.png)
+	
+	- 위의 예제에서 10240 샘플을 학습할 경우 interval 이 긴 경우가 학습속도나 결과가 더 좋았음
+	- 위의 예제에서는 interval 이 긴 경우가 구분과 일반화의 측면에서 더 좋은 결과를 가져왔음
+
+### Tile Coding
+
+- 학습목표
+	- Tile Coding 이 어떻게 일반화와 구분을 달성할 수 있는지 설명
+	- Tile Coding 의 이점과 한계에 대해 이해
+
+- 타일 코딩에 대해서
+
+	![tile_coding_tile_coding](/assets/images/posts/tile_coding_tile_coding.png)
+	
+	- Tile Coding 은 Coarse Coding 의 한 종류로, 그리드 (Tiling) 를 중복해서 상태 공간을 전체적으로 철저히 분할한다.
+	- 하나의 Tiling 은 State aggregation 과 같다.
+	- 위의 예제에서는 Tiling 간 동일한 offset 을 사용하여 대각의 영역이 생성되었으나, offset 이 랜덤할 경우 좀 더 구형으로 형성된다.
+
+	![tile_coding_direction_of_generalization](/assets/images/posts/tile_coding_direction_of_generalization.png)
+	
+	- 일반화에 대한 제어가 필요한 경우 상태 공간을 스케일링 하거나, 그리드의 크기를 변경시킨다.
+
+- 타일 코딩의 이점
+	- 그리드가 균일 (uniform) 하다면, 어느 타일에 속해있는지 계산하기 쉽다.
+	- 계산 상의 이점으로, 저 차원의 환경에서 타일코딩을 이용해 선행 실험을 할 수 있다.
+
+- 타일 코딩의 한계
+	- 상태 공간의 차원이 늘어날 수록, 필요한 타일의 수도 지수적으로 증가한다.
+	- 따라서 입력 차원을 독립적으로 처리할 수 있는지를 고려해야 하는데, 이는 문제에 따라 다르다.
+
+### Using Tile Coding in TD
+
+- 학습목표
+	- Tile Coding 을 TD learning 에 적용하는 방법을 설명
+	- Tile Coding 표현방식에서 중요한 요소를 식별
+
+- Tile Coding 의 계산 상 이점
+
+	![tile_coding_td_sparse_binary_representations](/assets/images/posts/tile_coding_td_sparse_binary_representations.png)
+		
+	- Tile Coding 으로 표현 시, 특정 상태를 표현할 때, 적은 영역의 활성화로 표현된다.
+	- 이는 feature vector 가 sparse binary vector (희소 이진 벡터) 로 표현된다는 의미이다.
+	- 이 때, 계산은 단순히 몇몇 가중치의 합으로 표현되며 이는 행렬곱을 계산하는 것보다 훨씬 비용이 작다. 
+
+- Tile Coding 계산의 간단한 예시
+
+	![tile_coding_td_simple_example](/assets/images/posts/tile_coding_td_simple_example.png)
+	
+- 1000-steps random walk 문제에서 Tile coding 과 State aggregation 의 비교
+
+	![tile_coding_td_1000_steps_random_walk](/assets/images/posts/tile_coding_td_1000_steps_random_walk.png)
+	
+	- 상태 500에서 시작하여 좌, 혹은 우로 200 스텝 범위 안으로 랜덤하게 움직일 수 있다고 가정
+	- 상태 1 또는 1000을 벗어나면 Terminal State 로 진입
+
+	![tile_coding_td_1000_steps_random_walk_tile_coding_and_state_aggregation](/assets/images/posts/tile_coding_td_1000_steps_random_walk_tile_coding_and_state_aggregation.png)
+
+	- 상태 200개를 묶은 state aggregation 은 5개의 영역으로 표현됨
+	- 상태 200개를 묶은 tile coding 은 좌, 우의 미표현 영역으로 인해 6개의 영역을 생성해야 함
+		- 50개의 tiling 을 사용하여 학습한다고 가정
+	- step-size 의 경우 tile coding 은 사용된 tiling 의 수 만큼 더 나눈 값을 사용
+	
+	![tile_coding_td_1000_steps_random_walk_tile_coding_and_state_aggregation_result](/assets/images/posts/tile_coding_td_1000_steps_random_walk_tile_coding_and_state_aggregation_result.png)
+	
+	- 결과적으로 Tile coding 이 State aggregation 보다 상태를 더 구분하고, 큰 성능저하 없이 더 정확한 결과를 보여줌
+
+## Neural Networks
+
+### What is a Neural Network?
+
+- 학습목표
+	- feed forward neural networks 에 대해 이해하기
+	- 활성화 함수 (activation function) 에 대해 이해하기
+	- neural network 가 파라미터화된 함수라는 점을 이해하기
+
+- Simple neural networks
+
+	![neural_networks_simple_neural_network_feed_forward](/assets/images/posts/neural_networks_simple_neural_network_feed_forward.png)
+	
+	- Neural network 란 입력, 은닉, 출력 층의 구성요소인 노드와 각 층간의 연결을 통해 최종 값을 출력하는 네트워크를 말함
+	- 각각의 노드와 연결은 일련의 연산과정을 가진다.
+	- 층과 층의 이동으로 출력 층까지 일방향으로 데이터가 이동하는 network 를 feed forward network 라 한다.
+	- 가령 출력 값이 다시 층을 거슬러 올라가거나, 본인의 입력값에 영향을 주는 경우 이를 recurrent network 라 한다.
+	
+	![neural_networks_simple_neural_network_mechanics](/assets/images/posts/neural_networks_simple_neural_network_mechanics.png)
+	
+	- 노드의 연결은 가중치와 입력값의 곱의 합에 활섬함수를 적용한 형태의 연산을 한다.
+	- Sigmoid function : s 자 형태의 함수로 tanh 가 여기에 속함
+	- logistic function :  ReLU ($f(x) = x$ if $x>0$ or 0), thresholding units ($f(x) = 1$ if $x>0$ or 0)
+	
+	![neural_networks_simple_neural_network_implementation](/assets/images/posts/neural_networks_simple_neural_network_implementation.png)
+
+	- Neural network 의 연산을 함수로 표현하면 위와 같다.
+	- 다음 층이 최종 출력층이 아니라면, 위의 값은 다시 입력 층이 된다.
+
+### Non-linear Approximation with Neural Networks
+
+- 개요
+	- Tile coding 은 예측을 위해 고정된 feature 의 집합을 생성하는 하나의 방법이다.
+	- 신경망은 유용한 feature 의 집합을 학습하기 위한 전략을 제공한다.
+
+- 학습목표
+	- 신경망이 어떻게 feature 를 생성하는지 이해하기
+	- 신경망은 상태에 대한 비선형 함수임을 이해하기
+
+- Non-linear representations
+
+	![neural_networks_nonlinear_approximation_representations](/assets/images/posts/neural_networks_nonlinear_approximation_representations.png)
+	
+	- 신경망을 생성할 때, 초기 가중치 값을 설정하는 작업이 필요하다.
+		- $\textbf{w}_{\it{init}} \sim \mathscr{N} (\mu, \sigma)$ 
+		- 이 작업은 중요한 작업이고 추후에 다룬다.
+	- 하나의 노드에서는 아래와 같은 연산이 이루어진다.
+		- $f(w_1 x_1 + w_2 x_2)$
+		- 노드로 향하는 입력값(노드) : $x_1, x_2$
+		- 입력값과 노드를 연결하는 가중치(화살표) : $w_1, w_2$
+		- 위 곱연산의 합계 이후 적용되는 활성화(비선형) 함수 : $f()$
+		- 위 활성화 함수 적용 이전의 연산은 행렬곱의 연산으로 표현된다.
+	- 이러한 연산이 적용된 하나의 층은 다음 층의 feature 가 된다.
+	- 위 프로세스는 Tile coding 의 것과 크게 다르지 않다.
+		- 상태의 값을 feature 로 재표현 하는 것
+		- 신경망과 Tile coding 모두 non-linear mapping 을 하게 된다.
+	- Tile coding 과 신경망의 차이
+		- Tile coding 의 경우 학습 이전에 타일의 크기, 타일의 형태, 타일링 수 등의 초기 고정 파라미터가 설정 된다.
+		- 신경망의 경우 층의 수, 노드의 수, 활성화 함수와 같은 초기 고정 파라미터가 있다.
+		- 하지만 신경망의 경우 학습 중에 바뀌는 파라미터도 있다. (가중치와 편향)
+
+	![neural_networks_nonlinear_approximation_visualize_pretrained_node](/assets/images/posts/neural_networks_nonlinear_approximation_visualize_pretrained_node.png)
+
+	- 위의 이미지는 신경망에서 기학습된 노드의 출력값을 시각화한 것이다.
+	- 위와 같이, 각 영역(x,y 좌표)이 활성화 정도가 0,1 로만 표현되는 것이 아니고 (정도의 차이), 비선형으로 표현됨을 볼 수 있다.
+
+### Deep Neural Networks
+
+- 개요
+	- 신경망 아키텍쳐의 선택은 성능에 큰 영향을 준다.
+		- 노드 수, 활성화 함수, 노드 배열, 연결 방식 등
+	- 신경망의 깊이가 학습에 어떠한 영향을 주는지 알아본다.
+
+- 학습목표
+	- 심층신경망이 여러 개의 층(layer) 으로 구성되어있다는 점을 이해하기
+	- 위의 층의 깊이가 구성과 추상화를 통해 특징을 학습하는 데 도움이 된다는 점을 이해하기
+
+- Modular architecture
+	- 신경망 아키텍쳐에서 각 층을 모듈로 이해할 수 있다. 이 층은 추가되거나 제거될 수 있다.
+	- 신경망에서의 깊이란 이 은닉층의 숫자를 가리킨다.
+	
+- Universal approximation
+	- 이론 상으로 신경망은 깊을 필요가 없다.
+	- 단 하나의 은닉층이 많은 노드를 가짐으로서 (넓이가 넓음) 모든 연속함수를 근사할 수 있다.
+	- 이를 범용 근사 속성 (Universal approximation property) 이라 한다.
+	- 하지만 실제경험과 이론에 따르면 깊은 은닉층이 복잡한 함수의 근사를 더 쉽게 해준다는 결과가 있다.
+
+- Compositional features
+
+	![neural_networks_deep_neural_networks_compositional_features](/assets/images/posts/neural_networks_deep_neural_networks_compositional_features.png)
+	
+	- 신경망의 깊이는 구성상의 특성을 허용한다.
+	- 모듈식 구성 요소를 결합하여 보다 전문화된 기능을 생성할 수 있다.
+	- 위 그림과 같이, raw data 에서 바로 올빼미를 추출하는 것보다, raw 한 요소에서 보다 복합적인 요소를 거처 식별하는 것이 더 효율적이다.
+	- 층을 겹치거나 노드를 추가함으로써, 더 복잡한 함수를 표현해낼 수 있다.
+	
+- Levels of abstraction
+
+	![neural_networks_deep_neural_networks_levels_of_abstraction](/assets/images/posts/neural_networks_deep_neural_networks_levels_of_abstraction.png)
+
+	- 신경망의 층은 특징의 추상화에도 도움을 준다.
+	- 예를 들어 위의 그림이 올뺴미임을 식별함에 있어서, 뒷 배경의 요소는 중요한 요소가 아니다.
+	- 즉, 불필요한 세부 정보를 제거하도록 네트워크를 명시적으로 설계할 수 있다.
+	- 예를 들어 병목 계층이 그러한데, 연속적인 레이어에서 이전 레이어보다 노드 수를 줄여 핵심적인 요소만 파악하는 것이다.
+
+## Training Neural Networks
+
+### Gradient Descent for Training Neural Networks
+
+- 개요
+	- 알고리즘의 업데이트는 매우 간단하며, 대부분의 경우 경사하강법에 기반을 둔다.
+	- 신경망의 경우에도 위와 동일하다.
+	- 역전파 알고리즘은 실제로 복잡하지 않으며, 실제로 그냥 경사하강법이다.
+	- 그러나 경사가 조금 더 복잡한데 이는 내재함수 떄문이다.
+
+- 학습목표
+	- 신경망에서의 경사 유도
+	- 신경망에서 경사하강법을 구현
+
+- Recap on Gradient Descent
+
+	![training_neural_networks_gradient_descent](/assets/images/posts/training_neural_networks_gradient_descent.png)
+
+	- 선형함수근사에서 첫 단계는 목표와 출력값 간의 차이인 손실을 정의하는 것이다.
+	- 그 다음 위 손실을 최소화 하는 기울기를 도출한다.
+	- 즉, 기울기의 반대방향으로 이동하여, 손실을 최소화한다. (변수가 기울기임을 주목)
+	- 그렇다면 신경망에서 손실함수의 기울기를 어떻게 계산할까?
+
+- Notation
+
+	![training_neural_networks_gradient_descent_notation](/assets/images/posts/training_neural_networks_gradient_descent_notation.png)
+	
+	- 네트워크의 입력을 $s$, 출력을 $\hat{y}$ 로 정의한다.
+	- 은닉층의 학습된 특성(learned features) 을 $x$ 로 정의한다.
+	- 가중치 $a$ 는 특성을 생성하고, 가중치 $b$ 는 결과값을 생성한다.
+	- 여기에서 $x$ 와 $\hat{y}$ 와 같은 값들은 벡터로 표현될 수 있다.
+		- (하지만 엄밀히 말하면 행렬로 표현된다고 보는 것이 맞을 것 같음.)
+		- (벡터간의 내적 연산은 두 벡터의 유사성을 판단하는 연산이라고 생각할 때...)
+	- Loss $L$ : $L(hat{y}_k, y_k) = (\hat{y}_k - y_k)^2$
+		- 위의 손실함수는 이 예에서 쓰이는 예시이다.
+
+- Goal
+
+	![training_neural_networks_gradient_descent_oriented_goal](/assets/images/posts/training_neural_networks_gradient_descent_oriented_goal.png)
+	
+	- 위 식은 업데이트 식의 유도 전 원형의 형태이다.
+	- 업데이트 식과 유사한 부분이 있다.
+		- $\delta$ : 오류항
+		- 각각의 입력값과 오류항 관련 값(델타) 를 곱한 값에 대한 업데이트를 진행한다.
+		- 추후 우리는 델타 A 가 델타 B 를 통해 효율적으로 구해질 수 있다는 것을 볼 것이다.
+			- 역전파로 A의 에러를 생성하는 것에 도움을 준다.
+
+- Deriving the gradient
+
+	![training_neural_networks_gradient_descent_deriving_the_gradient_1](/assets/images/posts/training_neural_networks_gradient_descent_deriving_the_gradient_1.png)
+
+	- Chain Rule 을 활용하여 식을 변형한다.
+	- 최종적으로 위 식에서 델타 B 를 정의하면 식은 단순한 형태로 표현이 될 수 있다.
+
+	![training_neural_networks_gradient_descent_an_example_of_the_gradient](/assets/images/posts/training_neural_networks_gradient_descent_an_example_of_the_gradient.png)
+	
+	- 위의 식은 Loss 를 squared error, 활성홤수를 선형함수로 정의했을 때의 예시이다.
+
+	![training_neural_networks_gradient_descent_deriving_the_gradient_2](/assets/images/posts/training_neural_networks_gradient_descent_deriving_the_gradient_2.png)
+
+	- 위 B의 방식과 동일하지만 x 항이 미분하려는 A 항을 포함하고 있다는 점을 반영해야 한다.
+	
+- The backprop algorithm
+
+	![training_neural_networks_gradient_descent_backprop_algorithm](/assets/images/posts/training_neural_networks_gradient_descent_backprop_algorithm.png)
+
+	- 계산량을 줄이기 위해 출력층에서부터 계산해온 값을 활용하는 것이 역전파의 주요 아이디어이다.
+	
+	![training_neural_networks_gradient_descent_backprop_algorithm_relu](/assets/images/posts/training_neural_networks_gradient_descent_backprop_algorithm_relu.png)
+	
+	- 위는 ReLu 를 활성화함수로 사용하고, 출력에 선형 유닛을 사용한 신경망의 예시이다.
+
+### Optimization Strategies for NNs
+
+- 개요
+	- 심층망 지도학습은 이미지 식별, 음성인식, 자연어 생성 등의 영역에서 현재 쓰이고 있다.
+	- 이러한 발전의 원인은 학습데이터와 계산량의 증가에 있다.
+	- 그러나 위의 발전의 이점을 가져가려면, 학습의 개선 또한 필요하다.
+	
+- 학습목표
+	- 신경망에서의 초기화의 중요성 이해
+	- 신경망 학습을 위한 최적화 기술에 대한 서술
+	
+- 학습 시작점의 문제
+
+	![training_neural_networks_optimization_strategies_for_nns_starting_point](/assets/images/posts/training_neural_networks_optimization_strategies_for_nns_starting_point.png)
+
+	- 학습 시작점은 학습 전반에 매우 큰 영향을 준다.
+	- 가령 평평한 손실함수 기울기의 지점에서 시작한 경우 학습이 거의 진행되지 않는다.
+	- 기울기가 있는 지점에서 시작한 경우 지역 최소값을 찾을 수 있다.
+	- 전역 최저점 근처에서 학습을 시작한 경우 빠르게 최고의 결과를 얻을 수 있다.
+
+- Weight initialization
+	
+	![training_neural_networks_optimization_strategies_for_nns_weight_initialization_1](/assets/images/posts/training_neural_networks_optimization_strategies_for_nns_weight_initialization_1.png)
+	
+	- 가중치를 분산이 작은 정규분포로 초기화하는 기법
+	- 이것은 잠재적 features 의 집합에 더 많은 다양성을 부여한다.
+	- 분산이 작다는 전제가 있다면, 각 신경의 출력값이 이웃 신경망과 동일한 범위에 있음을 보장한다.
+	- 이 전략의 약점은, 입력 뉴런이 추가되면 출력값의 분산이 커진다는 점이다.
+	
+	![training_neural_networks_optimization_strategies_for_nns_weight_initialization_2](/assets/images/posts/training_neural_networks_optimization_strategies_for_nns_weight_initialization_2.png)
+
+	- 우리는 위 단점을 입력값의 수에 대한 제곱군으로 스케일링 하여 극복할 수 있다.
+
+- Update momentum (heavy-ball method)
+
+	![training_neural_networks_optimization_strategies_for_nns_update_momentum](/assets/images/posts/training_neural_networks_optimization_strategies_for_nns_update_momentum.png)
+
+	- 일반적인 확률적 경사하강 업데이트에 모멘텀 M 항을 더한 것
+	- 모멘텀은 $\lambda$ 와 함께 점점 감쇠된다.
+	- 최근 업데이트 방향이 모두 같다면, 모멘텀이 증가한다.
+	- 최근 업데이트 방향이 서로 상충되면, 모멘텀이 감소한다.
+
+- Vector step sizes
+	
+	![training_neural_networks_optimization_strategies_for_nns_vector_step_sizes](/assets/images/posts/training_neural_networks_optimization_strategies_for_nns_vector_step_sizes.png)
+	
+	- $W_{t+1} = W_t - \eta \nabla J(W_t)$
+		- $W_t$ 와 $W_{t+1}$ 은 각각 현재와 업데이트된 가중치를 나타냄
+		- $\eta$ 는 학습률(learning rate) 벡터이며, 각 매개변수에 대해 다른 값을 가질 수 있음
+		- $\nabla J(W_t)$ 는 현재의 그래디언트 값 (Loss 함수에 대한 각 매개변수의 편미분)
+	- 벡터 스텝 사이즈 기법은 네트워크가 복잡하거나 데이터가 불균형한 경우에 유용하며, 경사하강법의 수렴속도를 향상시킬 수 있음
+	- 그러나 올바른 학습률 벡터를 선택하는 것이 중요하며, 이를 위한 다양한 최적화 기법이 개발되고 연구되고 있음
+	
+
+### David Silver on Deep Learning + RL = AI?
+
+- About reinforcement learning
+
+	![training_neural_networks_david_silver_reinforcement_learning](/assets/images/posts/training_neural_networks_david_silver_reinforcement_learning.png)
+	
+	- 강화학습은 모든 종류의 다른 의사결정 문제에 대한 광범위한 목적의 프레임워크이다.
+		- agent 가 있고, agent 가 world 에서 actions 를 행한다.
+		- agent 의 action 이 world 에 영향을 주고, 관측 값을 agent 에 준다.
+		- agent 는 world 에서 performance 를 최대로 할 수 있는 action을 택한다.
+		- 위 performance 는 reward signal 로 측정된다.
+	- 강화학습은 표현 학습에 대해 매우 일반적인 방식으로 생각하는 방법이다.
+
+- About deep learning
+
+	![training_neural_networks_david_silver_deep_learning](/assets/images/posts/training_neural_networks_david_silver_deep_learning.png)
+	
+	- 우리가 어떤 목적을 가지고 있을 때 deep learning 은 목적을 달성하기 위한 표현을 만드는 방법을 제공한다.
+		- 입력값을 시스템 내 어떠한 필터를 거쳐 표현을 만드는 방법
+		- 어떠한 종류의 특성을 생성하여, 입력 값으로 문제를 해결하는데 도움을 주는 방법
+		- 최소한의 도메인 지식을 활용
+
+- About deep reinforcement learning 1
+
+	![training_neural_networks_david_silver_deep_reinforcement_learning](/assets/images/posts/training_neural_networks_david_silver_deep_reinforcement_learning.png)
+
+	- 위의 reinforcement learning 과 deep learning 을 합친 형태
+	- 문제와 목표는 reinforcement learning 으로 정의될 수 있다.
+	- deep learning 은 메커니즘을 제공한다.
+
+- About deep neural network
+	- multi-layered function
+	- a compositional function
+		- a function of a function of a function
+	- 예시
+		- 어떠한 입력값이 시스템에 들어온다. (예를 들어 강아지나 고양이 이미지)
+		- 한 묶음의 다양한 함수를 통과한다. (이 함수는 내부 상태나 특징을 제공하게 된다.)
+		- 위의 내부상태, 특징들은 가중치 $w$ 와 작용하게 된다. 
+		- 위의 다양한 층의 계산을 거쳐, 어떠한 형태의 출력물을 제공한다. (예를 들어 이것이 강아지인지 고양이인지)
+		- 결과적으로 위의 것으로 목적을 정의하게 되는데, 이것을 loss 라 칭한다.
+		- loss 는 시스템이 얼마나 잘했는지를 알려준다.
+	- 계산을 정방향이 아닌 역방향으로 하는 점
+	
+	![training_neural_networks_david_silver_backpropagated_gradient](/assets/images/posts/training_neural_networks_david_silver_backpropagated_gradient.png)
+	
+	- Chain rule 을 이용한 역전파
+
+	![training_neural_networks_david_silver_training_deep_neural_network](/assets/images/posts/training_neural_networks_david_silver_training_deep_neural_network.png)
+	
+	- 결국 심층신경망의 훈련은 loss 함수의 관련 파라미터에 대한 기울기를 토대로, 파라미터의 값을 조율해 에러 값을 줄이는 것이 목표이다.
+
+- Anatomy of an RL Agent
+	- RL 에서 에이전트의 구성 요소에 무엇이 포함되어 있는지는 중요한 문제이다.
+		- 이는 무엇을 학습하고자 하는 것인가에 대한 문제이다.
+	
+	![training_neural_networks_david_silver_anatomy_of_an_rl_agent](/assets/images/posts/training_neural_networks_david_silver_anatomy_of_an_rl_agent.png)
+	
+	- 에이전트에 정책이 포함되어 있는 경우 : 에이전트의 행동을 결정 (a policy-based approach to RL) - 정책이 확률론적임
+	- 에이전트에 가치함수가 포함되어 있는 경우 : 에이전트의 보상에 대한 예측을 함 (a value-based RL agent) - 각 상태/행동의 가치를 고려하여 최적의 행동을 수행함
+	- 에이전트에 모델이 포함되어 있는 경우 : 에이전트가 환경이 어떻게 작용할지를 예측 (a model-based approach to RL) - 다음 상태 및 보상을 예측하여 다음 동작을 계획함
+
+- About deep reinforcement learning
+	- 심층 신경망은 근사함수로서 사용
+		- Policy, Value function, Model 중 어느 하나에 대한 표현을 한다.
+	- 위에 대한 loss function 을 고려한다. (아래는 예시이다.)
+		- Policy-based RL : Policy Gradient
+		- Value-based RL : TD error
+		- Model-based RL : Next-step prediction error
+
+
+- 학습목표
+	- 단일 은닉층 신경망의 기울기 계산
+	- 임의의 심층 네트워크에 대한 기울기를 계산하는 방법 이해
+	- 신경망 초기화의 중요성 이해
+	- 신경망 초기화 전략 설명
+	- 신경망 훈련을 위한 최적화 기술 설명
+
+
 ## 강의 개요 (과정 로드맵)
 
 - 가치함수를 테이블로 표현할 수 있는 경우
