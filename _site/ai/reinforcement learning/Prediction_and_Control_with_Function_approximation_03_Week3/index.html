@@ -1,0 +1,1452 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.20.2 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Prediction and Control with Function Approximation - 03. Week 3. Control with Approximation | Bluesplatter</title>
+<meta name="description" content="관련 자료 (RLbook Pages 243-246, 249-252)">
+
+
+  <meta name="author" content="HY03">
+  
+  <meta property="article:author" content="HY03">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Bluesplatter">
+<meta property="og:title" content="Prediction and Control with Function Approximation - 03. Week 3. Control with Approximation">
+<meta property="og:url" content="http://localhost:4000/ai/reinforcement%20learning/Prediction_and_Control_with_Function_approximation_03_Week3/">
+
+
+  <meta property="og:description" content="관련 자료 (RLbook Pages 243-246, 249-252)">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2024-05-17T10:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/ai/reinforcement%20learning/Prediction_and_Control_with_Function_approximation_03_Week3/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "HY03",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Bluesplatter Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    TeX: {
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    },
+    tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$'] ],
+    processEscapes: true,
+  }
+});
+MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+	  alert("Math Processing Error: "+message[1]);
+	});
+MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+	  alert("Math Processing Error: "+message[1]);
+	});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+    
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo/logo.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          세상에 남기는 작은 흔적
+          <span class="site-subtitle">Bluesplatter</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/">연도별 포스트</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="http://localhost:4000/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#ai" itemprop="item"><span itemprop="name">Ai</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#reinforcement-learning" itemprop="item"><span itemprop="name">Reinforcement learning</span></a>
+          <meta itemprop="position" content="3" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Prediction and Control with Function Approximation - 03. Week 3. Control with Approximation</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/profile/photo.jpg" alt="HY03" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">HY03</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>저는 전문가가 아니고 이것 저것 알아보는 비전문가 입니다. <br /> 틀린 내용이 기술되어도 너그러이 봐주시고 댓글을 남겨주셨으면 좋겠습니다.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="http://bluesplatter.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:hyunik03@gmail.com">
+            <meta itemprop="email" content="hyunik03@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">이메일</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Prediction and Control with Function Approximation - 03. Week 3. Control with Approximation">
+    <meta itemprop="description" content="관련 자료 (RLbook Pages 243-246, 249-252)">
+    <meta itemprop="datePublished" content="2024-05-17T10:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Prediction and Control with Function Approximation - 03. Week 3. Control with Approximation
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2024-05-17T10:00:00+09:00">May 17, 2024</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h2 id="관련-자료-rlbook-pages-243-246-249-252">관련 자료 (RLbook Pages 243-246, 249-252)</h2>
+
+<h2 id="chap10-on-policy-control-with-approximation">Chap.10 On-policy Control with Approximation</h2>
+
+<ul>
+  <li>이번 챕터에서는 제어 문제에 대해 집중한다.
+    <ul>
+      <li>action-value function 의 근사화 함수 $\hat{q} (s,a, \textbf{w} ) \approx q_*(s,a)$</li>
+      <li>$\textbf{w} \in \mathbb{R}^d$ (유한 차원의 가중치 벡터)</li>
+      <li>이번 쳅터에서는 on-policy 의 경우에 집중한다. (off-policy 는 11장에서 다룬다.)</li>
+    </ul>
+  </li>
+  <li>이 장에서는 semi-gradient Sarsa 알고리즘에 대해 다룬다.
+    <ul>
+      <li>semi-gradient TD(0) 를 action value 와 on-policy control 로 자연스럽게 확장한다.</li>
+      <li>episodic case 에서는 이 확장이 직관적이나, continuing case 에서는 최적 정책을 정의하기 위한 할인에 대한 개념을 고려해야 한다.</li>
+      <li>놀랍게도 우리가 참 함수근사를 가지게 된다면, 할인을 포기하고 새로운 “average-reward” 공식을 새로운 “differential” value function 에 적용해야 한다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="101-episodic-semi-gradient-control">10.1 Episodic Semi-gradient Control</h3>
+
+<ul>
+  <li>semi-gradient prediction methods 를 action values 로 확장하는 것은 직관적이다.
+    <ul>
+      <li>action-value function 의 근사화, $\hat{q} \approx q_\pi$ 를 가중치 벡터 $\textbf{w}$ 로 파라미터화된 함수화 형태를 만드는 것.</li>
+      <li>이전에 고려하였던 $S_t \mapsto U_t$ 에 대해 이제는 $S_t, A_t \mapsto U_t$ 를 고려한다.</li>
+      <li>업데이트 타겟 $U_t$ 는 $q_\pi (S_t,A_t)$ 의 어떠한 근사치도 될 수 있다.</li>
+      <li>가령 통상적인 backed-up value 들, full Monte Carlo return ($G_t$) 또는 n-step Sarsa returns 가 될 수 있다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>보편적인 gradient-descent update for action-value prediction</p>
+
+    <p><img src="/assets/images/posts/10_1_1_gradient_descent_update_for_action_value_prediction.png" alt="10_1_1_gradient_descent_update_for_action_value_prediction" /></p>
+  </li>
+  <li>
+    <p>episodic semi-gradient one-step Sarsa</p>
+
+    <p><img src="/assets/images/posts/10_1_2_episodic_semi_gradient_one_step_sarsa.png" alt="10_1_2_episodic_semi_gradient_one_step_sarsa" /></p>
+
+    <ul>
+      <li>이 방식 또한 TD(0) 와 같은 방식으로 수렴하고, 같은 error 범위를 가지게 된다. (단 가치함수근사가 선형임을 전제로 함.)</li>
+    </ul>
+  </li>
+  <li>control methods
+    <ul>
+      <li>우리는 action-value prediction methods 와 쌍을 이루는 policy improvement 와 action selection 기술이 필요하다.</li>
+      <li>이산적이지 않은 연속적인 actions 와 거대한 이산 action sets 환경에서의 기술은 아직 논의 중이다.</li>
+      <li>반면 action 이 이산적이고 크지 않은 집합이라면 이미 개발된 기술들을 사용할 수 있다.</li>
+      <li>가령 현 상태 $S_t$ 에서 각각의 가능한 행동 $a$ 가 있다면 우리는 $\hat{q} (S_t, a, \textbf{w}_t )$ 를 계산해 낼 수 있고</li>
+      <li>greedy action $A^*_t = \arg\max_a \hat{q}(S_t,a, \textbf{w}_t)$ 를 찾을 수 있다.</li>
+      <li>정책 개선은 이 예측 정책을 탐욕 정책의 soft approximation (예를 들어 $\epsilon$-greedy policy) 로 변경하는 것으로 끝나며, 행동 또한 동일 정책으로 선택되면 된다.</li>
+    </ul>
+
+    <p><img src="/assets/images/posts/10_1_3_episodic_semi_gradient_sarsa_pseudo_code.png" alt="10_1_3_episodic_semi_gradient_sarsa_pseudo_code" /></p>
+  </li>
+</ul>
+
+<h3 id="103-average-reward-a-new-problem-setting-for-continuing-tasks">10.3 Average Reward: A New Problem Setting for Continuing Tasks</h3>
+
+<ul>
+  <li>average reward settings
+    <ul>
+      <li>Markov decision problems (MDPs) 에서 에피소드와 할인 설정 외의 고전적인 세팅 방법</li>
+      <li>continuing problems - 종료 혹은 시작상태 없이 환경과 에이전트가 계속 상호작용 하는 문제 에 적용된다.</li>
+      <li>할인이 없이 에이전트는 지연된 보상을 즉각적인 보상과 같이 생각한다.</li>
+      <li>dynamic programming 에서는 고전적인 이론으로 여겨지고, 강화학습에서는 덜 사용한다.</li>
+      <li>다음 섹션에서 우리는 discounted setting 이 근사 함수와 문제가 있고, 그렇기에 average-reward setting 이 그것을 대체함을 논의할 것이다.</li>
+    </ul>
+
+    <p><img src="/assets/images/posts/10_3_1_average_reward_settings.png" alt="10_3_1_average_reward_settings" /></p>
+
+    <ul>
+      <li>average-reward setting 에서 정책 $\pi$ 은 보상의 평균으로 평가되며, 이것을 $r(\pi)$ 로 표기한다.</li>
+    </ul>
+  </li>
+  <li>Ergodicity (에르고딕성)
+    <ul>
+      <li>기대값은 초기 상태 $S_0$ 와 이후의 행동 $A_0,A_1,…,A_{t-1}$ 가 정책 $\pi$ 에 따라 선택된다는 조건 하에 계산된다.</li>
+      <li>$\mu_\pi$ 는 안정 상태 분포 (steady-state distribution) 으로 정의되며, 다음과 같이 나타낼 수 있다.</li>
+      <li>$\mu_\pi(s) \doteq \lim_{t \to \infty} Pr [ S_t=s | A_{0:t-1} \sim \pi ]$</li>
+      <li>이는 주어진 $\pi$ 에 대해 항상 존재하며 초기 상태 $S_0$ 에 독립적이라고 가정한다.</li>
+      <li>MDP 에 대한 이러한 가정을 에르고딕성 (ergodicity) 라 한다.</li>
+      <li>이는 MDP 가 어디에서 시작하든지 또는 에이전트가 초기에 어느 결정을 내리든지 간에, 이러한 결정들은 일시적 효과만을 가질수 있다는 것을 의미한다.</li>
+      <li>장기적으로 한 상태에 있을 확률의 기대값은 오직 정책과 MDP 의 전이 확률에 의존하게 된다.</li>
+      <li>그렇기에 위의 수식이 안정적으로 수렴함을 보장할 수 있다.</li>
+    </ul>
+  </li>
+  <li>평균 보상 접근법을 통한 정책의 최적성 평가
+    <ul>
+      <li>할인되지 않은 지속적인 경우에서 최적성의 종류 간에는 미묘한 차이점이 있다.</li>
+      <li>그러나 대부분의 실용적인 목적을 위해서는 정책들을 시간 단계당 평균 보상, 즉 $r(\pi)$ 에 따라 순서를 매기는 것만으로도 충분할 수 있다.</li>
+      <li>이는 정책 $\pi$ 하의 평균 보상으로 다음과 같이 제안된다.
+        <ul>
+          <li>$\lim_{t \to \infty} \mathbb{E} [ R_t | S_0, A_{0:t-1} \sim \pi ]$</li>
+        </ul>
+      </li>
+      <li>특히, $r(\pi)$ 의 최대 값을 달성하는 모든 정책을 최적이라고 간주한다.</li>
+    </ul>
+  </li>
+  <li>Average-reward setting 에서 안정적 상태 분포와 차분 가치 함수
+    <ul>
+      <li>안정적 상태 분포 (steady state distribution) : 정책 $\pi$ 를 따라 행동을 선택하였을 때, 같은 분포가 되는 상태</li>
+    </ul>
+
+    <p><img src="/assets/images/posts/10_3_2_steady_state_distribution.png" alt="10_3_2_steady_state_distribution" /></p>
+
+    <ul>
+      <li>average-reward setting 에서 보상값은 보상과 평균 보상의 차로 정의된다.</li>
+    </ul>
+
+    <p><img src="/assets/images/posts/10_3_3_differential_return.png" alt="10_3_3_differential_return" /></p>
+
+    <ul>
+      <li>이는 differential return (차분 보상) 이라 하고, 이에 상응하는 가치 함수는 differential value function (차분 가치 함수) 라 한다.</li>
+      <li>같은 방식의 표현을 사용한다.
+        <ul>
+          <li>$v_\pi(s) \doteq \mathbb{E}_\pi [G_t | S_t=s]$</li>
+          <li>$q_\pi (s,a) \doteq \mathbb{E}_\pi [G_t | S_t=s, A_t=a]$</li>
+        </ul>
+      </li>
+      <li>Differential value function 또한 Bellman equations 를 가지고 있다.</li>
+      <li>이는 간단히 $\gamma$ 를 제거하고, 보상 대신 보상과 true average reward 의 차를 사용하는 차이점이 있다.</li>
+    </ul>
+
+    <p><img src="/assets/images/posts/10_3_4_differential_value_function_bellman_equations.png" alt="10_3_4_differential_value_function_bellman_equations" /></p>
+
+    <ul>
+      <li>또한 TD error 에 대한 differential form 도 있다.</li>
+    </ul>
+
+    <p><img src="/assets/images/posts/10_3_5_differential_form_td_error.png" alt="10_3_5_differential_form_td_error" /></p>
+
+    <ul>
+      <li>$\bar{R}_t$ : 시간 t 에서의 평균 보상 $r(\pi)$ 의 추정치</li>
+      <li>이러한 변형된 정의에서 평균보상 세팅을 통한 대부분의 알고리즘과 많은 이론적 결과는 변화 없이 적용이 된다.</li>
+      <li>예를 들어 semi-gradient Sarsa 의 average reward 버전은. 위의 변형된 TD error 를 사용한다.</li>
+    </ul>
+
+    <p><img src="/assets/images/posts/10_3_6_semi_gradient_sarsa_average_reward_version.png" alt="10_3_6_semi_gradient_sarsa_average_reward_version" /></p>
+
+    <ul>
+      <li>이에 대한 pseudo code 는 아래와 같다.</li>
+    </ul>
+
+    <p><img src="/assets/images/posts/10_3_7_semi_gradient_sarsa_pseudo_code.png" alt="10_3_7_semi_gradient_sarsa_pseudo_code" /></p>
+  </li>
+</ul>
+
+<h2 id="episodic-sarsa-with-function-approximation">Episodic Sarsa with Function Approximation</h2>
+
+<h3 id="episodic-sarsa-with-function-approximation-1">Episodic Sarsa with Function Approximation</h3>
+
+<ul>
+  <li>학습목표
+    <ul>
+      <li>어떻게 행동-가치 근사를 위해 행동 종속적인 feature 를 구성하는지 이해</li>
+      <li>어떻게 episodic tasks 에서 함수 근사를 이용한 Sarsa 를 적용하는지 이해</li>
+    </ul>
+  </li>
+  <li>
+    <p>State-values to action-values</p>
+
+    <p><img src="/assets/images/posts/episodic_sarsa_with_function_approximation_state_values_to_action_values.png" alt="episodic_sarsa_with_function_approximation_state_values_to_action_values" /></p>
+
+    <ul>
+      <li>value function approximation 은 weight vector 와 feature vector, 2개의 구성요소를 가지고 있다.</li>
+      <li>State-value function approximation 에서는 주어진 상태에 대해 이 2개의 요소의 내적 연산을 통해 가치 추정을 한다.</li>
+      <li>TD 에서 Sarsa 로 전환하기 위해 우리는 action value function 을 사용해야 한다.</li>
+      <li>따라서 feature 의 표현에서 action 또한 표현이 되어야 한다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Representing actions</p>
+
+    <p><img src="/assets/images/posts/episodic_sarsa_with_function_approximation_representing_actions.png" alt="episodic_sarsa_with_function_approximation_representing_actions" /></p>
+
+    <ul>
+      <li>feature 의 표현에 action 이 포함되는 하나의 방법으로 각 행동에 대응하도록 function approximator 를 분리하는 것이다.
+        <ul>
+          <li>stacking the features</li>
+          <li>즉, 각각의 행동에 대해 같은 상태 feature 를 사용하며, 단 해당하는 행동에 대응하는 feature 만 활성화 하는 것</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Computing action-values</p>
+
+    <p><img src="/assets/images/posts/episodic_sarsa_with_function_approximation_computing_action_values.png" alt="episodic_sarsa_with_function_approximation_computing_action_values" /></p>
+
+    <ul>
+      <li>4개의 요소를 가진 상태 feature 와 3개의 action 이 있다고 가정</li>
+      <li>action 에 해당하는 상태 feature 만 활성화</li>
+      <li>stacking features : 상태와 행동을 함께 포함하는 특성을 표현하는 방식</li>
+    </ul>
+  </li>
+  <li>Computing Action-values with a Neural Network
+    <ul>
+      <li>위의 Stacking feature 방식으로 action value 를 계산하는 것이 선형 함수 근사에 특화된 것으로 생각할 수 있으나 그렇지 않다.</li>
+      <li>신경망의 경우
+        <ul>
+          <li>상태를 입력으로 받음</li>
+          <li>마지막 은닉층에서 상태 특성을 생성</li>
+          <li>위 상태 특성에 각 행동 가치에 해당하는 별개의 가중치를 연산, 별도의 출력을 생성</li>
+          <li>한 행동 가치의 가중치는 다른 행동 가치의 가중치와 상호작용하지 않음 (Stacking 과 동일)</li>
+        </ul>
+      </li>
+      <li>즉 신경망에서 각 행동 가치가 독립적인 가중치 집합으로 계산되는 방식이 Stacking 과 동일한 개념이다.</li>
+      <li>둘 다 행동 가치를 독립적으로 계산하기 때문에 한 행동 가치의 가중치는 다른 행동 가치에 영향을 미치지 않는다.</li>
+      <li>단 상태와 마찬가지로 행동 또한 일반화시키고 싶은 경우 행동 또한 상태와 포함하여 feature 로 구성해야 한다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Episodic Sarsa with function approximation</p>
+
+    <p><img src="/assets/images/posts/10_1_3_episodic_semi_gradient_sarsa_pseudo_code.png" alt="10_1_3_episodic_semi_gradient_sarsa_pseudo_code" /></p>
+  </li>
+</ul>
+
+<h3 id="episodic-sarsa-in-mountain-car">Episodic Sarsa in Mountain Car</h3>
+
+<ul>
+  <li>학습목표
+    <ul>
+      <li>approximate TD control method 의 성능 분석에 대한 경험</li>
+    </ul>
+  </li>
+  <li>
+    <p>The Mountain Car environment</p>
+
+    <p><img src="/assets/images/posts/episodic_sarsa_in_mountain_car_the_mountain_car_environment.png" alt="episodic_sarsa_in_mountain_car_the_mountain_car_environment" /></p>
+    <ul>
+      <li>episodic task</li>
+      <li>목표 : 동력이 부족한 (중력이 자동차의 엔진보다 강함) 자동차를 산의 우측 경사 위의 목적지에 도달하게 만드는 것
+        <ul>
+          <li>자동차가 바로 올라갈 수 없고, 반대방향 등으로 이동하여 모멘텀을 얻어 목적지에 도달하여야 함.</li>
+        </ul>
+      </li>
+      <li>초기 상태 : 계곡 밑바닥의 근처 랜덤한 장소에서 시작</li>
+      <li>종료 상태 : 언덕 꼭대기위 깃발 위치에 도달</li>
+      <li>빠른 시간 내에 목표 달성을 위해 각 시간 스텝마다 보상 수치에 -1을 적용</li>
+      <li>할인 : 없음</li>
+      <li>상태값 : 자동차의 위치, 자동차의 속도 (2차원 연속 공간)</li>
+      <li>행동값 : 전진, 후진, 가속없음</li>
+    </ul>
+  </li>
+  <li>
+    <p>Feature representation</p>
+
+    <p><img src="/assets/images/posts/episodic_sarsa_in_mountain_car_feature_representation.png" alt="episodic_sarsa_in_mountain_car_feature_representation" /></p>
+    <ul>
+      <li>feature 는 위치와 속도로 이루어짐</li>
+      <li>tile coding 기법을 사용하며, 8x8 그리드(타일)을 8 타일링 사용</li>
+      <li>action 은 개별적으로 다루며, stacked feature 표현법을 사용한다.</li>
+      <li>보상 초기 값은 0으로 세팅 (이는 매우 긍정적인 세팅으로, 실제 보상값이 -1씩 줄기 때문에 보상이 0보다 커질 수 없음)
+        <ul>
+          <li>위의 세팅으로 시스템적인 탐험을 일으킴</li>
+          <li>위의 세팅으로 타 탐험정책 없이 그리드 정책을 운영할 수 있음</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Learned values</p>
+
+    <p><img src="/assets/images/posts/episodic_sarsa_in_mountain_car_learned_values_1.png" alt="episodic_sarsa_in_mountain_car_learned_values_1" /></p>
+
+    <ul>
+      <li>상태의 값을 샘플링하여 시각화함 (상태의 값이 연속적이어서, 모든 상태의 탐험이 불가능함)</li>
+      <li>$- \max_a Q(s,a, \textbf{w})$ 수치 사용 : step 마다 -1 의 보상이 적용되는데, 이 값으로 몇 스텝 후에 종료될지를 예상함</li>
+      <li>화살표 포인트가 시작점이며, 초록색 점선이 최적의 trajetory 를 가리킨다.</li>
+    </ul>
+
+    <p><img src="/assets/images/posts/episodic_sarsa_in_mountain_car_learning_curve.png" alt="episodic_sarsa_in_mountain_car_learning_curve" /></p>
+
+    <ul>
+      <li>learning curve 는 학습의 속도에 더 나은 insight 를 제공한다.</li>
+      <li>$\alpha$ (step size) 값이 작을수록 학습 속도가 느렸음</li>
+      <li>모든 $\alpha$ 값이 8로 나누어짐
+        <ul>
+          <li>step size vector 를 사용하지 않을 경우 보편적으로 feature vector의 norm (길이) 값을 사용</li>
+          <li>여기서는 8개의 타일링을 사용하였으므로, 1의 feature vector 의 길이는 8이 된다.</li>
+        </ul>
+      </li>
+      <li>위의 부연설명 (Chat-GPT)
+        <ul>
+          <li>tiling 한 숫자만큼 하나의 상태가 여러 타일에 속하게 되고, 여러 가중치가 업데이트되어 이것이 과도한 영향을 주는 요인이 될 수 있다.</li>
+          <li>tiling 의 수만큼 나누어줌으로서, 학습과정의 안정성을 높이게 된다. (normalization)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="expected-sarsa-with-function-approximation">Expected Sarsa with Function Approximation</h3>
+
+<ul>
+  <li>학습목표
+    <ul>
+      <li>함수 근사를 이용한 Expected Sarsa 업데이트에 대해 설명하기</li>
+      <li>함수 근사를 이용한 Q-learning 에 대해 설명하기</li>
+    </ul>
+  </li>
+  <li>
+    <p>From Sarsa to Expected Sarsa</p>
+
+    <p><img src="/assets/images/posts/expected_sarsa_with_function_approximation_from_sarsa_to_expected_sarsa.png" alt="expected_sarsa_with_function_approximation_from_sarsa_to_expected_sarsa" /></p>
+
+    <ul>
+      <li>Sarsa : 업데이트 할 때 다음 상태와 행동을 선택하여 업데이트한다. (On-policy)</li>
+      <li>Expected Sarsa : 정책에 따른 다음 상태의 모든 행동예측값을 이용해 업데이트한다. (Off-policy)</li>
+      <li>On-policy
+        <ul>
+          <li>장점 : 정책 일관성, 안정성, 탐험-이용 균형 유지</li>
+          <li>단점 : 학습 효율성 낮음, 로컬최적화 위험</li>
+        </ul>
+      </li>
+      <li>Off-policy
+        <ul>
+          <li>장점 : 학습 효율성 높음, 데이터 재사용 가능, 전역 최적화 탐색 가능</li>
+          <li>단점 : 불안정성, 수렴 문제, 정책 일관성 부족</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Expected Sarsa with Function Approximation</p>
+
+    <p><img src="/assets/images/posts/expected_sarsa_with_function_approximation_expected_sarsa_with_function_approximation.png" alt="expected_sarsa_with_function_approximation_expected_sarsa_with_function_approximation" /></p>
+
+    <ul>
+      <li>위의 식과 같이 $\textbf{w}$ 를 TD error 값을 이용해 업데이트 해 나아간다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Expected Sarsa to Q-learning</p>
+
+    <p><img src="/assets/images/posts/expected_sarsa_with_function_approximation_expected_sarsa_to_q_learning.png" alt="expected_sarsa_with_function_approximation_expected_sarsa_to_q_learning" /></p>
+
+    <ul>
+      <li>Q-learning 은 Expected-Sarsa 의 특이 케이스 중 하나이다. (학습하려는 정책이 Greedy policy 인 Expected Sarsa)</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="exploration-under-function-approximation">Exploration under Function Approximation</h2>
+
+<h3 id="exploration-under-function-approximation-1">Exploration under Function Approximation</h3>
+
+<ul>
+  <li>학습목표
+    <ul>
+      <li>함수 근사에서의 낙관적 초기값을 통한 탐색-이용과 $\epsilon$-greedy 방식을 통한 탐색-이용 방식에 대한 설명</li>
+    </ul>
+  </li>
+  <li>
+    <p>Optimitic Initial Values in the Tabular Setting</p>
+
+    <p><img src="/assets/images/posts/exploration_under_function_approximation_optimistic_initial_values_in_the_tabular_setting.png" alt="exploration_under_function_approximation_optimistic_initial_values_in_the_tabular_setting" /></p>
+
+    <ul>
+      <li>agent 가 실제 보상값보다 더 큰 보상값을 얻을 것이라고 상상하는 것</li>
+      <li>이는 에이전트로 하여금 상태-행동 공간에서 시스템적인 탐색을 유도한다.</li>
+      <li>이는 Tabular Setting 에서 하나의 상태-행동 쌍이 다른 상태-행동 쌍의 값에 영향을 미치지 않기에 가능하다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>How to Initialize Values Optimistically under Function Approximation</p>
+
+    <p><img src="/assets/images/posts/exploration_under_function_approximation_how_to_initiallize_values_optimistically_under_function_approximation.png" alt="exploration_under_function_approximation_how_to_initiallize_values_optimistically_under_function_approximation" /></p>
+
+    <ul>
+      <li>함수 근사에서 낙관적인 초기값을 세팅한다는 것은, 낙관적 결과값을 위해 가중치 벡터를 세팅한다는 것과 같은 의미이다.
+        <ul>
+          <li>이는 특수한 환경에서는 쉽게 가능한데, 이를테면 binary feature 일 경우이다.</li>
+          <li>binary feature : 모든 상태-행동 쌍에 대응하는 하나의 가중치가 존재하며, feature 값은 1과 0으로 표현됨.</li>
+        </ul>
+      </li>
+      <li>대부분의 문제에서는 낙관적인 초기값을 세팅하는 것이 불가능하다.
+        <ul>
+          <li>신경망에서는 가중치를 조절하여 낙관적인 결과값을 유도하는 것은 꽤 복잡한 문제이다.</li>
+          <li>예를 들어 tanh 활성화 함수를 사용할 경우 초기 가중치가 양수여도 음수의 결과값이 나올 수도 있다.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>How Optimism Interacts with Generalization</p>
+
+    <p><img src="/assets/images/posts/exploration_under_function_approximation_how_optimism_interacts_with_generalization.png" alt="exploration_under_function_approximation_how_optimism_interacts_with_generalization" /></p>
+
+    <ul>
+      <li>어떻게 feature 값을 일반화하였느냐에 따라, 낙관적 초기값은 tabular case 와 같은 시스템적 탐색을 하지 못할 수도 있다.
+        <ul>
+          <li>방문하지 않은 영향을 받는 상태까지도 다 같이 업데이트가 됨.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>$\epsilon$-greedy</p>
+
+    <p><img src="/assets/images/posts/exploration_under_function_approximation_epsilon_greedy.png" alt="exploration_under_function_approximation_epsilon_greedy" /></p>
+
+    <ul>
+      <li>$\epsilon$-greedy 는 광범위하게 사용되며, Non-linear 함수 근사에서도 쉽게 사용될 수 있다.</li>
+      <li>어떻게 초기화되고 근사화되었냐에 무관하게 행동 가치 추정만 필요하다.</li>
+      <li>그러나 $\epsilon$-greedy 는 직접적인 탐험 방법이 아니며, 해당 상태에서 할 수 있는 행동에 대한 랜덤한 확률에 의존하여 더 나은 정책을 찾는 방법이다.
+        <ul>
+          <li>낙관성에 의존한 시스템 적인 탐색방법이 아니다.</li>
+        </ul>
+      </li>
+      <li>함수 근사에서 탐색방법의 발전은 아직 열린 질문이며 이 과정에서는 이 심플한 방법에 의존한다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="average-reward">Average Reward</h2>
+
+<h3 id="average-reward--a-new-way-of-formulating-control-problems">Average Reward : A New Way of Formulating Control Problems</h3>
+
+<ul>
+  <li>개요
+    <ul>
+      <li>Continuing tasks 에서 우리는 엄청나게 긴 흐름의 성능에 관심이 있을 수 있다.</li>
+      <li>지금까지 우리는 discounting 을 사용해 단기 성과와 장기 이익의 균형을 맞춰왔다.</li>
+      <li>위의 방식과 다른 average reward 공식을 이용한 방법에 대해 살펴본다.</li>
+    </ul>
+  </li>
+  <li>학습목표
+    <ul>
+      <li>average reward setting 에 대해 서술</li>
+      <li>Average reward optimal policies 와 discounting 을 통해 얻은 policies 간의 차이에 대한 설명</li>
+      <li>차분 가치 함수의 이해</li>
+    </ul>
+  </li>
+  <li>
+    <p>A simple example</p>
+
+    <p><img src="/assets/images/posts/average_reward_a_simple_example.png" alt="average_reward_a_simple_example" /></p>
+
+    <ul>
+      <li>근시안적인 MDP 문제 (Continuing tasks)</li>
+      <li>대부분의 상태에서는 하나의 행동만이 존재하여 결정할 것이 없고, 오직 하나의 상태 (교차점) 에서만 정책 결정이 이루어진다.
+        <ul>
+          <li>이 지점에서 어떠한 ring 으로 순환할 지 결정할 수 있다. (두 개의 결정론적인 정책이 존재)</li>
+        </ul>
+      </li>
+      <li>위의 표기된 보상 외에 타 전이에서의 보상은 0이다.</li>
+      <li>Discounting 을 사용하는 경우
+        <ul>
+          <li>$\gamma$ = 0.5
+            <ul>
+              <li>$v_L (S) \approx 1$</li>
+              <li>$v_R (S) \approx 0.1$</li>
+            </ul>
+          </li>
+          <li>$\gamma$ = 0.9
+            <ul>
+              <li>$v_L (S) \approx 2.4$</li>
+              <li>$v_R (S) \approx 3.2$</li>
+            </ul>
+          </li>
+          <li>즉, 할인율 (0.841) 과 상태의 수 (100개의 상태일 경우 0.99)에 따라 최적 정책이 달라지게 된다.</li>
+          <li>continuing task 에서 할인율을 1로 하였을 경우 반환값이 무한대가 될 수 있다.</li>
+          <li>할인율 값이 크면, 더해야 할 변수가 늘어 학습이 어렵게 된다.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>The Average Reward objective</p>
+
+    <p><img src="/assets/images/posts/average_reward_the_average_reward_objective.png" alt="average_reward_the_average_reward_objective" /></p>
+
+    <ul>
+      <li>하나의 정책에서 위의 average reward 를 최대화 하는 목표는 장단기 보상을 동일하게 생각한다는 의미이다.
+        <ul>
+          <li>위의 값을 $r(\pi)$ 로 표현한다.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <p><img src="/assets/images/posts/average_reward_the_average_reward_objective_mu.png" alt="average_reward_the_average_reward_objective_mu" /></p>
+
+    <ul>
+      <li>또한 특정 상태에 있을 확률값을 나타내는 $\mu$ 를 이용하여 식을 위와같이 변형할 수 있다.</li>
+    </ul>
+  </li>
+  <li>Returns for Average Reward
+    <ul>
+      <li>average reward 정의는 어떤 정책이 더 나은지에 대해 직관적으로 표현된다.</li>
+      <li>그렇다면 우리는 어떻게 특정 상태의 행동이 더 나은 것인지 판단할 수 있을까?
+        <ul>
+          <li>즉 행동가치가 필요함</li>
+        </ul>
+      </li>
+      <li>average reward setting 에서 리턴값은 보상값과 average reward $r(\pi)$ 의 차로 정의된다.</li>
+    </ul>
+
+    <p><img src="/assets/images/posts/average_reward_returns_for_average_reward_1.png" alt="average_reward_returns_for_average_reward_1" /></p>
+
+    <ul>
+      <li>좌측으로 도는 정책의 Cesaro Sum 을 이용하여 average reward setting 의 리턴값을 계산해보면 0.4가 된다.
+        <ul>
+          <li>n-1 바퀴까지 0으로 상쇄, n 번째에서 누적합의 평균을 구함</li>
+        </ul>
+      </li>
+      <li>이를 이용해 우측 한바퀴를 돈뒤 좌측으로 도는 정책을 생각해보면 값은 1.4가 되고, 우측으로 도는 행동이 더 나은 행동임을 알 수 있다.</li>
+    </ul>
+
+    <p><img src="/assets/images/posts/average_reward_returns_for_average_reward_2.png" alt="average_reward_returns_for_average_reward_2" /></p>
+
+    <ul>
+      <li>오른쪽으로 도는 정책을 기준으로 왼쪽으로 도는 정책과 비교한 경우</li>
+      <li>차등 수익 (differential return) 은 후속 시간 단계에서 동일한 정책을 따르는 경우에만 행동에 대해 비교할 수 있다.</li>
+      <li>정책을 비교할 경우 average reward 값을 비교한다.</li>
+      <li>차등 수익의 경우 차감된 상수가 실제 평균 보상과 동일한 경우에만 수렴하고 그외의 경우 양수 또는 음수 무한대로 발산한다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Value Functions for Average Reward</p>
+
+    <p><img src="/assets/images/posts/average_reward_value_functions_for_average_reward.png" alt="average_reward_value_functions_for_average_reward" /></p>
+
+    <ul>
+      <li>위와 같이 Average reward 에 대한 리턴값이 정의됨.</li>
+      <li>가치함수는 일반적인 방식대로 예상 리턴값으로 정의할 수 있음</li>
+      <li>이 값은 에이전트가 고정된 정책을 따랐을 때 모든 상태에 대한 평균 보상값이 아닌 특정상태에서 행동함으로써 에이전트가 얼마나 더 많은 보상을 얻는지를 시사함</li>
+      <li>discount 세팅처럼 average reward 또한 bellman 방정식에 사용할 수 있으며, 다른 점은 즉각적 보상에서 $r(\pi)$ 를 차감한다는 점과 discount 가 없다는 점이다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Differential Sarsa</p>
+
+    <p><img src="/assets/images/posts/differential_sarsa_differential_semi_gradient_sarsa_for_estimating.png" alt="differential_sarsa_differential_semi_gradient_sarsa_for_estimating" /></p>
+  </li>
+</ul>
+
+<h3 id="satinder-singh---on-the-optimal-reward-problem-where-do-rewards-come-from">Satinder Singh - On the Optimal Reward Problem (Where do Rewards Come From?)</h3>
+
+<ul>
+  <li>보상함수의 출처
+    <ul>
+      <li>일반적인 강화학습은 보상이 환경으로부터 주어지는 것으로 가정</li>
+      <li>하지만 실제로 이 보상은 설계자가 정하는 것 (설계자가 에이전트의 행동에 대한 선호도를 반영)</li>
+      <li>보상함수는 에이전트 설계자의 선호도를 반영하는 동시에 에이전트의 목표나 목적을 설정하는 매개변수 역할을 함</li>
+      <li>따라서 설계자의 선호도와 에이전트의 목표를 구분하여 두 개의 보상함수를 상정하는 것이 바람직하다.</li>
+    </ul>
+  </li>
+  <li>두 개의 보상함수 상정
+    <ul>
+      <li>외적 보상 함수 (Extrinsic Reward)
+        <ul>
+          <li>설계자의 선호도를 반영한 외부 환경과의 상호작용을 통해 얻는 보상</li>
+          <li>예 : 방에 얼마나 깨끗한지, 방의 청결도를 최대화하고자 하는 것</li>
+        </ul>
+      </li>
+      <li>내적 보상 함수 (Intrinsic Reward)
+        <ul>
+          <li>에이전트 내부에 설정된 보상</li>
+          <li>에이전트의 목표나 학습 과정을 효율적으로 유도하는 것</li>
+          <li>예 : 에이전트가 청소 작업을 효율적으로 하기 위해 새로운 장소를 탐색하거나 장애물을 피하고자 하는 것</li>
+        </ul>
+      </li>
+      <li>위 두가지의 보상 함수를 조합하여 사용한다.</li>
+    </ul>
+  </li>
+  <li>보상 함수 기술
+    <ul>
+      <li>역강화 학습 (Inverse Reinforcement Learning, IRL)
+        <ul>
+          <li>목적: 전문가의 행동 데이터를 통해 외부 보상 함수를 추정하는 방법.</li>
+          <li>과정: 전문가의 행동을 관찰하여 그들이 어떤 보상 함수를 최대화하려고 하는지를 역으로 추정함.</li>
+          <li>상관관계: IRL은 주로 외부 보상 함수를 추정하는 데 사용될 수 있음. 전문가의 행동을 통해 설계자의 선호도를 반영한 보상 함수를 도출한다.</li>
+        </ul>
+      </li>
+      <li>보상 셰이핑 (Reward Shaping)
+        <ul>
+          <li>목적: 에이전트의 학습을 가속화하고 효율적으로 만들기 위해 내부 보상 함수를 조정하는 방법.</li>
+          <li>과정: 기존의 보상 함수에 추가적인 보상이나 페널티를 부여하여 학습을 용이하게 한다.</li>
+          <li>상관관계: 내부 보상 함수를 설계할 때 유용. 에이전트의 행동을 보다 효율적으로 유도하기 위해 보상 함수를 조정한다.</li>
+        </ul>
+      </li>
+      <li>선호 추출 (Preference Elicitation)
+        <ul>
+          <li>목적: 설계자의 선호도를 직접적으로 추출하여 보상 함수에 반영하는 방법.</li>
+          <li>과정: 설계자가 특정 행동이나 결과에 대해 선호도를 명시하면, 이를 기반으로 보상 함수를 설정한다.</li>
+          <li>상관관계: 선호 추출은 외부 보상 함수를 설정하는 데 직접적으로 사용될 수 있으며, 설계자의 명시적인 선호도를 보상 함수에 반영한다.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>보상 함수 설계 방법
+    <ul>
+      <li>외부 보상 함수 (Extrinsic Reward Function) : 역강화 학습과 선호 추출을 통해 주로 설정됨.</li>
+      <li>내부 보상 함수 (Intrinsic Reward Function) : 보상 셰이핑을 통해 주로 설정됨</li>
+    </ul>
+  </li>
+  <li>최적 보상 프레임워크 (optimal reward framework)
+    <ul>
+      <li>개요
+        <ul>
+          <li>주어진 보상 함수 공간에서 에이전트의 행동을 최적화하는 보상 함수를 찾는 접근법</li>
+          <li>설계자의 목정을 달성하기 위해 에이전트가 학습하는 과정에서 최적의 보상 함수를 발견하는 것을 목표로 함</li>
+        </ul>
+      </li>
+      <li>설명
+        <ul>
+          <li>보상 함수 공간 탐색 : 주어진 보상 함수 공간 (설계자가 정의한 여러 후보 보상 함수로 구성) 에서 다양한 보상 함수를 탐색함</li>
+          <li>다양한 알고리즘을 사용하여 보상 함수 공간을 탐색하고 최적의 보상 함수를 찾는 것</li>
+        </ul>
+      </li>
+      <li>목표
+        <ul>
+          <li>에이전트가 특정 보상 함수를 학습하여 행동을 최적화할 때, 설계자의 목적(외적 보상 함수)을 최적으로 달성할 수 있는 보상함수를 찾는 것</li>
+          <li>즉, 외적 보상 함수를 최적화하는 내적 보상 함수를 찾는 것</li>
+        </ul>
+      </li>
+      <li>메타 학습 접근법
+        <ul>
+          <li>학습을 학습하는 기법. 모델이 새로운 작업을 빠르게 배우고 적응할 수 있도록 하는 방법을 개발하는 것</li>
+          <li>내부 학습 (Inner-loop learning)
+            <ul>
+              <li>특정 작업에 대해 에이전트가 학습하는 단계로, 모델은 주어진 작업에 대해 최적의 성능을 내기 위해 학습한다.</li>
+            </ul>
+          </li>
+          <li>외부 학습 (Outer-loop learning)
+            <ul>
+              <li>여러 작업에서의 학습 경험을 통해 모델의 학습 능력을 향상시키는 단계로, 메타 학습모델이 새로운 작업을 더 잘배우도록 하는 과정이다.</li>
+            </ul>
+          </li>
+          <li>초매개변수 (Hyperparameters)
+            <ul>
+              <li>모델의 학습과정을 조정하는 매개변수로, 메타학습에서는 이 매개변수를 학습한다.</li>
+              <li>이는 모델이 새로운 작업에 빠르게 적응할 수 있도록 도와준다.</li>
+            </ul>
+          </li>
+          <li>최적 보상 프레임워크는 메타 학습 접근법으로, 외부 루프에서는 보상 함수를 최적화하고, 내부 루프에서는 주어진 보상 함수에 따라 에이전트의 행동을 최적화한다.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>정책 경사도 보상 설계(PGRD)
+    <ul>
+      <li>개요
+        <ul>
+          <li>정책 경사도 방법을 사용하여 내적 보상 함수를 최적화하는 접근법</li>
+        </ul>
+      </li>
+      <li>설명
+        <ul>
+          <li>정책 경사도 방법: 정책의 매개변수를 조정하여 기대 보상을 최대화하는 방법</li>
+          <li>내적 보상 함수 최적화: 내적 보상 함수의 매개변수를 조정하여 에이전트의 행동을 개선</li>
+        </ul>
+      </li>
+      <li>PGRD 알고리즘 (절차):
+        <ul>
+          <li>초기 정책 및 보상 함수 설정</li>
+          <li>정책 경사도를 계산하여 정책을 업데이트</li>
+          <li>내적 보상 함수의 매개변수를 업데이트</li>
+          <li>반복</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>결론
+    <ul>
+      <li>강화 학습에서 보상 함수는 단순히 주어지는 것이 아니라, 효과적으로 설계되어야 하는 요소임</li>
+      <li>상 함수는 설계자의 선호도와 에이전트의 목표를 구분하여 설정해야 하며, 이를 통해 에이전트가 더 나은 성능을 발휘할 수 있도록 해야함.</li>
+      <li>두 접근법 모두 에이전트의 행동을 개선하기 위해 보상 함수를 학습하고 최적화하는 데 중점을 두며, 최적 보상 프레임워크는 더 넓은 범위의 메타 학습 문제로, PGRD는 구체적인 알고리즘으로 작동함.</li>
+    </ul>
+  </li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#adam-white" class="page__taxonomy-item" rel="tag">Adam White</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#alberta-machine-intelligence-institute" class="page__taxonomy-item" rel="tag">Alberta Machine Intelligence Institute</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#control-with-approximation" class="page__taxonomy-item" rel="tag">Control with Approximation</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#coursera" class="page__taxonomy-item" rel="tag">Coursera</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#martha-white" class="page__taxonomy-item" rel="tag">Martha White</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#%EA%B0%95%ED%99%94%ED%95%99%EC%8A%B5" class="page__taxonomy-item" rel="tag">강화학습</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#%EC%95%A8%EB%B2%84%ED%83%80-%EB%8C%80%ED%95%99%EA%B5%90" class="page__taxonomy-item" rel="tag">앨버타 대학교</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#ai" class="page__taxonomy-item" rel="tag">AI</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#reinforcement-learning" class="page__taxonomy-item" rel="tag">Reinforcement Learning</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2024-05-17T10:00:00+09:00">May 17, 2024</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Prediction+and+Control+with+Function+Approximation+-+03.+Week+3.+Control+with+Approximation%20http%3A%2F%2Flocalhost%3A4000%2Fai%2Freinforcement%2520learning%2FPrediction_and_Control_with_Function_approximation_03_Week3%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fai%2Freinforcement%2520learning%2FPrediction_and_Control_with_Function_approximation_03_Week3%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fai%2Freinforcement%2520learning%2FPrediction_and_Control_with_Function_approximation_03_Week3%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/ai/reinforcement%20learning/Prediction_and_Control_with_Function_approximation_02_Week2/" class="pagination--pager" title="Prediction and Control with Function Approximation - 02. Week 2. Constructing Features for Prediction
+">이전</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ai/reinforcement%20learning/Prediction_and_Control_with_Function_approximation_02_Week2/" rel="permalink">Prediction and Control with Function Approximation - 02. Week 2. Constructing Features for Prediction
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2024-01-23T18:00:00+09:00">January 23, 2024</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">관련 자료 (RLbook Pages 204-210, 215-222, 223-228)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ai/reinforcement%20learning/Prediction_and_Control_with_Function_approximation_01_Week1/" rel="permalink">Prediction and Control with Function Approximation - 01. Week 1. On-policy Prediction with Approximation
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-08-31T10:00:00+09:00">August 31, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">강의 개요 (과정 로드맵)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ai/reinforcement%20learning/Sample_based_Learning_Methods_04_Week4/" rel="permalink">Sample-based Learning Methods - 04. Week 4. Planning, Learning &amp; Acting
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-07-16T10:00:00+09:00">July 16, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">관련 자료 (RLbook Pages 159-166)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ai/reinforcement%20learning/Sample_based_Learning_Methods_03_Week3/" rel="permalink">Sample-based Learning Methods - 03. Week 3. Temporal Difference Learning Methods for Control
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-07-12T10:00:00+09:00">July 12, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">관련 자료 (RLbook Pages 129-134)
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+<!--
+<script>
+	(function(d, h, m){
+    var js, fjs = d.getElementsByTagName(h)[0];
+    if (d.getElementById(m)){return;}
+    js = d.createElement(h); js.id = m;
+    js.onload = function(){
+        window.makerWidgetComInit({
+        position: "left",          
+        widget: "eqypoqmawbcz3azh-usiy9q7ma4ong1w1-juelcm3zfgcuwjds"                
+    })};
+    js.src = "https://makerwidget.com/js/embed.js";
+    fjs.parentNode.insertBefore(js, fjs)
+	}(document, "script", "dhm"))
+</script>
+-->
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:hyunik03@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/HY03" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 HY03. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://localhost:4000/ai/reinforcement%20learning/Prediction_and_Control_with_Function_approximation_03_Week3/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/ai/reinforcement%20learning/Prediction_and_Control_with_Function_approximation_03_Week3"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://bluesplatter.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>
